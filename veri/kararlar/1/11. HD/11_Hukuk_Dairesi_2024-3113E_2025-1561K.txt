@@ -1,0 +1,40 @@
+
+
+11. Hukuk Dairesi         2024/3113 E.  ,  2025/1561 K.
+
+"İçtihat Metni"
+MAHKEMESİ : İstanbul Bölge Adliye Mahkemesi 14. Hukuk Dairesi
+SAYISI : 2021/218 Esas, 2024/426 Karar
+HÜKÜM : Esastan ret
+İLK DERECE MAHKEMESİ : İstanbul 13. Tüketici Mahkemesi
+SAYISI : 2019/520 E., 2020/310 K.
+
+Bölge Adliye Mahkemesi kararı davacı vekili tarafından temyiz edilmekle; kesinlik, süre, temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, temyiz dilekçesinin kabulüne karar verildikten ve Tetkik Hâkimi tarafından hazırlanan rapor dinlendikten sonra dosyadaki belgeler incelenip gereği düşünüldü:
+KARAR
+
+I. DAVA
+Davacı vekili dava dilekçesinde; müvekkilinin, taraflar arasında düzenlenen foreks ve kaldıraçlı alım satım sözleşmesindeki edimlerini yerine getirdiğini, işlemlerin bir süre USD/TRY olarak devam ettiğini ve müvekkilinin bu işlemlerden memnun kaldığını, ilerleyen süreçte davalı şirketin kötüniyetli olarak bir takım FX plus gün sonu hesaplamaları Demo-ACC Trader IS DEMO hesap adı ile 2015 yılı itibari ile müvekkilinin hesabında para kalmadığı gerekçesiyle SEL pozisyonunu kapatarak, hesabı haksız şekilde Stop Out olarak tanımlandığını ileri sürerek müvekkilinin foreks ve kaldıraçlı alım satım sözleşmesi sonucu uğradığı zarar nedeniyle 500,00 USD karşılığı 2.000,00 TL'nin faiziyle birlikte tahsiline karar verilmesini ve müvekkile vaki sataşmasının önlenmesini talep etmiştir.
+
+II. CEVAP
+Davalı vekili cevap dilekçesinde; 2015 yılında düzenlenen sözleşme ile davacının sermaye piyasalarında işlem yapmaya başladığını, taraflar arasında düzenlenen sermaye piyasası faaliyetleri çerçeve sözleşmesi ile davacıya sunulan yatırım hizmetlerine ilişkin özel hükümler içeren "Alım Satıma Aracılık hizmetleri Özel Şartları ve Kaldıraçlı Varlık Alım Satımına Aracılık Faaliyetleri Özel Şartları" ile davacı tarafından kullanılan elektronik işlem platformuna ilişkin "Trade Master Sistemi Hizmet Sözleşmesi" akdedildiğini, işlem risklerinin anlatılarak risk bildirim formunun davacıya imzalatıldığını, Bursa Şubesi nezdinde davacı adına yatırım hesabı açıldığını, davacıya ait hesaptan yapılan işlemlerin davaya konu edildiğini, Demo hesabındaki işlemlerin uyuşmazlık konusu olmadığını, 17.08.2015 ve 17.09.2015 tarihlerinde teminat seviyesinin otomatik pozisyon kapanma seviyesinin altına gelmesi nedeniyle stop out işleminin devreye girerek USD/TRY paritesindeki açık pozisyonların en zararda olan pozisyondan başlamak suretiyle, teminat miktarı yeterli seviyeye ulaşana dek sistem tarafından otomatik olarak kapatıldığını, ileri sürülen zararlarda müvekkilinin hiçbir kusurunun bulunmadığını, kısmi dava açmada davacının hukuki yararı bulunmadığını, uyuşmazlık konusu olayların, müvekkilinin kusuru ve müdahalesi olmaksızın, kaldıraçlı işlemlerin genel işleyişine uygun olarak gerçekleştiğini, davacının iddialarının Sermaye Piyasası Kurulu (SPK) tarafından incelendiğini ve müvekkilinin işlemlerinde hukuka aykırılık tespit edilmediğini savunarak davanın reddini istemiştir.
+
+III. İLK DERECE MAHKEMESİ KARARI
+İlk Derece Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile davalı aracı şirketin; son derece riskli olan kaldıraçlı işlemler sonucunda ortaya çıkan zarar, ziyan ve kayıplardan dolayı davacının kendi sorumluluğunun bulunduğu, davacının ileri sürdüğü zararın oluşumunda kusuru bulunmayan aracı kurumun sorumlu tutulamayacağını, SPK'nın 13.05.2016 tarihli yazısı cevabında aracı kurumun tarafından gerçekleştirilen işlemlerde SPK mevzuatına aykırılık teşkil eden bir husus bulunmadığı ifade edildiği, bilirkişi raporunun ve SPK yazı cevabının aynı doğrultuda olduğu, bilirkişi raporunun hükme elverişli görüldüğü, davacının zararından davalı aracı kurumun kusuru bulunmadığı gerekçesiyle davanın reddine karar verilmiş, hüküm, davacı vekilince istinaf edilmiştir.
+
+IV. İSTİNAF
+Bölge Adliye Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile davacı tarafından SPK'ya yapmış olduğu başvurunun 13.05.2016 tarihinde, adli yargıda dava açılması için geri çevrildiği, yeniden bu idari kurula yapılan başvurunun sonucunun beklenmesine gerek bulunmadığı, istinaf başvurusunun incelendiği tarih itibariyle de bu kuruldan dosyadaki tespitlere aykırı bir sonuç elde edildiği bildirilmediği, davalı tarafından hesapların otomatik kapatılması ile zararın daha da büyümesinin engellendiği ve bu durumun davacının yeterli teminat bulundurmamasından kaynaklandığı, yapılan işlemler nedeniyle oluştuğu iddia edilen zarardan davalının sorumluluğu bulunmadığı gerekçesiyle davacı vekilinin istinaf başvurusunun esastan reddine karar verilmiş, hüküm, davacı tarafça temyiz edilmiştir.
+
+V. TEMYİZ
+A. Dava ve Hukuki Nitelendirme
+Dava, kaldıraçlı alım satım sözleşmesinden kaynaklanan ve davalının hukuka aykırı olduğu iddia edilen uygulamaları nedeniyle uğranılan zararın tazmini istemine ilişkindir.
+
+B. Değerlendirme ve Gerekçe
+Yapılan yargılama ve saptanan somut uyuşmazlık bakımından uygulanması gereken hukuk kuralları gözetildiğinde İlk Derece Mahkemesince verilen kararda bir isabetsizlik olmadığının anlaşılmasına göre yapılan istinaf başvurusunun 6100 sayılı Hukuk Muhakemeleri Kanunu'nun (HMK) 353/1-b(1) hükmü uyarınca Bölge Adliye Mahkemesince esastan reddine ilişkin kararın usul ve yasaya uygun olduğu kanısına varıldığından Bölge Adliye Mahkemesi kararının onanmasına karar vermek gerekmiştir.
+
+VI. SONUÇ: Yukarıda açıklanan nedenlerle, davacı vekilinin temyiz itirazlarının reddi ile Bölge Adliye Mahkemesince verilen kararın HMK'nın 370/1 hükmü uyarınca ONANMASINA, aynı Kanun'un 372. maddesi uyarınca işlem yapılmak üzere dava dosyasının İlk Derece Mahkemesine, kararın bir örneğinin Bölge Adliye Mahkemesine gönderilmesine, aşağıda yazılı temyiz giderinin temyiz edene yükletilmesine, 06.03.2025 tarihinde kesin olarak oy birliğiyle karar verildi.
+
+
+
+
+
+

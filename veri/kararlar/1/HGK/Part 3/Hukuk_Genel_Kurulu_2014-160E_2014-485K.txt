@@ -1,0 +1,34 @@
+
+
+Hukuk Genel Kurulu         2014/160 E.  ,  2014/485 K.
+
+"İçtihat Metni"
+MAHKEMESİ : Ankara 11. Aile Mahkemesi
+TARİHİ : 10/07/2013
+NUMARASI : 2013/627-2013/904
+
+Taraflar arasındaki "Boşanma" davasından dolayı yapılan yargılama sonunda; Ankara 11. Aile Mahkemesince davanın kabulüne dair verilen 20.10.2011 gün ve 2010/1591 E- 2011/1405 K. sayılı kararın incelenmesi davalı tarafından istenilmesi üzerine, Yargıtay 2. Hukuk Dairesi'nin 19.02.2013 gün ve 2013/1745 E.-2013/4151 K. sayılı ilamıyla bozularak dosya yerine geri çevrilmekle yeniden yapılan yargılama sonunda; mahkemece önceki kararda direnilmiştir.
+
+Elektronik ortamda Dairemize gönderilen temyize konu direnme dosyası üzerinde UYAP ortamında yapılan temyiz incelemesinden sonra gereği görüşüldü:
+Dava, boşanma istemine ilişkindir.
+Mahkemenin, davanın kabulüne dair kararı Özel Dairece bozulmuş; verilen direnme kararı da davalı vekili tarafından temyiz edilmiştir.
+6100 sayılı HMK’nun 445. Maddesinde dava ve diğer yargılama işlemlerinin elektronik ortamda gerçekleştirildiği hâllerde UYAP kullanılarak verilerin kaydedileceği ve saklanacağı ifade edilmiştir.
+Şu da bir gerçektir ki; sağlıklı bir temyiz incelemesi yapılabilmesi dosyada bulunan tüm belgelerin asıl dosyadaki gibi mahkemeye geliş tarih sırasına göre ve okunabilecek şekilde taranarak UYAP sistemine aktarılması ve aktarılan evrakların dizi pusulasının da eklenmesi suretiyle mümkündür. Dizi pusulası hazırlanıp UYAP ortamına atılmadığı takdirde fiziki dosya içinde bulunan evrakların tamamının dijital dosya içine atılıp atılmadığının denetlenmesi imkanı da bulunmamaktadır. Temyize konu dosyada bulunan evrakın elektronik ortamda bulunmaması, geliş sırasına ve türüne uygun okunaklı şekilde taranmaması halinde sağlıklı bir temyiz incelemesi yapılamaz.
+Hukuk Muhakemeleri Kanunu Yönetmeliği’nin “yazı işleri hizmetlerinin yürütülmesi” başlıklı 6. maddesinde dizi pusulası düzenleme görevi zabıt katiplerinin görevi arasında sayılmış, aynı maddenin 3. fıkrasında da mahkeme yazı işlerini denetlemek, hukukî başvuru veya kanun yolları incelemesi için dosyayla ilgili gerekli işlemleri yapmak ya da yaptırmak mahkeme yazı işleri müdürünün görevleri arasında sayılmış, aynı maddenin 2. fıkrasında ise yazı işleri hizmetlerinin hakimin denetimi altına yürütüleceği belirtilmiştir.
+Bu kapsamda;
+A-Evrakın geliş sırasına ve türüne uygun olarak UYAP sistemine aktarılıp aktarılmadığına yönelik (gruplar kaldırılmak suretiyle) elektronik dosya üzerinde yapılan incelemede;
+a) 1233 nolu “dosyaya eklenecek evrak” adlı klasör ve devamındaki 1262 numaraya kadar olan evrakların bozma öncesine ait dosya olmasına ve müstakil bir dosyası bulunmasına rağmen söz konusu dosya içine değil de niçin gerekçeli karardan sonrasına tarandığı,
+b) 1264 nolu mazeret dilekçesinin sırasına taranmadığı tespit edilmiştir. Bu bakımdan belirtilen eksikliklerin tamamlanması ve evrakın tekrar olmamak üzere ilgili yerlere aktarılması gerekir.
+B- UYAP sitemine taranmak veya aktarılmak suretiyle alınan evrakın usulüne uygun ve nitelikte yüklenip yüklenmediğine yönelik (gruplar kaldırılmak suretiyle) elektronik dosya üzerinde yapılan incelemede;
+a) 1233 nolu “dosyaya eklenecek evrak” adlı klasör ve devamındaki 1262 nolu evraka kadar olan bir kısım evrakın usulüne uygun ve nitelikte yüklenmediği,
+b) Davalıya ait 1265 nolu temyiz dilekçesinin tek sayfa olarak tarandığı tespit edilmiştir. Belirtilen evrakın usulüne uygun ve nitelikte yüklenmesi, fiziki dosya içinde bulunan evrakın dizi pusulası yapılarak, hazırlanan dizi pusulasının da UYAP sistemine aktarılması gerekir.
+C- Tebligat evrakları hakkında elektronik dosya üzerinde yapılan incelemede;
+A) Gerekçeli kararın davalıya tebliğ edildiğine dair 1265 nolu evrakın tebliğ tarihini okunmadığı tespit edilmiştir.
+S O N U Ç: Yukarıda (A), (B) ve (C) bentlerinde belirlenen konularda işlem yapılmak üzere dosyanın mahkemesine GERİ ÇEVRİLMESİNE, 02/04/2014 gününde oybirliği ile karar verildi.
+
+
+
+
+
+
+

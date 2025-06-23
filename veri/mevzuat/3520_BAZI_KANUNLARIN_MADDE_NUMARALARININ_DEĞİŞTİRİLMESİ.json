@@ -1,0 +1,851 @@
+{
+  "mevzuat_adi": "BAZI KANUNLARIN MADDE NUMARALARININ DEĞİŞTİRİLMESİ HAKKlNDA\nKANUN HÜKMÜNDE KARARNAMENİN DEĞİŞTİRİLEREK KABULÜ\nHAKKINDA KANUN[1]",
+  "kanun_icerigi": {
+    "maddeler": {
+      "1": {
+        "baslik": "5802",
+        "metin": "Madde 1\n27.7.1967"
+      },
+      "2": {
+        "baslik": "2947",
+        "metin": "Madde 2\n17.6.1982"
+      },
+      "GEÇİCİ numaralarının": {
+        "baslik": "b) Hizalarındaki kanuna numarasız olarak getirilmiş olan ek maddeler ise belirtilen sütundaki gibi numaralandırılmışlardır.",
+        "metin": "Geçici madde numaralarının değiştirilmesi"
+      },
+      "3": {
+        "baslik": "1189",
+        "metin": "Madde 3\n23.1.1968"
+      },
+      "4": {
+        "baslik": "2568",
+        "metin": "Madde 4\n4.7.1972"
+      },
+      "5": {
+        "baslik": "Ek Madde 3",
+        "metin": "Madde 5"
+      },
+      "6": {
+        "baslik": "3080",
+        "metin": "Madde 6\n5.5.1972"
+      },
+      "EK EKLEYEN": {
+        "baslik": "1 SAYILI LİSTE",
+        "metin": "EK MADDE EKLEYEN VEYA MÜSTAKİL HÜKÜM GETİREN KANUN\nEK MADDENİN VEYA MÜSTAKİL\nHÜKMÜN EKLENDİĞİ ANA KANUNUN\nEk Maddenin\nTarihi"
+      },
+      "No": {
+        "baslik": "Numarası",
+        "metin": "Madde No\nTarihi\nNumarası\nYeni No\n27.6.1984"
+      },
+      "EK 1": {
+        "baslik": "2935",
+        "metin": "Ek Madde 1\n18.5.1987"
+      },
+      "EK 2": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 2"
+      },
+      "EK 3": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 3\n28.8.1983\n2882\nEk Madde\n5.5.1983"
+      },
+      "EK 4": {
+        "baslik": "3305",
+        "metin": "Ek Madde 4\n20.11.1981"
+      },
+      "EK 5": {
+        "baslik": "2981",
+        "metin": "Ek Madde 5"
+      },
+      "EK 6": {
+        "baslik": "Ek Madde 5",
+        "metin": "Ek Madde 6\n9.11.1983"
+      },
+      "EK 7": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 7\n31.7.1970"
+      },
+      "EK 8": {
+        "baslik": "657",
+        "metin": "Ek Madde 8"
+      },
+      "EK 9": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 9"
+      },
+      "EK 10": {
+        "baslik": "Ek Madde 3",
+        "metin": "Ek Madde 10"
+      },
+      "EK 11": {
+        "baslik": "Ek Madde 4",
+        "metin": "Ek Madde 11"
+      },
+      "7": {
+        "baslik": "Ek Madde 28",
+        "metin": "Madde 7"
+      },
+      "8": {
+        "baslik": "3288",
+        "metin": "Madde 8\n22.3.1971"
+      },
+      "9": {
+        "baslik": "Ek Madde 1",
+        "metin": "Madde 9"
+      },
+      "10": {
+        "baslik": "2771",
+        "metin": "Madde 10\n14.7.1965"
+      },
+      "11": {
+        "baslik": "3366",
+        "metin": "Madde 11\n24.2.1984"
+      },
+      "12": {
+        "baslik": "Ek Madde 1",
+        "metin": "Madde 12"
+      },
+      "EK 12": {
+        "baslik": "Madde 92",
+        "metin": "Ek Madde 12"
+      },
+      "13": {
+        "baslik": "5655",
+        "metin": "Madde 13\n29.5.1936"
+      },
+      "EK 13": {
+        "baslik": "Madde 93",
+        "metin": "Ek Madde 13\n15.5.1975"
+      },
+      "EK 14": {
+        "baslik": "657",
+        "metin": "Ek Madde 14"
+      },
+      "EK 15": {
+        "baslik": "Madde 4",
+        "metin": "Ek Madde 15"
+      },
+      "EK 16": {
+        "baslik": "Madde 5",
+        "metin": "Ek Madde 16"
+      },
+      "EK 17": {
+        "baslik": "Madde 6",
+        "metin": "Ek Madde 17\n20.2.1979"
+      },
+      "5/N": {
+        "baslik": "Ek Madde 1",
+        "metin": "Madde 5/N"
+      },
+      "83": {
+        "baslik": "3206",
+        "metin": "Madde 83\n4.4.1929"
+      },
+      "EK 18": {
+        "baslik": "657",
+        "metin": "Ek Madde 18\n12.5.1982"
+      },
+      "EK 19": {
+        "baslik": "657",
+        "metin": "Ek Madde 19"
+      },
+      "EK 20": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 20"
+      },
+      "EK 21": {
+        "baslik": "926",
+        "metin": "Ek Madde 21\n31.7.1970"
+      },
+      "EK 22": {
+        "baslik": "926",
+        "metin": "Ek Madde 22\n13.11.1969"
+      },
+      "EK 23": {
+        "baslik": "657",
+        "metin": "Ek Madde 23"
+      },
+      "EK 24": {
+        "baslik": "Madde 36",
+        "metin": "Ek Madde 24"
+      },
+      "EK 25": {
+        "baslik": "Madde 38",
+        "metin": "Ek Madde 25"
+      },
+      "EK 26": {
+        "baslik": "Madde 39",
+        "metin": "Ek Madde 26\n29.11.1984"
+      },
+      "EK 27": {
+        "baslik": "657",
+        "metin": "Ek Madde 27\n18.5.1987"
+      },
+      "EK 28": {
+        "baslik": "657",
+        "metin": "Ek Madde 28"
+      },
+      "EK 29": {
+        "baslik": "Madde 7",
+        "metin": "Ek Madde 29\n30.12.1987"
+      },
+      "EK 30": {
+        "baslik": "657",
+        "metin": "Ek Madde 30\nEk Maddenin\nTarihi"
+      },
+      "EK 31": {
+        "baslik": "506",
+        "metin": "Ek Madde 31"
+      },
+      "EK 32": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 32\n20.6.1987"
+      },
+      "14": {
+        "baslik": "3009",
+        "metin": "Madde 14\n20.11.1981"
+      },
+      "17": {
+        "baslik": "3291",
+        "metin": "Madde 17\n(fıkra üç)\n9.5.1969"
+      },
+      "18": {
+        "baslik": "1323",
+        "metin": "Madde 18\n27.7.1967"
+      },
+      "EK 33": {
+        "baslik": "506",
+        "metin": "Ek Madde 33"
+      },
+      "EK 34": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 34"
+      },
+      "EK 35": {
+        "baslik": "Ek Madde 3",
+        "metin": "Ek Madde 35\n14.2.1985"
+      },
+      "EK 36": {
+        "baslik": "Ek Madde 3",
+        "metin": "Ek Madde 36\n18.1.1979\n2177\nEk Madde\n8.6.1949"
+      },
+      "EK 37": {
+        "baslik": "5434",
+        "metin": "Ek Madde 37\n24.12.1980"
+      },
+      "EK 38": {
+        "baslik": "5434",
+        "metin": "Ek Madde 38"
+      },
+      "EK 39": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 39"
+      },
+      "EK 40": {
+        "baslik": "Ek Madde 3",
+        "metin": "Ek Madde 40\n28.4.1982"
+      },
+      "EK 41": {
+        "baslik": "5434",
+        "metin": "Ek Madde 41"
+      },
+      "EK 42": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 42"
+      },
+      "EK 43": {
+        "baslik": "Ek Madde 3",
+        "metin": "Ek Madde 43"
+      },
+      "EK 44": {
+        "baslik": "Ek Madde 4",
+        "metin": "Ek Madde 44"
+      },
+      "EK 45": {
+        "baslik": "Ek Madde 5",
+        "metin": "Ek Madde 45"
+      },
+      "EK 46": {
+        "baslik": "Ek Madde 6",
+        "metin": "Ek Madde 46\n21.7.1983\n2865\nEk Madde\n8.6.1949"
+      },
+      "EK 47": {
+        "baslik": "5434",
+        "metin": "Ek Madde 47\n23.9.1983\n2898\nEk Madde\n8.6.1949"
+      },
+      "EK 48": {
+        "baslik": "5434",
+        "metin": "Ek Madde 48"
+      },
+      "EK 49": {
+        "baslik": "Madde 6",
+        "metin": "Ek Madde 49\n7.5.1986"
+      },
+      "EK 50": {
+        "baslik": "5434",
+        "metin": "Ek Madde 50"
+      },
+      "EK 51": {
+        "baslik": "Ek Madde 2",
+        "metin": "Ek Madde 51"
+      },
+      "EK 52": {
+        "baslik": "Ek Madde 3",
+        "metin": "Ek Madde 52"
+      },
+      "EK 53": {
+        "baslik": "Ek Madde 4",
+        "metin": "Ek Madde 53"
+      },
+      "EK 54": {
+        "baslik": "Ek Madde 5",
+        "metin": "Ek Madde 54"
+      },
+      "EK 55": {
+        "baslik": "Ek Madde 6",
+        "metin": "Ek Madde 55"
+      },
+      "EK 56": {
+        "baslik": "Ek Madde 7",
+        "metin": "Ek Madde 56"
+      },
+      "EK 57": {
+        "baslik": "Ek Madde 8",
+        "metin": "Ek Madde 57"
+      },
+      "EK 58": {
+        "baslik": "Ek Madde 9",
+        "metin": "Ek Madde 58"
+      },
+      "EK 59": {
+        "baslik": "Ek Madde 10",
+        "metin": "Ek Madde 59\n26.6.1984"
+      },
+      "37": {
+        "baslik": "KHK/241",
+        "metin": "Madde 37\n8.6.1949"
+      },
+      "EK 66": {
+        "baslik": "5434",
+        "metin": "Ek Madde 66\n29.11.1984\nKHK/243\nEk Madde\n8.6.1949"
+      },
+      "EK 67": {
+        "baslik": "5434",
+        "metin": "Ek Madde 67\n30.12.1987"
+      },
+      "EK 68": {
+        "baslik": "5434",
+        "metin": "Ek Madde 68\n14.1.1988\nKHK/311\nEk Madde\n8.6.1949"
+      },
+      "EK 69": {
+        "baslik": "5434",
+        "metin": "Ek Madde 69\n11.9.1957"
+      },
+      "19": {
+        "baslik": "2422",
+        "metin": "Madde 19\n17.7.1964"
+      },
+      "36": {
+        "baslik": "Ek Madde 23",
+        "metin": "Madde 36"
+      },
+      "39": {
+        "baslik": "Ek Madde 25",
+        "metin": "Madde 39"
+      },
+      "20": {
+        "baslik": "3035",
+        "metin": "Madde 20\n8.6.1965"
+      },
+      "92": {
+        "baslik": "Ek Madde 11",
+        "metin": "Madde 92"
+      },
+      "93": {
+        "baslik": "Ek Madde 12",
+        "metin": "Madde 93"
+      },
+      "35": {
+        "baslik": "KHK/241",
+        "metin": "Madde 35\n14.7.1965"
+      },
+      "38": {
+        "baslik": "Ek Madde 24",
+        "metin": "Madde 38"
+      },
+      "55": {
+        "baslik": "KHK/243",
+        "metin": "Madde 55\n14.7.1965"
+      },
+      "GEÇİCİ EKLEYEN": {
+        "baslik": "2 SAYILI LİSTE",
+        "metin": "GEÇİCİ MADDE EKLEYEN KANUNUN\nGEÇİCİ MADDENİN EKLENDİĞİ\nANA KANUNUN\nGeçici\nGeçici Maddenin\nTarihi"
+      },
+      "No:": {
+        "baslik": "Numarası",
+        "metin": "Madde No:\nTarihi\nNumarası\nYeni No\n22.4.1925\n657\nMaddei Muvakkate\n22.4.1925"
+      },
+      "GEÇİCİ 1": {
+        "baslik": "3380",
+        "metin": "Geçici Madde 1\n3 SAYILI LİSTE\nEK GEÇİCİ MADDE EKLEYEN KANUNUN\nEK GEÇİCİ MADDENİN\nEKLENDİĞİ ANA KANUNUN\nEk Geçici\nEk Geçici Maddenin\nTarihi"
+      },
+      "GEÇİCİ 2": {
+        "baslik": "Geçici Madde 7",
+        "metin": "Geçici Madde 2"
+      },
+      "GEÇİCİ 24": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 24"
+      },
+      "GEÇİCİ 3": {
+        "baslik": "Geçici Madde 8",
+        "metin": "Geçici Madde 3"
+      },
+      "GEÇİCİ 6": {
+        "baslik": "1475",
+        "metin": "Geçici Madde 6\n5.5.1981"
+      },
+      "GEÇİCİ 7": {
+        "baslik": "2560",
+        "metin": "Geçici Madde 7"
+      },
+      "GEÇİCİ 8": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 8"
+      },
+      "GEÇİCİ 9": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 9\n5.6.1986\n3305\nEk Geçici Madde 4\n20.11.1981"
+      },
+      "GEÇİCİ 10": {
+        "baslik": "2560",
+        "metin": "Geçici Madde 10\n11.8.1982\n2698\nGeçici Madde\n11.8.1982"
+      },
+      "GEÇİCİ 11": {
+        "baslik": "3032",
+        "metin": "Geçici Madde 11\n22.4.1983"
+      },
+      "GEÇİCİ 12": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 12"
+      },
+      "GEÇİCİ 13": {
+        "baslik": "3270",
+        "metin": "Geçici Madde 13\n22.4.1983"
+      },
+      "GEÇİCİ 4": {
+        "baslik": "Geçici Madde 13",
+        "metin": "Geçici Madde 4"
+      },
+      "GEÇİCİ 14": {
+        "baslik": "3370",
+        "metin": "Geçici Madde 14\n22.4.1983"
+      },
+      "GEÇİCİ 15": {
+        "baslik": "2820",
+        "metin": "Geçici Madde 15\n24.5.1983\n2827\nGeçici Madde\n24.5.1983"
+      },
+      "GEÇİCİ 5": {
+        "baslik": "1475",
+        "metin": "Geçici Madde 5\n22.2.1979\n2184\nGeçici Madde\n25.8.1971"
+      },
+      "GEÇİCİ 112": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 112\n18.6.1964"
+      },
+      "GEÇİCİ 113": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 113"
+      },
+      "GEÇİCİ 114": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 114"
+      },
+      "GEÇİCİ 115": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 115"
+      },
+      "GEÇİCİ 116": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 116"
+      },
+      "GEÇİCİ 117": {
+        "baslik": "Geçici Madde 5",
+        "metin": "Geçici Madde 117"
+      },
+      "GEÇİCİ 118": {
+        "baslik": "Geçici Madde 6",
+        "metin": "Geçici Madde 118\n23.2.1965\n545\nGeçici Madde\n8.6.1949"
+      },
+      "GEÇİCİ 119": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 119\n5.7.1965\n670\nGeçici Madde\n8.6.1949"
+      },
+      "GEÇİCİ 120": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 120\n7.2.1969"
+      },
+      "GEÇİCİ 121": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 121"
+      },
+      "GEÇİCİ 122": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 122"
+      },
+      "GEÇİCİ 123": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 123"
+      },
+      "GEÇİCİ 124": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 124"
+      },
+      "GEÇİCİ 125": {
+        "baslik": "Geçici Madde 5",
+        "metin": "Geçici Madde 125"
+      },
+      "GEÇİCİ 126": {
+        "baslik": "Geçici Madde 6",
+        "metin": "Geçici Madde 126"
+      },
+      "GEÇİCİ 127": {
+        "baslik": "Geçici Madde 7",
+        "metin": "Geçici Madde 127"
+      },
+      "GEÇİCİ 128": {
+        "baslik": "Geçici Madde 8",
+        "metin": "Geçici Madde 128"
+      },
+      "GEÇİCİ 129": {
+        "baslik": "Geçici Madde 9",
+        "metin": "Geçici Madde 129\n2.3.1970\n1239\nGeçici Madde\n8.6.1949"
+      },
+      "GEÇİCİ 130": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 130\n1.3.1971"
+      },
+      "GEÇİCİ 131": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 131"
+      },
+      "GEÇİCİ 132": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 132\n8.7.1971"
+      },
+      "GEÇİCİ 133": {
+        "baslik": "5434",
+        "metin": "Geçici Madde 133"
+      },
+      "GEÇİCİ 134": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 134"
+      },
+      "GEÇİCİ 135": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 135"
+      },
+      "GEÇİCİ 136": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 136"
+      },
+      "GEÇİCİ 137": {
+        "baslik": "Geçici Madde 5",
+        "metin": "Geçici Madde 137"
+      },
+      "GEÇİCİ 138": {
+        "baslik": "Geçici Madde 6",
+        "metin": "Geçici Madde 138"
+      },
+      "GEÇİCİ 139": {
+        "baslik": "Geçici Madde 7",
+        "metin": "Geçici Madde 139"
+      },
+      "GEÇİCİ 140": {
+        "baslik": "Geçici Madde 8",
+        "metin": "Geçici Madde 140"
+      },
+      "GEÇİCİ 141": {
+        "baslik": "Geçici Madde 9",
+        "metin": "Geçici Madde 141"
+      },
+      "GEÇİCİ 142": {
+        "baslik": "Geçici Madde 10",
+        "metin": "Geçici Madde 142"
+      },
+      "GEÇİCİ 143": {
+        "baslik": "Geçici Madde 11",
+        "metin": "Geçici Madde 143"
+      },
+      "GEÇİCİ 144": {
+        "baslik": "Geçici Madde 12",
+        "metin": "Geçici Madde 144"
+      },
+      "GEÇİCİ 145": {
+        "baslik": "Geçici Madde 13",
+        "metin": "Geçici Madde 145"
+      },
+      "GEÇİCİ 146": {
+        "baslik": "Geçici Madde 14",
+        "metin": "Geçici Madde 146"
+      },
+      "GEÇİCİ 147": {
+        "baslik": "Geçici Madde 15",
+        "metin": "Geçici Madde 147"
+      },
+      "GEÇİCİ 16": {
+        "baslik": "Geçici Madde 6",
+        "metin": "Geçici Madde 16\n17.3.1969\n1135\nGeçici Madde\n17.3.1969"
+      },
+      "GEÇİCİ 148": {
+        "baslik": "Geçici Madde 16",
+        "metin": "Geçici Madde 148"
+      },
+      "GEÇİCİ 17": {
+        "baslik": "Geçici Madde 148",
+        "metin": "Geçici Madde 17"
+      },
+      "GEÇİCİ 149": {
+        "baslik": "Geçici Madde 17",
+        "metin": "Geçici Madde 149"
+      },
+      "GEÇİCİ 18": {
+        "baslik": "Geçici Madde 149",
+        "metin": "Geçici Madde 18"
+      },
+      "GEÇİCİ 150": {
+        "baslik": "Geçici Madde 18",
+        "metin": "Geçici Madde 150"
+      },
+      "GEÇİCİ 19": {
+        "baslik": "Geçici Madde 150",
+        "metin": "Geçici Madde 19"
+      },
+      "GEÇİCİ 151": {
+        "baslik": "Geçici Madde 19",
+        "metin": "Geçici Madde 151\nGeçici\nGeçici Maddenin\nTarihi"
+      },
+      "GEÇİCİ 20": {
+        "baslik": "Yeni No",
+        "metin": "Geçici Madde 20"
+      },
+      "GEÇİCİ 21": {
+        "baslik": "Geçici Madde152",
+        "metin": "Geçici Madde 21"
+      },
+      "GEÇİCİ 22": {
+        "baslik": "Geçici Madde153",
+        "metin": "Geçici Madde 22"
+      },
+      "GEÇİCİ 23": {
+        "baslik": "506",
+        "metin": "Geçici Madde 23"
+      },
+      "GEÇİCİ 25": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 25"
+      },
+      "GEÇİCİ 26": {
+        "baslik": "657",
+        "metin": "Geçici Madde 26"
+      },
+      "GEÇİCİ 27": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 27"
+      },
+      "GEÇİCİ 28": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 28\nGeçici\nGeçici Maddenin\nTarihi"
+      },
+      "GEÇİCİ 29": {
+        "baslik": "2547",
+        "metin": "Geçici Madde 29\n12.8.1986\nKHK/260\nGeçici Madde\n4.11.1981"
+      },
+      "GEÇİCİ 30": {
+        "baslik": "2547",
+        "metin": "Geçici Madde 30\n6.11.1981\n2548\nGeçici Madde\n6.11.1981"
+      },
+      "GEÇİCİ 31": {
+        "baslik": "657",
+        "metin": "Geçici Madde 31\n7.2.1967\n828\nGeçici Madde\n7.2.1967"
+      },
+      "GEÇİCİ 32": {
+        "baslik": "506",
+        "metin": "Geçici Madde 32"
+      },
+      "GEÇİCİ 33": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 33\n16.6.1975"
+      },
+      "GEÇİCİ 34": {
+        "baslik": "506",
+        "metin": "Geçici Madde 34"
+      },
+      "GEÇİCİ 35": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 35"
+      },
+      "GEÇİCİ 36": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 36"
+      },
+      "GEÇİCİ 37": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 37\nGeçici\nGeçici Maddenin\nTarihi"
+      },
+      "GEÇİCİ 38": {
+        "baslik": "Geçici Madde 5",
+        "metin": "Geçici Madde 38"
+      },
+      "GEÇİCİ 39": {
+        "baslik": "Geçici Madde 6",
+        "metin": "Geçici Madde 39"
+      },
+      "GEÇİCİ 40": {
+        "baslik": "Geçici Madde 7",
+        "metin": "Geçici Madde 40\n11.5.1976\n1992\nGeçici Madde\n17.7.1964"
+      },
+      "GEÇİCİ 41": {
+        "baslik": "506",
+        "metin": "Geçici Madde 41\n11.8.1977"
+      },
+      "GEÇİCİ 42": {
+        "baslik": "506",
+        "metin": "Geçici Madde 42\n11.8.1977\n2099\nGeçici Madde\n17.7.1964"
+      },
+      "GEÇİCİ 43": {
+        "baslik": "506",
+        "metin": "Geçici Madde 43\n29.6.1978"
+      },
+      "GEÇİCİ 44": {
+        "baslik": "506",
+        "metin": "Geçici Madde 44"
+      },
+      "GEÇİCİ 45": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 45"
+      },
+      "GEÇİCİ 46": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 46"
+      },
+      "GEÇİCİ 47": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 47"
+      },
+      "GEÇİCİ 48": {
+        "baslik": "Geçici Madde 5",
+        "metin": "Geçici Madde 48"
+      },
+      "GEÇİCİ 49": {
+        "baslik": "Geçici Madde 6",
+        "metin": "Geçici Madde 49\n6.3.1981"
+      },
+      "GEÇİCİ 50": {
+        "baslik": "506",
+        "metin": "Geçici Madde 50"
+      },
+      "GEÇİCİ 51": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 51"
+      },
+      "GEÇİCİ 52": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 52"
+      },
+      "GEÇİCİ 53": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 53\n11.12.1981"
+      },
+      "GEÇİCİ 54": {
+        "baslik": "506",
+        "metin": "Geçici Madde 54\n24.10.1983"
+      },
+      "GEÇİCİ 55": {
+        "baslik": "506",
+        "metin": "Geçici Madde 55"
+      },
+      "GEÇİCİ 56": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 56"
+      },
+      "GEÇİCİ 57": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 57\n17.11.1983"
+      },
+      "GEÇİCİ 58": {
+        "baslik": "506",
+        "metin": "Geçici Madde 58"
+      },
+      "GEÇİCİ 59": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 59\n20.3.1985"
+      },
+      "GEÇİCİ 60": {
+        "baslik": "506",
+        "metin": "Geçici Madde 60"
+      },
+      "GEÇİCİ 61": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 61"
+      },
+      "GEÇİCİ 62": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 62"
+      },
+      "GEÇİCİ 63": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 63\n24.12.1985"
+      },
+      "GEÇİCİ 64": {
+        "baslik": "506",
+        "metin": "Geçici Madde 64"
+      },
+      "GEÇİCİ 65": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 65\n20.6.1987"
+      },
+      "GEÇİCİ 66": {
+        "baslik": "506",
+        "metin": "Geçici Madde 66"
+      },
+      "GEÇİCİ 67": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 67"
+      },
+      "GEÇİCİ 68": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 68"
+      },
+      "GEÇİCİ 69": {
+        "baslik": "Geçici Madde 4",
+        "metin": "Geçici Madde 69"
+      },
+      "GEÇİCİ 70": {
+        "baslik": "Geçici Madde 5",
+        "metin": "Geçici Madde 70\n4.4.1987"
+      },
+      "GEÇİCİ 71": {
+        "baslik": "506",
+        "metin": "Geçici Madde 71"
+      },
+      "GEÇİCİ 72": {
+        "baslik": "Geçici Madde 2",
+        "metin": "Geçici Madde 72"
+      },
+      "GEÇİCİ 73": {
+        "baslik": "Geçici Madde 3",
+        "metin": "Geçici Madde 73\n20.5.1988\nKHK/323\nGeçici Madde\n17.7.1964"
+      },
+      "GEÇİCİ 74": {
+        "baslik": "506",
+        "metin": "Geçici Madde 74\n3.3.1965\n551\nGeçici Madde\n3.3.1965"
+      },
+      "Numarası": {
+        "baslik": "Numarası",
+        "metin": "Madde Numarası\nTarihi\nNumarası\nYeni Numarası\n12.12.1980\n2358\nEk Geçici Madde\n8.6.1949\n5434\nEk Geçici Madde 4\n24.12.1980\n2363\nEk Geçici Madde 1\n8.6.1949\n5434\nEk Geçici Madde 5\nEk Geçici Madde 2\nEk Geçici Madde 6\n18.9.1981\n2525\nEk Geçici Madde\n8.6.1949\n5434\nEk Geçici Madde 7\n22.10.1981\n2540\nEk Geçici Madde\n8.6.1949\n5434\nEk Geçici Madde 8\n6.11.1981\n2551\nEk Geçici Madde 1\n8.6.1949\n5434\nEk Geçici Madde 9\nEk Geçici Madde 2\nEk Geçici Madde 10\nEk Geçici Madde 3\nEk Geçici Madde 11\nEk Geçici Madde 4\nEk Geçici Madde 12\nEk Geçici Madde 5\nEk Geçici Madde 13\nEk Geçici Madde 6\nEk Geçici Madde 14\n13.11.1981\n2559\nEk Geçici Madde 1\n8.6.1949\n5434\nEk Geçici Madde 15\nEk Geçici Madde 2\nEk Geçici Madde 16\nEk Geçici Madde 3\nEk Geçici Madde 17\nEk Geçici Madde 4\nEk Geçici Madde 18\n28.4.1982\n2665\nEk Geçici Madde 1\n8.6.1949\n5434\nEk Geçici Madde 19\nEk Geçici Madde 2\nEk Geçici Madde 20\n23.6.1983\n2852\nEk Geçici Madde\n8.6.1949\n5434\nEk Geçici Madde 21\n22.9.1983\n2889\nEk Geçici Madde\n8.6.1949\n5434\nEk Geçici Madde 22\n20.2.1979\n2182\nEk Geçici Madde 1\n14.7.1965\n657\nEk Geçici Madde 55\nEk Geçici Madde 2\nEk Geçici Madde 56\nEk Geçici Madde 3\nEk Geçici Madde 57\n26.6.1984\nHK/241\nEk Geçici Madde\n14.7.1965\n657\nEk Geçici Madde 58\n10.12.1982\n2762\nEk Geçici Madde\n20.4.1967\n854\nEk Geçici Madde 1\n17.6.1982\n2682\nEk Geçici Madde 5\n13.5.1971\n1402\nEk Geçici Madde 4\n27.3.1979\n2218\nEk Geçici Madde\n4.8.1971\n1462\nEk Geçici Madde 1\n10.12.1982\n2762\nEk Geçici Madde\n25.8.1971\n1475\nEk Geçici Madde 1\n[1] Bu Kanuna ekli listelerde yer alan Kanunların, değişikliğe uğramış madde numaraları Külliyattaki yerlerine işlenmişlerdir. Ancak Külliyatın 3520 sayılı Kanundan önce basılması nedeniyle maddelerin karşısındaki eski madde numaraları ile ilgi ve bağlantıyı kuran şerhde bu Kanundan bahsedilememiştir."
+      }
+    }
+  }
+}

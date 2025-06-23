@@ -1,0 +1,35 @@
+
+
+11. Hukuk Dairesi         2024/3078 E.  ,  2024/7756 K.
+
+"İçtihat Metni"
+MAHKEMESİ :Asliye Hukuk Mahkemesi(Asliye Ticaret Mahkemesi sıfatıyla)
+SAYISI : 2021/107 Esas, 2021/226 Karar
+HÜKÜM : Davanın kısmen kabulü
+
+İlk Derece Mahkemesince bozmaya uyularak verilen karar davalı banka vekili ile davacı vekili tarafından temyiz edilmekle; temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, temyiz dilekçelerinin kabulüne karar verildikten ve Tetkik Hâkimi tarafından hazırlanan rapor dinlendikten sonra dosyadaki belgeler incelenip gereği düşünüldü:
+
+KARAR
+I. DAVA
+Davacı vekili dava dilekçesinde; müvekkili şirketin ... Bankası Bozüyük Şubesi'ne verdiği 14.01.2013 tarihli EFT talimatı ile ... adlı şahsın ... Bankası'ndaki hesabına 50.000,00 TL EFT yapılmasını istediğini, talimatta EFT yapılacak ismin doğru, IBAN numarasının yanlış yazıldığını, ... Bankası Bozüyük Şubesi'nin yanlış IBAN numarasına göre paranın davalı ... hesabına geçtiğini, davalı bankanın T.C. Merkez Bankası'nın EFT işletim kuralları ve görevleri gereği EFT talimatındaki lehtarın isim ve IBAN numarasını karşılaştırıp buna göre işlem yapmak zorunda olduğunu, davalı ...'ın hesabına hataen yatırılan paranın 29.554,00 TL'sini bankadan çekerek kullandığını ileri sürerek, 50.000,00 TL'nin 14.01.2013 tarihinden itibaren işleyecek reeskont faizi ile birlikte davalılardan müştereken ve müteselsilen tahsilini talep etmiştir.
+
+II. CEVAP
+1.Davalı Banka vekili cevap dilekçesinde; söz konusu EFT'nin hatalı gönderilmesinde müvekkili bankanın bir kusuru bulunmayıp davacı tarafından EFT talimatının hatalı olarak verildiğini, davacının hatalı EFT gönderimi halinde gönderici banka şubesi olan ... Bankası Bozüyük Şubesi tarafından iade mesajı gönderilmesini temin etmesi gerektiği halde 25.01.2013 tarihine kadar müvekkiline ulaşan bir iade talebi bulunmadığını, gönderici bankanın IBAN numarasının doğruluğunu kontrol etmek zorunda olduğunu savunarak davanın reddine karar verilmesini istemiştir.
+
+2.Diğer davalı davaya cevap vermemiştir.
+
+III. MAHKEME KARARI
+Mahkemece bozma ilamına uyularak tüm dosya kapsamına göre, dosyası içerisinde bulunan 20.05.2019 tarihli bilirkişi raporunda davacı şirketin zararının 50.000,00 TL olup, davalı ...'nın bu zararın oluşmasında %50 kusurlu olduğunun belirlendiği, diğer davalı ...'ın ödemek zorunda olduğu 50.000,00 TL'nin %50'si olan 25.000,00 TL'sinden davalı Banka'nın müteselsilen sorumlu olduğunun kabulü gerektiği, davalı ... hakkında verilen karar kesinleşmiş olduğundan hakkında yeniden karar verilmesine yer olmadığına karar vermek gerektiği gerekçesiyle, davanın kısmen kabulüne; 50.000,00 TL'nin %50'si olan 25.000,00 TL'nin, davalı ... ...'ın ödemekle yükümlü olduğuna karar verilen tutar ile tahsilde tekerrür olmamak kaydı ile temerrüt tarihi olan 25.01.2013 tarihinden itibaren işleyecek reeskont faizi ile birlikte davalı ... A.Ş.'den alınarak davacıya verilmesine, davalı ... A.Ş. yönünden fazlaya ilişkin talebin reddine, davalı ... ... hakkında Mahkemelerinin 2019/33 E., 2019/438 K. sayılı ve 26.09.2019 tarihli ilamı ile verilen karar kesinleşmiş olduğundan ... bu davalı hakkında yeniden karar verilmesine yer olmadığına karar verilmiş, hüküm davacı vekili ve davalı Banka vekilince temyiz edilmiştir.
+
+IV. TEMYİZ İNCELEMESİ
+1. Uyuşmazlık ve Hukuki Nitelendirme
+Dava, bankacılık işleminden kaynaklanan maddi tazminat istemine ilişkindir.
+
+2. İlgili Hukuk
+6098 sayılı Türk Borçlar Kanunu, 5411 sayılı Bankacılık Kanunu
+
+3. Değerlendirme
+Dosyadaki yazılara, mahkemece uyulan bozma kararı gereğince hüküm verilmiş olmasına ve delillerin takdirinde bir isabetsizlik bulunmamasına göre, davacı vekilinin ve davalı Banka vekilinin bütün temyiz itirazları yerinde görülmemiştir.
+
+V.SONUÇ: Davacı vekilinin ve davalı Banka vekilinin yerinde görülmeyen tüm temyiz itirazlarının reddi ile usul ve kanuna uygun olan kararın ONANMASINA, dosyanın Mahkemesine gönderilmesine, aşağıda yazılı temyiz giderinin temyiz eden davalı Bankaya yükletilmesine, davacıdan temyiz harcı peşin alındığından başkaca harç alınmasına mahal olmadığına, 06.11.2024 tarihinde oy birliğiyle karar verildi.
+

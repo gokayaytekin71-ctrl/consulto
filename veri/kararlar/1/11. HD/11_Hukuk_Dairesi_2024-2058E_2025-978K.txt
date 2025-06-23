@@ -1,0 +1,38 @@
+
+
+11. Hukuk Dairesi         2024/2058 E.  ,  2025/978 K.
+
+"İçtihat Metni"
+MAHKEMESİ : İstanbul Bölge Adliye Mahkemesi 44. Hukuk Dairesi
+SAYISI : 2020/2585 Esas, 2024/285 Karar
+HÜKÜM : Davanın reddi
+
+Bölge Adliye Mahkemesince verilen karar davacı vekili tarafından temyiz edilmekle; temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, temyiz dilekçesinin kabulüne karar verildikten ve Tetkik Hâkimi tarafından hazırlanan rapor dinlendikten sonra dosyadaki belgeler incelenip gereği düşünüldü.
+KARAR
+I. DAVA
+Davacı vekili dava dilekçesinde; müvekkilinin tüm dünyada ve " yazılımlarının eser ve hak sahibi olduğunu, müvekkiline gelen lisanssız kullanıma ilişkin ihbarlar üzerine, davalı şirket adresinde delil tespiti yapıldığını ve müvekkiline ait yazılımların davalı şirket adresindeki bilgisayarlarda izinsiz olarak, korsan tabir edilen biçimde yüklenmiş ve kullanılır olduğunun tespit edildiğini, ilgililer hakkında suç duyurusunda bulunulduğunu, davalı yanın müvekkiline ait programı, herhangi bir sözleşme ve izne tabi olmaksızın bilgisayarlarında kullanarak haksız kazanç elde ettiğini bu durumun müvekkilinin mali haklarına tecavüz teşkil ettiğini ileri sürerek fazlaya ilişkin haklarını saklı tutarak şimdilik 10.000,00 TL'nin, haksız eylem tarihinden itibaren ticari faizi ile birlikte davalıdan tahsiline karar verilmesini talep etmiştir.
+
+II. CEVAP
+Davalı vekili cevap dilekçesinde; dava konusu yazılımın müvekkili şirket bilgisayarlarında yüklü olmadığını, müvekkili şirket çalışanlarının, şirket işlerini icra ettikleri şirkete ait 14 adet bilgisayar mevcut olduğunu, bu bilgisayarlar dışında şirkete ait ve çalışanlarca kullanılan herhangi bir bilgisayarın mevcut olmadığını, delil tespitinde şirketin 6 adet bilgisayarı olduğu husunun hatalı olarak belirtildiğini, yazılımın rastlandığı laptopun şirkete ait olmadığını, 14 adet şirket bilgisayarlarının hiçbirinde yazılıma rastlanmadığını, bu hususun delil tespiti dosyasındaki bilirkişi raporunda hiç dile getirilmediğini ve söz konusu laptopun şirket çalışanı ...'un şahsına ait olduğunu savunarak davanın reddini istemiştir.
+
+
+III. İLK DERECE MAHKEMESİ KARARI
+İlk Derece Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile dava konusu uyuşmazlıktaki yazılım programlarının 5846 sayılı Fikir ve Sanat Eserleri Kanunu'nun (FSEK) 2/1 hükmü kapsamında hususiyet taşıyan eser niteliğinde olduğu, davacının davaya konu yazılımının FSEK'in 11. maddesi çerçevesinde karineten hak sahibi olduğu davalının davacının hak sahibi olduğu dava konusu yazılımı lisanssız olarak işyerindeki bilgisayarda kurulu olduğu tespit edilmiş olduğundan ve dosyada davacının kullandığı yazılımın lisans belgeleri de ibraz edilmediğinden, FSEK'in 22. maddesi gereğince çoğaltma hakkının ihlal edildiği, yazılımının emsal telif bedelinin 6.999,00 euro+KDV, "Interbase 2020" yazılımının emsal telif bedelinin ise 74,00 euro + KDV olduğu, ancak "İnterbase 2020" yazılımının çalışır durumda olmaması sebebiyle sadece" yazılımının emsal telif bedelinin 6.999,00 euro+KDV olup tutarının FSEK 68 çerçevesinde üç katına kadar bedelinin davacı tarafça istenebileceği, davalı 6098 sayılı Türk Borçlar Kanunu'nun (TBK) 66. maddesi anlamında çalışanın kendisine verilen işi yapılması sırasında başkalarına verdiği zararı gidermekle sorumlu olup davalının itirazının aksine delil tespit raporunda yazılım tespit edilen bilgisayarın ...’a ait şahsi bilgisayar olduğu belirtilmemiş, aksine şirket bilgisayarlarından birisi olduğu belirtilmiş olması, ticaret sicil kayıtlarına göre davalı şirket yazılım geliştirme işiyle iştigal etmesi, başka bir deyişle davaya konu yazılımın davalı şirket tarafından da kullanılması mümkün olabileceğinden, davalının husumete ilişkin itirazının yerinde görülmediği, bu itibarla davacının davasının taleple bağlı kalınarak kabulü gerektiği gerekçesiyle davanın kabulüne karar verilmiş, hüküm, davalı vekilince istinaf edilmiştir.
+
+IV. İSTİNAF
+Bölge Adliye Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile davalı taraf bilgisayarın şahsi bilgisayar olduğu iddiasında olup, Bakırköy 1. Fikri ve Sınai Haklar Ceza Mahkemesi'nin 2019/400 E. sayılı ceza dosyasının halen derdest olduğu ancak ceza yargılamasındaki beyanların alındığı, değişik iş tespit tutanağı, işe alım sırasında alınan taahhütname, 2015 tarihli taahhütname uyarınca (10.madde) çalışanların lisanssız yazılım yüklememeleri gerektiği konusunda bilgilendirilmeleri ve ceza dosyasına sunulan diğer deliller değerlendirildiğinde hukuk yargılamasında davalının sorumlu olmadığı sonuca ulaşıldığı, ihbar olunan ...'un davalı şirket uhdesinde çalışması esnasında kişisel bilgisayarı olduğuna ilişkin beyanı ve şirket işlerinde kullanıldığına dair başkaca delil olmadığı gözetilerek, ceza yargılamasında kişisel amaçlı olarak programı indirdiğinin ikrarı da bulunmakla, subüt bulmayan davanın reddine karar verilmesi gerekirken, davanın kabulüne karar verilmesi yerinde olmadığı gerekçesiyle davalının istinaf başvurusunun kısmen kabulü ile İlk Derece Mahkemesi kararının kaldırılmasına, yeniden hüküm kurulmasına, davanın reddine karar verilmiş, karar, davacı vekilince temyiz edilmiştir.
+
+V. TEMYİZ
+A. Dava ve Hukuki Nitelendirme
+Dava, FSEK kapsamında eser olarak korunan bilgisayar yazılım programına ait mali haklara yönelik tecavüzün nedeni ile maddi tazminat istemine ilişkindir.
+
+B. Değerlendirme ve Gerekçe
+İlk Derece Mahkemesince verilen karara yönelik olarak yapılan istinaf başvurusu üzerine 6100 sayılı Hukuk Muhakemeleri Kanunu'nun (HMK) 355. vd. maddeleri kapsamında yöntemince yapılan inceleme sonucunda Bölge Adliye Mahkemesince esastan verilen nihai kararda, dosya kapsamına göre saptanan somut uyuşmazlık bakımından uygulanması gereken hukuk kurallarına aykırı bir yön olmadığı gibi aynı Kanun'un 369/1 hükmü ve 371. maddesinin uygulanmasını gerektirici nedenlerin de bulunmamasına göre usul ve yasaya uygun Bölge Adliye Mahkemesi kararının onanmasına karar vermek gerekmiştir.
+
+VI.SONUÇ: Yukarıda açıklanan nedenlerle, davacı vekilinin temyiz itirazlarının reddi ile Bölge Adliye Mahkemesince verilen kararın HMK'nın 370/1 hükmü uyarınca ONANMASINA, aynı Kanun'un 372. maddesi uyarınca işlem yapılmak üzere dava dosyasının İlk Derece Mahkemesine, kararın bir örneğinin Bölge Adliye Mahkemesine gönderilmesine, aşağıda yazılı temyiz giderinin temyiz edene yükletilmesine, 18.02.2025 tarihinde kesin olarak oy birliğiyle karar verildi.
+
+
+
+
+
+

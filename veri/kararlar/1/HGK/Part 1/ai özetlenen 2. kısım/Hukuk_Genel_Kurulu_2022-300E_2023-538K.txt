@@ -1,0 +1,138 @@
+
+
+Hukuk Genel Kurulu         2022/300 E.  ,  2023/538 K.
+
+"İçtihat Metni"
+
+MAHKEMESİ : ... Bölge Adliye Mahkemesi 17. Hukuk Dairesi
+SAYISI : 2021/1161 E., 2021/1250 K.
+KARAR : Davanın reddine
+
+
+Taraflar arasındaki menfi tespit davasından dolayı yapılan yargılama sonunda İlk Derece Mahkemesince davanın reddine karar verilmiştir.
+
+İlk Derece Mahkemesince verilen kararın taraf vekilleri tarafından istinaf edilmesi üzerine, Bölge Adliye Mahkemesince davacı vekilinin istinaf başvurusunun esastan reddine, davalı vekilinin vekâlet ücretine yönelik istinaf başvurusunun kabulüne, İlk Derece Mahkemesi kararının kaldırılmasına ve davanın reddine karar verilmiştir.
+
+Bölge Adliye Mahkemesi kararı davalı vekili tarafından temyiz edilmesi üzerine Yargıtay (Kapatılan) 15. Hukuk Dairesince yapılan inceleme sonunda bozulmuş, Bölge Adliye Mahkemesi tarafından Özel Daire bozma kararına karşı direnilmiştir.
+
+Direnme kararı davalı vekili tarafından temyiz edilmekle; kesinlik, süre, temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda Tetkik Hâkimi tarafından hazırlanan gündem ve dosyadaki belgeler incelenip gereği düşünüldü:
+
+I. DAVA
+Davacı vekili, müvekkili şirketin elektrik enerjisi ürettiğini, ürettiği enerjiyi iletim hatlarıyla davalının iletim sistemine aktardığını, bununla ilgili olarak davalı ile 31.10.2012 tarihinde “İletim Sistemi Sistem Kullanım Anlaşması” imzalandığını, sistem kullanım anlaşması uyarınca santralin uzaktan denetlenebilmesi, gerekirse uzaktan müdahale ile kapasite arttırma veya azaltma imkânı sağlayacak bir otomasyon sistemi kurulduğunu ve işletmeye alındığını, otomasyon sisteminin iki yılı aşkın süre hiçbir arıza vermediğini, davalının ilk olarak 03.12.2014 tarihinde sistemde arıza olduğunu bildirdiğini ve müvekkili şirketin arızayı gidermediği gerekçesiyle üç adet ceza faturası düzenlediğini, davalının iddia ettiği arızanın ya hiç gerçekleşmediğini ya da söz konusu arızanın davalının sistemlerinden kaynaklandığını ileri sürerek üç adet ceza faturası toplamı 199.705,96 TL borçlu olmadığının tespitine karar verilmesini talep etmiştir.
+
+II. CEVAP
+Davalı vekili, davalıya tahakkuk ettirilen ceza faturalarının, davacının SCADA ve haberleşme sisteminde oluşan arıza yüzünden sistem kullanım anlaşması uyarınca düzenlendiğini belirterek davanın reddini savunmuştur.
+
+III. İLK DERECE MAHKEMESİ KARARI
+İlk Derece Mahkemesinin 13.03.2018 tarihli ve 2015/687 Esas, 2018/284 Karar sayılı kararı ile; davacı ile dava dışı şirketlerin bağlı bulunduğu Batı Anadolu Yük Tevzi Müdürlüğü kayıtlarına göre, davacı şirkete ait kayıtlar dışında bağlı bulunan diğer şirketlere ait SCADA ve haberleşme arızasının anılan dönem içinde tespit edilemediği, bu nedenle davalının sisteminden kaynaklı bir arızanın bulunmadığı, ortaya çıkan arızanın davacının sisteminden kaynaklandığı, davalının arızanın giderilmesine dair talep yazısı davacıya iletilmesine rağmen sözleşmede kararlaştırılan süre içerisinde arızanın giderilmediği, bu nedenle ceza faturalarının taraflar arasındaki sözleşmeye uygun olduğu gerekçesiyle davanın reddine, 17.932,35 TL vekâlet ücretinin davacıdan alınarak davalıya verilmesine karar verilmiştir.
+
+IV. İSTİNAF
+A. İstinaf Yoluna Başvuranlar
+İlk Derece Mahkemesinin yukarıda belirtilen kararına karşı süresi içinde taraf vekilleri istinaf başvurusunda bulunmuştur.
+
+B. Gerekçe ve Sonuç
+Bölge Adliye Mahkemesinin 15.10.2020 tarihli ve 2018/1154 Esas, 2020/1080 Karar sayılı kararı ile;
+1. Davacı vekilinin istinaf başvurusu yönünden yapılan incelemede;
+Alınan bilirkişi raporlarına göre, davacı şirkete cezanın uygulandığı dönemlerde davalının reaktif güce ait sayısal değerleri incelendiğinde, üç saniye gibi kısa bir sürede reaktif güç değerinin 16 MVAR olarak büyük bir değişim gösterdiği bu durumun davalı ... yük tevzi merkezinden sağlıklı bir reaktif güç bilgisi alınmasını ve görüntülenmesini imkânsız kıldığı, bu durumun ceza uygulanan dönemde sürekli olarak tekrarlandığı, davacının SCADA sisteminde oluşan arızayı gidermek için yeterli çabayı göstermediği arızalanan kart yedeğini bulundurmadığı, yeni kart temini için gerekli organizasyon yapmadığı ve üzerine düşen yükümlülüğü yerine getirmediği, İlk Derece Mahkemesince davanın reddine dair verilen kararda usul ve yasaya aykırılık bulunmadığı gerekçesiyle davacı vekilinin istinaf başvurusunun esastan reddine,
+
+2. Davalı vekilinin istinaf başvurusu yönünden yapılan incelemede;
+Harçlandırılan dava değeri üzerinden hesaplanan vekâlet ücretinin, davanın reddine karar verilmesi nedeniyle Avukatlık Asgari Ücret Tarifesine göre hesaplanarak 23.827,32 TL'nin davacıdan alınarak davalıya verilmesi gerektiği, ancak davalı vekilinin istinaf başvurusunda vekâlet ücreti talebini 19.130,56 TL olarak bildirdiği nazara alındığında 6100 sayılı Hukuk Muhakemeleri Kanunu'nun (HMK) 26 ncı maddesi gereğince 19.130,56 TL vekâlet ücretinin davacıdan tahsili ile davalıya verilmesi gerektiği gerekçesiyle davalı vekilinin istinaf başvurusunun kabulüne, ilk derece mahkemesi kararının kaldırılarak davanın reddine, 19.130,56 TL vekâlet ücretinin davacıdan alınarak davalıya verilmesine karar verilmiştir.
+
+V. BOZMA VE BOZMADAN SONRAKİ YARGILAMA SÜRECİ
+A. Bozma Kararı
+1. Bölge Adliye Mahkemesinin yukarıda belirtilen kararına karşı süresi içinde davalı vekili temyiz isteminde bulunmuştur.
+
+2. Yargıtay (Kapatılan) 15. Hukuk Dairesinin yukarıda tarih ve sayısı belirtilen kararı ile;
+"...1- Dava, taraflar arasındaki sistem kullanım anlaşması uyarınca davalı tarafından düzenlenen ceza faturalarından kaynaklı borçlu olmadığının tespiti istemine ilişkindir.
+02/12/2020 tarihli Resmi Gazete'de yayımlanan, 25/11/2020 tarihli 7257 sayılı Kanun'un 33. maddesi ile, 6446 sayılı Elektrik Piyasası Kanunu'nun 8 inci maddesinin ikinci fıkrasına (ç) bendinden sonra gelmek üzere (d) bendi eklenmiş, buna göre “İletim sisteminin normal işletme koşulları içerisinde işletilmesi ile işletme güvenliği ve bütünlüğü üzerinde risk oluşturan durumlara ilişkin olarak bağlantı ve sistem kullanım anlaşmalarında düzenlenen sistem kullanım ihlallerinin takibini yapmak, ihlal durumu tespit edilen tüzel kişilere sistem kullanım anlaşmasında düzenlenen ceza-i şartları ve diğer yaptırımları uygulamak” TEİAŞ’ın görev ve yükümlülükleri arasında gösterildikten sonra 6446 sayılı Kanun'a Ek madde 3 ile “8 inci maddenin ikinci fıkrasının (d) bendinin uygulamasından kaynaklanan uyuşmazlıklar idari yargıda görülür.” hükmü eklenmiş, 46. madde ile de Kanun'un yayımı tarihinde yürürlüğe gireceği düzenlenmiştir.
+Bu bağlamda, ilk derece mahkemesinin ve Dairemizin karar tarihinden sonra yürürlüğe giren 7257 sayılı Kanun ile bağlantı ve sistem kullanım anlaşmalarında düzenlenen sistem kullanım ihlallerine ilişkin ceza-i şartlara ilişkin uyuşmazlıkların idari yargı yolunda görüleceği hükme bağlandığından yargı yoluna ilişkin bu değişikliğin usul hükmü niteliğinde olduğu, derhal ve kesinleşmemiş tüm uyuşmazlıkları da kapsar şekilde uygulanması gerektiği anlaşıldığından 6100 sayılı HMK'nın 114/1-b maddesine göre dava şartı olan "yargı yolunun caiz olmaması" nedeniyle davanın usulden reddine karar verilmesi gerektiğinden ilk derece mahkemesi kararının bozulması uygun görülmüştür.
+2- Bozma nedenine göre davalı vekilinin temyiz itirazlarının şimdilik incelenmesine gerek görülmemiştir,..." gerekçesiyle karar bozulmuştur.
+
+B. Bölge Adliye Mahkemesince Verilen Direnme Kararı
+Bölge Adliye Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile; önceki karar gerekçesi yanında, Bölge Adliye Mahkemesince verilen karar tarihinin 15.10.2020 olduğu, bozma gerekçesinde belirtilen 7257 sayılı Elektrik Piyasası Kanunu ile Bazı Kanunlarda Değişiklik Yapılmasına Dair Kanun'un (7257 sayılı Kanun) 33 üncü maddesine eklenen (d) bendinin düzenleme tarihi 25.11.2020 olup, 02.12.2020 tarihli Resmî Gazete'de yayımlanması ile yürürlüğe girdiği, davanın ise 08.06.2015 tarihinde açıldığı, buna göre dava tarihi itibariyle yürürlükte bulunan kanun hükümleri gereğince davayı görme görevinin adli yargıda olduğunun anlaşıldığı, aksi kararlaştırılmadıkça her davanın açıldığı tarihe göre usul kurallarının belirlenmesi gerektiği, dava tarihi itibariyle adli yargının görevli olduğu gerekçesiyle direnme kararı verilmiştir.
+
+VI. TEMYİZ
+A. Temyiz Yoluna Başvuranlar
+Bölge Adliye Mahkemesinin yukarıda belirtilen direnme kararına karşı davalı vekili temyiz isteminde bulunmuştur.
+
+B. Temyiz Sebepleri
+Davalı vekili, vekâlet ücretine ilişkin hesaplamanın davanın harca esas değeri üzerinde yapılarak müvekkili lehine 23.827,32 TL vekâlet ücretine hükmedilmesi gerektiğini, İlk Derece Mahkemesince verilen karara ilişkin sunulan istinaf dilekçesinde, hükmedilecek vekâlet ücretinin 19.130,56 TL olması gerektiği yönünde beyanlarının bulunmadığını, Bölge Adliye Mahkemesince eksik vekâlet ücretine hükmedildiğini ileri sürerek kararın bozulmasını talep etmiştir.
+
+C. Uyuşmazlık
+Direnme yolu ile Hukuk Genel Kurulu önüne gelen uyuşmazlık; davanın 08.06.2015 tarihinde açıldığı, İlk Derece Mahkemesince 13.03.2018 tarihinde, istinaf talebi üzerine Bölge Adliye Mahkemesince 15.10.2020 tarihinde ilk kararın verildiği somut olayda, 02.12.2020 tarihinde yürürlüğe giren 7257 sayılı Kanun’un 33 üncü maddesi ile, 6446 sayılı Elektrik Piyasası Kanunu'nun (6446 sayılı Kanun) 8 inci maddesinin ikinci fıkrasına (d) bendinin eklendiği ve bu maddeden kaynaklanan uyuşmazlıkların da 7257 sayılı Kanun’un 39 uncu maddesi ile 6446 sayılı Kanun'a eklenen "EK MADDE 3" uyarınca idari yargıda görüleceğine ilişkin düzenleme karşısında, yargı yolunun caiz olmaması sebebiyle davanın usulden reddine karar verilmesinin gerekip gerekmediği noktasında toplanmaktadır.
+
+D. Gerekçe
+1. İlgili Hukuk
+1. 6446 sayılı Elektrik Piyasası Kanunu'nun 8 inci maddesi.
+
+2. 7257 sayılı Elektrik Piyasası Kanunu ile Bazı Kanunlarda Değişiklik Yapılmasına Dair Kanun'un 33, 39 ve 46 ncı maddesi.
+
+3. 6100 sayılı Hukuk Muhakemeleri Kanunu'nun 114 ve 115 inci maddesi.
+
+2. Değerlendirme
+1. Uyuşmazlığın çözümü için öncelikle konu ile ilgili yasal düzenlemelerin açıklığa kavuşturulmasında yarar vardır.
+
+2. Mahkemenin davanın esası hakkında yargılama yapabilmesi (davayı esastan inceleyebilmesi) için varlığı veya yokluğu gerekli olan hâllere dava şartları denir.
+
+3. Mahkeme, hem davanın açıldığı günde hem de yargılamanın her aşamasında dava şartlarının bulunup bulunmadığını kendiliğinden araştırıp inceler ve bu konuda tarafların istem ve beyanları ile bağlı değildir. Dava şartlarının davanın açıldığı günde bulunmaması ya da bu şartlardan birinin yargılama aşamasında ortadan kalktığının öğrenilmesi durumunda mahkemece mesmu (dinlenebilir) olmadığı gerekçesiyle davanın reddedilmesi gerekir.
+
+4. Dava şartlarının amacı, bir davanın esası hakkında incelemeye geçilebilmesi için gerekli bütün şartları ve bunların incelenmesi usulünü tespit etmek, böylece davaların daha çabuk, basit ve ekonomik bir şekilde sonuçlanmasına yardımcı olmaktır (Baki Kuru, İstinaf Sistemine Göre Yazılmış Medeni Usul Hukuku, ... 2016, s. 190).
+
+5. Hukuk Muhakemeleri Kanunu'nun 114 üncü maddesinin 1-b bendine göre “Yargı yolunun caiz olması” dava şartları arasında yer alır.
+
+6. Yargı yolu kavramı, açılan bir davanın o hukuk sistemine dâhil yargı kollarından hangisinde bakılacağını ifade eder. Adli yargı ile idari yargı, bir başka deyişle hukuk mahkemeleri ile idare mahkemeleri arasındaki ilişki yargı yolu ilişkisidir. Bu münasebet kamu düzenine ilişkin olduğundan mahkemece yargılamanın her aşamasında resen araştırılmalıdır.
+
+7. Nitekim Hukuk Genel Kurulunun 18.03.2021 tarihli ve 2017/3-1531 Esas, 2021/312 Karar sayılı kararında da bu hususlara değinilmiştir.
+
+8. Tüm bu açıklamalar ışığında somut olay değerlendirildiğinde; davacı, davalı ile imzalanan “İletim Sistemi Sistem Kullanım Anlaşması” uyarınca kurulan otomasyon siteminde arıza gerçekleştiği ve arızanın giderilmediği gerekçesiyle davalı tarafından düzenlenen ceza faturalarından dolayı borçlu olmadığının tespitini talep etmiş olup, eldeki dava 08.06.2015 tarihinde açılmıştır.
+
+9. İlk Derece Mahkemesince davanın reddine dair verilen kararın taraf vekillerince istinaf edilmesi üzerine ... Bölge Adliye Mahkemesi 17. Hukuk Dairesinin 15.10.2020 tarihli ve 2018/1154 Esas, 2020/1080 Karar sayılı kararı ile, davacı vekilinin istinaf başvurusunun esastan reddine, davalı vekilinin vekâlet ücretine yönelik istinaf başvurusun kabulü ile ilk derece mahkemesi kararı kaldırılarak yeniden esas hakkında verilen karar davalı vekili tarafından temyiz edilmiştir.
+
+10. Bölge Adliye Mahkemesince verilen karardan sonra 02.12.2020 tarihli Resmî Gazete'de yayımlanan 7257 sayılı Kanun'un 33 üncü maddesi ile, 6446 sayılı Kanun'un "İletim faaliyeti" başlıklı 8 inci maddesinin ikinci fıkrasına (ç) bendinden sonra gelmek üzere (d) bendi eklenmiş ve "İletim sisteminin normal işletme koşulları içerisinde işletilmesi ile işletme güvenliği ve bütünlüğü üzerinde risk oluşturan durumlara ilişkin olarak bağlantı ve sistem kullanım anlaşmalarında düzenlenen sistem kullanım ihlallerinin takibini yapmak, ihlal durumu tespit edilen tüzel kişilere sistem kullanım anlaşmasında düzenlenen cezai şartları ve diğer yaptırımları uygulamak" TEİAŞ’ın görev ve yükümlülükleri arasına alınmıştır.
+
+11. Elektrik Piyasası Kanunu ile Bazı Kanunlarda Değişiklik Yapılmasına Dair Kanun'un 39 uncu maddesi ile, 6446 sayılı Kanun'a eklenen "EK MADDE 3" ile, 6446 sayılı Kanun'un 8 inci maddesinin ikinci fıkrasının (d) bendinin uygulamasından kaynaklanan uyuşmazlıkların idari yargıda görüleceği düzenlenmiş, 7257 sayılı Kanun'un 46 ncı maddesi ile de bu Kanun'un yayımı tarihinde yürürlüğe gireceği belirtilmiştir.
+
+12. Az yukarıda da açıklandığı üzere HMK’nın 114 üncü maddesinin 1-b bendine göre “Yargı yolunun caiz olması” dava şartları arasında yer almakta olup, HMK'nın 115/1 inci maddesinde ise mahkemece, dava şartlarının mevcut olup olmadığının, yargı yolunun kamu düzenine ilişkin olması nedeniyle davanın her aşamasında resen dikkate alınması gerektiği belirtilmiştir.
+
+13. Elektrik Piyasası Kanunu ile Bazı Kanunlarda Değişiklik Yapılmasına Dair Kanun'un 46 ncı maddesinde, bu Kanun'un yayımı tarihinde yürürlüğe gireceği belirtilmiş olmakla, bağlantı ve sistem kullanım anlaşmalarında düzenlenen sistem kullanım ihlâllerine yönelik ceza-i şartlara ilişkin uyuşmazlıkların idari yargı yolunda görüleceğine ilişkin düzenlemenin devam eden davalarda uygulanmayacağı yönünde açık bir düzenlemeye de yer verilmemesi karşısında, kanun koyucunun iradesinin bu düzenlemenin eldeki davalarda da uygulanması gerektiği yönünde olduğunun kabulü gerekir.
+
+14. Bu durumda Bölge Adliye Mahkemesince, dava tarihi itibariyle yürürlükte bulunan kanun hükümleri gereğince davanın adli yargıda görülmesi gerektiği gerekçesiyle verilen direnme kararı yerinde değildir.
+
+15. Hukuk Genel Kurulunda yapılan görüşmeler sırasında; HMK'nın Geçici 1 inci maddesinin "Bu Kanunun yargı yolu ve göreve ilişkin hükümleri, Kanunun yürürlüğe girmesinden önceki tarihte açılmış olan davalarda uygulanmaz" hükmünü içerdiği, buna göre davanın açıldığı tarihteki görevli mahkemenin sonradan çıkan Kanun ile değiştirilmesinin kabul edilmediği, usul hükümlerinin derhâl uygulanırlığı ilkesinin Kanun'un yürürlüğünden sonraki işlemlerde uygulanması gerektiği, somut olayda 7257 sayılı Kanun'un 33 üncü maddesi ile yargı yoluna ilişkin düzenleme yapılırken hâlen derdest olan davalara uygulanacağına dair bir hüküm getirilmediğinden bu düzenlemenin ancak Kanun'un yürürlük tarihinden sonra açılan davalar için uygulanması gerektiği görüşü ileri sürülmüş ise de, bu görüş yukarıda açıklanan nedenlerle Kurul çoğunluğu tarafından benimsenmemiştir.
+
+16. Hâl böyle olunca Hukuk Genel Kurulunca da benimsenen Özel Daire bozma kararına uyulması gerekirken önceki hükümde direnilmesi doğru olmamıştır.
+
+17. Bu nedenle direnme kararı bozulmalıdır.
+
+VII. KARAR
+Açıklanan sebeplerle;
+1- Direnme kararının Özel Daire bozma kararında gösterilen nedenlerden dolayı 6100 sayılı Kanun’un 371 inci maddesi gereğince BOZULMASINA,
+
+2- Bozma nedenine göre davalı vekilinin temyiz itirazlarının şimdilik incelenmesine yer olmadığına,
+
+İstek hâlinde temyiz peşin harcının yatırana geri verilmesine,
+
+Dosyanın 6100 sayılı Kanun’un 373 üncü maddesinin ikinci fıkrası uyarınca ... Bölge Adliye Mahkemesi 17. Hukuk Dairesine gönderilmesine,
+
+31.05.2023 tarihinde oy çokluğuyla kesin olarak karar verildi.
+
+
+
+"K A R Ş I O Y"
+
+
+Sayın çoğunluk ile aramızda oluşan uyuşmazlık; yargılama sırasında yargı yolunu belirleyen bir Yasa'nın yürürlüğe girmesi hâlinde, yasada derdest dosyalara da uygulanacağına ilişkin bir düzenleme bulunmasa dahi mahkemenin görevsizlik kararı verip veremeyeceği noktasında toplanmaktadır.
+
+Bilindiği üzere 6100 sayılı HMK’nın Geçici 1 inci maddesi açıkça “Bu Kanunun yargı yolu ve göreve ilişkin hükümleri Kanunun yürürlüğe girmesinden önceki tarihte açılmış olan davalarda uygulanmaz” şeklinde düzenlenerek davanın açıldığı tarihteki görevli mahkemenin sonradan çıkan bir Yasayla değiştirilmesini kabul etmemiş ve kuralı bu şekilde koymuştur.
+
+Usul hükümlerinin derhal uygulanırlığı ilkesi, yasanın yürürlüğünden sonraki işlemlere uygulanacağını ifade eder. Örneğin HUMK döneminde açılan bir dava sırasında HMK'nın yürürlüğe girmesi hâlinde yürürlük tarihinden sonra yapılan usulü muamelelere HMK hükümleri uygulanacaktır.
+
+Yasa Koyucu çıkardığı usule ilişkin bir yasayla görevli veya yetkili mahkemeyi değiştirecekse aynı yasada açıkça söz konusu Yasa'nın hâlen derdest olan davalara da uygulanacağını hüküm altına almalıdır. Aksi anlayış “tabii hakim ilkesi”ne de aykırı olacaktır.
+
+Somut olayda 7257 sayılı Yasa'nın 33 üncü maddesi ile yargı yolu hakkında düzenleme yapılırken hâlen derdest olan davalara da uygulanacağına dair bir hüküm getirilmediğine göre bu Yasa ancak yürürlük tarihinden sonra açılan davalar için uygulanmalıdır.
+
+Açıklanan ve Bölge Adliye Mahkemesinin direnme kararında belirtilen gerekçelerle kararın onanması düşüncesinde olduğumuzdan sayın çoğunluğun görüşüne katılmıyoruz.
+
+
+
+

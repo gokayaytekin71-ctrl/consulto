@@ -1,0 +1,50 @@
+
+
+Hukuk Genel Kurulu         2020/132 E.  ,  2022/874 K.
+
+"İçtihat Metni"
+MAHKEMESİ :Ticaret Mahkemesi
+
+
+1. Taraflar arasındaki “alacak” davasından dolayı yapılan yargılama sonunda, İstanbul 45. Asliye Ticaret Mahkemesince verilen davanın reddine ilişkin karar davacı vekili tarafından temyiz edilmesi üzerine Yargıtay (Kapatılan) 13. Hukuk Dairesince yapılan inceleme sonunda bozulmuş, Mahkemece Özel Daire bozma kararına karşı direnilmiştir.
+2. Direnme kararı davacı vekili tarafından temyiz edilmiştir.
+3. Hukuk Genel Kurulunca dosyadaki belgeler incelendikten sonra gereği görüşüldü:
+
+I. YARGILAMA SÜRECİ
+Davacı İstemi:
+4. Davacı vekili, davalı firmanın KOSGEB destekleme kredileri kapsamında tedarikçi firma olarak yeraldığını, Başbakanlık Teftiş Kurulunca yapılan inceleme sonucunda davalı firmanın bilgisayar yazılım desteklerinin teknik bakımdan yetersiz olduğunun tespit edildiğini, bu nedenle verilen desteğin amacına ulaşmadığını ve Kurum olarak zarara uğradıklarını ileri sürerek, fazlaya ilişkin hak saklı kalmak kaydıyla, teftiş raporunda belirtilen 287.325,26TL tutarındaki destek bedelinin yasal faizi ile birlikte davalıdan tahsiline karar verilmesini talep etmiştir.
+Davalı Cevabı:
+5. Davalı vekili, taleplerin muhatabının müvekkili olmadığını, müvekkili şirketin tedarikçi veri tabanında yer alan ve yararlanıcı işletmelerin ihtiyacı olan destek konusu mal ve hizmetleri temin eden işletme olduğunu, davacının muhatabının KOSGEB’den destek alan firmalar olabileceğini, bu durumda istenen alacağın müvekkili ile ilgisinin bulunmadığını, taraf sıfatı (husumet) yokluğu nedeniyle davanın reddinin gerektiğini, kaldı ki davacının alacağını öğrendiği bir yıl içerisinde dava açması gerekirken açmaması nedeniyle bu yönüyle de davanın süreden reddinin gerektiğini savunmuştur.
+İlk Derece Mahkemesi Kararı:
+6. İstanbul 45. Asliye Ticaret Mahkemesinin 15.02.2013 tarihli ve 2011/178 E., 2013/18 K. sayılı kararı ile; dava konusunun yazılım firmasının verdiği hizmetin ayıplı çıkmasından kaynaklanan haksız alınan yazılım desteği tutarının istenmesi olduğu, davaya fikri ve sınai haklar mahkemesinin bakabileceği gerekçesiyle görevsizlik kararı verilmiştir.
+7. Mahkemenin yukarıda belirtilen kararının süresi içinde taraf vekilleri tarafından temyiz edilmesi üzerine, Yargıtay 11. Hukuk Dairesinin 03.07.2013 tarihli ve 2013/10318 E., 2013/14116 K. sayılı kararı ile; davanın, davalı tedarikçi firma tarafından temin edilen bilgisayar yazılımının yetersizliği iddiasına dayalı alacak istemine ilişkin olduğu, davalıya ait eser sahipliği hakkına ilişkin bir çekişme bulunmadığı, Mahkemenin görevli olduğu gerekçesiyle bozma kararı verilmiştir.
+8. İstanbul 45. Asliye Ticaret Mahkemesinin 10.12.2013 tarihli ve 2013/235 E., 2013/314 K. sayılı kararı ile; bozma kararına uyulmakla birlikte yazılım desteğinin verildiği iki sene içinde herhangi bir eksikliğin rapor edilmediği, davalı firmanın da bu nedenle sorumluluğuna gidilemeyeceği gerekçesiyle davanın reddine karar verilmiştir.
+Özel Daire Bozma Kararı:
+9. Mahkemenin yukarıda belirtilen kararına karşı süresi içinde davacı vekili tarafından temyiz isteminde bulunulmuştur.
+10. Yargıtay (Kapatılan) 13. Hukuk Dairesinin 25.01.2016 tarihli ve 2015/26558 E., 2016/1383 K. sayılı kararı ile ;
+“…Davacının dayandığı Başbakanlık Teftiş Kurulu Başkanlığınca 2.7.2007 tarih ve 38/07-21 sayılı soruşturma raporunda, davalı firmanın tedarikçi olarak işlem yapıldığı İkitelli Laboratuar (BSGM) Müdürlüğü (rapor kapsamında diğer birkaç müdürlükte dahil olmak üzere) çalışanlarının destek süreçlerine dönük mevzuat açısından eksik ve tahrifatlı işlemlerin yapıldığı tespit edildiği belirtilmiştir. Mahkemece, davalının yazılım hizmeti verildiği 2 sene içinde herhangi bir eksikliğin tespit edilemediği gerekçesi ile davanın reddine karar verilmiş ise de; davalının sunduğu yazılım üzerinde herhangi bir inceleme yapılmamıştır. Bu durumda mahkemece öncelikle yazılımın yetersiz olduğunun tespitine ilişkin teftiş raporu ve eklerinin ilgili kurumdan celbi sağlandıktan sonra konusunda uzman kişilerden oluşan yeni bir bilirkişi heyeti oluşturularak dava konusu bilgisayar yazılımı üzerinde inceleme yapılmak suretiyle, teknik açıdan yeterli olup olmadığının tespiti ile sonucuna uygun karar verilmesi gerekirken yazılı şekilde eksik incelemeye dayalı olarak hüküm tesisi usul ve yasaya aykırı olup bozmayı gerektirir…” gerekçesiyle karar bozulmuştur.
+Direnme Kararı:
+11. İstanbul 2. Asliye Ticaret Mahkemesinin 24.01.2017 tarihli ve 2016/409 E., 2017/75 K. sayılı kararı ile; önceki karar gerekçesinin yanında, davacı kurumun kendi tespit, inceleme ve denetim görevlerini yerine getirmemiş olduğu, satışı yapacak firmanın yazılım denetimi yapıldıktan sonra havuza alınması gerektiği, yazılım kullanımına 2003-2004 yıllarında başlanılmasına karşın 2007 yılında hazırlanan bir müfettiş raporundan bahisle yazılımın hatalı, eksik olduğunun ileri sürülmesinin hakkın kötüye kullanımı teşkil ettiği, bilirkişi raporlarında yazılımın bu aşamada incelenmesinin geçerli olmayacağının belirtildiği gerekçesiyle direnme kararı vermiştir.
+Direnme Kararının Temyizi:
+12. Direnme kararı süresi içinde davacı vekili tarafından temyiz edilmiştir.
+
+II. UYUŞMAZLIK
+13. Direnme yolu ile Hukuk Genel Kurulu önüne gelen uyuşmazlık; somut olayda, bozma kararı doğrultusunda yeniden bilirkişi raporu alınmasının gerekip gerekmediği, buradan varılacak sonuca göre dosyanın bu hâliyle davanın reddine karar verilmesinin yerinde olup olmadığı noktasında toplanmaktadır.
+
+III. GEREKÇE
+14. Öncelikle 6100 sayılı Hukuk Muhakemeleri Kanunu’nun (HMK) 31. maddesinde düzenlenen “Hâkimin davayı aydınlatma ödevi”ne ilişkin olarak açıklama yapmakta fayda vardır.
+15. Hukuk Muhakemeleri Kanunu’nun 25/1. maddesinde, hâkimin kanunda öngörülen istisnalar dışında, iki taraftan birinin söylemediği şeyi veya vakıaları kendiliğinden dikkate alamayacağı ve onları hatırlatabilecek davranışlarda bulunamayacağı, aynı maddenin 2. fıkrasında yine kural olarak hâkimin kendiliğinden delil toplayamayacağı kabul edilmiştir (Umar, Bilge: Hukuk Muhakemeleri Kanunu Şerhi, 2. Baskı, Ankara 2014, s. 114 vd.).
+16. Taraflarca getirilme ilkesi olarak kabul edilen bu düzenleme ile özel hukuk uyuşmazlıklarında kural olarak, tarafların iddia ve savunmalarına ilişkin vakıaların ve bu vakıaların delillerinin bizzat taraflarca getirilmesi ve yargılamada ileri sürülmesi düzenlenmiştir. Böylelikle dava malzemelerinin toplanmasında ve bunların ileri sürülmesinde hâkimin pasif olması kabul edilmiştir (Üstündağ, Saim: Medeni Yargılama Hukuku, 7. Baskı, İstanbul 2000, s. 238).
+17. Bununla birlikte dava malzemesinin taraflarca getirilmesi, hâkimin bu hususlar hakkında hiçbir yetkisi olmadığı ve tamamen etkisiz olduğu anlamına gelmemektedir (Alangoya, H. Yavuz /Yıldırım, Mehmet Kamil /Deren Yıldırım, Nevhis: Medenî Usul Hukuku Esasları, 7. Baskı, İstanbul 2009, s. 184). Bu, özellikle hâkimin yargılama sonucunda verdiği hükmün maddi gerçekle örtüşür olabilmesinin bir sonucudur.
+18. Tarafların getirdiği ve ileri sürdüğü dava malzemeleri bazı durumlarda maddi veya hukukî açıdan eksik, belirsiz yahut çelişkili olabilir. Bu durum, davanın yürütülmesini zorlaştırabildiği gibi hâkimin doğru bir hükme varma ihtimalini de tehlikeye sokabilir. Bu nedenle HMK’nın 31. maddesinde, bu durumlarda, hâkimin taraflara açıklama yaptırabileceği, soru sorabileceği ve tarafların delil göstermelerini isteyebileceği düzenlenmiştir.
+19. Tüm bu açıklamalar ışığında somut olay değerlendiğinde; davacı KOSGEB, davalı şirketin verdiği hizmetin ayıplı olduğu iddiasıyla hizmet için ödenen bedelin iadesi amacıyla eldeki davayı açmış ise de, taraflar arasında olduğu belirtilen sözleşmelerin ve davanın dayandırıldığı Başbakanlık Teftiş Kurulu raporu ile eklerinin dosya kapsamında bulunmadığı anlaşılmaktadır. Mahkemece sağlıklı bir sonuca varılabilmesi ve varılan sonucun denetlenebilmesi açısından belirtilen ilgili evrakın getirtilmesi suretiyle taraf, Mahkeme ve Yargıtay denetimine elverişli, dosyadaki diğer bilirkişi raporu ile çelişki doğması hâlinde bu çelişkiyi aydınlatacak nitelikte, konusunda uzman kişilerden oluşan yeni bir bilirkişi heyetinden rapor alınması suretiyle hüküm tesisi gerekir.
+20. O hâlde, Hukuk Genel Kurulunca da benimsenen Özel Daire bozma kararına uyulması gerekirken önceki kararda direnilmesi usul ve yasaya aykırıdır.
+21. Diğer taraftan, dava tarihi 25.01.2010 olduğu hâlde direnme kararının başlık kısmında 03.02.2010 olarak hatalı yazılmış ise de bu durum mahallinde düzeltilebilir maddi hata niteliğinde olduğundan ayrıca bozma nedeni yapılmamıştır.
+22. Bu nedenle direnme kararı bozulmalıdır.
+
+IV. SONUÇ :
+Açıklanan nedenlerle;
+Davacı vekilinin temyiz itirazlarının kabulü ile direnme kararının Özel Daire bozma kararında gösterilen nedenlerden dolayı, 6217 sayılı Kanun’un 30. maddesi ile 6100 sayılı Hukuk Muhakemeleri Kanunu’na eklenen “Geçici Madde 3” atfıyla uygulanmakta olan 1086 sayılı Hukuk Usulü Muhakemeleri Kanunu’nun 429. maddesi gereğince BOZULMASINA,
+İstek hâlinde temyiz peşin harcının yatırana geri verilmesine,
+Aynı Kanun’un 440. maddesi uyarınca kararın tebliğinden itibaren on beş gün içerisinde karar düzeltme yolu açık olmak üzere, 08.06.2022 tarihinde oy birliği ile karar verildi.
+

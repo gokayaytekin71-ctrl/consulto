@@ -1,0 +1,35 @@
+
+
+11. Hukuk Dairesi         2024/4044 E.  ,  2024/8527 K.
+
+"İçtihat Metni"
+MAHKEMESİ :Asliye Hukuk Mahkemesi
+SAYISI : 2023/507 Esas, 2024/218 Karar
+HÜKÜM : Kısmen kabul
+
+Taraflar arasındaki alacak davasının bozma ilamına uyularak yapılan yargılaması sonucunda Mahkemece davanın kısmen kabulüne karar verilmiştir.
+
+Mahkeme kararı, taraf vekilleri tarafından temyiz edilmekle; kesinlik, süre, temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, temyiz dilekçelerinin kabulüne karar verildikten ve Tetkik Hâkimi tarafından hazırlanan rapor dinlendikten sonra dosyadaki belgeler incelenip gereği düşünüldü:
+
+I. DAVA
+Davacı vekili dava dilekçesinde; 18.05.2012 tarihinde davacının davalı bankadaki hesabından internet bankacılığı şifre ve kullanıcı bilgileri ele geçirilmek suretiyle dava dışı ... isimli kişinin hesabına 47.839,00 TL EFT yapıldığını, konuyla ilgili savcılığa şikayet dilekçesi verildiğini, soruşturmada, işlemin yapıldığı bilgisayarın ... Sosyal Yardımlaşma ve Dayanışma Vakfına ait IP numarasını kullandığının tespit edildiğini, mudinin mevduatını korumak için gerekli önlemleri almayan bankanın sorumlu olduğunu ileri sürerek 47.839,00 TL'nin 18.05.2012 tarihinden itibaren işleyecek avans faizi ile birlikte tahsilini talep etmiştir.
+
+II. CEVAP
+Davalı vekili cevap dilekçesinde; davalı bankanın sistemine herhangi bir saldırının tespit edilemediğini, şifre ve parola bilgileri ile sim kartın korunmamasından davacının sorumlu olduğunu, davalının tüm güvenlik önlemlerini aldığını, davacının internet bankacılığı işlemlerini yetkilisine verilen OTP cihazı ile gerçekleştirdiğini savunarak davanın reddini istemiştir.
+
+III.MAHKEME KARARI
+Mahkemece bozma ilamına uyularak "davalı bankanın internet bankacılığı üzerinde yerinde inceleme yetkisi verilerek ve internet bankacılığı sisteminin bulunduğu yer belirlenerek, 2 bilgisayar mühendisi ve konusunda uzman 1 bankacıdan oluşan bilirkişi heyetinden rapor alınarak varsa davalı bankanın kusurlu olup olmadığı ve varsa kusur oranı belirlenerek sonucuna göre karar verilmesi gerekirken yazılı şekilde karar verilmesi doğru olmamış, kararın bu nedenle bozulması gerekmiştir. Kabule göre de davalı banka harçtan muaf olmamasına rağmen harca hükmedilmemesi doğru olmamıştır.
+" gerekçesiyle bozmaya uyulduğu, dosyanın heyet bilirkişine tevdi edilerek Yargıtay bozma ilamı doğrultusunda aldırılan raporlarda; olayda davacıya ait OTP cihazı ile şifre üretilip internet bankacılığına giriş yapıldığı, şifrenin bertaraf edilmediği, giriş yapıldıktan sonra bilgisayar korsanları tarafından önceden bilgisayara yüklenen bilgisayar solucanları ile internet ağının dinlenmesi, sistemde bulunan gerçek bilgilere ulaşılması ile sistem güvenliği aşılarak zarara sebebiyet verildiği anlaşılmış, "OTP cihazının ürettiği şifre bertaraf edilip iş bu cihazın ürettiği şifreye ihtiyaç duyulmadan EFT yapılıp yapılamayacağı" hususları yönünden aldırılan ek raporda tespitler nazarında, davacının hesabından üç aşamalı güvenlik kontrolü ile OTP şifresi bertaraf edilmeden sisteme giriş yapıldığı, bozma ilamı doğrultusunda davacının şifre paylaşımı yapıp yapmadığının bozma öncesi dosyada bulunan olayın gerçekleştiği tarihteki telefon görüşmeleri ile banka hareketlerine bakılarak araştırma ve inceleme yapılmasına karşın buna ilişkin yeterli bilgi veya veri bulunmadığı, olayın gerçekleştiği 18.05.2012 tarihindeki internet sağlayıcı ağ trafiği dökümüne ulaşılamayacağından yukarıda izah edildiği üzere, OTP cihazı sisteme kayıtlı ise bunu bertaraf etmenin mümkün olmadığı yönündeki bilgi ışığında şifrenin üçüncü kişilerin eline geçme ihtimalinin çok yüksek olduğu, bu olayda davacının şifrelerini muhafaza etmeyerek bir şekilde üçüncü kişilerin eline geçmesine sebebiyet vermesi, davalı bankanın da müşterinin hesabında bulunan paranın müşterinin haberi olmadan bilgisayar korsanlığı yoluyla başka bir hesaba aktarılmasının önlenmesi konusunda ek güvenlik tedbirlerini almadığı, bankanın hafif kusurundan dahi sorumlu olduğu dikkate alınarak, tarafların yarı oranında sorumlulukları bulunduğu kanaatine varılmış olup davanın kısmen kabulüne karar verilmiş, hüküm taraf vekillerince temyiz edilmiştir.
+
+IV. TEMYİZ İNCELEMESİ
+1. Uyuşmazlık ve Hukuki Nitelendirme
+Uyuşmazlık, dava konusu EFT tarihi itibariyle OTP cihazının ürettiği şifre bertaraf edilip bu cihazın ürettiği şifreye ihtiyaç duyulmadan EFT işleminin yapılıp yapılamayacağı noktasında toplanmaktadır.
+
+2. İlgili Hukuk
+6100 sayılı Hukuk Muhakemeleri Kanunu’nun (6100 sayılı Kanun) 369 uncu maddesinin birinci fıkrası ile 370 ve 371 inci maddeleri, 6098 sayılı Türk Borçlar Kanunu'nun 52 nci maddesi.
+
+3. Değerlendirme
+Dosyadaki yazılara, mahkemece uyulan bozma kararı gereğince hüküm verilmiş olmasına ve delillerin takdirinde bir isabetsizlik bulunmamasına göre, davacı vekili ile davalı vekilinin bütün temyiz itirazları yerinde görülmemiştir.
+
+V.SONUÇ: Davacı vekili ile davalı vekilinin yerinde görülmeyen tüm temyiz itirazlarının reddi ile usul ve kanuna uygun olan kararın ONANMASINA, dosyanın Mahkemesine gönderilmesine, aşağıda yazılı temyiz giderinin temyiz eden davalıya yükletilmesine, temyiz harcı davacıdan peşin alındığından başkaca harç alınmasına mahal olmadığına, 02.12.2024 tarihinde oy birliğiyle karar verildi.
+

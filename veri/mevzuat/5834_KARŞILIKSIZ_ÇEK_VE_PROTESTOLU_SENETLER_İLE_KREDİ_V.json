@@ -1,0 +1,51 @@
+{
+  "mevzuat_adi": "KARŞILIKSIZ ÇEK VE PROTESTOLU SENETLER İLE KREDİ VE\nKREDİ KARTLARI BORÇLARINA İLİŞKİN KAYITLARIN\nDİKKATE ALINMAMASI HAKKINDA KANUN",
+  "kanun_icerigi": {
+    "maddeler": {
+      "1": {
+        "baslik": "Amaç ve kapsam",
+        "metin": "MADDE 1 – (1) Ödeme tarihi bu Kanunun yürürlüğe girdiği tarihten önce olup da; kullandığı nakdî ve gayrî nakdî kredinin ödemelerini aksatan gerçek ve tüzel kişilerin, ticari faaliyette bulunan ve bulunmayan gerçek kişilerin ve kredi müşterilerinin karşılıksız çıkan çek, protesto edilmiş senet, kredi kartı ve diğer kredi borçlarına ilişkin kayıtları, söz konusu borçların bu Kanunun yürürlüğe girdiği tarihten önce veya bu Kanunun yürürlüğe girdiği tarihten itibaren altı ay içinde ödenmesi veya yeniden yapılandırılması halinde borcun tamamının ödenmesini müteakiben Merkez Bankasında tutulan kayıtlardan silinir."
+      },
+      "GEÇİCİ 1-": {
+        "baslik": "(2) Merkez Bankasınca kayıtların silinmesinden sonra, bankalar, finansal kiralama şirketleri, faktoring şirketleri ve tüketici finansman şirketlerince yapılacak kredilendirme, çek karnesi verilmesi ve diğer işlemlerde silinmiş kayıtlar dikkate alınmaz.",
+        "metin": "GEÇİCİ MADDE 1- (Ek: 18/1/2017-6770/33 md.)\n(1) Anapara ve/veya taksit ödeme tarihi bu maddenin yürürlüğe girdiği tarihten önce olup da; kullandığı nakdî ve gayrı nakdî kredilerinin anapara, faiz ve/veya ferilerine ilişkin ödemelerini aksatan gerçek ve tüzel kişilerin, ticari faaliyette bulunan ve bulunmayan gerçek kişilerin ve kredi müşterilerinin karşılıksız çıkan çek, protesto edilmiş senet, kredi kartı ve diğer kredi borçlarına ilişkin 19/10/2005 tarihli ve 5411 sayılı Bankacılık Kanununun ek 1 inci maddesi hükmü uyarınca kurulan Türkiye Bankalar Birliği Risk Merkezi nezdinde tutulan kayıtları, söz konusu borçların ödenmesi geciken kısmının bu maddenin yürürlüğe girdiği tarihten itibaren altı ay içinde tamamının ödenmesi veya yeniden yapılandırılması halinde, bu kişilerle yapılan finansal işlemlerde kredi kuruluşları ve finansal kuruluşlar tarafından dikkate alınmayabilir.\n(2) Kredi kuruluşları ve finansal kuruluşların birinci fıkra hükmü uyarınca mevcut kredileri yeniden yapılandırması veya yeni kredi kullandırması, bu kuruluşlara hukuki ve cezai sorumluluk doğurmaz."
+      },
+      "GEÇİCİ 2-": {
+        "baslik": "(2) Kredi kuruluşları ve finansal kuruluşların birinci fıkra hükmü uyarınca mevcut kredileri yeniden yapılandırması veya yeni kredi kullandırması, bu kuruluşlara hukuki ve cezai sorumluluk doğurmaz.",
+        "metin": "GEÇİCİ MADDE 2- (Ek:25/3/2020-7226/48 md.)\n(1) Anapara ve/veya taksit ödeme tarihi 24/3/2020 tarihinden önce olup da; kullandığı nakdî ve gayrî nakdî kredilerinin anapara, faiz ve/veya ferilerine ilişkin ödemelerini aksatan gerçek ve tüzel kişilerin, ticari faaliyette bulunan ve bulunmayan gerçek kişilerin ve kredi müşterilerinin karşılıksız çıkan çek, protesto edilmiş senet, kredi kartı ve diğer kredi borçlarına ilişkin 5411 sayılı Kanunun ek 1 inci maddesi hükmü uyarınca kurulan Türkiye Bankalar Birliği Risk Merkezi nezdinde tutulan kayıtları, söz konusu borçların ödenmesi geciken kısmının 31/12/2020 tarihine kadar tamamının ödenmesi veya yeniden yapılandırılması halinde, bu kişilerle yapılan finansal işlemlerde kredi kuruluşları ve finansal kuruluşlar tarafından dikkate alınmaz."
+      },
+      "GEÇİCİ 3-": {
+        "baslik": "(2) Kredi kuruluşları ve finansal kuruluşların birinci fıkra hükmü uyarınca mevcut kredileri yeniden yapılandırması veya yeni kredi kullandırması, bu kuruluşlara hukuki ve cezai sorumluluk doğurmaz.",
+        "metin": "GEÇİCİ MADDE 3- (Ek:3/6/2021-7326/13 md.)\n(1) Anapara ve/veya taksit ödeme tarihi 20/5/2021 tarihinden önce olup da; kullandığı nakdî ve gayrî nakdî kredilerinin anapara, faiz ve/veya ferilerine ilişkin ödemelerini aksatan gerçek ve tüzel kişilerin, ticari faaliyette bulunan ve bulunmayan gerçek kişilerin ve kredi müşterilerinin karşılıksız çıkan çek, protesto edilmiş senet, kredi kartı ve diğer kredi borçlarına ilişkin 5411 sayılı Kanunun ek 1 inci maddesi hükmü uyarınca kurulan Türkiye Bankalar Birliği Risk Merkezi nezdinde tutulan kayıtları, söz konusu borçların ödenmesi geciken kısmının 31/12/2021 tarihine kadar tamamının ödenmesi veya yeniden yapılandırılması halinde, bu kişilerle yapılan finansal işlemlerde kredi kuruluşları ve finansal kuruluşlar tarafından dikkate alınmaz."
+      },
+      "GEÇİCİ 4-": {
+        "baslik": "(2) Kredi kuruluşları ve finansal kuruluşların birinci fıkra hükmü uyarınca mevcut kredileri yeniden yapılandırması veya yeni kredi kullandırması, bu kuruluşlara hukuki ve cezai sorumluluk doğurmaz.",
+        "metin": "GEÇİCİ MADDE 4- (Ek:3/11/2022-7420/27 md.)\n(1) Anapara ve/veya taksit ödeme tarihi 1/10/2022 tarihinden önce olup da; kullandığı nakdî ve gayrî nakdî kredilerinin anapara, faiz ve/veya ferilerine ilişkin ödemelerini aksatan gerçek ve tüzel kişilerin, ticari faaliyette bulunan ve bulunmayan gerçek kişilerin ve kredi müşterilerinin karşılıksız çıkan çek, protesto edilmiş senet, kredi kartı ve diğer kredi borçlarına ilişkin 5411 sayılı Kanunun ek 1 inci maddesi hükmü uyarınca kurulan Türkiye Bankalar Birliği Risk Merkezi nezdinde tutulan kayıtları, söz konusu borçların ödenmesi geciken kısmının 1/7/2023 tarihine kadar tamamının ödenmesi veya yeniden yapılandırılması halinde, bu kişilerle yapılan finansal işlemlerde kredi kuruluşları ve finansal kuruluşlar tarafından dikkate alınmaz.\n(2) Kredi kuruluşları ve finansal kuruluşların birinci fıkra hükmü uyarınca mevcut kredileri yeniden yapılandırması veya yeni kredi kullandırması, bu kuruluşlara hukuki ve cezai sorumluluk doğurmaz."
+      },
+      "2": {
+        "baslik": "Yürürlük",
+        "metin": "MADDE 2 – (1) Bu Kanun yayımı tarihinde yürürlüğe girer."
+      },
+      "3": {
+        "baslik": "Yürütme",
+        "metin": "MADDE 3 – (1) Bu Kanun hükümlerini Bakanlar Kurulu yürütür.\n5834 SAYILI KANUNA EK VE DEĞİŞİKLİK GETİREN MEVZUATIN VEYA\nANAYASA MAHKEMESİ TARAFINDAN İPTAL EDİLEN HÜKÜMLERİN\nYÜRÜRLÜĞE GİRİŞ TARİHİNİ GÖSTERİR LİSTE\nDeğiştiren Kanunun/ KHK’nin veya İptal Eden Anayasa Mahkemesi Kararının Numarası\n5834 Sayılı Kanunun Değişen veya İptal Edilen Maddeleri\nYürürlüğe Giriş Tarihi"
+      },
+      "GEÇİCİ 1": {
+        "baslik": "6770",
+        "metin": "Geçici Madde 1\n27/1/2017"
+      },
+      "GEÇİCİ 2": {
+        "baslik": "7226",
+        "metin": "Geçici Madde 2\n26/3/2020"
+      },
+      "GEÇİCİ 3": {
+        "baslik": "7326",
+        "metin": "Geçici Madde 3\n9/6/2021"
+      },
+      "GEÇİCİ 4": {
+        "baslik": "7420",
+        "metin": "Geçici Madde 4\n9/11/2022"
+      }
+    }
+  }
+}

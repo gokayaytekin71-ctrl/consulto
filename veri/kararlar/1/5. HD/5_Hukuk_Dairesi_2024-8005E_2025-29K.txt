@@ -1,0 +1,51 @@
+
+
+5. Hukuk Dairesi         2024/8005 E.  ,  2025/29 K.
+
+"İçtihat Metni"
+
+MAHKEMESİ :Asliye Hukuk Mahkemesi
+SAYISI : 2023/406 Esas, 2024/20 Karar
+
+I. YARGI YERİ BELİRLENMESİNE KONU KARARLAR
+A. Gebze 5. Asliye Hukuk Mahkemesinin 12.09.2023 Tarihli ve 2022/214 Esas, 2023/112 Karar Sayılı Kararı
+İtirazın iptali davalarında yetki kuralına ilişkin özel bir düzenleme mevcut olmadığından genel hükümlere göre hareket edileceği, buna göre davalının ikamet adresinin bulunduğu yer mahkemesinin itirazın iptali davasında yetkili mahkeme olacağı, tüm dosya kapsamı birlikte değerlendirildiğinde hem dava dilekçesinde, hem icra dosyasında hem de cevap dilekçesinde davalı/borçlunun yerleşim yeri adresinin ... olduğunun anlaşıldığı, bu haliyle yetkili mahkemenin Aksaray Asliye Hukuk Mahkemeleri olduğu gerekçesiyle görevsizlik kararı verilmiştir.
+
+B. Aksaray 5. Asliye Hukuk Mahkemesinin 18.01.2024 Tarihli ve 2023/406 Esas, 2024/20 Karar Sayılı Kararı
+Taraflar arasında yazılı olmayan elektronik cihaz alım satım sözleşmesinin bulunduğu, davacının cihaz bedellerini göndermesine rağmen davalının cihazları göndermediğine dair icra takibi yapması üzerine iş bu itirazın iptali davasının açıldığı ve davanın sözleşme ilişkisine dayanması nedeniyle davacı alacaklının yerleşim yerinin yetkili olduğu gerekçesiyle yetkisizlik kararı verilmiştir.
+
+II. GEREKÇE
+A. Uyuşmazlık
+Uyuşmazlık, alacağın tahsili için başlatılan icra takibine vaki itirazın iptali istemine ilişkindir.
+
+
+B. İlgili Hukuk
+1. Farklı bölge adliye mahkemelerinin yargı çevresinde kalan ilk derece mahkemeleri ile bölge adliye mahkemeleri arasındaki yetki ve görev uyuşmazlıklarının giderilmesi isteminin hukuki dayanağı, 6100 sayılı Hukuk Muhakemeleri Kanunu’nun (6100 sayılı Kanun) 21 ve 22 nci maddeleri ile 5235 sayılı Adlî Yargı İlk Derece Mahkemeleri ile Bölge Adliye Mahkemelerinin Kuruluş, Görev ve Yetkileri Hakkında Kanun’un (5235 sayılı Kanun) 36 ncı maddesinin üçüncü fıkrasında yer alan düzenlemelerdir.
+
+2. 6100 sayılı Kanun’un 6 ncı, 10 uncu ve 115 inci maddesi, 6098 sayılı Türk Borçlar Kanunu'nun (6098 sayılı Kanun) 89 uncu maddesi ve 2004 sayılı İcra ve İflas Kanunu'nun 50 nci maddesi
+
+C. Değerlendirme
+1. İlamsız bir takipte yetkili icra dairesi de 2004 sayılı Kanun'un 50 nci maddesinin yollaması ile 6100 sayılı Kanun'un genel hükümlerine göre belirlenecektir. 6100 sayılı Kanun'un 6 ncı maddesine göre genel yetkili icra dairesi, davalı gerçek veya tüzel kişinin takibin yapıldığı tarihteki yerleşim yeri icra dairesidir. Yine aynı Kanun’un 16 ncı maddesine göre ise haksız fiilden doğan uyuşmazlıklarda, haksız fiilin işlendiği veya zararın meydana geldiği yahut gelme ihtimalinin bulunduğu yer ya da zarar görenin yerleşim yeri mahkemesi icra dairesi de yetkilidir. Aynı Kanun’un 10 uncu maddesine göre ise sözleşmeden doğan davaların sözleşmenin ifa edileceği yer mahkemesinde de açılabileceği hüküm altına alınmış olup, bu sebeple sözleşmeden doğan para borcunun tahsili için başlatılan takipte, sözleşmenin ifa edileceği yer icra dairesi de yetkili kılınmıştır. Takibin konusu sözleşmeden kaynaklı para borcu olduğunda, 6098 sayılı Kanun'un 89 uncu maddesine göre, aksi kararlaştırılmadıkça para borçları alacaklının ödeme zamanındaki yerleşim yerinde ifa edilecektir.
+
+2. Dosya kapsamından, davacı vekilince taraflar arasında bir tarafın elektronik cihaz satışı yapması diğer tarafın ise bedelini ödeyerek satın alması hususunda yazılı olmayan anlaşma mevcut olduğu, bu hususta müvekkilinin davalının banka hesaplarına toplamda 64.800,00 TL gönderdiğini ancak davalının borcunu gereği gibi ifa etmediği gerekçeleriyle davalı hakkında icra takibine girişildiğini iddia ettiği, davalı vekilince de müvekkilinin davacı ile aralarındaki ticari işten kaynaklı borcunun tamamının ödendiğini, böyle bir borcu bulunmadığını ileri sürdüğü ve buna ilişkin banka dekontları sunduğu, bu hali ile taraflar arasında bir havale ilişkisi bulunduğunun itilafsız olduğu anlaşılmaktadır.
+
+3. Bir davada, birden fazla genel ve özel yetkili mahkeme varsa, davacı bu mahkemelerden birinde dava açmak hususunda bir seçimlik hakka sahiptir. Davacı, davasını bu genel ve özel yetkili mahkemelerden hiçbirinde açmaz ve yetkisiz bir mahkemede açarsa, o zaman seçme hakkı davalılara geçer.
+
+4. Somut olayda, davacının alacağının tahsili için Gebze İcra Dairesinin 2022/18362 Esas sayılı dosyası ile takip başlattığı, davalının sadece borca itiraz ettiği, böylelikle icra dairesinin yetkisinin kesinleştiği anlaşılmaktadır. İcra dairesinin yetkisine itiraz edilmemesinin o yerdeki mahkemeyi itirazın iptali yönünden yetkili hale getirmezse de yerleşim yeri Gebze/Kocaeli olan davacının davayı Gebze Mahkemelerinde açtığı, 6098 sayılı Kanun'un 89 uncu maddesi uyarınca para alacağına ilişkin davalarda aksi kararlaştırılmadıkça para borcunun alacaklının yerleşim yerinde ödenmesi gerektiğinden alacaklının bulunduğu yer mahkemesi de yetkili olup davacı tercih hakkını bu yönde kullandığından, uyuşmazlığın Gebze 5. Asliye Hukuk Mahkemesinde görülerek sonuçlandırılması gerekir.
+
+
+III. KARAR
+Açıklanan sebeplerle;
+6100 sayılı Kanun’un 21 ve 22 nci maddeleri ile 5235 sayılı Kanun’un 36 ncı maddesinin üçüncü fıkrası gereğince Gebze 5. Asliye Hukuk Mahkemesinin YARGI YERİ OLARAK BELİRLENMESİNE,
+
+06.01.2025 tarihinde oy birliğiyle kesin olarak karar verildi.
+
+
+
+
+
+
+
+
+
+

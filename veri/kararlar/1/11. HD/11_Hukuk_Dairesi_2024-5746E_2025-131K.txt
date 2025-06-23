@@ -1,0 +1,31 @@
+
+
+11. Hukuk Dairesi         2024/5746 E.  ,  2025/131 K.
+
+"İçtihat Metni"
+MAHKEMESİ : İstanbul Bölge Adliye Mahkemesi 44. Hukuk Dairesi
+SAYISI : 2024/567 Esas, 2024/1190 Karar
+HÜKÜM : Davanın reddi
+
+
+Bölge Adliye Mahkemesince bozmaya uyularak verilen karar davacı vekili tarafından temyiz edilmekle; temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, temyiz dilekçesinin kabulüne karar verildikten ve Tetkik Hâkimi tarafından hazırlanan rapor dinlendikten sonra dosyadaki belgeler incelenip gereği düşünüldü:
+KARAR
+I. DAVA
+Davacı vekili dava dilekçesinde; davalılar adına tescilli 2008/07552 sayılı patentin 551 sayılı Patent Haklarının Korunması Hakkında Kanun Hükmünde Kararname'nin (551 sayılı KHK) 5. maddesi çerçevesinde ''Yenilik, tekniğin bilinen durumunu aşma ve sanayiye uygulanabilir olma'' kriterlerini taşımadığını, patentin 17.10.2003 tarihli EP 1579046 sayılı Avrupa patentinin Türkiye'deki uzantısı olduğunu, 551 sayılı KHK'nın 47. maddesindeki istem veya istemlerin tarifnamede tanımlanan buluşun kapsamını aşamayacağına dair düzenleme uyarınca aynı KHK'nın 129/1-c hükmüne göre 1. istem ve buna bağlı 2 ila 14. istemlerin iptalinin gerektiğini, aynı KHK'nın 129/1-a hükmüne göre de dava konusu patentin hükümsüzlük şartlarını oluştuğunu, 03.09.1996 tarihinde yayımlanan US 5,551,260 sayılı ABD patenti ve 29.07.1913 tarihinde yayımlanan US 1,068,853 sayılı ABD patenti karşısında dava konusu patentin 1 ve 15. istemlerinin yeni olmadığını, yine 30.06.1925 tarihinde yayımlanan US 1,544,085 sayılı patent karşısında dava konusu patentin 16 ila 37 sayılı istemlerinin patentlenemeyeceğini ileri sürerek 2008/07552 sayılı patentin hükümsüzlüğüne karar verilmesini talep etmiştir.
+
+II. CEVAP
+Davalı vekili cevap dilekçesinde; istemlerin davacının dayandığı ABD patentleri ve mevcut tekniğin bilinen durumu karşısında yenilik özelliğini taşıdığını, dava konusu patentin incelemeli patent olduğunu, patent verilebilirlik şartlarını bünyesinde barındırdığını, istemlerin tarifnamenin kapsamını aşmadığını savunarak davanın reddini istemiş, yargılama sırasında Avrupa Patent Ofisi (EPO) nezdinde dayanak patentin istemlerinde daraltmaya gidildiğini, tescil ve itiraz sürecinin işlediğini bildirmiştir.
+
+
+III. BÖLGE ADLİYE MAHKEMESİ KARARI
+Bölge Adliye Mahkemesince bozma ilamına uyularak yapılan yargılama neticesinde, davalı adına tescilli TR 2008 07552 T4 sayılı patentin EP 03772671.8 başvuru numaralı Avrupa Patent belgesinin Türkiye validasyonu olduğu, 16.07.2007 tarihinde tescil edildiği, EPO başvurusu sürecindeki itirazlar üzerine değişiklik yapılmış haliyle kabul edildiği, temyiz sürecinin tamamlanarak 19.02.2013 tarihinde kabul gören haliyle tesciline karar verildiği, bu süreçte patentin 1-14 numaları istemlerinin silindiği, 15,16 ve 17 numaralı istemlerinin 1 numaralı bağımsız istem, 18 numaralı bağımlı istemin 2 numaralı istem olarak belirlendiği, sonraki bağımlı istemlerin sıra numaralarının birbirini takip ettiği, EPO'daki itiraz süreci sonucu patentin kapsamının kısıtlanarak ya da daraltılarak devamına karar verilmesi halinde, bu yeni durumun bültende ilanından itibaren patentin, ulusal korumaya sahip olduğu tüm ülkeler bakımından geçerlilik taşıyacağı, bu durumda yargılama sürecinde patentin istemleri daraltılarak tescil edildiğinden ve Türk Patent ve Marka Kurumu'na yapılan istem değişikliği talebi onaylandığından, patent başvurusundan çıkarılan 1-14 numaralı istemlerin incelenmesine gerek bulunmadığı, ancak bunun davayı konusuz bırakmadığı, hükümsüzlük incelemesinin daraltılan istem setine göre yapılacağı, patentin itiraz kurulu tarafından 19.02.2013 tarihinde kabul gören haliyle hükümsüzlük talebinde dayanak gösterilen US 1,068,853, US 1,544,085 ve US 5,551,260 numaralı patentler ile EP 1579046 B1 patentinin içeriğinin, tarifname ve görsellerin karşılaştırması sonucunda davaya konu patentin yenilik ve buluş basamağı içerdiği, hükümsüzlük şartlarının oluşmadığı, davacının sadece 1-14 sayılı istemlerin değil, tescil edilen diğer istemlerin de patentlenebilir olmadığını ileri sürdüğü gerekçesiyle davanın reddine karar verilmiş, hüküm davacı vekilince temyiz edilmiştir.
+
+IV. TEMYİZ
+A. Dava ve Hukuki Nitelendirme
+Dava, patent hükümsüzlüğü talebine ilişkindir.
+
+B. Değerlendirme ve Gerekçe
+Dosyadaki yazılara, Bölge Adliye Mahkemesince 6100 sayılı Hukuk Muhakemeleri Kanunu'nun (HMK) 373/3 hükmü uyarınca uyulan bozma kararı gereğince hüküm verilmiş olmasına ve delillerin takdirinde bir isabetsizlik bulunmamasına göre, davacı vekilinin bütün temyiz itirazları yerinde değildir.
+
+V. SONUÇ: Yukarıda açıklanan nedenlerle, davacı vekilinin temyiz itirazlarının reddi ile Bölge Adliye Mahkemesince verilen kararın HMK'nın 370/1 hükmü uyarınca ONANMASINA, aynı Kanun'un 372. maddesi uyarınca işlem yapılmak üzere dava dosyasının İlk Derece Mahkemesine, kararın bir örneğinin Bölge Adliye Mahkemesine gönderilmesine, aşağıda yazılı temyiz giderinin temyiz edene yükletilmesine, 15.01.2025 tarihinde kesin olarak oybirliğiyle karar verildi.
+

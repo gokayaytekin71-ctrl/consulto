@@ -1,0 +1,923 @@
+{
+  "mevzuat_adi": "ASKERİ CEZA KANUNU[1][2]",
+  "kanun_icerigi": {
+    "BİRİNCİ KISIM": {
+      "baslik": "Askeri suçlar ve kabahatler ve cezalar",
+      "maddeler": {
+        "1": {
+          "baslik": "Askeri cürüm ve kabahat:",
+          "metin": "Madde 1 – Türk Ceza Kanununa göre cürümler ve cezalar hakkında umumi suretle cari olan esaslar bu kanunda hilafı yazılı olmadıkça askeri cürümler ve cezalar hakkında da tatbik olunur.\n1 - Bu kanunun ölüm, ağır hapis ve hapis cezalariyle cezalandırdığı suçlar askeri cürümlerdir.\n2 - Bu kanunun kısa hapis cezasiyle cezalandırdığı suçlar askeri kabahatlerdir."
+        },
+        "2": {
+          "baslik": "Askerlerin askeri olmayan suçları:",
+          "metin": "Madde 2 – Askeri şahısların askeri olmayan suçları için Türk Ceza Kanunu hükümleri tatbik olunur."
+        },
+        "3": {
+          "baslik": "Askeri şahıslar:[3]",
+          "metin": "Madde 3 – \n\n(Değişik: 22/3/2000 - 4551/1 md.)\nAskerî şahıslar; Mareşalden asteğmene kadar subaylar, astsubaylar, Millî Savunma Bakanlığı ile Türk Silahlı Kuvvetleri kadro ve kuruluşunda çalışan sivil personel, uzman jandarma, uzman erbaş, sözleşmeli erbaş ve er, erbaş ve erler ile askerî öğrencilerdir.\nMilli Savunma Bakanlığı ile Türk Silahlı Kuvvetleri kadro ve kuruluşunda çalışan Devlet memurlarının asker kişi sıfatları, 4.1.1961 tarihli ve 211 sayılı Türk Silahlı Kuvvetleri İç Hizmet Kanununun 115 inci maddesinde belirtilen yükümlülükleri ile sınırlıdır."
+        },
+        "4": {
+          "baslik": "İhtiyat askeri şahıslar:",
+          "metin": "Madde 4 – İhtiyat askeri şahıslar askeri hizmetlerde bulundukları müddetçe bu kanun hükümlerine tabidirler."
+        },
+        "5": {
+          "baslik": "Asker kişilerin yabancı ülkelerde işledikleri askerî suçlar",
+          "metin": "Madde 5 – \n\n(Mülga: 25/10/1963-353/259 md.; Yeniden düzenleme : 22/3/2000-4551/2 md.) Asker kişilerin yabancı ülkelerde Türk askerî kıt’a, karargâh ve kurumlarında veya diğer resmi görevleri sırasında veya esir kamplarında işledikleri askerî suçlar, Türkiye’de işlenmiş sayılır. Bunlar hakkında yabancı ülkede hüküm verilmiş olsa bile, Milli Savunma Bakanının talebi üzerine Türkiye’de tekrar muhakeme olunurlar. Bu halde, yabancı ülkede verilip infaz edilen ceza, verilecek cezadan indirilir. Ceza nev’ileri farklı ise, mahkeme yapılacak indirmeyi tayin eder."
+        },
+        "6": {
+          "baslik": "Müttefik hükümetlerin askeri şahıslarına karşı yapılan suçlar:",
+          "metin": "Madde 6 – Müttefik hükümetlerin askeri şahısları ile müşterek vazife sırasında bu şahıslara karşı yapılan askeri suçlar müttefik hükümetler ile mukabele bilmisil mukavelesi varsa Türkiye askeri şahıslarına yapılmış sayılarak ona göre cezalandırılır."
+        },
+        "7": {
+          "baslik": "Harb hükümleri ve cari olacağı hal ve vakitler:",
+          "metin": "Madde 7 – \n\n(Değişik: 15/6/1942-4257/1 md.)\nBu kanunda \"seferberlikte\" tabiriyle takyit edilen ceza hükümleri (Harb hükümleri) dir ve aşağıdaki hal ve vakitlerde caridir:\nA) Umumi seferberlik müddetince askeri şahıslar hakkında;\nB) Kısmi seferberlik ilan olunan mıntıkalarda bunun devamı müddetince askeri şahıslar hakkında;\nC) Örfi idare ilan olunan mıntıkalarda harb hükümleri tatbik olunacağına Cumhurbaşkanınca karar verildiği takdirde bunun devamı müddetince mezkür mıntıkada bulunanlar hakkında;[4]\nD) Fesat ve isyan halinde veyahut silah kullanılacak askeri bir hareket yapılması halinde kumanda eden subay tarafından harb hükümleri mer'i olacağı resmen bildirilen askeri kıtalar hakkında bu hallerin devamı müddetince;\nE) Bulundukları mahalde en büyük rütbeli komutan tarafından harb hükümleri mer'i olacağı kendilerine resmen tebliğ olunan harb esirleri hakkında."
+        },
+        "8": {
+          "baslik": "Seferberlik ve tarifi:",
+          "metin": "Madde 8 – 1 - Sefer tabiri harb halini ihtiva eden seferberliktir.\n2 - Seferberlik, ordunun veya bazı kısımlarının seferber olmasını amir olan emirde yazılı ve muayyen tarihten başlayarak ilgasını mübeyyin neşrolunan emirde yazılan tarihte biten haldir.\n3 - Hazarda Türkiye Cumhuriyeti hudut ve kara suları dışında yalnız dahi seyrü hareket eden her harb tayyare ve harb gemisi üssülharekelerinden birine varıncaya kadar bu kanunun tatbikatında seferber sayılır."
+        },
+        "9": {
+          "baslik": "Düşman karşısı:",
+          "metin": "Madde 9 – Seferberlikte düşman ile müsademeyi intizaren emniyet hizmetleri tatbik ve ifa olunmağa başladığı zamandan itibaren bu müsademeye memur kıta, gemi, tayyare düşman karşısında sayılır."
+        },
+        "10": {
+          "baslik": "Silahlı eşkiya:",
+          "metin": "Madde 10 – Silahlı eşkiya düşman sayılır."
+        },
+        "11": {
+          "baslik": "Silahlının tarifi:",
+          "metin": "Madde 11 – Bu kanunun tatbikatında; \"Silahlı\" tabirinden maksat hizmetin icabı olan silahı hamili bulunmak, veya silahının başında olarak bir amirin kumandası ve nezaretiyle hizmete başlanılmış olmak halidir."
+        },
+        "12": {
+          "baslik": "Hizmetin tarifi:",
+          "metin": "Madde 12 – Bu kanunun tatbikatında (Hizmet) tabirinden maksat gerek malüm ve muayyen olan ve gerek bir amir tarafından emredilen bir askeri vazifeninmadun tarafından yapılması halidir."
+        },
+        "13": {
+          "baslik": "Memur, amir ve üstün tarifi:",
+          "metin": "Madde 13 – \n\n(Değişik: 15/6/1942-4257/1 md.)\n1 - Bu kanunun tatbikatında \"memur\" tabirinden maksat 12 nci maddede yazılı hizmeti ifa ile mükellef olandır.\n2 - Amir, makam ve memuriyet itibariyle emretmek salahiyetini haiz kimsedir.\n3 - Üst tabiri rütbe ve kıdem büyüklüğünü gösterir.\n4 - Herhangi bir suretle ciheti askeriyece  göz altına alınan yabancı devlet orduları mensupları arasında astlık ve üstlük münasebetleri cari değildir. Bunlar arasında astlık ve üstlük münasebetleri salahiyetli komutanlar tarafından hususi surette verilen emirle teessüs edebilir."
+        },
+        "14": {
+          "baslik": "Toplu erbaş ve er karşısının tarifi:",
+          "metin": "Madde 14 – Bir fiil toplu erbaş ve er karşısında yapılmış sayılarak kanunun bu kayıt ile takyit ettiği hükümlerin tatbikı için amir veya mafevk ile failden veya şeriklerden başka askeri hizmet maksadiyle toplanmış en az yedi askeri şahsın bulunması şarttır."
+        },
+        "15": {
+          "baslik": "Nöbetçi, karakol, devriyenin tarifi:",
+          "metin": "Madde 15 – 1 - Bu kanunun tatbikatında nöbetçi hazarda ve seferde emniyet, muhafaza, disiplin, tarassut maksatlariyle silahlı olarak bir yere konulan ve muayyen bir talimatı bulunan tek veya çift askerdir.\n2 - Karakol hazarda ve seferde aynı maksatlarla konulan ve bir amir emrinde bulunan silahlı bir kısım askerdir.\n3 - Devriye hazarda ve seferde aynı maksatlarla muayyen bir mıntakada seyyar olarak vazife yapan bir veya daha ziyade silahlı askerdir."
+        },
+        "16": {
+          "baslik": "Ordu ve kıtanın tarifi:",
+          "metin": "Madde 16 – Bu kanunda yazılı olan \"Ordu\" kelimesi kara, deniz ve hava kuvvetlerine; ve kıta kelimesi subay kumandasında bulunan her birliğe şamildir."
+        },
+        "17": {
+          "baslik": "İstirdat ve tazminat nasıl hükmolunur:",
+          "metin": "Madde 17 – Askeri mahkeme istirdat ve tazminata Türk Ceza Kanununun koyduğu kaideler mucibince hükmeder.\n(Ek: 11/12/1935-2862/1 md.) Adli amirler disiplin cezasile birlikte değeri 25 lirayı geçmiyen şeyler için istirdad ve tazminata da karar verebilirler.\nBu kararlar aleyhine tefhim veya tebliğden itibaren 15 gün içinde askeri mahkemede itiraz olunabilir. İtiraz üzerine duruşma yapılarak hüküm verilir. İtiraz eden, muhakeme için tayin edilen günde mahkemede bulunmazsa itiraz hakkının düşmesine mahkemece karar verilir.\nİtiraz üzerine mahkemece verilecek kararlar kat'i olup bunlar aleyhine temyize müracaat olunamaz.[5]"
+        },
+        "18": {
+          "baslik": "Askeri Ceza Kanununda yazılı cezanın icrası ve disiplin cezalarının tatbiki:",
+          "metin": "Madde 18 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "19": {
+          "baslik": "Disiplin cezaları:",
+          "metin": "Madde 19 – \n\n(Mülga: 31/1/2013-6413/45 md.)\nİKİNCİ BAP\nCezalar\nUmumi hükümler\nBİRİNCİ FASIL\nAskeri cezalar"
+        },
+        "20": {
+          "baslik": "Ölüm cezası:",
+          "metin": "Madde 20 – 1- Ölüm cezası, buna mahküm olan kimsenin hayatının izale olunmasıdır. Bu ceza askeri şahıslar hakkında askeri bir cürümden dolayı hükmedilmiş ise mahkumun kurşuna dizilmesi suretiyle infaz olunur.\n2 - Askeri olmayan bir cürümden dolayı askeri şahıslar ile askeri olmayan şahıslar hakkında askeri mahkemelerden verilen ölüm hükümleri Türk Ceza Kanununun 12 nci maddesi mucibince icra olunur. Bu veçhile asılacak ölüm mahkumları cezanın infazı için o baptaki ilam ve tasdik emri suretleriyle C. Müddeiumumiliğine verilirler."
+        },
+        "21": {
+          "baslik": "Şahsi hürriyeti tahdit eden cezalar:",
+          "metin": "Madde 21 – Bu kanuna göre şahsi hürriyeti tahdit eden cezalar ağır hapis ve hapis ve kısa hapistir."
+        },
+        "22": {
+          "baslik": "Ağır hapis ve hapis cezalarının mahiyeti ve neticeleri:",
+          "metin": "Madde 22 – Ağır hapis ve hapis cezalarının mahiyeti ve neticeleri ve icrası Türk Ceza Kanununda yazılı olan kaidelere tabidir."
+        },
+        "23": {
+          "baslik": "Kısa hapis cezaları :",
+          "metin": "Madde 23 – \n\n(Değişik: 15/6/1942-4257/1 md.)\nA) Kısa hapis cezaları üç türlüdür:\n1 - Göz hapsi;\n2 - Oda hapsi;\n3 - Katıksız hapis.\nB) (Değişik : 22/3/2000-4551/3 md.) Subay, astsubay, Milli Savunma Bakanlığı ve Türk Silahlı Kuvvetlerinde görevli Devlet memurları, uzman jandarma ve uzman erbaşlar hakkında:\n1 - Dört haftaya kadar göz hapsi,\n2 - Dört haftaya kadar oda hapsi,\nCezaları verilebilir.\nC) Erbaş ve er hakkında:\n1 - Dört haftaya kadar oda hapsi;\n2 - Üç haftaya kadar katıksız hapis cezaları verilebilir.\nD) (Değişik : 22/3/2000-4551/3 md.) Askeri öğrenciler hakkında : (Askeri orta ve lise ile eşidi okullar öğrencileri hariç) dört haftaya kadar oda hapsi cezası verilebilir.\nE) Kısa hapis cezalarında maaş ve tahsisat tam olarak verilir."
+        },
+        "24": {
+          "baslik": "Göz ve oda hapsi cezalarının mahiyeti, neticeleri ve yerine getirilmesi[6]",
+          "metin": "Madde 24 – \n\n(Değişik: 22/3/2000-4551/4 md.)\nSubay, astsubay, Milli Savunma Bakanlığı ve Türk Silahlı Kuvvetlerinde görevli Devlet memurları, uzman jandarma ve uzman erbaşlar;\nA) Göz hapsi cezalarında:\n1 - Resmi daire, kışla, eğitim alanları ile sair yerlerdeki hizmetlerine devam ederler.\n2 - Hizmetin bitiminden sonra hiçbir yere gidemezler. Kışlada veya resmi odalarda kalırlar.\n3 - Hizmete ilişkin olanlar dışında hiçbir ziyaret kabul edemezler.\nB)  Oda hapis cezalarında :\n1 - Mümkün olduğu takdirde cezayı tek başlarına belirli bir hapis odasında geçirirler.\n2 - Emir veremezler.\n3 - Genel hizmet yapamazlar.\nAskeri öğrenciler, oda hapsi cezasını belirli hapis odalarında topluca geçirirler. Hapis odalarının kapısında bir nöbetçi bulundurulur."
+        },
+        "25": {
+          "baslik": "Erbaş ve er hakkında oda ve katıksız hapis cezalarının mahiyeti ve icrası:",
+          "metin": "Madde 25 – Erbaş ve er :\n1 - Oda hapsi cezasını muayyen hapis odalarında topluca geçirirler.\n2 - Katıksız hapis cezasını hapis odasında tek başına geçirirler.\n3 - Hapis odalarının kapısında bir nöbetçi bulundurulur.\n4 - (...)[7] Onbaşı ve erler ağır askeri hizmetlerde kullanılabilirler."
+        },
+        "26": {
+          "baslik": "Katıksız hapsin icrası:",
+          "metin": "Madde 26 – Katıksız hapis, mahkuma bir katı minder ve gıda olarak yalnız su ve istihkak miktarı ekmek verilmek ve tütün ve saire verilmemek suretiyle tenfiz olunur. Bu mahrumiyetler hapsin dördüncü sekizinci on ikinci günleriyle bundan sonra mahkumiyet müddetince her üç günde bir kaldırılır."
+        },
+        "27": {
+          "baslik": "Katıksız hapsin değiştirilmesi:",
+          "metin": "Madde 27 – Mahkumun sıhhati katıksız hapse müsait değilse disiplin cezasının bir derece daha hafifi tatbik olunur."
+        },
+        "28": {
+          "baslik": "Kısa hapis cezalarının tatbikı şartları:",
+          "metin": "Madde 28 – 1 - Bu kanunda kısa hapis cezası gösterilen yerlerde failin rütbesine göre caiz olan kısa hapsin her nev'i hükmolunabilir.\n2 - Bu kanunda kısa hapis cezasının nevi tasrih edilipte bu nevi cezanın failin rütbesine göre verilmesi gayricaiz olduğu takdirde failin rütbesine göre caiz olan bir derece hafifi hükmolunur."
+        },
+        "29": {
+          "baslik": "Fer'i askeri cezalar:[8]",
+          "metin": "Madde 29 – (Değişik : 22/3/2000-4551/5 md.)\nAskeri şahıslar hakkında hükmolunacak fer’i askeri cezalar şunlardır:\nA) Türk Silahlı Kuvvetlerinden çıkarma.\nB) Rütbenin geri alınması.\nC) Askeri öğrencilik hukukunu kaybettirme."
+        },
+        "30": {
+          "baslik": "Türk Silahlı Kuvvetlerinden çıkarma cezası:[9]",
+          "metin": "Madde 30 – \n\n(Değişik: 22/3/2000-4551/6 md.)\nAşağıda yazılı hallerde subay, astsubay, uzman jandarmalar ve özel kanunlarında bu cezanın uygulanacağı belirtilen asker kişiler hakkında, askeri mahkemeler veya adliye mahkemelerince asıl ceza ile birlikte, Türk Silahlı Kuvvetlerinden çıkarma cezası da verilir. Bu husus mahkeme hükmünde belirtilmemiş olsa dahi, Silahlı Kuvvetlerden çıkarmayı gerektirir.\nA) Taksirli suçlardan verilen cezalar hariç olmak üzere ölüm, ağır hapis, bir seneden fazla hapis cezası ile hükümlülük halinde,\nB) Devletin şahsiyetine karşı işlenen suçlarla basit ve nitelikli zimmet, irtikap, rüşvet, hırsızlık, dolandırıcılık, sahtecilik, inancı kötüye kullanma, dolanlı iflas gibi yüz kızartıcı veya şeref ve haysiyeti kırıcı suçtan veya istimal ve istihlak kaçakçılığı hariç kaçakçılık, resmi ihale ve alım satımlara fesat karıştırma, Devlet sırlarını açığa vurma suçlarından biriyle hükümlülük halinde.\nTaksirli suçlardan verilen cezalar hariç olmak üzere, askeri mahkemelerce üç aydan fazla hapis cezası ile birlikte Türk Silahlı Kuvvetlerinden çıkarma cezası da verilebilir."
+        },
+        "31": {
+          "baslik": "Türk Silahlı Kuvvetlerinden çıkarma cezasının niteliği ve sonuçları:[10]",
+          "metin": "Madde 31 – (Değişik : 22/3/2000-4551/7 md.)\nTürk Silahlı Kuvvetlerinden çıkarma cezasının niteliği, hükümlünün Silahlı Kuvvetlerle ilişiğinin kesilmesidir. Bu ceza, ayrıca bir hükme gerek kalmaksızın;\nA) Askeri rütbe ve memuriyetlerin kaybedilmesi,\nB) Subay, astsubay, uzman jandarma ve Devlet memuru olarak tekrar Türk Silahlı Kuvvetlerine kabul edilmeme,\nSonuçlarını doğurur."
+        },
+        "32": {
+          "baslik": "Askeri öğrencilik hukukunu kaybettirme cezası, niteliği ve sonuçları[11]",
+          "metin": "Madde 32 – (Değişik : 22/3/2000-4551/8 md.)\nAşağıda yazılı hallerde askeri öğrenciler hakkında, askeri mahkemeler veya adliye mahkemelerince; asıl ceza ile birlikte askeri öğrencilik hukukunu kaybettirme cezası da verilir. Bu husus mahkeme hükmünde belirtilmemiş olsa dahi, Silahlı Kuvvetlerden çıkarmayı gerektirir.\nA) Taksirli suçlardan verilen cezalar hariç olmak üzere ölüm, ağır hapis veya üç aydan fazla hapis cezasına hükümlülük halinde,\nB) 30 uncu maddenin birinci fıkrasının (B) bendinde yazılı hallerde.\nTaksirli suçlardan verilen cezalar hariç olmak üzere, askeri mahkemelerce üç ay veya daha az hapis cezası ile birlikte askeri öğrencilik hukukunu kaybettirme cezası da verilebilir.\nBu ceza ayrıca bir hükme gerek kalmaksızın;\nA) Askeri öğrencilik sıfatının,\nB) Muvazzaf askeri personel yetiştiren askeri okullara girme hakkının,\nKaybedilmesi sonuçlarını doğurur."
+        },
+        "33": {
+          "baslik": "İhraç cezasının mahiyeti ve neticeleri:",
+          "metin": "Madde 33 – \n\n(Mülga : 22/3/2000-4551/38 md.)"
+        },
+        "34": {
+          "baslik": "Asker kişiler hakkında memuriyetten mahrumiyet cezasının uygulanması:[12]",
+          "metin": "Madde 34 – (Değişik : 22/3/2000-4551/9 md.)\nSubaylar, astsubaylar, Türk Silahlı Kuvvetlerinde görevli Devlet memurları, uzman jandarma ve uzman erbaşlar hakkında memuriyetten mahrumiyet cezası verildiği takdirde, bu fer’i cezaya karşılık o kadar süre açığa çıkarılmalarına hükmolunur. Bu süre kıdemden ve emeklilik süresinden indirilir.\nYükümlü olan erbaş ve erler hakkında memuriyetten mahrumiyet cezası terhislerinden sonra yerine getirilir.\nBir seneden fazla memuriyetten mahrumiyet cezasına hükümlülük halinde, bu Kanunun Türk Silahlı Kuvvetlerinden çıkarmaya ilişkin hükümleri uygulanır.\nAltı aydan fazla memuriyetten mahrumiyet cezası alan uzman jandarma ve uzman erbaşların Türk Silahlı Kuvvetleri ile ilişkileri kesilir."
+        },
+        "35": {
+          "baslik": "Rütbenin geri alınması cezası, niteliği, sonuçları ve yerine getirilmesi[13]",
+          "metin": "Madde 35 – (Değişik : 22/3/2000 - 4551/10 md.)\nRütbenin geri alınması cezası 30 uncu maddede yazılı hallerde erbaşlar hakkında uygulanır. Bu husus mahkeme hükmünde belirtilmemiş olsa dahi, rütbenin geri alınması işlemi idarece re’sen uygulanır.\nRütbenin geri alınması cezası, hükümlünün rütbesinin geri alınarak erliğe indirilmesi, askeri hizmetten doğan ve özel kanunda saklı tutulmayan bütün hakların kaybı sonuçlarını doğurur.\n\n\n(İptal son fıkra: Anayasa Mahkemesinin 25/11/2005 tarihli ve E. : 2000/34, K. : 2005/91 sayılı Kararı ile.)"
+        },
+        "36": {
+          "baslik": "Rütbenin geri alınması cezasının mahiyeti ve neticeleri:",
+          "metin": "Madde 36 – \n\n(Mülga : 22/3/2000 - 4551/38 md.)"
+        },
+        "37": {
+          "baslik": "Umumi mahkemelerin verdiği cezaların icabettiği askeri fer'i cezaların tatbiki şekli:",
+          "metin": "Madde 37 – \n\n(Mülga : 22/3/2000 - 4551/38 md.)"
+        },
+        "38": {
+          "baslik": "Yeni baştan askerlik cezası, mahiyeti ve neticeleri:",
+          "metin": "Madde 38 – \n\n(Mülga: 14/6/1989 - 3574/4 md.)"
+        },
+        "39": {
+          "baslik": "Askeri mahkemelerce verilen tutuklama kararları ile asker kişiler hakkında verilen cezaların ve tutuklama kararlarının infaz yeri:[14]",
+          "metin": "Madde 39 – \n\n(Mülga: 15/8/2017-KHK-694/203 md.; Aynen kabul: 1/2/2018-7078/189 md.)\nİKİNCİ FASIL\nCürme teşebbüs"
+        },
+        "40": {
+          "baslik": "Teşebbüs:",
+          "metin": "Madde 40 – 1 - Askeri cürümlerde müteşebbisler hakkında Türk Ceza Kanununun 61, 62, 63 üncü maddeleri hükümleri tatbik olunur.\n2 - Bir cürümün cezasiyle beraber askeri fer'i cezalardan birinin hükmedilmesi lazım veya caiz ise o cürme teşebbüs halinde dahi bu fer'i ceza verilir, veya verilebilir.\nÜÇÜNCÜ FASIL\nCürümde ve kabahatte iştirak"
+        },
+        "41": {
+          "baslik": "İştirak:",
+          "metin": "Madde 41 – 1- Askeri cürümlerde ve kabahatlerde iştirak halinde, Türk Ceza Kanununun 64 üncüden 67 nciye kadar olan maddeler hükmü tatbik olunur.\n2 - Hizmete mütaallik hususlarda verilen emir bir suç teşkil ederse bu suçun işlenmesinden emir veren mesuldur.\n3 - Aşağıdaki hallerde maduna da faili müşterek cezası verilir :\nA : Kendisine verilen emrin hudutlarını aşmış ise,\nB : Amirin emrinin adli ve askeri bir suç maksadını ihtiva eden bir fiile mütaallik olduğu kendisince malum ise.\nDÖRDÜNCÜ FASIL\nCürümde tekerrür"
+        },
+        "42": {
+          "baslik": "Tekerrür:",
+          "metin": "Madde 42 – 1 - Bir cürüm işleyenin mükerir sayılması ve bu kanunun o suretle gösterdiği hükümlerin ve cezaların tatbik edilmesi, suçlunun askeri bir cürümden dolayı bir Türk askeri mahkemesinde mahkum olarak ceza gördükten sonra aynı askeri cürmü tekrar yapmasına bağlıdır.\nBu hüküm evvelce verilen ceza kısmen tenfiz edilmiş veya hususi af yoluyle düşmüş olsa bile tatbik olunur. Şu kadar ki cezanın tenfizinden veya affından itibaren yeni cürmün işlendiği tarihe kadar aradan beş sene geçmiş ise bu hükümler tatbik olunmaz.\n2 - Tekerrürün teaddüdünde aynı kaide caizdir.\nBEŞİNCİ FASIL\nCürüm ve cezaların içtimaı"
+        },
+        "43": {
+          "baslik": "Cürüm ve cezaların içtimaı:",
+          "metin": "Madde 43 – 1 - Bu kanunda yazılı cürümlerle cezaların içtimaında Türk Ceza Kanununun 68 inciden 80 inciye kadar olan maddeleri hükmü tatbik olunur.\n2 - Bir araya gelen cezalar aynı neviden kısa hapis cezalarından ibaret ise mecmuuna bir kısa hapis cezası verilir ve İçtima hali şiddet sebebi sayılır.\n3 - Kısa hapis cezaları aynı neviden değil ise umumi ceza en ağır cezanın azami haddine göre tayin olunur. Bir gün katıksız hapis iki gün oda hapsine müsavi tutulur.\n4 - Müteaddit cürümlerin cezalarından velevki yalnız biriyle beraber fer'i bir cezanın dahi hüküm edilmesi lazım veya caiz ise bu fer'i ceza hükmolunur veya hükmolunabilir.\nALTINCI FASIL\nCezaya ehliyet veren ve bunu kaldıran ve hafifleten sebepler"
+        },
+        "44": {
+          "baslik": "Cezaya ehliyet veren, kaldıran ve hafifleten sebepler:",
+          "metin": "Madde 44 – Cezaya ehliyet veren ve bunu kaldıran veya hafifleten sebeplere dair Türk Ceza Kanununun birinci kitabının dördüncü babında yazılı hükümler, bu kanunda hilafı yazılı olmadıkça askeri cezalar hakkında da mer'idir."
+        },
+        "45": {
+          "baslik": "Din ve vicdana göre lazım sayılan hareketler cezaya ehliyeti ve tesiri:",
+          "metin": "Madde 45 – Bir şahsın hareketini vicdanına veya dinine göre lazım saymış olması, yapmak veya yapmamakla vukua gelen bir cezayı mucip olmasına mani teşkil etmez."
+        },
+        "46": {
+          "baslik": "Korku ve ihtiyari sarhoşluğun cezaya tesiri:",
+          "metin": "Madde 46 – 1 - Vazife ve hizmette şahsi tehlike korkusu cezayı hafifletmez.\n2 - Disiplin tecavüzünde ve kabahatlerinde veya hizmet esnasında yapılan suçlarda ihtiyari sarhoşluk cezayı hafifletemez.\nYEDİNCİ FASIL\nCezaların tecili"
+        },
+        "47": {
+          "baslik": "Erteleme[15]",
+          "metin": "Madde 47 – \n\n(Değişik: 23/6/2016 - 6722/9 md.)\nTürk Ceza Kanununun hapis cezasının ertelenmesine ilişkin hükümleri, askeri suçlar hakkında da uygulanır.\nAncak aşağıdaki hâllerde hapis cezaları ertelenmez:\nA) Sırf askeri suçlardan dolayı yapılan yargılama sonunda hükmolunan netice cezanın üç ay veya daha fazla süreli hapis cezası olması.\nB) Fiilin, disiplini ağır şekilde ihlal etmesi veya birliğin güvenliğini tehlikeye düşürmesi ya da birliğin muharebe hazırlığını veya etkinliğini zafiyete uğratması ya da büyük bir zarar meydana getirmesi.\nC) Fiilin savaş veya seferberlikte işlenmesi.\nD) Daha önce sırf askeri bir suçtan dolayı mahkûm olunması.\nSEKİZİNCİ FASIL\nMüşterek hükümler"
+        },
+        "48": {
+          "baslik": "Askeri suçlarda şikayet ve izin:",
+          "metin": "Madde 48 – (Değişik; 12/5/1941 - 4026/1 md.)\nA) Askeri suçların takibi şikayete bağlı değildir.\nB) Askeri kazaya tabi olupta Türk Ceza Kanunu mucibince takibi Adliye Vekilinin izinine bağlı suçlar hakkında izin, Milli Müdafaa Vekili tarafından verilir."
+        },
+        "49": {
+          "baslik": "Askeri cürümlerde dava ve cezanın nasıl düşeceği:",
+          "metin": "Madde 49 – \n\n(Değişik: 11/12/1935 - 2862/4 md.)\nAşağıdaki fıkralarda yazılı hükümler mahfuz olmak üzere askeri suçlarda dava ve cezanın düşmesi hususlarında Türk Ceza Kanununun birinci kitabının 9 uncu babı hükümleri tatbik olunur.\nA) \n\n(İptal: Anayasa Mahkemesi’nin 28/3/2013 tarihli ve E.: 2012/143, K.: 2013/48 sayılı Kararı ile.)\nB) Hıyanet cürümlerile maznun ve mahkum olanlar hakkıda müruru zaman yoktur.\nC) (Ek : 14/6/1989 - 3574/1 md.) Sırf askeri suçlarda Türk Ceza Kanununun 119 uncu maddesi hükümleri uygulanmaz."
+        },
+        "50": {
+          "baslik": "Cezanın nasıl arttırılacağı:",
+          "metin": "Madde 50 – Bu kanunda bir suç için şahsi hürriyeti tahdit eden bir cezanın arttırılacağı yazılı olan yerlerde mezkür ceza mevzuubahis cürüm için muayyen olan cezanın iki misline kadar çoğaltılabilir. Şu kadar ki ceza o cürüm için kanunda yazılı azami haddi geçemez."
+        },
+        "51": {
+          "baslik": "Cezanın arttırılması icabeden sebepler:",
+          "metin": "Madde 51 – Bu kanunda hususi bir hüküm tayin edilmemiş oldukça aşağıdaki haller her halde cezanın arttırılmasını muciptir.\nA) Madunlarla birlikte bir suçu yapmak veya madunların bir suçuna iştirak etmek;\nB) Suç silahın veya resmi nüfuz ve salahiyetin suistimali suretiyle hizmetin ifası esnasında yapılmak;\nC) Suç müteaddit şahıslar tarafından toplu olarak veya herkesin gözü önünde birlikte işlenmek."
+        },
+        "52": {
+          "baslik": "Memnu hakların ne suretle geri verileceği ve neticeleri:",
+          "metin": "Madde 52 – 1 - Türk Ceza Kanunu ile Ceza Muhakemeleri Usulü Kanununun memnu hakların geri verilmesi hususundaki hükümleri askeri şahıslar hakkında da tatbik olunur.\n2 - Memnu hakların geri verilmesine karar verildiği takdirde mahkumiyetle zayi olan bilcümle askeri rütbe, unvan, memuriyet, nişan ve askeri hizmet esnasında kazanılan tekaütlük ve sair haklar geri gelmez. Şu kadar ki bu kararı alan tekrar orduya girerse yeni baştan rütbe, nişan ve madalya ve tekaüt hakkı kazanabilir.\n3 - Umumi af ilanından mahkum bulunan askeri şahsın nişan, rütbe ve madalya ve tekaütlük hakkının geri verilmesi, ancak Umumi Af Kanununda yazılı olmağa bağlıdır."
+        },
+        "53": {
+          "baslik": "Şartla salıverilme[16]",
+          "metin": "Madde 53 – (Değişik : 22/3/2000 - 4551/13 md.)\nAskeri mahkemeler tarafından mahkum edilen askeri şahıslar hakkında şartla salıverilme ve şartla salıverilme kararının geri alınması hususlarında 765 sayılı Türk Ceza Kanunu ve 647 sayılı Cezaların İnfazı Hakkında Kanunun ilgili hükümleri uygulanır.\nGerek askeri mahkemelerden ve gerekse adliye mahkemelerinden şartla tahliye kararı alanların tamamlanacak askeri yükümlülükleri varsa, tahliyelerinde tamamlattırılır.\nÜÇÜNCÜ BAP\nCürümler ve cezaları\nBİRİNCİ FASIL\nHiyanet"
+        },
+        "54": {
+          "baslik": "Vatan aleyhindeki cürümler:",
+          "metin": "Madde 54 – Vatan aleyhinde bir cürüm yapan askeri şahıslar hakkında Türk Ceza Kanununun 125 inciden 145 inci maddeye kadar olan maddeleri hükümleri tatbik olunur."
+        },
+        "55": {
+          "baslik": "Harb hiyaneti:",
+          "metin": "Madde 55 – \n\n(Değişik: 21/8/1940 - 3914/1 md.)\n(1) Seferberlikte veyahut Türkiye Cumhuriyetini tehdit eden yakın bir harb tehlikesi mevcut olduğunu gösteren fevkalade zamanlarda Türk Ceza Kanununun 129 uncu maddesinin birinci fıkrasında yazılı cürümleri işleyenler veya işlemeye teşebbüs edenler (Harb hiyaneti) cürümünden dolayı ölüm cezası ile cezalandırılırlar.\n(2) Az vahim hallerde ölüm cezası yerine müebbet veyahut on beş seneden aşağı olmamak üzere ağır hapis cezası verilebilir. Maksat hasıl olursa her halde ölüm cezası verilir."
+        },
+        "56": {
+          "baslik": "Milli Müdafaaya hiyanet:",
+          "metin": "Madde 56 – \n\n(Değişik: 8/6/1959 - 7331/1 md.)\n(1) Bu maddede gösterilen fiilleri işliyenler ve bunlara teşebbüs edenler (Milli Müdafaaya hiyanet) cürmünden dolayı aşağıda yazılı cezalarla cezalandırılırlar.\nA) Türk Ceza Kanununun 133 üncü maddesinde ve 136 ncı maddesinin siyasi ve askeri casusluğa dair 3 üncü fıkrasında yazılı cürümleri işliyenlere Türk Ceza Kanununa göre ceza verilir. Bu cürümleri seferberlikte veyahut Türkiye Cumhuriyetini tehdit eden yakın bir harb tehlikesi mevcut olduğunu gösteren fevkalade zamanlarda işliyenler veya işlemiye teşebbüs edenler, 136 ncı maddenin son fıkrasında suçlunun taksirine müstenit olarak yazılı olan haller hariç olmak üzere, ölüm cezasiyle cezalandırılır.\nB) Doğru olması halinde askeri veya siyasi bir sır teşkil edecek olan evrak ve vesaikı ve sair maddeleri Milli Müdafaaya hiyanet maksadiyle sahte olarak vücuda getiren veya bu suretle vücuda getirilmiş olduğunu bildiği halde bunları aynı maksatla bir başkasına bildiren veya tevdi edenler hakkında on beş seneden aşağı olmamak üzere ağır hapis cezası verilir.\nFiil seferberlikte veyahut Türkiye Cumhuriyetini tehdit eden yakın bir harb tehlikesi mevcut olduğunu gösteren fevkalade zamanlarda işlenmiş ise failleri ölüm cezası ile cezalandırılırlar.\nC) (A) ve (B) bentlerinde yazılı cürümlerden birini veya bazılarını işlemek üzere iki veya daha ziyade kimseler aralarında ittifak ederlerse bunlardan herbiri sekiz seneden on beş seneye kadar ağır hapis cezası ile cezalandırılır. Fiil seferberlikte veyahut Türkiye Cumhuriyetini tehdit eden yakın bir harb tehlikesi mevcut olduğunu gösteren fevkalade zamanlarda işlenmiş ise failleri müebbet ağır hapis cezası ile cezalandırılırlar.\nD) (A) ve (B) bentlerinde yazılı hiyanet cürümlerini işlemeyi bir kimseden talep veya bu cürümleri işlemek için hizmetini arz veyahut böyle bir talebi veya arzı kabul edenler hakkında da bu bentlerde yazılı cezalar aynen verilir. Eğer böyle bir talep veya arz veya kabul yazılı şekilde vukubulmuşsa, bu yazının fail tarafından mücerret gönderilmiş olmasiyle cürüm tamam olur.\nE) (A) ve (B) bentlerinde yazılı cürümlerden birini veya bazılarını işlemek üzere bir teşekkül kuranlar, tanzim ve sevk ve idare edenler üç seneden aşağı olmamak üzere ağır hapis veya böyle bir teşekküle yalnız iştirak edenler bir seneden üç seneye kadar ağır hapis cezasiyle cezalandırılırlar.\nFiil seferberlikte veyahut Türkiye Cumhuriyetini tehdit eden yakın bir harb tehlikesi mevcut olduğunu gösteren fevkalade zamanlarda işlenmiş ise teşekkülü kuranlar, tanzim ve sevk ve idare edenler ölüm ve böyle bir teşekküle iştirak edenler müebbet veya on beş seneden aşağı olmamak üzere ağır hapis cezasiyle cezalandırılırlar.\nF) C, D, E bentlerinde yazılı hallerde her hangi bir suretle olursa olsun cürmün işlenmesine mani olan suç ortağı cezadan kurtulur.\nG) Türk Ceza Kanununun 127 inci maddesinin 3 üncü fıkrasında yazılı olan milli menfaatler aleyhine yabancıdan menfaat veya vait kabul eden vatandaşla bu maksatla para veren veya menfaat temin veya vadeden yabancılar bu fıkra hükümlerine göre cezalandırılırlar.\nFiil seferberlikte veyahut Türkiye Cumhuriyetini tehdit eden yakın bir harb tehlikesini mevcut olduğunu gösteren fevkalade zamanlarda işlenmiş ise, failleri ölüm cezasiyle cezalandırılır.\nEğer para veya menfaat, yazılı bir beyan ile talep veya kabul ve taahhüt edilmiş ise, fail tarafından bu beyanın mücerret gönderilmiş olması ile fiil tamam olur.\nBu bentte yazılı cürümler ancak Milli Müdafaa Vekilinin talebi üzerine takip olunur. Talebin geri alınması caizdir.\n2) Az vahim hallerde bu maddede yazılı ölüm cezaları yerine müebbet ağır hapis veya on beş seneden aşağı olmamak üzere muvakkat ağır hapis cezası verilir."
+        },
+        "57": {
+          "baslik": "Milli Müdafaa aleyhine sair hareketler:",
+          "metin": "Madde 57 – \n\n(Değişik: 21/8/1940-3914/1 md.)\n(1) Her kim, bir müstahkem mevkide, bir harb limanında veyahut diğer bir askeri müessesede ve askeri sahada, deniz ordusuna ait bir gemide, yahut Devlet karasuları içinde Devletin bir makamına, bir memura veya bir askere karşı ismi ve şahsı halleri, sıfatı, mesleki, ikamet mahalli veya tabiiyeti hakkında kasten yanlış malumat verir veya malumat vermekten çekinirse üç aydan üç seneye kadar hapis ile cezalandırılır.\nResmen tahdit ve ilan edilmiş olan emniyet mıntakaları ve ordunun ihtiyaçlarına taalluk eden mevat ve eşyayı imal ve tamire ve muhafazaya tahsis edilmiş olan sınai müesseseler, depolar dahi askeri müessese gibi telakki olunur.\n(2) Türk Ceza Kanununun 135 inci maddesinde yazılı fiilleri işleyenler bu maddede gösterilen cezalarla cezalandırılır."
+        },
+        "58": {
+          "baslik": "Milli mukavemeti kırmak:",
+          "metin": "Madde 58 – \n\n(Değişik: 21/8/1940-3914/1 md.)\nHer kim, Türk Ceza Kanununun 153, 161 inci maddelerinde yazılı suçlardan birisini ve 155 inci maddede yazılı halkı askerlikten soğutmak yolunda neşriyatta ve telkinatta bulunmak ve nutuk irat etmek fiillerini işleyecek olursa milli mukavemeti kırmak cürmünden dolayı mezkur maddelerde gösterilen cezalarla cezalandırılır."
+        },
+        "59": {
+          "baslik": "Milli Müdafaa vasıtalarını tahrip:",
+          "metin": "Madde 59 – \n\n(Değişik: 21/8/1940-3914/1 md.)\n(1) Milli Müdafaayı ihlal kastiyle müdafaaya yarayan vasıtalardan birini veya her hangi bir tesisi tahrip eden, yok eden, terkeden, kullanılmayacak hale getiren veya kusurlu olarak imal, teslim veya tesellüm eden veya bunlara her hangi bir suretle zarar verenler sekiz seneden aşağı olmamak üzere ağır hapis cezasiyle cezalandırılır.\n(2) Milli Müdafaanın emniyeti için ehemmiyetli olan bir işletmeye muktazi her hangi bir vasıtayı Milli Müdafaayı ihlal kastiyle kısmen veya tamamen bozarak veya tahrip ederek veyahut mesaisini ihlal eyleyerek işletmenin faaliyetini tehlikeye düşürenler veya muattal bir hale koyanlar sekiz seneden aşağı olmamak üzere ağır hapis cezasiyle cezalandırılır.\n(3) Fiil, seferberlikte yapılmış veya Devletin harb hazırlıklarını veya harb kudretini veya kabiliyetini ve askeri hareketlerini tehlikeye koymuş ise 1, 2 numaralı fıkralarda yazılı curümlerin failleri ölüm cezası ile cezalandırılır."
+        },
+        "60": {
+          "baslik": "Söz vererek tahliye olunan harb esirleri:",
+          "metin": "Madde 60 – 1 - Harb esiri olupta verdiği sözü tutmayarak Türkiye Cumhuriyeti aleyhine muharip olarak tutulmak ve yahut ecnebi olupta Türkiye Cumhuriyeti hizmeti askeriyesinde bulunduğu halde Türkiye aleyhine bir düşman ile beraber olmak hiyanet addolunarak faili ölüme mahkum olur.\n2 - Düşman eline düşen her Türk askeri düşmana karşı silah tutmamak üzere söz vererek serbestisini elde ederse bir seneden beş seneye kadar hapsolunur.\nİKİNCİ FASIL\nSeferberlikte harb kuvvetlerini tehlikeye düşürmek"
+        },
+        "61": {
+          "baslik": "Seferberliği geciktirenlerin ve ihlal edenlerin cezası:",
+          "metin": "Madde 61 – 1 - Her kim kasten seferberliği geciktirip veya askeri bir hizmet ve vazifeyi ihlal edip bu suretle düşman teşebbüsatının kolaylaşmasına ve terakkisine ve yahut muharip Türkiye Cumhuriyeti ve mütteffikleri kıtalarına zarar ve tehlike gelmesine sebep olursa muvakkat ağır hapis ve yahut üç seneden fazla hapis cezasiyle cezalandırılırlar.\n2 - Az vahim hallerde veya vazife ve hizmeti ihlal kasten vukubulmamış ise, üç seneye kadar hapsolunur."
+        },
+        "62": {
+          "baslik": "Müstahkem bir mevkii veya kendi mevkiini veya kendisini veya bir gemiyi, bir tayyareyi düşmana teslim eden kumandanların cezası:",
+          "metin": "Madde 62 – 1 - Aşağıda yazılı olan askeri şahıslar ölüm cezasiyle cezalandırılır:\nA) Müstahkem bir mevkii; müdafaasına hizmet eden bütün vasıtaları kullanıp bitirmeksizin düşmana teslim eden mezkür mevkiin kumandanı;\nB) Emri altında bulunan müdafaa vasıtalarını ihmal ile kendisine mevdu mevkii terkeden veya düşmana teslim eden kumandan;\nC) Vazifesinin kendisinden talep eylediği her şeyi evvelden yapmayarak emri altına tevdi edilen kıtaatın teslimisilah etmesini intaç edecek surette açık sahrada düşmanla mukavele yapan kumandan;\nD) Askeri bir gemi ve tayyareyi ve yahut mürettebatını düşmana teslim etmemek için vazifenin kendisinden talep ettiği her şeyi evvelden yapmayarak düşmana teslim eden gemi ve tayyare kumandanı;\n2 - B. ve C. fıkralarında yazılı olan cürümlerin failleri az vahim hallerde, beş seneden az olmamak üzere, muvakkat ve yahut müebbet ağır hapis cezasiyle cezalandırılır.\nÜÇÜNCÜ FASIL"
+        },
+        "63": {
+          "baslik": "Yoklama kaçağı, bakaya, saklı, firar",
+          "metin": "Madde 63 – 1 - \n\n(Değişik: 31/3/2011-6217/4 md.) Barışta, 25/6/2019 tarihli ve 7179 sayılı Askeralma Kanununun 24 üncü maddesi uyarınca haklarında verilen idarî para cezası kesinleştikten sonra söz konusu Kanunun 23 üncü maddesinde belirtilen mazeretlerden birisi bulunmaksızın,[17]\na) Yoklama kaçaklarından birlikte (…)[18] yoklamaya tabi oldukları doğumluların yurt genelinde normal sevk yılı içindeki son kafilesi gönderilmiş bulunanlar için, son kafilenin gönderilmesi tarihinden,\nb) Bakaya kalanlar için, bakaya kaldıkları tarihten,\nc) İhtiyat erattan çağrılıp da birlikte işleme tabi olduğu kişiler gönderilmiş bulunanlar için, en son gönderilme tarihinden,\nd) Yoklama kaçağı, saklı veya bakaya olup olmamasına bakılmaksızın askerlik şubesince sevk edildiği kıtasına katılmayan veya geç katılanlar için, kendilerine tanınan kanuni yol süresinin bitiminden,\nitibaren dört ay içinde gelenler altı aya kadar, yakalananlar iki aydan altı aya kadar; dört aydan sonra bir yıl içinde gelenler iki aydan bir yıla kadar, yakalananlar dört aydan bir yıla kadar; bir yıldan sonra gelenler dört aydan iki yıla kadar, yakalananlar altı aydan üç yıla kadar hapis cezasıyla cezalandırılır.\n2 - \n\n(Değişik: 15/6/1942-4257/1 md.) Seferberlikte birinci fıkrada yazılı olanlarla ruhsatlılardan sevk gününün bitmesinden itibaren yedi gün içinde gelenler bir aydan bir seneye, elde edilenler dört aydan iki seneye kadar, yedi günden sonra üç ay içinde gelenler iki seneden aşağı olmamak üzere elde edilenler üç seneden aşağı olmamak üzere hapis, üç aydan sonra kendiliğinden gelenler beş seneden az olmamak üzere ağır hapis, elde edilenler ölüm cezasına mahkum edilirler. Az vahim hallerde ölüm cezası yerine müebbet veya on seneden aşağı olmamak üzere ağır hapis cezası verilir ve diğer hallerde gösterilen cezalar yarıya indirilir."
+        },
+        "64": {
+          "baslik": "Çağırılıpta gelmiyen yedek subaylar, yedek astsubaylar ve askeri memurların cezaları:[19]",
+          "metin": "Madde 64 – \n\n(Değişik: 15/6/1942-4257/1 md.)\n1 - Hazarda askeri hizmete çağrıldığı halde 1076 sayılı kanunun 15 inc maddesine tevfikan Milli Müdafaa Vekaletince emredilen müddet içinde askerlik şubesine gelmiyen yedek subay , yedek astsubay ve askeri memurlardan bu müddetin bitmesinden sonra on beş gün içinde elde edilenler bir aydan altı aya kadar, on beş günden sonra üç ay içinde elde edilenler altı aydan bir seneye kadar hapis ve üç aydan sonra elde edilenler beş seneye kadar ağır hapis cezasiyle cazalandırılır. Bu müddetler içinde kendiliğinden gelenlerin cezaları yarıya indirilir.\n2 - Seferberlikte çağrıldığı halde muayyen müddet içinde askerlik şubesine gelmiyen yedek subaylar, yedek astsubaylar ve askeri memurlardan bu müddetin bitmesinden sonra yedi gün içinde gelenler üç aydan iki seneye kadar, elde edilenler altı aydan üç seneye kadar, yedi günden sonra üç ay içinde gelenler iki seneden ve elde edilenler üç seneden aşağı olmamak üzere hapis, üç aydan sonra gelenler beş seneden az olmamak üzere ağır hapis, elde edilenler ölüm cezasiyle cezalandırılırlar.\n3 - Askeri hizmet için yapılan davet üzerine şubeye gelen yedek subay , yedek astsubay ve askeri memurlardan mahalli müretteplerine hazarda on iki ve sefeberlikte dört gün içinde hareket etmiyenler veya yol müddeti hariç olarak bu müddetlerin yarısından fazla bir müddeti yolda geçirerek vazife ve memuriyetlerine iltihak etmiyenler hazarda üç aya kadar ve seferberlikte üç aydan beş seneye kadar hapsolunurlar. Bu fıkrada ve 65 inci maddede yazılı müddetler halin icabına göre Milli Müdafaa Vekilliğince azaltılabilir veya uzatılabilir.\nAz vahim hallerde 63 üncü maddenin son fıkrasında yazılı hükümler bu maddede yazılı olan cezalar hakkında da tatbik olunur.\n4 - 1076 sayılı kanunun 13 ve 15 inci madelerinde yazılı haller bu maddenin tatbikında da nazara alınır."
+        },
+        "65": {
+          "baslik": "Vazife ve memuriyetlerine gitmeyenlerin cezaları:",
+          "metin": "Madde 65 – \n\n(Değişik: 25/1/1957-6889/1 md.)\nTayin olunduğu vazife ve memuriyet emrinin tebliğinden itibaren mazeretsiz hazarda 15 ve seferberlikte 6 gün içinde hareket etmiyen veya yol müddeti hariç olarak hazarda 7, seferde 3 günden fazla bir müddet yolda geçirerek vazife ve memuriyetlerine iltihak etmiyen subaylar, askeri memurlarla astsubaylar üç aya kadar ve seferberlikte üç aydan beş aya kadar hapsolunurlar. Tekerrürü halinde ilk fiil hazarda ise altı ay ve seferberlikte ise sekiz ay ve her iki fiil seferberlikte ise bir sene hapsolunurlar.\nYukarda hareket ve iltihak için tayin olunan müddetlerin bitmesinden itibaren hazarda altı, seferberlikte üç gün içinde kıtasına iltihak etmiyenler hakkında da 66 ncı madde hükümleri tatbik olunur."
+        },
+        "66": {
+          "baslik": "Firar ve cezası:",
+          "metin": "Madde 66 – \n\n(Değişik: 14/6/1989-3574/2 md.)\n1) Aşağıda yazılı askeri şahıslar bir yıldan üç yıla kadar hapsolunur:\na) Kıt'asından veya görevi icabı bulunmak zorunda olduğu yerden izinsiz olarak altı günden fazla uzaklaşanlar,\nb) Kıt'asından veya görevini yapmakta olduğu yerden izin, istirahat veya hava değişimi alarak ayrılanlardan, dönmeye mecbur bulundukları günden itibaren altı gün içerisinde özürsüz olarak gelmeyenler,\n2) Aşağıda yazılı hallerde hapis cezası iki yıldan aşağı olamaz.\na) Suçlu, silah, mühimmat ve bunların teçhizat veya nakil vasıtalarından ve hayvanlardan birini veya ordu hizmetine tahsis edilen herhangi bir şeyi beraberinde götürmüş ise;\nb) Suçlu hizmet yaparken kaçmış ise;\nc) Suçlu mükerrir ise;\n3) Seferberlikte bu maddede yazılı mehiller yarıya indirilir."
+        },
+        "67": {
+          "baslik": "Yabancı memlekete firar edenlerin cezaları:",
+          "metin": "Madde 67 – (Değişik : 22/1/2004-5080/1 md.)\nAşağıda yazılı fiilleri işleyen asker kişiler, yabancı ülkeye kaçmış sayılarak bir seneden beş seneye kadar hapis cezası ile cezalandırılırlar:\nA) \n\n(Değişik: 5/6/2017-KHK-691/3 md.; Aynen kabul: 31/1/2018-7069/3 md.) İzinli olduğu durumlar hariç, ülke sınırları dışında üç günü geçirenler.\nB) Ülke sınırları dışındaki bir askerî birlik veya görev yerinden, deniz veya hava aracından kaçıp da bu durumda üç günü geçirenler.\nC) Ülke sınırları dışındaki bir askerî birlikten, deniz veya hava aracından herhangi bir nedenle ayrı düşüp de askerî veya sivil bir Türk resmî makamına veya müttefik devlet makamlarına özürsüz olarak müracaat etmeksizin üç günü geçirenler.\nD) Harp esiri iken serbest bırakılıp da askerî veya sivil bir Türk resmî makamına veya müttefik devlet makamlarına teslim olmak üzere harekete geçme imkânı doğduğu halde, özürsüz olarak hareketsiz kalan ve bu durumda üç günü geçirenler.\nAşağıda yazılı hallerde üç seneden yedi seneye kadar hapis cezası verilir:\nA) Fail beraberinde silah, mühimmat, savaş araç veya gerecini götürmüş ise.\nB) Fail hizmet yaparken kaçmış ise.\nC) Fail mükerrir ise.\nSeferberlik ve savaş halinde, bu maddede yazılı mehil bir güne iner. Bu maddedeki suçu seferberlikte işleyenlere beş seneden, savaş halinde işleyenlere ise yedi seneden aşağı olmamak üzere ağır hapis cezası verilir."
+        },
+        "68": {
+          "baslik": "Mehil içinde yakalananların cezası[20]",
+          "metin": "Madde 68 – (Değişik : 22/3/2000-4551/15 md.) 66 ve 67 nci maddelerde yazılı olan süreler içinde yakalananlara iki aydan altı aya kadar hapis cezası verilir.\nAşağıda yazılı hallerde, gün unsuru aranmaz ve ceza artırılır.\nA) Fail beraberinde silah, mühimmat, savaş araç ve gerecini götürmüş ise,\nB) Fail hizmet yaparken kaçmış ise."
+        },
+        "69": {
+          "baslik": "Düşman  tarafında, düşman kaşısında, mahsur mevkiden kaçanların cezası:",
+          "metin": "Madde 69 – 1- Düşman tarafına kaçan ölüme mahkum edilir.\n2 - Düşman karşısında veya mahsur bir mevkiden kaçan müebbet veya muvakkat ağır hapis ile cezalandırılır. Vahim hallerde ölüm cezası verilebilir."
+        },
+        "70": {
+          "baslik": "Sözleşerek firar ve cezası:",
+          "metin": "Madde 70 – 1- İkiden ziyade askeri şahıslar önceden kararlaştırarak toplu kaçarlarsa sözleşerek firar sayılır.\n2- Suçlular yabancı memlekete kaçmışlar ise ön ayak olanlar beş seneden yedi seneye kadar; ön ayak olanlar subay veya askeri memur ise beş seneden on seneye kadar ağır hapis ile cezalandırılırlar.\n3 - Suçlular vatan içine kaçmışlarsa ön ayak olanlar iki seneden beş seneye kadar, ön ayak olan subay veya askeri memur ise beş seneden yedi seneye kadar ağır hapis ile cezalandırılırlar.\n4 - Sözleşerek kaçan diğer suçlular bir seneden üç seneye kadar hapsolunur. Firar yabancı memlekete ise ceza bir kat arttırılır.\n5 - Seferberlikte sözleşerek firara ön ayak olanlar ölüm cezasiyle cezalandırılırlar, diğer suçluların cezaları muayyen cezanın yarısı kadar arttırılır.\n6 - \n\n(Mülga: 14/6/1989-3574/4 md.)"
+        },
+        "71": {
+          "baslik": "Erbaşların rütbelerinin geri alınması[21]",
+          "metin": "Madde 71 – (Değişik : 22/3/2000-4551/16 md.) Firar ve izin tecavüzü cürümlerinden hüküm giyen erbaşların rütbelerinin geri alınmasına da hükmolunur."
+        },
+        "72": {
+          "baslik": "Firar cezalarının sonraya bırakılması:",
+          "metin": "Madde 72 – 1 - \n\n(Mülga : 25/10/1963-353/259 md.)\n2 - Bunlar sevkolunurken, yollardan misafirhanelerden, bulundukları kıta ve müesseselerden tekrar kaçarlarsa evvelce mahkum oldukları ceza iki misline iblağ olunur."
+        },
+        "73": {
+          "baslik": "Geri gelen kaçakların cezalarının indirilmesi",
+          "metin": "Madde 73 – Kaçak, kaçtığından altı hafta, seferberlikte bir hafta içinde kendiliğinden geri gelirse yukarıki maddelere göre verilecek cezalar yarısına kadar indirilir. Ölüm cezası yerine müebbet ağır hapis yahut beş seneden az olmamak üzere ağır hapis cezası verilir."
+        },
+        "74": {
+          "baslik": "Firara kalkışanları haber vermiyenlerin cezası:",
+          "metin": "Madde 74 – Bir firar teşebbüsünü doğru olarak haber alıpta firarın önü alınabilecek bir zamanda bunu amirine haber vermekte ihmal eden askeri şahıs, eğer  firar vuku bulmuş ise altı aya kadar ve firar seferberlikte vuku bulmuş ise iki seneye kadar hapsolunur.[22]"
+        },
+        "75": {
+          "baslik": "Kaçaklara yardım edenlerin cezaları:",
+          "metin": "Madde 75 – 1 – \n\n(Değişik: 30/4/1945-4726/2 md.) Asker kişileri kaçmağa kışkırtan veya kaçmalarını veya kaçaklığın devamını kolaylaştıran veya kaçakları, izinsizleri, bakayayı, yoklama kaçaklarını, saklıları ve çağrılıp ta gelmiyen yedek subaylar ve yedek astsubaylar ile yedek askeri memurları bilerek özel ve resmi hizmete alanlar veya gizliyenler veya Devlet, il ve belediyelerle bunların denetimi altındaki bütün kuruluş ve kurumlarda ve banka ve kamu faydasına çalışan dernek ve mesleki kuruluşlarda her ne suretle olursa olsun çalıştıranlar ve Hükümetten yapılacak tebligat üzerine özel işlerinden çıkarmıyanlar barışta üç aydan bir yıla ve tekerrüründe bir yıldan üç yıla, seferberlikte veya olağanüstü hallerde altı aydan iki yıla kadar hapis ve bu eylemin seferberlikte veya olağanüstü hallerde tekerrüründe yedi yıla kadar ağır hapis cezasiyle cezalandırılır.[23]\n2 - Seferberlikte herhangi bir suretle askeri kuvveti tenkise sebep olacak surette vakıa gayrimutabık kasten vesika verenler birinci defasında iki seneden beş seneye kadar ağır hapis ve mükerrirler ölüm cezasiyle cezalandırılırlar."
+        },
+        "76": {
+          "baslik": "Tutukevi veya cezaevinden kaçmak veya kaçmaya aracı olmak[24]",
+          "metin": "Madde 76 – (Değişik : 22/3/2000-4551/17 md.) Askeri tutukevi veya cezaevinden kaçmak veya kaçmaya aracı olmak suçlarını işleyen asker kişiler hakkında, Türk Ceza Kanununun İkinci Kitabının Dördüncü Bab Yedinci Faslında yer alan hükümler uygulanır.\nAncak, askeri ceza ve tutukevlerinden altı gün veya daha fazla süre ile kaçan asker kişilere verilecek hapis cezası veya asıl cezaya ilave olunacak hürriyeti bağlayıcı ceza bir yıldan az olamaz."
+        },
+        "77": {
+          "baslik": "Göz veya oda hapsi ceza yerinden kaçmak, infaz şartlarına uymamak, kaçmaya aracı olmak[25]",
+          "metin": "Madde 77 – (Değişik : 22/3/2000-4551/18 md.) Disiplin mahkemeleri ile disiplin amirleri tarafından verilen göz veya oda hapsi cezalarının çekildiği yeri terk edenlere veya cezanın diğer infaz şartlarını yerine getirmeyenlere, bir aydan altı aya kadar hapis cezası verilir.\nGöz veya oda hapsi ceza yerinden kaçanlara, aracı olanlara veya ihmal yahut kayıtsızlıkları ile kaçmalarına sebebiyet verenlere de aynı ceza uygulanır.\nGöz veya oda hapsini çekmekte olduğu yeri terk fiili, altı gün veya daha fazla devam etmiş ise, verilecek hapis cezası bir yıldan az olamaz."
+        },
+        "78": {
+          "baslik": "Düşman tarafına, yabancı memlekete kaçanlar hakkında mali ve fer'i cezalar:",
+          "metin": "Madde 78 – A:1 - Düşman tarafına kaçan veya seferberlikte mükellef olduğu hizmetten uzak kalmak kastiyle yabancı bir memlekete sığınanların veya yabancı memlekette kalanların mevcut ve ileride vücut bulacak menkul ve gayrimenkul bütün mal ve mülklerinin millet namına zaptına karar verilir. Bu karar verilirken suçlunun hısımları bir müdafi tayin etmek hakkını haizdirler.\n2 - Bu karar maznuna, mümkün olmadığı halde onun son ikametgahına tebliğ olunur ve askeri mahkeme kapısına asılır, gazetelerle ilan olunur. Seferberliğin bittiğini bildiren emir tarihinden üç ay içinde bu tebliğ bir kere daha yapılır.\n3 - Zabıt kararının bir hulasası karar tarihinden sekiz gün içinde tapu idarelerine ve gaiplerin mallarını idare ile muvazzaf olan makama tebliğ olunur.\n4 - Zaptına karar verilen mal ve mülkler mezkür idareler tarafından satılıncaya kadar mahcuz kalır. Bu mal ve mülkler satılmazdan evvel maznun gelir veyahut yakalanır da muhakemesi yapılırsa haciz kaldırılır.\n5 - Suçlunun kanunen infaka mecbur olduğu kimselerin geçinmeleri son ikametgahı sulh hakiminin emriyle haczolunan mallarından kıymetlerine göre temin olunabilir.\nB:1 - Suçlunun füruu, baba ve anası, kardeşleri yahut karısı sağ ise, ölüme bağlı tasarruf hükümlerine göre (K. M. 452, 453) bu kimselerin mahfuz hisseleri miktarı kendilerine verilir ve mütebakisi millet menfaatine satılır. Bu mirasçılardan kimse bulunmazsa, bütün mallar millet menfaatine satılır.\n2 - Suçlunun gelmesine maddi bir imkansızlığın sebebiyet verdiği resmi tahkikat ile sabit olmaz ise veya hısımları tarafından ispat edilemez ise (A) fıkrasının 2 rakamında yazılı olduğu üzere seferberlik bittikten sonra yapılacak son tebliğ tarihinden bir sene sonunda zabıt katileşir ve zaptolunan mallar satılır.\n3 - Zaptolunan mallar devlet mallarının satılmasına dair kanunlara ve nizamnamelere göre satılır.\n4 - Malların satılmasına ve kıymetlerine karşı itirazlar suçlunun Türkiyede bulunduğu son ikametgahı veya son bulunduğu mahal mahkemelerine arzolunur.\n5 - Suçlunun borçları mirasçılara terkedilen hisselerden istifa olunur. Mirasçı yoksa bütün malların dörtte üçü suçlunun borçlarına karşılık teşkil eder.\n6 - Mallar satıldıktan sonra A fıkrasının 2 numarasında yazılı müddetin hitamından evvel suçlunun ölmüş olduğu anlaşılırsa satılan malların bedeli mirasçılarına verilir.\n7 - Zaptolunan mallar satıldıktan sonra vicahi muhakeme neticesinde suçlu beraet ederse geldiği veya yakalandığı günden ilerisi için bütün medeni haklarına sahip olur. Geçen zaman için mallarının zaptedilmesi yüzünden kendisine ve ailesine vakı olan zarar ve ziyanın tazminini Devletten talep ve iddia edebilir.\nC:1 - Şahsi servetini gizlemek, elinden çıkarmak veya azaltmak kastiyle seferberlikte gerek hayatta bulunanlar arasında cari olan ve gerek ölüme bağlı bulunan akit ve tasarruflardan birine dair suçlu tarafından karşılıklı veya karşılıksız doğrudan doğruya veya bilvasıta yapılan her türlü talep ve müracaatlar ve muamelelerin muteber olmayacağı zabıt karariyle beraber karar altına alınır.\n2 - \"A\" fıkrasında gösterilen suçlunun mallarının zaptına karar verilmeden veya verildikten sonra bu suçlunun bütün mallarının veya bir kısmının kaçırılmasına veya azaltılmasına doğrudan doğruya ve bilvasıta bilerek yardım eden bütün devlet memurları, varisler, ticari, ve mali müesseseler, şirketler ve bütün üçüncü şahıslar bu suretle gizlenen veya kaçırılan mallar kıymetinin iki mislinden az ve üç mislinden çok olmamak üzere ağır para cezasına mahkum olurlar.\nD: Suçlu Kanunu Medeni mucibince haiz olduğu vesayete mütallik bütün haklarını zayi eder.\nE: Bu maddedeki suçlar hakkında, dava ve ceza müruru zamanı işlemez.\nDÖRDÜNCÜ FASIL\nKendini askerliğe yaramıyacak hale getirmek ve\naskerlikten kurtulmak için hile kullanmak[26]"
+        },
+        "79": {
+          "baslik": "Kendini askerliğe yaramayacak hale getirenlerin cezası:",
+          "metin": "Madde 79 – 1 - Kendisini kasten sakatlayan veya her hangi bir suretle askerliğe yaramayacak bir hale getiren veya kendi rızasiyle bu hale getirten bir seneden beş seneye kadar hapis cezasiyle cezalandırılır.\n2 - Fiil her nevi askeri maksatlar için çalışmak kabiliyetini mahvetmiş ise suçlu yedi seneye kadar ağır hapis ile cezalandırılır.\n3 - Fiil seferberlikte yapılmışsa on seneye kadar ağır hapis, düşman karşısında yapılmışsa yapan ölüm cezasiyle cezalandırılır."
+        },
+        "80": {
+          "baslik": "Başkasını askerliğe yaramayacak hale getirenlerin cezası:",
+          "metin": "Madde 80 – 79 uncu maddede yazılı fiilleri bilerek başkasına yapan dahi aynı ceza ile cezalandırılır."
+        },
+        "81": {
+          "baslik": "Askerlikten kurtulmak için hile yapanlar:",
+          "metin": "Madde 81 – (Değişik : 11/12/1935-2862/9 md.)\n1 - Askerlik çağına girenlerden askerlikten büsbütün veya kısmen kurtulmak kasdile ismini değiştirenler, başkasını kendi yerine tabib muayenesine veya askere gönderenler, başkasının hüviyet cüzdanını veya askeri vesikasını kullananlar, askerlik işlerinde sahte şehadetname veya evrak kullanan yahut her ne suretle olursa olsun hile ve desise yapanlarla kıt'aya veya bir müesseseye intisab ettikten sonra kendisinin yapmağa mecbur olduğu hizmetten büsbütün veya kısmen kurtulmak kasdile hile yapanlar on seneye kadar ağır hapis cezası ile cezalandırılırlar.\n2 - (Değişik : 22/3/2000-4551/19 md.) Yukarıdaki fıkrada yazılı cezalar suç ortaklarına da uygulanır. Az vahim hallerde altı aydan beş seneye kadar hapis cezası verilir.\nBEŞİNCİ FASIL\nAskeri itaat ve inkıyadı bozan suçlar"
+        },
+        "82": {
+          "baslik": "Amir veya üstü tehdit[27]",
+          "metin": "Madde 82 – \n\n(Mülga: 16/6/1964-477/47 md. delaletiyle 64 md. ile; Yeniden düzenleme: 22/3/2000-4551/20 md.)\n\n\n(Mülga birinci fıkra: 31/1/2013-6413/45 md.)\nAmir veya üstünü herhangi bir suretle tehdit edenlere, altı aydan iki seneye kadar hapis cezası verilir. Fiil toplu asker karşısında veya silahlı iken veya hizmet esnasında işlendiği takdirde, verilecek hapis cezası bir yıldan az olamaz."
+        },
+        "83": {
+          "baslik": "Bilerek doğru söylemeyenlerin cezaları:",
+          "metin": "Madde 83 – \n\n(Mülga: 16/6/1964-477/49 md. delaletiyle 64 md. ile) (22/3/2000-4551/38)"
+        },
+        "84": {
+          "baslik": "Yalan yere şikâyet[28]",
+          "metin": "Madde 84 – 1. Doğru olmadığını bildiği iddialarla şikayete kalkışan üç aya kadar hapsolunur.\n2. \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "85": {
+          "baslik": "Amir ve mafevkine hakaret edenlerin cezaları:",
+          "metin": "Madde 85 – 1. (Değişik : 22/3/2000-4551/21 md.)\nBir amire veya üste hakaret eden üç aydan bir seneye kadar hapis cezası ile, hakaret hizmet esnasında yahut hizmete müteallik bir muameleden dolayı vuku bulursa altı aydan üç seneye kadar hapis cezası ile cezalandırılır.\n2. Hakaret bir maddei mahsusa tayini ile vukua gelmiş ise altı aydan beş seneye kadar hapsolunur.\n3. Hakaret umuma teşhir olunmuş yazı, resim veya sair neşir vasıtalariyle veya resmi makamlara verilipte üzerine muamele cereyan etmiş evrak ile yapılmış ise bir seneden beş seneye kadar hapsolunur."
+        },
+        "86": {
+          "baslik": "İtaatsizlik ve cezası",
+          "metin": "Madde 86 – \n\n(Mülga:16/6/1964-477/48 md. delaletiyle 64 md. ile) (22/3/2000-4551/38)"
+        },
+        "87": {
+          "baslik": "İtaatsizlikte ısrar edenlerin cezası:",
+          "metin": "Madde 87 – 1. \n\n(Değişik: 22/3/2000-4551/22 md.)\nHizmete ilişkin emri hiç yapmayan asker kişiler bir aydan bir seneye kadar, emrin yerine getirilmesini söz veya fiili ile açıkça reddeden veya emir tekrar edildiği halde emri yerine getirmeyenler, üç aydan iki seneye kadar hapis cezası ile cezalandırılırlar.\n2.  Yukarıki fıkrada yazılı suçlar seferberlikte yapılırsa beş ve düşman karşısında yapılırsa on seneye kadar ağır hapis cezası hükmolunur."
+        },
+        "88": {
+          "baslik": "Toplu asker karşısında veya hizmetten savuşmak için veya silahlı iken yapılan itaatsizliğin cezaları:",
+          "metin": "Madde 88 – \n\n(Değişik: 22/3/2000-4551/23 md.)\n87 nci maddede yazılı itaatsizlik suçlarını; toplu asker karşısında yahut silah başı emrine karşı veya silahlı iken veya hizmetten kısmen veya tamamen sıyrılmak kastı ile yapanlar altı aydan beş seneye kadar hapis, seferberlikte beş seneye kadar ağır hapis ve düşman karşısında on seneden aşağı olmamak üzere ağır hapis cezası ile cezalandırılırlar."
+        },
+        "89": {
+          "baslik": "Büyük zararlar veren itaatsizliğin cezaları:",
+          "metin": "Madde 89 – 1. \n\n(Değişik: 22/3/2000-4551/24 md.) Emre itaatsizlik sonucu bir insanın hayatını tehlikeye koyan, memleketin veya bir askeri birliğin güvenliğini veya savaş hazırlığını veya eğitimini önemli derecede ihlal eden veya büyük bir zarar meydana getiren yahut başkasının malına önemli bir zarar veren asker kişiler, bir seneden on seneye kadar hapis, seferberlikte iki seneden onbeş seneye kadar ağır hapis cezası ile cezalandırılır.\n2. Düşman karşısında ölüm cezası veyahut on beş seneden aşağı olmamak üzere ağır hapis ile cezalandırılır."
+        },
+        "90": {
+          "baslik": "Mukavemet ve cezası",
+          "metin": "Madde 90 – 1. Bir amiri veya mafevkını zorla ve tehdit ile hizmet emrini ifadan menetmeğe, yahut hizmete mütaallik bir muameleyi yapmak veya yapmamak için zorlamağa kalkışan mukavemet cürmünü yapmış olur. Bu cürmü işleyenler altı aydan on seneye kadar, az vahim hallerde üç aydan az olmamak üzere hapis, seferberlikte iki seneden, az vahim hallerde altı aydan aşağı olmamak üzere hapis cezalariyle cezalandırılır.\n2. Mukavemet cürmü amirin muhafazasına memur olan yahut bu maksatla getirilen erbaşa ve ere karşı yapılırsa yine aynı ceza verilir."
+        },
+        "91": {
+          "baslik": "Amire ve mafevka fiilen taarruz edenlerin cezaları",
+          "metin": "Madde 91 – 1. Amire veya mafevka fiilen taaruz eden veya fiilen taarruza teşebbüs eden üç seneden, az vahim hallerde altı aydan aşağı olmamak üzere hapsolunur.\n2. Taarruz veya taarruza teşebbüs silahlı olarak veya bir hizmet esnasında veya toplu asker karşısında veyahut silah ve tehlikeli bir alet ile yapılmış ise beş seneden, az vahim hallerde bir seneden aşağı olmamak üzere suçluya hapis cezası verilir.\n3. \n\n(Değişik: 22/1/2004–5078/1 md.) Taarruz, amirin veya mafevkin vücudunda tahribatı mucip olmuşsa onbeş seneden az olmamak üzere ağır hapis, eğer ölümü mucip olmuşsa müebbet ağır hapis, az vahim hâllerde yirmidört seneden otuz seneye kadar ağır hapis cezası verilir.\n4. \n\n(Değişik: 22/1/2004–5078/1 md.) Taarruz veya taarruza teşebbüs seferberlikte yapılmışsa yirmi seneden, az vahim hâllerde onbeş seneden az olmamak üzere ağır hapis, eylem amir veya mafevkin vücudunda tahribatı mucip olmuşsa müebbet ağır hapis, ölümü mucip olmuş ise ölüm cezası verilir."
+        },
+        "92": {
+          "baslik": "Tahrik suretiyle madunun yaptığı suçlar hakkındaki cezaların nasıl indirileceği:",
+          "metin": "Madde 92 – 1. Bir amir veya mafevk, askeri nizamlara ve askerlik kaidelerine mugayir muamelede bulunmak, yahut makam ve mevkiinin salahiyetini tecavüz etmek suretleriyle madunu tahrik eyler ve madun bu tahrik sebebiyle 82, 83, 84, 85, 86, 87, 88, 89, 90 ve 91 inci maddelerde yazılı suçlardan birini hemen yaparsa, Türk Ceza Kanununun elli birinci maddesine göre madunun cezası hafifletilir.\n2. Birinci fıkradaki tahriki yapanlar tahrikin nevi ve mahiyetine göre 116, 117 ve 118 inci maddelerde yazılı cezalarla cezalandırılır."
+        },
+        "93": {
+          "baslik": "Muharrik ve cezası",
+          "metin": "Madde 93 – 1. Askeri şahıslardan birini amire veya mafevka karşı itaatsizliğe mukavemete, fiilen taarruza sevk ve tahrik eden muharrik sayılır.\n2. \n\n(Mülga: 31/1/2013-6413/45 md.)\n3. Suç teşebbüs derecesinde kalmışsa muharrik üç aydan iki seneye ve seferberlikte altı aydan beş seneye kadar hapsolunur. Ceza herhalde müteşebbisin cezasından şiddetli olmaz.\n4. Suç yapılmışsa, muharrik cürme şerik olur."
+        },
+        "94": {
+          "baslik": "İsyan muharriki ve cezası",
+          "metin": "Madde 94 – 1. Birden ziyade askeri şahısları hep birlikte amire veya mafevka itaatsizliğe veya mukavemete veyahut fiilen taarruza sevk ve tahrik eden isyan muharriki sayılır. Suç yapılmamış veyahut yapılmağa teşebbüs edilmemişse isyan muharriki beş seneden az olmamak üzere ağır hapis cezasiyle cezalandırılır.\n2. Tahrik sebebiyle, askeri hizmete ehemmiyetli bir zarar gelmişse isyan muharriki on seneden az olmamak üzere ağır hapisle cezalandırılır.\n3. Seferberlikte isyan muharriki ölüm cezasiyle cezalandırılır."
+        },
+        "95": {
+          "baslik": "Hilafı salahiyet askerlik işleri için toplananlar ve müzakere yapanların cezaları",
+          "metin": "Madde 95 – \n\n(Değişik: 25/5/1972-1590/1 md.)\n1. Hakkı ve görevi olmadığı halde askeri muamelat, teşkilat, harekat, tesisat veya tertibata müteallik işler hakkında :\na) Müzakere veya istişare için asker kişileri toplıyan,\nb) Birlikte beyanat veya şikayette bulunmak üzere imza toplıyan,\nc) Birlikte beyanat veya şikayette bulunan,\nd) Her ne suretle olursa olsun gösteri veya tezahüratta bulunan,\nKim olursa olsun altı aydan üç seneye kadar hapsolunur.\n2. (a) fıkrasında yazılı toplantıya bilerek katılanlar ile (b) fıkrasında yazılı beyanat ve şikayetlere imza koyanlar altı aya kadar hapsolunur.\n3. Kendisine özel bir mezuniyet verilmediği halde, görevi ve sıfatı icabı muttali olduğu askeri muamelat, teşkilat, harekat, tesisat veya tertibata müteallik işler hakkında beyanat veren, yazı yazan veya sair surette açıklamada bulunanlar her kim olursa olsun, fiili daha ağır bir cezayı gerektirmediği takdirde altı aydan üç seneye kadar hapsolunur.\n4. Astlık - üstlük münasebetlerini zedelemeye, amir veya komutanlara karşı güven hissini yok etmeye matuf olarak alenen tahkir veya tezyif edici fiil ve harekette bulunanlar altı aydan üç seneye kadar hapsolunur.\n5. Bu maddede yazılı suçların basın yoliyle işlenmesi halinde ceza artırılarak verilir.\n6. Bu maddenin 3 ve 4 üncü fıkralarında yazılı suçlar hakkındaki soruşturma icrası Milli Savunma Bakanının iznine tabidir."
+        },
+        "96": {
+          "baslik": "Askerlikten soğutanların cezaları:",
+          "metin": "Madde 96 – \n\n(Değişik: 31/1/2013-6413/45 md.)\nUmuma teşhir olunmuş yazı, resim veya sair teşhir vasıtalarıyla veyahut seferberlikte sözle arkadaşlarını hoşnutsuzluğa kışkırtan, üç aydan beş seneye kadar hapsolunur."
+        },
+        "97": {
+          "baslik": "Fesat ve cezası:",
+          "metin": "Madde 97 – 1. Birden ziyade askeri şahıslar bir amire veya mafevka hep birlikte itaatsizlik veya mukavemet veya fiilen taarruz etmek (M. 86, 90, 91) için ittifak ederlerse fesat sayılır ve ceza, ittifak edenlerin yapmak için ittifak ettikleri cürme tatbik edilecek kanun maddesine göre tayin ve ölüm ile müebbet ağır hapisten başka hallerde üç aydan iki seneye kadar artırılır.\n2. İttifak edenler eğer suçu işlerse ceza ölüm ve müebbet ağır hapisten başka hallerde 50 nci madde mucibince arttırılır."
+        },
+        "98": {
+          "baslik": "Fesadı haber vermeyenlerin cezası",
+          "metin": "Madde 98 – Fesat hakkında bir suretle haber alıpta fesada veya fesadın fiile çıkmasına mani olacak kadar vaktiyle malümat vermekte ihmal eden fesat, fiile çıktığı surette üç seneye kadar hapsolunur."
+        },
+        "99": {
+          "baslik": "Fesadı haber verenlerin cezadan kurtulması",
+          "metin": "Madde 99 – Fesat için ittifak edenlerden biri, başka suretle malümat almadan fesadın fiile çıkmasına mümanaat mümkün olacak hal ve zamanda haber verirse, cezadan kurtulur."
+        },
+        "100": {
+          "baslik": "Askeri isyan ve cezası",
+          "metin": "Madde 100 – Birden ziyade askeri şahıslar, gürültü patırdı ile veya alenen toplanarak bir amire veya mafevka itaatsizliğe veya mukavemet veya fiilen taar-ruza (M. 86, 90, 91) birlikte kalkışırlarsa \"Askeri isyan\" sayılır. Toplanmaya iştirakedenlerin her biri beş seneden ve seferberlikte on seneden az olmamak üzere muvakkat ağır hapis cezasiyle cezalandırılır."
+        },
+        "101": {
+          "baslik": "Askeri isyanda önayak olanların cezaları",
+          "metin": "Madde 101 –  1. \n\n(Değişik: 22/1/2004-5078/2 md.) Askerî isyanın (M. 100) reisi veya mürettibi veya ön ayak olanları ile asilerden amire ve mafevke zorla müessir fiillerde bulunanlar münferiden yaptıkları suç müebbet ağır hapis cezasını mucip değilse, on seneden az olmamak üzere muvakkat ağır hapis cezası ile cezalandırılır.\n2. Askeri isyan, seferberlikte yapılmışsa birinci fıkradaki suçlulara ölüm cezası verilir."
+        },
+        "102": {
+          "baslik": "Düşman karşısında askeri isyan suçlularının cezası",
+          "metin": "Madde 102 – Askeri isyan (M. 100) düşman karşısında yapılmışsa isyana iştirak edenlerin hepsine ölüm cezası verilir."
+        },
+        "103": {
+          "baslik": "Askeri isyan ve fesada iştirak edenlerden nadim olanların cezalarının azaltılması:",
+          "metin": "Madde 103 – 1. Bir fesada (M. 97) veya askeri isyana (M.100) iştirak edipte amirlere veya mafevklere zorla müessir fiiller yapmadan evvel nedametle intizam ve inzıbata dönenler fesat ve isyanın reisi veya mürettibi veya önayakları değilseler iki seneye kadar hapsolunurlar.\n2. Amir veya mafevka zorla müessir fiiller yapılmaksızın fesat ve isyana iştirak edenlerin hepsi intizam ve disipline dönerlerse reis veya mürettibi veya önayak olanları bir seneden beş seneye kadar hapsolunur."
+        },
+        "104": {
+          "baslik": "Askeri fesat ve isyana iştirak edenlerden önayak sayılacak diğer askerler",
+          "metin": "Madde 104 – Askeri fesat (M. 97) ve isyana (M. 100) iştirak edenlerden şunlar da reis ve müşevvik cezalariyle cezalandırılırlar\nA: Amir ve mafevk tarafından şahsına vakı olan itaat emrine karşı itaatsizlikte söz ile veya fiilen ısrar eden;\nB: Askeri işareti suistimal ederek veya sair işaretler vererek isyanın vukuunu kolaylaştıran;\nC: Asiler arasında en büyük rütbelisi veya en kıdemlisi olan;"
+        },
+        "105": {
+          "baslik": "Fesat ve isyan suçlularının cezalarının azaltılması",
+          "metin": "Madde 105 – 94, 100, 101 ve 104 üncü maddelerde yazılı suçlar az vahim oldukları halde 94 üncü maddenin birinci fıkrasında ve 100 üncü maddede yazılı cezalar altı ay ve seferberlikte bir sene hapis cezasına ve 94 üncü maddenin ikinci ve 101 nci maddenin birinci fıkrasında ve 104 üncü maddelerde yazılı olan cezalar bir sene hapis cezasına ve seferberlikte iki sene hapis cezasına ve 102 nci maddede yazılı ceza az vahim hallerde müebbeden ağır hapis veyahut beş sene den az olmamak üzere ağır hapis veya hapis cezalarına indirilebilir."
+        },
+        "106": {
+          "baslik": "Askeri karakol ve nöbetçi ve devriyeye taarruz edenlerin cezaları",
+          "metin": "Madde 106 – \n\n(Değişik: 27/6/1932-2034/4 md.)\nAskeri karakola, nöbetçiye ve devriyeye hakaret eden veya bunları dinlemiyen veya bunlara mukavemette bulunan yahut fiilen taarruz eden bu suçları amire karşı yapmış sayılır ve öylece cezalandırılır."
+        },
+        "107": {
+          "baslik": "Bu fasıldaki cezalar maduna tatbik olunabilmesinin şartı",
+          "metin": "Madde 107 – Bu fasılda madunlar hakkında tayin edilen ağır cezaların verilmesi için mafevkın rütbesi ve kıdemi herhangi bir suretle madunun malümu bulunması şarttır. Madunun mafevkın vaziyetini bilmediği sabit olursa hakkında tertip olunacak ceza umumi hükümlere tabidir.\nALTINCI FASIL\nMakam ve memuriyet nüfuzunu suiistimal"
+        },
+        "108": {
+          "baslik": "Madununa hizmetle münasebeti olmayan emirler verenlerin ve mutalebede bulunanların cezası:",
+          "metin": "Madde 108 – \n\n(Mülga: 16/6/1964-477/53 md. delaletiyle 64 md.)"
+        },
+        "109": {
+          "baslik": "Madununa suç yapmak için emir verenlerin cezası:",
+          "metin": "Madde 109 – 1. Rütbe veya makam ve memuriyetinin nüfuz ve salahiyetini suistimal ederek madununa bir suçun yapılmasını teklif eden, amir veya mafevk iki seneye kadar hapsolunur.\n2. Suç yapılır veya yapılmağa teşebbüs edilirse faili asliye muayyen olan ceza, emir veren hakkında (M. 50) artırılarak hükmolunur."
+        },
+        "110": {
+          "baslik": "Madunun şikayetnamesini saklayan veya geri aldıranların cezası:",
+          "metin": "Madde 110 – Madunların verdikleri şikayetnameleri saklayanlar veya tehdit ederek geri aldıranlar beş seneye kadar hapsolunur."
+        },
+        "111": {
+          "baslik": "Hak edilmemiş veya müsaade olunmamış disiplin cezası verenlerin cezası:",
+          "metin": "Madde 111 – Ceza vermek salahiyetini tecavüz ederek ve bilhassa hak edilmemiş veya müsaade olunmamış bir cezayı kasten verenler beş seneye kadar hapsolunur."
+        },
+        "112": {
+          "baslik": "Askeri mahkemeler üzerinde tesir yapanların cezası",
+          "metin": "Madde 112 – Memuriyetinin nüfuzunu suistimal ile askeri mahkemeler üzerinde tesir yapanlar beş seneye kadar hapsolunur."
+        },
+        "113": {
+          "baslik": "Askeri şahısları mürettep oldukları yerlerden geriye sevkedenlerin cezası:",
+          "metin": "Madde 113 – 1. Askerlik hizmetine davet edilmiş olan kimseleri, makbul bir sebep olmaksızın mürettep oldukları mevki ve kıta ve müessesenin gayrısına sevkeden altı aya kadar hapsolunur.\n2. Seferberlikte bu ceza bir seneden az olmamak üzere arttırılır."
+        },
+        "114": {
+          "baslik": "Erleri kanuna muhalif olarak hizmetçiliğe verenlerin cezası",
+          "metin": "Madde 114 – \n\n(Değişik: 25/3/1953-6078/1 md.)\nKanunen emir veya seyis eri almaya hakkı olmayanlara emir veya seyis eri verenlerle bu emir veya seyis erini alıp istihdam edenler asker olsun olmasın bir aydan 3 aya kadar hapsolunur.\nEmir veya seyis eri almak hakkını haiz olanlardan kendi emir veya seyis erini askerlik şeref ve haysiyetine uymayan şekillerde süfli hizmetlerde çalıştıranlar veyahut bunların vazifesi dışında kendi sanat, meslek veya şahsi işlerinde çalışmasına müsaade veya müsamaha edenler bir aydan 6 aya kadar hapsolunur.\nYukardaki haller haricinde askerleri hizmetçiliğe veya sair suretlerle çalışmaya verenlerle asker olsun olmasın alan veya çalıştıranlar 2 aydan bir seneye kadar hapsolunur."
+        },
+        "115": {
+          "baslik": "Memuriyet nüfuzunun sair suretle kötüye kullanılması[29]",
+          "metin": "Madde 115 – \n\n(Değişik: 22/3/2000-4551/25 md.) Emir vermek yetkisini veya memuriyet nüfuzunu kötüye kullanarak mevzuatın tayin ettiği ahvalden başka bir suretle herhangi bir gerçek veya tüzel kişi yahut astı hakkında keyfi bir işlem yapan yahut yapılmasını emreden amir veya üst, bir aydan iki seneye kadar hapis cezası ile cezalandırılır.\nBu işlem, siyasi bir amaçla yahut kişisel bir çıkar sağlamak için yapılmış veya yapılması emredilmiş ise, fiil başka bir suç oluşturmadığı takdirde altı aydan aşağı olmamak üzere hapis cezası verilir."
+        },
+        "116": {
+          "baslik": "Madununa sövüp sayan veya fena muamelede bulunanların cezası",
+          "metin": "Madde 116 – \n\n(Mülga: 16/6/1964-477/55 md. delaletiyle 64 md. ile)"
+        },
+        "117": {
+          "baslik": "Maduna müessir fiiller yapanların cezası",
+          "metin": "Madde 117 – 1. Madununu kasten itip kakan, döven, veya sair suretlerle cismen eza verecek veya sıhhatini bozacak hallerde bulunan veyahut tazip maksadiyle madunun hizmetini lüzumsuz yere güçleştiren veya onun diğer askerler tarafından tazip edilmesine veya suimuamelde bulunulmasına müsamaha eden amir veya mafevk iki seneye kadar hapsolunur.\n2. \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "118": {
+          "baslik": "Müessir fiillerle Madununun vücudunda tahribat yapan veya ölümüne sebep olan mafevka verilecek ceza",
+          "metin": "Madde 118 – 1. 117 nci maddede yazılan fiiller madunun vücudunda tahrıbatı mucip olmuş ise amir veya mafevk beş seneye kadar hapsolunur.\n2.Daha ziyade vahim hallerde amir ve mafevk altı aydan beş seneye kadar hapsolunur.\n3. Fiil taammüden yapılmış ise amir veya mafevk on seneye kadar ağır hapis cezasiyle cezalandırılır.\n4. Fiil ölümü intaç etmiş ise fail on seneden az olmamak üzere ağır hapis cezasına mahkum olur."
+        },
+        "119": {
+          "baslik": "Mafevkin cürüm sayılmıyacak olan fiilleri",
+          "metin": "Madde 119 – \n\n(Değişik: 27/6/1932-2034/5 md.)\n1 - Bir madunun fiili taarruzlarını defetmek yahut mübrem ve müstacel bir zaruret ve tehlike halinde verdiği emirlere itaat ettirmek için bir mafevk tarafından yapılan müessir fiiller makam ve memuriyet nufuzunu suistimal telakki edilmez ve suç sayılmaz.\n2 - Bu hüküm harbde veya eşkıya müsademeleri ve isyan yahut askerlik harekatı ve mücrim takıbatı gibi vazifeler başında mübrem surette elzem bir itaati temin için başka vasıtalar bulunmadığı takdirde bir subayın madunun ısrar ve mukavemetine karşı silah kullanmaya mecbur kalması halinde de caridir.\n3 - Mafevkin, hizmete ve askerliğe dair kusur ve hatalardan dolayı madunu tenkit ve muanaze etmesi hakaret sayılmaz."
+        },
+        "120": {
+          "baslik": "Bu fasıldaki suçlarda karakolun vaziyeti",
+          "metin": "Madde 120 – (Değişik birinci cümle: 27/6/1932-2034/6 md.) Bu fasılda yazılı olan suçları yapan bir askeri karakol veya devriye yahut nöbetçi bu suçları yapan mafevk gibi ceza görür.Bu suçlar karakol amiri olan mafevka karşı yapılmış ise ceza arttırılır. (M. 50) 119 uncu maddenin hükümleri karakollar hakkında da caridir."
+        },
+        "121": {
+          "baslik": "Askerliğe ait vesika, evrak, harita ve şekilleri yakanlar",
+          "metin": "Madde 121 – Askerliğe ve hesap işlerine dair olan defterleri ve müsveddeleri, vesikaları, hükümlü evrakı, harita ve şekilleri fena niyetle tahrip eden, yakan, yok eden veya ettiren on seneye kadar hapsolunur. Bunları muhafaza imkanı olmayıpta düşman eline geçmesinde düşman için fayda varsa bu fiiller suç sayılmaz.\nYEDİNCİ FASIL\nSeferberlikte insanlar ve mallar aleyhine yapılan cürümler"
+        },
+        "122": {
+          "baslik": "Ganimet almak için uzaklaşan, ganimet alan ve aldığı şeyi teslim etmeyenler:",
+          "metin": "Madde 122 – 1. Seferberlikte ganimet almak kastiyle kıtasından uzaklaşan veyahut ganimet hukukuna tabi bir şeyi ganimet namiyle kendiliğinden temellük eden üç seneye kadar hapsolunur.\n2. Meşru surette aldığı ve fakat teslim ile mükellef bulunduğu şeyleri teslimden imtina ile temellük eden dahi aynı ceza ile cezalandırılır."
+        },
+        "123": {
+          "baslik": "Yağmacılığın tarifi:",
+          "metin": "Madde 123 – Harbin mucip olduğu dehşet ve korkudan istifade veya askeri kuvvetini suistimal ederek:\nA: Ahaliden birinin malını haksız olarak zabt veya bir kimseyi malını vermeğe icbar eden;\nB: Salahiyeti olmadığı halde ahaliden para veyahut zorla eşya toplayan veya memur olduğu istimvalin (tekalifi harbiye) derecesinin kendi menfaatları için aşan yağmacı sayılır.\nC: Alınan eşya erzak, sıhhi levazım, giyecek, ısınılacak gibi şeyler yeme veya nakil vasıtalarına munhasır kalır ve o andaki zaruri ihtiyaçlarla mütenasip bulunursa bu hareket yağmacılık sayılmaz."
+        },
+        "124": {
+          "baslik": "Yağmacılığın cezası:",
+          "metin": "Madde 124 – Yağmacılık eden her askeri şahıs beş seneye kadar hapsolunur."
+        },
+        "125": {
+          "baslik": "Bir kimsenin malını tahrip veya imha edenlerin cezası:",
+          "metin": "Madde 125 – 1. Harb zarureti olmaksızın bir kimsenin mal ve mülkünü kasten tahrip ve imha edenler ve ağaçları kesenler ve mahsulat ve mezruata hasar iras edenler ve bunlar için emir verenler veya müsamahada bulunan amir ve mafevkler iki seneye kadar hapsolunur.Ve daha vahim hallerde yağmacı sayılırlar. (M. 123)\n2. Yukarıdaki fiilleri yapanlarla emir veren veya müsamaha eden amir ve mafevkler hakkında Adliye mahkemelerinde alakadarlar tarafından tazminat davası açılabilir. Ve bu fiilleri yapanlarla emir veren veya müsamaha eden amir ve mafevkler icabeden tazminatla müteselsilen mahkum olur."
+        },
+        "126": {
+          "baslik": "Zorla, müessir fiillere birden ziyade şahısların iştirakiyle yağmacılık ve cezası:",
+          "metin": "Madde 126 – 1.Yağmacılık (M. 123) veya yağmacılıktan sayılan fiiller (M.125) bir şahsa karşı zorla yapılırsa faili on seneye kadar ağır hapis cezasiyle cezalandırılır. Eğer bu zorluk cismen tahribatı mucip olursa faili on seneden az olmamak üzere muvakkat ağır hapis cezasiyle mücazat olunur. Fiil ölümü mucip olursa faili ölüme mahkum olur; az vahim hallerde müebbet ağır hapis cezası verilir.\n2. Yukardaki fıkrada yazılı yağmacılığa birden ziyade şahıslar iştirak eylerse reis ve mürettibi ve önayak olanları ölüme mahkum olur. Diğerleri birinci fıkra mucibince cezalandırılır. Bu yağmacılıkta bir şahsa karşı müessir fiillerde bulunmaksızın iştirak edenlere on seneye kadar ağır hapis cezası verilir."
+        },
+        "127": {
+          "baslik": "Muharebe meydanlarında ölülerin ,esirlerin, yaralıların mallarına tecavüz edenler:",
+          "metin": "Madde 127 – 1. Haksız  olarak  ve  temellük  kastiyle  Türkiye  Cumhuriyeti  ve  müttefikleri  ordusundan  muharebe  meydanlarında  ölü  olarak  kalmış  olanların  eşya  ve  paralarını  alan   veyahut   muharebe  meydanlarında   veya  yürüyüş  esnasında  veya  hastanede  veyahut  nakliyat  zamanında  bir  hastanın,  bir  yaralının   veya  nezaret ve muhafazası altına verilmiş olan bir harb esirinin bir şeyini alan veya zorla zapteden veyahut Hilali Ahmer ve Salibi Ahmer'e mensup sıhhiye müesseselerini yağma ve tahrip eden veya bu bapta teşvikat ve tahrikat yapan ve emir veren on seneye kadar ağır hapis ile cezalandırılır. Az vahim hallerde beş seneye kadar hapsolunur.\n2. Nakline memur olduğu yaralıyı bir sebep ve zaruret olmaksızın terkeden veyahut bir yaralıya işkence eden beş seneye kadar hapsolunur.\n3. Yaralıyı soymak kastiyle işkence eden veya soyarken tekrar yaralayan ölüm cezasiyle cezalandırılır."
+        },
+        "128": {
+          "baslik": "Kıtasından geri kalarak ahaliye taaddi edenler:",
+          "metin": "Madde 128 – 1. Mensup olduğu kıtaat veya askeri heyetten geri kalarak ahaliye taaddi eden altı aydan beş seneye kadar hapsolunur.\n2. Bu fiile birden ziyade şahıslar iştirak ederek ahaliyi tazyik etmiş olurlarsa veyahut fiil yağmacılk (M. 123 ve 125) şeklini almış olursa müştereklerden her biri on seneye kadar ağır hapis cezasiyle cezalandırılır."
+        },
+        "129": {
+          "baslik": "Fiillerin Türk vatandaşlarına karşı yapılmasının cezası:",
+          "metin": "Madde 129 – 123, 124, 125, 126 ve 128 inci maddelerde yazılı olan fiiller Türk vatandaşlarına karşı yapılırsa ceza arttırılır. (M. 50) Eğer ceza Türk Ceza Kanununda daha şiddetli ise o kanun hükümleri tatbik olunur.\nSEKİZİNCİ FASIL\nMallara karşı yapılan diğer cürümler"
+        },
+        "130": {
+          "baslik": "Hizmete mahsus eşyayı tahrip ve terk ve kaybedenler:",
+          "metin": "Madde 130 – \n\n(Değişik: 22/3/2000-4551/26 md.)\nAskeri eşyayı kasten terk veya kısmen yahut tamamen tahrip eden, özürsüz kaybeden veya harabolmasına sebebiyet veren veya özel menfaati için kullanan asker kişiler, eşyanın değeri, önemi, meydana gelen hasarın miktarı ve fiilin işleniş şekline göre üç aydan iki seneye kadar hapis cezası ile cezalandırılırlar.\nSuç konusu eşya; silah, mühimmat, savaş aracı veya gereci ise ceza artırılır.\nKaybedilen, kasten terk veya kısmen yahut tamamen tahrip edilen veya harabolmasına sebebiyet verilen eşyanın ödettirilmesine de ayrıca hükmolunur."
+        },
+        "131": {
+          "baslik": "Eşyayı ve malları çalan, satan, rehine veren ve alanlar[30]",
+          "metin": "Madde 131 – \n\n(Değişik: 11/12/1935-2862/10 md.)\n1 - Askeri bir hizmet yaparken veya vazifeyi suistimal ederek bir hizmet veya vazifeden ötürü tevdi veya emanet edilmiş olan para veya kıymeti ne olursa olsun bir eşyayı yahut kendisine tevdi veya emanet edilmiş olmasa bile her türlü askeri erzak, eşya ve hayvanları çalanlar veya zimmetine geçirenler, yahut ihtilas edenler veya satanlar, yahut rehine verenler ve bunları bilerek satın alanlar veya rehin kabul edenler veya gizliyenler beş seneye kadar ağır hapis cezasile cezalandırılırlar.\n\n\n(Değişik: 22/3/2000-4551/27 md.) Az vahim hallerde, altı aydan üç seneye kadar hapis cezası hükmolunur.\nÇalınan veya rehin edilen mallar bulunursa geri alınır. Yok edilen eşya, hayvan ve sairenin değerlerinin ödettirilmesine de hükmolunur.\n2 - Yukarıki fıkrada yazılı fiiller silah, cephane veya her hangi bir müdafaa vasıtasına taallük ederse ceza arttırılır.\n3 - Yukarıki iki fıkrada yazılı fiiller seferberlikte yapılırsa yapanlar hakkında on seneden aşağı olmamak üzere ağır hapis, az vahim hallerde iki seneden aşağı olmamak üzere beş seneye kadar ağır hapis cezası verilir."
+        },
+        "132": {
+          "baslik": "Üstünün, astının veya arkadaşının bir şeyini çalanlar[31]",
+          "metin": "Madde 132 – (Değişik : 22/3/2000-4551/28 md.)\nBir üstünün, arkadaşının veya astının bir şeyini çalan asker kişiler, altı aydan beş seneye kadar hapis cezası ile cezalandırılırlar."
+        },
+        "133": {
+          "baslik": "Bozuk ölçü kullananlar:",
+          "metin": "Madde 133 – Bir terazi veya kantar veya herhangi bir ölçüyü ayarı bozuk olduğunu bilerek askeri bir hizmetin ifasında kullananlar, iki seneye kadar hapsolunur.\nDOKUZUNCU FASIL\nHizmet ve vazifenin ihlali"
+        },
+        "134": {
+          "baslik": "Hakikata muhalif rapor layiha sair evrak tanzim ve ita edenler:",
+          "metin": "Madde 134 – 1. Hizmete veya tevdi edilen bir vazifeye mütaallik olarak kasten hakikata muhalif rapor veya takrir veya layiha ve sair resmi evrak tanzim eden ve veren veyahut bunların hakikata muhalif olduğunu bilerek mafevklere takdime delalet eden altı aydan üç seneye kadar hapis ile cezalandırılır.\n2. \n\n(Mülga : 22/3/2000 - 4551/38 md.)"
+        },
+        "135": {
+          "baslik": "Rüşvet:",
+          "metin": "Madde 135 – Askeri şahıslardan herhangi biri Türk Ceza Kanununun 3 üncü babının 3 üncü faslında yazılı suçlardan birini işlerse o fasıldaki cezalarla cezalandırılır."
+        },
+        "136": {
+          "baslik": "Dikkatsizlik edenler:",
+          "metin": "Madde 136 – 1. Her kim askeri karakolun veya müfrezenin veyahut hususi bir vazife ile mükellef olan bir kısım askerin kumandanı veya subaylarından veyahut nöbetçi iken kasten veya tekasülünden :\nA: Kendisini verilen vazifeyi yapmayacak hale korsa;\nB: Nöbet mahallini terkederse yahut verilen sair talimata mugayir hareket ederse;\nC: Her iki halde de bir mazarratı mucip olursa on dört günden az olmamak üzere katıksız hapis veya iki seneye kadar hapis ile cezalandırılır.[32]\n2. Yukarıki fıkrada yazılı suç seferberlikte yapılmışsa suçlu altı aydan az olmamak üzere hapis, düşman karşısında ölüm, az vahim hallerde bir seneden az olmamak üzere muvakkat veya müebbet ağır hapis ile cezalandırılır.\n3. 2 nci fıkrada yazılı suç dolayısiyle ehemmiyetli bir zarar tehlikesi zuhura gelmişse üç aydan aşağı olmamak üzere hapis, bu tehlike düşman karşısında olduğu takdirde suçluya bir seneden az olmamak üzere ağır hapis cezası verilir."
+        },
+        "137": {
+          "baslik": "Tekasül dolayısiyle esliha ve harb malzemesinden bir şeyin hasara uğramasına sebep olanlar:",
+          "metin": "Madde 137 – Vazife veya hizmette tekasül dolayısiyle bir gemi veya tayyarenin veya esliha ve harb malzemesinden birinin mühimce hasara uğramasına sebep olan (…)[33] üç seneye kadar hapsolunur."
+        },
+        "138": {
+          "baslik": "Askeri mahkeme işine sekte verenler:",
+          "metin": "Madde 138 – Askeri mahkemelerin vazifelerini ve muamelelerini makbul sebeb olmaksızın geciktiren altı aya kadar hapsolunur."
+        },
+        "139": {
+          "baslik": "Suç yapılmasına göz yumanlar:",
+          "metin": "Madde 139 – Bir askeri karakolun veya bir müfrezenin veya hususi bir vazife ile mükellef olan bir kısım askerin kumandanı iken veyahut subaylarından veya nöbetçi iken mani olabileceği ve vazifeten men'e mecbur bulunduğu bir suçun yapılmasına göz yumarsa fiili kendisi yapmış gibi ceza görür."
+        },
+        "140": {
+          "baslik": "Mahsup ve mevkufları firar ettirenler:",
+          "metin": "Madde 140 – Bir mevkuf veya mahpusu muhafaza ve nezarete memur olupta kasten kaçıran veya firarını kolaylaştıran veyahut amiri tarafından emrolunduğu veya vazifeten mecbur bulunduğu halde bir diğerini tevkif ve hapsetmiyen Türk Ceza Kanununun 301, 302, 303, 304,305, 306 ve 307 nci maddeleri mucibince ceza görür."
+        },
+        "141": {
+          "baslik": "Erzak tağşiş edenler:",
+          "metin": "Madde 141 – Askeri tayınattan olan her nevi zehair ve erzakı tağşiş veya tebdil eden veya ettiren veya bu suretle tağşiş veya tebdil olunmuş zehair ve erzakı bilerek tevzi eden veya ettiren üç seneye kadar hapsolunur."
+        },
+        "142": {
+          "baslik": "Bozuk erzaktan tayınat verenler:",
+          "metin": "Madde 142 – Askeri tayınatı çürümüş bozulmuş zahire ve erzaktan veren veya verdiren iki seneye kadar hapsolunur."
+        },
+        "143": {
+          "baslik": "Şartnameye aykırı mal ve hizmet kabul etmek[34]",
+          "metin": "Madde 143 – \n\n(Değişik: 22/3/2000-4551/29 md.) Sözleşmeye bağlanmış yiyecek, giyecek, teçhizat veya diğer mal ve hizmetler ile her nevi imalat ve inşaatı, sözleşmeye ilişkin şartname ve numulerine uymadıkları halde kabul eden veya ettirenler üç yıldan az olmamak üzere hapis cezası ile cezalandırılırlar.\nFiil ceza kanunlarına göre daha ağır bir suç teşkil ediyorsa, ceza o kanuna göre tayin edilir.\nKabul edilen veya ettirilen eşya; silah, mühimmat, savaş aracı veya gereci ise veya suç seferberlik veya savaş halinde işlenmişse ceza artırılır."
+        },
+        "144": {
+          "baslik": "Umumi surette ihmal ve tekasül:",
+          "metin": "Madde 144 – Kendisine tevdi edilen askeri bir işin ifasında bu kanunda yazılı hallerden başka Türk Ceza Kanunu mucibince cezayı mucip ihmal ve tekasül gösteren ve vazifesini suiistimal eden o kanun mucibince cezalandırılır. (T.C.K.B: F:4)\nONUNCU FASIL\nAskeri disiplini bozan sair fiiller"
+        },
+        "145": {
+          "baslik": "Madununa nezarete ihmal edenler, madunun suçları hakkında takibatta bulunmayanlar:",
+          "metin": "Madde 145 – (…)[35]  veya bu fiiller hakkında kasten kanuni takibatta bulunmayan mafevk kısa hapis ile veya altı aya kadar hapis ile cezalandırılır."
+        },
+        "146": {
+          "baslik": "Başkasının yaralanmasına ve ölmesine sebep olanlar:",
+          "metin": "Madde 146 – Silahları ve cephanesi hakkında dikkatsizlik ve nizamlara ve emirlere talimatlara riayetsizlik dolayısıyla başkasının yaralanmasına veya ölmesine sebep olanlar hakkında Türk Ceza Kanununun 455 ve 459 uncu maddelerine göre ceza verilir."
+        },
+        "147": {
+          "baslik": "İzinsiz evlenenler:",
+          "metin": "Madde 147 – \n\n(Değişik: 22/12/1934-2632/2 md., Mülga: 11/12/1935-2862/14 md.; Yeniden Yürürlük: 29/1/1936-2908/1 md.) İzin alması icap eden askeri şahıslardan izinsiz evlenenler bir seneye kadar hapsolunurlar.\nEvlenmeleri kanuna göre yasak olan askeri şahıslardan evlenenler üç aydan bir seneye kadar hapsolunurlar."
+        },
+        "148": {
+          "baslik": "Siyasi faaliyetlerde bulunanlar[36]",
+          "metin": "Madde 148 – \n\n(Değişik: 22/3/2000-4551/30 md.)\nAskeri şahıslardan;\nA) Siyasi bir partiye üye olmak için müracaat eden veya herhangi bir suretle siyasi partilere girenler,\nB) Siyasi amaçla toplantı yapan veya aynı amaçla siyasi gösterilere katılanlar,\nC) Siyasi amaçla nutuk söyleyen, demeç veren, yazı yazan veya telkinde bulunanlar,\nD) Siyasi toplantılara resmi veya sivil kıyafetle katılanlar,\nE) Herhangi bir sebeple yalnız veya toplu olarak siyasi mahiyette beyanname hazırlayan, hazırlanmış beyannameyi imzalayan, imzalatan veya yayın organlarına ulaştıran veya dağıtanlar,\nFiil daha ağır bir cezayı gerektirmediği takdirde, bir aydan beş yıla kadar hapis cezası ile cezalandırılırlar.\nBu cürünler, seferberlikte işlenirse ceza iki misli olarak hükmolunur."
+        },
+        "149": {
+          "baslik": "Uyuşturucu veya uyarıcı maddelere ilişkin suçlar:[37]",
+          "metin": "Madde 149 – \n\n(Mülga: 16/6/1964-477/60 md. delaletiyle 64 md. İle; 22/3/2000-4551/38 md.; Yeniden düzenleme: 23/6/2016-6722/10 md.)\nKıta, karargâh veya askeri kurumlarda ya da görev esnasında veya görev yerlerinde;\nA) Uyuşturucu veya uyarıcı madde kullanılmasını kolaylaştırma ve alenen özendirme,\nB) Kullanmak için uyuşturucu veya uyarıcı madde satın almak, kabul etmek veya bulundurmak ya da uyuşturucu veya uyarıcı madde kullanmak,\nsuçlarını işleyen askeri şahıslar hakkında, Türk Ceza Kanununun bu suçlara ilişkin hükümleri uygulanır.\nON BİRİNCİ FASIL\nAskerlik haysiyetine ve şerefine dokunan suçlar ve cezaları"
+        },
+        "150": {
+          "baslik": "Şeref ve haysiyete dokunan fiiller ve cezaları:",
+          "metin": "Madde 150 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "151": {
+          "baslik": "Kumar oynayanlar:",
+          "metin": "Madde 151 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "152": {
+          "baslik": "Irza ve iffete tecavüz edenler:",
+          "metin": "Madde 152 – \n\n(Mülga : 22/3/2000-4551/38 md.)"
+        },
+        "153": {
+          "baslik": "İffetsiz bir kimse ile evlenen veya böyle bir kimse ile yaşayanlar[38]",
+          "metin": "Madde 153 – \n\n(Değişik: 22/3/2000-4551/31 md.)\nİffetsizliği anlaşılmış olan bir kimse ile bilerek evlenen veya evlilik bağını devam ettirmekte veya böyle bir kimseyi yanında bulundurmakta veya karı koca gibi herhangi bir kimse ile nikahsız olarak devamlı surette yaşamakta ısrar eden asker kişiler hakkında Türk Silahlı Kuvvetlerinden çıkarma cezasına, erbaşlar hakkında rütbenin geri alınmasına hükmolunur.\nBir kimseyle gayri tabii mukarenette bulunan yahut bu fiili kendisine rızasıyla yaptıran asker kişiler hakkında, fiilleri başka bir suç oluştursa bile, ayrıca Türk Silahlı Kuvvetlerinden çıkarma cezası, erbaşlar için rütbenin geri alınması cezası verilir."
+        },
+        "154": {
+          "baslik": "Talebelik hukukunun zıyaını mucip haller:",
+          "metin": "Madde 154 – \n\n(Mülga : 22/3/2000-4551/38 md.)\nDÖRDÜNCÜ BAP\nYalnız harb zamanında askeri kanunlara tabi şahıslar hakkındaki hükümler"
+        },
+        "155": {
+          "baslik": "Orduya mensup olmayanlar hakkında bu kanunun tatbikı:",
+          "metin": "Madde 155 – Türkiye Cumhuriyetine karşı vukubulan bir harbde herhangi bir hizmet veya mukavele ve taahhüt ve her hangi bir sebep ve suretle muharip Türk ordusu nezdinde bulunan veya orduyu takip eden şahıslar hakkında bu kanun hükümleri ve bilhassa harb hükümleri cari olur."
+        },
+        "156": {
+          "baslik": "Bir kıtanın hizmetinde bulananların mukavelelerinin dahi askeri mahkemelerce feshi:",
+          "metin": "Madde 156 – Muharip askeri bir kıtaya hizmet veya mukavele ile münasebeti olanların mahkum oldukları cezalarla birlikte bu hizmet ve mukavelenin feshine de askeri mahkemelerce hükmolunabilir."
+        },
+        "157": {
+          "baslik": "Muharip orduda bulunan yabancı subaylara bu kanunun tatbikı:",
+          "metin": "Madde 157 – Muharip Türk ordusu nezdinde bulunmalarına müsaade edilmiş olan yabancı subaylar Türkiye Cumhuriyeti Hükümetince hususi mukarrerat yapılmamışsa Türk subayları hakkındaki hükümlere tabidirler. Bu subayların refakatlerinde bulunan şahıslar hakkında 155 inci madde hükmü tatbik olunur."
+        },
+        "158": {
+          "baslik": "Harb esirleri hakkında bu kanunun tatbikı:",
+          "metin": "Madde 158 – \n\n(Değişik: 15/6/1942-4257/1 md.)\n1- Harb esirleri bir suç işlerlerse rütbelerine göre bu kanun mucibince cezalandırılırlar.\n2 - Harb esirleri arasında astlık ve üstlük münasebetleri esaret hali başladıktan sonra cari değildir. Bunlar arasında astlık ve üstlük münasebetleri salahiyetli komutanlar tarafından verilen emirle teessüs edebilir."
+        },
+        "159": {
+          "baslik": "Muharebe meydanında hiyanet ve muhariplerin mallarına tecavüz edenler hakkında bu kanunun tatbikı:",
+          "metin": "Madde 159 – Türkiye Cumhuriyetine karşı ilan edilmiş olan bir harbde gerek bir Türk gerek bir yabancı 55, 56 ve 127 nci maddelerde beyan edilen suçları yaparsa bu maddelerde yazılı cezalarla cezalandırılırlar."
+        },
+        "160": {
+          "baslik": "Harekat mıntakasında askere tecavüz edenler:",
+          "metin": "Madde 160 – İlan olunan harekat mıntakasından asker ve jandarma subay ve erbaşına ve erine karşı 91 inci maddenin 3 ve 4 numaralı fıkralarında yazılı suçları yapan şahıslar hakkında o maddedeki cezalar tatbik olunur."
+        },
+        "161": {
+          "baslik": "Yabancı memlekette Türkiye askerlerine, memurlarına makamlarına karşı cürüm işleyenler:",
+          "metin": "Madde 161 – Türkiye Cumhuriyeti askerleri tarafından işgal edilen bir yabancı memlekete gerek Türk, gerek bir yabancı Türkiye kıtaatı askeriyesinden birine veya bunlara mensup olanlara veyahut Türkiye Hükümetinin nasbettiği memurları ile makamlarına karşı Türkiye kanunları ve nizamnamelerinin cezayı mucip gördüğü bir fiili yaparsa bu fiil Türkiye Cumhuriyeti topraklarında yapılmış sayılır."
+        }
+      }
+    },
+    "İKİNCi KISIM": {
+      "baslik": "Disiplin cezaları",
+      "maddeler": {
+        "162": {
+          "baslik": "Disiplin tecavüzü ve kabahat:",
+          "metin": "Madde 162 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "163": {
+          "baslik": "Disiplin cezalarının verilmesi:",
+          "metin": "Madde 163 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "164": {
+          "baslik": "Disiplin cezasiyle cezalandırılanlar:",
+          "metin": "Madde 164 –  \n\n(Mülga: 31/1/2013-6413/45 md.)\nİKİNCİ BAP\nDisiplin cezaları\nI - DİSİPLİN CEZALARININ NEVİLERİ"
+        },
+        "165": {
+          "baslik": "Disiplin cezalarının nevileri:",
+          "metin": "Madde 165 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "166": {
+          "baslik": "Disiplin cezalarının nasıl verileceği:",
+          "metin": "Madde 166 –  \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "167": {
+          "baslik": "Cezaların içtima hali:",
+          "metin": "Madde 167 –  \n\n(Mülga: 31/1/2013-6413/45 md.)\nII - CEZA VERMEK SALAHİYETİ\nA - Umumi surette"
+        },
+        "168": {
+          "baslik": "Disiplin cezası vermeğe salahiyetli amirler:",
+          "metin": "Madde 168 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "169": {
+          "baslik": "Disiplinin temini için tevkif salahiyeti:",
+          "metin": "Madde 169 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "170": {
+          "baslik": "Ceza vermek salahiyeti olan en yakın amir ile daha yüksek amirlerin ceza vereceği haller:",
+          "metin": "Madde 170 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "171": {
+          "baslik": "Disiplin amirlerinin ceza salahiyeti:",
+          "metin": "Madde 171 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "172": {
+          "baslik": "Disiplin amirlerine vekalet edenler",
+          "metin": "Madde 172 – \n\n(Mülga: 31/1/2013-6413/45 md.)\nÜÇÜNCÜ BAP\nAskeri adli hakim, memurların disiplin cezaları"
+        },
+        "173": {
+          "baslik": "Askeri adli hakim ve memurlara verilecek cezalar:",
+          "metin": "Madde 173 – \n\n(Mülga: 31/1/2013-6413/45 md.)\nDÖRDÜNCÜ BAP\nOrduyu takip edenlerle harb esirlerine verilecek disiplin cezaları"
+        },
+        "174": {
+          "baslik": "Disiplin cezalarının tatbikı sureti:",
+          "metin": "Madde 174 – \n\n(Mülga: 31/1/2013-6413/45 md.)\nBEŞİNCİ BAP\nDisiplin cezalarının verilmesi ve infazı\nI - CEZANIN VERİLMESİ"
+        },
+        "175": {
+          "baslik": "Failin müdafaa hakkı:",
+          "metin": "Madde 175 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "176": {
+          "baslik": "Cezanın şiddetli verileceği haller:",
+          "metin": "Madde 176 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "177": {
+          "baslik": "Mevkufiyetin cezaya mahsubu",
+          "metin": "Madde 177 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "178": {
+          "baslik": "Mafevka arzedilecek cezalar:",
+          "metin": "Madde 178 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "179": {
+          "baslik": "Disiplin cezalarında müruru zaman:",
+          "metin": "Madde 179 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "180": {
+          "baslik": "İnfaz edilmiş disiplin cezalarının mahkemece mahsubu:",
+          "metin": "Madde 180 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "181": {
+          "baslik": "Cezanın katileşmesi:",
+          "metin": "Madde 181 – \n\n(Mülga: 31/1/2013-6413/45 md.)\nII - CEZANIN İNFAZI"
+        },
+        "182": {
+          "baslik": "Cezanın vakti infazı zamanı:",
+          "metin": "Madde 182 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "183": {
+          "baslik": "Cezanın infazı sureti:",
+          "metin": "Madde 183 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "184": {
+          "baslik": "Yüksek disiplin amirlerinin cezaları değiştirme salahiyeti:",
+          "metin": "Madde 184 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "185": {
+          "baslik": "Uyarı, aylık kesilmesi, izinsizlik ve sıra harici hizmet cezalarının infazı[39]",
+          "metin": "Madde 185 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "186": {
+          "baslik": "Disiplin cezasının müruruzamanı:",
+          "metin": "Madde 186 – \n\n(Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "187": {
+          "baslik": "Cezalının ayrılması halinde yapılacak muamele:",
+          "metin": "Madde 187 – \n\n(Mülga: 31/1/2013-6413/45 md.)\nALTINCI BAP\nDisiplin cezalarından şikayet"
+        },
+        "188": {
+          "baslik": "Şikayet:",
+          "metin": "Madde 188 – \n\n(Değişik: 22/12/1934-2632/6 md.; Mülga: 11/12/1935-2862/14 md.; Yeniden yürürlük: 29/1/1936-2908/1 md.; Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "189": {
+          "baslik": "Şikayetin kabulü veya reddi:",
+          "metin": "Madde 189 – \n\n(Değişik: 22/12/1934-2632/7 md.; Mülga: 11/12/1935-2862/4 md.; Yeniden yürürlük: 29/1/1936-2908/1 md.; Mülga: 31/1/2013-6413/45 md.)\nYEDİNCİ BAP[40]\nAmir tarafından cezanın değiştirilmesi veya kaldırılması hakkında müracaatlar"
+        },
+        "190": {
+          "baslik": "Cezanın kaldırılması ve değiştirilmesi:",
+          "metin": "Madde 190 – \n\n(Değişik: 22/12/1934-2632/8 md.; Mülga: 11/12/1935-2862/14 md.; Yeniden Yürürlük: 29/1/1936-2908/1 md.; Mülga: 31/1/2013-6413/45 md.)\nSEKİZİNCİ BAP[41]\nDisiplin cezalarına nezaret"
+        },
+        "191": {
+          "baslik": "Cezanın kaldırılacağı ve değiştirileceği haller:",
+          "metin": "Madde 191 – \n\n(Değişik: 22/12/1934-2632/9 md.; Mülga: 11/12/1935-2862/14 md.; Yeniden Yürürlük: 29/1/1936-2908/1 md.; Mülga: 31/1/2013-6413/45 md.)"
+        },
+        "192": {
+          "baslik": "Son maddeler:",
+          "metin": "Madde 192 – \n\n(Değişik: 11/12/1935-2862/13 md.)\nAskeri Ceza Kanununun 75, 79 uncu maddelerile 78 inci maddesinin C fıkrasının iki numarasında ve askeri eşyayı satın almak, rehin olarak kabul etmek ve gizlemek fiillerine dair 131 inci maddede yazılı suçlar askeri mahkemelere tabi olmıyan siviller tarafından yapılırsa umumi mahkemeler bu kanun hükümlerini tatbik ederler."
+        },
+        "193": {
+          "baslik": "İlga edilen kanunlar:",
+          "metin": "Madde 193 – 1286 tarihli Askeri Ceza Kanunu ile ilave ve zeyilleri ve muaddel maddeleri ve mensubini askeriyenin siyasetle meni iştigali hakkındaki 25 Eylül 1328 ve Askeri Ceza Kanununun 169 uncu maddesi makamına kaim olan 16 Teşrinievvel 1328 ve seferde tekalifi harbiye ve vesaiti nakliye komisyonlarına ve efradı cedidenin sevkine memur olanlar hakkındaki 21 Ağustos 1330 ve mafevk tarafından maduna yapılacak bazı ef'alin cürüm addolunmayacağına dair olan 30 Teşrinievvel 1330 ve 1286 tarihli Askeri Ceza Kanununun 101, 102, 103, 104 üncü maddesine matuf olan 3 Mart 1331 ve esrarı askeriye ve hiyaneti harbiye hakkındaki 16 Teşrinievvel 1330 ve seferde tart cezasının sureti tatbikına dair olan 25 Şubat 1330 tarihli kanunlarla zeyilleri ve sair kanunların bu kanuna muhalif olan hükümleri mülgadır."
+        },
+        "EK 1": {
+          "baslik": "Madde 193 – 1286 tarihli Askeri Ceza Kanunu ile ilave ve zeyilleri ve muaddel maddeleri ve mensubini askeriyenin siyasetle meni iştigali hakkındaki 25 Eylül 1328 ve Askeri Ceza Kanununun 169 uncu maddesi makamına kaim olan 16 Teşrinievvel 1328 ve seferde tekalifi harbiye ve vesaiti nakliye komisyonlarına ve efradı cedidenin sevkine memur olanlar hakkındaki 21 Ağustos 1330 ve mafevk tarafından maduna yapılacak bazı ef'alin cürüm addolunmayacağına dair olan 30 Teşrinievvel 1330 ve 1286 tarihli Askeri Ceza Kanununun 101, 102, 103, 104 üncü maddesine matuf olan 3 Mart 1331 ve esrarı askeriye ve hiyaneti harbiye hakkındaki 16 Teşrinievvel 1330 ve seferde tart cezasının sureti tatbikına dair olan 25 Şubat 1330 tarihli kanunlarla zeyilleri ve sair kanunların bu kanuna muhalif olan hükümleri mülgadır.",
+          "metin": "Ek Madde 1 – (20/5/1933-2183 sayılı ek kanunun 1 inci maddesi hükmü olup, ek madde haline getirilmiştir.)\nAşağıda yazılı fiilleri ilk defa yapan subaylarla askeri memurlar ve astsubaylara iki aydan altı aya kadar hapis cezası verilir:\nTekerrürü halinde evvelce verilmiş olan ceza bir kat arttırılmakla beraber zabitlerle askeri memurlar hakkında (ihraç) astsubaylar hakkında (rütbenin geri alınması) cezaları da birlikte hükmolunur.\nA) Ticaret yapmak veya yaptırmak,"
+        },
+        "EK 2": {
+          "baslik": "B) Ticari ve sınai müesseselerde vazife kabul etmek.",
+          "metin": "Ek Madde 2 – (20/5/1933-2183 sayılı ek kanunun 2. maddesi hükmü olup, ek madde haline getirilmiştir.)\nAşağıda yazılı fiilleri ilk defa yapan yedek subay hakkında iki aydan altı aya ve astsubaylarla erler hakkında on beş günden üç aya kadar hapis cezası verilir.\nTekerrürü halinde cezaları bir kat arttırılmakla beraber astsubaylar hakkında (rütbenin geri alınması) cezası da birlikte hükmolunur.\nA) Fiili hizmeti askerilerini ifa esnasında bizzat ticaret veya sanatla iştigal etmek,\nB) Ticari ve sınai müesseselerde vazife kabul etmek."
+        },
+        "EK 3": {
+          "baslik": "Anayasa Mahkemesinin 18/7/2012 tarihli ve E.: 2011/113, K.: 2012/108 sayılı Kararı",
+          "metin": "Ek Madde 3\n1/1/2013 tarihinden başlayarak altı ay sonra\n(1/7/2013)\nAnayasa Mahkemesinin 28/3/2013 tarihli ve E.: 2012/143, K.: 2013/48 sayılı Kararı\n49\n10/10/2013\n6722\n47, 149, Ek Madde 8\n14/7/2016\nAnayasa Mahkemesinin 14/7/2016 tarihli ve E: 2016/11, K: 2016/132 sayılı Kararı\n67\n23/9/2016 tarihinden başlayarak dokuz ay sonra\n(23/6/2017)\n6763\n39, Ek Madde 8\n2/12/2016\nKHK/691\n67\n22/6/2017\nKHK/694\n39\n25/8/2017\n7069\n67\n8/3/2018\n7078\n39\n8/3/2018\nKHK/698\n7\n24/6/2018 tarihinde birlikte yapılan Türkiye Büyük Millet Meclisi ve Cumhurbaşkanlığı seçimleri sonucunda Cumhurbaşkanının andiçerek göreve başladığı tarihte\n7179\n64, 75\n26/6/2019\n7281\n63\n5/3/2021"
+        },
+        "EK 4": {
+          "baslik": "Askeri doktorların bizzat hususi hastane açmaları memnudur. Hilafında hareket, birinci madde mucibince cezayı müstelzimdir. (Mülga üçüncü cümle: 8/8/2011-KHK-650/37 md.; İptal: Anayasa Mahkemesi’nin 18/7/2012 tarihli ve E.: 2011/113 K.: 2012/108 sayılı Kararı ile.)[42][43]",
+          "metin": "Ek Madde 4 – (3/8/1942-4277 sayılı ek kanunun 1. maddesi hükmü olup, ek madde olarak numarası teselsül ettirilmiştir.)\nA) Fevkalade halin, seferberliğin veya harb halinin devamı müddetince askeri bir hizmet yaparken Milli Müdafaa vasıtalarına veya askeri ihtiyaçlara taallük eden taahhüt, imal, inşa, alım, satım, teslim, tesellüm, nakil, muhafaza veya tevzi yahut celp, sevk ve muayene gibi işlerde zimmet, ihtilas, irtikap, rüşvet veya hırsızlık suçlarından birini işliyenler on seneden aşağı olmamak üzere ağır hapis veya müebbet ağır hapis cezasiyle birlikte beş yüz liradan aşağı olmamak üzere ağır para cezasiyle cezalandırılırlar. Şu kadar ki para cezası hiçbir halde temin olunan menfaatin iki mislinden az olamaz.\nB) \n\n(Değişik: 22/1/2004-5078/3 md.) Seferberlikte veya harp hâlinin devamı müddetince vahim hâllerde ölüm cezası hükmolunur."
+        },
+        "EK 5": {
+          "baslik": "C) Bu maddede yazılı suçlardan husule gelen veya husulü kasdolunan zarar hafif ise (A) fıkrasına göre hükmedilmesi lazımgelen muvakkat ağır hapis ve para cezası yarıya, pek az ise üçte bire indirilir.",
+          "metin": "Ek Madde 5 – (3/8/1942-4277 sayılı ek kanunun 2. maddesi hükmü olup, ek madde olarak numarası teselsül ettirilmiştir.)"
+        },
+        "EK 6": {
+          "baslik": "Fevkalade halin, seferberliğin veya harb halinin devamı müddetince Milli Müdafaa vasıtalarına veya askeri ihtiyaçlara taallük eden işlerde hususi kanunlara göre kendilerine tevdi edilen vazifeleri yaparken bu kanunda yazılı suçları işliyen askeri olmıyan şahıslar hakkında da umumi mahkemelerce birinci maddede yazılı cezalar tatbik olunur.",
+          "metin": "Ek Madde 6 – (25/5/1972-1590/2 md. ile gelen ek 1 inci md. hükmü olup madde numarası teselsül ettirilmiştir.)\nBirinci askeri yasak bölgeler içinde veya nöbet yerlerinde, karakollarda, kışlalarda, karargahlarda, askeri kurumlarda, yerleşme veya konaklama amaciyle kullanılan bina veya mahaller içinde; askerlere fiilen taarruzda bulunanlar, sövenler veya hakaret edenler veyahut askerlik görevlerine ilişkin işleri yapmaya veya yapmamaya zorlamak için şiddet veya tehdide başvuranlar Türk Ceza Kanununun bu fiillere ilişkin l88, l90, l91, 254, 255, 256, 257, 258, 260, 266, 267,268, 269, 271, 272 ve 273 üncü maddeleri uyarınca cezalandırılırlar.\nNöbetçi, devriye, karakol, inzibat, askeri trafik, kolluk veya kurtarma ve yardım görevi yapan askerlere karşı bu görevleri yaptıkları sırada yukarıdaki fıkrada yazılı suçları işliyenler aynı kanun maddeleri ile cezalandırılırlar."
+        },
+        "EK 7": {
+          "baslik": "Umumi emniyet ve asayişi korumaya ilişkin önleyici ve adli zabıta görevlerini ifa ettikleri sırada jandarma subay, astsubay, erbaş ve erlerine karşı işlenen suçlarda yukardaki fıkralar hükümleri uygulanmaz.",
+          "metin": "Ek Madde 7 – (Ek : 22/3/2000-4551/37 md.)\nBu Kanunda ve diğer kanunlarda geçen;\nA) “Başgedikli”, “Gedikli” ve “Küçük Zabit” ibareleri “Astsubay”,\nB) “Toplu Efrat” ibaresi “Toplu Asker”, “Efrat” ibaresi sadece “Erbaş ve Er”, “Nefer” ibaresi “Er”.\nC) “Tard, ihraç ve rütbenin geri alınması” fer’i cezaları (erbaşlar için öngörülen rütbenin geri alınması fer’i cezası hariç), “Türk Silahlı Kuvvetlerinden çıkarma” fer’i cezası,"
+        },
+        "EK 8": {
+          "baslik": "Olarak değiştirilmiştir.",
+          "metin": "Ek Madde 8 – (Ek: 31/3/2005-5329/1 md.; Değişik: 23/6/2016-6722/11 md.)\nAskeri mahkemeler ve adli yargı mahkemeleri tarafından verilen kısa süreli hapis cezaları; 16/6/1927 tarihli ve 1076 sayılı Yedek Subaylar ve Yedek Askeri Memurlar Kanunu hükümlerine göre askerlik hizmetini yerine getiren yükümlüler ile yükümlü erbaş ve erler hakkında Türk Ceza Kanununun 50 nci maddesinin birinci fıkrasında belirtilen seçenek yaptırımlara, diğer askeri şahıslar hakkında ise aynı fıkranın (a), (b) ve (d) bentlerinde belirtilen seçenek yaptırımlara çevrilebilir. Ancak aşağıdaki hâllerde kısa süreli hapis cezaları seçenek yaptırımlara çevrilemez:\nA) Sırf askeri suçlardan dolayı yapılan yargılama sonunda hükmolunan netice cezanın dört ay veya daha fazla süreli hapis cezası olması.\nB) Fiilin, disiplini ağır şekilde ihlal etmesi veya birliğin güvenliğini tehlikeye düşürmesi ya da birliğin muharebe hazırlığını veya etkinliğini zafiyete uğratması ya da büyük bir zarar meydana getirmesi.\nC) Fiilin savaş veya seferberlikte işlenmesi.\n1076 sayılı Kanun hükümlerine göre askerlik hizmetini yerine getiren yükümlüler ile yükümlü erbaş ve erler hakkında verilen kısa süreli hapis cezasına seçenek yaptırımların yerine getirilmesi askerlik hizmetlerinin sonuna bırakılır."
+        },
+        "EK 9": {
+          "baslik": "(Ek fıkra: 24/11/2016-6763/2 md.) Sırf askerî suçlar ile hapis cezasının üst sınırı üç ayı geçen askerî suçlar hakkında, önödeme hükümleri uygulanmaz.",
+          "metin": "Ek Madde 9 – (Ek: 31/3/2005-5329/1 md.)"
+        },
+        "EK 10": {
+          "baslik": "5739",
+          "metin": "Ek  Madde 10\n1/3/2008\n6191\n3, 39, Ek Madde 8\n22/3/2011\n6217\n63\n14/4/2011"
+        },
+        "EK 11": {
+          "baslik": "Askerî suçlar ile sırf askerî suçlar:",
+          "metin": "Ek Madde 11 –  (Ek:24/6/2021-7329/1 md.)\nBu Kanunda düzenlenen suçlar ile asker kişilerin askerlik hizmet ve görevleriyle ilgili olarak işledikleri suçlar, askerî suçtur.\nBu Kanunda düzenlenen ve asker kişiler tarafından işlenen 60 ıncı, 62 nci, 65 inci, 66 ncı, 67 nci, 68 inci, 70 inci, 79 uncu, 81 inci, 82 nci, 85 inci, 87 nci, 88 inci, 89 uncu, 90 ıncı, 91 inci, 97 nci, 98 inci, 100 üncü, 101 inci, 102 nci ve 136 ncı maddelerinde düzenlenen suçlar, sırf askerî suçtur."
+        },
+        "EK 12": {
+          "baslik": "Amir-maiyet veya üst-ast ilişkisi:",
+          "metin": "Ek Madde 12 – (Ek:24/6/2021-7329/2 md.)\nAskerlik hizmet ve görevlerine ilişkin hâller dışında, asker kişilerden nişanlıların, evlilik bağı kalmasa bile eşlerin, kan veya kayın hısımlığından üstsoy veya altsoy ile üçüncü derece dâhil hısımların veya evlâtlık bağı olanların birbirlerine karşı işledikleri suçlar bakımından amir-maiyet ve üst-ast ilişkisi dikkate alınmaz.\nYükümlü erbaş ve erler arasında ast, üst veya amir ilişkisinin dikkate alınması için fiilin askerî hizmet ve görevlerinden dolayı işlenmesi şarttır."
+        },
+        "EK 13": {
+          "baslik": "Yakalama ve tutuklama:",
+          "metin": "Ek Madde 13 – (Ek:24/6/2021-7329/3 md.)\nAşağıda belirtilen hâllerde, asker kişi herkes tarafından geçici olarak yakalanabilir:\na) Kişiye suçu işlerken rastlanması.\nb) Suçüstü bir fiilden dolayı; izlenen kişinin kaçması olasılığının bulunması veya hemen kimliğini belirleme olanağının bulunmaması.\nTutuklama kararı veya yakalama emri düzenlenmesini gerektiren ve gecikmesinde sakınca bulunan hâllerde; Cumhuriyet savcısına derhâl başvurma olanağı bulunmadığı takdirde, amiri, üstü, askerî karakol, nöbetçi, devriye, askerî inzibat ve kolluk görevlisi asker kişiyi yakalama yetkisine sahiptir.\nYakalanan kişi ve olay hakkında Cumhuriyet savcısına hemen bilgi verilerek emri doğrultusunda işlem yapılır. Cumhuriyet savcısı, yakalanan kişiyi serbest bırakmaz ise en yakın askerî inzibat karakoluna veya askerî makama ya da adli kolluk görevlilerine teslim edilmesine karar verir. Suçun Türk Ceza Kanununun İkinci Kitap, Dördüncü Kısım altındaki Dördüncü, Beşinci, Altıncı ve Yedinci Bölümlerinde tanımlanan suçlar ile 12/4/1991 tarihli ve 3713 sayılı Terörle Mücadele Kanunu kapsamına giren suçlardan olması durumunda, yakalanan kişi Cumhuriyet savcısının talimatı ile adli kolluk görevlilerine teslim edilir.\nAsker kişilerin gözaltına alınması veya tutuklanması durumunda derhâl kıta komutanı veya askerî kurum amirine de haber verilir."
+        },
+        "EK 14": {
+          "baslik": "Soruşturma ve kovuşturma:",
+          "metin": "Ek Madde 14 – (Ek:24/6/2021-7329/4 md.)\nAskerî suçlarla ilgili olarak aşağıdaki hükümler uygulanır:\na)  Subay ve astsubayların şüpheli sıfatıyla ifadesi bizzat Cumhuriyet savcısı tarafından alınır.\nb) Askerî amirler Cumhuriyet savcısının işe el koymasına kadar delillerin kaybolmasını önleyecek tedbirleri alır.\nc) Ülke sınırları dışında işlenen suçlar bakımından Cumhuriyet savcısı, adli kolluk görevlileri tarafından yapılacak işlemlerin Millî Savunma Bakanlığınca yurt dışında görevlendirilen hukuk sınıfı subaylar tarafından yapılmasını isteyebilir.\nd) Kuvvetli suç şüphesinin varlığını gösteren somut delillerin bulunması ve sırf askerî suç nedeniyle askerî disiplinin ağır şekilde ihlal edilmesi hâlinde de asker kişi hakkında tutuklama kararı verilebilir.\ne) Sırf askerî suçlarda, tutuklama yasağına ilişkin hükümler uygulanmaz.\nAsker kişilerin işlediği askerî suçlarla ilgili olarak kabul edilen iddianamenin bir örneğini mahkeme, kovuşturmaya yer olmadığına karar verilmesi durumunda ise kararın bir örneğini savcılık soruşturma iznini veren komutanlığa veya askerî kurum amirliğine gönderir.\nAskerî birlik komutanı veya askerî kurum amiri, emir komutasındaki asker kişilerin, ifadelerinin alınması veya sorgularının yapılması için hazır bulundurulmasını sağlar."
+        },
+        "EK 15": {
+          "baslik": "7415",
+          "metin": "Ek Madde 15\n13/7/2022"
+        },
+        "EK 16": {
+          "baslik": "Yüce Divanda yargılanacak asker kişilerle ilgili soruşturma usulü:",
+          "metin": "Ek Madde 16 – (Ek:24/6/2021-7329/6 md.)\nGenelkurmay Başkanı ile Kara, Deniz ve Hava Kuvvetleri Komutanlarının işlediği askerî suçların soruşturulması izne tabidir. Ancak, ağır ceza mahkemesinin görevine giren suçüstü hâllerinde soruşturma genel hükümlere göre yürütülür.\nGenelkurmay Başkanı ile Kara, Deniz ve Hava Kuvvetleri Komutanları hakkında askerî suçlardan dolayı soruşturma yapılması Cumhurbaşkanının iznine bağlıdır.\nİzin vermeye yetkili merci, ihbar veya şikâyetin işleme konulması hâlinde bir ön inceleme yaptırır.\nYetkili merci, soruşturma izni konusundaki kararını suçun işlenildiğinin öğrenilmesinden itibaren ön inceleme dâhil en geç otuz gün içinde verir. Bu süre, zorunlu hâllerde on beş günü geçmemek üzere bir defa uzatılabilir. Yetkili merci, belirtilen süreler içinde soruşturma izni verilmesi veya verilmemesi konusunda karar verir ve kararını Yargıtay Cumhuriyet Başsavcılığına, hakkında inceleme yapılana ve varsa şikayetçiye bildirir. Bu kararlara karşı on gün içinde Danıştay Birinci Dairesine itiraz edilebilir. İtirazlar, öncelikle incelenir ve en geç üç ay içinde karara bağlanır. Verilen kararlar kesindir.\nSoruşturma Yargıtay Cumhuriyet Başsavcısı tarafından yapılır. Hâkim kararı gerektiren işlemlere dair Yargıtay Cumhuriyet Başsavcılığının talepleri ile kovuşturmaya yer olmadığına dair kararlara yapılan itirazlar hakkında, soruşturma konusu suçların en ağırına bakmakla görevli Yargıtay ceza dairesini numara itibarıyla izleyen ceza dairesi başkanı tarafından karar verilir. Suçun son numaralı ceza dairesinin görevine girmesi hâlinde talebi ve itirazı inceleme yetkisi Birinci Ceza Dairesi Başkanına aittir. Hâkim kararı gerektiren işlemlerde Başkanın verdiği kararlara karşı yapılan itirazı numara itibarıyla izleyen ceza dairesi başkanı inceler. Son numaralı daire başkanının kararı, Birinci Ceza Dairesi Başkanı tarafından incelenir. İddianame düzenlenmesi hâlinde kovuşturma, Yüce Divan sıfatıyla Anayasa Mahkemesinde yapılır.\n3628 sayılı Kanunun 17 nci maddesinin birinci fıkrasında sayılan suçlar bakımından da bu madde hükümleri uygulanır.\nBu maddede hüküm bulunmayan hâllerde 4483 sayılı Kanun hükümleri uygulanır."
+        },
+        "EK 17": {
+          "baslik": "Hükmün açıklanmasının geri bırakılması:",
+          "metin": "Ek Madde 17 – (Ek:24/6/2021-7329/7 md.)\n4/12/2004 tarihli ve 5271 sayılı Ceza Muhakemesi Kanununun hükmün açıklanmasının geri bırakılmasına ilişkin hükümleri, aşağıdaki hâller hariç askerî suç ve cezalar hakkında da uygulanır:\nA) Sırf askerî bir suçtan dolayı altı ay veya daha fazla süreli hapis cezasına hükmedilmesi.\nB) Fiilin, disiplini ağır şekilde ihlal etmesi veya birliğin güvenliğini tehlikeye düşürmesi ya da birliğin muharebe hazırlığını veya etkinliğini zafiyete uğratması ya da büyük bir zarar meydana getirmesi.\nC) Fiilin savaş veya seferberlikte işlenmesi."
+        },
+        "EK 18": {
+          "baslik": "Uygulanacak hükümler:",
+          "metin": "Ek Madde 18 – (Ek:24/6/2021-7329/8 md.)\nAskerî suçların soruşturması ve kovuşturmasına ilişkin olarak bu Kanunda hüküm bulunmayan hâllerde 5271 sayılı Kanun hükümleri uygulanır."
+        },
+        "EK 19": {
+          "baslik": "Mahkemelerin görev ve yetkisi:",
+          "metin": "Ek Madde 19 – (Ek:24/6/2021-7329/9 md.)\nAskerî suçlara ilişkin dava ve işler, suçun işlendiği yerin bağlı olduğu ilin adıyla anılan asliye ve ağır ceza mahkemelerinde ya da askerî birlik ve personel yoğunluğunun gerektirmesi hâlinde Adalet Bakanlığının önerisi üzerine Hâkimler ve Savcılar Kurulunca belirlenen ilçelerde kurulu bulunan asliye veya ağır ceza mahkemelerinde görülür. İlçede görülmesine karar verildiği takdirde ilçenin yargı çevresi de aynı usulle belirlenir. Bu suçlara ilişkin dava ve işler, acele işlerden sayılır ve bunlarla ilgili davalar adli tatilde de görülür.\nBirinci fıkra uyarınca belirlenen mahkemelerin görev alanına giren suçlara ilişkin davalarla;\na) Diğer mahkemelerin görev alanına giren suçlara ilişkin davaların aralarındaki bağlantı nedeniyle birlikte yürütülmesinin zorunlu olduğu hâllerde davalar, birinci fıkra uyarınca belirlenen mahkemelerde,\nb) Türk Ceza Kanununun İkinci Kitap, Dördüncü Kısım altındaki Dördüncü, Beşinci, Altıncı ve Yedinci Bölümünde tanımlanan suçlar ile Terörle Mücadele Kanunu kapsamına giren suçlara ilişkin davaların aralarındaki bağlantı nedeniyle birlikte yürütülmesinin zorunlu olduğu hâllerde davalar, bu bentte belirtilen suçlara bakmakla görevli mahkemelerde,\nbirleştirilir.\nAsker kişiler tarafından ülke sınırları dışında işlenen askerî suçlara ait dava ve işlere bakmaya birinci fıkra kapsamındaki Ankara mahkemeleri yetkilidir. Yurt dışında bulunan askerî mahallerde yapılacak önleme aramasına karar vermeye de bu yer sulh ceza hâkimliği yetkilidir.\nBu Kanunun 65 inci, 66 ncı, 67 nci, 68 inci ve 70 inci maddelerinde düzenlenen suçlara ilişkin dava ve işlerde yetkili mahkeme, şüpheli veya sanığın mensubu olduğu askerî birlik veya askerî kurumun bulunduğu yerde birinci fıkra uyarınca belirlenen il ve ilçe mahkemeleridir.\nAskerî suçlara ilişkin soruşturmalar, suçun işlendiği yerin bağlı olduğu ilin adıyla anılan Cumhuriyet başsavcılığınca ya da birinci fıkra uyarınca Hâkimler ve Savcılar Kurulunca belirlenen ilçe Cumhuriyet başsavcılığınca yürütülür. Bu başsavcılıklarda askerî suçlar bürosu kurulur ve yeteri kadar Cumhuriyet savcısı görevlendirilir. İl veya birinci fıkra uyarınca belirlenen ilçe Cumhuriyet savcısı, suçun işlendiği yer Cumhuriyet savcısından soruşturmanın kısmen veya tamamen yapılmasını isteyebilir. Gecikmesinde sakınca bulunan hâllerde suçun işlendiği yer Cumhuriyet savcısı zorunlu olan delilleri toplar ve gerekmesi hâlinde alınacak kararlar bakımından bulunduğu yer sulh ceza hâkimliğinden talepte bulunur."
+        },
+        "EK 20": {
+          "baslik": "Atıflar:",
+          "metin": "Ek Madde 20 – (Ek:24/6/2021-7329/10 md.)\nKanunlarda geçen;\nA) Askerî Yargıtay, Yargıtayı,\nB) Askerî Yargıtay Başsavcılığı, Yargıtay Cumhuriyet Başsavcılığını,\nC) Askerî Yargıtay Başsavcısı, Yargıtay Cumhuriyet Başsavcısını,\nD) Askerî Yargıtay Başkanı, Askerî Yargıtay daire başkanları ve Askerî Yargıtay üyeleri sırasıyla, Yargıtay Birinci Başkanını, Yargıtay daire başkanlarını ve Yargıtay üyelerini,\nE) Askerî mahkeme, bu Kanun uyarınca belirlenen asliye ceza mahkemesini, ağır ceza mahkemesinin görev alanına giren suçlar bakımından ağır ceza mahkemesini,\nF) Askerî hâkim, hâkim veya sulh ceza hâkimini,\nG) Askerî savcılık, Cumhuriyet başsavcılığını,\nH) Askerî savcı, ilgisine göre Cumhuriyet başsavcısını veya Cumhuriyet savcısını,\nI) Yardımcı askerî savcı ve askerî savcı yardımcısı, Cumhuriyet savcısını,\nJ) Askerî adalet müfettişi, ilgisine göre Hâkimler ve Savcılar Kurulu müfettişlerini veya adalet müfettişlerini,"
+        },
+        "EK 21-": {
+          "baslik": "ifade eder.",
+          "metin": "Ek Madde 21- (Ek:12/6/2024-7517/2 md.)"
+        },
+        "GEÇİCİ 1": {
+          "baslik": "Genelkurmay Başkanı, Kara, Deniz ve Hava Kuvvetleri Komutanları ile general ve amiraller hakkında bu Kanunun ek 15 inci ve ek 16 ncı maddeleri kapsamında yürütülen işlemlerde soruşturma izni vermeye, soruşturma ve kovuşturma yapmaya yetkili mercilerin tayininde ilgililerin son rütbeleri ve görevleri esas alınır.",
+          "metin": "Geçici Madde 1 – (1632 sayılı Kanunun kendi numarasız muvakkat maddesi olup teselsül için numaralandırılmıştır.)\nBu kanunun makabline şümulü :"
+        },
+        "GEÇİCİ 2": {
+          "baslik": "Bu kanun ile konulan cezalar bundan evvelki kanunlarda yazılı olan cezalardan daha hafif olduğu surette bu kanunun meriyete konulduğu tarihte hükmedilmemiş olan suçlarla eski kanuna göre hükmedilip henüz infaz edilmemiş veya infaz edilmekte bulunmuş olan hükümler hakkında da tatbik olunur.",
+          "metin": "Geçici Madde 2 – (Ek: 22/1/2004-5078/4 md.)\nBu Kanunun yürürlüğe girdiği tarihten önce 91 inci maddenin (4) numaralı fıkrası kapsamına giren suçlardan dolayı haklarında idam cezası verilen hükümlülerin dosyalarından;\na) Henüz Askerî Yargıtaya gönderilmemiş olan veya Askerî Yargıtay Başsavcılığında bulunan yahut Türkiye Büyük Millet Meclisine gönderilmiş olanlar, hükmü veren askerî mahkemece duruşma açılarak,\nb) Askerî Yargıtayda bulunanlar, ilgili dairesince ele alınarak,\nBu Kanunun yürürlüğe girdiği tarihten itibaren üç ay içinde karara bağlanır."
+        },
+        "GEÇİCİ 3": {
+          "baslik": "Askerî Yargıtay Başsavcılığında ve Türkiye Büyük Millet Meclisinde bulunan dosyalar, gelişlerindeki usule uygun olarak, bu Kanunun yürürlüğe girdiği tarihten itibaren bir ay içinde, hükmü veren askerî mahkemeye geri gönderilir.",
+          "metin": "Geçici Madde 3 – (Ek:24/6/2021-7329/11 md.)\nBu Kanun uyarınca askerî suçlara bakmak amacıyla il ve ilçelerde belirlenecek mahkemeler, bu Kanunun yürürlüğe girdiği tarihten itibaren bir ay içinde belirlenir. Belirleme tarihi itibarıyla kovuşturma evresine geçilmiş askerî suçlara ilişkin dava dosyaları, belirlenen bu mahkemelere devredilmez, kesinleşinceye kadar açıldıkları mahkemelerde görülmeye devam olunur.\nMülga;\na) 27/6/1972 tarihli ve 1600 sayılı Askerî Yargıtay Kanununa tabi Askerî Yargıtay Başkanı, Başsavcısı, İkinci Başkanı, daire başkanları ve üyelerinin görevleri sırasında işledikleri şahsi suçları ile görev suçlarının soruşturulması ve kovuşturulmasında Yargıtay Birinci Başkanı, Yargıtay daire başkanları ve üyeleri ile Yargıtay Cumhuriyet Başsavcısının,\nb) 4/7/1972 tarihli ve 1602 sayılı Askerî Yüksek İdare Mahkemesi Kanununa tabi Askerî Yüksek İdare Mahkemesi Başkanı, Askerî Yüksek İdare Mahkemesi Başsavcısı, daire başkanları ve üyelerinin görevleri sırasında işledikleri şahsi suçları ile görev suçlarının soruşturulması ve kovuşturulmasında Danıştay Başkanı, Danıştay daire başkanları ve üyeleri ile Danıştay Başsavcısının,\nc) 26/10/1963 tarihli ve 357 sayılı Askerî Hâkimler Kanununa tabi askerî hâkimlerin görevleri sırasında işledikleri şahsi suçları ile Millî Savunma Bakanı tarafından soruşturma yapılmasına izin verilmesi hâlinde görev suçlarının soruşturulması ve kovuşturulmasında 24/2/1983 tarihli ve 2802 sayılı Hâkimler ve Savcılar Kanununda yer alan hâkim ve Cumhuriyet savcılarının,\nyargılanmasına ilişkin hükümler uygulanır. Bu fıkra hükümleri (a) ve (b) bentlerinde yer alanların görevleri sırasındaki eylemleri nedeniyle yapılacak disiplin soruşturma veya kovuşturmaları bakımından da uygulanır. (c) bendinde yer alanların görevleri sırasındaki eylemleri nedeniyle yapılacak disiplin soruşturma veya kovuşturmaları bakımından ise 926 sayılı Kanunun geçici 45 inci maddesinin birinci fıkrasının (b) bendinde belirlenen disiplin hükümleri uygulanır.\n10/3/1983 tarihli ve 2803 sayılı Jandarma Teşkilat, Görev ve Yetkileri Kanununun geçici 5 inci maddesi ile 9/7/1982 tarihli ve 2692 sayılı Sahil Güvenlik Komutanlığı Kanununun geçici 9 uncu maddesi kapsamında Millî Savunma Bakanlığı tarafından Jandarma Genel Komutanlığı ve Sahil Güvenlik Komutanlığı emrine görevlendirilen erbaş ve erler ile askerlik yükümlüleri, bu görevlendirme süresince asker kişi sayılırlar ve bu Kanuna tabi olmaya devam ederler. Bu kişilerin Jandarma Genel Komutanlığı ve Sahil Güvenlik Komutanlığında görevli rütbelilere karşı işledikleri askerî suçlar asker kişilere karşı işlenmiş sayılır. Soruşturma izni, Jandarma Genel Komutanlığında asgari alay komutanı veya eşidi kurum amiri, Sahil Güvenlik Komutanlığında ise asgari grup komutanı veya eşidi kurum amiri olmak üzere, asker kişinin fiilen görev yaptığı birlik komutanı veya kurum amiri, bu kişilerin yokluklarında ise vekilleri tarafından bizzat verilir."
+        },
+        "194": {
+          "baslik": "Kanunun mer'iyeti tarihi :",
+          "metin": "Madde 194 – Bu kanun neşri tarihinden dört ay sonra muteberdir."
+        },
+        "195": {
+          "baslik": "Madde 194 – Bu kanun neşri tarihinden dört ay sonra muteberdir.",
+          "metin": "Madde 195 – Bu kanunun hükümlerini icraya İcra Vekilleri Heyeti memurdur.\n22/5/1930 Tarihli Ve 1632 Sayılı Ana Kanuna İşlenemeyen Hükümler"
+        },
+        "GEÇİCİ -–": {
+          "baslik": "1. 9/7/1982 tarihli ve 2693 sayılı Kanunun geçici maddesi:",
+          "metin": "Geçici Madde -– 16/5/1982 tarihi dahil olmak üzere bu tarihten sonra, bu Kanunun yayımı tarihine kadar feri cezaları infaz edilmiş olanların idari işlemleri geri alınır."
+        },
+        "GEÇİCİ –": {
+          "baslik": "2. 14/6/1989 tarihli ve 3574 sayılı Kanunun geçici maddesi:",
+          "metin": "Geçici Madde – Bu Kanunun yürürlüğe girdiği tarihten önce verilmiş olan yeni baştan askerlik cezaları yerine getirilmez. Yerine getirilmiş olan yeni baştan askerlik cezaları hükümsüz sayılarak askerlik süreleri yeniden hesaplanır. Muvazzaflık süresini doldurmuş olanlar derhal terhis edilirler.\nAncak terhise müstehak olunan tarihten sonra işlenmiş bulunan suçlardan dolayı takibat yapılır, verilmiş olan cezalar çektirilir."
+        },
+        "38": {
+          "baslik": "3. 22/3/2000 tarihli ve 4551 sayılı Kanunun 38 inci maddesi:",
+          "metin": "Madde 38 – 1632 sayılı Kanunda yer alan katıksız hapis cezası ve bu cezanın uygulanmasına ilişkin hükümlerle aynı Kanunun 33, 36, 37, 83, 86, 149, 152, 154 üncü maddeleri ile 25 inci maddesinin (4) numaralı bendinin ilk cümlesi ve 134 üncü maddenin (2) numaralı fıkrası  yürürlükten kaldırılmıştır.\n1632 SAYILI KANUNA EK VE DEĞİŞİKLİK GETİREN MEVZUATIN VEYA\nANAYASA MAHKEMESİ KARARLARININ\nYÜRÜRLÜĞE GİRİŞ TARİHLERİNİ GÖSTERİR TABLO\nDeğiştiren Kanunun / KHK’nin veya İptal Eden Anayasa Mahkemesi Kararının Numarası\n1632 sayılı Kanunun değişen veya iptal edilen maddeleri\nYürürlüğe Giriş Tarihi\n2034\n76, 77, 82, 106, 119, 120, 131, 154\n4/7/1932"
+        },
+        "EK 1,": {
+          "baslik": "2183",
+          "metin": "Ek Madde 1, Ek Madde 2, Ek Madde 3\n25/5/1933\n2632\n66, 67, 147, 150, 153, 188, 189, 190, 191\n27/12/1934\n2862\n17, 30, 39, 49, Üçüncü Bab Üçüncü Fasıl Başlığı, 63,64, 65, 66, Üçüncü Bab Dördüncü Fasıl Başlığı, 81, 131, 153, 173, 192\n18/12/1935\n2908[44]\n-\n5/2/1936\n3514\n39, 154\n14/7/1938\n3719\n47, 148\n14/7/1939\n3823\n47, 148\n18/5/1940\n3914\n55, 56, 57, 58, 59\n27/8/1940\n4026\n48\n15/5/1941\n4257\n7, 13, 23, 24, 63, 64, 158, 164, 174\n20/6/1942"
+        },
+        "EK 4,": {
+          "baslik": "4277",
+          "metin": "Ek Madde 4, Ek Madde 5\n8/8/1942\n4542\n35, 153\n17/4/1944\n4726\n63, 75\n8/5/1945\n6078\n114\n1/4/1953\n6781\n150\n14/7/1956\n6866\n34, 35\n24/12/1956\n6889\n65\n2/2/1957\n7331\n56\n15/6/1959\n353\n5, 72\nBu kanuna göre kurulacak askeri mahkeme lerin fiilen göreve başladıkları tarihte\n477[45]\n82,  83, 86,  108, 116, 130, 145, 149 uncu maddeler ile 154 üncü maddenin ikinci fıkrasının (a) bendi\nDisiplin mahkemelerinin kurulup fiilen göreve başladıkları tarihte\n1590\n95, Ek Madde 6\n4/6/1972\n1656\n148\n12/2/1973\n2693\n32, 35\n13/7/1982\n3574\n29, 38, 49, 66, 67, 70\n17/6/1989\n3970\n63\n19/5/1994 tarihinden itibaren üç ay sonra\n4551[46]\n3, 5, 23, 24, 25, 29, 30, 31, 32, 33, 34, 35, 36, 37, 39, 47, 53, 67, 68, 71, 76, 77, 81, 82, 83, 85, 86, 87, 88, 89, 115, 130, 131, 132, 134, 143, 148, 149, 152, 153, 154, 165, 166, 171, 172, 185, Ek Madde 7\n26/3/2000 tarihinden itibaren 2 ay sonra\n5078\n91,101, Ek 4, Geçici Madde 2\n29/1/2004\n5080\n67\n29/1/2004"
+        },
+        "EK 8,": {
+          "baslik": "5329",
+          "metin": "Ek Madde 8, Ek Madde 9\n1/6/2005"
+        },
+        "EK 11,": {
+          "baslik": "7329",
+          "metin": "Ek Madde 11, Ek Madde 12, Ek Madde 13, Ek Madde 14, Ek Madde 15, Ek Madde 16, Ek Madde 17, Ek Madde 18, Ek Madde 19, Ek Madde 20, Geçici Madde 3\n30/6/2021"
+        },
+        "EK 21": {
+          "baslik": "7517",
+          "metin": "Ek Madde 21\n28/6/2024\n[1] a - Bu Kanunda geçen \"erat\" tabiri 4/1/1961 tarih ve 211 sayılı Kanunun 118. maddesi ile \"erbaş ve er\" olarak değiştirilmiştir.\nb -  Bu Kanundaki Adli amirlik müessesesinin görev ve yetkileri,25/10/1963 tarih ve 353 sayılı Kanunun 259. maddesi gereğince askeri mahkemeler kurulmuş olduğundan, adı geçen Kanunun geçici 1. maddesi ile sona ermiştir.\nc -  Bu Kanundaki, 16/6/1964 tarih ve 477 sayılı Kanunun cezalandırdığı suçlara ait hükümler, adı geçen Kanunun 64. maddesi ile ilga edilmiş olduğundan ilgili maddelerdeki açıklamalarda; ilga edilmiş olan maddedeki suçun 16/6/1964 tarih ve 477 sayılı Kanunun hangi maddesi ile cezalandırılmış olduğu da belirtilmiştir.\nd -  26/10/1963 tarih ve 357 sayılı Askeri Hakimler Kanununun 41.maddesinde \".....diğer kanunların bu kanuna aykırı hükümleri, bu kanunun kapsadığı kişiler hakkında uygulanmaz\" denilmektedir.\ne -  Bu Kanunda geçen \"ihtiyat zabit ve ihtiyat askeri memurlar\" ibareleri 29/11/1983 tarih ve 2962 sayılı Kanunun 2. maddesi ile \"yedek subay ve yedek askeri memurlar\" şeklinde değiştirilmiş ve metne işlenmiştir.\nf -   Bu Kanunda geçen \"uzman çavuş\" tabiri, 18/3/1986 tarih ve 3269 sayılı Kanunun 21. maddesi ile \"uzman erbaş\" olarak değiştirilmiş ve metne işlenmiştir.\ng -  Bu Kanunda ve diğer Kanunlarda geçen;\nA)         “Başgedikli”, “Gedikli” ve “Küçük Zabit” ibareleri “Astsubay”,\nB)         “Toplu Efrad” ibaresi “Toplu Asker”, “Efrat” ibaresi sadece “Erbaş ve Er”, “Nefer” ibaresi “Er”,\nC)        “Tard, ihraç ve rütbenin geri alınması” fer’i cezaları (erbaşlar için öngörülen rütbenin geri alınması fer’i cezası hariç) “Türk Silahlı Kuvvetlerinden çıkarma” fer’i cezası olarak,\n22/3/2000 tarih ve 4551 sayılı Kanunun 37 nci maddesiyle eklenen “Ek Madde 7” ile değiştirilmiştir.\n[2] 22/3/2000 tarihli ve 4551 sayılı Kanunun 38 inci maddesiyle, bu Kanunda yer alan katıksız hapis cezası ve bu cezanın uygulanmasına ilişkin hükümler yürürlükten kaldırılmıştır.\n[3] 10/3/2011 tarihli ve 6191 sayılı Kanunun 10 uncu maddesiyle, bu maddenin birinci fıkrasında yer alan “uzman jandarma ve uzman erbaşlar” ibaresi “uzman jandarma, uzman erbaş, sözleşmeli erbaş ve er” şeklinde değiştirilmiştir.\n[4] 2/7/2018 tarihli ve 698 sayılı KHK’nin 5 inci maddesiyle, bu bentte yer alan “İcra Vekilleri Heyetince” ibaresi “Cumhurbaşkanınca” şeklinde değiştirilmiştir.\n[5] Adli amirlik müessesesi hakkında bu Kanunun ilk sayfasındaki dipnota bakınız.\n[6] Bu maddenin başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 4 üncü maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[7] “Küçük Zabitler hizmetten mahrumdurlar” şeklindeki ilk cümle; 22/3/2000 tarih ve 4551 sayılı Kanunun 38. maddesi ile yürürlükten kaldırılmıştır.\n[8] Bu maddenin başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 5 inci maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[9] Bu maddenin başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 6 ncı maddesiyle metne işlendiği şekliyle değiştirilmiştir.\n[10] Bu maddenin başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 7 nci maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[11] Bu maddenin başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 8 inci maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[12] Bu maddenin başlığı, 22/3/2000 tarih ve 4551 sayılı Kanunun 9 uncu maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[13] Bu maddenin başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 10 uncu maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[14] Bu maddenin başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 11 inci maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[15] Bu maddenin başlığı 23/6/2016 tarihli ve 6722 sayılı Kanunun 9 uncu maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[16] Bu madde başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 13 üncü maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[17] 18/2/2021 tarihli ve 7281 sayılı Kanunun 2 nci maddesiyle bu fıkrada yer alan “1111 sayılı Askerlik Kanununun 89 uncu maddesi” ibaresi “25/6/2019 tarihli ve 7179 sayılı Askeralma Kanununun 24 üncü maddesi” şeklinde ve “kabul edilecek bir özrü olmadan,” ibaresi “söz konusu Kanunun 23 üncü maddesinde belirtilen mazeretlerden birisi bulunmaksızın,” şeklinde değiştirilmiştir.\n[18] 22/5/2012 tarihli ve 6318 sayılı Kanunun 27 nci maddesiyle bu bentte yer alan “son” ibaresi madde metninden çıkarılmıştır.\n[19] 25/6/2019 tarihli ve 7179 sayılı Kanunun 62 nci maddesiyle 64 üncü maddesinin başlığında ve ikinci fıkrasında yer alan “yedek subaylarla” ibareleri “yedek subaylar, yedek astsubaylar ve” şeklinde değiştirilmiş, birinci ve üçüncü fıkralarına “yedek subay” ibarelerinden sonra gelmek üzere “, yedek astsubay” ibaresi eklenmiştir.\n[20] Bu madde başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 15 inci maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[21] Bu madde başlığı 22/3/2000 tarih ve 4551 sayılı Kanunun 16 ıncı maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[22] 16/6/1964 tarih ve 477 sayılı Kanunun 64.maddesinde; Askeri Ceza Kanunu'nun bu Kanunun cezalandırdığı suçlara ait hükümlerinin yürürlükten kaldırılmış olduğu hükme başlanmış; aynı kanunun 51. maddesinde bir firar teşebbüsünü doğru olarak haber almasına rağmen önlenebilecek bir zaman içerisinde amirine haber vermeme fiili cezalandırılmış ise de, bu maddede zikredilen firarın seferberlikte vuku bulmuş olması fiili anılan 51. madde kapsamı dışında kaldığından madde metni aynen alınmıştır.\n[23] 25/6/2019 tarihli ve 7179 sayılı Kanunun 62 nci maddesiyle bu fıkrada yer alan “yedek subaylarla” ibaresi “yedek subaylar ve yedek astsubaylar ile” şeklinde değiştirilmiştir.\n[24] Bu madde başlığı 22/3/2000 tarihli ve 4551 sayılı Kanunun 17 nci maddesi ile metne işlendiği şekilde değiştirilmiştir.\n[25] Bu madde başlığı 22/3/2000 tarihli ve 4551 sayılı Kanunun 18 inci maddesi ile metne işlendiği şekilde değiştirilmiştir.\n[26] Fasıl başlığı, 11/12/1935 tarih ve 2862 sayılı Kanunun 8. maddesi ile değiştirilmiştir.\n[27] Bu madde başlığı, “Amire ve mafevka hürmet etmeyenlerin cezaları” iken, 22/3/2000 tarih ve 4551 sayılı Kanunla “Amir veya üste saygısızlık ve tehdit”şeklinde, daha sonra 31/1/2013 tarihli ve 6413 sayılı Kanunun 45 inci maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[28] Bu madde başlığı, “Yalan yere veya usulsüz şikayet edenlerin cezaları:” iken, 31/1/2013 tarihli ve 6413 sayılı Kanunun 45 inci maddesiyle metne işlendiği şekilde değiştirilmiştir.\n[29] Bu madde başlığı, “Sair hallerde memuriyetin nüfuzunu suistimal edenlerin cezası” iken 22/3/2000 tarih ve 4551 sayılı Kanunla metne işlendiği şekilde değiştirilmiştir.\n[30] Maddenin matlabındaki \"Askeri\" kelimesi 27/6/1932 tarih ve 2034 sayılı Kanunun 7. maddesi ile kaldırılmıştır.\n[31] Bu madde başlığı, “Mafevkının, arkadaşının, madununun bir şeyini çalanlar” iken, 22/3/2000 tarih ve 4551 sayılı Kanunla metne işlendiği şekilde değiştirilmiştir.\n[32] Her ne kadar 16/6/1964 tarih ve 477 sayılı Kanunun 56. maddesi ile aynı fiil cezalandırılmış ise de, öngörülen ceza miktarı hizmetin aksamamış veya maddi bir zarar doğmamış olması keyfiyetine göre düzenlenmiş olduğundan metin muhafaza edilmiştir.\n[33] 31/1/2013 tarihli ve 6413 sayılı Kanunun 45 inci maddesiyle, bu maddede yer alan “kısa hapis veya” ibaresi madde metninden çıkarılmıştır.\n[34] Bu madde başlığı, “Mükavelename hilâfında eşya ve taahhüdat kabul edenler” iken 22/3/2000 tarih ve 4551 sayılı Kanunla metne işlendiği şekilde değiştirilmiştir.\n[35] Bu maddenin “Maduna nezaret vazifesinde ihmal ve tekasül eden, madunun suçlarını haber vermeyen” kısmı; 16/6/1964 tarihli ve 477 sayılı Disiplin Mahkemeleri Kuruluşu, Yargılama Usulü ve Disiplin Suç ve Cezaları Hakkında Kanunun 54 üncü maddesiyle disiplin suçu haline dönüştürülmüş ve  sözkonusu Kanunun 64 üncü maddesiyle yürürlükten kaldırılmıştır.\n[36] Bu madde başlığı, 22/3/2000 tarih ve 4551 sayılı Kanunla metne işlendiği şekilde değiştirilmiştir.\n[37] Bu maddenin başlığı 23/6/2016 tarihli ve 6722 sayılı Kanunun 10 uncu maddesiyle metne işlendiği şekilde yeniden düzenlenmiştir.\n[38] Bu madde başlığı, “İffetsiz bir kadınla evlenen veya böyle bir kadını tutanlar” iken 22/3/2000 tarih ve 4551 sayılı Kanunla metne işlendiği şekilde değiştirilmiştir.\n[39] Bu madde başlığı “Tevbih ve izinsizlik ve hapis cezalarının infazı sureti” iken 22/3/2000 tarihli ve 4551 sayılı Kanunla metne işlendiği şekilde değiştirilmiştir.\n[40] Bu başlık, 22/12/1934 tarih ve 2632 sayılı Kanunun 8 inci maddesi ile gelmiştir.\n[41] Bu başlık, 22/12/1934 tarih ve 2632 sayılı Kanunun 9 uncu maddesi ile gelmiştir.\n[42] Bu maddede sözü edilen birinci madde ile bu kanunun ek birinci maddesi kastedilmektedir.\n[43] Anayasa Mahkemesinin 18/7/2012 tarihli ve E.: 2011/113 K.: 2012/108 sayılı Kararı ile bu fıkranın üçüncü cümlesini mülga eden hüküm iptal edilmiş olup iptal hükmünün, kararın Resmî Gazete’de yayımlandığı 1/1/2013 tarihinden başlayarak altı ay sonra yürürlüğe girmesi hüküm altına alınmıştır.\n[44] 2862 sayılı Kanunla ilga edilen ve Askeri Ceza Kanununun bazı maddelerini değiştiren 22/12/1934 tarih ve 2632 sayılı Kanunun 5 inci maddesinden başka diğer maddeleri hükümlerinin mer'iyetinin iadesine dair Kanundur.\n[45] 1632 sayılı Kanunun 477 sayılı Kanunun cezalandırdığı suçlara ait hükümleri yürürlükten kaldırılmıştır.\n[46] 1632 sayılı Kanunun katıksız hapis cezası ve bu cezanın uygulanmasına ilişkin hükümler yürürlükten kaldırılmıştır."
+        }
+      }
+    }
+  }
+}

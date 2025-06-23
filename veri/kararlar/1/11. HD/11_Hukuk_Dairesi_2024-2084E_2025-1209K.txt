@@ -1,0 +1,45 @@
+
+
+11. Hukuk Dairesi         2024/2084 E.  ,  2025/1209 K.
+
+"İçtihat Metni"
+MAHKEMESİ : İstanbul Bölge Adliye Mahkemesi 44. Hukuk Dairesi
+SAYISI : 2020/2190 Esas, 2024/50 Karar
+HÜKÜM :Yeniden hüküm kurulmak suretiyle dava ret
+İLK DERECE MAHKEMESİ : İstanbul 2. Fikrî ve Sınaî Haklar Hukuk Mahkemesi
+SAYISI : 2018/310 E., 2019/556 K.
+
+Bölge Adliye Mahkemesi kararı davacı vekili tarafından temyiz edilmekle; temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, temyiz dilekçesinin kabulüne karar verildikten ve
+Tetkik Hâkimi tarafından hazırlanan rapor dinlendikten sonra dosyadaki belgeler incelenip gereği düşünüldü:
+
+KARAR
+I. DAVA
+Davacı vekili dava dilekçesinde; online çiçek ve hediye sektöründe faaliyet gösteren müvekkili şirketin “...”, “...”, “....com” ibareli, biri de tanınmış olarak tescilli markalarını ticaret unvanında ve alan adında kullandığını, davalının www.gazeboflowers.com.tr alan adlı web sitesine ticari etki yaratacak biçimde Google Adwords Reklam Yöntemi için anahtar sözcük olarak izinsiz ve hukuka aykırı olarak müvekkili markalarının kullanıldığının tespit edildiğini ileri sürerek marka tescillerinden doğan haklara vaki tecavüzün men'ine, ref'ine, haksız rekabetin tespitine, men'ine, ref'ine 20.000,00 TL manevi tazminatın davalıdan tahsiline karar verilmesini talep etmiştir.
+
+II. CEVAP
+Davalı vekili cevap dilekçesinde; müvekkili şirket tarafından Google Adwords hizmetinde seçilen kelimeler arasında “...” ve/veya “...” ibarelerinin olmadığını, bu anlamda ifadeler olarak “çiçek” ve “sepet” kelimelerinin seçildiğini, “....com” Google aramasında müvekkilinin adının üst tarafta çıkmasının nedeninin Google Adwords hizmetinin algoritmasından kaynaklandığını, Google Adwords reklamlarında bir anahtar sözcük için en yüksek ücreti ödeyen kimsenin reklam sıralamasında yukarılarda hatta ilk sırada yer aldığını, müvekkilinin davacının talebi üzerine Google Adwords anahtar kelime seçimlerinde davacının isim tescili olan anahtar kelimeleri çıkardığını, bunun da müvekkilinin iyi niyetini ortaya koyduğunu, dava tarihi itibariyle müvekkilinin hiçbir şekilde “....com”, “...”, “...” ibarelerini kullanmadığını, müvekkilinin reklam veren olarak kendi iştigal alanı olan “çiçek” ve mesleği ile ilgili kelimelerden biri olan ve satışını gerçekleştirdiği “sepet” ve “...” kelimelerini anahtar kelime olarak kullandığını, Adwords reklam uygulamalarında bir şirketin iştigal ettiği meslek adını, ürettiği ürün ve herkesin kullanabileceği umumi bir kavramı kullanabileceğini, davacının bu dava ile Türkiye’de çiçek sektöründe tekel olma çabası güttüğünü, bu durumun Rekabet Kanunu'na da aykırı olduğunu savunarak davanın reddini istemiştir.
+
+III. İLK DERECE MAHKEMESİ KARARI
+İlk Derece Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile davalı tarafından Google Adwords sisteminde “...” ve “...” kelimelerinin reklam amaçlı olarak 20.06.2016 tarihinde oluşturulduğu, dava öncesi 16.10.2017 tarihinde gerçekleştirilen güncelleme ile “...”, “...” kelimeleri negatif anahtar kelime olarak belirlenip kullanımdan kaldırıldığı, “...” kelimesinin dava sonrası 14.03.2018 tarihinde kullanımına son verildiği, “...” kelimesinin halihazırda kullanılmaya devam edildiği gerekçesi ile davanın kabulüne karar verilmiş, hüküm, taraflarca istinaf edilmiştir.
+
+IV. BÖLGE ADLİYE MAHKEMESİ KARARI
+Bölge Adliye Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile TÜRKPATENT'in 29.04.2013 tarihli kararı ile davacının "..." markasının tanınmış marka olarak tespit edildiği, davalının reklam olarak Google Adwords kelime seçimlerinde dava tarihinden sonra sadece "..." ibaresinin kaldığı, bu kullanımın sadece çiçek ve sepet kelimelerini içerdiği, davacı markasının "..." olarak tanındığı, çiçek ve sepet kelimelerinin davalı tarafın internet sitesinde, çiçekçilik mesleği gereği satmakta olduğu ürünün cinsini, niteliğini göstermek amacıyla internet sayfasındaki menüde ya da ürün tanıtımında kullanıldığı, kullanımın 6769 sayılı Sınai Mülkiyet Kanunu'nun (SMK) 7/5-b hükmü anlamında malların türüne, sunuluş şekline ilişkin "hukuka uygun kullanım" olduğu vasıf ve cins bildirmesi ve davacının markalarından farklı olarak kullanılması nedeniyle dürüst ve ticari kullanım sınırları içerisinde kaldığı gerekçesiyle davalının istinaf başvurusunun kabulü ile İlk Derece Mahkemesi kararının kaldırılmasına, yeniden hüküm kurulmasına, davanın reddine karar verilmiş, karar, davacı tarafça temyiz edilmiştir.
+
+V. TEMYİZ
+A. Dava ve Hukuki Nitelendirme
+Dava, marka hakkına tecavüzün tespiti, men'i, ref'i, haksız rekabetin tespiti ve manevi tazminat talebine ilişkindir.
+
+B.Değerlendirme ve Gerekçe
+Uyuşmazlık, davalının arama motoruna anahtar sözcük olarak bildirmiş olduğu "..." ibaresinin, davacının "...", "...", "....com" ibareli markaları karşısında dürüst kullanım kabul edilip edilemeyeceği noktasında toplanmaktadır.
+
+SMK'nın 7/5-(b) hükmü:
+"Marka sahibi, üçüncü kişiler tarafından dürüstçe ve ticari hayatın olağan akışı içinde, markasının aşağıda belirtilen biçimlerde kullanılmasını engelleyemez:
+
+b) Malların veya hizmetlerin türüne, kalitesine, miktarına, kullanım amacına, değerine, coğrafi kaynağına, üretim veya sunuluş zamanına ya da diğer niteliklerine ilişkin açıklamalarda bulunulması"
+
+düzenlemesini haiz olup, bu madde uyarınca kullanımın tecavüz oluşturmaması için ibarenin (b) bendinde yazılı şekilde açıklama yapmak amacıyla kullanılması gerekir.
+
+Somut olayda, davalı şirketin, davacının markasıyla benzer olan "..." ibaresini anahtar sözcük olarak arama motoruna bildirdiği ve bu işareti ticari etki yaratacak şekilde yönlendirici kod ve anahtar sözcük olarak kullandığı anlaşılmaktadır. O nedenle kullanımı mezkûr madde kapsamına girmez. Bu husus dikkate alınarak yapılacak değerlendirme sonucuna göre karar verilmesi gerekirken yazılı gerekçe ile karar verilmesi doğru olmamış bozmayı gerektirmiştir.
+
+VI. SONUÇ: Yukarıda (1) numaralı bentte açıklanan nedenlerle davacının temyiz itirazlarının kabulü ile Bölge Adliye Mahkemesi kararının BOZULMASINA, 6100 sayılı Hukuk Muhakemeleri Kanunu'un 373/2 hükmü uyarınca dava dosyasının Bölge Adliye Mahkemesi'ne gönderilmesine, peşin alınan temyiz karar harcının istek halinde ilgiliye iadesine, 25.02.2025 tarihinde oy birliğiyle karar verildi.
+

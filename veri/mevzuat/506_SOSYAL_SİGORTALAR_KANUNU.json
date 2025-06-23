@@ -1,0 +1,567 @@
+{
+  "mevzuat_adi": "SOSYAL SİGORTALAR KANUNU",
+  "kanun_icerigi": {
+    "maddeler": {
+      "1": {
+        "baslik": "2795",
+        "metin": "Madde 1\n1/2/1983\nDiğer Maddeleri\n1/1/1983"
+      },
+      "97": {
+        "baslik": "Madde 1 ilâ 96 – (Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Madde 97 – \n\n(Mülga: 25/8/1999 - 4447/62 md.)"
+      },
+      "98": {
+        "baslik": "Madde 97 – (Mülga: 25/8/1999 - 4447/62 md.)",
+        "metin": "Madde 98 ilâ 140 - \n\n(Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 1": {
+        "baslik": "Madde 98 ilâ 140 - (Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 1 - (13/7/1967 tarihli ve 899 sayılı Kanunun 3 üncü maddesi hükmü olup, ek maddeye çevrilerek 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 2": {
+        "baslik": "Ek Madde 1 - (13/7/1967 tarihli ve 899 sayılı Kanunun 3 üncü maddesi hükmü olup, ek maddeye çevrilerek 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 2 - (16/6/1975 - 1912/7 md. ile gelen ek 1. md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 29/6/1978-2167/15 md.)"
+      },
+      "EK 3": {
+        "baslik": "Ek Madde 2 - (16/6/1975 - 1912/7 md. ile gelen ek 1. md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 29/6/1978-2167/15 md.)",
+        "metin": "Ek Madde 3 –(16/6/1975 - 1912/7 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 4": {
+        "baslik": "Ek Madde 3 –(16/6/1975 - 1912/7 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 4 – (16/6/1975 - 1912/7 md. ile gelen Ek 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 5": {
+        "baslik": "Ek Madde 4 – (16/6/1975 - 1912/7 md. ile gelen Ek 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 5 – (11/8/1977 - 2098/1 md. ile gelen ek 1 inci madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 6": {
+        "baslik": "Ek Madde 5 – (11/8/1977 - 2098/1 md. ile gelen ek 1 inci madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 6 – (11/8/1977 - 2098/1 md. ile gelen ek 2 nci madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 7": {
+        "baslik": "Ek Madde 6 – (11/8/1977 - 2098/1 md. ile gelen ek 2 nci madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 7 – (11/8/1977 - 2098/1 md. ile gelen ek 3 üncü madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 8": {
+        "baslik": "Ek Madde 7 – (11/8/1977 - 2098/1 md. ile gelen ek 3 üncü madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 8 – (11/8/1977 - 2099/2 md. ile gelen numarasız Ek md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 9": {
+        "baslik": "Ek Madde 8 – (11/8/1977 - 2099/2 md. ile gelen numarasız Ek md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 9 – (11/8/1977 - 2100/2 maddesi hükmü olup, ek maddeye çevrilerek 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 10": {
+        "baslik": "Ek Madde 9 – (11/8/1977 - 2100/2 maddesi hükmü olup, ek maddeye çevrilerek 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 10 – (29/6/1978 - 2167/14 md. ile gelen Ek 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 11": {
+        "baslik": "Ek Madde 10 – (29/6/1978 - 2167/14 md. ile gelen Ek 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 11 – (29/6/1978 - 2167/14 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 12": {
+        "baslik": "Ek Madde 11 – (29/6/1978 - 2167/14 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 12 – (29/6/1978 - 2167/14 md. ile gelen ek 3 üncü madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 13": {
+        "baslik": "Ek Madde 12 – (29/6/1978 - 2167/14 md. ile gelen ek 3 üncü madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 13 – (29/6/1978 - 2167/14 md. ile gelen Ek 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 14": {
+        "baslik": "Ek Madde 13 – (29/6/1978 - 2167/14 md. ile gelen Ek 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 14 – (29/6/1978 - 2167/14 md. ile gelen Ek 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 15": {
+        "baslik": "Ek Madde 14 – (29/6/1978 - 2167/14 md. ile gelen Ek 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 15 – (29/6/1978 - 2167/14 md. ile gelen Ek 6 ncı md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006 - 5510/106 md.)"
+      },
+      "EK 16": {
+        "baslik": "Ek Madde 15 – (29/6/1978 - 2167/14 md. ile gelen Ek 6 ncı md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006 - 5510/106 md.)",
+        "metin": "Ek Madde 16 – (29/6/1978 - 2167/14 md. ile gelen ek 7 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 6/3/1981 - 2422/20 md.)"
+      },
+      "EK 17": {
+        "baslik": "Ek Madde 16 – (29/6/1978 - 2167/14 md. ile gelen ek 7 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 6/3/1981 - 2422/20 md.)",
+        "metin": "Ek Madde 17 – (29/6/1978 - 2167/14 md. ile gelen Ek 8 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 6/3/1981 - 2422/20 md.)"
+      },
+      "EK 18-": {
+        "baslik": "Ek Madde 17 – (29/6/1978 - 2167/14 md. ile gelen Ek 8 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 6/3/1981 - 2422/20 md.)",
+        "metin": "Ek Madde 18- (29/6/1978 - 2167/14 md. ile gelen Ek 9 ncu Md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 19": {
+        "baslik": "Ek Madde 18- (29/6/1978 - 2167/14 md. ile gelen Ek 9 ncu Md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 19 - (6/3/1981 - 2422 sayılı Kanunun 19 ncu maddesi hükmü olup, ek maddeye çevrilerek numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 20": {
+        "baslik": "Ek Madde 19 - (6/3/1981 - 2422 sayılı Kanunun 19 ncu maddesi hükmü olup, ek maddeye çevrilerek numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 20 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)"
+      },
+      "EK 21": {
+        "baslik": "Ek Madde 20 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)",
+        "metin": "Ek Madde 21 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)"
+      },
+      "EK 22": {
+        "baslik": "Ek Madde 21 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)",
+        "metin": "Ek Madde 22 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)"
+      },
+      "EK 23": {
+        "baslik": "Ek Madde 22 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)",
+        "metin": "Ek Madde 23 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)"
+      },
+      "EK 24": {
+        "baslik": "Ek Madde 23 – (Ek : 6/3/1981 - 2422/17 md.; Mülga : 25/8/1999 - 4447/62 md.)",
+        "metin": "Ek Madde 24 – (6/3/1981 - 2422/17 md. ile gelen Ek 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md. )"
+      },
+      "EK 25": {
+        "baslik": "Ek Madde 24 – (6/3/1981 - 2422/17 md. ile gelen Ek 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md. )",
+        "metin": "Ek Madde 25 – (11/12/1981 - 2564/3 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Değişik: 28/1/1983 - 2795/5 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 26": {
+        "baslik": "Ek Madde 25 – (11/12/1981 - 2564/3 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Değişik: 28/1/1983 - 2795/5 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 26 – (20/3/1985 - 3168/7 md. ile gelen Ek md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 27": {
+        "baslik": "Ek Madde 26 – (20/3/1985 - 3168/7 md. ile gelen Ek md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 27 – (24/12/1985 tarih ve 3246 sayılı Kanunun 3 üncü maddesi hükmü olup, ek maddeye çevrilerek 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)"
+      },
+      "EK 28": {
+        "baslik": "Ek Madde 27 – (24/12/1985 tarih ve 3246 sayılı Kanunun 3 üncü maddesi hükmü olup, ek maddeye çevrilerek 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)",
+        "metin": "Ek Madde 28 – (24/12/1985 - 3246/1 md. ile gelen Ek 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)"
+      },
+      "EK 29": {
+        "baslik": "Ek Madde 28 – (24/12/1985 - 3246/1 md. ile gelen Ek 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)",
+        "metin": "Ek Madde 29 – (24/12/1985 - 3246/1 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)"
+      },
+      "EK 30": {
+        "baslik": "Ek Madde 29 – (24/12/1985 - 3246/1 md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)",
+        "metin": "Ek Madde 30 – (24/12/1985 - 3246/1 md. ile gelen Ek 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)"
+      },
+      "EK 31": {
+        "baslik": "Ek Madde 30 – (24/12/1985 - 3246/1 md. ile gelen Ek 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)",
+        "metin": "Ek Madde 31 – (29/4/1986 - 3279/10 md. ile gelen Ek 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md. )"
+      },
+      "EK 32": {
+        "baslik": "Ek Madde 31 – (29/4/1986 - 3279/10 md. ile gelen Ek 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md. )",
+        "metin": "Ek Madde 32 – (29/4/1986 - 3279/10 Md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106  md.)"
+      },
+      "EK 33": {
+        "baslik": "Ek Madde 32 – (29/4/1986 - 3279/10 Md. ile gelen Ek 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Ek Madde 33 – (20/6/1987 - 3395/16 md. ile gelen Ek 1 inci madde hükmü olup 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 34": {
+        "baslik": "Ek Madde 33 – (20/6/1987 - 3395/16 md. ile gelen Ek 1 inci madde hükmü olup 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 34 – 35 - (20/6/1987 - 3395/16 md. ile gelen Ek 2 ve 3 üncü madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 25/8/1999 - 4449/62 md.)"
+      },
+      "EK 36": {
+        "baslik": "KHK/700",
+        "metin": "Ek Madde 36\n24/6/2018 tarihinde birlikte yapılan Türkiye Büyük Millet Meclisi ve Cumhurbaşkanlığı seçimleri sonucunda Cumhurbaşkanının andiçerek göreve başladığı tarihte (9/7/2018)"
+      },
+      "EK 37": {
+        "baslik": "5378",
+        "metin": "Ek Madde 37\n1/6/2006\n5386\n121 ve Geçici Madde 91\n9/7/2005\n5454\n140, Ek Madde 24 ve Geçici Madde 92\n15/2/2006\n5458\n80, Ek Madde 50\n4/3/2006 tarihini takip eden ayın ilk gününde\n5561\n26 ve Geçici Madde 93\n18/10/2006 tarihinden geçerli olmak üzere 16/12/2006\n5655\n140, Ek Madde 25 ve Geçici Madde 91\n20/5/2007\n5698\n58, 63\n23/10/2007\n(5754 sayılı Kanun ile değişik)\n5510\nSosyal Sigortalar Kanununun 142 ve 143 üncü, Ek Madde 36, Geçici Madde 20, Geçici Madde 81 ve 87 nci maddeleri hariç diğer tüm maddeleri.\n1/10/2008"
+      },
+      "EK 38": {
+        "baslik": "Ek Madde 37 – (Ek: 30/5/1997 - KHK - 572/21 md.; Mülga: 1/7/2005 – 5378/50 md.)",
+        "metin": "Ek Madde 38 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 39": {
+        "baslik": "Ek Madde 38 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 39 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 40": {
+        "baslik": "Ek Madde 39 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 40 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 41": {
+        "baslik": "Ek Madde 40 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 41 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 42": {
+        "baslik": "Ek Madde 41 – (Ek: 25/8/1999 - 4447/16 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 42 – (Ek: 29/9/1999 - KHK - 578/2 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 43": {
+        "baslik": "Ek Madde 42 – (Ek: 29/9/1999 - KHK - 578/2 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 43 – (Ek : 24/8/2000 - KHK- 616/63 md.; İptal: Anayasa Mahkemesinin 31/10/2000 tarihli ve E.:2000/65, K.:2000/38 sayılı Kararı ile; Yeniden düzenleme: 29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 44": {
+        "baslik": "Ek Madde 43 – (Ek : 24/8/2000 - KHK- 616/63 md.; İptal: Anayasa Mahkemesinin 31/10/2000 tarihli ve E.:2000/65, K.:2000/38 sayılı Kararı ile; Yeniden düzenleme: 29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 44 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 45": {
+        "baslik": "Ek Madde 44 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 45 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 46": {
+        "baslik": "Ek Madde 45 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 46 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 47": {
+        "baslik": "Ek Madde 46 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 47 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 48-": {
+        "baslik": "Ek Madde 47 - (Ek:29/7/2003-4958/53 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 48- (Ek: 24/6/2004-5198/19 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 49-": {
+        "baslik": "Ek Madde 48- (Ek: 24/6/2004-5198/19 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 49- (Ek: 2/12/2004-5264/2 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "EK 50-": {
+        "baslik": "Ek Madde 49- (Ek: 2/12/2004-5264/2 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Ek Madde 50- (Ek: 22/2/2006-5458/7 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 1": {
+        "baslik": "Ek Madde 50- (Ek: 22/2/2006-5458/7 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 1 ilâ 19 – \n\n(Mülga: 31/5/2006-5510/106 md.)[3]"
+      },
+      "GEÇİCİ 20": {
+        "baslik": "6111",
+        "metin": "Geçici Madde 20\n25/2/2011"
+      },
+      "GEÇİCİ 21": {
+        "baslik": "(Ek fıkra: 13/2/2011-6111/53 md.) Birinci fıkranın (b) bendinin uygulanmasında, yardımların sağlanması ve bağlanması yönünden alt sınırın belirlenmesinde muadil miktar karşılaştırması esas alınır. Ancak, gelir ve aylıkların artırılmasında 506 sayılı Kanuna göre bağlanan gelir ve aylıkların artırımına ilişkin hükümler devir tarihine kadar uygulanmaz. 5510 sayılı Kanunun geçici 20 nci maddesinin onikinci fıkrasında yer alan sınırlama dâhilinde sandıkların kuruluş senetlerinde yer alan hükümler ve sandıkların uygulamaları saklıdır. Bu hüküm, yürürlüğe girdiği tarihten önceki artışlarda ve görülmekte olan davalar hakkında da uygulanır.",
+        "metin": "Geçici Madde 21 – (Ek: 13/7/1967 - 899/4 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 22": {
+        "baslik": "Geçici Madde 21 – (Ek: 13/7/1967 - 899/4 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 22 – (Ek: 13/7/1967 - 899/5 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 23": {
+        "baslik": "Geçici Madde 22 – (Ek: 13/7/1967 - 899/5 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 23 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 24": {
+        "baslik": "Geçici Madde 23 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 24 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 25": {
+        "baslik": "Geçici Madde 24 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 25 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 26": {
+        "baslik": "Geçici Madde 25 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 26 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 27": {
+        "baslik": "Geçici Madde 26 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 27 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 28": {
+        "baslik": "Geçici Madde 27 – (23/10/1969 - 1186/21 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 28 – (7/3/1973 - 1698/2 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 29": {
+        "baslik": "Geçici Madde 28 – (7/3/1973 - 1698/2 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 29 – (7/3/1973 - 1698/2 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 30": {
+        "baslik": "Geçici Madde 29 – (7/3/1973 - 1698/2 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 30 – (7/3/1973 - 1698/2 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 31": {
+        "baslik": "Geçici Madde 30 – (7/3/1973 - 1698/2 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 31 –  (7/3/1973 - 1698/2 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106  md.)"
+      },
+      "GEÇİCİ 32": {
+        "baslik": "Geçici Madde 31 –  (7/3/1973 - 1698/2 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Geçici Madde 32 – (21/6/1973 - 1753/4 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 33": {
+        "baslik": "Geçici Madde 32 – (21/6/1973 - 1753/4 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 33 – (21/6/1973 - 1753/4 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106  md.)"
+      },
+      "GEÇİCİ 34": {
+        "baslik": "Geçici Madde 33 – (21/6/1973 - 1753/4 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Geçici Madde 34 – (16/6/1975 - 1912/7 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 35": {
+        "baslik": "Geçici Madde 34 – (16/6/1975 - 1912/7 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 35 – (16/6/1975 - 1912/7 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 36": {
+        "baslik": "Geçici Madde 35 – (16/6/1975 - 1912/7 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 36 – (16/6/1975 - 1912/7 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 37": {
+        "baslik": "Geçici Madde 36 – (16/6/1975 - 1912/7 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 37 – (16/6/1975 - 1912/7 md. ile gelen Geçici 4 üncü madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 38": {
+        "baslik": "Geçici Madde 37 – (16/6/1975 - 1912/7 md. ile gelen Geçici 4 üncü madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 38 – (16/6/1975 - 1912/7 md. ile gelen Geçici 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 39": {
+        "baslik": "Geçici Madde 38 – (16/6/1975 - 1912/7 md. ile gelen Geçici 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 39 – (16/6/1975 - 1912/7 md. ile gelen Geçici 6 ncı md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 40": {
+        "baslik": "Geçici Madde 39 – (16/6/1975 - 1912/7 md. ile gelen Geçici 6 ncı md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 40 – (16/6/1975 - 1912/7 md. ile gelen Geçici 7 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 41": {
+        "baslik": "Geçici Madde 40 – (16/6/1975 - 1912/7 md. ile gelen Geçici 7 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 41 – (11/5/1976 - 1992 sayılı Kanunun 3 üncü md. si ile gelen geçici md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 42": {
+        "baslik": "Geçici Madde 41 – (11/5/1976 - 1992 sayılı Kanunun 3 üncü md. si ile gelen geçici md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 42 – (11/8/1977 - 2098/1 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 43": {
+        "baslik": "Geçici Madde 42 – (11/8/1977 - 2098/1 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 43 – (11/8/1977 - 2099 sayılı Kanunun 3 üncü md. si ile gelen geçici md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 44": {
+        "baslik": "Geçici Madde 43 – (11/8/1977 - 2099 sayılı Kanunun 3 üncü md. si ile gelen geçici md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 44 – (29/6/1978 - 2167/14 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 45": {
+        "baslik": "Geçici Madde 44 – (29/6/1978 - 2167/14 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 45 – (29/6/1978 - 2167/14 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 46": {
+        "baslik": "Geçici Madde 45 – (29/6/1978 - 2167/14 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 46 – (29/6/1978 - 2167/14 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 47": {
+        "baslik": "Geçici Madde 46 – (29/6/1978 - 2167/14 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 47 – (29/6/1978 - 2167/14 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 48": {
+        "baslik": "Geçici Madde 47 – (29/6/1978 - 2167/14 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 48 – (29/6/1978 - 2167/14 md. ile gelen Geçici 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 49": {
+        "baslik": "Geçici Madde 48 – (29/6/1978 - 2167/14 md. ile gelen Geçici 5 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 49 – (29/6/1978 - 2167/14 md. ile gelen Geçici 6 ncı md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 50": {
+        "baslik": "Geçici Madde 49 – (29/6/1978 - 2167/14 md. ile gelen Geçici 6 ncı md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 50 – (6/3/1981 - 2422/18 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 51": {
+        "baslik": "Geçici Madde 50 – (6/3/1981 - 2422/18 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 51 – (6/3/1981 - 2422/18 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 52": {
+        "baslik": "Geçici Madde 51 – (6/3/1981 - 2422/18 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 52 – (6/3/1981 - 2422/18 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 53": {
+        "baslik": "Geçici Madde 52 – (6/3/1981 - 2422/18 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 53 – (6/3/1981 - 2422/18 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 54": {
+        "baslik": "Geçici Madde 53 – (6/3/1981 - 2422/18 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 54 – (11/12/1981 - 2564/4 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 55": {
+        "baslik": "Geçici Madde 54 – (11/12/1981 - 2564/4 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 55 – (24/10/1983 - 2934/5 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 56": {
+        "baslik": "Geçici Madde 55 – (24/10/1983 - 2934/5 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 56 – (24/10/1983 - 2934/5 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 57": {
+        "baslik": "Geçici Madde 56 – (24/10/1983 - 2934/5 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 57 – (24/10/1983 - 2934/5 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106  md.)"
+      },
+      "GEÇİCİ 58": {
+        "baslik": "Geçici Madde 57 – (24/10/1983 - 2934/5 md. ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Geçici Madde 58 – (17/11/1983 - 2959/1 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 59": {
+        "baslik": "Geçici Madde 58 – (17/11/1983 - 2959/1 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 59 – (17/11/1983 - 2959/1 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 60": {
+        "baslik": "Geçici Madde 59 – (17/11/1983 - 2959/1 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 60 – (20/3/1985 - 3168/8 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 61": {
+        "baslik": "Geçici Madde 60 – (20/3/1985 - 3168/8 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 61 – (20/3/1985 - 3168/8 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 62": {
+        "baslik": "Geçici Madde 61 – (20/3/1985 - 3168/8 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 62 – (20/3/1985 - 3168/8 md. ile gelen Geçici 3 üncü md. hükmü olup 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 63": {
+        "baslik": "Geçici Madde 62 – (20/3/1985 - 3168/8 md. ile gelen Geçici 3 üncü md. hükmü olup 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 63 – (20/3/1985 - 3168/8 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 64": {
+        "baslik": "Geçici Madde 63 – (20/3/1985 - 3168/8 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 64 – (24/12/1985 - 3246/2 md. ile gelen Geçici 1 inci md. hükmü olup, madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)"
+      },
+      "GEÇİCİ 65": {
+        "baslik": "Geçici Madde 64 – (24/12/1985 - 3246/2 md. ile gelen Geçici 1 inci md. hükmü olup, madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992 - 3774/6 md.)",
+        "metin": "Geçici Madde 65 – (24/12/1985 - 3246/2 md. ile gelen Geçici 2 nci md. hükmü olup, madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992-3774/6 md.)"
+      },
+      "GEÇİCİ 66": {
+        "baslik": "Geçici Madde 65 – (24/12/1985 - 3246/2 md. ile gelen Geçici 2 nci md. hükmü olup, madde numarası teselsül ettirilmiştir; Mülga: 20/2/1992-3774/6 md.)",
+        "metin": "Geçici Madde 66 – (20/6/1987 - 3395/17 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106  md.)"
+      },
+      "GEÇİCİ 67": {
+        "baslik": "Geçici Madde 66 – (20/6/1987 - 3395/17 md. ile gelen Geçici 1 inci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Geçici Madde 67 – (20/6/1987 - 3395/17 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 68": {
+        "baslik": "Geçici Madde 67 – (20/6/1987 - 3395/17 md. ile gelen Geçici 2 nci md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 68 – (20/6/1987 - 3395/17 md ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 69": {
+        "baslik": "Geçici Madde 68 – (20/6/1987 - 3395/17 md ile gelen Geçici 3 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 69 – (20/6/1987 - 3395/17 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 70": {
+        "baslik": "Geçici Madde 69 – (20/6/1987 - 3395/17 md. ile gelen Geçici 4 üncü md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 70 – (20/6/1987 - 3395/17 md. ile gelen Geçici 5 inci md. hükmü olup, madde numarası teselsül ettirilmiştir; İptal: Ana. Mah. Kar. 26/10/1988 - E. 1988/19, K. 1988/33)"
+      },
+      "GEÇİCİ 71": {
+        "baslik": "Geçici Madde 70 – (20/6/1987 - 3395/17 md. ile gelen Geçici 5 inci md. hükmü olup, madde numarası teselsül ettirilmiştir; İptal: Ana. Mah. Kar. 26/10/1988 - E. 1988/19, K. 1988/33)",
+        "metin": "Geçici Madde 71 – (4/4/1987- KHK - 277/1 md. ile gelen Geçici 1 md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)"
+      },
+      "GEÇİCİ 72": {
+        "baslik": "Geçici Madde 71 – (4/4/1987- KHK - 277/1 md. ile gelen Geçici 1 md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)",
+        "metin": "Geçici Madde 72 – (4/4/1987 - KHK - 277/1 md. ile gelen Geçici 2 md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)"
+      },
+      "GEÇİCİ 73": {
+        "baslik": "Geçici Madde 72 – (4/4/1987 - KHK - 277/1 md. ile gelen Geçici 2 md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)",
+        "metin": "Geçici Madde 73 – (4/4/1987 - KHK - 277/1 md. ile gelen Geçici 3 md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)"
+      },
+      "GEÇİCİ 74": {
+        "baslik": "Geçici Madde 73 – (4/4/1987 - KHK - 277/1 md. ile gelen Geçici 3 md. hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)",
+        "metin": "Geçici Madde 74 – (20/5/1988 - KHK - 323/1 md. ile gelen Geçici Madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)"
+      },
+      "GEÇİCİ 75": {
+        "baslik": "Geçici Madde 74 – (20/5/1988 - KHK - 323/1 md. ile gelen Geçici Madde hükmü olup, 1/2/1989 tarih ve 3520 sayılı Kanun ile madde numarası teselsül ettirilmiştir. Mülga: 9/5/1990 - 3642/1 md.)",
+        "metin": "Geçici Madde 75 – (Ek: 16/2/1989 - 3522/2 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 76": {
+        "baslik": "Geçici Madde 75 – (Ek: 16/2/1989 - 3522/2 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 76 – (Ek: 7/3/1991 - 3702/1 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 77": {
+        "baslik": "Geçici Madde 76 – (Ek: 7/3/1991 - 3702/1 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 77 – (Ek: 7/3/1991 - 3702/1 md. ; Mülga: 31/5/2006-5510/106  md.)"
+      },
+      "GEÇİCİ 78": {
+        "baslik": "Geçici Madde 77 – (Ek: 7/3/1991 - 3702/1 md. ; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Geçici Madde 78 – (Ek: 5/3/1992 - 3786/1 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 79": {
+        "baslik": "Geçici Madde 78 – (Ek: 5/3/1992 - 3786/1 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 79 – (Ek:1/12/1993 - 3917/2 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 80": {
+        "baslik": "Geçici Madde 79 – (Ek:1/12/1993 - 3917/2 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 80 – (Ek: 8/12/1994 - 4056/1 md.; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 81": {
+        "baslik": "Geçici Madde 80 – (Ek: 8/12/1994 - 4056/1 md.; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 81 – (Ek: 25/8/1999 - 4447/17 md.)\nBu Kanunun yürürlüğe girdiği tarihte;\nA) Bu Kanunun yürürlük tarihinden önce yürürlükte bulunan hükümlere göre yaşlılık aylığı bağlanmasına hak kazanmış olanlar ile sigortalılık süresi 18 yıl ve daha fazla olan kadınlar ve sigortalılık süresi 23 yıl ve daha fazla olan erkekler hakkında, bu Kanunun yürürlüğe girdiği tarihten önce yürürlükte bulunan hükümler uygulanır.\nB) \n\n(Yeniden düzenleme: 23/5/2002-4759/3 md.) 23.5.2002 tarihinde;\na) (A) bendi kapsamında olanlar hariç sigortalılık süresi 18 (dahil) yıldan fazla olan kadınlar 20 yıllık sigortalılık süresini ve 40 yaşını doldurmaları, sigortalılık süresi 23 yıldan (dahil) fazla olan erkekler 25 yıllık sigortalılık süresini ve 44 yaşını doldurmaları ve en az 5000 gün,\nb) Sigortalılık süresi 17 (dahil) yıldan fazla, 18 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 41 yaşını doldurmaları, sigortalılık süresi 21 yıl 6 ay (dahil) dan fazla, 23 yıldan az olan erkekler 25 yıllık sigortalılık süresini ve 45 yaşını doldurmaları ve en az 5000 gün,\nc) Sigortalılık süresi 16 (dahil) yıldan fazla, 17 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 42 yaşını doldurmaları, sigortalılık süresi 20 yıl (dahil) dan fazla, 21 yıl 6 aydan az olan erkekler 25 yıllık sigortalılık süresini ve 46 yaşını doldurmaları ve en az 5075 gün,\nd) Sigortalılık süresi 15 (dahil) yıldan fazla, 16 yıldan az olan  kadınlar 20 yıllık sigortalılık süresini ve 43 yaşını doldurmaları, sigortalılık süresi 18 yıl 6 ay (dahil) dan fazla, 20 yıldan az olan erkekler 25 yıllık sigortalılık süresini ve 47 yaşını doldurmaları ve en az 5150 gün,\ne) Sigortalılık süresi 14 (dahil) yıldan fazla, 15 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 44 yaşını doldurmaları, sigortalılık süresi 17 yıl (dahil) dan fazla, 18 yıl 6 aydan az olan erkekler 25 yıllık sigortalılık süresini ve 48 yaşını doldurmaları ve en az 5225 gün,\nf) Sigortalılık süresi 13 (dahil) yıldan fazla, 14 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 45 yaşını doldurmaları, sigortalılık süresi 15 yıl 6 ay (dahil) dan fazla, 17 yıldan az olan erkekler 25 yıllık sigortalılık süresini ve 49 yaşını doldurmaları ve en az 5300 gün,\ng) Sigortalılık süresi 12 (dahil) yıldan fazla, 13 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 46 yaşını doldurmaları, sigortalılık süresi 14  (dahil) yıldan fazla, 15 yıl 6 aydan az olan erkekler 25 yıllık sigortalılık süresini ve 50 yaşını doldurmaları ve en az 5375 gün,\nh) Sigortalılık süresi 11 (dahil) yıldan fazla, 12 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 47 yaşını doldurmaları, sigortalılık süresi 12 yıl 6 ay (dahil) dan fazla, 14 yıldan az olan erkekler 25 yıllık sigortalılık süresini ve 51 yaşını doldurmaları ve en az 5450 gün,\nı) Sigortalılık süresi 10 (dahil) yıldan fazla, 11 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 48 yaşını doldurmaları, sigortalılık süresi 11 (dahil) yıldan fazla, 12 yıl 6 aydan az olan erkekler 25 yıllık sigortalılık süresini ve 52 yaşını doldurmaları ve en az 5525 gün,\nj) Sigortalılık süresi 9 (dahil) yıldan fazla, 10 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 49 yaşını doldurmaları, sigortalılık süresi 9 yıl 6 ay (dahil) dan fazla, 11 yıldan az olan erkekler 25 yıllık sigortalılık süresini ve 53 yaşını doldurmaları ve en az 5600 gün,\nk) Sigortalılık süresi 8 (dahil) yıldan fazla, 9 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 50 yaşını doldurmaları, sigortalılık süresi 8 (dahil) yıldan fazla, 9 yıl 6 aydan az olan erkekler 25 yıllık sigortalılık süresini ve 54 yaşını doldurmaları ve en az 5675 gün,\nl) Sigortalılık süresi 7 (dahil) yıldan fazla, 8 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 51 yaşını doldurmaları, sigortalılık süresi 6 yıl 6 ay (dahil) dan fazla, 8 yıldan az olan erkekler 25 yıllık sigortalılık süresini ve 55 yaşını doldurmaları ve en az 5750 gün,\nm) Sigortalılık süresi 6 (dahil) yıldan fazla, 7 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 52 yaşını doldurmaları, sigortalılık süresi 5 (dahil) yıldan fazla, 6 yıl 6 aydan az olan erkekler 25 yıllık sigortalılık süresini ve 56 yaşını doldurmaları ve en az 5825 gün,\nn) Sigortalılık süresi 5 (dahil) yıldan fazla, 6 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 53 yaşını doldurmaları, sigortalılık süresi 3 yıl 6 ay (dahil) dan fazla, 5 yıldan az olan erkekler 25 yıllık sigortalılık süresini ve 57 yaşını doldurmaları ve en az 5900 gün,\no) Sigortalılık süresi 4 (dahil) yıldan fazla, 5 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 54 yaşını doldurmaları, sigortalılık süresi 2 yıl 8 ay 15 (dahil) günden fazla, 3 yıl 6 aydan az olan erkekler 25 yıllık sigortalılık süresini ve 58 yaşını doldurmaları ve en az 5975 gün,\np) Sigortalılık süresi 3 (dahil) yıldan fazla, 4 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 55 yaşını doldurmaları ve en az 5975 gün,\nr) Sigortalılık süresi 2 yıl 8 ay 15 (dahil) günden fazla, 3 yıldan az olan kadınlar 20 yıllık sigortalılık süresini ve 56 yaşını doldurmaları ve en az 5975 gün,\nMalûllük, yaşlılık ve ölüm sigortaları primi ödemiş bulunmaları şartı ile yaşlılık aylığından yararlanabilirler.\nC) \n\n(Yeniden düzenleme: 23/5/2002-4759/3 md.)  a) 23.5.2002 tarihinde 15 yıllık sigortalılık süresini kadın ise 50, erkek ise 55 yaşını doldurmuş ve 3600 gün malûllük, yaşlılık ve ölüm sigortaları primi ödemiş bulunanlara istekleri halinde yaşlılık aylığı bağlanır.\nb) 23.5.2002 tarihinde (a) bendinde öngörülen şartları yerine getiremeyenlerden bu şartları;\nba) 24.5.2002 ile 23.5.2005 tarihleri arasında yerine getirenler kadın ise 52, erkek ise 56 yaşını doldurmuş olmaları,\nbb) 24.5.2005 ile 23.5.2008 tarihleri arasında yerine getirenler kadın ise 54, erkek ise 57 yaşını doldurmuş olmaları,\nbc) 24.5.2008 ile 23.5.2011 tarihleri arasında yerine getirenler kadın ise 56, erkek ise 58 yaşını doldurmuş olmaları,\nbd) 24.5.2011 tarihinden sonra yerine getiren kadınlar 58, 24.5.2011 ile 23.5.2014 tarihleri arasında yerine getiren erkekler 59 yaşını doldurmuş olmaları,\nbe) 24.5.2014 tarihinden sonra yerine getiren erkekler  60 yaşını doldurmuş olmaları,"
+      },
+      "GEÇİCİ 82": {
+        "baslik": "Şartı ile yaşlılık aylığından yararlanabilirler.",
+        "metin": "Geçici Madde 82 – (25/8/1999 - 4447/17 md. ; Mülga: 31/5/2006-5510/106 md. )"
+      },
+      "GEÇİCİ 83": {
+        "baslik": "Geçici Madde 82 – (25/8/1999 - 4447/17 md. ; Mülga: 31/5/2006-5510/106 md. )",
+        "metin": "Geçici Madde 83 – (Ek : 24/8/2000 -KHK- 616/64 md.; İptal: Anayasa Mahkemesinin 31/10/2000 tarihli ve E.:2000/65, K.:2000/38 sayılı Kararı ile.)"
+      },
+      "GEÇİCİ 84": {
+        "baslik": "Geçici Madde 83 – (Ek : 24/8/2000 -KHK- 616/64 md.; İptal: Anayasa Mahkemesinin 31/10/2000 tarihli ve E.:2000/65, K.:2000/38 sayılı Kararı ile.)",
+        "metin": "Geçici Madde 84 – (Ek : 24/8/2000 -KHK- 616/64 md.; İptal: Anayasa Mahkemesinin 31/10/2000 tarihli ve E.:2000/65, K.:2000/38 sayılı Kararı ile. )"
+      },
+      "GEÇİCİ 85-": {
+        "baslik": "Geçici Madde 84 – (Ek : 24/8/2000 -KHK- 616/64 md.; İptal: Anayasa Mahkemesinin 31/10/2000 tarihli ve E.:2000/65, K.:2000/38 sayılı Kararı ile. )",
+        "metin": "Geçici Madde 85- (Ek: 9/4/2003-4842/34 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 86": {
+        "baslik": "Geçici Madde 85- (Ek: 9/4/2003-4842/34 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 86 – (Ek:29/7/2003-4958/54 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 87-": {
+        "baslik": "Geçici Madde 86 – (Ek:29/7/2003-4958/54 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 87- (Ek:29/7/2003-4958/54 md.) \n\n(Mülga:9/1/2025-7538/1 md.)"
+      },
+      "GEÇİCİ 88": {
+        "baslik": "5035",
+        "metin": "Geçici Madde 88\n2/1/2004\n506 SAYILI KANUNA EK VE DEĞİŞİKLİK GETİREN MEVZUATIN VEYA\nANAYASA MAHKEMESİ İPTAL KARARLARININ\nYÜRÜRLÜĞE GİRİŞ TARİHLERİNİ GÖSTERİR LİSTE\nDeğiştiren Kanunun/KHK’nin veya İptal Eden Anayasa Mahkemesi Kararının\nNumarası\n506 sayılı Kanunun değişen veya iptal edilen maddeleri\nYürürlüğe Giriş\nTarihi\n5073\na) 37 nci maddesi\n28/1/2004 tarihinde,\nb) 78 inci maddesinin birinci fıkrası\n1/1/2004 tarihinden geçerli olmak üzere yayımı tarihi olan     28/1/2004 tarihinden itibaren,\nc) Ek 3 üncü maddesi\n1/2/2004 tarihinde,\nd) 79 uncu ve  ek 42 nci maddesi\n1/5/2004 tarihinde,\ne) Geçici Madde 89 ve 90\n1/1/2004 tarihinden geçerli olmak üzere 28/1/2004 tarihinde yürürlüğe girer.\n5198\n85 inci madde\n6/7/2004 tarihini takip eden aybaşında\n8, 79, 80, 83, 117, 118, 120, 121, 140 ve Ek Madde 48\n6/7/2004\n78 inci madde\n1/7/2004\n5264\n32, Ek Madde 49\n11/12/2004"
+      },
+      "GEÇİCİ 89": {
+        "baslik": "Geçici Madde 88 – (Ek:25/12/2003 – 5035/46 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 89 – (Ek: 22/1/2004 – 5073/13 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 90": {
+        "baslik": "Geçici Madde 89 – (Ek: 22/1/2004 – 5073/13 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 90 – (Ek: 22/1/2004 – 5073/13 md. ; Mülga: 31/5/2006-5510/106  md.)"
+      },
+      "GEÇİCİ 91-": {
+        "baslik": "Geçici Madde 90 – (Ek: 22/1/2004 – 5073/13 md. ; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Geçici Madde 91- (Ek: 2/7/2005-5386/2 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 92—": {
+        "baslik": "Geçici Madde 91- (Ek: 2/7/2005-5386/2 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 92— (Ek: 8/2/2006-5454/7 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "GEÇİCİ 93-": {
+        "baslik": "Geçici Madde 92— (Ek: 8/2/2006-5454/7 md. ; Mülga: 31/5/2006-5510/106 md.)",
+        "metin": "Geçici Madde 93- (Ek: 12/12/2006-5561/3 md. ; Mülga: 31/5/2006-5510/106 md.)\nEk Geçici Madde 1 – (Ek: 15/4/1987 – 3351/1 md. ; Mülga: 31/5/2006-5510/106 md.)\nEk Geçici Madde 2 – (Ek : 31/5/2000 – 4571/1 md. ; Mülga: 31/5/2006-5510/106 md.)"
+      },
+      "141": {
+        "baslik": "Ek Geçici Madde 3 – (Ek : 20/3/2002 – 4747/3 md. ; Mülga: 31/5/2006-5510/106  md.)",
+        "metin": "Madde 141 – \n\n(Mülga: 17/4/2008-5754/64 md.)"
+      },
+      "142": {
+        "baslik": "Yürürlük tarihi:",
+        "metin": "Madde 142 – Bu Kanunun 126 ncı maddesi 1 Kasım 1964 tarihinde, diğer hükümleri ise yayımını takibeden aybaşından altı ay sonra yürürlüğe girer.\nAncak, geçici 7, 17 ve 18 inci maddeler ile 96 ncı madde hükümlerine göre yapılacak zamlar bu kanunun yayım tarihini takibeden ilk üç aylık dönemden itibaren hesabedilerek kanun yürürlüğe girdikten sonra verilir."
+      },
+      "143": {
+        "baslik": "Yürütme organı:",
+        "metin": "Madde 143 – Bu Kanunu Bakanlar Kurulu yürütür.\n506 SAYILI KANUNDA EK VE DEĞİŞİKLİK YAPAN MEVZUATIN YÜRÜRLÜKTEN KALDIRDIĞI KANUN VE HÜKÜMLERİ GÖSTERİR LİSTE\nYürürlükten Kaldırılan\nKanun veya Kanun Hükümleri\nTarihi\nSayısı\nMaddesi\n1136 sayılı kanunun Geçici 1 inci maddesinin 1186 sayılı kanuna aykırı hükümleri\n23/10/1969\n1186\n22\n4792 sayılı Sosyal Sigortalar Kurumu Kanununun değişik 6 ncı maddesinin 2,3,4 üncü fıkralarıyla 4837 sayılı kanunun muaddel 13 üncü maddesinin € bendi hükmü bu kanunun yürürlük tarihini takipeden mali yılbaşından itibaren\n11/5/1976\n1992\nEk 2\n1912 sayılı kanunun 7 nci maddesi ile 506 sayılı kanuna eklenen Ek Madde 1\n29/6/1978\n2167\n15\n2167 sayılı kanun ile 506 sayılı kanuna eklenen Ek Madde 7 ve 8\n6/3/1981\n2422\n20\n2422 sayılı kanun ile değişik 506 sayılı kanunun 73 üncü maddesinin B/b bendi\n28/1/1983\n2795\n6\n506 sayılı kanunun değişik 23,68,71 inci maddeleri I/B fıkraları\n20/3/1985\n3168\n6\n1517 sayılı kanun ile değişik 123 üncü maddesinin 7 nci ve müteakip fıkraları\n29/6/1978\n2167\nEk 9\n506 sayılı Sosyal Sigortalar Kanununa 6/3/1981 tarih ve 2422 sayılı kanunun 17 nci maddesi ile eklenen Ek 1 inci maddenin son fıkrası[7]\n29/4/1986\n3279\n9\n352 sayılı KHK\n16/2/1989\n3522\n4\n506 sayılı Sosyal Sigortalar Kanununun ek 27, 28, 29, 30 uncu maddeleri ile geçici 64 ve 65 inci maddeleri.\n20/2/1992\n3774\n6\n506 SAYILI KANUNA EK VE DEGİŞİKLİK GETİREN MEVZUATIN YÜRÜRLÜĞE GİRİŞ TARİHİNİ GÖSTERİR LİSTE\nKanun No.\nFarklı Tarihte Yürürlüğe Giren Maddeler\nYürürlüğe Giriş Tarihi\n672\n24/10/1965\n899\nYayım tarihini (24/7/1967) takip eden ve 506 sayılı kanun gereğince Sosyal Sigortalar kurumuna işveren tarafından tevdi edilmekte olan üç aylık prim bordrolarının ilgili bulunduğu dönem başından itibaren\n1186\n1/3/1969\n1474\nYayımı tarihini (1/9/1971) takip eden, kurumun ödeme dönemi başından itibaren\n1517\n19/2/1972\n1655\n11/2/1973\n1698\n1/4/1973\n1753\n2/7/1973"
+      },
+      "96,": {
+        "baslik": "1912",
+        "metin": "Madde 96, Geçici Madde 1, 2, 3\n1/7/1974\nDiğer Maddeleri\n1/7/1975\n1992\n26/5/1976\n2098\n1/9/1977\n2099\nYayımlandığı tarihi (24/8/1977) takip eden dönem başından itibaren\n3520\n10/2/1989\n2100\n24/11/1977\n2162\n9/7/1978"
+      },
+      "EK 7,": {
+        "baslik": "2167",
+        "metin": "Ek Madde 7, 8 ve Geçici Madde 1[8]\n1/7/1978\nDiğer maddeleri\n11/7/1978"
+      },
+      "1,2,3,4,6,8,10,11,12,13,15,16": {
+        "baslik": "2422",
+        "metin": "Madde 1,2,3,4,6,8,10,11,12,13,15,16 Geçici Madde 3, 4,[9]"
+      },
+      "5,": {
+        "baslik": "1/4/1981",
+        "metin": "Madde 5, 7, 9\n1/1/1982\nDiğer Maddeleri\n1/3/1981"
+      },
+      "2": {
+        "baslik": "3910",
+        "metin": "Madde 2\n1/1/1993\nDiğer Maddeleri\n12/5/1993\n3917\n8/12/1993\n3995\n7/6/1994\n4056\n11/12/1994 tarihini izleyen aybaşında\nKHK/572\n6/6/1997\n4410\n18/7/1999\n4447\n8, 9, 60, 130, Ek Madde 39, Ek Madde 40, Ek Madde 41, Geçici Madde 81,\nYayımı tarihi (8/9/1999)\n32, 36, 55, 61, 67, 78, 79, 85, 96, Ek Madde 24, Ek Madde 32, Ek Madde 38, Geçici Madde 82\nYayımını takip eden yıl başında\n63\nYayımını takip eden ay başında\nKHK/578\n30/9/1999\nKHK/592\n25/2/2000\n4571\n1/4/2000   tarihinden geçerli olmak üzere 31/5/2000 tarihinde\nKHK/616\n4/10/2000\n4747\n3\n1/4/2002\n4759\n1/6/2002\n4842\n33,34\n24/4/2003 tarihini   izleyen aybaşında\n32\n24/4/2003\n4884\n17/6/2003\n4958\n3, 8, 18, 23, 24, 26, 32, 43, 46, 49, 53, 60, 68, 69, 71, 79, 85, 93, 95, 104, 106, 110, 121, 129, 130, 135, 140, Ek Madde 3, Ek Madde 15, Ek Madde 43, Ek Madde 44, Ek Madde 45, Ek Madde 46, Ek Madde 47, Geçici Madde 86, Geçici Madde 87\nYayımı tarihi (6/8/2003)\n2, 77\n1/1/2004 tarihinden itibaren\n80\nAyın sonundan itibaren\n86\nYayımını takip eden ay başından itibaren\n96\nYayımı tarihinden altı ay sonra"
+      },
+      "3,": {
+        "baslik": "1/1/1982",
+        "metin": "Madde 3, ile eklenen Ek Madde 1\n1/2/1982\nDiğer Maddeleri\n15/12/1981"
+      },
+      "1,": {
+        "baslik": "2934",
+        "metin": "Madde 1, 2, Geçici Madde 1, 3[10]"
+      },
+      "4": {
+        "baslik": "1/1/1984",
+        "metin": "Madde 4\n1/1/1985\nDiğer Maddeleri\n26/10/1983\n2959\n1/12/1983"
+      },
+      "4,": {
+        "baslik": "3168",
+        "metin": "Madde 4, 7 Geçici Madde 4[11]\n1/5/1985\nDiğer maddeleri\n27/3/1985\n3203\n1/6/1985\nKHK/251\n13/11/1985\n3246\n10/1/1986\n3251\n14/1/1986\n3279\n6/5/1986\n3351\n24/4/1987\n3395\n8 inci ve 13 üncü Maddeler\n9/7/1987 tarihini takip eden dönem başında\nDiğer Maddeler\n9/7/1987\nKHK/323\n27/5/1988\nKHK/352\n23/12/1988\n3522\n29/12/1988 tarihinden geçerli olmak üzere 24/2/1989\n3702\n1/1/1991 tarihinden geçerli olmak üzere 22/3/1991\n3774\nEğitim ve Öğretim Hizmetleri Sınıfına dahil personel için 1/7/1992 Diğer personel için 27/2/1992\n3786\n14/3/1992\n3869\n9/7/1992 tarihinden geçerli olmak üzere 22/3/1993"
+      },
+      "GEÇİCİ 87": {
+        "baslik": "7538",
+        "metin": "Geçici Madde 87\n15/1/2025\n[1] 5510 sayılı Kanunun 106 ncı maddesinin 17/4/2008 tarihli ve 5754 sayılı Kanunun 64 üncü maddesiyle değişik son fıkrasında bu maddenin 5754 sayılı Kanunun Geçici 20 nci maddesinde belirtilen devir işlemlerinin tamamlanmasından sonra yürürlükten kalkacağı hüküm altına alınmıştır.\n[2] 2/7/2018 tarihli ve 700 sayılı KHK’nin 53 üncü maddesiyle, bu maddenin birinci fıkrasında yer alan “Bakanlar Kurulu” ibaresi “Cumhurbaşkanı” şeklinde ve ikinci fıkrasında yer alan “Bakanlar Kurulunun” ibaresi “Cumhurbaşkanının” şeklinde değiştirilmiştir.\n[3] 5510 sayılı Kanunun 106 ncı maddesinin 17/4/2008 tarihli ve 5754 sayılı Kanunun 64 üncü maddesiyle değişik son fıkrasında bu maddenin 5754 sayılı Kanunun Geçici 20 nci maddesinde belirtilen devir işlemlerinin tamamlanmasından sonra yürürlükten kalkacağı hüküm altına alınmıştır.\n[4] 14/3/2011 tarihli ve 2011/1559 sayılı Bakanlar Kurulu Kararı ile, bu madde kapsamındaki bankalar, sigorta ve reasürans şirketleri, ticaret odaları, sanayi odaları, borsalar veya bunların teşkil ettikleri birlikler personeli için kurulmuş bulunan sandıkların iştirakçileri ile aylık veya gelir bağlanmış olanlar ile bunların hak sahiplerinin Sosyal Güvenlik Kurumuna devredilmesine ilişkin sürenin iki yıl uzatılması hüküm altına alınmıştır.\n[5] 8/4/2013 tarihli ve 2013/4617 sayılı Bakanlar Kurulu Kararı ile, bu madde kapsamındaki bankalar, sigorta ve reasürans şirketleri, ticaret odaları, borsalar veya bunların teşkil ettikleri birlikler personeli için kurulmuş bulunan sandıkların iştirakçileri ile aylık veya gelir bağlanmış olanlar ile bunların hak sahiplerinin Sosyal Güvenlik Kurumuna devredilmesine ilişkin sürenin bir yıl uzatılması hüküm altına alınmıştır.\n[6] 24/2/2014 tarihli ve 2014/6042 sayılı Bakanlar Kurulu Kararı ile, bu madde kapsamındaki bankalar, sigorta ve reasürans şirketleri, ticaret odaları, borsalar veya bunların teşkil ettikleri birlikler personeli için kurulmuş bulunan sandıkların iştirakçileri ile aylık veya gelir bağlanmış olanlar ile bunların hak sahiplerinin Sosyal Güvenlik Kurumuna devredilmesine ilişkin sürenin bir yıl uzatılması hüküm altına alınmıştır.\n[7] Bu maddede sözü edilen ek 1 inci maddenin numarası teselsülü sağlamak için “Ek Madde 20” olarak değiştirilmiştir.\n[8] Bu maddede sözü edilen geçici 1 inci maddenin numarası teselsülü sağlamak için “Geçici Madde 44” olarak değiştirilmiştir.\n[9] Bu maddede sözü edilen geçici 3 ve 4 üncü maddelerin numaraları, teselsülü sağlamak için sırasıyla “Geçici Madde 52” ve “Geçici Madde 53” olarak değiştirilmiştir.\n[10] Bu maddede sözü edilen geçici 1 ve 3 üncü maddelerin numaraları teselsülü sağlamak için sırasıyla “Geçici Madde 55” ve “Geçici Madde 57” olarak değiştirilmiştir.\n[11] Bu maddede sözü edilen geçici 4 üncü maddenin numarası teselsülü sağlamak için “Geçici Madde 63” olarak değiştirilmiştir."
+      }
+    }
+  }
+}

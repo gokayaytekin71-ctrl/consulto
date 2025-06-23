@@ -1,0 +1,79 @@
+
+
+6. Hukuk Dairesi         2022/2178 E.  ,  2023/2232 K.
+
+"İçtihat Metni"
+MAHKEMESİ : Ankara Bölge Adliye Mahkemesi 31. Hukuk Dairesi
+SAYISI : 2021/669 E., 2022/162 K.
+DAVA TARİHİ : 07.05.2015
+HÜKÜM/KARAR : Esastan Ret
+İLK DERECE MAHKEMESİ : Ankara 5. Asliye Ticaret Mahkemesi
+SAYISI : 2018/479 E., 2021/457 K.
+
+Taraflar arasındaki alacak davasından dolayı yapılan yargılama sonunda İlk Derece Mahkemesince davanın kısmen kabulüne karar verilmiştir.
+
+Kararın taraflar vekillerince tarafından istinaf edilmesi üzerine, Bölge Adliye Mahkemesince başvurunun esastan reddine karar verilmiştir.
+
+Bölge Adliye Mahkemesi kararı davacı vekilince duruşmalı, davalı vekilince duruşmasız olarak temyiz edilmekle; kesinlik, süre, temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, 07.06.2023 tarihinde duruşma yapılmasına ve duruşma gününün taraflara davetiye ile bildirilmesine karar verilmiştir.
+
+Belli edilen günde davacı vekili Avukat ... ile davalı vekili Avukat ...'nun gelmiş olmalarıyla duruşmaya başlanarak hazır bulunan avukatların sözlü açıklamalarından sonra işin incelenerek karara bağlanması için uygun görülen Tetkik Hâkimi tarafından hazırlanan rapor dinlenerek dosyadaki belgeler incelenip gereği düşünüldü:
+
+I. DAVA
+Davacı yüklenici vekili dava dilekçesinde özetle, taraflar arasında “Kayaş-Kayseri hat kesimine F/O kablo ve enerji kablosu döşemesi ile GMS-R, transmisyon ve telefon sistemleri kurulumu yapım işi” ile ilgili 11.02.2013 tarihli anahtar teslim götürü bedel sözleşme imzalandığını, Yapım İşleri Genel Şartnamesi’nin 4. maddesinde “anahtar teslim götürü bedel sözleşme” tanımı yapıldığı ve sözleşmenin 6. maddesinde yer almasına rağmen davalı idarenin uygulama projeleri ve mahal listesini hazırlamadığını ve teslim etmediğini, bu nedenle imzalanan sözleşmenin anahtar teslim götürü bedel sözleşme olarak kabul edilemeyeceğini, sözleşmenin “birim fiyat esaslı” olduğunu, davalı idarenin, teklif aşaması, ihale şartnamesinde ve birim fiyat cetvelinde yapılacak sistemi Seviye-1 olacağına ilişkin birim fiyatlara göre hazırladığını, müvekkili şirketin de Seviye-1’e göre teklif verdiğini ancak davalı idare ile yapılan yazışmalarda davalı idarenin değişen ve gelişen süreçte sistemin Seviye-2’ye çıkarılmasını istediğini, sistemin Seviye-2 olması sonucu birim ve fiyatların arttığını, bunun açıkça sözleşmenin yenilenmesi anlamına geldiğini, müvekkili şirket tarafından alınan malzemelerin büyük oranının dövize endeksli yurt dışından temin edildiğini, döviz kurlarının yükselmesi nedeniyle de müvekkili şirketin ciddi zarar gördüğünü ve davalı idarenin döviz kur farkını karşılaması gerektiğini beyan ederek, müvekkilleri ile davalı idare arasında imzalanan sözleşme gereğince yapılan işler için şimdilik 490.000,00 TL ve döviz kur farkı için şimdilik 10.000,00 TL olmak üzere toplam 500.000,00 TL’nin tahsilini talep etmiştir.
+
+II. CEVAP
+Davalı idare vekili cevap dilekçesinde özetle; sözleşmenin 6. maddesi ve teklif mektubu uyarınca, sözleşmenin, anahtar teslim götürü bedel sözleşme olduğunu, yüklenicinin iddia ettiği gibi ihale dokümanlarında birim fiyat cetveli bulunmadığını, kullanılacak ekipman miktarını belirleyici ana unsurun şartnamede tanımlanan GSM-R radyo planlama sinyal seviyeleri ve kriterleri olduğunu, ilerleyen süreç içerisinde teknik şartnamede herhangi bir değişiklik yapılmadığını, yüklenicinin hazırlattığı projelerde teknik şartname gereği olan ETCS Seviye -2 gereksinimlerini karşılayacak Radyo Planlaması yapması gerektiğini anlamış olduğunun açık olduğunu, ne ihale sürecinde ne doküman onayı sürecinde ne de işin yapılması sürecinde bu konuya ilişkin itirazının olmadığını, davacının kur artışından kaynaklı mağduriyetlerinin giderilmesi talebinin, gerek sözleşmenin 6.1 ve 6.2 maddelerine gerekse anahtar teslim götürü bedel teklif mektubundaki taahhüde göre sözleşmeye ve mevzuata uygun olmadığını belirterek davanın reddini talep etmiştir.
+
+III. İLK DERECE MAHKEMESİ KARARI
+Ankara 5. Asliye Ticaret Mahkemesi’nin 2018/479 Esas, 2021/457 Karar ve 17.06.2021 tarihli kararı ile; taraflarca imzalanmış olan sözleşmenin eki olan GSM-R BSS Sistemi Şartnamesi'nin “Kapsam'' başlıklı 1.maddesi “...ETCS sistemi Sevive-2 gereksinimini karşılayacak, geleceğin tren kontrol sistemleri için ortak bir iletişim platformu sağlayacaktır” şeklindeki düzenlenme ile kurulması istenen sistem ''Seviye 2'' olarak tanımlandığı gibi, yine taraflarca imzalanmış olan sözleşmenin eki olan Transmisyon Sistemleri Şartnamesi'nin 6.21 maddesinde “GSM-R sisteminde ETCS Sevive-2 gereksinimlerinin karşılanabilmesi amacıyla hiçbir zaman iletişimin kesilmeyeceği bir transmisyon alt yapısı kurulacak olup, teklif sahipleri bunu nasıl sağlayacaklarını tekliflerinde belirteceklerdir” denilmek suretiyle kurulacak sistemin seviyesinin Seviye 2 sistem olması gerektiğinin belirtildiği, davalı idare tarafından sonradan bir değişiklik yapılmadığı, hükme esas alınan bilirkişi raporunda da ifade edildiği üzere, sözleşmenin anahtar teslim götürü bedel sözleşme olduğu kabul edilerek, sözleşme fiyatları üzerinden ve davacı tarafça tamamlanan kısmın sözleşme bedeline olan oranı dikkate alınarak yapılan hesaplama neticesinde belirlenen 22.005.168,05 TL'den, davalı kayıtlarına göre davacı tarafa ödendiği sabit olan 17.025.875,34 TL'nin mahsubu neticesinde davacının 4.979.292,71 TL alacaklı olduğu anlaşılmakla, belirlenen bu tutar üzerinden davanın kısmen kabulüne karar verilmiştir.
+
+IV. İSTİNAF
+A. İstinaf Yoluna Başvuranlar
+İlk Derece Mahkemesinin yukarıda belirtilen kararına karşı, süresi içinde taraf vekilleri istinaf başvurusunda bulunmuştur.
+
+B. İstinaf Nedenleri
+Davacı vekili istinaf başvurusunda özetle; sözleşmenin birim fiyatlı sözleşme olduğunu, ihale dokümanları incelendiğinde uygulama projesi ve buna ilişkin mahal listesi olmadığını, sözleşmenin götürü bedel olsa dahi ilave işler bakımından değerlendirme yapılmadığını, raporlar arasındaki çelişki giderilmediğini, dava tarihine göre alacağın uyarlanması gerektiğini belirtilerek istinaf başvurusunda bulunmuştur.
+Davalı vekili istinaf başvurusunda özetle; davacının sözleşme yükümlülüklerini yerine getirmediğini belirterek istinaf başvurusunda bulunmuştur.
+
+C. Gerekçe ve Sonuç
+Bölge Adliye Mahkemesinin yukarıda tarih ve sayısı belirtilen kararı ile özetle; tarafların istinaf başvurularının esastan reddine karar verilmiştir.
+
+V. TEMYİZ
+A. Temyiz Yoluna Başvuranlar
+Bölge Adliye Mahkemesinin yukarıda belirtilen kararına karşı süresi içinde taraf vekilleri temyiz isteminde bulunmuştur.
+
+B. Temyiz Sebepleri
+Davacı vekili, istinaf dilekçesinde belirtilen gerekçelerle kararı temyiz etmiştir.
+Davalı vekili, istinaf dilekçesinde belirtilen gerekçelerle kararı temyiz etmiştir.
+
+
+C. Gerekçe
+1. Uyuşmazlık ve Hukuki Nitelendirme
+Uyuşmazlık; sözleşmenin birim fiyatlı sözleşme olduğunun kabulü ile yapılan sözleşme kapsamı ve dışı iş bedeli ile kur farkı alacağının tahsili istemine ilişkindir.
+
+2. İlgili Hukuk
+6098 sayılı Türk Borçlar Kanunu'nun 470 inci maddesi ve ihale mevzuatı.
+
+3. Değerlendirme
+1.Bölge adliye mahkemelerinin nihai kararlarının bozulması 6100 sayılı Kanun'un 371 nci maddesinde yer alan sebeplerden birinin varlığı hâlinde mümkündür.
+2.Taraflar arasında imzalanan sözleşmenin 6. maddesinde, sözleşme bedelinin götürü olduğu belirtildiği gibi, sözleşme ekleri arasında birim fiyat cetvelinin bulunmadığı, davacı verdiği teklif mektubunda tüm ihale evraklarını okuduğunu, anladığını belirtmiş olup, ihale aşamasında bir itiraz da bulunmadığı anlaşıldığından, mahkemece sözleşmenin götürü bedel sözleşme olduğuna dair kabulü hukuka uygun olduğu gibi, sözleşme ve eki şartnamelerde kurulması istenen sistemin “Seviye-2” düzeyinde olduğu, davalı idarece sonradan iş artışı yapılmadığı, davacının iş artışı nedeniyle iş bedeli talep etmesinin bu nedenle mümkün olmadığı, mahkemenin kabulünün yerinde olduğu anlaşıldığından davacının temyiz itirazları yerinde görülmeyip, reddi gerekmiştir.
+3. Yargılama aşamasında alınan bilirkişiler tarafından düzenlenen raporda, fiyat farkı hesabı ile yerli makine ve teçhizat üzerinden KDV hesabı yapıldığı, bulunan miktarların sözleşme bedeline eklendiği ve toplam iş bedelinin bulunduğu, davacının tamamladığı iş oranının toplam iş bedeline oranlandığı ve böylelikle davacının hakettiği iş bedelinin bulunduğu ve yapılan ödemeler düşülerek davacının bakiye alacağının hesaplandığı, bu haliyle raporun denetime elverişli, açıklayıcı olduğu, önceki raporlar arasındaki çelişkiyi giderdiği anlaşıldığından davacının raporun yetersiz olduğu yönündeki temyiz sebepleri yerinde olmadığı gibi, raporda davacının %85 oranında işi tamamladığı, bu oranda bedele hak kazandığı hesaplandığından, davalının da temyiz itirazları yerinde görülmeyip, reddi gerekmiştir.
+Temyizen incelenen karar, tarafların karşılıklı iddia ve savunmalarına, dayandıkları belgelere, uyuşmazlığa uygulanması gereken hukuk kuralları ile hukuki ilişkinin nitelendirilmesine, dava şartlarına, yargılama ve ispat kuralları ile kararda belirtilen gerekçelere göre usul ve kanuna uygun olup, taraf vekillerince temyiz dilekçesinde ileri sürülen nedenler kararın bozulmasını gerektirecek nitelikte görülmemiştir.
+
+VI. KARAR
+Açıklanan sebeplerle;
+
+Temyiz olunan Ankara Bölge Adliye Mahkemesi 31. Hukuk Dairesinin 2021/669 Esas, 2022/162 Karar ve 01.03.2022 tarihli kararının 6100 sayılı Kanunun 370 nci maddesinin birinci fıkrası uyarınca ONANMASINA,
+
+8.400,00 TL duruşma vekalet ücretinin taraflardan karşılıklı alınarak Yargıtay duruşmasında vekille temsil olunan taraflara verilmesine,
+
+Aşağıda yazılı onama harçlarının temyiz eden taraflardan alınmasına,
+
+Dosyanın İlk Derece Mahkemesine, kararın bir örneğinin Bölge Adliye Mahkemesine gönderilmesine,
+
+07.06.2023 tarihinde oy birliğiyle karar verildi.
+
+
+
+
+

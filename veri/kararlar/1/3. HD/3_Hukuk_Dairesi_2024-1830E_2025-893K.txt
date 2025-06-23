@@ -1,0 +1,46 @@
+
+
+3. Hukuk Dairesi         2024/1830 E.  ,  2025/893 K.
+
+"İçtihat Metni"
+MAHKEMESİ : Ankara Bölge Adliye Mahkemesi 24. Hukuk Dairesi
+SAYISI : 2023/1722 E., 2024/204 K.
+İLK DERECE MAHKEMESİ : Beypazarı 1. Asliye Hukuk Mahkemesi
+SAYISI : 2020/31 E., 2023/427 K.
+
+Bölge Adliye Mahkemesi kararı, davalı vekili tarafından temyiz edilmekle; kesinlik, süre, temyiz şartı ve diğer usul eksiklikleri yönünden yapılan ön inceleme sonucunda, temyiz dilekçesinin kabulüne karar verildikten ve Tetkik Hâkimi tarafından hazırlanan rapor dinlendikten sonra dosyadaki belgeler incelenip gereği düşünüldü:
+I. DAVA
+Davacı vekili; müvekkilin Ulucak Köyünde tarımsal sulama amaçlı sözleşme ile elektrik abonesi olduğu, müvekkilin elektrik dağıtım sistemine bağlı olduğu elektrik sistemlerinin işletme, bakım ve onarım işlerinin davalı tarafından yerine getirilmediğini ileri sürerek; müvekkilin 1002830561sözleşme ve 4000598742 tesisat numaralı elektrik aboneliğinin bağlandığı elektrik dağıtım tesislerinin işletme, bakım ve onarım işlerine ait yükümlülüğün davalıya ait olduğuna ilişkin muazaranın giderilmesine ve bu yükümlülüğün davalı tarafından yürütülmesine karar verilmesini talep etmiştir.
+II. CEVAP
+Davalı vekili; dava konusu tarımsal sulama tesislerinin mevzuat gereği geçici tesis olduğunu, tesisleri besleyen trafonun İl Özel İdare zamanında yapıldığını, yani tesisin özel tesis olduğunu, İl Özel İdarelerinin kaldırılması ve trafonun ortak kullanımda olmasından dolayı işletme, bakım ve onarım sorumluluğu trafodan beslenen tesis sahiplerine ait olduğunu savunarak, davanın reddini istemiştir.
+III. İLK DERECE MAHKEMESİ KARARI
+İlk Derece Mahkemesinin yukarıda tarih ve sayısı belirtilen kararıyla; davacının enerji aldığı tarımsal sulama aboneliğine ait elektrik hattı ve trafonun, geçici tesis niteliğinde olmayan dağıtım tesisi olduğu, işletme, bakım ve onarım işleri ile ilgili yükümlülüğün davalı ... şirketine ait bulunduğu gerekçesiyle; davanın kabulüne, elektrik tesisi ve trafosunun işletme, bakım ve onarım işlerine ait yükümlülüğün davalı Şirkete ait olduğunun tespiti ile muarazanın bu şekilde giderilmesine karar verilmiş; karara karşı süresi içinde davalı vekili istinaf başvurusunda bulunulmuştur.
+IV. İSTİNAF
+Bölge Adliye Mahkemesinin yukarıda tarih ve sayısı belirtilen kararıyla, başvurunun reddine karar verilmiş; karara karşı, süresi içinde davalı vekili temyiz isteminde bulunmuştur.
+V. TEMYİZ
+A. Temyiz Sebepleri
+Davalı vekili; tarımsal sulamanın geçici bağlantı kabul edilmemesinin hatalı olduğunu, tarımsal faaliyet amaçlı bağlantı taleplerinde, birden fazla talebin bulunması ve şebeke yatırımının gerekmesi halinde, bu kapsamda tesis edilen bağlantı hatları, tarımsal bağlantı hattı olarak kabul edilebileceğini ileri sürerek; kararın bozulmasını istemiştir.
+B. Değerlendirme ve Gerekçe
+Uyuşmazlık, ortak kullanımda olan tarımsal sulama yapılan hat ve trafonun işletme, bakım ve onarımının davalı tarafından yapılması istemine ilişkindir.
+Elektrik Piyasası Bağlantı ve Sistem Kullanım Yönetmeliği'nin Kullanıcı mülkiyetindeki elektrik tesislerinin dağıtım şirketince devralınması başlıklı 37. maddesinde;
+''(1) Kullanıcı mülkiyetindeki elektrik tesislerinden aşağıdaki şartları taşıyanlar, Kurul tarafından belirlenen usul ve esaslar çerçevesinde dağıtım şirketince devralınır:
+a) İlgili kurum veya kuruluş tarafından talep edilmesi halinde; milli güvenliği ilgilendiren kurum ve kuruluşlara enerji sağlayan dağıtım tesisi kapsamındaki hat ve tesisler,
+b) Yeni bir bağlantı kapsamında ortak kullanıma konu olacak dağıtım tesisleri ile yeni bağlantı sebebiyle dağıtım tesisi kapsamına girecek tesisler,
+c) Mevcut tesisi kullanacak şekilde iyileştirme ve/veya kapasite artış yatırımı gerektiren dağıtım tesisleri,
+ç) Dağıtım şirketince dağıtım şebekesi içinde başka bir amaçla da faydalanılmak üzere devralınması uygun görülen diğer dağıtım tesisleri.
+(2) Birinci fıkranın (a) bendi hariç devre rıza gösterilmemesi halinde kamulaştırma yoluna gidilir.
+(3) Kullanıcı tarafından tesis edilmiş olan dağıtım tesislerinin işletme, bakım, onarımı dağıtım şirketince yapılır.
+(4) Bu madde kapsamında devralınacak tesislerin devir alma işlemlerinin başlatılması ile birlikte dağıtım şirketi tarafından bu tesislere yatırım yapılabilir ve bu tesislerden başka kullanıcıların bağlantı talepleri karşılanabilir.'' hükmüne yer verilmiştir.
+Yapılan bu açıklamalar ışığında somut olay incelendiğinde; hükme esas alınan bilirkişi raporu ile davacının trafolu tarımsal sulama abonesi olduğu, elektrik tesisi ve trafosunun geçici tesis niteliğinde olmadığı, özel dağıtım hattı olduğunu ancak birden fazla kişinin ortak kullanımında bulunduğu için ilgili dağıtım şirketi tarafından devralınması gerektiği, dolayısıyla dava konusu elektrik dağıtım tesisinin işletme, bakım ve onarım işleri yükümlülüğün davalı ... şirketine ait olduğunun belirlenmesine göre, davalının temyiz itirazlarının reddi ile usul ve kanuna uygun bulunan kararın onanmasına karar verilmiştir.
+VI. KARAR
+Açıklanan sebeplerle;
+Temyiz olunan Bölge Adliye Mahkemesi kararının 6100 sayılı Hukuk Muhakemeleri Kanunu'nun 370/1 maddesi hükmü uyarınca ONANMASINA,
+Aşağıda yazılı bakiye temyiz harcının temyiz edene yükletilmesine,
+Dosyanın İlk Derece Mahkemesine, kararın bir örneğinin Bölge Adliye Mahkemesine gönderilmesine,17.02.2025 tarihinde oy birliğiyle karar verildi.
+
+
+
+
+
+
+

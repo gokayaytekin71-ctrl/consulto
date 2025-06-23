@@ -1,0 +1,627 @@
+{
+  "mevzuat_adi": "DENİZDE ZABT VE MÜSADERE KANUNU",
+  "kanun_icerigi": {
+    "maddeler": {
+      "1": {
+        "baslik": "Denizde zabt ve musadere hakkının istimali salahiyeti",
+        "metin": "Madde 1 – Denizde zabt ve müsadere hakkı, deniz nakil vasıtalarını durdurmak ve aramak ve nakil vasıtaları ile onların içinde bulunan mallar hakkında aşağıdaki hükümlere göre muamele etmek salahiyetini ihtiva eder."
+      },
+      "2": {
+        "baslik": "Harb gemilerile ticari maksatlara tahsis veya bu uğurda istimal edilmeyen ve munhasıran amme idaresine tahsis veya bu uğurda istimal edilen deniz nakil vasıtaları denizde zabt ve müsadere hakkına tabi değildir.",
+        "metin": "Madde 2 – Denizde zabt ve musadere hakkını istimale aşağıdaki makamlar salahiyetlidir.\n1 – Harb gemileri komutanları ile ordu birlikleri komutanları."
+      },
+      "3": {
+        "baslik": "2 – Türkiye Cumhuriyeti hakimiyeti altında olan yerlerde hususi surette bu vazife ile tavzif edilen makamlar.",
+        "metin": "Madde 3 – Denizde zabt ve müsadere hakkının tatbik edileceği zamanın başlangıcını ve sonunu Cumhurbaşkanı tayin eder.[1]"
+      },
+      "4": {
+        "baslik": "Madde 3 – Denizde zabt ve müsadere hakkının tatbik edileceği zamanın başlangıcını ve sonunu Cumhurbaşkanı tayin eder.[1]",
+        "metin": "Madde 4 – Zabt ve müsadere hakkı:\n1 – Açık denizlerde,\n2 – Türkiye Cumhuriyetinin, müttefiklerinin ve düşmanlarının hakimiyeti altında olan sularda,\n3 – Türkiye Cumhuriyetinin, müttefiklerinin ve düşmanlarının seyrüsefere yarayan iç sularında ve tesisatında,"
+      },
+      "5": {
+        "baslik": "İstimal edilir.",
+        "metin": "Madde 5 – Denizde zabt ve müsadere hakkı bitaraf sularda tatbik edilmez.\nİKİNCİ FASIL"
+      },
+      "6": {
+        "baslik": "Nakil vasıtalarının ve malın düşmanlık ve bitaraflık sıfatı",
+        "metin": "Madde 6 – Bir deniz nakil vasıtasının düşmanlık veya bitaraflık sıfatı, taşımağa salahiyetli olduğu bayrakla taayyün eder. Bir bayrak taşımağa salahiyetli olmayan nakil vasıtaları hakkında sahibinin tabiiyeti esas tutulur."
+      },
+      "7": {
+        "baslik": "Nakil vasıtasının sıfatı itiraz edilmeyecek bir şekilde tesbit olunmadığı müddetçe düşman gemisi telakki olunur.",
+        "metin": "Madde 7 – Düşman deniz nakil vasıtasının bitaraf bir bayrağa geçişi, düş manlık sıfatının istilzam ettiği neticelerden kurtulmağa matuf olduğu takdirde tanınmaz.\nAşağıdaki hallerde bitaraf bayrağa geçiş birinci fıkrada gösterilen maksatla yapılmış sayılır:\n1 – Geçiş, denizde zapt ve müsadere hakkının tatbika başlandığı andan sonra vukubulmuşsa;\n2 – Geçiş, denizde zapt ve müsadere hakkının tatbikına takaddüm eden altmış gün zarfında vukubulmakla beraber:\na) Geçiş vesaiki nakil vasıtasında mevcut olmazsa, veya\nb) Geçiş, bir şarta muallak olur veya tam olmazsa, veyahut\nc) Nakil vasıtası üzerinde tasarruf hakkı ile, nakil vasıtasının istimalinden mütevellit kazanç geçişten evvelki ellerde kalırsa."
+      },
+      "8": {
+        "baslik": "Mal",
+        "metin": "Madde 8 – Malın düşmanlık veya bitaraflık sıfatı, malikinin tabiiyetine ve eğer maliki tabiiyetsiz ise kanuni ikametgahına göre taayyün eder. Mal, bir şirkete ait ise sıfatının tayininde şirketin kanuni ikametgahı esas tutulur."
+      },
+      "9": {
+        "baslik": "Malın sıfatı her türlü itirazdan salim bir şekilde sabit olmadıkça düşman malı sayılır.",
+        "metin": "Madde 9 – Düşman malı yolculuk esnasında malikini değiştirdiği takdirde, bu değişme, zapt ve müsadere hakkının tatbika başlandığı andan sonra vukubulmuşsa, varma mahalline vasıl oluncaya kadar düşmanlık sıfatını muhafaza eder.\nÜÇÜNCÜ FASIL\nNakil vasıtalarının ve malın tabi olacağı muamele"
+      },
+      "10": {
+        "baslik": "düşman nakil vasıtaları ve bunların yükü",
+        "metin": "Madde 10 – Düşman nakil vasıtaları zapt ve müsadereye tabidirler."
+      },
+      "11": {
+        "baslik": "Madde 10 – Düşman nakil vasıtaları zapt ve müsadereye tabidirler.",
+        "metin": "Madde 11 – Düşman nakil vasıtalarındaki düşman malı zapt ve müsadereye tabidir."
+      },
+      "12": {
+        "baslik": "Madde 11 – Düşman nakil vasıtalarındaki düşman malı zapt ve müsadereye tabidir.",
+        "metin": "Madde 12 – Düşman nakil vasıtasındaki bitaraf mal serbesttir. Şu kadar ki, bu mallar aşağıdaki hallerde zapt ve müsadeye tabi olur:\n1 – Harb kaçağı olur veya harb kaçağı olmasa bile, harb kaçağı diğer eşyanın sahibine ait bulunursa;\n2 – Nakil vasıtası ablukayı yarmak fiilini irtikap ederse;"
+      },
+      "13": {
+        "baslik": "3 – Düşman refakatinde giden, kuvvet istimaliyle mukavemet eden yahut hasmane himaye ve yardımda bulunan bir nakil vasıtasının kaptan veya malikine ait ise.",
+        "metin": "Madde 13 – Bir düşman nakil vasıtasının gemi adamlarına veya yolcularına ait olup şahsi istimallerine mahsus bulunan eşya serbesttir."
+      },
+      "14": {
+        "baslik": "Bitaraf nakil vasıtaları ve bunların yükü",
+        "metin": "Madde 14 – A) Bitaraf nakil vasıtası aşağıdaki hallerde zapta tabidir:\n1 – Harb kaçağı mal naklediyorsa veya bizzat kendisi harb kaçağı ise;\n2 – Düşman refakatinde seyrediyorsa;\n3 – Pasif mukavemet gösterirse;\n4 – Kuvvet istimaline mukavemet ederse;\n5 – Hasmane himaye ve yardımda bulunursa;\n6 – Vesaikı muntazam değilse;\n7 – Ablukayı yarmak fiilini irtikap ederse;\n8 – Rota emrini tatbik etmezse;\n9 – Sahte evrak kullanarak düşmana kaçak mal taşımış ve düşmana bu yardımdan sonra dönüş yolculuğunda yakalanmış ise.\nB) Nakil vasıtası aşağıdaki hallerde ayrıca müsadereye de tabidir:\n1 – Yükün yarısından fazlasını harb kaçağı teşkil ediyorsa yahut nakil vasıtası bizzat harb kaçağı ise;\n2 – Düşman refakatinde seyrediyorsa;\n3 – Kuvvet istimali ile mukavemet gösterirse;\n4 – Hasmane himaye ve yardımda bulunursa;\n5 – Ablukayı yarmak fiilini irtikap ederse;"
+      },
+      "15": {
+        "baslik": "6 – Sahte evrak kullanarak düşmana kaçak eşya taşımış ve düşmana bu yardımdan sonra dönüş yolculuğunda yakalanmış ise.",
+        "metin": "Madde 15 – Bitaraf nakil vasıtasındaki düşman malı serbesttir.\nŞu kadar ki, bu mallar aşağıdaki hallerde zabt ve müsadereye tabi olur:\n1 – Harb kaçağı ise yahut harb kaçağı olmasa bile harb kaçağı diğer eşyanın sahibine ait ise;\n2 – Nakil vasıtası düşman refakatinde seyrediyorsa;\n3 – Nakil vasıtası kuvvet istimali ile mukavemette bulunursa;\n4 – Nakil vasıtası hasmane himaye ve yardımda bulunursa;\n5 – Nakil vasıtası ablukayı yarmak fiilini irtikap ederse."
+      },
+      "16": {
+        "baslik": "5 – Nakil vasıtası ablukayı yarmak fiilini irtikap ederse.",
+        "metin": "Madde 16 – Bitaraf nakil vasıtalarındaki bitaraf mal serbesttir. Şu kadar ki, bu mallar aşağıdaki hallerde zabt ve müsadereye tabi olur:\n1 – Harb kaçağı ise veya harb kaçağı olmasa bile harb kaçağı diğer eşya sahibine ait ise;\n2 – Nakil vasıtası ablukayı yarmak fiilini irtikap ederse;"
+      },
+      "17": {
+        "baslik": "3 – Düşman refakatinde giden, kuvvet istimaliyle mukavemet eden yahut hasmane himaye ve yardımda bulunan bir nakil vasıtasının kaptan veya malikine ait ise.",
+        "metin": "Madde 17 – Bitaraf nakil vasıtasının gemi adamlarına veya yolcularına ait olup şahsi istimallerine mahsus bulunan eşya serbesttir."
+      },
+      "18": {
+        "baslik": "Madde 17 – Bitaraf nakil vasıtasının gemi adamlarına veya yolcularına ait olup şahsi istimallerine mahsus bulunan eşya serbesttir.",
+        "metin": "Madde 18 – Askeri hastane gemileriyle hususi şahıslar veya resmen tanınmış yardım cemiyetlerince teçhiz edilmiş olan hastane gemileri, aşağıdaki şartların tahakkuku halinde, zapt ve müsadereye tabi değildirler:\n1 – Bu gemilerin hastane gemisi oldukları Türkiye Cumhuriyeti Hükümetine bildirilmiş;\n2 – Mer'iyette bulunan Devletlerarası mukaveleler hükümlerine göre hastane gemisi oldukları layıkı veçhile belli edilmiş ve"
+      },
+      "19": {
+        "baslik": "3 – Tahsis olundukları maksatlara uygun olarak istimal edilmekte bulunmuş iseler.",
+        "metin": "Madde 19 – A) Aşağıdaki nakil vasıtaları da zabt ve müsadereye tabi değildirler:\n1 – Münhasıran sahil balıkçılığına veya mahalli ve küçük seyrüsefere hizmet eden nakil vasıtalariyle bunların teçhizatı ve yükü;\n2 – Münhasıran dini, ilmi veya insani vazifelerle muvazzaf olan nakil vasıtaları;\n3 – Münhasıran mükaleme memurlarının nakline veya harb esirlerinin mübadelesine hizmet eden nakil vasıtaları;\n4 – Türkiye Cumhuriyeti Hükümetinin veya müttefiklerinin bir vesikası ile mücehhez bulunan nakil vasıtası."
+      },
+      "20": {
+        "baslik": "B) Bu nakil vasıtaları her hangi bir surette hasmane hareketlerde bulunur veya buna iştirak eder yahut ciheti tahsislerine mugayir hallerde bulunurlarsa zapt ve musadereden muafiyet hakkını kaybederler. Bu nakil vasıtaları Türkiye Cumhuriyeti Hükümetinin veya müttefiklerinin salahiyetli makamları tarafından verilen emirlere riayet etmedikleri takdirde dahi aynı hüküm tatbik olunur.",
+        "metin": "Madde 20 – Bitaraf veya düşman nakil vasıtalarında bulunan posta mektup irsalatı tecavüzden masundur. Nakil vasıtası zaptedildiği takdirde bunlar zapteden tarafından mahalline gönderilir.\nŞu kadar ki birinci fıkra ahkamı:\n1 – Posta paketleriyle harb kaçağı eşyayı ihtiva eden mektuplar;\n2 – Ablukanın yarılması halinde abluka edilmiş bir limana giden veya böyle bir limandan gelen mektuplar hakkında tatbik edilmez.\nDÖRDÜNCÜ FASIL"
+      },
+      "21": {
+        "baslik": "Harb kaçağı",
+        "metin": "Madde 21 – Doğrudan doğruya kara, hava ve deniz teslihatına yarayan ve düşman ülkesinde veya düşman tarafından işgal olunan araziye veyahut düşman harb kuvvetlerine muhtas olan bilcümle eşya ve maddeler harb kaçağı (Mutlak harb kaçağı) addolunurlar.\nEşyanın muvasalat edeceği mahalle doğrudan doğruya sevkedilmesiyle aktarmaya veya kara üzerinde diğer bir nakliyata lüzum olması arasında fark yoktur."
+      },
+      "22": {
+        "baslik": "Mutlak harb kaçağı eşya ve maddeler Cumhurbaşkanı karariyle tayin ve ilan olunur.[2]",
+        "metin": "Madde 22 – Mutlak surette harb kaçağı eşyanın düşmana muhtas olduğu aşağıdaki hallerde sabit addedilir:\n1 – Mal ve eşya, vesaikına nazaran, bir düşman limanında boşaltılmak veya düşman harb kuvvetlerine teslim edilmek icap ediyorsa;\n2 – Nakil vasıtası yalnız düşman limanlarına uğrayacaksa;"
+      },
+      "23": {
+        "baslik": "3 – Vesaikına nazaran mal ve eşyanın ait olduğu bitaraf limana vusulünden evvel nakil vasıtasının düşman limanına uğraması veya düşman harb kuvvetleriyle temas etmesi icap ediyorsa.",
+        "metin": "Madde 23 – A) 1 – Harb gayeleri için olduğu kadar, müslihane gayeler için de kullanılabilen ve Türkiye Cumhuriyeti Hükümeti tarafından ilan edilen listeye dahil bulunan ve\n2 – Düşman harb kuvvetlerinin veya düşman idare makamlarının istimaline mahsus olan bilcümle eşya ve mevat harb kaçağı (Meşrut harb kaçağı) addolunurlar.\nB) A fıkrasında yazılı olan eşya ve mevat bitaraf bir limanda boşaltılmak icap ediyorsa bu takdirde düşmanın da aynı şekilde hareket eylemesi şartiyle, kaçak eşya addedilmez.\nC) Düşman ülkesinde hiç bir deniz hududu bulunmuyorsa (B) fıkrası tatbik edilmez.\nMadda 24 – Meşrut harb kaçağı:\n1 – Bir düşman makamına;\n2 – Düşmanın müstahkem bir mevkiine veya düşman harb kuvvetlerinin harekat mıntakasına veya iaşe üssü hizmetini gören bir mevkie;\n3 – Düşman devletin harb kuvvetlerine veya idare makamlarına bu kabil eşya ve mevat ita ve teslim ettiği sabit olan ve düşman ülkesinde bulunan bir tüccar veya acentaya;"
+      },
+      "25": {
+        "baslik": "Gönderildiği takdirde düşmana ait sayılır.",
+        "metin": "Madde 25 – Aşağıdaki eşya ve mevat hiç bir suretle harb kaçağı sayılamaz:\n1 – İçinde bulunduğu nakil vasıtasının istimaline veya gemi adamlariyle yolcuların zati istimaline yarayan eşya ve mevat;\n2 – Münhasıran hasta ve yaralıların tedavisine yarayan eşya ve mevat;"
+      },
+      "26": {
+        "baslik": "Şu kadar ki iki numaralı benddeki eşya ve mevat düşman ülkesine veya düşman harb kuvvetlerine mahsus olduğu takdirde, mühim askeri icapların ve ihtiyaçların mevcudiyeti halinde tazminat mukabilinde alınabilir.",
+        "metin": "Madde 26 – Bir nakil vasıtasının takip edeceği yol ve malın boşaltılacağı mahal hakkında nakil vasıtasında bulunan vesaika doğru nazariyle bakılır.\nBirinci fıkradaki kaide şu hallerde cari değildir:\n1 – Bariz bir surette yolunu değiştiren nakil vasıtası yolundan inhirafı hakkında kafi derecede muhik sebep gösteremezse;\n2 – Seyahat yolu ve boşaltma mahalli hakkındaki vesikaların hakikata uymadığını kabul ettirecek sebep mevcutsa."
+      },
+      "27": {
+        "baslik": "Harb kaçağı naklinin neticeleri",
+        "metin": "Madde 27 – Harb kaçağı taşıyan nakil vasıtaları zabta tabidirler."
+      },
+      "28": {
+        "baslik": "Harb kaçağı kıymet, ağırlık, hacim veya navlun itibariyle yükün yarısından fazlasına baliğ olursa bu gibi nakil vasıtaları müsadereye tabidir.",
+        "metin": "Madde 28 – Kendisi harb kaçağı olan nakil vasıtası zabt ve müsadereye tabidir."
+      },
+      "29": {
+        "baslik": "Madde 28 – Kendisi harb kaçağı olan nakil vasıtası zabt ve müsadereye tabidir.",
+        "metin": "Madde 29 – Harb kaçağı mal zabt ve müsadereye tabidir."
+      },
+      "30": {
+        "baslik": "Harb kaçağı mal sahibine ait olan ve aynı nakil vasıtasında bulunan sair mal da aynı suretle zabt ve müsadereye tabidir.",
+        "metin": "Madde 30 – A) Bitaraf bir nakil vasıtasındaki bitaraf harb kaçağı:\n1 – Nakil vasıtası durdurulduğu anda denizde zabt ve müsadere hakkının başlanmasına dair olan karardan veya bu nevi malın Türkiye Cumhuriyeti Hükümeti tarafından ilan edilen listeye dahil olduğundan haberdar değilse;\n2 – Nakil vasıtası mezkür hususattan haberdar olmakla beraber harb kaçağı malı boşaltmaya muktedir olamamışsa;\nAncak bir tazminat mukabilinde müsadere olunabilir.\nB) Harb kaçağı mal sahibine ait olup böyle bir gemide bulunan mal serbesttir.\nC) A fıkrasının 1 ve 2 numaralı hallerinde bitaraf nakil vasıtası, yükünün yarısından fazlası harb kaçağı olsa bile, 27 nci maddenin 2 nci fıkrası hükmü tatbik olunmaz.\nBEŞİNCİ FASIL"
+      },
+      "31": {
+        "baslik": "Refakat",
+        "metin": "Madde 31 – Düşman harb gemilerinin refakatinde bulunan nakil vasıtaları harbin her türlü tehlikelerine maruzdurlar.\nBunlar zabt ve müsadereye tabidirler."
+      },
+      "32": {
+        "baslik": "Bunlar zabt ve müsadereye tabidirler.",
+        "metin": "Madde 32 – Düşman harb gemileri refakatinde yolculuk etmesi sebebiyle zabt ve müsadereye tabi olan bir nakil vasıtasındaki düşman malı zabt ve müsadereye tabidir."
+      },
+      "33": {
+        "baslik": "Nakil vasıtasının kaptan veya sahibine ait mal da aynı suretle zabt ve müsadereye tabidir.",
+        "metin": "Madde 33 – Kendi harb gemileri refakatinde bulunan bitaraf nakil vasıtaları durdurma ve araştırmağa tabi değildirler.\nBununla beraber, kafilenin komutanından kafilesine dahil nakil vasıtalarının evsafı ve bunların yükü hakkında malümat ve teminat istenebilir.\nALTINCI FASIL"
+      },
+      "34": {
+        "baslik": "Mukavemet",
+        "metin": "Madde 34 – Bir nakil vasıtası stop ettirildikten sonra kaptan veya gemi adamlarının tarzı hareketleri yüzünden durdurulması veya araştırılması yapılamazsa, pasif mukavemette bulunmuş, sayılarak nakil vasıtası zabta tabi olur."
+      },
+      "35": {
+        "baslik": "Madde 34 – Bir nakil vasıtası stop ettirildikten sonra kaptan veya gemi adamlarının tarzı hareketleri yüzünden durdurulması veya araştırılması yapılamazsa, pasif mukavemette bulunmuş, sayılarak nakil vasıtası zabta tabi olur.",
+        "metin": "Madde 35 – Denizde zabt ve musadere hakkının istimaline karşı kuvvete müracaatla gösterilen mukavemet kuvvet istimalile bertaraf edilebilir."
+      },
+      "36": {
+        "baslik": "Mukavemetin bertaraf edilmesinden sonra nakil vasıtası zabt ve müsadereye tabi olur.",
+        "metin": "Madde 36 – Kuvvete müracaatla mukavemet göstermesi sebebiyle zabt ve müsadereye tabi olan bir nakil vasıtasındaki düşman malı zabt ve müsadereye tabidir.\nNakil vasıtasının kaptan veya sahibine ait mal da aynı suretle zabt ve müsadereye tabidir.\nYEDiNCİ FASIL"
+      },
+      "37": {
+        "baslik": "Hasmane himaye ve yardım",
+        "metin": "Madde 37 – Hasmane himaye ve yardım aşağıdaki hallerde mevcuttur. Nakil vasıtası:\n1 – Harb hareketlerine iştirak ederse;\n2 – Düşmanın denizde bulunan harb kuvvetlerinin harekatını sair surette doğrudan doğruya himaye veya buna yardım ederse;\n3 – Düşman hükümeti tarafından kiralanmış olur veya onun emri veya kontrolü altında bulunursa;\n4 – Düşman menfaatine haber götürmeğe veya düşman harb kuvvetleri mensuplarını nakle devamlı surette tahsis edilmiş ise;\n5 – Yolculuğu, sureti mahsusada, düşman menfaatine bir haber götürme veya düşman harb kuvvetleri mensuplarını yahut düşman kuvvetleri hizmetine girmek isteyen şahısları nakil için yapmakta ise;"
+      },
+      "38": {
+        "baslik": "6 – Malikinin, kiracısının veya kaptanının malümatiyle bir düşman kıtasını havi olur yahut yolculuk esnasında düşman harekatını doğrudan doğruya himaye ve buna yardım eden eşhası taşırsa;",
+        "metin": "Madde 38 – Hasmane himaye ve yardım şu hallerde dahi mevcuttur:\n1 – Telsizle mücehhez bir nakil vasıtası harb kuvvetleri veya askeri harekat hakkında düşmana faydalı olacak haberler gönderirse;\n2 – Emri altında harekatta, bulunan birliğe yaklaşmaması için bir askeri komutandan emir alan telsizle mücehhez bir nakil vasıtası bu emre muhalif hareket ederse;"
+      },
+      "39": {
+        "baslik": "3 – Emri altında harekatta bulunan birliğin doğrudan doğruya civar ve yakılarında telziz tesisatını istimal etmemesi için bir askeri komutandan emir alan telsizle mücehhez bir nakil vasıtası bu emre muhalif hareket ederse.",
+        "metin": "Madde 39 – Hasmane himaye ve yardımda bulunan nakil vasıtaları zabt ve müsadereye tabidir. Böyle bir halde beynelminel harb hukukuna nazaran caiz olduğu nispette, bunlara karşı silah kuvvetiyle de harekete geçilebilir."
+      },
+      "40": {
+        "baslik": "38 inci maddenin birinci numarasındaki halde bir nakil vasıtası hasmane himaye ve yardımdan dolayı haber irsali anından itibaren harb sonuna kadar zabt ve müsadere olunabilir.",
+        "metin": "Madde 40 – Durdurulduğu anda denizde zabt ve müsadere hakkının tatbikına başlanması kararından haberdar olmadığı yahut haberdar olmakla beraber taşıdığı şahısları henüz çıkaramadığı takdirde bitaraf bir nakil vasıtası 37 nci maddenin 5 ve 6 ncı numaralarındaki hallerde zabt ve müsadereye tabi olmaz."
+      },
+      "41": {
+        "baslik": "Madde 40 – Durdurulduğu anda denizde zabt ve müsadere hakkının tatbikına başlanması kararından haberdar olmadığı yahut haberdar olmakla beraber taşıdığı şahısları henüz çıkaramadığı takdirde bitaraf bir nakil vasıtası 37 nci maddenin 5 ve 6 ncı numaralarındaki hallerde zabt ve müsadereye tabi olmaz.",
+        "metin": "Madde 41 – Hasmane himaye ve yardım dolayısiyle zabt ve müsadereye tabi bir nakil vasıtasındaki düşmana ait mal zabt ve müsadereye tabi olur.\nBu nakil vasıtasında kaptan veya malikine ait olan mal da aynı suretle zabt ve müsadereye tabidir.\nSEKİZİNCİ FASIL"
+      },
+      "42": {
+        "baslik": "Sahte ve noksan evrak",
+        "metin": "Madde 42 – Evrakı muntazam olmayan nakil vasıtaları zapta tabidir.\nAşağıdaki hallerde bir nakil vasıtasının evrakı muntazam değildir:\n1 – Nakil vasıtasında birden fazla veya musanna veya muharref evrak bulunursa;\n2 – Esaslı vesaik noksan olur, imha edilmiş veya ortadan kaldırılmış bulunursa.\nDOKUZUNCU FASIL"
+      },
+      "43": {
+        "baslik": "Abluka",
+        "metin": "Madde 43 – Abluka, Türkiye Cumhuriyeti Hükümeti veya onun namına hareket eden askeri komutanlar tarafından ilan edilir.\nAbluka ilan olunurken şunlar tesbit olunur:\n1 – Ablukanın başlama zamanı;\n2 – Abluka edilen sahillerin coğrafi hududu;"
+      },
+      "44": {
+        "baslik": "3 – Bitaraf gemilerin çıkıp gitmeleri için bırakılan müddet.",
+        "metin": "Madde 44 – Ablukanın ilanı ile bunun tevsi ve tahdidi aşağıdaki makamlara bildirilir.\n1 – Hükümet tarafından bitaraf devletlere;"
+      },
+      "45": {
+        "baslik": "2 – Ablukayı yapan harb kuvvetleri komutanı tarafından abluka edilen sahildeki liman makamlarına veya salahiyetli sair mahalli makamlara.",
+        "metin": "Madde 45 – Abluka düşman sahillerine inhisar eder."
+      },
+      "46": {
+        "baslik": "Ablukayı yapan harb kuvvetleri bitaraf sahillere girişe mani olamazlar.",
+        "metin": "Madde 46 – Ablukanın hukukan hüküm ifade etmesi için, fiilen müessir olması lazımdır."
+      },
+      "47": {
+        "baslik": "Düşman sahillerile olan muvasalaya fiilen mani olmağa kafi miktarda harb kuvvetleri tarafından idame ettirildiği takdirde abluka fiilen müessirdir.",
+        "metin": "Madde 47 – Abluka eden harb kuvvetleri fena hava yüzünden muvakkaten uzaklaştıkları takdirde abluka refedilmiş sayılmaz."
+      },
+      "48": {
+        "baslik": "Madde 47 – Abluka eden harb kuvvetleri fena hava yüzünden muvakkaten uzaklaştıkları takdirde abluka refedilmiş sayılmaz.",
+        "metin": "Madde 48 – Abluka bilcümle devletlerin nakil vasıtalarına karşı bitarafane yapılmak icap eder."
+      },
+      "49": {
+        "baslik": "Madde 48 – Abluka bilcümle devletlerin nakil vasıtalarına karşı bitarafane yapılmak icap eder.",
+        "metin": "Madde 49 – Abluka olduğunu bildiği halde abluka edilen sahile varmağa veya o sahili terke teşebbüs eden bir nakil vasıtası ablukayı ihlalden dolayı zabt ve müsadereye tabi olur."
+      },
+      "50": {
+        "baslik": "Madde 49 – Abluka olduğunu bildiği halde abluka edilen sahile varmağa veya o sahili terke teşebbüs eden bir nakil vasıtası ablukayı ihlalden dolayı zabt ve müsadereye tabi olur.",
+        "metin": "Madde 50 – Bir bitaraf devletin limanını bu devlete ablukanın tebliğinden sonra terkeden nakil vasıtası ablukadan haberdar sayılır."
+      },
+      "51": {
+        "baslik": "Madde 50 – Bir bitaraf devletin limanını bu devlete ablukanın tebliğinden sonra terkeden nakil vasıtası ablukadan haberdar sayılır.",
+        "metin": "Madde 51 – Ablukayı ihlal eden nakil vasıtasında bulunan mal zabt ve musadereye tabidir.\nKiracı yükleme anında, ablukanın ihlali kasd ve niyetinden haberdar olmadığını ve haberdar olmasına imkan da bulunmadığını ispat ederse, ablukayı ihlalden dolayı mal müsadere olunmayabilir.\nONUNCU FASIL"
+      },
+      "52": {
+        "baslik": "İstirdat",
+        "metin": "Madde 52 – Düşman tarafından zabt ve fakat henüz müsadere veya harb uğrunda istimal edilmeden geri alınan bir nakil vasıtası istirdat edilmiş sayılır.\nBöyle bir nakil vasıtası, zabtı için bir sebep mevcut olmadığı takdirde serbest bırakılır.\nON BİRİNCİ FASIL"
+      },
+      "53": {
+        "baslik": "Denizde zabt ve müsadere hakkının istimalinde riayet edilecek usul",
+        "metin": "Madde 53 – Denizlerde müsadere hakkının tatbikında yapılan aramalarda ve ittihaz olunan bütün tedbirlerde mümkün olduğu kadar nezakete riayet edilir."
+      },
+      "54": {
+        "baslik": "Durdurma ve arama",
+        "metin": "Madde 54 – Durdurma ve arama, nakil vasıtası hakkında bilinmesi lazım gelen hususları tesbit için yapılır."
+      },
+      "55": {
+        "baslik": "Neticede nakil vasıtası ya serbest bırakılır veya zabtolunur.",
+        "metin": "Madde 55 – Durdurma, nakil vasıtasının stop etmesi için vakı davetten gemi evrakının muayenesinin hitamına kadar olan muameleleri ihtiva eder."
+      },
+      "56": {
+        "baslik": "Madde 55 – Durdurma, nakil vasıtasının stop etmesi için vakı davetten gemi evrakının muayenesinin hitamına kadar olan muameleleri ihtiva eder.",
+        "metin": "Madde 56 – Durdurmada aşağıdaki usul caridir:\n1 – Durdurulacak nakil vasıtası bir işaret veya ihtar ateşile durmağa davet edilir. En geç bu davete kadar harb gemisi bayrağını çekmiş olmalıdır.\nNakil vasıtası durmazsa bu halde nakil vasıtasının gidiş yolu istikametine veya aşırma suretile bir mermi atılır. Nakil vasıtası yine durmaz veya mukavemet ederse kuvvetle durmağa icbar edilir.\n2 – Nakil vasıtası durunca bir müfreze gönderilir. Müfrezenin komutanı geminin vesaikini muayene eder."
+      },
+      "57": {
+        "baslik": "Hususi haller dolayısile bir müfrezenin gönderilmesi imkansızsa bu halde istisnai olarak, gemi vesaikinin harp gemisine getirilerek orada muayenesi istenebilir.",
+        "metin": "Madde 57 – Yalnız nakil vasıtasının vesaikinin tetkikle, vaziyet kafi derecede tenevvür etmezse nakil vasıtasında arama yapılır."
+      },
+      "58": {
+        "baslik": "Arama kaptan, gemi adamları ve yolcuların sorguya çekilmesiyle vesikaların ve münderecatının tam ve hakikate uygun olup olmadıklarının tetkik ve tesbiti maksadile nakil vasıtası ve yükün muayenesinden ibarettir.",
+        "metin": "Madde 58 – Bitaraf posta gemilerinde arama ancak zaruret halinde mümkün olan nezaket ve süratle yapılır."
+      },
+      "59": {
+        "baslik": "Rota emri",
+        "metin": "Madde 59 – Rota emri, durdurma veya arama yapılabilmesi için muayyen bir mahalde gitmesi hususunda bir nakil vasıtasına verilen emirdir."
+      },
+      "60": {
+        "baslik": "Madde 59 – Rota emri, durdurma veya arama yapılabilmesi için muayyen bir mahalde gitmesi hususunda bir nakil vasıtasına verilen emirdir.",
+        "metin": "Madde 60 – Durdurma maksadile olan rota emri aşağıdaki hallerde caizdir:\n1 – Şüpheyi mucip esaslı sebepler mevcut olur ve"
+      },
+      "61": {
+        "baslik": "2 – Denizin vaziyetinden, düşmanın müdahale etmesi tehlikesinden veya durduran yahut durdurulan nakil vasıtasının hal ve vaziyetinden dolayı durdurma derhal yapılamazsa.",
+        "metin": "Madde 61 – Arama maksadile olan rota emri aşağıdaki hallerde caizdir:\n1 – Durdurmadan sonra şüpheyi mucip esaslı sebepler mevcut olursa ve"
+      },
+      "62": {
+        "baslik": "2 – Nakil vasıtasının bulunduğu yerde arama yapılması mümkün olmaz veya maslahata uygun bulunmazsa.",
+        "metin": "Madde 62 – Rota emrine itaat etmiyen nakil vasıtası kuvvet istimali ile buna icbar olunabilir.\nBu nakil vasıtası zabta tabidir."
+      },
+      "63": {
+        "baslik": "Nakil vasıtasının zabtı",
+        "metin": "Madde 63 – Zabt, nakil vasıtası üzerindeki emir ve kumanda salahiyetini ele almak suretile olur."
+      },
+      "64": {
+        "baslik": "Madde 63 – Zabt, nakil vasıtası üzerindeki emir ve kumanda salahiyetini ele almak suretile olur.",
+        "metin": "Madde 64 – Nakil vasıtası bir müsadere müfrezesi ile işgal edilir."
+      },
+      "65": {
+        "baslik": "Müsadere müfrezesinin amiri bu gemiye Türk Bayrağını çekmeye salahiyetlidir.",
+        "metin": "Madde 65 – Nakil vasıtalarının bir müsadere müfrezesile işgali kabil olmadığı takdirde nakil vasıtası bayrağını indirmeğe ve sürat ve rotasını harb gemisinin emirlerine göre tanzim etmiye davet olunur."
+      },
+      "66": {
+        "baslik": "Madde 65 – Nakil vasıtalarının bir müsadere müfrezesile işgali kabil olmadığı takdirde nakil vasıtası bayrağını indirmeğe ve sürat ve rotasını harb gemisinin emirlerine göre tanzim etmiye davet olunur.",
+        "metin": "Madde 66 – Nakil vasıtasında bulunan vesaik hıfzedilir ve bunun listesi yapılır.\nNakil vasıtasının teçhizat ve yükü emniyet altına alınır.\nMümkün olursa nakil vasıtası kaptanına zabt hakkında bir vesika verilir."
+      },
+      "67": {
+        "baslik": "Malın zabtı",
+        "metin": "Madde 67 – Malın zabtı, nakil vasıtasının zabtı suretile olur.\nBununla beraber aşağıdaki hallerde mal müstakilen zabtolunabilir.\n1 – Kaptan malı teslime hazır olursa;\n2 – Nakil vasıtasının sevki mümkün olmaz ve tahribi de caiz bulunmazsa;\n3 – Nakil vasıtası tahrib edilecek olursa."
+      },
+      "68": {
+        "baslik": "Sevk",
+        "metin": "Madde 68 – Zabtolunan nakil vasıtası veya mal mümkün olan süratle Türkiye veya müttefiklerinin bir limanına sevk ve oradaki devlet ajanının emrine teslim edilir.\nBitaraf bir devlet limanına sevk ancak deniz müsadere mahkemesinin kararına intizaren zaptolunan nakil vasıtası veya malın orada muhafaza edilmesine bitaraf devlet müsaade ettiği takdirde yapılır.\nSevkten evvel nakil vasıtalarının, malların ve malzemenin kullanılması"
+      },
+      "69": {
+        "baslik": "Sevkten evvel nakil vasıtalarının, malların ve malzemenin kullanılması",
+        "metin": "Madde 69 – Zabtolunan düşman nakil vasıtaları icap ettiği takdirde sevklerinden evvel ordunun hizmetinde kullanılabilirler.\nAynı hüküm, bir düşman gemisi rafakatinde yolculuk, kuvvet istimali ile mukavemet veya harb hareketlerine iştirak ettiğinden dolayı müsadereye tabi bulunan ve zabtolunan bitaraf bir nakil vasıtası hakkında da caridir."
+      },
+      "70": {
+        "baslik": "Sair sebepler dolayısiyle müsadereye tabi olup zaptolunan bitaraf nakil vasıtaları da sevklerinden önce insani vazifelerin ifası için ordu hizmetinde kullanılabilirler.",
+        "metin": "Madde 70 – Zabtolunan düşman veya bitaraf nakil vasıtalarındaki müsadereye tabi mallar ve malzeme lüzumu halinde sevklerinden önce ordunun ve hassatan zabteden nakil vasıtasının ihtiyacı için kullanılabilir."
+      },
+      "71": {
+        "baslik": "Nakil vasıtalarının ve malların tahribi",
+        "metin": "Madde 71 – Sevkleri maslahata uygun veya emin görünmediği takdirde zabtolunan düşman nakil vasıtalarının tahribi caizdir."
+      },
+      "72": {
+        "baslik": "Madde 71 – Sevkleri maslahata uygun veya emin görünmediği takdirde zabtolunan düşman nakil vasıtalarının tahribi caizdir.",
+        "metin": "Madde 72 – Zabtolunan bitaraf nakil vasıtalarının aşağıdaki hallerde tahribi caizdir:\n1 – Düşman refakatinde yolculuk, kuvvet istimali ile mukavemet veya hasmane himaye ve yardımda bulunduklarından dolayı zabtedilmiş ve\n2 – Sevkleri maslahata uygun veya emin görülmemişse.\nBirinci fıkranın bir numarasında yazılı olanlardan gayri sebeblerle zabtedilmiş olan bitaraf nakil vasıtalarının da aşağıdaki hallerde istisnaen tahribi caizdir:\n1 – Müsadere olunacakları kuvvetle muntazar ve"
+      },
+      "73": {
+        "baslik": "2 – Sevkleri zabteden nakil vasıtasını tehlikeye maruz veya bunun girişmiş olduğu teşebbüsleri akim bırakabilecek ise.",
+        "metin": "Madde 73 – 71 ve 72 nci maddelere göre nakil vasıtalarının tahribi yolcuların, gemi adamlarının ve nakil vasıtasına ait evrakın emin bir yere getirilmiş olması şartiyle caizdir."
+      },
+      "74": {
+        "baslik": "Gemi filikaları emin bir yer sayılmazlar. Meğer ki yolcuların ve gemi adamlarının selameti mevcut deniz ve hava vaziyetine nazaran karanın yakın olması veya kendilerini alabilecek mevkide diğer bir nakil vasıtasının mevcudiyeti dolayısiyle temin edilmiş bulunsun.",
+        "metin": "Madde 74 – 67 nci madde mucibince yalnız başına zabtolunan mal başka bir şart aranmaksızın tahrip olunabilir."
+      },
+      "75": {
+        "baslik": "Gemi adamlariyle yolculura yapılacak muamele",
+        "metin": "Madde 75 – Zabtolunan düşman nakil vasıtalarının kaptan, doktor ve çarkçıları:\n1 – Bitaraf bir Devlet tabiiyetinde olduklarını ispat ettikleri ve\n2 – Harbin devamı müddetince hiç bir düşman nakil vasıtasında hizmet deruhte etmiyeceklerine dair yazılı şekilde söz verdikleri takdirde serbest bırakılır.\nZabtolunan düşman nakil vasıtalarının diğer gemi adamları bitaraf bir Devlet tabiiyetinde olduklarını ispat ettikleri takdirde serbest bırakılırlar.\nZabtolunan bitaraf nakil vasıtalarının kaptan, çarkçı, doktor ve diğer gemi adamları bitaraf bir Devlet tabiyetinde olduklarını ispat ettikleri takdirde serbest bırakılırlar."
+      },
+      "76": {
+        "baslik": "Zabtolunan nakil vasıtası kuvvet istimaliyle mukavemet veya harb hareketlerine iştirak ettiği takdirde yukarki fıkralar ahkamı tatbik edilmez.",
+        "metin": "Madde 76 – Zabtolunan nakil vasıtalarının yolcuları serbest bırakılırlar. Aşağıdaki şahıslar bundan müstesnadır.\n1 – Düşman harb kuvvetleri mensupları;\n2 – Düşman harp kuvvetlerinin hizmetine girmek maksadiyle yolculuk edenler;"
+      },
+      "77": {
+        "baslik": "3 – Düşman ajanlar.",
+        "metin": "Madde 77 – Deniz müsadere mahkemesi huzurunda cerayan edecek muhakeme için lüzumlu olan şahitler 75 ve 76 ncı maddelere göre serbest bırakılmaları icap eden kimselerden olsalar bile mümkün olduğu nispette alakonulurlar."
+      },
+      "78": {
+        "baslik": "Madde 77 – Deniz müsadere mahkemesi huzurunda cerayan edecek muhakeme için lüzumlu olan şahitler 75 ve 76 ncı maddelere göre serbest bırakılmaları icap eden kimselerden olsalar bile mümkün olduğu nispette alakonulurlar.",
+        "metin": "Madde 78 – Zaptolunan nakil vasıtasının yolcu, kaptan, çarkçılar ve doktor ile diğer gemi adamlarından serbest bırakılmıyacak olanlar mümkün olduğu nispette bir Türk veya müttefik bir Devlet limanına getirilirler."
+      },
+      "79": {
+        "baslik": "Müsadere",
+        "metin": "Madde 79 – Zabtolunan nakil vasıtasının ve malın müsaderesi Deniz Müsadere Mahkemesinin hükmü ile olur.\nHükmün katiyet kesbetmesi ile teçhizatı da dahil olmak üzere nakil vasıtası ve zaptedilen mal Türk Devletinin malı olur.\nON iKiNCİ FASlL"
+      },
+      "80": {
+        "baslik": "Tazminat",
+        "metin": "Madde 80 – Bir nakil vasıtasının veya malın zaptı muhakeme tarikına gidilmeksizin kaldırıldığı veya deniz müsadere mahkemesince tasdik edilmediği takdirde alakadarlar tazminat talep edebilirler;"
+      },
+      "81": {
+        "baslik": "Şu kadar ki nakil vasıtasının ve malın zaptı için kafi sebepler mevcut olursa bu hüküm tatbik olunmaz.",
+        "metin": "Madde 81 – 72 nci maddenin birinci fıkrasının bir numarasında yazılı olanlardan gayri sebepler dolayısiyle zabtolunan bitaraf nakil vasıtaları tahrip edildiği takdirde:\n1 – Tahrip edilen nakil vasıtasının malikleri nakil vasıtası müsadereye tabi olmadığı veya 72 nci maddenin ikinci fıkrasının ikinci numarasında yazılı hususi haller mevcut bulunmadığı takdirde nakil vasıtasının kıymetine tekabül eden bir tazminat talep edebilirler.\n2 – Nakil vasıtası ile birlikte tahrip edilen malın malikleri mal müsadereye tabi olmadığı veya 72 nci maddenin ikinci fıkrasının ikinci numarasında yazılı hususi haller mevcut bulunmadığı takdirde malın kıymetine tekabül eden bir tazminat talep edebilirler.\n3 – Zati istimallerine mahsus ve kendilerine ait olup nakil vasıtası ile tahrip edilmiş olan eşyaları için kaptan, çarkçı, doktor ve diğer gemi adamları ve yolcular bu eşyanın kıymetine tekabül eden bir tazminat talep edebilirler."
+      },
+      "82": {
+        "baslik": "80 inci maddeye istinat eden talepler manfuzdur.",
+        "metin": "Madde 82 – 67 nci maddeye tevfikan zabtedilen mal tahrip edildiği ve müsadereye tabi maldan olmadığı takdirde sahipleri malın değerine tekabül eden bir tazminat talep edebilirler."
+      },
+      "83": {
+        "baslik": "80 inci maddeye istinat eden talepler mahfuzdur.",
+        "metin": "Madde 83 – 70 inci maddede gösterildiği veçhile ordunun ihtiyacı için kullanılan mal ve levazım müsadereye tabi tutulmadığı takdirde malikleri değerine tekabül eden bir tazminat talep edebilirler."
+      },
+      "84": {
+        "baslik": "80 inci maddeye istinat eden talepler mahfuzdur.",
+        "metin": "Madde 84 – Rota emrinin verilmesi caiz olmadığı takdirde alakadarlar tazminat talebinde bulunabilirler. Meğer ki zabt için kafi sebepler mevcut olsun."
+      },
+      "85": {
+        "baslik": "Madde 84 – Rota emrinin verilmesi caiz olmadığı takdirde alakadarlar tazminat talebinde bulunabilirler. Meğer ki zabt için kafi sebepler mevcut olsun.",
+        "metin": "Madde 85 – Alakadarlar tazminat taleplerini Deniz Müsadere Mahkemesinde dermeyan ederler."
+      },
+      "86": {
+        "baslik": "Zabt ile neticelenmiyen bir rota emrinden veyahut sevkedilmeden evvel serbest bırakılan nakil vasıtası veya malın zaptından mütevellit tazminat hakları bunların serbest bırakıldıklarından itibaren altı ay zarfında dermeyan edilmezlerse sakıt olur.",
+        "metin": "Madde 86 – Düşman bir Devlet tebaasının bu fasıl hükümlerine göre taleplerde bulunabilmesi ancak mütekabiliyet esasının temin edilmiş olmasına bağlıdır.\nİKİNCİ BAP\nBİRİNCİ FASlL"
+      },
+      "87": {
+        "baslik": "I – Deniz müsadere mahkemelerinin kaza salahiyeti ve bu salahiyetin mevzuu",
+        "metin": "Madde 87 – Deniz müsadere mahkemelerinin kaza mevzuu, denizde zabt ve müsadere hukukuna taallük eden muamele ve tedbirlerin kanuna muvafık olup olmadığını tetkik etmektir."
+      },
+      "88": {
+        "baslik": "Madde 87 – Deniz müsadere mahkemelerinin kaza mevzuu, denizde zabt ve müsadere hukukuna taallük eden muamele ve tedbirlerin kanuna muvafık olup olmadığını tetkik etmektir.",
+        "metin": "Madde 88 – Deniz müsadere mahkemelerinin kaza salahiyeti ve denizde zabt ve müsadere hukukunu tatbika memur makamların faaliyete geçecekleri zamanın başlangıcı Türkiye Cumhuriyeti Hükümeti tarafından denizde zabt ve müsadere hakkının kullanılmasına dair ittihaz olunan kararın neşri tarihinden başlar."
+      },
+      "89": {
+        "baslik": "Madde 88 – Deniz müsadere mahkemelerinin kaza salahiyeti ve denizde zabt ve müsadere hukukunu tatbika memur makamların faaliyete geçecekleri zamanın başlangıcı Türkiye Cumhuriyeti Hükümeti tarafından denizde zabt ve müsadere hakkının kullanılmasına dair ittihaz olunan kararın neşri tarihinden başlar.",
+        "metin": "Madde 89 – Denizde zabt ve müsadere hakkının tatbikı suretiyle zabtolunan deniz nakil vasıtaları ve malları deniz müsadere mahkemelerinde görülecek işlerin mevzuunu teşkil eder.\nII – Deniz müsadere mahkemelerinin teşkilatı"
+      },
+      "90": {
+        "baslik": "1. Mahkemeler",
+        "metin": "Madde 90 – Davaları birinci derecede rüyet etmek üzere deniz müsadere mahkemeleri ve ikinci derecede rüyet etmek üzere bir Yüksek Deniz Müsadere Mahkemesi teşkil olunur."
+      },
+      "91": {
+        "baslik": "Madde 90 – Davaları birinci derecede rüyet etmek üzere deniz müsadere mahkemeleri ve ikinci derecede rüyet etmek üzere bir Yüksek Deniz Müsadere Mahkemesi teşkil olunur.",
+        "metin": "Madde 91 – Deniz müsadere mahkemelerinin toplanacağı yerleri Başkomutan tayin eder."
+      },
+      "92": {
+        "baslik": "Madde 91 – Deniz müsadere mahkemelerinin toplanacağı yerleri Başkomutan tayin eder.",
+        "metin": "Madde 92 – Deniz müsadere mahkemeleri ikisi adliye hakimlerinden birisi askeri adli hakimlerden olmak üzere üç mesleki hakimden ve iki deniz subayından terekküp eder. Reislik vazifesi en kıdemli adliye hakimi tarafından görülür."
+      },
+      "93": {
+        "baslik": "Madde 92 – Deniz müsadere mahkemeleri ikisi adliye hakimlerinden birisi askeri adli hakimlerden olmak üzere üç mesleki hakimden ve iki deniz subayından terekküp eder. Reislik vazifesi en kıdemli adliye hakimi tarafından görülür.",
+        "metin": "Madde 93 – Yüksek Deniz Müsadere Mahkemesi, ikisi Temyiz Mahkemesi Azasından ve birisi Askeri Temyiz Mahkemesi askeri adli hakimlerinden olmak üzere üç mesleki hakimden ve iki deniz üst subayından terekküp eder. Reislik vazifesi adliye hakimlerinden kıdemlisine aittir."
+      },
+      "94": {
+        "baslik": "Madde 93 – Yüksek Deniz Müsadere Mahkemesi, ikisi Temyiz Mahkemesi Azasından ve birisi Askeri Temyiz Mahkemesi askeri adli hakimlerinden olmak üzere üç mesleki hakimden ve iki deniz üst subayından terekküp eder. Reislik vazifesi adliye hakimlerinden kıdemlisine aittir.",
+        "metin": "Madde 94 – Deniz müsadere mahkemelerine, icabı kadar, yedek hakim de tayin olunur."
+      },
+      "95": {
+        "baslik": "Reise vekalet edecek yedek hakimi Adliye Vekili, diğer hakimlere vekalet edecek yedek hakimleri mahkemenin reisi tayin eder.",
+        "metin": "Madde 95 – Deniz müsadere mahkemelerinin reisleri ve adli hakimleri ve yedekleri Adliye Vekili, askeri adli hakim ile subay hakimler ve yedekleri Milli Müdafaa Vekili tarafından intihap ve milli iradeye arzolunur."
+      },
+      "96": {
+        "baslik": "Madde 95 – Deniz müsadere mahkemelerinin reisleri ve adli hakimleri ve yedekleri Adliye Vekili, askeri adli hakim ile subay hakimler ve yedekleri Milli Müdafaa Vekili tarafından intihap ve milli iradeye arzolunur.",
+        "metin": "Madde 96 – Deniz müsadere mahkemelerinin adli ve askeri ve subay hakimleri vazifeleri devam ettiği müddetçe hakimlerin haiz olduğu bütün hak ve salahiyetlere sahiptirler. Bunlar hakimlik vazifelerinden ancak Hakimler Kanunu hükümlerine göre çıkarılabilirler."
+      },
+      "97": {
+        "baslik": "2. Deniz müsadere mahkemelerinde Devlet ajanı",
+        "metin": "Madde 97 – Her deniz müsadere mahkemesine, Devlet ajanı olarak, bir deniz subayı tayin olunur. Ajana muavin de verilebilir.\nDevlet ajanı ve muavinleri Milli Müdafaa Vekilinin inhası üzerine kararname ile tayin olunur.\nYüksek deniz müsadere mahkemesi nezdindeki Devlet ajanı Başkomutanın ve deniz müsadere mahkemelerindeki Devlet ajanları da başajanın emri altında bulunurlar."
+      },
+      "98": {
+        "baslik": "3. Yardım",
+        "metin": "Madde 98 – Bütün mahkemeler ve Devlet makamları salahiyetleri dahilinde deniz müsadere mahkemelerinin ve ajanlarının adli taleplerini yerine getirmekle mükelleftirler.\nİKİNCİ FASIL\nDeniz müsadere mahkemelerinin ve Devlet ajanlarının vazifeleri"
+      },
+      "99": {
+        "baslik": "I. Deniz Müsadere Mahkemeleri",
+        "metin": "Madde 99 – A) Deniz müsadere mahkemeleri aşağıdaki hususlara hüküm verir:\n1 – Denizde zapt ve müsadere hakkının tatbikında tevessül olunan tedbirlerin kanuna muvafık olup olmadığına;\n2 – Zabtolunan nakil vasıtası veya malın müsaderesine veya serbest bırakılmasına;\n3 – Zabt ve imha muamelelerinin haksız olarak yapılmış veya haksız surette rota emri verilmiş olmasından dolayı zarar ve ziyan tediyesine;\n4 – 30 uncu maddenin (A) fıkrası mucibince tazminat tediyesine;\n5 – Zabtolunan nakil vasıtası veya malın kullanılması veya iadesi hakkında birinci derece muhakemenin devamı sırasında ve hitamından önce vakı olan iddialara.\nB) Yüksek deniz müsadere mahkemesi aşağıdaki hususlara hüküm verir.\n1 – Deniz müsadere mahkemeleri hükümlerine karşı vakı olan istinaf davaları üzerine;\n2 – Deniz müsadere mahkemeleri kararları aleyhindeki itirazlar üzerine;"
+      },
+      "100": {
+        "baslik": "3 – Zabtolunan nakil vasıtasının veya malın kullanılması veya iadesi hakkında ikinci derece muhakemenin devamı sırasında ve hitamından önce vakı olan iddialara.",
+        "metin": "Madde 100 – Deniz müsadere mahkemelerinin kaza salahiyeti tamamiyle istisnai bir selahiyettir. Diğer mahkemeler ve Devlet idare makamları deniz müsadere mahkemelerinin katiyet halini almış olan hükümleri ile bağlıdır."
+      },
+      "101": {
+        "baslik": "II. Devlet ajanı",
+        "metin": "Madde 101 – Deniz müsadere mahkemelerindeki Devlet ajanlarının vazifeleri şunlardır:\n1 – Hazırlık tahkikatı yapmak;\n2 – Zabtolunan nakil vasıtasını ve yükü ve tevkif edilen eşhası muhafaza etmek;\n3 – Mahkemede davayı açmak;\n4 – Mahkemede Devleti temsil etmek;\n5 – Hükümleri icra ettirmek."
+      },
+      "102": {
+        "baslik": "Devlet ajanı muhakeme neticeleninceye kadar zabtolunan nakil vasıtasını ve yükünü serbest bırakabilir veya alakalılar ile sulh yapabilir.",
+        "metin": "Madde 102 – Yüksek Deniz Müsadere Mahkemesi nezdindeki ajan bu Mahkeme huzurunda Devleti temsil eder.\nBu ajan muhakemenin hitamından önce zabtolunan nakil vasıtasını ve yükünü serbest bırakabileceği gibi alakalılar ile sulh da yapabilir."
+      },
+      "103": {
+        "baslik": "Bu ajan Yüksek Deniz Müsadere Mahkemesinin hükümlerini, deniz müsadere mahkemesi ajanlarının yerine bizzat icra ettirebilir.",
+        "metin": "Madde 103 – Deniz müsadere mahkemelerinin Devlet ajanları, vazifelerinin icrasında deniz ordusu hizmet makamlarını davet edebilecekleri gibi onlara talimat da verebilirler.\nÜÇÜNCÜ FASIL\nMuhakeme usulü"
+      },
+      "104": {
+        "baslik": "I. Hazırlık tahkikatı",
+        "metin": "Madde 104 – Deniz müsadere hukukunun tatbikında kullanılan tedbirlerden olmak üzere, bir nakil vasıtası ve hamulesi bir yere sevkedilmişse, bu nakil vasıtası ve hamulesi ve nakil vasıtasında bulunan vesikalar vesair evrak ile zabt raporu ve diğer subut vasıtaları hemen deniz ordusunun salahiyetli hizmet makamlarına tevdi olunur.\nDeniz ordusu hizmet makamı, Devlet ajanının hiç bir talimatı olmasa bile:\n1 – Zaptolunan nakil vasıtası ve eşyanın muhafazası ve nezaret altına alınan eşhasın iaşe ve muhafazaları için;\n2 – Subut vasıtalarının muhafazası için;"
+      },
+      "105": {
+        "baslik": "İcap eden tedbirleri alır ve bu tedbirler hakkında, Devlet ajanına hemen malümat verir.",
+        "metin": "Madde 105 – Devlet ajanı deniz müsadere mahkemesinin hükmüne esas teşkil edebilecek subut delillerini toplar ve lüzumu halinde ehlihibre dahi celp ve istima eder.\nDevlet ajanı:\nI – Evrak ve vesikaları açarken mümkün olan hallerde zabtolunan nakil vasıtasını sevkeden komutan veya kaptanı da celbederek hazır bulundurur;\nII – 66 ncı maddenin birinci fıkrası mucibince tanzim edilmiş olan müfredat listesiyle nakil vasıtasının vesikalarını karşılaştırarak vaziyeti tesbit eder;\nIII – Nakil vasıtasının hamulesi ve techizatı hakkında bir liste tanzim ve zabtolunan nakil vasıtasını ve hamulesini tetkik ve muayene eder;\nIV – Kaptanı ve nezaret altına alınan kimseleri ve icap eden şahitleri dinler.\nŞahitlerle ehlihibreye yemin ettirilebilir."
+      },
+      "106": {
+        "baslik": "Şahitlerle ehlihibreye yemin ettirilebilir.",
+        "metin": "Madde 106 – Zabtolunan nakil vasıtası ve hamulesi, bir müttefik veya bir bitaraf limana sevkedilmişse, deniz ordusu hizmet makamlarına ait olan vazifeler, mahalli kanunlar mani olmadıkça, orada bulunan salahiyetli Türk konsolosu tarafından ifa olunur."
+      },
+      "107": {
+        "baslik": "Madde 106 – Zabtolunan nakil vasıtası ve hamulesi, bir müttefik veya bir bitaraf limana sevkedilmişse, deniz ordusu hizmet makamlarına ait olan vazifeler, mahalli kanunlar mani olmadıkça, orada bulunan salahiyetli Türk konsolosu tarafından ifa olunur.",
+        "metin": "Madde 107 – Deniz müsadere hukukunun tatbikı dolayısiyle nakil vasıtası ve hamulesi bir yere sevkedilmişse, komutan, zabt raporunu, müsadere mahkemesi ajanına tevdi edilmek üzere başkomutana takdim eder."
+      },
+      "108": {
+        "baslik": "Zabtedilen nakil vasıtası ve mal ve eşya 69 ve 70 nci maddeler hükmü dahilinde bir yere sevkedilmeden önce kullanılmaya başlanmış ise yine aynı hüküm tatbik olunur.",
+        "metin": "Madde 108 – Hazırlık tahkikatı sırasında, tarafların yapacakları müracaatlar ve dermeyan edecekleri iddialar Devlet ajanına karşı yapılır."
+      },
+      "109": {
+        "baslik": "Madde 108 – Hazırlık tahkikatı sırasında, tarafların yapacakları müracaatlar ve dermeyan edecekleri iddialar Devlet ajanına karşı yapılır.",
+        "metin": "Madde 109 – Ordunun sair birlikleri veyahut salahiyetli hizmet makamları tarafından yapılan zabt muameleleri hakkında dahi 104 - 108 inci maddelerin hükümleri tatbik olunur."
+      },
+      "110": {
+        "baslik": "II. Deniz müsadere mahkemesinde muhakeme usulü",
+        "metin": "Madde 110 – Devlet ajanı, işin maddi ve hukuki vaziyetinin kafi derecede aydınlanmış olduğuna kanaat getirdikten sonra muhakemeye başlanılmak üzere dava dosyasını deniz müsadere mahkemesine gönderir."
+      },
+      "111": {
+        "baslik": "Deniz zapt ve müsadere hakkının tatbikında zabtolunan nakil vasıtasının ve hamulesinin bir yere sevkedilmediği veya bunlar bir yere sevkolunduktan sonra serbest bırakıldığı hallerde kendisine bir zarar ve ziyan iddiası dermeyan edilmemiş veya bir uzlaşma ile iş halledilmiş veyahut iddiadan vazgeçilmiş ise; Devlet ajanı işi mahkemeye sevkten sarfınazar edebilir.",
+        "metin": "Madde 111 – Deniz müsadere mahkemesinin reisi muhakemeyi idare eder."
+      },
+      "112": {
+        "baslik": "Reis, her iş için mahkemenin mesleki hakimlerinden birisini raportör tayin eder.",
+        "metin": "Madde 112 – Deniz müsadere mahkemesinin reisi, muhakemenin başlıyacağını, Türk gazetelerinden birisiyle ilan eder. Reis bu ilanda bir de mehil tayin eder. Alakalılar iddialarını bu mehil içinde mahkemeye dermeyan etmeğe mecburdurlar. Mehil bittikten sonra müracaat eden alakalı muhakemeye kabul edilmez.\nİddialarını evvelce hazırlık tahkikatı sırasında Devlet ajanına dermeyan etmiş olan alakalılar hakkında dahi bu mehil caridir.\nMehil bir aydan az ve üç aydan çok olamaz. Mehil ilan tarihinden itibaren işlemeye başlar."
+      },
+      "113": {
+        "baslik": "Malüm olan alakalıya keyfiyet ayrıca tebliğ edilir.",
+        "metin": "Madde 113 – Zabt için olmayıp da bir rota emri dolayısiyle cereyan eden muhakemelerde ve keza bir yere sevkedilmeden önce serbest bırakılan nakil vasıtasının ve hamulesinin zabtı olayısiyle cereyan eden muhakemelerde 112 nci maddenin birinci fıkrasında gösterilen ilan yapılmaz.\nBirinci fıkrada gösterilen haller dışında kalan ve 85 inci maddede gösterilen altı aylık mehil içinde Devlet ajanına yapılan zarar ve ziyan iddiaları için mahkeme reisi tarafından alakalıya bir mehil tayin olunur. Alakalının bu mehil içinde zarar ve ziyan iddiasını mahkemeye dermeyan etmesi iktiza eder. Bu mehil bittikten sonra alakalı muhakemeye kabul edilmez. Mehil tebliğ tarihinden itibaren işlemeye başlar."
+      },
+      "114": {
+        "baslik": "Devlet ajanına yapılan zarar ve ziyan iddiaları 85 inci maddede gösterilen mehilin hitamından sonra dermeyan edilmişse, deniz müsadere mahkemesi, davanın reddine karar verir. Bu karara karşı itiraz caizdir.",
+        "metin": "Madde 114 – Alakalılar ancak, zabtolunan nakil vasıtasının veya hamulesinin serbest bırakılmasını veyahut zarar ve ziyan verilmesini istiyebilir."
+      },
+      "115": {
+        "baslik": "Dava, istinat isteği sebepleri ve subut vasıtalarını muhtevi olmak lazımdır.",
+        "metin": "Madde 115 – Dava arzuhallerinin bir Türk avukatı tarafından tanzim ve imza edilmesi şarttır.\nMuhakeme alakalıyı temsil eden bir Türk avukatı huzuriyle cereyan eder."
+      },
+      "116": {
+        "baslik": "Yukarıda gösterilen avukat, yerine diğer bir avukatın tayin edildiği, mahkemeye ispat edilinceye kadar, temsil salahiyetini muhafaza eder.",
+        "metin": "Madde 116 – Mücbir sebepler dolayısiyle davasını müddeti içinde ikame edemiyen alakalının eski hale getirme talebi kabul olunur.\nEski hale getirme talebi 112 nci maddede gösterilen mehilin hitamından itibaren bir sene içinde dermeyan olunabilir."
+      },
+      "117": {
+        "baslik": "Eski hale getirme talebinin reddine dair olan kararlar aleyhine itiraz caizdir.",
+        "metin": "Madde 117 – Düşman devlet tebaası, ancak mütekabiliyet temin edilmiş ise, dava ikame edebilir. Bu hususta mahkeme bir karar verir."
+      },
+      "118": {
+        "baslik": "Karar aleyhine itiraz caizdir.",
+        "metin": "Madde 118 – İlanda gösterilen mehilin hitamından sonra mahkeme reisi dava dosyasını iddialarını dermeyan etmek üzere Devlet ajanına tevdi eder."
+      },
+      "119": {
+        "baslik": "Devlet ajanı, bir ay içinde dava dosyasını iddialari ile birlikte mahkemeye tevdi eder. Talep halinde bu müddet uzatılabilir.",
+        "metin": "Madde 119 – Nakil vasıtası veya hamulesi bir yere sevkedilmemiş veya edildikten sonra serbest bırakılmış olan hallerde, alakalılar tarafından müddet ve şekle mütaallik hükümlere muvafık bir dava açılmamış veya açılan dava uzlaşma veya feragat suretiyle neticelenmiş ise, Devlet ajanı muhakemenin yapılmasına mahal olmadığına karar verilmesini talep edebilir."
+      },
+      "120": {
+        "baslik": "Bu talep üzerine verilecek karara itiraz caizdir.",
+        "metin": "Madde 120 – 119 uncu maddeye nazaran muhakemenin yapılmasına mahal olmadığına karar verilmiyecek olursa, mahkeme reisi duruşma için bir gün tayin eder."
+      },
+      "121": {
+        "baslik": "Devlet ajanı ve alakalıların vekili muhakeme günü için re'sen mahkemeye davet olunur.",
+        "metin": "Madde 121 – Devlet ajanı dava dosyasını her zaman tetkik edebilir."
+      },
+      "122": {
+        "baslik": "Alakalının avukatı tarafından dava dosyasının tetkikına, Devlet ajanının muvafakatiyle müsaade olunur. Devlet ajanı, ancak askeri zaruretler icap ettirdiği takdirde bu muvafakattan imtina edebilir. Mahkeme dava dosyasının alakalının avukatına gösterilmiyen kısımlarından istihraç etmiş olduğu vakıaları, hükümde alakalılar aleyhine bir delil olarak kullanamaz.",
+        "metin": "Madde 122 – Muhakeme alenidir."
+      },
+      "123": {
+        "baslik": "Mahkeme Devletin emniyeti bakımından lüzum görürse, muhakemenin gizli olarak cereyanına karar verebilir.",
+        "metin": "Madde 123 – Hukuk Usulü Muhakemeleri Kanununun (150-158) inci maddeleri hükümleri deniz müsadere mahkemelerinde dahi caridir."
+      },
+      "124": {
+        "baslik": "Madde 123 – Hukuk Usulü Muhakemeleri Kanununun (150-158) inci maddeleri hükümleri deniz müsadere mahkemelerinde dahi caridir.",
+        "metin": "Madde 124 – Duruşmada raportör aza vakıaları ve münazaalı olan vaziyeti izah eder.\nBundan sonra Devlet ajanı ve alakalılar dinlenir. Karşılıklı iddialar da caizdir. Yeni vakıalar ve yeni delillerin de iradına müsaade olunur."
+      },
+      "125": {
+        "baslik": "Alakalılar duruşmada temsil edilmiyorsa, mahkeme, 114 üncü maddede gösterilen iddialar hakkında elde bulunan sübut delilleri üzerine hükmünü verir.",
+        "metin": "Madde 125 – Re'sen veya alakalıların talebi üzerine muhakeme ve duruşma talik veya tehir olunabilir."
+      },
+      "126": {
+        "baslik": "Madde 125 – Re'sen veya alakalıların talebi üzerine muhakeme ve duruşma talik veya tehir olunabilir.",
+        "metin": "Madde 126 – Mahkeme, hazırlık tahkikatında irat ve ikame olunan delillerden başka diğer sübut delillerinin de iradını lüzumlu görürse bunları tayin veya istinabe edeceği bir hakim vasıtasiyle temin eder.\nDevlet ajanı ve alakalının vekili bu delillerin ikame olunacağı günden haberdar edilir.\nDelillerin irat ve ikamesi hakkında Hukuk Usulü Muhakemeleri Kanunu hükümleri tatbik olunur."
+      },
+      "127": {
+        "baslik": "Delillerin irat ve ikamesi hakkında Hukuk Usulü Muhakemeleri Kanunu hükümleri tatbik olunur.",
+        "metin": "Madde 127 – Müzakere sonunda raportör aza birinci ve mahkemenin reisi sonuncu olarak reylerini verirler. Diğer azalardan yaşları sırasiyle genç olanlar önce rey verirler."
+      },
+      "128": {
+        "baslik": "Madde 127 – Müzakere sonunda raportör aza birinci ve mahkemenin reisi sonuncu olarak reylerini verirler. Diğer azalardan yaşları sırasiyle genç olanlar önce rey verirler.",
+        "metin": "Madde 128 – Kararlar, reylerin, mutlak ekseriyetiyle verilir."
+      },
+      "129": {
+        "baslik": "Madde 128 – Kararlar, reylerin, mutlak ekseriyetiyle verilir.",
+        "metin": "Madde 129 – Hüküm aleni celsede tefhim olunur. Tefhim, hüküm fıkrasının okunması suretiyle icra olunur.\nHükmün esbabı mucibeyi muhtevi olması iktiza eder.\nHükmün esbabı mucibesinin de tefhimi muvafık görülürse, esbabı mucibenin okunması veyahut muhtevasının esaslı kısımlarının şifahen bildirilmesi suretiyle icra olunur."
+      },
+      "130": {
+        "baslik": "Hüküm ve kararlar buna iştirak eden hakimler tarafından imza olunur. Hükmün beyaz edilmesinde, hakimlerden biri imza edemiyecek halde ise maniinin sebebi reis tarafından ve bunun da bulunmaması halinde hükümde hazır bulunan hakimlerden en yaşlısı tarafından hükmün altına yazılır.",
+        "metin": "Madde 130 – Ara kararları, duruşma yapılmadan da verilebilir."
+      },
+      "131": {
+        "baslik": "Hükümler ve tefhim edilmeyen kararlar Devlet ajanına ve alakalıların avukatlarına re'sen tebliğ olunur.",
+        "metin": "Madde 131 – Deniz müsadere mahkemelerinin hükümleri katileştikten sonra icra olunur."
+      },
+      "132": {
+        "baslik": "Hükmün katileştiği mahkeme reisi tarafından tevsik olunduktan sonra Devlet ajaniyle alakalıların avukatlarına tebliğ olunur.",
+        "metin": "Madde 132 – Müsadere mahkemelerinin hükümleri Devlet ajanı tarafından icra edilir."
+      },
+      "133": {
+        "baslik": "Madde 132 – Müsadere mahkemelerinin hükümleri Devlet ajanı tarafından icra edilir.",
+        "metin": "Madde 133 – Tebliğ işleri hakkında Hukuk Usulü Muhakemeleri Kanununun tebligata dair olan hükümleri tatbik olunur.[3]\nDevlet ajanına tebligat imza mukabilinde yapılır.\nIII. Yüksek Deniz Müsadere Mahkemesinde muhakeme usulü"
+      },
+      "134": {
+        "baslik": "1. İstinaf",
+        "metin": "Madde 134 – Deniz müsadere mahkemelerinin hükümlerine karşı bu mahkemeler nezdindeki Devlet ajanı veya alakalılar tarafından istinaf talep edilebilir."
+      },
+      "135": {
+        "baslik": "İstinaf, yeni vakıalara ve yeni delillere de istinaden istenebilir.",
+        "metin": "Madde 135 – İstinaf, hükmün tebliğinden itibaren bir ay içinde ve yazılı şekilde deniz müsadere mahkemesinde yapılır."
+      },
+      "136": {
+        "baslik": "İstinaf arzuhali verildiğini mütaakip, deniz müsadere mahkemesi reisi arzuhal ile birlikte dava dosyasını hemen Yüksek Deniz Müsadere Mahkemesine gönderir.",
+        "metin": "Madde 136 – İstinaf talebi esbabı mucibeye müstenit olmak icabeder.\nİstinaf sebepleri, istinaf arzuhalinde dermeyan edilmemiş ise, bir istinaf layihası ile Yüksek Deniz Müsadere Mahkemesine arzolunur."
+      },
+      "137": {
+        "baslik": "İstinaf layihası, istinaf olunan hükmün tebliği tarihinden itibaren iki ay zarfında verilir. Bu müddet Yüksek Deniz Müsadere Mahkemesi tarafından uzatılabilir.",
+        "metin": "Madde 137 – İstinaf sebeblerinde:\nHükmün hangi noktalarının değiştirilmesi icabettiği açıkça izah edilir."
+      },
+      "138": {
+        "baslik": "İstinafın kabulü için serdolunan istinaf sebebi ve yeni vakıalar ve deliller açıkca gösterilir.",
+        "metin": "Madde 138 – Yüksek Deniz Müsadere Mahkemesinde duruşmadan önce istinaf talebinin geri alınması caizdir. Bu takdirde istinaf hakkı sakıt olur."
+      },
+      "139": {
+        "baslik": "Madde 138 – Yüksek Deniz Müsadere Mahkemesinde duruşmadan önce istinaf talebinin geri alınması caizdir. Bu takdirde istinaf hakkı sakıt olur.",
+        "metin": "Madde 139 – Alakalının istinaf arzuhali ve layihası bir avukat tarafından da imza edilmek icap eder."
+      },
+      "140": {
+        "baslik": "Madde 139 – Alakalının istinaf arzuhali ve layihası bir avukat tarafından da imza edilmek icap eder.",
+        "metin": "Madde 140 – İstinaf arzuhali ve layihası kanuni mehil içinde ve kanunun gösterdiği şekilde verilmemiş ise istinaf talebi reddolunur. Red kararı aleyhine itiraz caizdir."
+      },
+      "141": {
+        "baslik": "Karar esbabı mücibeye müstenit olmak icap eder.",
+        "metin": "Madde 141 – İstinaf arzuhali ve istinaf layihası Yüksek Deniz Müsadere Mahkemesi tarafından re'sen hasım tarafa tebliğ olunur. Alakalılara yapılacak tebligat başka bir vekil tayin edilmemişse, birinci derecede muhakemede bulunan vekil vasıtasiyle yapılır."
+      },
+      "142": {
+        "baslik": "Yüksek Deniz Müsadere Mahkemesinin Reisi, hasım tarafa cevap vermek üzere münasip bir mehil tayin ve duruşma gününü tesbit eder.",
+        "metin": "Madde 142 – Yüksek Deniz Müsadere Mahkemesinde cereyan eden muhakeme hakkında bu kanunun 111, 114 üncü maddeleri ve 115 inci maddenin 2 nci fıkrası ve 116 ve 117 nci maddelerin birinci fıkraları, ve 120 nci maddenin ikinci fıkrası, ve 121 - 127 nci maddelerle. 128, 129, 130, 133 üncü maddeleri hükümleri aynen caridir. Eski hale getirme talebi istinaf müddetinin hitamından itibaren bir sene içinde dermeyan edilmek lazımdır."
+      },
+      "143": {
+        "baslik": "Madde 142 – Yüksek Deniz Müsadere Mahkemesinde cereyan eden muhakeme hakkında bu kanunun 111, 114 üncü maddeleri ve 115 inci maddenin 2 nci fıkrası ve 116 ve 117 nci maddelerin birinci fıkraları, ve 120 nci maddenin ikinci fıkrası, ve 121 - 127 nci maddelerle. 128, 129, 130, 133 üncü maddeleri hükümleri aynen caridir. Eski hale getirme talebi istinaf müddetinin hitamından itibaren bir sene içinde dermeyan edilmek lazımdır.",
+        "metin": "Madde 143 – Yüksek Deniz Müsadere Mahkemesi, deniz müsadere mahkemesinin hükmünü tamamen veya kısmen feshederse, davayı yeniden rüyet etmek üzere deniz müsadere mahkemesine iade edebilir."
+      },
+      "144": {
+        "baslik": "Madde 143 – Yüksek Deniz Müsadere Mahkemesi, deniz müsadere mahkemesinin hükmünü tamamen veya kısmen feshederse, davayı yeniden rüyet etmek üzere deniz müsadere mahkemesine iade edebilir.",
+        "metin": "Madde 144 – Yüksek Deniz Müsadere Mahkemesinin hükümleri tefhim veya tebliğ ile katileşir."
+      },
+      "145": {
+        "baslik": "Madde 144 – Yüksek Deniz Müsadere Mahkemesinin hükümleri tefhim veya tebliğ ile katileşir.",
+        "metin": "Madde 145 – Yüksek Deniz Müsadere Mahkemesinin hükümlerini deniz müsadere mahkemeleri nezdindeki Devlet ajanı icra ettirir.\nŞu kadar ki, Yüksek Deniz Müsadere Mahkemesi ajanı bu salahiyeti kendisi için muhafaza edebilir."
+      },
+      "146": {
+        "baslik": "2. İtiraz",
+        "metin": "Madde 146 – İtiraz yoluna ancak bu kanunda yazılı hallerde müracaat olunabilir.\nİtiraz, kararın tebliğ, veya tefhim tarihinden itibaren onbeş gün içinde deniz müsadere mahkemasine yazılı şekilde yapılır.\nİtiraz istidasının, bir avukat tarafından imza edilmiş olması şarttır.\nİtiraz üzerine duruşma yapılmadan karar verilir."
+      },
+      "147": {
+        "baslik": "IV. Mahkeme masrafları",
+        "metin": "Madde 147 – Deniz müsadere mahkemelerinde görülen işler harc ve resme tabi değildir.\nZabtının doğruluğu kabul edilen bir nakil vasıtası serbest bırakılmış ise, nakil vasıtasının ve hamulesinin muhafaza masrafları nakil vasıtasına tahmil olunur.\nSerbest bırakılmak veya zarar ziyan iddialarının kabulü halinde, muhafaza masrafları Devlete tahmil olunur. Şu kadar ki zabt muamelesi kafi sebeplere müstenit bulunmuş ise bu hüküm tatbik olunmaz.\nMasrafların miktarı mahkeme tarafından tesbit olunur. Bu husustaki karara karşı itiraz caizdir.\nDÖRDÜNCÜ FASIL\nZabtolunan nakil vasıtasının veya malların muhakeme sırasında"
+      },
+      "148": {
+        "baslik": "kullanılması veyahut iadesi",
+        "metin": "Madde 148 – Deniz müsadere mahakemesinde cereyan etmekte olan muhakeme esnasında Devlet ajanı, zabtolunan nakil vasıtasının, veya malın kullanılmasına müsaade edilmesini talep edebilir.\nNakil vasıtasının veya malın kıymetine ehemmiyetli bir noksan arız olmakta veyahut bunların muhafazası mühim bir masrafa ihtiyaç göstermekte ise, istenilen müsaade verilir. Mahkeme bu husus hakkında bir karar vermeden önce malüm olan alakalıları mümkünse dinler. Nakil vasıtası veya malın vaziyeti acele bir karar verilmesini zaruri kılmış ise bu dinlemeden sarfınazar olunur.\nNakil vasıtasının veya malın müsaderesine karar verileceği kuvvetle melhuz ise yine istenilen müsaade verilebilir. Mahkeme karar vermeden önce malüm olan alakalıları mümkünse dinler. Ahval ve şerait bunların müşaderesine karar verileceğine hiç şüphe bırakmıyorsa bu dinlemeden sarfınazar olunur."
+      },
+      "149": {
+        "baslik": "Nakil vasıtasının veya malın müsaderesine karar verileceği kuvvetle melhuz ise yine istenilen müsaade verilebilir. Mahkeme karar vermeden önce malüm olan alakalıları mümkünse dinler. Ahval ve şerait bunların müşaderesine karar verileceğine hiç şüphe bırakmıyorsa bu dinlemeden sarfınazar olunur.",
+        "metin": "Madde 149 – Yüksek Deniz Müsadere Mahkemesinde kullanılmak ve iade edilmek hususlarına dair olan talepler bu mahkeme nezdindeki ajan tarafından dermeyan olunur."
+      },
+      "150": {
+        "baslik": "Madde 149 – Yüksek Deniz Müsadere Mahkemesinde kullanılmak ve iade edilmek hususlarına dair olan talepler bu mahkeme nezdindeki ajan tarafından dermeyan olunur.",
+        "metin": "Madde 150 – Mahkame 148, 149 uncu maddeler mucibince kullanılmasına müsaade edilen nakil vasıtası veya malların serbest bırakılmasına karar verdiği hallerde, alakalıların, bu yüzden maruz kaldıkları zarar ve ziyana mukabil bir tazminat takdir ve hükmeder."
+      },
+      "151": {
+        "baslik": "Madde 150 – Mahkame 148, 149 uncu maddeler mucibince kullanılmasına müsaade edilen nakil vasıtası veya malların serbest bırakılmasına karar verdiği hallerde, alakalıların, bu yüzden maruz kaldıkları zarar ve ziyana mukabil bir tazminat takdir ve hükmeder.",
+        "metin": "Madde 151 – Alakalılar muhakemenin her halinde nakil vasıtasının veya malın, kıymetlerine muadil, bir teminat mukabilinde, kendilerine iadesini talep edebilirler. Bu talepler ancak Devlet ajanının muvafakatiyle kabul olunabilir. Teminatın nevi ve miktarı mahkeme tarafından tesbit olunur.\nTeminat nakil vasıtasının veya malın yerine kaim olur.\nBu hususlar hakkında deniz müsadere mahkemeleri ve eğer iş Yüksek Deniz Müsadere Mahkemesinde görülmekte ise bu mahkeme karar verir. Bu kararlara karşı itiraz caizdir.\nBEŞİNCİ FASIL"
+      },
+      "152": {
+        "baslik": "Muhakemenin iadesi",
+        "metin": "Madde 152 – Katileşmiş bir hüküm aleyhine aşağıdaki hallerde muhakemenin iadesi talep edilebilir:\n1 – Hükümde ihticac olunan bir vasikanın sahteliği sabit olursa;\n2 – Yemin verilerek dinlenmiş olan bir şahit veya ehlihibrenin hükme müessir olacak surette kast veya ihmal ile hakikat hilafında şahitlikte bulunduğu veya rey verdiği sabit olursa.\nMuhakemenin iadesi talebi iade talebine sebep teşkil eden suçtan dolayı katileşmiş bir hüküm bulunduğu veya delillerin yokluğundan başka sebepler yüzünden takibat ve tahkikatın icra ve devamı mümkün olmadıği takdirde kabul olunur.\nMuhakemenin iadesine dair olan arzuhallerin bir avukat tarafından imzası şarttır."
+      },
+      "153": {
+        "baslik": "Muhakemenin iadesine dair olan talepler, hükmün katileştiğinden itibaren üç sene sonra kabul olunmaz.",
+        "metin": "Madde 153 – Muhakemenin iadesine dair olan talepler hakkında hükmü vermiş olan mahkeme karar verir. Bu mahkeme lağvedilmişse salahiyetli mahkemeyi Adliye Vekili tayin eder.\nTalep kabul olunursa, muhakeme, serdolunan iade sebeplerine münhasır olarak rüyet olunur.\nYeniden yapılacak muhakemede ikinci babın üçüncü faslının II - IV kısımlarında yazılı hükümler caridir.\nALTINCI FASIL"
+      },
+      "154": {
+        "baslik": "Müteferrik hükümler",
+        "metin": "Madde 154 – 18 Kanunusani 1327 ve 11 Safer 1330 tarih ve 34 numaralı Ganaimi Bahriye Kanunu Muvakkati hükümleri ile 6/8/1331 tarihli Müsadereleri Ganaimi Bahriye Mahkemelerince tasdik edilen Sefain ve Merakibi Bahriye hakkında Kanunu Muvakkat ilga edilmiştir."
+      },
+      "155": {
+        "baslik": "Madde 154 – 18 Kanunusani 1327 ve 11 Safer 1330 tarih ve 34 numaralı Ganaimi Bahriye Kanunu Muvakkati hükümleri ile 6/8/1331 tarihli Müsadereleri Ganaimi Bahriye Mahkemelerince tasdik edilen Sefain ve Merakibi Bahriye hakkında Kanunu Muvakkat ilga edilmiştir.",
+        "metin": "Madde 155 – Bu kanun neşri tarihinden muteberdir."
+      },
+      "156": {
+        "baslik": "Madde 155 – Bu kanun neşri tarihinden muteberdir.",
+        "metin": "Madde 156 – Bu kanun hükümlerini yürütmeğe İcra Vekilleri Heyeti memurdur.\n3894 SAYILI KANUNA EK VE DEĞİŞİKLİK GETİREN MEVZUATIN VEYA\nANAYASA MAHKEMESİ İPTAL KARARLARININ YÜRÜRLÜĞE\nGİRİŞ TARİHLERİNİ GÖSTERİR LİSTE\nDeğiştiren Kanunun/ KHK’nin veya İptal Eden Anayasa Mahkemesi Kararının Numarası\n3894 Sayılı Kanunun Değişen veya İptal Edilen Maddeleri\nYürürlüğe Giriş Tarihi\nKHK/698\n3, 21\n24/6/2018 tarihinde birlikte yapılan Türkiye Büyük Millet Meclisi ve Cumhurbaşkanlığı seçimleri sonucunda Cumhurbaşkanının andiçerek göreve başladığı tarihte\n[1] 2/7/2018 tarihli ve 698 sayılı KHK’nin 16 ncı maddesiyle, bu maddede yer alan “İcra Vekilleri Heyeti” ibaresi “Cumhurbaşkanı” şeklinde değiştirilmiştir.\n[2] 2/7/2018 tarihli ve 698 sayılı KHK’nin 16 ncı maddesiyle, bu fıkrada yer alan “İcra Vekilleri Heyeti” ibaresi “Cumhurbaşkanı” şeklinde değiştirilmiştir.\n[3] Hukuk Usulü Muhakemeleri Kanununun Tebligata İlişkin hükümleri, 11/2/1959 tarih ve 7201 sayılı Kanunun 62 nci maddesiyle yürürlükten kaldırılmıştır."
+      }
+    }
+  }
+}

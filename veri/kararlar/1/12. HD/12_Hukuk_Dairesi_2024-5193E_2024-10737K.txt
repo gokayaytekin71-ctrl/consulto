@@ -1,0 +1,29 @@
+
+
+12. Hukuk Dairesi         2024/5193 E.  ,  2024/10737 K.
+
+"İçtihat Metni"
+MAHKEMESİ : İstanbul Bölge Adliye Mahkemesi 20. Hukuk Dairesi
+
+Yukarıda tarih ve numarası yazılı Bölge Adliye Mahkemesince verilen kararın müddeti içinde temyizen tetkiki borçlu tarafından istenmesi üzerine bu işle ilgili dosya daireye gönderilmiş olup, dava dosyası için Tetkik Hakimi ... tarafından düzenlenen rapor dinlendikten ve dosya içerisindeki tüm belgeler okunup incelendikten sonra işin gereği görüşülüp düşünüldü:
+
+İlamsız icra takibinde, borçlunun icra mahkemesine başvurusunda; icra takibinde düzenlenen 21.07.2020 tarihli ödeme emrinde İİK 'nun 58/3. maddesine aykırı olarak yabancı para alacağının hangi tarihteki kur üzerinden talep edildiğinin ve yabancı para alacağının TL karşılığının gösterilmediğini ileri sürerek ödeme emrinin iptalini talep ettiği, İlk Derece Mahkemesince; şikayetin kısmen kabulü ile 21.07.2020 tarihli ödeme emrinin 45.025,18 USD yönünden iptaline fazlaya ilişkin talebin reddine karar verildiği, tarafların istinaf yoluna başvurması üzerine Bölge Adliye Mahkemesince, borçlunun istinaf başvurusunun esastan reddine, alacaklının istinaf başvurusunun kabulü ile ilk derece mahkemesinin kaldırılması ile şikayetin reddine hükmedildiği, kararın şikayetçi borçlu tarafından temyiz edildiği anlaşılmıştır.
+İcra ve İflas Kanunu'nun 58. maddesinin 3. fıkrasında; alacağın veya istenen teminatın Türk parasıyla tutarının ve faizli alacaklarda faizin miktarı ile işlemeye başladığı günün, alacak veya teminat yabancı para ise alacağın hangi tarihteki kur üzerinden talep edildiğinin ve faizinin, takip talebinde belirtilmesi gerektiği düzenlenmiştir. Yine aynı Kanunun 60. maddesinin birinci fıkrasının birinci bendinde; alacaklının veya vekilinin banka hesap numarası hariç olmak üzere, 58. maddeye göre takip talebine yazılması lazım gelen kayıtların ödeme emrinde bulunması gerektiği belirtilmiştir.
+Buna göre; alacaklı, yabancı para alacağının TL karşılığını, takip talebinde göstermek zorunda olup, buna bağlı olarak bu zorunluluğun ödeme emrinde de yerine getirilmesi gerekmektedir. Bu noksanlık kamu düzeni ile ilgili olup, süresiz şikayet nedeni olduğu gibi, takibin her safhasında re'sen göz önünde tutulmalıdır (HGK.nun 12/05/1999 tarih ve 1999/12-271 E. - 99/301 K.sayılı kararı).
+İİK'nun 60/3. maddesine göre; "Ödeme emri iki nüsha olarak düzenlenir. Bir nüshası borçluya gönderilir, diğeri icra dosyasına konulur. Alacaklı isterse kendisine ayrıca tasdikli bir nüsha verilir. Nüshalar arasında fark bulunduğu takdirde borçludaki muteber sayılır."
+İİK'nun 8/a maddesinde, icra ve iflas dairelerince yapılacak her türlü icra ve iflas işlemlerinde Ulusal Yargı Ağı Bilişim Sisteminin kullanılacağı, her türlü veri, bilgi, belge ve kararın Ulusal Yargı Ağı Bilişim Sistemi vasıtasıyla işlenerek kaydedileceği hüküm altına alınmıştır.
+Diğer taraftan, HMK'nın 445. maddesi ile HMK'nın uygulanmasına ilişkin yönetmeliğe göre elektronik ortamda saklanan Uyap kayıtları asıldır.
+Somut olayda, icra dosyasında yapılan incelemede; borçlu hakkında genel haciz yoluyla ilamsız icra takibi başlatıldığı, alacaklı vekili tarafından düzenlenip icra müdürlüğüne sunulan ve icra müdür yardımcısının 21.07.2020 tarihinde kaşesi ve imzasını taşıyan takip talebinde toplam 45.025,18 USD ve 90.000,00 TL alacağın tahsilinin talep edildiği, '1 USD = 6,84 TL' olmak üzere harca esas değerin 397.972,23 TL olarak gösterildiği, yine 21.07.2020 tarihli icra müdür yardımcısının kaşesini ve imzasını içeren ödeme emrinde yabancı para alacağının Türk Lirası karşılığının harca esas değer olarak gösterildiği, bu ödeme emrinin 02.02.2021 tarihinde taranarak UYAP sistemine kaydedildiği, ancak icra müdürlüğünce 21.07.2020 tarihinde düzenlenip UYAP sistemine kaydedilen elektronik imza ile oluşturulan ödeme emrinde ise yabancı para alacağının Türk Lirası karşılığının bulunmadığı görülmektedir.
+İlk Derece Mahkemesince; borçluya kendisine tebliğ edilen ödeme emrini mahkemeye sunması için süre verildiği ve borçlu tarafından aslı gibidir kaşeli 21.07.2020 tarihli yabancı para alacağının Türk Lirası karşılığının bulunmadığı ödeme emrinin dosyaya sunulduğu anlaşılmıştır.
+Bu durumda; İİK'nın 8/a maddesine göre UYAP kayıtlarına itibar edilmesi gerektiği ve 21/07/2020 tarihli elektronik imza ile oluşturulmuş ödeme emrinde talep edilen yabancı para alacağının TL karşılığı gösterilmediği gibi yine İİK madde 60/3 gereğince borçludaki nüshanın muteber sayılması gerekirken alacaklı vekili tarafından ıslak imzalı olarak icra dosyasına sunulan ve takip tarihinden çok sonra sisteme taranarak kaydedilen ödeme emrinin esas alınması doğru görülmemiştir.
+O halde Bölge Adliye Mahkemesince, İlk Derece Mahkemesinin şikayetin kısmen kabulü ile 21/07/2020 tarihli ödeme emrinin 45.025,18 USD yönünden iptaline dair kararının yerinde olduğu gözetilerek alacaklının istinaf başvurusunun esastan reddine karar verilmesi gerekirken yazılı şekilde yanılgılı değerlendirme ile sonuca gidilmesi isabetsizdir.
+SONUÇ: Borçlunun temyiz isteminin kısmen kabulü ile İstanbul Bölge Adliye Mahkemesi 20. Hukuk Dairesinin 30.04.2024 tarih ve 2023/563 E. - 2024/1446 K. sayılı kararının yukarıda yazılı nedenlerle 5311 sayılı Kanun ile değişik İİK'nın 364/2. maddesi göndermesiyle uygulanması gereken 6100 sayılı HMK'nın 373/2. maddeleri uyarınca BOZULMASINA, peşin alınan temyiz harcının istek halinde ilgiliye iadesine, dosyanın Bölge Adliye Mahkemesine gönderilmesine, 18.12.2024 gününde oy birliğiyle karar verildi.
+
+
+
+
+
+
+
+
+
