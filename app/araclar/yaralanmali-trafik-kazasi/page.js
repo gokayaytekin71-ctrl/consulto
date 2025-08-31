@@ -2,7 +2,7 @@
 "use client";
 
 import { useMemo, useState, useEffect } from "react";
-import trh2010 from "../../../veri/trh2010.json";
+import trh2010 from "../../../data/trh2010.json";
 
 /* ──────────────────────────────────────────────────────────────────────────
    YARALANMALI TRAFİK KAZASI TAZMİNATI HESAPLAMA (Yaklaşık Aktüerya)

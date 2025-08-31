@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import trh2010 from "../../../veri/trh2010.json";
+import trh2010 from "../../../data/trh2010.json";
 
 /* ──────────────────────────────────────────────────────────────────────────
    DESTEKten YOKSUN KALMA TAZMİNATI (Genel Şart Ek-3 uyumlu, özet yaklaşım)
