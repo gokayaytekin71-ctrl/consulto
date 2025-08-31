@@ -27,30 +27,30 @@ export default function FavoriMakalelerPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#001933] to-[#004066] p-6">
+    <div className="min-h-screen p-6">
       <h1 className="text-3xl font-bold text-white mb-6 border-l-4 border-orange-500 pl-4">
-        Favori Makalelerim
+        Favori Makaleleriniz
       </h1>
       {bildirim && <div className="text-green-400 text-sm mb-4">{bildirim}</div>}
       {loading ? (
         <LoadingOverlay />
       ) : makaleler.length === 0 ? (
-        <p className="text-white opacity-70">Henüz favori makaleniz yok.</p>
+        <p className="text-white opacity-70">Henüz favorilere makale eklemediniz.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="divide-y divide-cyan-500">
           {makaleler.map((makale) => {
             const title = makale.baslik.trim();
             const doi = makale.doi;
             return (
               <li
                 key={makale.id}
-                className="flex justify-between items-center rounded-lg p-4 bg-gray-800/50 hover:bg-gray-700/70 transition-all duration-300 shadow-md"
+                className="flex justify-between items-center p-4 bg-[#1f2a3a] text-white rounded-none border-b border-cyan-500"
               >
                 <a
                   href={`https://doi.org/${doi}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg font-semibold text-white hover:text-yellow-300 capitalize"
+                  className="text-lg font-semibold text-white capitalize"
                 >
                   {title}
                 </a>

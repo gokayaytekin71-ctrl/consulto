@@ -6,6 +6,22 @@ const formatDateKey = (date) => date.toISOString().split("T")[0];
 import { useState, useEffect } from "react";
 import LoadingOverlay from "@/components/LoadingOverlay";
 
+// Inline chevron icons to keep visuals consistent across buttons
+function ChevronLeft({ className = "w-4 h-4" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M15.75 19.5L8.25 12l7.5-7.5" />
+    </svg>
+  );
+}
+function ChevronRight({ className = "w-4 h-4" }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
+      <path d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+    </svg>
+  );
+}
+
 const daysOfWeek = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
 
 export default function GorevlerimHaftalikTakvim() {
@@ -226,12 +242,14 @@ export default function GorevlerimHaftalikTakvim() {
   return (
     <div className="p-6 text-white space-y-8">
       <div className="flex justify-between items-center mb-4">
-        <button onClick={goToPrevWeek} className="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600">
-          ⬅ 2 Hafta Geri
+        <button onClick={goToPrevWeek} className="inline-flex items-center gap-2 text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600">
+          <ChevronLeft className="w-4 h-4" />
+          <span>2 Önceki Hafta</span>
         </button>
         <h2 className="text-lg font-bold">2 Haftalık Takvim</h2>
-        <button onClick={goToNextWeek} className="text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600">
-          Önü 2 Hafta ➡
+        <button onClick={goToNextWeek} className="inline-flex items-center gap-2 text-sm bg-gray-700 px-3 py-1 rounded hover:bg-gray-600">
+          <span>Sonraki 2 Hafta</span>
+          <ChevronRight className="w-4 h-4" />
         </button>
       </div>
 

@@ -1,4 +1,6 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -6,20 +8,24 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        profil: "linear-gradient(to bottom right, #002c4b, #003a66, #e2e8f0)",
+      // Akademik Odak teması için font ailelerini tanımlıyoruz.
+      fontFamily: {
+        // Ana metinler için modern ve okunaklı bir sans-serif font.
+        sans: ['Inter', ...fontFamily.sans],
+        // Başlıklar için otoriter ve zarif bir serif font.
+        serif: ['Lora', ...fontFamily.serif],
       },
-      backgroundImage: {
-        profil: "linear-gradient(to bottom right, #002c4b, #003a66, #e2e8f0)",
-      },
+      // Animasyonları daha sade ve profesyonel hale getiriyoruz.
       keyframes: {
-        fadeInUp: {
-          "0%": { opacity: "0", transform: "translateY(50px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+        // Sadece yumuşak bir belirme efekti.
+        fadeIn: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
       animation: {
-        fadeInUp: "fadeInUp 0.5s ease-out forwards",
+        // 'animate-fadeIn' sınıfıyla kullanılacak.
+        fadeIn: "fadeIn 0.5s ease-in-out forwards",
       },
     },
   },

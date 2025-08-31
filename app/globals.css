@@ -1,61 +1,109 @@
+/* app/globals.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@500;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* CSS Değişkenleri ile Tema Tanımlaması */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Aydınlık Tema (Varsayılan) */
+  --background: #F8FAFC; /* slate-50 */
+  --foreground: #0F172A; /* slate-900 */
+  --foreground-muted: #475569; /* slate-600 */
+  --border-color: #E2E8F0; /* slate-200 */
+  --card-background: #FFFFFF; /* white */
+  --primary-accent: #2563EB; /* blue-600 */
+  --primary-accent-hover: #1D4ED8; /* blue-700 */
 }
-
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Karanlık "Akademik Odak" Teması */
+    --background: #0F172A; /* slate-900 */
+    --foreground: #E2E8F0; /* slate-200 */
+    --foreground-muted: #94A3B8; /* slate-400 */
+    --border-color: #334155; /* slate-700 */
+    --card-background: #1E293B; /* slate-800 */
+    --primary-accent: #3B82F6; /* blue-500 */
+    --primary-accent-hover: #60A5FA; /* blue-400 */
   }
 }
 
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', sans-serif;
+}
+
+/* react-calendar gibi harici bileşenleri temamızla uyumlu hale getiriyoruz */
 .react-calendar {
-  color: #111827; /* Tailwind'deki gray-900 tonu gibi */
+  color: var(--foreground);
   background-color: transparent;
+  border-color: var(--border-color) !important;
 }
 
 .react-calendar__tile {
-  color: #1e293b; /* slate-800 gibi koyu yazı */
+  color: var(--foreground-muted);
+}
+
+.react-calendar__tile:hover {
+  background-color: var(--border-color) !important;
 }
 
 .react-calendar__tile--active {
-  background: #2563eb !important; /* mavi arka plan */
-  color: white !important;         /* açık zemin için yazı beyaz */
+  background: var(--primary-accent) !important;
+  color: white !important;
   font-weight: bold;
 }
 
 .react-calendar__tile--now {
-  background: #facc15 !important; /* bugünü sarı yap */
-  color: black !important;
+  background: #facc15 !important;
+  color: #1F2937 !important;
   font-weight: bold;
   border-radius: 6px;
 }
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
 
-/* app/globals.css */
-
+/* Chat bot link stillerini tema değişkenleriyle uyumlu hale getirme */
 .chat-bot-response a {
-  color: #0d6efd;
+  color: var(--primary-accent);
   text-decoration: underline;
   font-weight: 600;
-  background-color: rgba(13, 110, 253, 0.05);
+  background-color: rgba(37, 99, 235, 0.1);
   padding: 2px 4px;
   border-radius: 4px;
   transition: all 0.2s ease-in-out;
 }
 
 .chat-bot-response a:hover {
-  color: #0a58ca;
-  background-color: rgba(13, 110, 253, 0.1);
+  color: var(--primary-accent-hover);
+  background-color: rgba(37, 99, 235, 0.15);
   text-decoration: none;
 }
+
+/* ÖNCEKİ ADIMDAN GELEN PERFORMANS OPTİMİZASYONU KORUNDU */
+.search-result-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 320px; 
+}
+
+@keyframes bounce-vertical {
+  0%, 100% { transform: translateY(0); }
+  33% { transform: translateY(-4px); }
+  66% { transform: translateY(4px); }
+}
+
+.animate-bounce-vertical > div:nth-child(1) {
+  animation: bounce-vertical 1.2s infinite ease-in-out;
+  animation-delay: 0s;
+}
+.animate-bounce-vertical > div:nth-child(2) {
+  animation: bounce-vertical 1.2s infinite ease-in-out;
+  animation-delay: 0.2s;
+}
+.animate-bounce-vertical > div:nth-child(3) {
+  animation: bounce-vertical 1.2s infinite ease-in-out;
+  animation-delay: 0.4s;
+}
+

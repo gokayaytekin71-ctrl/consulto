@@ -50,6 +50,8 @@ model User {
   email              String?           @unique
   emailVerified      DateTime?
   image              String?
+  /// JSON array storing chat objects for each user
+  chats              Json              @default("[]")
   accounts           Account[]
   favoriteKararlar   FavoriteKarar[]
   favoriteMakaleler  FavoriteMakale[]
@@ -58,10 +60,6 @@ model User {
   hearings           Hearing[]
   notes              Note[]
   sessions           Session[]
-
-  /// JSON array storing chat objects for each user
-  chats        Json     @default("[]")
-
   tasks              Task[]
 }
 
@@ -73,28 +71,40 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model Mevzuat {
-  id        String   @id @default(cuid())
-  key       String   @unique
-  name      String
-  content   String
-  createdAt DateTime @default(now())
-}
-
 model Karar {
-  id            String          @id @default(cuid())
-  fileName      String          @unique
+  id            String                   @id @default(cuid())
+  fileName      String                   @unique
   content       String
   type          String?
   code          String?
   aiSummary     String?
-  createdAt     DateTime        @default(now())
+  createdAt     DateTime                 @default(now())
   contentLength Int?
   keywords      String?
+  /// PostgreSQL tsvector column used for full‑text search.
+  /// Prisma Client does not support the `tsvector` type.
+  /// We intentionally do NOT add `@ignore` here because this model defines GIN indexes
+  /// that reference this field. Marking it `@ignore` would invalidate those index definitions
+  /// and may cause future migrations to try dropping them.
+  tsv_main      Unsupported("tsvector")?
+  /// PostgreSQL tsvector column used for full‑text search.
+  /// Prisma Client does not support the `tsvector` type.
+  /// We intentionally do NOT add `@ignore` here because this model defines GIN indexes
+  /// that reference this field (tsv_extra). Marking it `@ignore` would invalidate those index definitions
+  /// and may cause future migrations to try dropping them.
+  tsv_extra     Unsupported("tsvector")?
   favoriteUsers FavoriteKarar[]
+  ibbgk         ibbgk[]
 
   @@index([contentLength])
   @@index([keywords])
+  @@index([createdAt(sort: Desc), id(sort: Desc)], map: "Karar_createdAt_id_desc_idx")
+  @@index([tsv_extra], map: "idx_karar_tsv_extra", type: Gin)
+  @@index([code(ops: raw("gin_trgm_ops"))], map: "karar_code_trgm", type: Gin)
+  @@index([keywords(ops: raw("gin_trgm_ops"))], map: "karar_keywords_trgm", type: Gin)
+  @@index([type(ops: raw("gin_trgm_ops"))], map: "karar_type_trgm", type: Gin)
+  @@index([tsv_extra], map: "karartsv_extra_gin", type: Gin)
+  @@index([tsv_main], map: "karartsv_main_gin", type: Gin)
 }
 
 model FavoriteMevzuat {
@@ -106,6 +116,41 @@ model FavoriteMevzuat {
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, mevzuatKey, maddeNo])
+}
+
+model Mevzuat {
+  id           String         @id
+  key          String         @unique
+  name         String
+  content      String
+  createdAt    DateTime       @default(now())
+  slug         String         @unique
+  shortName    String?
+  year         Int?
+  articleCount Int?
+  updatedAt    DateTime       @default(now()) @updatedAt
+  maddeler     MevzuatMadde[]
+}
+
+model MevzuatMadde {
+  id             String   @id @default(cuid())
+  mevzuatId      String
+  maddeNo        String
+  maddeNoOrder   Int?
+  maddeBaslik    String?
+  maddeUstBaslik String?
+  kisim          String?
+  bolum          String?
+  ayrim          String?
+  maddeMetin     String
+  orderIndex     Int?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+  mevzuat        Mevzuat  @relation(fields: [mevzuatId], references: [id], onDelete: Cascade)
+
+  @@unique([mevzuatId, maddeNo])
+  @@index([mevzuatId, orderIndex])
+  @@index([mevzuatId, maddeNoOrder])
 }
 
 model FavoriteKarar {
@@ -173,9 +218,21 @@ model Hearing {
 model Makale {
   id            String           @id @default(cuid())
   baslik        String
-  doi           String   @unique
+  doi           String           @unique
   createdAt     DateTime         @default(now())
   favoriteUsers FavoriteMakale[]
+}
+
+model Draft {
+  id          String   @id @default(dbgenerated("gen_random_uuid()"))
+  createdAt   DateTime @default(now()) @db.Timestamptz(6)
+  dava_turu   String?
+  olay_ozet   String?
+  talep       String?
+  dilekce_md  String
+  kaynaklar   Json?
+  girdi_ozeti Json?
+  dayanaklar  Json?
 }
 
 model FavoriteMakale {
@@ -187,4 +244,18 @@ model FavoriteMakale {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, makaleId])
+}
+
+model ibbgk {
+  id          BigInt   @id @default(autoincrement())
+  karar_id    String
+  birlesme_no String?  @db.VarChar(50)
+  konu        String?
+  ozet        String?
+  etiketler   Json?
+  created_at  DateTime @default(now()) @db.Timestamptz(6)
+  Karar       Karar    @relation(fields: [karar_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([created_at])
+  @@index([karar_id])
 }

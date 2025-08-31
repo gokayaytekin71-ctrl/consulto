@@ -1,43 +1,45 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# --- Node / Next build ve cache'ler ---
+node_modules/
+.next/
+.next/cache/
+dist/
+build/
+out/
+.turbo/
+.swc/
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
+# --- Ortam dosyaları ve deploy klasörleri ---
+.env*
+.vercel/
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# --- Loglar ---
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
+pnpm-debug.log*
+*.log
 
-# env files (can opt-in for committing if needed)
-.env*
-
-# vercel
-.vercel
-
-# typescript
+# --- TypeScript/Next yardımcı dosyaları ---
 *.tsbuildinfo
 next-env.d.ts
 
-/app/generated/prisma
+# --- OS / Editör çöpleri ---
+.DS_Store
+Thumbs.db
+.eslintcache
+
+# --- Python sanal ortam ve cache'leri (sende var) ---
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+
+# --- Projeye ait büyük veri dosyaları (DB’den okuyorsun) ---
+veri/
+
+# (Opsiyonel) runtime upload'lar varsa:
+public/uploads/
+
+# (Opsiyonel) Prisma yerel sqlite kullanıyorsan:
+prisma/dev.db

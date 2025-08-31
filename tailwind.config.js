@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+module.exports.plugins = (module.exports.plugins || []);
+module.exports.plugins.push(require('@tailwindcss/line-clamp'));
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -29,13 +31,20 @@ module.exports = {
           '0%': { transform: 'rotate(0deg)' },
           '100%': { transform: 'rotate(360deg)' },
         },
+        dot: {
+          '0%, 80%, 100%': { transform: 'scale(0)' },
+          '40%': { transform: 'scale(1)' },
+        },
       },
       animation: {
         aurora: 'aurora 20s ease-in-out infinite',
         spinSlow: 'spinSlow 3s linear infinite',
+        dot: 'dot 1.4s infinite ease-in-out both',
       },
     },
   },
+
+
   
   // YENİ: Gündem detay sayfasındaki blog metinlerini otomatik olarak
   // güzelleştirmek için tipografi eklentisi.

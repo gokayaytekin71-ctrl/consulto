@@ -1,52 +1,108 @@
-
-
 "use client";
-
+import { useState } from "react";
+import Link from "next/link";
 import React from "react";
+import Image from "next/image";
 
-export default function Sidebar({ chats, activeChatId, onNewChat, onSelectChat }) {
+export default function Sidebar({ items = [], session }) {
+  const [collapsed, setCollapsed] = useState(false);
+
   return (
-    <aside className="w-64 bg-gradient-to-b from-[#001f3f] to-[#004365] text-white p-6 flex flex-col shadow-lg">
-      <div className="mb-4">
-        <div className="relative w-full">
-          <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-          </span>
-          <input
-            type="text"
-            placeholder="Ara"
-            className="w-full pl-10 pr-4 py-2 rounded-md bg-[#2b2b25] text-gray-300 border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
+    <aside
+      className={`flex-shrink-0 bg-[#0f1a2b] text-white p-6 border-r border-gray-800 shadow-xl transition-all duration-300 ${
+        collapsed ? "w-16" : "w-72"
+      } flex flex-col`}
+    >
+      <div className="flex items-center justify-between mb-6">
+        {!collapsed && session?.user && (
+          <div className="flex items-center gap-3">
+            <Image
+              src={session.user.image}
+              alt={session.user.name || "Profil Resmi"}
+              width={72}
+              height={72}
+              className="rounded-full border-2 border-orange-500"
+            />
+            <div className="flex flex-col">
+              <span className="font-medium">{session.user.name}</span>
+              <span className="text-xs text-gray-400 truncate">{session.user.email}</span>
+            </div>
+          </div>
+        )}
       </div>
-      <nav className="space-y-2 text-sm flex-1 overflow-y-auto">
+      <nav className="flex flex-col gap-2">
+        {Array.isArray(items) && items.map(({ href, onClick, icon, label }) => {
+          const Wrapper = href ? Link : "button";
+          const props = href
+            ? { href }
+            : { onClick };
+          return (
+            <Wrapper
+              key={label}
+              {...props}
+              className={
+                collapsed
+                  ? "flex justify-center p-2 transition"
+                  : "flex justify-between p-3 bg-[#1f2a3a] rounded-lg hover:bg-[#253445] transition"
+              }
+            >
+              <div className="flex items-center space-x-2">
+                {collapsed ? (
+                  <span className="bg-[#1f2a3a] p-2 rounded-full">
+                    {React.cloneElement(icon, { className: "text-cyan-400 text-2xl" })}
+                  </span>
+                ) : (
+                  React.cloneElement(icon, { className: "text-cyan-400 text-2xl" })
+                )}
+                {!collapsed && <span className="pl-2">{label}</span>}
+              </div>
+            </Wrapper>
+          );
+        })}
         <button
-          onClick={onNewChat}
-          className="w-full text-left px-3 py-2 bg-gray-800 rounded-lg hover:bg-gray-700"
+          onClick={() => setCollapsed((c) => !c)}
+          className={
+            collapsed
+              ? "flex justify-center p-2 transition"
+              : "flex justify-between p-3 bg-[#1f2a3a] rounded-lg hover:bg-[#253445] transition"
+          }
         >
-          + Yeni Sohbet
+          <div className="flex items-center space-x-2">
+            <span className="bg-[#1f2a3a] p-2 rounded-full">
+              <svg xmlns="http://www.w3.org/2000/svg" className="text-cyan-400 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={collapsed ? "M4 12h16m-6-6l6 6-6 6" : "M20 12H4m6-6l-6 6 6 6"} />
+              </svg>
+            </span>
+            {!collapsed && <span className="text-cyan-400 whitespace-nowrap text-sm font-medium">Menüyü Gizle</span>}
+          </div>
         </button>
-        <div className="mt-4">
-          <p className="text-xs uppercase tracking-wide text-gray-300 mb-2">Sohbetler</p>
-          <ul className="space-y-1">
-            {chats.map((chat) => (
-              <li
-                key={chat.id}
-                onClick={() => onSelectChat(chat.id)}
-                className={`px-3 py-2 rounded text-sm cursor-pointer ${
-                  chat.id === activeChatId
-                    ? "bg-gray-700 text-white"
-                    : "hover:bg-gray-600 text-gray-300"
-                }`}
-              >
-                {chat.title}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <Link
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            document.querySelector("form#logoutForm")?.submit();
+          }}
+          className={
+            collapsed
+              ? "flex justify-center p-2 transition"
+              : "flex justify-between p-3 bg-[#1f2a3a] rounded-lg hover:bg-[#253445] transition"
+          }
+        >
+          <div className="flex items-center gap-3">
+            <svg xmlns="http://www.w3.org/2000/svg" className="text-red-500 w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H12" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H6a2 2 0 00-2 2v10a2 2 0 002 2h3" />
+            </svg>
+            {!collapsed && (
+              <span className="text-red-400 whitespace-nowrap text-sm font-medium">
+                Çıkış Yap
+              </span>
+            )}
+          </div>
+        </Link>
+
+        <form id="logoutForm" action="/api/auth/signout" method="POST" className="hidden" />
       </nav>
     </aside>
-);
+  );
 }

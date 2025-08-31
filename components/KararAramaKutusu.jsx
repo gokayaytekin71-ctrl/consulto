@@ -1,49 +1,108 @@
+// components/KararAramaKutusu.jsx
 "use client";
 
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useEffect } from 'react'; // useEffect eklendi
 import { useRouter } from 'next/navigation';
 import LoadingOverlay from "./LoadingOverlay";
 
-export default function KararAramaKutusu({ mevcutAramaSorgusu }) {
-  const [aramaMetni, setAramaMetni] = useState(mevcutAramaSorgusu || '');
+// Animasyon için yazılıp silinecek metinler
+const placeholderPhrases = [
+  "Kıdem tazminatı unsurları...",
+  "İşe iade davasında alt işveren...",
+  "Boşanma sebebi ıslahla değiştirilebilir mi...",
+  "Boşanma sonrası düğünde takılan takılar ...",
+  "Trafik kazası sonucu tazminatlar..."
+];
+
+// Animasyon hız ayarları
+const TYPING_SPEED = 100; // ms cinsinden yazma hızı
+const PAUSE_DURATION = 2000; // ms cinsinden bekleme süresi
+const DELETING_SPEED = 30; // ms cinsinden silme hızı
+
+export default function KararAramaKutusu({
+  defaultQuery = '',
+  basePath = '/kararlar'
+}) {
+  const [aramaMetni, setAramaMetni] = useState(defaultQuery);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+
+  // --- YENİ EKLENEN ANİMASYON STATE'LERİ ---
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+  const [currentPlaceholder, setCurrentPlaceholder] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // --- ANİMASYON MANTIĞI (useEffect) ---
+   useEffect(() => {
+    // EĞER KULLANICI ARAMA KUTUSUNA BİR ŞEYLER YAZDIYSA ANİMASYONU DURDUR
+    if (aramaMetni) {
+      setCurrentPlaceholder(''); // Animasyonlu metni temizle
+      return; // Döngüyü sonlandır
+    }
+
+    const handleTyping = () => {
+      const fullPhrase = placeholderPhrases[placeholderIndex];
+
+      // Silme modunda mıyız, yoksa yazma modunda mı?
+      if (isDeleting) {
+        // Metni birer birer sil
+        setCurrentPlaceholder(fullPhrase.substring(0, currentPlaceholder.length - 1));
+      } else {
+        // Metni birer birer yaz
+        setCurrentPlaceholder(fullPhrase.substring(0, currentPlaceholder.length + 1));
+      }
+
+      // Durumları kontrol et ve bir sonraki adıma geç
+      if (!isDeleting && currentPlaceholder === fullPhrase) {
+        // Yazma bitti, beklemeye geç ve sonra silmeyi başlat
+        setTimeout(() => setIsDeleting(true), PAUSE_DURATION);
+      } else if (isDeleting && currentPlaceholder === '') {
+        // Silme bitti, bir sonraki metne geç
+        setIsDeleting(false);
+        setPlaceholderIndex((prev) => (prev + 1) % placeholderPhrases.length);
+      }
+    };
+      // ... (animasyon mantığının geri kalanı aynı)
+  
+
+    const typingTimeout = setTimeout(handleTyping, isDeleting ? DELETING_SPEED : TYPING_SPEED);
+
+    return () => clearTimeout(typingTimeout);
+  }, [currentPlaceholder, isDeleting, placeholderIndex]);
+
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     const params = new URLSearchParams();
-    params.set('page', '1'); // Yeni arama her zaman 1. sayfadan başlar
-    if (aramaMetni.trim()) {
-      params.set('q', aramaMetni.trim());
-    }
-    startTransition(() => {
-      router.push(`/kararlar?${params.toString()}`);
-    });
+    if (aramaMetni.trim()) params.set('q', aramaMetni.trim());
+    startTransition(() => router.push(`${basePath}?${params.toString()}`));
   };
 
   return (
     <>
       {isPending && <LoadingOverlay />}
-      <form onSubmit={handleSearchSubmit} className="max-w-xl mx-auto mb-12 flex space-x-4 items-center animate-fade-in-up delay-400">
-        <div className="flex items-center flex-1 rounded-full p-[2px] bg-gradient-to-r from-blue-700/50 via-blue-400/50 to-blue-700/50 shadow-lg transition">
-          <div className="flex items-center w-full bg-blue-900/70 rounded-full px-4 py-2">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-300 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-            </svg>
-            <input
-              type="text"
-              value={aramaMetni}
-              onChange={e => setAramaMetni(e.target.value)}
-              placeholder="Karar metninde ara..."
-              className="w-full bg-transparent text-blue-100 placeholder-blue-300 focus:outline-none"
-            />
-          </div>
+      <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto flex space-x-3 items-center animate-fadeIn">
+        <div className="flex items-center flex-1 bg-slate-800/70 rounded-full border border-slate-700 shadow-lg transition-all duration-300 focus-within:ring-2 focus-within:ring-sky-500 focus-within:border-sky-500">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-500 mx-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          
+          {/* DEĞİŞİKLİK: placeholder dinamik state ile değiştirildi */}
+          {/* Yanıp sönen bir imleç efekti için dikey çizgi | eklendi */}
+          <input
+            type="text"
+            value={aramaMetni}
+            onChange={e => setAramaMetni(e.target.value)}
+            placeholder={currentPlaceholder + '|'}
+            className="w-full h-12 bg-transparent text-slate-200 placeholder-slate-500 focus:outline-none pr-4"
+          />
         </div>
         <button
           type="submit"
-          className="px-8 py-3 bg-orange-500 text-white font-semibold rounded-full shadow-lg hover:bg-orange-600 transition-colors duration-300 transform hover:scale-105"
+          disabled={isPending}
+          className="px-8 py-3 bg-sky-600 text-white font-semibold rounded-full shadow-md hover:bg-sky-700 transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-opacity-50 disabled:bg-slate-800 disabled:text-slate-500 disabled:cursor-not-allowed disabled:transform-none"
         >
-          Ara
+          {isPending ? 'Aranıyor...' : 'Ara'}
         </button>
       </form>
     </>

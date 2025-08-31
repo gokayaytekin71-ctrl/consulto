@@ -36,3 +36,49 @@ export async function GET(request) {
     return NextResponse.json({ error: 'Favoriler alınırken bir sunucu hatası oluştu.' }, { status: 500 });
   }
 }
+export async function POST(request) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: 'Yetkisiz erişim.' }, { status: 401 });
+  }
+
+  try {
+    const { mevzuatKey, maddeNo } = await request.json();
+
+    // Toggle favorite: if exists, remove; otherwise add
+    const existing = await prisma.favoriteMevzuat.findUnique({
+      where: {
+        userId_mevzuatKey_maddeNo: {
+          userId: session.user.id,
+          mevzuatKey,
+          maddeNo: maddeNo || null,
+        },
+      },
+    });
+
+    if (existing) {
+      await prisma.favoriteMevzuat.delete({
+        where: {
+          userId_mevzuatKey_maddeNo: {
+            userId: session.user.id,
+            mevzuatKey,
+            maddeNo: maddeNo || null,
+          },
+        },
+      });
+      return NextResponse.json({ removed: true });
+    } else {
+      const created = await prisma.favoriteMevzuat.create({
+        data: {
+          userId: session.user.id,
+          mevzuatKey,
+          maddeNo: maddeNo || null,
+        },
+      });
+      return NextResponse.json({ added: true, favorite: created });
+    }
+  } catch (error) {
+    console.error('API favori mevzuat POST hatası:', error);
+    return NextResponse.json({ error: 'Favori ekleme/kaldırma hatası.' }, { status: 500 });
+  }
+}
