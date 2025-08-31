@@ -1,7 +1,7 @@
 // components/LoadingOverlay.jsx
 "use client";
 import Lottie from "lottie-react";
-import animationData from "../public/loading.json";
+import animationData from "../assets/lottie/loading.json"
 
 export default function LoadingOverlay() {
   return (
