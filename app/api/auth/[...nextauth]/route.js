@@ -4,6 +4,8 @@ import NextAuth from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from '@/lib/prisma'; // Bu yolu '@/' alias ile değiştirmek daha iyi olabilir
 import GoogleProvider from "next-auth/providers/google";
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),

@@ -1,6 +1,8 @@
 import { getToken } from "next-auth/jwt";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const secret = process.env.NEXTAUTH_SECRET;
 

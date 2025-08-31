@@ -13,7 +13,8 @@ export async function GET(request) {
 
   return NextResponse.json(tasks);
 }
-
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 export async function PUT(request) {
   const body = await request.json();
   const { date, oldContent, newContent } = body;

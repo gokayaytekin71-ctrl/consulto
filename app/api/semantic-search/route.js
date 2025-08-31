@@ -2,6 +2,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { semanticSearchWithSnippets } from '@/lib/weaviate';
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);

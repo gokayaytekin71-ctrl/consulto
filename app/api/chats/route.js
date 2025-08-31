@@ -4,6 +4,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
 export const dynamic = "force-dynamic";
+export const runtime = 'nodejs';
+
 
 const API_ENDPOINT =
   process.env.API_ENDPOINT ||

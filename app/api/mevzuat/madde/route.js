@@ -1,6 +1,8 @@
 // app/api/mevzuat/madde/route.js
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const prisma = globalThis.__prisma ?? new PrismaClient();
 if (!globalThis.__prisma) globalThis.__prisma = prisma;
