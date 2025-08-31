@@ -7,6 +7,8 @@ import FavoriteButton from '@/components/FavoriteButton';
 import HighlightedKararBody from '@/components/HighlightedKararBody';
 import BackButton from '@/components/BackButton'; // Geri butonu import edildi
 import { redirect } from 'next/navigation';
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // --- URL helpers: use type + code as primary, keep filename as legacy fallback ---
 function slugifyType(t = "") {

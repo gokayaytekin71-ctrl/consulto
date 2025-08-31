@@ -6,6 +6,7 @@ import BasicFilter from "@/components/BasicFilter";
 import SectionRow from "@/components/SectionRow";
 import SearchResults from "@/components/SearchResults";
 
+
 function orderBySlugList(rows, slugs) {
   const map = new Map(rows.map((r) => [r.fileName?.replace(/\.txt$/, ""), r]));
   return slugs.map((s) => map.get(s)).filter(Boolean);

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getKararlarFromDB } from "@/lib/data";
-
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
 

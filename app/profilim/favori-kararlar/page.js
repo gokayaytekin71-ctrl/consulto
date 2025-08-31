@@ -4,7 +4,8 @@ import { useSession } from "next-auth/react";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import { useState, useEffect } from "react";
 import DecisionCard from "@/components/DecisionCard"; // Tutarlı görünüm için DecisionCard kullanıyoruz
-
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 export default function FavoriteKararlarPage() {
   const { data: session, status } = useSession();
   const [favorites, setFavorites] = useState([]);

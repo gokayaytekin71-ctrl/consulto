@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 import { Prisma } from "@prisma/client";
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 // Güvenli sütun adı seçimi (SQL injection'a izin verme)
 const FIELD_COLUMN = {
