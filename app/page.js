@@ -22,10 +22,6 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import Script from "next/script";
 
 // BİLEŞENLER
-const GundemSection = dynamic(
-  () => import('@/components/GundemSection'),
-  { loading: () => <LoadingOverlay />, ssr: false }
-);
 import DecisionCard from '@/components/DecisionCard.jsx';
 
 
@@ -92,7 +88,7 @@ export default async function Home() {
         <main className="min-h-screen bg-slate-100 text-gray-800">
             
             {/* YENİ SIRA 1: ARAMA BÖLÜMÜ */}
-            <section className="w-full bg-gradient-to-br from-[#001f3f] to-[#004365] py-14 px-6 text-white relative overflow-hidden">
+            <section className="w-full bg-gradient-to-br from-[#001f3f] to-[#004365] py-10 px-5 text-white relative overflow-hidden">
               {/* Arkaplan şekilleri */}
               <div className="absolute inset-0 -z-10 pointer-events-none">
                 <svg width="100%" height="100%">
@@ -101,16 +97,16 @@ export default async function Home() {
                 </svg>
               </div>
 
-              <div className="mx-auto max-w-5xl text-center space-y-6">
-                <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">
+              <div className="mx-auto max-w-4xl text-center space-y-5">
+                <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight">
                   Hukuki işlerinizi <span className="text-orange-400">yapay zeka ile hızlandırın</span>
                 </h1>
                 <div className="max-w-4xl mx-auto">
-                  <ul className="grid gap-3 sm:grid-cols-3 text-[15px] text-slate-100/95 items-stretch">
+                  <ul className="grid gap-2.5 sm:grid-cols-3 text-[14px] text-slate-100/95 items-stretch">
                     {/* Madde 1 */}
-                    <li className="group p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all overflow-hidden">
-                      <div className="grid grid-cols-[56px,1fr] items-center gap-4 min-h-[56px]">
-                        <span className="justify-self-center inline-flex shrink-0 w-12 h-12 items-center justify-center rounded-full ml-1 bg-emerald-400/15 ring-1 ring-emerald-300/30 text-emerald-300 transition-transform group-hover:scale-110">
+                    <li className="group p-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all overflow-hidden">
+                      <div className="grid grid-cols-[52px,1fr] items-center gap-3 min-h-[52px]">
+                        <span className="justify-self-center inline-flex shrink-0 w-10 h-10 items-center justify-center rounded-full ml-1 bg-emerald-400/15 ring-1 ring-emerald-300/30 text-emerald-300 transition-transform group-hover:scale-110">
                           {/* check icon */}
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                             <path d="M20 6L9 17l-5-5" />
@@ -125,9 +121,9 @@ export default async function Home() {
                     </li>
 
                     {/* Madde 2 */}
-                    <li className="group p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all overflow-hidden">
-                      <div className="grid grid-cols-[56px,1fr] items-center gap-4 min-h-[56px]">
-                        <span className="justify-self-center inline-flex shrink-0 w-12 h-12 items-center justify-center rounded-full ml-1 bg-amber-400/15 ring-1 ring-amber-300/30 text-amber-300 transition-transform group-hover:scale-110">
+                    <li className="group p-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all overflow-hidden">
+                      <div className="grid grid-cols-[52px,1fr] items-center gap-3 min-h-[52px]">
+                        <span className="justify-self-center inline-flex shrink-0 w-10 h-10 items-center justify-center rounded-full ml-1 bg-amber-400/15 ring-1 ring-amber-300/30 text-amber-300 transition-transform group-hover:scale-110">
                           {/* courthouse icon */}
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                             <path d="M12 3l8 4H4l8-4z" />
@@ -148,9 +144,9 @@ export default async function Home() {
                     </li>
 
                     {/* Madde 3 */}
-                    <li className="group p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all overflow-hidden">
-                      <div className="grid grid-cols-[56px,1fr] items-center gap-4 min-h-[56px]">
-                        <span className="justify-self-center inline-flex shrink-0 w-12 h-12 items-center justify-center rounded-full ml-1 bg-sky-400/15 ring-1 ring-sky-300/30 text-sky-300 transition-transform group-hover:scale-110">
+                    <li className="group p-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur-sm transition-all overflow-hidden">
+                      <div className="grid grid-cols-[52px,1fr] items-center gap-3 min-h-[52px]">
+                        <span className="justify-self-center inline-flex shrink-0 w-10 h-10 items-center justify-center rounded-full ml-1 bg-sky-400/15 ring-1 ring-sky-300/30 text-sky-300 transition-transform group-hover:scale-110">
                           {/* star icon */}
                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
                             <path d="M12 6l2 4 4 2-4 2-2 4-2-4-4-2 4-2 2-4z" />
@@ -170,53 +166,53 @@ export default async function Home() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-2">
                   <Link
                     href="/dilekce"
-                    className="group block rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all p-6 text-left shadow-lg backdrop-blur-sm"
+                    className="group block rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all p-5 text-left shadow-lg backdrop-blur-sm"
                   >
                     <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold">Dilekçe Pro </h3>
-                      <span className="inline-flex items-center gap-1 text-orange-300 text-sm opacity-90 group-hover:translate-x-0.5 transition">
+                      <h3 className="text-base font-bold">Dilekçe Pro </h3>
+                      <span className="inline-flex items-center gap-1 text-orange-300 text-xs opacity-90 group-hover:translate-x-0.5 transition">
                         Başla
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                       </span>
                     </div>
-                    <p className="mt-2 text-slate-200/80">
-                      Olayları girin, Sizden istenen bilgileri verin; yargıtay kararı atıflı dilekçeleriniz birkaç dakikada hazır!
+                    <p className="mt-1.5 text-slate-200/80 text-sm leading-snug">
+                      Olayları girin, Sizden istenen bilgileri verin; dilekçeleriniz birkaç dakikada hazır!
                     </p>
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      <li className="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-200 text-xs transition-transform duration-200 transform hover:scale-105">Yargıtay Kararlarına Atıf</li>
-                      <li className="px-2.5 py-1 rounded-full bg-sky-500/15 text-sky-200 text-xs transition-transform duration-200 transform hover:scale-105">Profesyonel Hukuki Dil</li>
-                      <li className="px-2.5 py-1 rounded-full bg-violet-500/15 text-violet-200 text-xs transition-transform duration-200 transform hover:scale-105">Özelleştirilebilir</li>
+                    <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                      <li className="px-1.5 py-[1px] rounded-full bg-emerald-500/15 text-emerald-200 text-[10px] leading-tight transition-transform duration-200 transform hover:scale-105">Yargıtay Kararlarına Atıf</li>
+                      <li className="px-1.5 py-[1px] rounded-full bg-sky-500/15 text-sky-200 text-[10px] leading-tight transition-transform duration-200 transform hover:scale-105">Profesyonel Hukuki Dil</li>
+                      <li className="px-1.5 py-[1px] rounded-full bg-violet-500/15 text-violet-200 text-[10px] leading-tight transition-transform duration-200 transform hover:scale-105">Özelleştirilebilir</li>
                     </ul>
                   </Link>
 
                   <Link
                     href="/bot"
-                    className="group block rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all p-6 text-left shadow-lg backdrop-blur-sm"
+                    className="group block rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all p-5 text-left shadow-lg backdrop-blur-sm"
                   >
                     <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold">Analiz Pro</h3>
-                      <span className="inline-flex items-center gap-1 text-orange-300 text-sm opacity-90 group-hover:translate-x-0.5 transition">
+                      <h3 className="text-base font-bold">Analiz Pro</h3>
+                      <span className="inline-flex items-center gap-1 text-orange-300 text-xs opacity-90 group-hover:translate-x-0.5 transition">
                         Analiz İste
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4">
                           <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                       </span>
                     </div>
-                    <p className="mt-2 text-slate-200/80">
-                      Konuyu yazın; Eğitilmiş Yapay Zeka Botumuz mevzuat ve içtihat atıflarıyla, analiz yapsın ve uyuşmazlıkla ilgili strateji oluştursun.
+                    <p className="mt-1.5 text-slate-200/80 text-sm leading-snug">
+                      Analizini istediğiniz konuyu yazın; uyuşmazlıkla ilgili yol haritanız, olası riskleriniz hazırlansın!
                     </p>
-                    <ul className="mt-3 flex flex-wrap gap-2">
-                      <li className="px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-200 text-xs transition-transform duration-200 transform hover:scale-105">Uyuşmazlığa dair derinlemesine inceleme</li>
-                      <li className="px-2.5 py-1 rounded-full bg-sky-500/15 text-sky-200 text-xs transition-transform duration-200 transform hover:scale-105">Akıllı Analiz</li>
-                      <li className="px-2.5 py-1 rounded-full bg-pink-500/15 text-pink-200 text-xs transition-transform duration-200 transform hover:scale-105">Emsal Kararlar İle Destekleme</li>
+                    <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                      <li className="px-1.5 py-[1px] rounded-full bg-amber-500/15 text-amber-200 text-[10px] leading-tight transition-transform duration-200 transform hover:scale-105">Uyuşmazlığa dair derinlemesine inceleme</li>
+                      <li className="px-1.5 py-[1px] rounded-full bg-sky-500/15 text-sky-200 text-[10px] leading-tight transition-transform duration-200 transform hover:scale-105">Strateji Oluşturma ve bilgilendirici analiz</li>
+                      <li className="px-1.5 py-[1px] rounded-full bg-pink-500/15 text-pink-200 text-[10px] leading-tight transition-transform duration-200 transform hover:scale-105">Karar ve mevzuat atıfları</li>
                     </ul>
                   </Link>
                 </div>
 
                 {/* Güven göstergeleri */}
-                <div className="mt-4 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-200/80">
+                <div className="mt-3 flex flex-wrap items-center justify-center gap-3 text-xs text-slate-200/80">
                   <span className="px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-200 text-xs transition-transform duration-200 transform hover:scale-105">Çoğu 2020 Sonrası 1.000.000+ karar ve sair hukuki belge ile eğitilmiş yapay zeka</span>
                   <span className="px-3 py-1 rounded-full bg-amber-500/15 text-amber-200 text-xs transition-transform duration-200 transform hover:scale-105">Akıllı Karar Arama ve Tamamı Özetli Yargıtay Hukuk Daireleri ve Hukuk Genel Kurulu Kararları</span>
                   <span className="px-3 py-1 rounded-full bg-pink-500/15 text-pink-200 text-xs transition-transform duration-200 transform hover:scale-105">Araç Değer Kaybı, Destekten Yoksun Kalma, İş Kazası Tazminatı Hesaplama vb. pek çok araç</span>
@@ -224,10 +220,7 @@ export default async function Home() {
               </div>
             </section>
 
-            {/* YENİ SIRA 2: GÜNDEM BÖLÜMÜ (Tam Genişlikte) */}
-            <section className="w-full bg-white overflow-x-hidden relative">
-                <GundemSection items={gundemItems} />
-            </section>
+        
 
             
             {/* DİĞER İÇERİK BÖLÜMLERİ */}
