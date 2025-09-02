@@ -19,7 +19,7 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata = {
-  title: "KararAi",
+  title: "Consülto",
   description: "Yargı, Mevzuat ve Resmî Gazete arayüzü",
 };
 

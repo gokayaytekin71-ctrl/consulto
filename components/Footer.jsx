@@ -26,7 +26,7 @@ export default function Footer() {
             </p>
             <div className="mt-3 flex items-center gap-3">
               <a
-                href="mailto:info@kararai.com"
+                href="mailto:info@consulto.com"
                 className="inline-flex w-8 h-8 items-center justify-center rounded-full border border-white/10 bg-white/5 hover:bg-white/10 transition"
                 aria-label="E‑posta"
               >

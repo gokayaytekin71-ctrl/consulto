@@ -10,7 +10,6 @@ import { FiUser, FiStar, FiBookOpen, FiFileText, FiEdit, FiCalendar } from "reac
 const profileItems = [
   { href: "/profilim", icon: <FiUser />, label: "Profil Sayfası" },
   { href: "/profilim/favori-kararlar", icon: <FiStar />, label: "Favori Kararlar" },
-  { href: "/profilim/favori-mevzuat", icon: <FiBookOpen />, label: "Favori Mevzuat" },
   { href: "/profilim/favori-makaleler", icon: <FiFileText />, label: "Favori Makaleler" },
   { href: "/profilim/notlarim", icon: <FiEdit />, label: "Notlarım" },
   { href: "/profilim/gorevlerim", icon: <FiCalendar />, label: "Görevlerim" },

@@ -707,8 +707,6 @@ const CASE_TYPES = {
         required: true,
         placeholder: "İl / İlçe / Mahalle / Cadde / No / Daire ...",
       },
-      { id: "kiraci_ad_soyad", label: "Kiracı Adı Soyadı", type: "text", required: false },
-      { id: "kiralayan_ad_soyad", label: "Kiralayan Adı Soyadı", type: "text", required: false },
       { id: "sozlesme_tarihi", label: "Kira Sözleşmesi Tarihi", type: "date", required: false },
       {
         id: "aylik_kira_bedeli",
@@ -1863,29 +1861,11 @@ async function finalizeResult(finalObj) {
                         <label className="block text-sm font-medium mb-1">Davacı Adı (isteğe bağlı)</label>
                         <input
                           className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
-                          placeholder="Cem Yılmaz"
+                          placeholder="Örn. Can Yılmaz"
                           value={davaciAdSoyad}
                           onChange={(e) => setDavaciAdSoyad(e.target.value)}
                         />
                       </div>
-
-                      {/* Olay Özeti */}
-                      <div className="md:col-span-2">
-                        <label className="block text-sm font-medium mb-1">Davaya Sebebiyet Veren Somut Olaylar *</label>
-                        <textarea
-                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
-                          rows={6}
-                          placeholder="Müvekkilin kocası müvekkili aldatmıştır. Ayrıca müvekkile sürekli hakaret etmektedir."
-                          value={olayOzet}
-                          onChange={(e) => setOlayOzet(e.target.value)}
-                          required
-                        />
-                        <div className="flex justify-between text-xs text-slate-400 mt-1">
-                          <span>En az 20 karakter</span>
-                          <span>{olayCharCount} karakter</span>
-                        </div>
-                      </div>
-
                       {/* Talep */}
                       <div>
                         <label className="block text-sm font-medium mb-1">Talep *</label>
@@ -1898,6 +1878,36 @@ async function finalizeResult(finalObj) {
                         />
                         <p className="text-xs text-slate-400 mt-1">Örn: Zararın tazmini ve yasal faiz.</p>
                       </div>
+
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Davalı Adı (isteğe bağlı)</label>
+                        <input
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          placeholder="Örn. Cem Yılmaz"
+                          value={davaciAdSoyad}
+                          onChange={(e) => setDavaciAdSoyad(e.target.value)}
+                        />
+                      </div>
+                      
+
+                      {/* Olay Özeti */}
+                      <div className="md:col-span-2">
+                        <label className="block text-sm font-medium mb-1">Davaya Sebebiyet Veren Somut Olaylar *</label>
+                        <textarea
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          rows={6}
+                          placeholder="Örn. Müvekkilin kocası müvekkili aldatmıştır. Kumar alışkanlığı vardır. Ayrıca müvekkile sürekli hakaret etmektedir."
+                          value={olayOzet}
+                          onChange={(e) => setOlayOzet(e.target.value)}
+                          required
+                        />
+                        <div className="flex justify-between text-xs text-slate-400 mt-1">
+                          <span>En az 20 karakter</span>
+                          <span>{olayCharCount} karakter</span>
+                        </div>
+                      </div>
+
+                    
 
                       {/* Dinamik Alanlar (Dava Türüne Göre) */}
                       {activeFields.length > 0 && (
