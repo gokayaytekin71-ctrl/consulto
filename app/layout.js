@@ -19,8 +19,12 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata = {
-  title: "Consülto",
-  description: "Yargı, Mevzuat ve Resmî Gazete arayüzü",
+  metadataBase: new URL('https://consultohukuk.com'),
+  title: {
+    default: 'Consülto Yapay Zeka Hukuk Asistanı',
+    template: '%s | CONSÜLTO Hukuk',
+  },
+  description: 'Consülto – Yapay Zeka Destekli Hukuk Asistanı…',
 };
 
 export default function RootLayout({ children }) {
