@@ -3,6 +3,9 @@ import { Cormorant_Garamond, EB_Garamond } from "next/font/google";
 import Header from "@/components/Header";
 import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
@@ -36,6 +39,8 @@ export default function RootLayout({ children }) {
           <main className="flex-1">{children}</main>
           <Footer />
         </AuthProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
