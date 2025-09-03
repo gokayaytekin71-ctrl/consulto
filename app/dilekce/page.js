@@ -1211,7 +1211,7 @@ const CASE_TYPES = {
 // Alan render helper
 function FieldInput({ field, value, onChange }) {
   const common =
-    "w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500";
+    "w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500";
   if (field.type === "textarea") {
     return (
       <textarea
@@ -1288,6 +1288,7 @@ export default function DilekcePage() {
   const [olayOzet, setOlayOzet] = useState("");
   const [talep, setTalep] = useState("");
   const [davaciAdSoyad, setDavaciAdSoyad] = useState("");
+  const [davaliAdSoyad, setDavaliAdSoyad] = useState("");
   const [delillerInput, setDelillerInput] = useState("");
 
   // Dava türü + dinamik alanlar
@@ -1312,10 +1313,42 @@ export default function DilekcePage() {
   useEffect(() => {
     if (step !== 2) return;
     setLoadStepIdx(0);
-    const interval = setInterval(() => {
-      setLoadStepIdx((i) => (i + 1) % LOADING_MESSAGES.length);
-    }, 2000);
-    return () => clearInterval(interval);
+    let cancelled = false;
+    let timeoutId = null;
+
+    function nextStep(currentIdx) {
+      // Determine duration for current index
+      let duration = 2000;
+      if (currentIdx === 0 || currentIdx === 1) duration = 10000;
+      else if (currentIdx === 2) duration = 15000;
+      else duration = 2000;
+
+      // Only cycle if not at the last message
+      if (currentIdx < LOADING_MESSAGES.length - 1) {
+        timeoutId = setTimeout(() => {
+          if (cancelled) return;
+          setLoadStepIdx((idx) => {
+            // Only increment if not at last index
+            if (idx < LOADING_MESSAGES.length - 1) {
+              // Schedule next step
+              nextStep(idx + 1);
+              return idx + 1;
+            }
+            // Stay at last message
+            return idx;
+          });
+        }, duration);
+      }
+      // If at last message, do not schedule further timeout (stay until step changes)
+    }
+
+    // Start recursive timeout
+    nextStep(0);
+
+    return () => {
+      cancelled = true;
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, [step]);
 
   // Sonuç state
@@ -1471,6 +1504,7 @@ function loadDraft(d) {
   setOlayOzet(d?.olay_ozet || "");
   setTalep(d?.talep || "");
   setDavaciAdSoyad(d?.davaci?.ad_soyad || "");
+  setDavaliAdSoyad(d?.davali?.ad_soyad || "");
   setDelillerInput(
     Array.isArray(d?.eldeki_deliller) ? d.eldeki_deliller.join("\n") : (d?.eldeki_deliller || "")
   );
@@ -1483,6 +1517,7 @@ function loadDraft(d) {
         olay_ozet: d?.olay_ozet,
         talep: d?.talep,
         davaci: d?.davaci,
+        davali: d?.davali,
         eldeki_deliller: d?.eldeki_deliller,
       },
     kaynaklar: d?.kaynaklar || {},
@@ -1583,6 +1618,7 @@ async function finalizeResult(finalObj) {
           alanlar: extraValues, // yeni: dinamik alanlar
         },
         ...(davaciAdSoyad.trim() ? { davaci: { ad_soyad: davaciAdSoyad.trim() } } : {}),
+        ...(davaliAdSoyad.trim() ? { davali: { ad_soyad: davaliAdSoyad.trim() } } : {}),
         ...(deliller.length ? { eldeki_deliller: deliller } : {}),
       };
 
@@ -1726,6 +1762,7 @@ async function finalizeResult(finalObj) {
     setOlayOzet("");
     setTalep("");
     setDavaciAdSoyad("");
+    setDavaliAdSoyad("");
     setDelillerInput("");
     setCaseType("");
     setExtraValues({});
@@ -1789,16 +1826,16 @@ async function finalizeResult(finalObj) {
     <main className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-black text-gray-100 relative overflow-hidden">
       {CanvasBackground ? <CanvasBackground /> : null}
 
-      <div className="relative z-10 py-12 md:py-16 px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 py-6 md:py-8 px-3 sm:px-4 lg:px-6">
         <div className="max-w-6xl mx-auto space-y-8">
-          <div className="bg-slate-900/40 border border-slate-700/60 rounded-xl shadow-2xl backdrop-blur-sm">
+          <div className="bg-slate-900/40 border border-slate-700/60 rounded-xl shadow-xl backdrop-blur-sm">
             {/* Header */}
             <header className="p-6 md:p-8 border-b border-slate-700/60">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 text-blue-400"
+                    className="h-8 w-8 text-blue-400 relative -top-1"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -1806,7 +1843,7 @@ async function finalizeResult(finalObj) {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" d={iconPath} />
                   </svg>
-                  <h1 className="text-2xl lg:text-3xl font-bold text-gray-100 leading-tight">
+                  <h1 className="text-xl lg:text-1xl font-bold text-gray-100 leading-tight">
                     Dilekçe Oluşturucu Pro
                   </h1>
                 </div>
@@ -1814,7 +1851,7 @@ async function finalizeResult(finalObj) {
                   <button
                     type="button"
                     onClick={() => { fetchRecentDrafts(); setShowDrafts(true); }}
-                    className="rounded-xl border border-slate-200 px-4 py-2 text-sm hover:bg-slate-600 transition"
+                    className="ml-0 mr-auto rounded-xl border border-slate-200 px-4 py-2 text-sm hover:bg-slate-600 transition self-start"
                     title="Son dilekçelerinizi görüntüleyin"
                   >
                     Son Dilekçeleriniz
@@ -1822,7 +1859,7 @@ async function finalizeResult(finalObj) {
                   <Stepper />
                 </div>
               </div>
-              <p className="mt-3 text-slate-300">
+              <p className="mt-2 text-slate-400 text-sm">
                 Önce dava türünü seçin, ardından olay özetinizi ve talebinizi girin. Diğer alanlar
                 seçiminize göre dinamik olarak gelecektir. Dilekçeyi tek
                 tıkla kopyalayabilir, Word/PDF formatında indirebilirsiniz.
@@ -1836,11 +1873,11 @@ async function finalizeResult(finalObj) {
                 <section className="p-6 md:p-8">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Dava Türü */}
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-1">Dava Türü *</label>
                         <select
-                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500"
                           value={caseType}
                           onChange={(e) => handleCaseTypeChange(e.target.value)}
                           required
@@ -1860,7 +1897,7 @@ async function finalizeResult(finalObj) {
                       <div>
                         <label className="block text-sm font-medium mb-1">Davacı Adı (isteğe bağlı)</label>
                         <input
-                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Örn. Can Yılmaz"
                           value={davaciAdSoyad}
                           onChange={(e) => setDavaciAdSoyad(e.target.value)}
@@ -1870,22 +1907,21 @@ async function finalizeResult(finalObj) {
                       <div>
                         <label className="block text-sm font-medium mb-1">Talep *</label>
                         <input
-                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Boşanma, 20.000 TL Maddi Tazminat, Kiralananın Tahliyesi..."
                           value={talep}
                           onChange={(e) => setTalep(e.target.value)}
                           required
                         />
-                        <p className="text-xs text-slate-400 mt-1">Örn: Zararın tazmini ve yasal faiz.</p>
                       </div>
 
                       <div>
                         <label className="block text-sm font-medium mb-1">Davalı Adı (isteğe bağlı)</label>
                         <input
-                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500"
                           placeholder="Örn. Cem Yılmaz"
-                          value={davaciAdSoyad}
-                          onChange={(e) => setDavaciAdSoyad(e.target.value)}
+                          value={davaliAdSoyad}
+                          onChange={(e) => setDavaliAdSoyad(e.target.value)}
                         />
                       </div>
                       
@@ -1894,8 +1930,8 @@ async function finalizeResult(finalObj) {
                       <div className="md:col-span-2">
                         <label className="block text-sm font-medium mb-1">Davaya Sebebiyet Veren Somut Olaylar *</label>
                         <textarea
-                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
-                          rows={6}
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500"
+                          rows={4}
                           placeholder="Örn. Müvekkilin kocası müvekkili aldatmıştır. Kumar alışkanlığı vardır. Ayrıca müvekkile sürekli hakaret etmektedir."
                           value={olayOzet}
                           onChange={(e) => setOlayOzet(e.target.value)}
@@ -1940,8 +1976,8 @@ async function finalizeResult(finalObj) {
                           Eldeki Deliller (isteğe bağlı) — her satır bir delil
                         </label>
                         <textarea
-                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-3 outline-none focus:ring-2 focus:ring-blue-500"
-                          rows={3}
+                          className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500"
+                          rows={2}
                           placeholder={`Tanık Beyanları\nNüfus Kayıtları\nFaturalar`}
                           value={delillerInput}
                           onChange={(e) => setDelillerInput(e.target.value)}
@@ -2104,7 +2140,7 @@ async function finalizeResult(finalObj) {
                   )}
 
                   {activeTab === "kaynaklar" && (
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-2 gap-4">
                       <div className="rounded-xl border border-slate-700 p-4">
                         <h3 className="font-medium mb-2 text-gray-200">Dayanaklar (Kanun Maddeleri)</h3>
 
@@ -2170,7 +2206,7 @@ async function finalizeResult(finalObj) {
                     aria-modal="true"
                     onClick={(e)=>e.stopPropagation()}
                     className={
-                      "fixed z-[999] w-[42rem] max-w-[92vw] max-h-[70vh] overflow-auto rounded-2xl " +
+                      "fixed z-[999] w-[42rem] max-w-[92vw] max-h-[70vh] overflow-auto rounded-xl " +
                       "border border-white/10 bg-slate-900/95 backdrop-blur-md " +
                       "shadow-[0_20px_60px_rgba(0,0,0,0.55),0_0_24px_rgba(34,211,238,0.2)] ring-1 ring-cyan-400/35 p-4 " +
                       "text-[12px] text-slate-100 transition-transform duration-150 ease-out will-change-transform " +
@@ -2405,7 +2441,7 @@ async function finalizeResult(finalObj) {
             className="absolute inset-0 bg-black/60"
             onClick={() => setShowDrafts(false)}
           />
-          <div className="absolute inset-y-0 right-0 w-full max-w-xl bg-slate-900 border-l border-slate-700 shadow-2xl p-6 overflow-y-auto">
+          <div className="absolute inset-y-0 right-0 w-full max-w-xl bg-slate-900 border-l border-slate-700 shadow-xl p-6 overflow-y-auto">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold text-gray-200">Son Dilekçeleriniz</h3>
               <div className="flex items-center gap-2">

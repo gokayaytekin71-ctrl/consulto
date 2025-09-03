@@ -125,7 +125,7 @@ export default function Header() {
       className="sticky top-0 z-50 relative
                  bg-gradient-to-b from-[#001f3f] to-[#004365]
                  text-[#F5F5DC] flex items-center justify-between
-                 px-4 sm:px-6 py-1 shadow-md"
+                 px-4 sm:px-6 py-0.5 shadow-md text-[0.9rem]"
     >
       {isPending && <LoadingOverlay />}
       <div className="flex-none">
@@ -133,8 +133,8 @@ export default function Header() {
           <Image
             src="/images/logo.png"
             alt="Logo"
-            width={120}
-            height={34}
+            width={108}
+            height={30}
             className="cursor-pointer hover:opacity-90 object-contain"
             style={{ cursor: "pointer" }}
           />
@@ -144,7 +144,7 @@ export default function Header() {
       <div
         className="absolute left-1/2 top-1/2
                    transform -translate-x-1/2 -translate-y-1/2
-                   w-16 h-16 pointer-events-none hidden md:block"
+                   w-14 h-14 pointer-events-none hidden md:block"
       >
         <Lottie animationData={animationData} loop autoPlay />
       </div>
@@ -152,8 +152,8 @@ export default function Header() {
       <nav className="flex-none flex items-center space-x-3 sm:space-x-4 text-sm sm:text-base">
         {/* Diğer Linkler (değişiklik yok) */}
         <Link href="/kararlar" onClick={(e) => { e.preventDefault(); startTransition(() => { router.push("/kararlar"); }); }} className="flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer">
-           <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
-             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 7v2h20V7L12 2z" /><path strokeLinecap="round" strokeLinejoin="round" d="M4 9v10h16V9H4z" /><path strokeLinecap="round" strokeLinejoin="round" d="M8 9v10M12 9v10M16 9v10" /><path strokeLinecap="round" strokeLinejoin="round" d="M2 19h20" /></svg>
+           <div className="w-7 h-7 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
+             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 2L2 7v2h20V7L12 2z" /><path strokeLinecap="round" strokeLinejoin="round" d="M4 9v10h16V9H4z" /><path strokeLinecap="round" strokeLinejoin="round" d="M8 9v10M12 9v10M16 9v10" /><path strokeLinecap="round" strokeLinejoin="round" d="M2 19h20" /></svg>
            </div>
            <span className="mt-0.5 text-xs text-white">Kararlar</span>
          </Link>
@@ -162,10 +162,10 @@ export default function Header() {
          href="/akilli-arama"
          className="flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer"
        >
-         <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
+         <div className="w-7 h-7 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
            {/* Lupa ikonu */}
            <svg xmlns="http://www.w3.org/2000/svg"
-                className="w-5 h-5 text-white"
+                className="w-4 h-4 text-white"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -178,8 +178,8 @@ export default function Header() {
        </a>
 
          <Link href="/dilekce" onClick={(e) => { e.preventDefault(); startTransition(() => { router.push("/dilekce"); }); }} className="flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer">
-           <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
-             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+           <div className="w-7 h-7 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
+             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                <path strokeLinecap="round" strokeLinejoin="round" d="M14 3H8a2 2 0 00-2 2v14l4-4h6a2 2 0 002-2V5a2 2 0 00-2-2z" />
                <path strokeLinecap="round" strokeLinejoin="round" d="M9 8h6M9 12h6M9 16h4" />
              </svg>
@@ -188,10 +188,10 @@ export default function Header() {
          </Link>
 
          <Link href="/bot" onClick={(e) => { e.preventDefault(); startTransition(() => { router.push("/bot"); }); }} className="flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer">
-           <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
+           <div className="w-7 h-7 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
              <svg
                xmlns="http://www.w3.org/2000/svg"
-               className="w-5 h-5 text-white"
+               className="w-4 h-4 text-white"
                viewBox="0 0 24 24"
                fill="none"
                stroke="currentColor"
@@ -212,8 +212,8 @@ export default function Header() {
          </Link>
 
          <Link href="/araclar" onClick={(e) => { e.preventDefault(); startTransition(() => { router.push("/araclar"); }); }} className="flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer">
-           <div className="w-8 h-8 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
-             <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+           <div className="w-7 h-7 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
+             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                <path strokeLinecap="round" strokeLinejoin="round" d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
              </svg>
            </div>
@@ -227,9 +227,9 @@ export default function Header() {
              aria-expanded={isOtherOpen}
              className={`flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer ${isOtherOpen ? 'scale-110' : ''}`}
            >
-             <div className={`w-8 h-8 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 bg-gradient-to-br from-[#001f3f] to-[#004365] ${isOtherOpen ? 'ring-2 ring-cyan-400/50' : ''}`}>
+             <div className={`w-7 h-7 flex items-center justify-center rounded-full shadow-lg transition-all duration-200 bg-gradient-to-br from-[#001f3f] to-[#004365] ${isOtherOpen ? 'ring-2 ring-cyan-400/50' : ''}`}>
                {/* üç nokta ikonu */}
-               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="currentColor">
+               <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
                  <circle cx="5" cy="12" r="1.8" />
                  <circle cx="12" cy="12" r="1.8" />
                  <circle cx="19" cy="12" r="1.8" />
@@ -299,10 +299,10 @@ export default function Header() {
                   aria-label="Bildirimler"
                   className="flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer"
                 >
-                  <div className="relative w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                    <BellIcon className="w-6 h-6 text-white" />
+              <div className="relative w-9 h-9 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                    <BellIcon className="w-5 h-5 text-white" />
                     {notifications.length > 0 && (
-                      <span className="absolute top-1 right-1 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white"></span>
+                      <span className="absolute top-0.5 right-0.5 block h-2.5 w-2.5 rounded-full bg-red-500 ring-2 ring-white"></span>
                     )}
                   </div>
                   <span className="mt-0.5 text-xs text-white">Bildirim</span>
@@ -353,8 +353,8 @@ export default function Header() {
                 onClick={(e) => { e.preventDefault(); startTransition(() => { router.push("/profilim"); }); }}
                 className="flex flex-col items-center p-2 transition-transform transform hover:scale-110 cursor-pointer"
               >
-                <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
-                  <UserCircleIcon className="w-6 h-6 text-white" />
+                <div className="w-9 h-9 flex items-center justify-center bg-gradient-to-br from-[#001f3f] to-[#004365] rounded-full shadow-lg hover:shadow-2xl transition-shadow duration-300">
+                  <UserCircleIcon className="w-5 h-5 text-white" />
                 </div>
                 <span className="mt-0.5 text-xs text-white">Profilim</span>
               </Link>

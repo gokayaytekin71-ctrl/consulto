@@ -171,11 +171,11 @@ export default async function KararlarPage({ searchParams }) {
   ]);
 
   return (
-    <div className="bg-[#001f3f] min-h-screen">
+    <div className="bg-[#001f3f] min-h-screen text-[0.9rem]">
       {/* HEADER */}
       <header className="w-full bg-blue-900/30 border-b border-blue-700/60 shadow-xl py-4">
         <div className="max-w-screen-2xl mx-auto px-4">
-          <h1 className="text-2xl md:text-3xl font-bold text-blue-200">
+          <h1 className="text-xl md:text-2xl font-bold text-blue-200">
             Karar Arşivi
           </h1>
           <p className="text-sm text-blue-300/90 mt-1">
@@ -192,7 +192,7 @@ export default async function KararlarPage({ searchParams }) {
             <div className="bg-blue-900/30 border border-blue-700/50 rounded-xl p-4">
               <div className="flex items-center gap-2 mb-3">
                 <span className="inline-block w-2 h-2 rounded-full bg-blue-300" />
-                <h2 className="text-lg font-semibold text-blue-100">Arama</h2>
+                <h2 className="text-base md:text-xl font-semibold text-blue-100">Arama</h2>
               </div>
               <BasicFilter
                 defaultParams={{
@@ -250,7 +250,7 @@ export default async function KararlarPage({ searchParams }) {
               <header className="mb-1">
                 <div className="flex items-center gap-2 mb-1">
                   <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-300" />
-                  <h2 id="ibk-title" className="text-lg md:text-2xl font-bold text-blue-100">
+                  <h2 id="ibk-title" className="text-base md:text-xl font-bold text-blue-100">
                     İçtihadı Birleştirme Kararları
                   </h2>
                 </div>

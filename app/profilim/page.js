@@ -86,25 +86,11 @@ export default async function ProfilePage() {
                 {favoriKararlarCount}
               </p>
             </div>
-            {/* Favori Mevzuat */}
-            <div className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-md">
-              <p className="text-gray-200 text-sm">Favori Mevzuat Maddelerim</p>
-              <p className="text-2xl font-bold text-white mt-2">
-                {favoriMevzuatlarCount}
-              </p>
-            </div>
             {/* Favori Makaleler */}
             <div className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-md">
               <p className="text-gray-200 text-sm">Favori Makalelerim</p>
               <p className="text-2xl font-bold text-white mt-2">
                 {favoriMakalelerCount}
-              </p>
-            </div>
-            {/* Kaydolma Tarihi */}
-            <div className="bg-white/20 backdrop-blur-md p-6 rounded-xl shadow-md">
-              <p className="text-gray-200 text-sm">Kaydolma Tarihi</p>
-              <p className="text-2xl font-bold text-white mt-2">
-                {new Date(registrationDate).toLocaleDateString("tr-TR")}
               </p>
             </div>
           </div>

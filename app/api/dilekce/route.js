@@ -10,6 +10,18 @@ function isJson(res) {
   return ct.includes('application/json');
 }
 
+function normalizePerson(v) {
+  if (typeof v === 'string') {
+    const s = v.trim();
+    return s ? { ad_soyad: s } : undefined;
+  }
+  if (v && typeof v === 'object') {
+    // Allow already-shaped objects like { ad_soyad, tc, vekil_mi, ... }
+    return Object.keys(v).length ? v : undefined;
+  }
+  return undefined;
+}
+
 export async function POST(req) {
   try {
     const body = await req.json();
@@ -34,19 +46,25 @@ export async function POST(req) {
       ? eldeki_deliller
       : (typeof eldeki_deliller === 'string' && eldeki_deliller.trim() ? [eldeki_deliller] : []);
 
+    const davaciNorm = normalizePerson(davaci);
+    const davaliNorm = normalizePerson(davali);
+    const vekilNorm  = normalizePerson(vekil);
+
     const payload = {
       olay_ozet,
       talep,
-      davaci: davaci || {},
       mahkeme: mahkeme || '',
       eldeki_deliller: deliller,
     };
+
+    if (davaciNorm) payload.davaci = davaciNorm;
+    if (davaliNorm) payload.davali = davaliNorm;
+
     // opsiyonelleri ekle
     if (dava_turu !== undefined) payload.dava_turu = dava_turu;
     if (konu !== undefined) payload.konu = konu;
     if (talep_kalemleri !== undefined) payload.talep_kalemleri = talep_kalemleri;
-    if (vekil !== undefined) payload.vekil = vekil;
-    if (davali !== undefined) payload.davali = davali;
+    if (vekilNorm) payload.vekil = vekilNorm;
     if (ozel_bilgiler !== undefined) payload.ozel_bilgiler = ozel_bilgiler;
 
     const resp = await fetch(`${DILEKCE_API_URL}/dilekce/olustur`, {
