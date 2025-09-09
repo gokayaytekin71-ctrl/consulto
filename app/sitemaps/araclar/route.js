@@ -15,6 +15,12 @@ const TOOLS = [
   "/araclar/faiz-hesaplama",
 ];
 
+function xmlResponse(body) {
+  return new NextResponse(body, {
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
+  });
+}
+
 export async function GET() {
   const now = new Date().toISOString();
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -24,7 +30,9 @@ ${TOOLS.map(
     `  <url><loc>${BASE_URL}${path}</loc><changefreq>monthly</changefreq><lastmod>${now}</lastmod><priority>0.6</priority></url>`
 ).join("\n")}
 </urlset>`;
-  return new NextResponse(xml, {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
-  });
+  return xmlResponse(xml);
+}
+
+export async function HEAD() {
+  return xmlResponse(null);
 }

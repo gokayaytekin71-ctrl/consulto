@@ -17,6 +17,12 @@ const STATIC_URLS = [
   "/paketler-ucretler" // Paketler & Ücretler
 ];
 
+function xmlResponse(body) {
+  return new NextResponse(body, {
+    headers: { "Content-Type": "application/xml; charset=utf-8" },
+  });
+}
+
 export async function GET() {
   const now = new Date().toISOString();
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -25,8 +31,9 @@ ${STATIC_URLS.map(
   (path) => `  <url><loc>${BASE_URL}${path}</loc><changefreq>weekly</changefreq><lastmod>${now}</lastmod><priority>0.8</priority></url>`
 ).join("\n")}
 </urlset>`;
+  return xmlResponse(xml);
+}
 
-  return new NextResponse(xml, {
-    headers: { "Content-Type": "application/xml; charset=utf-8" },
-  });
+export async function HEAD() {
+  return xmlResponse(null);
 }
