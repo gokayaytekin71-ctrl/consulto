@@ -1,6 +1,6 @@
 // app/sitemap.xml/route.js
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma"; // 👈 default import
 
 const BASE_URL = "https://www.consultohukuk.com";
 const PAGE_SIZE = 5000;
@@ -12,10 +12,16 @@ function xmlResponse(body) {
 }
 
 export async function GET() {
-  const total = await prisma.karar.count();
-  const pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  const lastmod = new Date().toISOString();
+  // DB erişimi hata verirse index yine çalışsın
+  let pageCount = 1;
+  try {
+    const total = await prisma.karar.count();
+    pageCount = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  } catch (_) {
+    // noop: boş index de Google için geçerlidir, alt haritalar sonra eklenebilir
+  }
 
+  const lastmod = new Date().toISOString();
   const items = [
     `${BASE_URL}/sitemaps/static`,
     `${BASE_URL}/sitemaps/araclar`,

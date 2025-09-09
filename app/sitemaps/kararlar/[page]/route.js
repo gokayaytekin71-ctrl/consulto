@@ -1,6 +1,6 @@
 // app/sitemaps/kararlar/[page]/route.js
 import { NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma"; // 👈 default import
 
 const BASE_URL = "https://www.consultohukuk.com";
 const PAGE_SIZE = 5000;
@@ -15,12 +15,18 @@ export async function GET(_req, { params }) {
   const page = Math.max(1, parseInt(params.page, 10) || 1);
   const skip = (page - 1) * PAGE_SIZE;
 
-  const kararlar = await prisma.karar.findMany({
-    select: { id: true, slug: true, updatedAt: true },
-    orderBy: { id: "asc" },
-    skip,
-    take: PAGE_SIZE,
-  });
+  let kararlar = [];
+  try {
+    kararlar = await prisma.karar.findMany({
+      select: { id: true, slug: true, updatedAt: true },
+      orderBy: { id: "asc" },
+      skip,
+      take: PAGE_SIZE,
+    });
+  } catch (_) {
+    // DB kapalıysa boş urlset döndürürüz (Google hata vermez)
+    kararlar = [];
+  }
 
   const urls = kararlar.map((k) => ({
     loc: `${BASE_URL}/kararlar/${k.slug || `karar_${k.id}`}`,
