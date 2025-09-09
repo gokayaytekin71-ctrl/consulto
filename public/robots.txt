@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /_next/
+Disallow: /profilim/
+Disallow: /auth/
+Disallow: /login/
+Disallow: /register/
+
+Sitemap: https://www.consultohukuk.com/sitemap.xml
