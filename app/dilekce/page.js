@@ -2108,8 +2108,8 @@ async function finalizeResult(finalObj) {
                   {/* Tablar */}
                   <div className="flex items-center gap-2 border-b border-slate-700/60">
                     {[
-                      { key: "dilekce", label: "Dilekçe" },
-                      { key: "kaynaklar", label: "Yararlanılan Kaynaklar ()" },
+                      { key: "dilekce", label: "Dilekçe Metni" },
+                      { key: "kaynaklar", label: "Yararlanılan Kaynaklar" },
                       { key: "girdi", label: "Girdi Özeti" },
                     ].map((t) => (
                       <button
