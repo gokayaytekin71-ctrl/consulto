@@ -43,7 +43,7 @@ export default function AnalysisPage() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const endRef = useRef(null);
+  const analysisEndRef = useRef(null);
   const [confirmDel, setConfirmDel] = useState({ open: false, id: null });
 
   // Popover state for mevzuat madde preview
@@ -428,7 +428,7 @@ export default function AnalysisPage() {
       console.timeEnd("[analyze] total");
       setIsLoading(false);
       setInput("");
-      endRef.current?.scrollIntoView({ behavior: "smooth" });
+      analysisEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
   }
 
@@ -934,7 +934,7 @@ export default function AnalysisPage() {
                     >{activeMarkdown}</ReactMarkdown>
                   ) : <div className="text-sm text-slate-500">Bu analiz için henüz sonuç yok. Üstteki formdan sorgunuzu gönderin.</div>
                 ) : <div className="text-sm text-slate-500">Sağdaki listeden bir analiz seçin veya yeni bir analiz başlatın.</div>}
-                <div ref={endRef} />
+                <div ref={analysisEndRef} />
               </div>
 
               <aside className="border-l border-slate-700 bg-slate-900 p-4 space-y-4">
@@ -1191,7 +1191,6 @@ export default function AnalysisPage() {
           }}
         />
       ) : null}
-      <div ref={endRef} />
     </div>
   );
 }
