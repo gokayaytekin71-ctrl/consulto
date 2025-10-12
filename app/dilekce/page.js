@@ -1442,6 +1442,18 @@ export default function DilekcePage() {
       window.removeEventListener("resize", update);
     };
   }, [openMevzuat?.el]);
+
+  // ----- Dikkat paneli görünürlük yardımcıları -----
+const isCevapMode =
+  ((result?.girdi_ozeti?.dilekce_tipi || (caseType === "cevap" ? "cevap" : "dava")) === "cevap");
+
+const dikkatData = (result?.dilekce?.davada_dikkat) || {};
+
+const hasDikkatData = !!(
+  (Array.isArray(dikkatData?.riskler) && dikkatData.riskler.length) ||
+  (Array.isArray(dikkatData?.karsi_iddialar) && dikkatData.karsi_iddialar.length) ||
+  (Array.isArray(dikkatData?.kritik_deliller) && dikkatData.kritik_deliller.length)
+);
   // Dava türü değişince dinamik alanları sıfırla
   function handleCaseTypeChange(val) {
     setCaseType(val);
@@ -2139,9 +2151,13 @@ async function finalizeResult(finalObj) {
                 </section>
               )}
 
-              {/* Sonuç */}
+                  {/* Sonuç */}
               {step === 3 && (
                 <section className="p-6 md:p-8 space-y-8">
+                  {/* Dikkat Edilecek Hususlar paneli (sadece dava modunda ve veri varsa) */}
+                  {!isCevapMode && hasDikkatData && (
+                    <DikkatPanel data={dikkatData} />
+                  )}
                   {/* Başlık ve aksiyonlar */}
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                     <div className="flex items-center gap-2">
