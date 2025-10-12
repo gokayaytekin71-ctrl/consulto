@@ -707,6 +707,18 @@ const LOADING_MESSAGES = [
  */
 const CASE_TYPES = {
   "": { label: "Seçiniz...", fields: [] },
+  cevap: {
+    label: "Cevap Dilekçesi (Karşı Tarafa Cevap)",
+    fields: [
+      {
+        id: "gelen_dava_dilekcesi",
+        label: "Gelen Dava Dilekçesi (Metin)",
+        type: "textarea",
+        required: true,
+        placeholder: "Davacının dava dilekçesini buraya yapıştırın (metin/Markdown)"
+      }
+    ],
+  },
 
   kira: {
     label: "Kira (Tahliye / Alacak)",
@@ -1442,6 +1454,18 @@ export default function DilekcePage() {
 
   // Gerekli alanları doğrula (dava türü + dinamik alanlar)
   function validateForm() {
+    // CEVAP modu: yalnızca gelen dava dilekçesi zorunlu
+    if (caseType === "cevap") {
+      const pasted = (extraValues["gelen_dava_dilekcesi"] || "").trim();
+      if (pasted.length < 20) {
+        setError("Lütfen gelen dava dilekçesini metin olarak ekleyin (en az 20 karakter).");
+        return false;
+      }
+      setError("");
+      return true;
+    }
+
+    // Standart (dava) modu kontrolleri
     if (olayCharCount < 20) {
       setError("Olay özeti en az 20 karakter olmalı.");
       return false;
@@ -1633,14 +1657,18 @@ async function finalizeResult(finalObj) {
       const payload = {
         olay_ozet: olayOzet.trim(),
         talep: talep.trim(),
-        dava_turu: caseType, // yeni: dava türü
+        dava_turu: caseType,
+        dilekce_tipi: caseType === "cevap" ? "cevap" : "dava",
         ozel_bilgiler: {
           tip: caseType,
-          alanlar: extraValues, // yeni: dinamik alanlar
+          alanlar: extraValues,
         },
         ...(davaciAdSoyad.trim() ? { davaci: { ad_soyad: davaciAdSoyad.trim() } } : {}),
         ...(davaliAdSoyad.trim() ? { davali: { ad_soyad: davaliAdSoyad.trim() } } : {}),
         ...(deliller.length ? { eldeki_deliller: deliller } : {}),
+        ...(caseType === "cevap"
+          ? { gelen_dava_dilekcesi: (extraValues["gelen_dava_dilekcesi"] || "").trim() }
+          : {}),
       };
 
       // 1) Önce Next.js proxy route'u dene (CORS yok)
@@ -1840,6 +1868,40 @@ async function finalizeResult(finalObj) {
     </div>
   );
 
+  // Dikkat Edilecek Hususlar paneli
+  const DikkatPanel = ({ data }) => {
+    const toList = (arr) =>
+      Array.isArray(arr) && arr.length
+        ? arr.map((x, i) => <li key={i} className="list-disc ml-5 mb-1">{String(x)}</li>)
+        : [<li key="empty" className="ml-5 text-slate-400">—</li>];
+
+    const riskler = Array.isArray(data?.riskler) ? data.riskler : [];
+    const karsi  = Array.isArray(data?.karsi_iddialar) ? data.karsi_iddialar : [];
+    const delil  = Array.isArray(data?.kritik_deliller) ? data.kritik_deliller : [];
+
+    return (
+      <div className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-4 md:p-5">
+        <h3 className="text-amber-300 font-semibold text-base md:text-lg mb-2">
+          Dikkat Edilecek Hususlar
+        </h3>
+        <div className="grid md:grid-cols-3 gap-4">
+          <div>
+            <div className="text-amber-200 font-medium mb-1">Riskler</div>
+            <ul>{toList(riskler)}</ul>
+          </div>
+          <div>
+            <div className="text-amber-200 font-medium mb-1">Karşı Tarafın Muhtemel İddiaları</div>
+            <ul>{toList(karsi)}</ul>
+          </div>
+          <div>
+            <div className="text-amber-200 font-medium mb-1">Mutlaka Sunulması Gereken Deliller</div>
+            <ul>{toList(delil)}</ul>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const iconPath =
     "M12 18.75a6 6 0 006-6v-1.5a.75.75 0 011.5 0v1.5a7.5 7.5 0 11-15 0v-1.5a.75.75 0 011.5 0v1.5a6 6 0 006 6zM12 9a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75V11.25a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75V9z";
 
@@ -1960,6 +2022,9 @@ async function finalizeResult(finalObj) {
                         />
                         <div className="flex justify-between text-xs text-slate-400 mt-1">
                           <span>En az 20 karakter</span>
+                          {caseType === "cevap" && (
+                            <span className="ml-2 text-amber-300">(Cevap Dilekçesi modunda zorunlu değil)</span>
+                          )}
                           <span>{olayCharCount} karakter</span>
                         </div>
                       </div>
@@ -2120,6 +2185,20 @@ async function finalizeResult(finalObj) {
                       </button>
                     </div>
                   </div>
+                  {/* Dikkat Paneli — sadece veri varsa göster */}
+                  {(() => {
+                    const d = result?.dilekce?.davada_dikkat;
+                    const hasData =
+                      d &&
+                      (
+                        (Array.isArray(d?.riskler) && d.riskler.length > 0) ||
+                        (Array.isArray(d?.karsi_iddialar) && d.karsi_iddialar.length > 0) ||
+                        (Array.isArray(d?.kritik_deliller) && d.kritik_deliller.length > 0)
+                      );
+                    return hasData ? (
+                      <DikkatPanel data={d} />
+                    ) : null;
+                  })()}
                   {error && (
                     <div className="w-full mt-2 rounded-xl border border-red-400/60 bg-red-500/10 p-2 text-xs text-red-300">
                       {error}
