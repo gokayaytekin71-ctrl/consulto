@@ -163,6 +163,8 @@ export async function POST(req) {
         dilekce_md: dilekce_md.trim(),
         kaynaklar: kaynaklarToSave ?? null,
         girdi_ozeti: girdi_ozeti ?? null,
+        dilekce_json: (dilekce_json ?? dilekce ?? null),
+        dayanaklar:   dayArr.length ? dayArr : null,
       },
     });
 

@@ -233,6 +233,7 @@ model Draft {
   kaynaklar   Json?
   girdi_ozeti Json?
   dayanaklar  Json?
+  dilekce_json Json?
 }
 
 model FavoriteMakale {

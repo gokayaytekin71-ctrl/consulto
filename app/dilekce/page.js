@@ -1446,14 +1446,6 @@ export default function DilekcePage() {
   // ----- Dikkat paneli görünürlük yardımcıları -----
 const isCevapMode =
   ((result?.girdi_ozeti?.dilekce_tipi || (caseType === "cevap" ? "cevap" : "dava")) === "cevap");
-
-const dikkatData = (result?.dilekce?.davada_dikkat) || {};
-
-const hasDikkatData = !!(
-  (Array.isArray(dikkatData?.riskler) && dikkatData.riskler.length) ||
-  (Array.isArray(dikkatData?.karsi_iddialar) && dikkatData.karsi_iddialar.length) ||
-  (Array.isArray(dikkatData?.kritik_deliller) && dikkatData.kritik_deliller.length)
-);
   // Dava türü değişince dinamik alanları sıfırla
   function handleCaseTypeChange(val) {
     setCaseType(val);
@@ -1880,39 +1872,6 @@ async function finalizeResult(finalObj) {
     </div>
   );
 
-  // Dikkat Edilecek Hususlar paneli
-  const DikkatPanel = ({ data }) => {
-    const toList = (arr) =>
-      Array.isArray(arr) && arr.length
-        ? arr.map((x, i) => <li key={i} className="list-disc ml-5 mb-1">{String(x)}</li>)
-        : [<li key="empty" className="ml-5 text-slate-400">—</li>];
-
-    const riskler = Array.isArray(data?.riskler) ? data.riskler : [];
-    const karsi  = Array.isArray(data?.karsi_iddialar) ? data.karsi_iddialar : [];
-    const delil  = Array.isArray(data?.kritik_deliller) ? data.kritik_deliller : [];
-
-    return (
-      <div className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-4 md:p-5">
-        <h3 className="text-amber-300 font-semibold text-base md:text-lg mb-2">
-          Dikkat Edilecek Hususlar
-        </h3>
-        <div className="grid md:grid-cols-3 gap-4">
-          <div>
-            <div className="text-amber-200 font-medium mb-1">Riskler</div>
-            <ul>{toList(riskler)}</ul>
-          </div>
-          <div>
-            <div className="text-amber-200 font-medium mb-1">Karşı Tarafın Muhtemel İddiaları</div>
-            <ul>{toList(karsi)}</ul>
-          </div>
-          <div>
-            <div className="text-amber-200 font-medium mb-1">Mutlaka Sunulması Gereken Deliller</div>
-            <ul>{toList(delil)}</ul>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   const iconPath =
     "M12 18.75a6 6 0 006-6v-1.5a.75.75 0 011.5 0v1.5a7.5 7.5 0 11-15 0v-1.5a.75.75 0 011.5 0v1.5a6 6 0 006 6zM12 9a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75V11.25a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75V9z";
@@ -2167,11 +2126,6 @@ async function finalizeResult(finalObj) {
                         ✓ Hazır
                       </span>
                       <h2 className="text-xl font-semibold text-gray-200">Taslak Dilekçe</h2>
-                      {hasDikkatData && (
-                        <div className="mt-6">
-                          <DikkatPanel data={dikkatData} />
-                        </div>
-                      )}
                       {saving && <span className="text-xs text-slate-400 ml-2">kaydediliyor…</span>}
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
@@ -2209,19 +2163,7 @@ async function finalizeResult(finalObj) {
                     </div>
                   </div>
                   {/* Dikkat Paneli — sadece veri varsa göster */}
-                  {(() => {
-                    const d = result?.dilekce?.davada_dikkat;
-                    const hasData =
-                      d &&
-                      (
-                        (Array.isArray(d?.riskler) && d.riskler.length > 0) ||
-                        (Array.isArray(d?.karsi_iddialar) && d.karsi_iddialar.length > 0) ||
-                        (Array.isArray(d?.kritik_deliller) && d.kritik_deliller.length > 0)
-                      );
-                    return hasData ? (
-                      <DikkatPanel data={d} />
-                    ) : null;
-                  })()}
+                  {null}
                   {error && (
                     <div className="w-full mt-2 rounded-xl border border-red-400/60 bg-red-500/10 p-2 text-xs text-red-300">
                       {error}
