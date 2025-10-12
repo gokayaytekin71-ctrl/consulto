@@ -442,6 +442,17 @@ function normalizeDayanaklar(arr){
   return Array.from(set);
 }
 
+// Yeni: Davada dikkat kartı normalizasyonu
+function normalizeDavadaDikkat(v){
+  const safeList = (x) => Array.isArray(x) ? x.map(s => String(s||"").trim()).filter(Boolean) : [];
+  const obj = (v && typeof v === 'object') ? v : {};
+  return {
+    riskler: safeList(obj.riskler),
+    karsi_iddialar: safeList(obj.karsi_iddialar),
+    kritik_deliller: safeList(obj.kritik_deliller),
+  };
+}
+
 // ---------- MEVZUAT HELPERS (Analiz sayfasıyla uyumlu) ----------
 
 // Küçük TR-normalize + slug
@@ -1523,10 +1534,13 @@ function loadDraft(d) {
     kaynaklar: d?.kaynaklar || {},
     dilekce: {
       dilekce_md: d?.dilekce_md || "",
-     dayanaklar: normalizeDayanaklar(
+      dayanaklar: normalizeDayanaklar(
         d?.dilekce_json?.dayanaklar ||
         d?.dayanaklar ||
         d?.kaynaklar?.dayanaklar),
+      davada_dikkat: normalizeDavadaDikkat(
+        d?.dilekce_json?.davada_dikkat || d?.dilekce?.davada_dikkat || d?.davada_dikkat
+      ),
     },
   });
 
@@ -1562,6 +1576,13 @@ async function finalizeResult(finalObj) {
       dayanaklar: normalizeDayanaklar(finalObj?.dilekce?.dayanaklar),
     },
   };
+
+  // Yeni alanı normalize et
+  if (finalForUI && finalForUI.dilekce) {
+    finalForUI.dilekce.davada_dikkat = normalizeDavadaDikkat(
+      finalForUI.dilekce.davada_dikkat
+    );
+  }
 
   setResult(finalForUI);
   setDilekceMd(md || "");
@@ -2111,6 +2132,7 @@ async function finalizeResult(finalObj) {
                       { key: "dilekce", label: "Dilekçe Metni" },
                       { key: "kaynaklar", label: "Yararlanılan Kaynaklar" },
                       { key: "girdi", label: "Girdi Özeti" },
+                      { key: "dikkat", label: "Davada Dikkat" },
                     ].map((t) => (
                       <button
                         key={t.key}
@@ -2126,6 +2148,89 @@ async function finalizeResult(finalObj) {
                       </button>
                     ))}
                   </div>
+
+                  {/* Davada Dikkat Paneli */}
+                  {activeTab === "dikkat" && (
+                    <div className="mt-4 space-y-4">
+                      {(() => {
+                        const card = (result?.dilekce?.davada_dikkat) || {};
+                        const riskler = Array.isArray(card.riskler) ? card.riskler : [];
+                        const karsi = Array.isArray(card.karsi_iddialar) ? card.karsi_iddialar : [];
+                        const deliller = Array.isArray(card.kritik_deliller) ? card.kritik_deliller : [];
+
+                        const isEmpty = (!riskler.length && !karsi.length && !deliller.length);
+
+                        return (
+                          <>
+                            {isEmpty ? (
+                              <div className="rounded-xl border border-slate-700/60 p-4 text-slate-400 text-sm">
+                                Bu bölüm için özetlenmiş bir içerik oluşturulamadı. Lütfen yeniden deneyin veya verilerinizi zenginleştirin.
+                              </div>
+                            ) : (
+                              <div className="grid md:grid-cols-3 gap-4">
+                                {/* Riskler */}
+                                <div className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-4">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <h3 className="font-semibold text-amber-300">Olası Riskler</h3>
+                                    <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300">
+                                      {riskler.length}
+                                    </span>
+                                  </div>
+                                  {riskler.length ? (
+                                    <ul className="list-disc pl-5 space-y-1 text-sm">
+                                      {riskler.map((it, idx) => (
+                                        <li key={idx} className="text-amber-100/90">{it}</li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <p className="text-slate-400 text-sm">Herhangi bir risk öne çıkmadı.</p>
+                                  )}
+                                </div>
+
+                                {/* Karşı Taraf İddiaları */}
+                                <div className="rounded-xl border border-sky-500/40 bg-sky-500/5 p-4">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <h3 className="font-semibold text-sky-300">Muhtemel Karşı İddialar</h3>
+                                    <span className="text-xs px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/40 text-sky-300">
+                                      {karsi.length}
+                                    </span>
+                                  </div>
+                                  {karsi.length ? (
+                                    <ul className="list-disc pl-5 space-y-1 text-sm">
+                                      {karsi.map((it, idx) => (
+                                        <li key={idx} className="text-sky-100/90">{it}</li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <p className="text-slate-400 text-sm">Öne çıkan bir karşı iddia listelenmedi.</p>
+                                  )}
+                                </div>
+
+                                {/* Kritik Deliller */}
+                                <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/5 p-4">
+                                  <div className="flex items-center justify-between mb-2">
+                                    <h3 className="font-semibold text-emerald-300">Mutlaka Sunulması Gereken Deliller</h3>
+                                    <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-300">
+                                      {deliller.length}
+                                    </span>
+                                  </div>
+                                  {deliller.length ? (
+                                    <ul className="list-disc pl-5 space-y-1 text-sm">
+                                      {deliller.map((it, idx) => (
+                                        <li key={idx} className="text-emerald-100/90">{it}</li>
+                                      ))}
+                                    </ul>
+                                  ) : (
+                                    <p className="text-slate-400 text-sm">Bu dava için kritik delil önerisi bulunamadı.</p>
+                                  )}
+                                </div>
+                              </div>
+                            )}
+                          </>
+                        );
+                      })()}
+                    </div>
+                  )}
 
                   {/* Tab içerikleri */}
                   {activeTab === "dilekce" && (
