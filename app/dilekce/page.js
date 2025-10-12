@@ -2105,6 +2105,12 @@ async function finalizeResult(finalObj) {
                         Temizle
                       </button>
                     </div>
+
+                    {/* DikkatPanel, form alanında gösterilmiyor */}
+                    {(() => {
+                      // eski: <DikkatPanel data={d} />
+                      return null
+                    })()}
                   </form>
                 </section>
               )}
@@ -2151,13 +2157,9 @@ async function finalizeResult(finalObj) {
                 </section>
               )}
 
-                  {/* Sonuç */}
+              {/* Sonuç */}
               {step === 3 && (
                 <section className="p-6 md:p-8 space-y-8">
-                  {/* Dikkat Edilecek Hususlar paneli (sadece dava modunda ve veri varsa) */}
-                  {!isCevapMode && hasDikkatData && (
-                    <DikkatPanel data={dikkatData} />
-                  )}
                   {/* Başlık ve aksiyonlar */}
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                     <div className="flex items-center gap-2">
@@ -2165,6 +2167,11 @@ async function finalizeResult(finalObj) {
                         ✓ Hazır
                       </span>
                       <h2 className="text-xl font-semibold text-gray-200">Taslak Dilekçe</h2>
+                      {hasDikkatData && (
+                        <div className="mt-6">
+                          <DikkatPanel data={dikkatData} />
+                        </div>
+                      )}
                       {saving && <span className="text-xs text-slate-400 ml-2">kaydediliyor…</span>}
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
