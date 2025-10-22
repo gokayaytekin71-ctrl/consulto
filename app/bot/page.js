@@ -137,12 +137,19 @@ export default function AnalysisPage() {
     const payload = JSON.parse(JSON.stringify(nextChats ?? []));
     const seq = ++saveSeq.current;
     console.log("[saveChats] begin seq=", seq, "items=", payload.length, "reason=", reason);
+
+    // Build JSON once and warn if unusually large to avoid silent browser drops.
+    const bodyJson = JSON.stringify({ chats: payload });
+    const approxKb = Math.round(bodyJson.length / 1024);
+    if (approxKb > 800) {
+      console.warn("[saveChats] payload is large (~KB):", approxKb);
+    }
+
     try {
       const res = await fetch("/api/chats", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chats: payload }),
-        keepalive: true,
+        body: bodyJson,
         cache: "no-store",
         credentials: "include",
       });
@@ -960,7 +967,7 @@ export default function AnalysisPage() {
                     className="flex-1 inline-flex items-center px-3 py-2 rounded-lg bg-slate-700/60 text-[11px] text-slate-300 font-medium leading-tight min-h-[32px] hover:text-cyan-300 hover:bg-slate-600/60 transition-colors"
                     href={href}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     onClick={(e)=>e.stopPropagation()}
                   >
                     {titleText}
@@ -1083,7 +1090,7 @@ export default function AnalysisPage() {
                                     className="text-white no-underline inline-flex flex-col leading-tight hover:text-cyan-400 hover:bg-cyan-500/10 hover:rounded px-1 transition-transform"
                                     href={`/kararlar/${encodeURIComponent(slug)}`}
                                     target="_blank"
-                                    rel="noreferrer"
+                                    rel="noopener noreferrer"
                                   >
                                     {content}
                                   </a>
@@ -1149,7 +1156,7 @@ export default function AnalysisPage() {
                                     className="text-white no-underline inline-flex flex-col leading-tight hover:text-cyan-400 hover:bg-cyan-500/10 hover:rounded px-1 transition-transform"
                                     href={`/kararlar/${encodeURIComponent(r.slug)}`}
                                     target="_blank"
-                                    rel="noreferrer"
+                                    rel="noopener noreferrer"
                                   >
                                     {content}
                                   </a>
