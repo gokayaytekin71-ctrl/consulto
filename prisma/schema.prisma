@@ -60,7 +60,9 @@ model User {
   hearings           Hearing[]
   notes              Note[]
   sessions           Session[]
+  Subscription       Subscription[]
   tasks              Task[]
+  UsageWeek          UsageWeek[]
 }
 
 model VerificationToken {
@@ -94,7 +96,6 @@ model Karar {
   /// and may cause future migrations to try dropping them.
   tsv_extra     Unsupported("tsvector")?
   favoriteUsers FavoriteKarar[]
-  ibbgk         ibbgk[]
 
   @@index([contentLength])
   @@index([keywords])
@@ -224,15 +225,15 @@ model Makale {
 }
 
 model Draft {
-  id          String   @id @default(dbgenerated("gen_random_uuid()"))
-  createdAt   DateTime @default(now()) @db.Timestamptz(6)
-  dava_turu   String?
-  olay_ozet   String?
-  talep       String?
-  dilekce_md  String
-  kaynaklar   Json?
-  girdi_ozeti Json?
-  dayanaklar  Json?
+  id           String   @id @default(dbgenerated("gen_random_uuid()"))
+  createdAt    DateTime @default(now()) @db.Timestamptz(6)
+  dava_turu    String?
+  olay_ozet    String?
+  talep        String?
+  dilekce_md   String
+  kaynaklar    Json?
+  girdi_ozeti  Json?
+  dayanaklar   Json?
   dilekce_json Json?
 }
 
@@ -249,14 +250,60 @@ model FavoriteMakale {
 
 model ibbgk {
   id          BigInt   @id @default(autoincrement())
-  karar_id    String
+  karar_code  String   @unique(map: "ibbgk_karar_code_uk")
   birlesme_no String?  @db.VarChar(50)
-  konu        String?
+  icerik      String?
   ozet        String?
   etiketler   Json?
   created_at  DateTime @default(now()) @db.Timestamptz(6)
-  Karar       Karar    @relation(fields: [karar_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  content     String?
+  pdf_url     String?
 
   @@index([created_at])
-  @@index([karar_id])
+  @@index([karar_code], map: "ibbgk_karar_id_idx")
+}
+
+model Subscription {
+  id               String             @id
+  userId           String
+  planId           String
+  status           SubscriptionStatus @default(ACTIVE)
+  currentPeriodEnd DateTime           @db.Timestamptz(6)
+  paytrMerchantOid String?
+  createdAt        DateTime           @default(now()) @db.Timestamptz(6)
+  updatedAt        DateTime           @default(now()) @db.Timestamptz(6)
+  SubscriptionPlan SubscriptionPlan   @relation(fields: [planId], references: [id], onUpdate: NoAction, map: "Subscription_plan_fkey")
+  User             User               @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "Subscription_user_fkey")
+
+  @@index([userId, status], map: "Subscription_user_status_idx")
+}
+
+model SubscriptionPlan {
+  id              String         @id
+  code            String         @unique
+  name            String
+  priceMonthly    Int
+  analysisPerWeek Int            @default(7)
+  dilekcePerWeek  Int            @default(2)
+  isActive        Boolean        @default(true)
+  createdAt       DateTime       @default(now()) @db.Timestamptz(6)
+  updatedAt       DateTime       @default(now()) @db.Timestamptz(6)
+  Subscription    Subscription[]
+}
+
+model UsageWeek {
+  id           String @id
+  userId       String
+  periodKey    String
+  analysisUsed Int    @default(0)
+  dilekceUsed  Int    @default(0)
+  User         User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "UsageWeek_user_fkey")
+
+  @@unique([userId, periodKey], map: "UsageWeek_user_period_key_unique")
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  CANCELED
+  PAST_DUE
 }

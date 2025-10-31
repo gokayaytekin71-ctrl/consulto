@@ -414,7 +414,7 @@ export default function AnalysisPage() {
       }
     } catch (err) {
       console.error("[analyze] FAILED", err);
-      const errText = `Hukuki analiz oluşturulurken bir hata meydana geldi.\n\nDetay: ${String(err?.message || err).slice(0, 400)}`;
+      const errText = "Analiz yapmak için giriş yapmanız gereklidir! (401 Yetkisiz erişim)";
       setChats(prev => {
         const next = prev.map(c =>
           c.id === draft.id ? { ...c, messages: [...(c.messages || []), { id: crypto.randomUUID(), sender: "bot", text: errText }] } : c

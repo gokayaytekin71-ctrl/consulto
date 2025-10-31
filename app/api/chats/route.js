@@ -3,6 +3,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
+import { checkQuota, incrementUsage } from "@/lib/quota";
 export const dynamic = "force-dynamic";
 export const runtime = 'nodejs';
 
@@ -15,7 +16,14 @@ const API_ENDPOINT =
 export async function GET(req) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new Response(null, { status: 401 });
+    return new Response(
+      JSON.stringify({
+        error: "UNAUTHORIZED",
+        message: "Oturum açmalısınız.",
+        requireLogin: true,
+      }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
   }
   const userId = session.user.id;
   const user = await prisma.user.findUnique({
@@ -31,7 +39,14 @@ export async function GET(req) {
 export async function PUT(req) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new Response(null, { status: 401 });
+    return new Response(
+      JSON.stringify({
+        error: "UNAUTHORIZED",
+        message: "Oturum açmalısınız.",
+        requireLogin: true,
+      }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
   }
   const userId = session.user.id;
   let body;
@@ -50,7 +65,35 @@ export async function PUT(req) {
 
 export async function POST(request) {
   const session = await getServerSession(authOptions);
-  if (!session) { return new Response(null, { status: 401 }); }
+  if (!session) {
+    return new Response(
+      JSON.stringify({
+        error: "UNAUTHORIZED_ANALYSIS",
+        message: "Analiz yapmak için giriş yapmanız gereklidir!",
+        requireLogin: true,
+      }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
+  }
+
+  const userId = session.user.id;
+
+  // --- Üyelik kotası kontrolü: ANALİZ ---
+  const q = await checkQuota(userId, "analysis");
+  if (!q.allowed) {
+    return new Response(
+      JSON.stringify({
+        error: "QUOTA_EXCEEDED",
+        message: "Analiz kotanız doldu.",
+        type: "analysis",
+        remaining: q.remaining,
+        limit: q.limit,
+        plan: q.planCode,
+        weekKey: q.weekKey,
+      }),
+      { status: 402, headers: { "Content-Type": "application/json" } }
+    );
+  }
 
   try {
     const body = await request.json();
@@ -110,6 +153,8 @@ export async function POST(request) {
       }
     }
 
+    await incrementUsage(userId, "analysis");
+
     return new Response(JSON.stringify(dataFromPython), {
       status: 200,
       headers: { "Content-Type": "application/json" }
@@ -124,7 +169,14 @@ export async function POST(request) {
 export async function DELETE(req) {
   const session = await getServerSession(authOptions);
   if (!session) {
-    return new Response(null, { status: 401 });
+    return new Response(
+      JSON.stringify({
+        error: "UNAUTHORIZED",
+        message: "Oturum açmalısınız.",
+        requireLogin: true,
+      }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const userId = session.user.id;

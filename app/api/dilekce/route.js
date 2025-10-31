@@ -1,4 +1,7 @@
 import { NextResponse } from 'next/server';
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { checkQuota, incrementUsage } from "@/lib/quota";
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -24,6 +27,31 @@ function normalizePerson(v) {
 
 export async function POST(req) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { error: "UNAUTHORIZED_DILEKCE", message: "Dilekçe oluşturmak için giriş yapmanız gereklidir!", requireLogin: true, type: "dilekce" },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+    const q = await checkQuota(userId, "dilekce");
+    if (!q.allowed) {
+      return NextResponse.json(
+        {
+          error: "QUOTA_EXCEEDED",
+          message: "Haftalık dilekçe kotanız doldu.",
+          type: "dilekce",
+          remaining: q.remaining,
+          limit: q.limit,
+          plan: q.planCode,
+          weekKey: q.weekKey,
+        },
+        { status: 402 }
+      );
+    }
+
     const body = await req.json();
     const {
       olay_ozet,
@@ -78,17 +106,18 @@ export async function POST(req) {
     if (!isJson(resp)) {
       const text = await resp.text();
       return NextResponse.json(
-        { error: 'Upstream returned non-JSON', details: text },
+        { error: 'UPSTREAM_NOT_JSON', message: 'Dilekçe servisi beklenmeyen bir yanıt döndürdü.', preview: String(text || '').slice(0, 180) },
         { status: resp.status || 502 },
       );
     }
 
     const data = await resp.json();
+    await incrementUsage(userId, "dilekce");
     return NextResponse.json(data, { status: resp.status });
   } catch (error) {
     console.error('API Dilekçe Oluşturma Hatası:', error);
     return NextResponse.json(
-      { error: 'Dilekçe oluşturma sırasında bir sunucu hatası oluştu.', detail: String(error?.message || error) },
+      { error: 'SERVER_ERROR', message: 'Dilekçe oluşturma sırasında bir hata oluştu.', detailPreview: String(error?.message || error).slice(0, 180) },
       { status: 500 }
     );
   }
@@ -96,6 +125,13 @@ export async function POST(req) {
 
 export async function GET(req) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        { error: 'UNAUTHORIZED_DILEKCE', message: 'Dilekçe durumu görüntülemek için giriş yapmanız gereklidir!', requireLogin: true, type: 'dilekce' },
+        { status: 401 }
+      );
+    }
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
     if (!id) {
@@ -111,7 +147,7 @@ export async function GET(req) {
     if (!isJson(resp)) {
       const text = await resp.text();
       return NextResponse.json(
-        { error: 'Upstream returned non-JSON', details: text },
+        { error: 'UPSTREAM_NOT_JSON', message: 'Dilekçe servisi beklenmeyen bir yanıt döndürdü.', preview: String(text || '').slice(0, 180) },
         { status: resp.status || 502 },
       );
     }
@@ -121,7 +157,7 @@ export async function GET(req) {
   } catch (error) {
     console.error('API Dilekçe Durum Hatası:', error);
     return NextResponse.json(
-      { error: 'Dilekçe durumu sorgulama sırasında bir sunucu hatası oluştu.', detail: String(error?.message || error) },
+      { error: 'SERVER_ERROR', message: 'Dilekçe durumu sorgulama sırasında bir hata oluştu.', detailPreview: String(error?.message || error).slice(0, 180) },
       { status: 500 }
     );
   }
