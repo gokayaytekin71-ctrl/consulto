@@ -10,6 +10,54 @@ import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
+// --- SEO: canonical & robots ---
+export const metadata = {
+  robots: { index: true, follow: true },
+};
+
+export async function generateMetadata({ params }) {
+  const { id } = params;
+  // Best-effort: resolve to canonical type+code based id if possible
+  let canonicalId = id;
+  try {
+    const parsed = parseParamsId(id);
+    let k = null;
+
+    if (parsed.mode === "filename") {
+      k = await prisma.karar.findFirst({
+        where: { fileName: `${parsed.fileNameBase}.txt` },
+        select: { type: true, code: true, fileName: true },
+      });
+    } else if (parsed.code) {
+      const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z-]+)\s*E.*?(\d{4})\/([0-9A-Za-z-]+)/i);
+      if (m) {
+        const [, eYear, eNo, kYear, kNo] = m;
+        k = await prisma.karar.findFirst({
+          where: {
+            AND: [
+              { code: { contains: `${eYear}/${eNo}` } },
+              { code: { contains: `${kYear}/${kNo}` } },
+            ],
+          },
+          select: { type: true, code: true, fileName: true },
+        });
+      }
+    }
+    if (k) {
+      const bid = buildKararIdFromRecord(k);
+      if (bid) canonicalId = bid;
+    }
+  } catch (_) {
+    // noop
+  }
+
+  const canonical = `https://www.consultohukuk.com/kararlar/${canonicalId}`;
+  return {
+    alternates: { canonical },
+    robots: { index: true, follow: true },
+  };
+}
+
 // --- URL helpers: use type + code as primary, keep filename as legacy fallback ---
 function slugifyType(t = "") {
   const map = { ç: "c", Ç: "c", ğ: "g", Ğ: "g", ı: "i", İ: "i", ö: "o", Ö: "o", ş: "s", Ş: "s", ü: "u", Ü: "u" };

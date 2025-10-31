@@ -7,5 +7,11 @@ Disallow: /profilim/
 Disallow: /auth/
 Disallow: /login/
 Disallow: /register/
+Disallow: /*?kw=*
+Disallow: /*&kw=*
+Disallow: /*?sort=*
+Disallow: /*&sort=*
+Disallow: /*?page=*
+Disallow: /*&page=*
 
 Sitemap: https://www.consultohukuk.com/sitemap.xml

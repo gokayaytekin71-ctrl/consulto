@@ -5,7 +5,6 @@ const BASE_URL = "https://www.consultohukuk.com";
 
 const STATIC_URLS = [
   "/",                 // Ana sayfa
-  "/kararlar",         // Kararlar arşivi
   "/akilli-arama",     // Akıllı Arama
   "/dilekce",          // Dilekçe Pro
   "/bot",              // Analiz Pro
