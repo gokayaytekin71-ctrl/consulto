@@ -10,10 +10,6 @@ import { redirect } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-// --- SEO: canonical & robots ---
-export const metadata = {
-  robots: { index: true, follow: true },
-};
 
 export async function generateMetadata({ params }) {
   const { id } = params;
