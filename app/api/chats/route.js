@@ -1,6 +1,6 @@
 // Proje yolunuz: /app/api/chats/route.js (veya pages/api/chats.js)
 
-import { getServerSession } from "next-auth/next";
+import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
 import { checkQuota, incrementUsage } from "@/lib/quota";
