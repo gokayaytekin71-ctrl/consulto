@@ -10,6 +10,7 @@ export const dynamic = 'force-dynamic';
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
+  trustHost: true,
   providers: [
     // DEĞİŞİKLİK BURADA: Sunucu tarafı uyumluluğu için .default eklendi.
    GoogleProvider.default({
