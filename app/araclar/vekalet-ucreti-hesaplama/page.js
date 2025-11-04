@@ -161,11 +161,11 @@ export default function VekaletUcreti() {
                      className="w-full rounded-lg bg-slate-900 border border-slate-600 px-3 py-2 mb-2"/>
               {cat === "para" ? (
                 <div className="text-xs text-slate-400">
-                  Konusu para olan davalarda: <strong>30.000 TL'ye kadar</strong> <em>meblağ kadar</em>. 30.000 TL üstünde <em>%16'sı 30.000 TL'yi geçiyorsa nispi</em>, geçmiyorsa <strong>30.000 TL</strong> uygulanır.
+                  Konusu para olan davalarda: <strong>45.000 TL'ye kadar</strong> <em>meblağ kadar</em>. 45.000 TL üstünde <em>%16'sı 45.000 TL'yi geçiyorsa nispi</em>, geçmiyorsa <strong>45.000 TL</strong> uygulanır.
                 </div>
               ) : (
                 <div className="text-xs text-slate-400">
-                  İcra takiplerinde: <strong>6.000 TL</strong>'ye kadar <em>meblağ kadar</em>. 6.000 TL ve üstünde <em>%16'sı 6.000 TL'den az ise 6.000 TL</em>, fazlaysa <em>nispi dilimler</em> uygulanır.
+                  İcra takiplerinde: <strong>9.000 TL</strong>'ye kadar <em>meblağ kadar</em>. 9.000 TL ve üstünde <em>%16'sı 9.000 TL'den az ise 9.000 TL</em>, fazlaysa <em>nispi dilimler</em> uygulanır.
                 </div>
               )}
             </>
@@ -217,7 +217,7 @@ export default function VekaletUcreti() {
 
             {!requiresValue && (
               <div className="text-xs text-slate-400">
-                Bu kalem **maktû** ücrete tabidir. Rakamlar AAÜT 2024–2025’e göre örneklenmiştir; tereddütte
+                Bu kalem **maktû** ücrete tabidir. Rakamlar AAÜT 2025–2026’ya göre örneklenmiştir; tereddütte
                 güncel Tarife metnini kontrol ediniz.
               </div>
             )}
