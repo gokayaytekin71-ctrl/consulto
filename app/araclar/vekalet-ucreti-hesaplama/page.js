@@ -21,28 +21,29 @@ const tl = (n) => (isFinite(n) ? n.toLocaleString("tr-TR") + " TL" : "—");
    (nispi dilimler: ilk 400k %16, sonraki 400k %15, 800k %14, 1.2m %11, 1.6m %8, 2m %5, 2.4m %3, 2.8m %2, üstü %1)
 */
 const NISPI_STEPS_2025 = [
-  { upTo: 400_000, rate: 0.16 },
-  { upTo: 400_000, rate: 0.15 },
-  { upTo: 800_000, rate: 0.14 },
-  { upTo: 1_200_000, rate: 0.11 },
-  { upTo: 1_600_000, rate: 0.08 },
-  { upTo: 2_000_000, rate: 0.05 },
-  { upTo: 2_400_000, rate: 0.03 },
-  { upTo: 2_800_000, rate: 0.02 },
+  { upTo: 600_000, rate: 0.16 },
+  { upTo: 600_000, rate: 0.15 },
+  { upTo: 1_200_000, rate: 0.14 },
+  { upTo: 1_200_000, rate: 0.13 },
+  { upTo: 1_800_000, rate: 0.11 },
+  { upTo: 2_400_000, rate: 0.08 },
+  { upTo: 3_000_000, rate: 0.05 },
+  { upTo: 3_600_000, rate: 0.03 },
+  { upTo: 4_200_000, rate: 0.02 },
   { upTo: Infinity, rate: 0.01 },
 ];
 
 /* Maktû örnek kalemler (pratikte bu liste genişletilir) */
 const MAKTU_2025 = {
   // Sık kullanılanlar (gerekirse artır)
-  "sulh-hukuk": 13_500,           // Sulh Hukuk Mahkemeleri (2025 örnek)
-  "asliye": 30_000,               // Asliye Mahkemeleri (2025 örnek)
-  "tuketici": 30_000,             // Tüketici Mahkemeleri (yakın değer; kontrol edilebilir)
-  "icra-mahkemesi": 13_500,       // İcra Mahkemeleri
+  "sulh-hukuk": 30_000,           // Sulh Hukuk Mahkemeleri (2026 örnek)
+  "asliye": 45_000,               // Asliye Mahkemeleri (2026 örnek)
+  "tuketici": 22_500,             // Tüketici Mahkemeleri 
+  "icra-mahkemesi": 18_000,       // İcra Mahkemeleri
   "idare-durusmasiz": 30_000,     // İdare/Vergi (duruşmasız)
-  "idare-durusmali": 37_000,      // İdare/Vergi (duruşmalı) — tahmini/örnek, güncellenebilir
-  "fikri-sinai": 45_000,          // FSHHM — örnek
-  "sulh-ceza-infaz": 13_500,      // Sulh Ceza / İnfaz Hâkimliği — örnek
+  "idare-durusmali": 40_000,      // İdare/Vergi (duruşmalı) — tahmini/örnek, güncellenebilir
+  "fikri-sinai": 55_000,          // FSHHM — örnek
+  "sulh-ceza-infaz": 18_000,      // Sulh Ceza / İnfaz Hâkimliği — örnek
   // İcra takipleri (maktu asgari ücrete tabi alt sınır)
   "icra-takip": 13_500,
 };
@@ -64,7 +65,7 @@ function calcNispi(value) {
 
 const CATEGORIES = [
   { id: "para", label: "Konusu Para Olan Davalar (nispi)" },
-  { id: "icra-takip", label: "İcra Takipleri (nispi özel)" },
+  { id: "icra-takip", label: "İcra Takipleri" },
   { id: "icra-mahkemesi", label: "İcra Mahkemeleri (maktû)" },
   { id: "sulh-hukuk", label: "Sulh Hukuk Mahkemeleri (maktû)" },
   { id: "sulh-ceza-infaz", label: "Sulh Ceza / İnfaz Hâkimlikleri (maktû)" },
@@ -97,9 +98,9 @@ export default function VekaletUcreti() {
       // İcra takipleri (nispi özel):
       // - 6.000 TL'ye kadar: meblağ kadar
       // - 6.000 TL ve üstü: %16'sı 6.000 TL'den az ise 6.000 TL, fazlaysa normal nispi
-      if (V <= 6000) return V;
+      if (V <= 9000) return V;
       const sixteenPct = Math.round(V * 0.16);
-      if (sixteenPct < 6000) return 6000;
+      if (sixteenPct < 9000) return 9000;
       return calcNispi(V);
     }
     // Diğerleri maktû
@@ -121,7 +122,7 @@ export default function VekaletUcreti() {
         rows.push({ dilim: use, oran: s.rate, tutar });
         rem -= use;
       }
-    } else if (cat === "icra-takip" && V > 6000 && V * 0.16 >= 6000) {
+    } else if (cat === "icra-takip" && V > 9000 && V * 0.16 >= 9000) {
       let rem = V;
       for (const s of NISPI_STEPS_2025) {
         if (rem <= 0) break;
@@ -138,8 +139,7 @@ export default function VekaletUcreti() {
     <div className="p-6">
       <h1 className="text-xl font-semibold mb-1">Vekâlet Ücreti Hesaplama</h1>
       <div className="text-xs text-slate-400 mb-4">
-        AAÜT 2024–2025 nispi dilimleri ve maktû kalemleri esas alınmıştır. Tarife yıllık güncellenir;
-        rakamlar mevzuat değişikliklerine göre kolayca güncellenebilir.
+        AAÜT 2025-2026 nispi dilimleri ve maktû kalemleri esas alınmıştır. Tarife günceldir.
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -178,19 +178,19 @@ export default function VekaletUcreti() {
 
           <div className="grid gap-3">
             <div className="rounded-lg border border-slate-700 bg-slate-800 p-3">
-              <div className="text-sm text-slate-300">AAÜT Vekâlet Ücreti (temel)</div>
+              <div className="text-sm text-slate-300">AAÜT 2025-2026 Vekâlet Ücreti (asliye hukuk)</div>
               <div className="text-2xl font-bold">{tl(applied)}</div>
               {(cat === "para" && V > 0 && V <= ASLIYE_MAKTU) && (
                 <div className="text-xs text-slate-400">Not: Değer Asliye maktû altında olduğundan <em>meblağ kadar</em> uygulandı.</div>
               )}
               {(cat === "para" && V > ASLIYE_MAKTU && Math.round(V*0.16) <= ASLIYE_MAKTU) && (
-                <div className="text-xs text-slate-400">Not: %16'sı 30.000 TL'yi geçmediğinden <strong>30.000 TL</strong> uygulandı.</div>
+                <div className="text-xs text-slate-400">Not: %16'sı 45.000 TL'yi geçmediğinden <strong>45.000 TL</strong> uygulandı.</div>
               )}
-              {(cat === "icra-takip" && V > 0 && V <= 6000) && (
-                <div className="text-xs text-slate-400">Not: İcra — 6.000 TL'ye kadar <em>meblağ kadar</em>.</div>
+              {(cat === "icra-takip" && V > 0 && V <= 9000) && (
+                <div className="text-xs text-slate-400">Not: İcra — 9.000 TL'ye kadar <em>meblağ kadar</em>.</div>
               )}
-              {(cat === "icra-takip" && V > 6000 && (V * 0.16) < 6000) && (
-                <div className="text-xs text-slate-400">Not: İcra — %16'sı 6.000 TL'den az olduğundan <strong>6.000 TL</strong> uygulandı.</div>
+              {(cat === "icra-takip" && V > 9000 && (V * 0.16) < 9000) && (
+                <div className="text-xs text-slate-400">Not: İcra — %16'sı 9.000 TL'den az olduğundan <strong>9.000 TL</strong> uygulandı.</div>
               )}
             </div>
 
@@ -199,7 +199,7 @@ export default function VekaletUcreti() {
               <div className="text-2xl font-bold">{tl(total)}</div>
             </div>
 
-            {((cat === "para" && V > ASLIYE_MAKTU && Math.round(V*0.16) > ASLIYE_MAKTU) || (cat === "icra-takip" && V > 6000 && V * 0.16 >= 6000)) && breakdown.length > 0 && (
+            {((cat === "para" && V > ASLIYE_MAKTU && Math.round(V*0.16) > ASLIYE_MAKTU) || (cat === "icra-takip" && V > 9000 && V * 0.16 >= 9000)) && breakdown.length > 0 && (
               <div className="rounded-lg border border-slate-700 bg-slate-800 p-3">
                 <div className="text-sm text-slate-300 mb-1">Nispi Kırılım</div>
                 <div className="text-xs grid gap-1">
