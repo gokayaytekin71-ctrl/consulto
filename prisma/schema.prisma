@@ -235,6 +235,7 @@ model Draft {
   girdi_ozeti  Json?
   dayanaklar   Json?
   dilekce_json Json?
+  userId       String?  @db.VarChar
 }
 
 model FavoriteMakale {

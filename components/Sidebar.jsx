@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
+import { signOut } from "next-auth/react";
 
 export default function Sidebar({ items = [], session }) {
   const [collapsed, setCollapsed] = useState(false);
@@ -76,12 +77,9 @@ export default function Sidebar({ items = [], session }) {
             {!collapsed && <span className="text-cyan-400 whitespace-nowrap text-sm font-medium">Menüyü Gizle</span>}
           </div>
         </button>
-        <Link
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            document.querySelector("form#logoutForm")?.submit();
-          }}
+        <button
+          type="button"
+          onClick={() => signOut({ callbackUrl: "/cikis" })}
           className={
             collapsed
               ? "flex justify-center p-2 transition"
@@ -99,9 +97,7 @@ export default function Sidebar({ items = [], session }) {
               </span>
             )}
           </div>
-        </Link>
-
-        <form id="logoutForm" action="/api/auth/signout" method="POST" className="hidden" />
+        </button>
       </nav>
     </aside>
   );

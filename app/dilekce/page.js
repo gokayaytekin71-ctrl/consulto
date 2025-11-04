@@ -1798,7 +1798,7 @@ async function finalizeResult(finalObj) {
       throw new Error("Sunucudan beklenen veri alınamadı.");
     } catch (err) {
       console.error(err);
-      setError(err.message || "Bilinmeyen hata.");
+      setError("Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");
       setLoading(false);
       setStep(1);
     }

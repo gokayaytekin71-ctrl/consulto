@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@prisma/client";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -82,10 +84,26 @@ async function fetchDayanaklarForIds({ schema, table, ids = [] }) {
 // ---------- GET ----------
 export async function GET(req) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        {
+          error: "UNAUTHORIZED_DRAFTS",
+          message: "Taslakları görmek için giriş yapmalısınız.",
+          requireLogin: true,
+          type: "drafts",
+        },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+
     const { searchParams } = new URL(req.url);
     const limit = Number(searchParams.get("limit") || 6);
 
     const items = await prisma.draft.findMany({
+      where: { userId },
       orderBy: { createdAt: "desc" },
       take: limit,
     });
@@ -129,6 +147,21 @@ export async function GET(req) {
 // ---------- POST ----------
 export async function POST(req) {
   try {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      return NextResponse.json(
+        {
+          error: "UNAUTHORIZED_DRAFTS",
+          message: "Taslak kaydetmek için giriş yapmalısınız.",
+          requireLogin: true,
+          type: "drafts",
+        },
+        { status: 401 }
+      );
+    }
+
+    const userId = session.user.id;
+
     const body = await req.json();
     const {
       dava_turu,
@@ -156,6 +189,7 @@ export async function POST(req) {
     // ŞEMADA OLAN alanlarla kaydı oluştur
     const created = await prisma.draft.create({
       data: {
+        userId,
         dava_turu: dava_turu || null,
         olay_ozet: olay_ozet || null,
         talep: talep || null,
