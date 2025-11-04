@@ -5,8 +5,25 @@ import React from "react";
 import Image from "next/image";
 import { signOut } from "next-auth/react";
 
+// HATALI/BOŞ src'leri güvenli hale getirir
+function getSafeImageSrc(raw) {
+  if (!raw || typeof raw !== "string") return "/default-avatar.png";
+  if (!raw.startsWith("/") && !raw.startsWith("http")) return "/default-avatar.png";
+  return raw;
+}
+
+// Boş/undefined metinler için güvenli metin döndürür
+function getSafeText(v, fallback = "") {
+  if (typeof v !== "string") return fallback;
+  const t = v.trim();
+  return t.length ? t : fallback;
+}
+
 export default function Sidebar({ items = [], session }) {
   const [collapsed, setCollapsed] = useState(false);
+  const avatarSrc = getSafeImageSrc(session?.user?.image);
+  const name = getSafeText(session?.user?.name, "Kullanıcı");
+  const email = getSafeText(session?.user?.email, "");
 
   return (
     <aside
@@ -18,15 +35,15 @@ export default function Sidebar({ items = [], session }) {
         {!collapsed && session?.user && (
           <div className="flex items-center gap-3">
             <Image
-              src={session.user.image}
-              alt={session.user.name || "Profil Resmi"}
+              src={avatarSrc}
+              alt={name || "Profil Resmi"}
               width={72}
               height={72}
-              className="rounded-full border-2 border-orange-500"
+              className="rounded-full border-2 border-orange-500 object-cover"
             />
             <div className="flex flex-col">
-              <span className="font-medium">{session.user.name}</span>
-              <span className="text-xs text-gray-400 truncate">{session.user.email}</span>
+              <span className="font-medium">{name}</span>
+              <span className="text-xs text-gray-400 truncate">{email}</span>
             </div>
           </div>
         )}
@@ -50,10 +67,10 @@ export default function Sidebar({ items = [], session }) {
               <div className="flex items-center space-x-2">
                 {collapsed ? (
                   <span className="bg-[#1f2a3a] p-2 rounded-full">
-                    {React.cloneElement(icon, { className: "text-cyan-400 text-2xl" })}
+                    {React.isValidElement(icon) ? React.cloneElement(icon, { className: "text-cyan-400 text-2xl" }) : null}
                   </span>
                 ) : (
-                  React.cloneElement(icon, { className: "text-cyan-400 text-2xl" })
+                  React.isValidElement(icon) ? React.cloneElement(icon, { className: "text-cyan-400 text-2xl" }) : null
                 )}
                 {!collapsed && <span className="pl-2">{label}</span>}
               </div>
