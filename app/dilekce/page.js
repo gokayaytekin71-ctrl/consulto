@@ -1689,6 +1689,26 @@ async function finalizeResult(finalObj) {
         data = undefined;
       }
 
+      // --- Quota / Auth guard: do not fall back to direct API on these ---
+      if (res && !res.ok) {
+        if (res.status === 402 && data?.error === "QUOTA_EXCEEDED") {
+          // Kullanıcının haftalık dilekçe hakkı bitti → net uyarı göster ve süreci durdur
+          setLoading(false);
+          setStep(1);
+          setError(
+            data?.message
+              || `Haftalık dilekçe kotanız dolmuştur. Plan: ${data?.plan ?? "-"}, limit: ${data?.limit ?? "-"}, kalan: ${data?.remaining ?? 0}.`
+          );
+          return; // ❗ kritik: artık doğrudan Flask'a düşme
+        }
+        if (res.status === 401) {
+          setLoading(false);
+          setStep(1);
+          setError("Lütfen giriş yapın. Dilekçe oluşturmak için oturum gereklidir.");
+          return; // ❗ kritik: artık doğrudan Flask'a düşme
+        }
+      }
+
       // 1.a) Proxy direkt sonucu verdiyse bitir (id yoksa bile ikinci POST atma)
       if (res?.ok && data && (data?.dilekce || data?.taslak_md || data?.durum === "completed")) {
         const finalObj = data?.dilekce
@@ -1748,6 +1768,25 @@ async function finalizeResult(finalObj) {
         body: JSON.stringify(payload),
       });
       const directJson = await directRes.json().catch(() => undefined);
+
+      // --- Direct API quota/auth guard (ek güvenlik) ---
+      if (!directRes.ok) {
+        if (directRes.status === 402 && directJson?.error === "QUOTA_EXCEEDED") {
+          setLoading(false);
+          setStep(1);
+          setError(
+            directJson?.message
+              || `Haftalık dilekçe kotanız dolmuştur. Plan: ${directJson?.plan ?? "-"}, limit: ${directJson?.limit ?? "-"}, kalan: ${directJson?.remaining ?? 0}.`
+          );
+          return;
+        }
+        if (directRes.status === 401) {
+          setLoading(false);
+          setStep(1);
+          setError("Lütfen giriş yapın. Dilekçe oluşturmak için oturum gereklidir.");
+          return;
+        }
+      }
 
       // Sunucu direkt sonucu döndürdüyse finalize et
       if (directJson?.dilekce || directJson?.taslak_md || directJson?.durum === "completed") {

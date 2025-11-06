@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { checkQuota, incrementUsage } from "@/lib/quota";
+import { consumeQuota } from "@/lib/quota";
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -36,17 +36,18 @@ export async function POST(req) {
     }
 
     const userId = session.user.id;
-    const q = await checkQuota(userId, "dilekce");
-    if (!q.allowed) {
+    // Atomic kota kontrolü + tüketim
+    const qc = await consumeQuota(userId, "dilekce");
+    if (!qc.ok) {
       return NextResponse.json(
         {
           error: "QUOTA_EXCEEDED",
           message: "Haftalık dilekçe kotanız doldu.",
           type: "dilekce",
-          remaining: q.remaining,
-          limit: q.limit,
-          plan: q.planCode,
-          weekKey: q.weekKey,
+          remaining: qc.remaining,
+          limit: qc.limit,
+          plan: qc.planCode,
+          weekKey: qc.weekKey,
         },
         { status: 402 }
       );
@@ -112,7 +113,6 @@ export async function POST(req) {
     }
 
     const data = await resp.json();
-    await incrementUsage(userId, "dilekce");
     return NextResponse.json(data, { status: resp.status });
   } catch (error) {
     console.error('API Dilekçe Oluşturma Hatası:', error);
