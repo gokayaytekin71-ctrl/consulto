@@ -314,7 +314,7 @@ export default async function Home() {
                         ),
                       },
                       {
-                        href: "/araclar/vekalet-ucreti",
+                        href: "/araclar/vekalet-ucreti/hesaplama",
                         title: "Vekâlet Ücreti",
                         icon: (
                           // document svg
@@ -339,7 +339,7 @@ export default async function Home() {
                         ),
                       },
                       {
-                        href: "/araclar/islah-harci",
+                        href: "/araclar/islah-harci-hesaplama",
                         title: "Islah Harcı",
                         icon: (
                           // stamp-like svg: base + handle
