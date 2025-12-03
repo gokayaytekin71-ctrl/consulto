@@ -9,19 +9,28 @@ export async function POST(req) {
     const body = {};
     formData.forEach((value, key) => (body[key] = value));
 
-    const { status, platform_order_id, payment_id, random_nr, signature, total_order_value, currency } = body;
-
-    // --- KRİTİK FİYAT FORMATLAMA ---
-    // Gelen total_order_value'yu (Örn: "100" veya 100) kesinlikle 2 ondalık basamağa (Örn: "100.00") çeviriyoruz.
-    const formattedTotal = Number(total_order_value).toFixed(2); 
-    // -------------------------------
+    // Güvenli değişken ataması: Gelmezse '0' varsay (Fiyat ve Para Birimi için)
+    const status = body.status;
+    const platform_order_id = body.platform_order_id;
+    const payment_id = body.payment_id;
+    const random_nr = body.random_nr;
+    const signature = body.signature;
+    
+    // Fiyatı ve para birimini yakala. total_order_value gelmezse 0 varsay (NaN hatasını önler).
+    const rawTotal = body.total_order_value || body.payment_amount || '0'; 
+    const rawCurrency = body.currency || '0'; 
+    
+    // --- KRİTİK DÜZELTME: Formatlama ---
+    // Gelen ham fiyatı (örn: "100" veya "100.00"), kesinlikle 2 ondalık basamağa formatla.
+    const formattedTotal = Number(rawTotal).toFixed(2); 
+    // -----------------------------------
 
     // 1. İmza Doğrulama String'ini Oluştur
     const dataToSign =
       String(random_nr) +
       String(platform_order_id) +
-      String(formattedTotal) + // <-- FORMATLANMIŞ DEĞER KULLANILDI
-      String(currency);
+      String(formattedTotal) + 
+      String(rawCurrency);
 
     const expectedSignature = crypto
       .createHmac("sha256", process.env.SHOPIER_API_SECRET)
@@ -31,7 +40,8 @@ export async function POST(req) {
     // 2. Güvenlik Kontrolü
     if (signature !== expectedSignature) {
       console.error("Shopier İmza Hatası! Alınan İmza Doğrulanamadı.");
-      console.error(`Gelen Tutar: ${total_order_value}, Formatlanan Tutar: ${formattedTotal}`);
+      console.error(`Data String Used: ${dataToSign}`);
+      console.error(`Fiyat (Ham/Formatlı): ${rawTotal} / ${formattedTotal}`);
       return new Response("Gecersiz Imza", { status: 400 });
     }
 
