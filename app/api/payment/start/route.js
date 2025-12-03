@@ -30,6 +30,7 @@ export async function POST(req) {
     // 2. Veritabanına "PENDING" olarak kaydet
     await prisma.payment.create({
       data: {
+        id: crypto.randomUUID(),
         userId: user.id,
         orderId: orderId,
         amount: selectedPkg.price,
