@@ -28,13 +28,23 @@ export async function POST(req) {
       console.error("Shopier İmza Hatası! Alınan İmza Doğrulanamadı.");
       // Hata olduğunda sade bir hata mesajı gösterelim
       const errorHtml = `
+        <!DOCTYPE html>
+        <html lang="tr">
+        <head>
+          <meta charset="UTF-8" />
+          <title>Ödeme Doğrulaması Başarısız</title>
+        </head>
         <body style="background:#111827; color:#fff; font-family:sans-serif; text-align:center; padding-top:10vh;">
-            <h1 style="color:#f87171;">❌ Ödeme Doğrulaması Başarısız!</h1>
-            <p style="color:#9ca3af;">Güvenlik imzası eşleşmediği için işlem iptal edildi. Lütfen destek ekibiyle iletişime geçiniz.</p>
-            <a href="/" style="display:inline-block; margin-top:20px; padding:10px 20px; background:#4f46e5; border-radius:8px; color:white; text-decoration:none;">Ana Sayfaya Dön</a>
+          <h1 style="color:#f87171;">❌ Ödeme Doğrulaması Başarısız!</h1>
+          <p style="color:#9ca3af;">Güvenlik imzası eşleşmediği için işlem iptal edildi. Lütfen destek ekibiyle iletişime geçiniz.</p>
+          <a href="/" style="display:inline-block; margin-top:20px; padding:10px 20px; background:#4f46e5; border-radius:8px; color:white; text-decoration:none;">Ana Sayfaya Dön</a>
         </body>
+        </html>
       `;
-      return new Response(errorHtml, { status: 400, headers: {'Content-Type': 'text/html'} });
+      return new Response(errorHtml, {
+        status: 400,
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
     }
 
     // 3. Sipariş Bulma
@@ -69,16 +79,26 @@ export async function POST(req) {
       // !!! BAŞARILI HTML SAYFASI !!!
       const homeUrl = "/"; // Next.js otomatik çözecektir
       const successHtml = `
+        <!DOCTYPE html>
+        <html lang="tr">
+        <head>
+          <meta charset="UTF-8" />
+          <title>Ödeme Başarılı</title>
+        </head>
         <body style="background:#111827; color:#fff; font-family:sans-serif; text-align:center; padding-top:10vh;">
-            <h1 style="color:#34d399;">✅ Ödeme Başarılı!</h1>
-            <p style="color:#9ca3af;">Hesabınıza ${payment.tokenAmount} Token başarıyla yüklendi.</p>
-            <a href="${homeUrl}" style="display:inline-block; margin-top:30px; padding:10px 20px; background:#3b82f6; border-radius:8px; color:white; text-decoration:none; font-weight:bold;">
-                👉 Ana Sayfaya ve Analiz Botuna Dön
-            </a>
-            <p style="margin-top:10px; color:#6b7280; font-size:12px;">Bu sayfayı kapatabilirsiniz.</p>
+          <h1 style="color:#34d399;">✅ Ödeme Başarılı!</h1>
+          <p style="color:#9ca3af;">Hesabınıza ${payment.tokenAmount} Token başarıyla yüklendi.</p>
+          <a href="${homeUrl}" style="display:inline-block; margin-top:30px; padding:10px 20px; background:#3b82f6; border-radius:8px; color:white; text-decoration:none; font-weight:bold;">
+            👉 Ana Sayfaya ve Analiz Botuna Dön
+          </a>
+          <p style="margin-top:10px; color:#6b7280; font-size:12px;">Bu sayfayı kapatabilirsiniz.</p>
         </body>
+        </html>
       `;
-      return new Response(successHtml, { status: 200, headers: {'Content-Type': 'text/html'} });
+      return new Response(successHtml, {
+        status: 200,
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
     } else {
       // Başarısız olursa durumu günceller
       await prisma.payment.update({
@@ -87,13 +107,23 @@ export async function POST(req) {
       });
       
       const failureHtml = `
+        <!DOCTYPE html>
+        <html lang="tr">
+        <head>
+          <meta charset="UTF-8" />
+          <title>Ödeme Başarısız</title>
+        </head>
         <body style="background:#111827; color:#fff; font-family:sans-serif; text-align:center; padding-top:10vh;">
-            <h1 style="color:#f87171;">❌ Ödeme Başarısız veya İptal Edildi.</h1>
-            <p style="color:#9ca3af;">Bakiyeniz yüklenemedi. Lütfen bankanızla iletişime geçiniz.</p>
-            <a href="/" style="display:inline-block; margin-top:20px; padding:10px 20px; background:#4f46e5; border-radius:8px; color:white; text-decoration:none;">Ana Sayfaya Dön</a>
+          <h1 style="color:#f87171;">❌ Ödeme Başarısız veya İptal Edildi.</h1>
+          <p style="color:#9ca3af;">Bakiyeniz yüklenemedi. Lütfen bankanızla iletişime geçiniz.</p>
+          <a href="/" style="display:inline-block; margin-top:20px; padding:10px 20px; background:#4f46e5; border-radius:8px; color:white; text-decoration:none;">Ana Sayfaya Dön</a>
         </body>
+        </html>
       `;
-      return new Response(failureHtml, { status: 200, headers: {'Content-Type': 'text/html'} });
+      return new Response(failureHtml, {
+        status: 200,
+        headers: { "Content-Type": "text/html; charset=utf-8" },
+      });
     }
   } catch (error) {
     console.error("Callback Critical Error:", error);
