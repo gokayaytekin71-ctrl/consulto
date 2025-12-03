@@ -1,3 +1,4 @@
+// app/api/payment/callback/route.js
 import prisma from "@/lib/prisma";
 import crypto from "crypto";
 
@@ -9,41 +10,25 @@ export async function POST(req) {
     const body = {};
     formData.forEach((value, key) => (body[key] = value));
 
-    // KRİTİK: total_order_value ve currency'ye güvenli varsayılan değer atıyoruz
-    const platform_order_id = body.platform_order_id;
-    const random_nr = body.random_nr;
-    const signature = body.signature;
-    const payment_id = body.payment_id;
-    const status = body.status;
-    
-    // Güvenli Fiyat ve Kur Çıkarımı: Değer gelmezse 0 varsay
-    const rawTotal = body.total_order_value || body.payment_amount || 0; 
-    const rawCurrency = body.currency || 0; 
-    
-    // Fiyatı 2 ondalık basamağa formatla (Örn: 100 -> "100.00")
-    const formattedTotal = Number(rawTotal).toFixed(2); 
+    const { status, platform_order_id, payment_id, random_nr, signature, total_order_value, currency } = body;
 
-    // 1. İmza Doğrulama String'ini Oluştur (4 Parametre Zorunlu)
-    const dataToSign =
-      String(random_nr) +
-      String(platform_order_id) +
-      String(formattedTotal) + // <-- "100.00" stringi ile imzalıyoruz
-      String(rawCurrency);
+    // Fiyat formatlama (Önceki adımda çözüldü)
+    const formattedTotal = Number(total_order_value).toFixed(2); 
+
+    // İmza Doğrulama
+    const dataToSign = String(random_nr) + String(platform_order_id) + String(formattedTotal) + String(currency);
 
     const expectedSignature = crypto
       .createHmac("sha256", process.env.SHOPIER_API_SECRET)
       .update(dataToSign)
       .digest("base64");
 
-    // 2. Güvenlik Kontrolü
     if (signature !== expectedSignature) {
       console.error("Shopier İmza Hatası! Alınan İmza Doğrulanamadı.");
-      console.error(`Gelen Tutar: ${rawTotal}, Formatlanan Tutar: ${formattedTotal}`);
-      console.error(`İmza İçin Kullanılan String: ${dataToSign}`);
       return new Response("Gecersiz Imza", { status: 400 });
     }
 
-    // 3. Sipariş Bulma
+    // Sipariş Bulma
     const payment = await prisma.payment.findUnique({
       where: { orderId: platform_order_id },
     });
@@ -64,19 +49,43 @@ export async function POST(req) {
         }),
       ]);
 
-      // Başarılı işlem sonrası Shopier'a OK döndürülür.
-      return new Response("OK", { status: 200 }); 
+      // !!! KRİTİK ÇÖZÜM: HTML YÖNLENDİRME (REDIRECT) !!!
+      const targetUrl = new URL('/', process.env.NEXT_PUBLIC_APP_URL || 'https://www.consultohukuk.com').toString();
+
+      const htmlContent = `
+        <html>
+        <head>
+            <meta http-equiv="refresh" content="0; url=${targetUrl}">
+            <script>
+                // Fallback JS redirect
+                window.location.replace('${targetUrl}');
+            </script>
+        </head>
+        <body>
+            Ödeme başarıyla tamamlandı. Ana sayfaya yönlendiriliyorsunuz...
+        </body>
+        </html>
+      `;
+
+      // Shopier'a 200 OK gönderilir, tarayıcı HTML'i okuyup yönlenir.
+      return new Response(htmlContent, {
+        status: 200, 
+        headers: {
+            'Content-Type': 'text/html',
+        }
+      });
+      // !!! YÖNLENDİRME BİTİŞ !!!
 
     } else {
-      // Başarısız olursa durumu günceller
+      // Başarısız olursa sadece OK döner, tarayıcıda kalır
       await prisma.payment.update({
         where: { id: payment.id },
         data: { status: "FAILED", paymentId: payment_id },
       });
     }
 
-    // Başarısız işlem sonrası Shopier'a OK döner
-    return new Response("OK", { status: 200 });
+    // Başarısız işlem sonrası Shopier'a OK döner (kullanıcı callback sayfasında kalır)
+    return new Response("OK", { status: 200 }); 
   } catch (error) {
     console.error("Callback Critical Error:", error);
     return new Response("Server Error", { status: 500 });
