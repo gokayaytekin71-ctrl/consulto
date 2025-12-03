@@ -54,7 +54,7 @@ export async function POST(req) {
       buyer_surname: "Musteri",
       buyer_email: user.email || "info@consultohukuk.com",
       buyer_account_age: 0,
-      buyer_id_nr: 0,
+      buyer_id_nr: 11111111111,
       buyer_phone: "05555555555",
       billing_address: "Dijital Teslimat",
       billing_city: "Istanbul",
