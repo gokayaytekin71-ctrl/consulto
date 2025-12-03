@@ -11,12 +11,12 @@ export async function POST(req) {
 
     const { status, platform_order_id, payment_id, random_nr, signature, total_order_value, currency } = body;
 
-    // --- FİYAT VE CURRENCY KALDIRILDI ---
+    // --- FİYAT VE CURRENCY KALDIRILDI (Son Deneme Fix) ---
     // Shopier'ın callback imza kuralı sadece ID'ler üzerinden yürütülüyor olmalı.
     const dataToSign =
       String(random_nr) +
       String(platform_order_id); 
-      // ----------------------------------
+    // ----------------------------------------------------
 
     const expectedSignature = crypto
       .createHmac("sha256", process.env.SHOPIER_API_SECRET)
@@ -26,11 +26,15 @@ export async function POST(req) {
     // Güvenlik Kontrolü
     if (signature !== expectedSignature) {
       console.error("Shopier İmza Hatası! Alınan İmza Doğrulanamadı.");
-      console.error(`İmza İçin Kullanılan String: ${dataToSign}`);
-      console.error(`Gelen/Hesaplanan İmza Farkı: Received=${signature.slice(0, 10)}... Expected=${expectedSignature.slice(0, 10)}...`);
-
-      // Eğer imza tutmazsa işlemi durdur
-      return new Response("Gecersiz Imza", { status: 400 });
+      // Hata olduğunda sade bir hata mesajı gösterelim
+      const errorHtml = `
+        <body style="background:#111827; color:#fff; font-family:sans-serif; text-align:center; padding-top:10vh;">
+            <h1 style="color:#f87171;">❌ Ödeme Doğrulaması Başarısız!</h1>
+            <p style="color:#9ca3af;">Güvenlik imzası eşleşmediği için işlem iptal edildi. Lütfen destek ekibiyle iletişime geçiniz.</p>
+            <a href="/" style="display:inline-block; margin-top:20px; padding:10px 20px; background:#4f46e5; border-radius:8px; color:white; text-decoration:none;">Ana Sayfaya Dön</a>
+        </body>
+      `;
+      return new Response(errorHtml, { status: 400, headers: {'Content-Type': 'text/html'} });
     }
 
     // 3. Sipariş Bulma
@@ -38,11 +42,19 @@ export async function POST(req) {
       where: { orderId: platform_order_id },
     });
 
-    if (!payment) return new Response("Siparis Bulunamadi", { status: 404 });
-    if (payment.status === "SUCCESS") return new Response("OK", { status: 200 });
+    if (!payment) {
+        const errorHtml = `
+        <body style="background:#111827; color:#fff; font-family:sans-serif; text-align:center; padding-top:10vh;">
+            <h1 style="color:#f87171;">⚠️ Sipariş Bulunamadı (404)</h1>
+            <p style="color:#9ca3af;">Ödeme veritabanına işlenemedi. Lütfen destek ile iletişime geçiniz.</p>
+        </body>
+        `;
+        return new Response(errorHtml, { status: 404, headers: {'Content-Type': 'text/html'} });
+    }
 
-    // 4. Bakiye Yükleme
+    // 4. Bakiye Yükleme ve HTML Yanıtı
     if (status && status.toLowerCase() === "success") {
+      // Bakiye yükleme işlemini yap
       await prisma.$transaction([
         prisma.payment.update({
           where: { id: payment.id },
@@ -53,16 +65,36 @@ export async function POST(req) {
           data: { tokenBalance: { increment: payment.tokenAmount } },
         }),
       ]);
+
+      // !!! BAŞARILI HTML SAYFASI !!!
+      const homeUrl = "/"; // Next.js otomatik çözecektir
+      const successHtml = `
+        <body style="background:#111827; color:#fff; font-family:sans-serif; text-align:center; padding-top:10vh;">
+            <h1 style="color:#34d399;">✅ Ödeme Başarılı!</h1>
+            <p style="color:#9ca3af;">Hesabınıza ${payment.tokenAmount} Token başarıyla yüklendi.</p>
+            <a href="${homeUrl}" style="display:inline-block; margin-top:30px; padding:10px 20px; background:#3b82f6; border-radius:8px; color:white; text-decoration:none; font-weight:bold;">
+                👉 Ana Sayfaya ve Analiz Botuna Dön
+            </a>
+            <p style="margin-top:10px; color:#6b7280; font-size:12px;">Bu sayfayı kapatabilirsiniz.</p>
+        </body>
+      `;
+      return new Response(successHtml, { status: 200, headers: {'Content-Type': 'text/html'} });
     } else {
       // Başarısız olursa durumu günceller
       await prisma.payment.update({
         where: { id: payment.id },
         data: { status: "FAILED", paymentId: payment_id },
       });
+      
+      const failureHtml = `
+        <body style="background:#111827; color:#fff; font-family:sans-serif; text-align:center; padding-top:10vh;">
+            <h1 style="color:#f87171;">❌ Ödeme Başarısız veya İptal Edildi.</h1>
+            <p style="color:#9ca3af;">Bakiyeniz yüklenemedi. Lütfen bankanızla iletişime geçiniz.</p>
+            <a href="/" style="display:inline-block; margin-top:20px; padding:10px 20px; background:#4f46e5; border-radius:8px; color:white; text-decoration:none;">Ana Sayfaya Dön</a>
+        </body>
+      `;
+      return new Response(failureHtml, { status: 200, headers: {'Content-Type': 'text/html'} });
     }
-
-    // 5. Shopier'e başarılı yanıt gönder
-    return new Response("OK", { status: 200 });
   } catch (error) {
     console.error("Callback Critical Error:", error);
     return new Response("Server Error", { status: 500 });
