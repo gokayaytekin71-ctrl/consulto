@@ -5,7 +5,6 @@ import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
 
-// Paket Ayarları (İstersen fiyatları buradan değiştirebilirsin)
 const PACKAGES = {
   1: { tokens: 10, price: 100, name: "10 Token Paketi" },
   2: { tokens: 50, price: 400, name: "50 Token Paketi" },
@@ -24,10 +23,15 @@ export async function POST(req) {
 
     const user = await prisma.user.findUnique({ where: { id: session.user.id } });
     
-    // 1. Sipariş No Üret (Çakışmayı önlemek için timestamp + random)
+    // API Anahtarlarını Kontrol Et (Loglarda görebilmek için)
+    if (!process.env.SHOPIER_API_KEY || !process.env.SHOPIER_API_SECRET) {
+        console.error("SHOPIER API ANAHTARLARI EKSİK!");
+        return new Response("Server Config Error", { status: 500 });
+    }
+
     const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-    // 2. Veritabanına "PENDING" olarak kaydet
+    // DB'ye kaydet (ID manuel veriyoruz, hata almamak için)
     await prisma.payment.create({
       data: {
         id: crypto.randomUUID(),
@@ -39,16 +43,16 @@ export async function POST(req) {
       },
     });
 
-    // 3. Shopier Parametrelerini Hazırla
+    // Shopier Parametreleri
     const args = {
       API_KEY: process.env.SHOPIER_API_KEY,
-      website_index: 1, // Paneldeki 1. Geri Dönüş URL kutusunu kullanır
+      website_index: 1,
       platform_order_id: orderId,
       product_name: selectedPkg.name,
-      product_type: 1, // Dijital Ürün
+      product_type: 1, 
       buyer_name: user.name || "Kullanici",
-      buyer_surname: "Musteri", // Zorunlu alan
-      buyer_email: user.email || "email@yok.com",
+      buyer_surname: "Musteri",
+      buyer_email: user.email || "info@consultohukuk.com",
       buyer_account_age: 0,
       buyer_id_nr: 0,
       buyer_phone: "05555555555",
@@ -60,23 +64,26 @@ export async function POST(req) {
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
-      currency: 0, // 0 = TL
-      data: selectedPkg.price,
+      currency: 0,
+      data: selectedPkg.price, // Fiyat
       modul_version: "1.0.4",
       random_nr: Math.floor(Math.random() * 1000000),
     };
 
-    // 4. Shopier İmzasını Oluştur
-    const data = args.random_nr + args.platform_order_id + args.data + args.currency;
+    // 4. İMZA OLUŞTURMA (KRİTİK BÖLÜM)
+    // Shopier dokümanına göre: random_nr + platform_order_id + data + currency
+    // ÖNEMLİ: Hepsi String olarak birleştirilmeli
+    const dataString = String(args.random_nr) + String(args.platform_order_id) + String(args.data) + String(args.currency);
+    
     const signature = crypto
       .createHmac("sha256", process.env.SHOPIER_API_SECRET)
-      .update(data)
+      .update(dataString)
       .digest("base64");
 
     args.signature = signature;
     args.callback = `${process.env.NEXT_PUBLIC_APP_URL}/api/payment/callback`;
 
-    // 5. HTML Formunu Oluştur ve Gönder (Otomatik submit)
+    // Formu Gönder
     const formInputs = Object.entries(args)
       .map(([key, val]) => `<input type="hidden" name="${key}" value="${val}">`)
       .join("");
