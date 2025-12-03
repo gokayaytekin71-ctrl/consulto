@@ -9,39 +9,27 @@ export async function POST(req) {
     const body = {};
     formData.forEach((value, key) => (body[key] = value));
 
-    // Güvenli değişken ataması: Gelmezse '0' varsay (Fiyat ve Para Birimi için)
-    const status = body.status;
-    const platform_order_id = body.platform_order_id;
-    const payment_id = body.payment_id;
-    const random_nr = body.random_nr;
-    const signature = body.signature;
-    
-    // Fiyatı ve para birimini yakala. total_order_value gelmezse 0 varsay (NaN hatasını önler).
-    const rawTotal = body.total_order_value || body.payment_amount || '0'; 
-    const rawCurrency = body.currency || '0'; 
-    
-    // --- KRİTİK DÜZELTME: Formatlama ---
-    // Gelen ham fiyatı (örn: "100" veya "100.00"), kesinlikle 2 ondalık basamağa formatla.
-    const formattedTotal = Number(rawTotal).toFixed(2); 
-    // -----------------------------------
+    const { status, platform_order_id, payment_id, random_nr, signature, total_order_value, currency } = body;
 
-    // 1. İmza Doğrulama String'ini Oluştur
+    // --- FİYAT VE CURRENCY KALDIRILDI ---
+    // Shopier'ın callback imza kuralı sadece ID'ler üzerinden yürütülüyor olmalı.
     const dataToSign =
       String(random_nr) +
-      String(platform_order_id) +
-      String(formattedTotal) + 
-      String(rawCurrency);
+      String(platform_order_id); 
+      // ----------------------------------
 
     const expectedSignature = crypto
       .createHmac("sha256", process.env.SHOPIER_API_SECRET)
       .update(dataToSign)
       .digest("base64");
 
-    // 2. Güvenlik Kontrolü
+    // Güvenlik Kontrolü
     if (signature !== expectedSignature) {
       console.error("Shopier İmza Hatası! Alınan İmza Doğrulanamadı.");
-      console.error(`Data String Used: ${dataToSign}`);
-      console.error(`Fiyat (Ham/Formatlı): ${rawTotal} / ${formattedTotal}`);
+      console.error(`İmza İçin Kullanılan String: ${dataToSign}`);
+      console.error(`Gelen/Hesaplanan İmza Farkı: Received=${signature.slice(0, 10)}... Expected=${expectedSignature.slice(0, 10)}...`);
+
+      // Eğer imza tutmazsa işlemi durdur
       return new Response("Gecersiz Imza", { status: 400 });
     }
 
