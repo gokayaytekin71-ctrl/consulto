@@ -6,7 +6,7 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 
 const PACKAGES = {
-  1: { tokens: 10, price: 1, name: "10 Token Paketi" },
+  1: { tokens: 10, price: 1, name: "10 Token Paketi" }, 
   2: { tokens: 50, price: 400, name: "50 Token Paketi" },
   3: { tokens: 100, price: 700, name: "100 Token Paketi" },
 };
@@ -22,24 +22,25 @@ export async function POST(req) {
 
     const user = await prisma.user.findUnique({ where: { id: session.user.id } });
 
-    // Güvenlik Kontrolü
     if (!process.env.SHOPIER_API_KEY || !process.env.SHOPIER_API_SECRET) {
-      console.error("SHOPIER API ANAHTARLARI EKSİK VEYA BOŞ!");
-      return new Response("Server Config Error: Shopier Keys Missing", { status: 500 });
+      console.error("SHOPIER API ANAHTARLARI EKSİK!");
+      return new Response("Sunucu yapılandırma hatası (Shopier Keys Missing)", { status: 500 });
     }
 
-    // Fiyatı 2 ondalık basamağa (Örn: "100.00") formatla
+    // --- KRİTİK FİYAT FORMATLAMA BAŞLANGIÇ ---
+    // Shopier'ın imza hesaplaması için fiyatı zorla 2 ondalık basamağa ("100.00") çeviriyoruz.
     const formattedPrice = Number(selectedPkg.price).toFixed(2); 
+    // ------------------------------------------
 
     const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-    // KRİTİK: DB Kaydı (İşlem burada başarısız oluyorsa DATABASE_URL yanlıştır)
+    // DB Kaydı
     await prisma.payment.create({
       data: {
-        id: crypto.randomUUID(), // ID'yi manuel oluşturuyoruz
+        id: crypto.randomUUID(),
         userId: user.id,
         orderId,
-        amount: selectedPkg.price,
+        amount: selectedPkg.price, 
         tokenAmount: selectedPkg.tokens,
         status: "PENDING",
       },
@@ -60,7 +61,6 @@ export async function POST(req) {
       buyer_account_age: 0,
       buyer_id_nr: 0,
       buyer_phone: "05555555555",
-      
       billing_address: "Dijital Teslimat",
       billing_city: "Istanbul",
       billing_country: "TR",
@@ -69,8 +69,7 @@ export async function POST(req) {
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
-      
-      total_order_value: formattedPrice, // Formatlanmış fiyatı gönder
+      total_order_value: formattedPrice, // <-- FORMATLANMIŞ FİYATI GÖNDER
       currency: 0, 
       platform: 0,
       is_in_frame: 0,
@@ -79,7 +78,7 @@ export async function POST(req) {
       random_nr: randomNr,
     };
 
-    // İmza Oluşturma (Formatlanmış fiyat kullanılır)
+    // İmza Oluşturma (KRİTİK: total_order_value'yu formatlı kullanıyoruz)
     const dataToSign =
       String(args.random_nr) +
       String(args.platform_order_id) +
@@ -112,8 +111,7 @@ export async function POST(req) {
 
     return new Response(html, { headers: { "Content-Type": "text/html" } });
   } catch (err) {
-    // DB bağlantı hatası burada yakalanır ve frontend'e 500 döner
-    console.error("KRİTİK DB BAĞLANTI HATASI (Payment Start):", err);
+    console.error("KRİTİK HATA: DB CREATE BAŞARISIZ OLDU:", err);
     return new Response("Veritabanı bağlantı hatası veya sunucu hatası.", { status: 500 });
   }
 }
