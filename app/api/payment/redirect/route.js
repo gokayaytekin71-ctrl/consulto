@@ -1,5 +1,5 @@
 // app/payment/redirect/route.js
-// Bu dosya, Shopier'den gelen POST'u güvenle alır ve kullanıcıyı GET ile ana sayfaya yönlendirir.
+// Bu dosya, POST veya GET ne gelirse gelsin tarayıcıyı ana sayfaya yönlendirir.
 
 import { NextResponse } from 'next/server';
 
@@ -8,17 +8,29 @@ const DOMAIN = process.env.NEXT_PUBLIC_APP_URL || 'https://www.consultohukuk.com
 
 export const dynamic = 'force-dynamic';
 
-// GET isteği gelirse (normal sayfa yüklemesi)
-export async function GET(request) {
-    // Genellikle bu kısım çalışmaz, ama çalışırsa ana sayfaya at
-    return NextResponse.redirect(new URL('/', DOMAIN), 307);
+export async function GET() {
+    // Hem GET hem POST için yönlendirmeyi kullanıyoruz
+    return handleRedirect();
 }
 
-// POST isteği gelirse (Shopier'den dönüş)
-export async function POST(request) {
-    // 1. Gelen POST verilerini ignore et (artık gerek yok)
-    // 2. Tarayıcıya "Şimdi / adresine git" (GET isteğiyle) talimatı ver
+export async function POST() {
+    // 1. Ödeme callback'i buradan geçecektir. Ancak veritabanı güncellemesi
+    //    '/api/payment/callback' adresinde zaten yapıldığı için
+    //    burada sadece yönlendirme tetiklenir.
     
-    // 303 See Other, POST isteğini GET'e çevirip yeni konuma gitmek için idealdir.
-    return NextResponse.redirect(new URL('/', DOMAIN), 303);
+    // 2. Yönlendirmeden önce verilerin (POST body) okunması gerektiğini belirtmek için:
+    try {
+        await request.formData(); // POST gövdesini okuyup bırakıyoruz
+    } catch (e) {
+        // Hata olsa bile yönlendirmeye devam et, kullanıcıyı hata sayfasında bırakma
+    }
+
+    return handleRedirect();
+}
+
+// Ortak yönlendirme fonksiyonu
+function handleRedirect() {
+    // 307 Temporary Redirect kullanmak, Next.js ve tarayıcılar için POST'tan sonra güvenli yönlendirmedir.
+    // Başka bir yöntem olan 303 See Other da aynı işi görür. 
+    return NextResponse.redirect(new URL('/', DOMAIN), 307);
 }
