@@ -6,7 +6,7 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 
 const PACKAGES = {
-  1: { tokens: 10, price: 1, name: "10 Token Paketi" }, // Test için 1 TL
+  1: { tokens: 10, price: 100, name: "10 Token Paketi" },
   2: { tokens: 50, price: 400, name: "50 Token Paketi" },
   3: { tokens: 100, price: 700, name: "100 Token Paketi" },
 };
@@ -20,9 +20,13 @@ export async function POST(req) {
     const selectedPkg = PACKAGES[packageId];
     if (!selectedPkg) return new Response("Geçersiz paket", { status: 400 });
 
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id },
-    });
+    const user = await prisma.user.findUnique({ where: { id: session.user.id } });
+
+    // Güvenlik Kontrolü
+    if (!process.env.SHOPIER_API_KEY || !process.env.SHOPIER_API_SECRET) {
+      console.error("SHOPIER API ANAHTARLARI EKSİK!");
+      return new Response("Server Config Error", { status: 500 });
+    }
 
     const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
@@ -40,7 +44,7 @@ export async function POST(req) {
 
     const randomNr = Math.floor(Math.random() * 1000000);
 
-    // ---- SHOPIER PARAMETRELERİ ----
+    // Shopier Parametreleri
     const args = {
       API_key: process.env.SHOPIER_API_KEY, 
       website_index: 1,
@@ -61,17 +65,16 @@ export async function POST(req) {
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
-      total_order_value: selectedPkg.price, // Burası kritik
+      total_order_value: selectedPkg.price, 
       currency: 0, 
       platform: 0,
       is_in_frame: 0,
       current_language: 0,
-      modul_version: "1.0.4", // Sürüm 1.0.4 daha stabil çalışır
+      modul_version: "1.0.4",
       random_nr: randomNr,
     };
 
-    // ---- İMZA OLUŞTURMA ----
-    // Shopier'in beklediği imza sırası: random_nr + platform_order_id + total_order_value + currency
+    // İmza Oluşturma
     const dataToSign =
       String(args.random_nr) +
       String(args.platform_order_id) +
@@ -84,14 +87,10 @@ export async function POST(req) {
       .digest("base64");
 
     args.signature = signature;
-    
-    // Callback URL'yi buraya eklemiyoruz, panelden alıyor.
+    // Callback URL panelden alınır, buraya eklemeye gerek yok.
 
     const formInputs = Object.entries(args)
-      .map(
-        ([key, val]) =>
-          `<input type="hidden" name="${key}" value="${val}">`
-      )
+      .map(([key, val]) => `<input type="hidden" name="${key}" value="${val}">`)
       .join("");
 
     const html = `
