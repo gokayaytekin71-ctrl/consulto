@@ -6,7 +6,8 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 
 const PACKAGES = {
-  1: { tokens: 10, price: 1, name: "10 Token Paketi" },
+  // NOT: 1 TL testin bittiyse, buradaki fiyatı 100 olarak eski haline getirebilirsin.
+  1: { tokens: 10, price: 100, name: "10 Token Paketi" }, 
   2: { tokens: 50, price: 400, name: "50 Token Paketi" },
   3: { tokens: 100, price: 700, name: "100 Token Paketi" },
 };
@@ -30,7 +31,10 @@ export async function POST(req) {
 
     const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-    // DB Kaydı
+    // Fiyatı 2 ondalık basamağa (örnek: 1.00) formatla
+    const formattedPrice = Number(selectedPkg.price).toFixed(2); // <-- KRİTİK DEĞİŞİKLİK
+
+    // DB Kaydı (Amount hala tam sayı/float olarak kaydedilir)
     await prisma.payment.create({
       data: {
         id: crypto.randomUUID(),
@@ -65,7 +69,7 @@ export async function POST(req) {
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
-      total_order_value: selectedPkg.price, 
+      total_order_value: formattedPrice, // <-- FORMATLANMIŞ FİYATI GÖNDER
       currency: 0, 
       platform: 0,
       is_in_frame: 0,
@@ -74,11 +78,11 @@ export async function POST(req) {
       random_nr: randomNr,
     };
 
-    // İmza Oluşturma
+    // İmza Oluşturma (Formatlanmış fiyat kullanılır)
     const dataToSign =
       String(args.random_nr) +
       String(args.platform_order_id) +
-      String(args.total_order_value) +
+      String(args.total_order_value) + // <-- KRİTİK: total_order_value (Örn: "1.00")
       String(args.currency);
 
     const signature = crypto
@@ -87,7 +91,10 @@ export async function POST(req) {
       .digest("base64");
 
     args.signature = signature;
-    // Callback URL panelden alınır, buraya eklemeye gerek yok.
+    
+    // Callback URL'yi buraya da ekleyelim (Güvenlik için paneldeki ayar çalışmazsa diye)
+    args.callback = `${process.env.NEXT_PUBLIC_APP_URL}/api/payment/callback`;
+
 
     const formInputs = Object.entries(args)
       .map(([key, val]) => `<input type="hidden" name="${key}" value="${val}">`)
