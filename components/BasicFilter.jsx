@@ -1,26 +1,21 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
-
-
 import LoadingOverlay from "./LoadingOverlay";
 import { createPortal } from "react-dom";
 
-function IconInfo({ className = "w-4 h-4" }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M12 10v6" />
-      <path d="M12 7h.01" />
-    </svg>
-  );
-}
+// --- İKONLAR ---
+const IconInfo = ({ className = "w-4 h-4" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="9" /><path d="M12 10v6" /><path d="M12 7h.01" /></svg>;
+const IconSearch = ({ className = "w-4 h-4" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8" /><path d="M21 21l-4.35-4.35" /></svg>;
+const IconChevronDown = ({ className = "w-4 h-4" }) => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M6 9l6 6 6-6" /></svg>;
 
-
+// --- STYLES ---
+// Analiz sayfası stiline uygun Input (Koyu zemin, ince border, cyan focus)
+const inputClass = "w-full bg-[#020617] border border-slate-800 rounded-lg px-3 py-2.5 text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all";
+const labelClass = "block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5";
 
 const organOptions = [
-  { label: "", value: "" },
+  { label: "Tümü / Farketmez", value: "" },
   { label: "Yargıtay HGK", value: "Hukuk Genel Kurulu" },
-
   { label: "Yargıtay 1. Hukuk Dairesi",  value: "1. Hukuk Dairesi" },
   { label: "Yargıtay 2. Hukuk Dairesi",  value: "2. Hukuk Dairesi" },
   { label: "Yargıtay 3. Hukuk Dairesi",  value: "3. Hukuk Dairesi" },
@@ -45,337 +40,195 @@ export default function BasicFilter({ defaultParams = {} }) {
 
   function openTips() {
     const btn = infoBtnRef.current;
-    const margin = 12;
-    const estHeight = 340; // estimated popover height
     if (btn) {
       const rect = btn.getBoundingClientRect();
-      const width = Math.min(560, window.innerWidth - 2 * margin);
-      let left = Math.min(rect.left, window.innerWidth - width - margin);
-      left = Math.max(margin, left);
-
-      let top = rect.bottom + margin;
-      if (top + estHeight > window.innerHeight - margin) {
-        top = Math.max(margin, rect.top - estHeight - margin);
-      }
+      const width = Math.min(420, window.innerWidth - 24);
+      let left = Math.max(12, Math.min(rect.left, window.innerWidth - width - 12));
+      let top = rect.bottom + 12;
+      if (top + 340 > window.innerHeight) top = rect.top - 340 - 12;
       setTipPos({ top, left });
     }
     setShowTips(true);
   }
 
   useEffect(() => {
-    function onKey(e) {
-      if (e.key === "Escape") setShowTips(false);
-    }
-    function onResize() {
-      if (showTips) openTips();
-    }
+    function onKey(e) { if (e.key === "Escape") setShowTips(false); }
+    function onResize() { if (showTips) openTips(); }
     window.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
-    window.addEventListener("scroll", onResize, true);
     return () => {
       window.removeEventListener("keydown", onKey);
       window.removeEventListener("resize", onResize);
-      window.removeEventListener("scroll", onResize, true);
     };
   }, [showTips]);
 
-  // Basit GET formu: butona basınca /kararlar?q=... gibi URL oluşur
-  // Boş alanlar gelse bile backend bunları yok sayıyor ("" falsy).
   return (
     <>
       {loading && <LoadingOverlay />}
-      <form
-        action="/kararlar"
-        method="GET"
-        className="space-y-4"
-        noValidate
-        onSubmit={() => setLoading(true)}
-      >
-      {/* Hızlı satır */}
-      <div className="flex gap-3">
-        <input
-          type="text"
-          name="q"
-          defaultValue={defaultParams.q || ""}
-          placeholder="Genel Arama "
-          onChange={() => {
-            try {
-              if (kwRef.current) kwRef.current.value = "";
-              if (aiqRef.current) aiqRef.current.value = "";
-            } catch {}
-          }}
-          className="flex-1 min-w-0 px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <button
-          type="submit"
-          className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold"
-        >
-          Ara
-        </button>
-      </div>
-
-      {/* Detaylı arama */}
-      <details className="bg-blue-900/20 p-4 rounded-lg border border-blue-700/40">
-        <summary className="cursor-pointer font-semibold text-blue-200">
-          Detaylı Arama
-        </summary>
-
-        <div className="mt-4 space-y-4">
-          {/* Organ seçimi (value = DB karşılığı) */}
-          <div>
-            <label className="block text-sm mb-2 text-blue-300">
-              Yargıtay Karar Organları
-            </label>
-            <select
-              name="organ"
-              defaultValue={defaultParams.organ || ""}
-              className="w-full px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {organOptions.map(({ label, value }) => (
-                <option key={label || "blank"} value={value}>
-                  {label || "Seçiniz…"}
-                </option>
-              ))}
-            </select>
+      <form action="/kararlar" method="GET" className="flex flex-col gap-5" noValidate onSubmit={() => setLoading(true)}>
+        
+        {/* --- 1. HERO INPUT (Ana Arama) --- */}
+        <div className="relative group">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-600 group-focus-within:text-cyan-500 transition-colors">
+            <IconSearch className="w-4 h-4" />
           </div>
-
-          {/* Esas/Karar filtreleri */}
-          <div className="flex flex-col gap-4">
-            <div>
-              <label className="block text-sm mb-1 text-blue-300">Esas Numarası</label>
-              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
-                <input
-                  type="text"
-                  name="esasYili"
-                  inputMode="text"
-                  defaultValue={defaultParams.esasYili || ""}
-                  placeholder="Yıl"
-                  className="w-full min-w-0 px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="text-blue-300">/</span>
-                <input
-                  type="text"
-                  name="esasNo"
-                  inputMode="text"
-                  defaultValue={defaultParams.esasNo || ""}
-                  placeholder="No"
-                  className="w-full min-w-0 px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-sm mb-1 text-blue-300">Karar Numarası</label>
-              <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
-                <input
-                  type="text"
-                  name="kararYili"
-                  inputMode="text"
-                  defaultValue={defaultParams.kararYili || ""}
-                  placeholder="Yıl"
-                  className="w-full min-w-0 px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-                <span className="text-blue-300">/</span>
-                <input
-                  type="text"
-                  name="kararNo"
-                  inputMode="text"
-                  defaultValue={defaultParams.kararNo || ""}
-                  placeholder="No"
-                  className="w-full min-w-0 px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Alan sınırlı aramalar */}
-          <div className="grid grid-cols-1 gap-4">
-            <div>
-              <label className="block text-sm mb-1 text-blue-300">Karar Özeti İçinde Arama</label>
-              <input
-                ref={aiqRef}
-                type="text"
-                name="aiq"
-                inputMode="text"
-                defaultValue={defaultParams.aiq || ""}
-                placeholder="örn. iş kazası, muvazaa"
-                className="w-full px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-
-            <div>
-              <label className="block text-sm mb-1 text-blue-300">Anahtar Kelimelerde Ara</label>
-              <input
-                ref={kwRef}
-                type="text"
-                name="kw"
-                inputMode="text"
-                defaultValue={defaultParams.kw || ""}
-                placeholder="örn. tahliye davası"
-                className="w-full px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4">
-            <div>
-              <label className="block text-sm mb-1 text-blue-300">Kelime Öbeği </label>
-              <input
-                type="text"
-                name="phrase"
-                inputMode="text"
-                defaultValue={defaultParams.phrase || ""}
-                placeholder="örn. mutlak muvazaa"
-                className="w-full px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-            <div>
-              <label className="block text-sm mb-1 text-blue-300">Hariç Tut (Kararda Olmasın)</label>
-              <input
-                type="text"
-                name="qnot"
-                inputMode="text"
-                defaultValue={defaultParams.qnot || ""}
-                placeholder="örn. ihbar, kıdem"
-                className="w-full px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </div>
-          </div>
-
-          {/* Butonlar */}
-          <div className="flex items-center gap-3 pt-2">
-            <button
-              type="submit"
-              className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-semibold"
-            >
-              Uygula
-            </button>
-            <a
-              href="/kararlar"
-              className="px-4 py-2 rounded-lg border border-blue-700/60 text-blue-100 hover:bg-blue-700/20"
-            >
-              Sıfırla
-            </a>
-          </div>
-        </div>
-      </details>
-
-      {/* İpucu (tıklayınca açılan sabit popover) */}
-      <div className="relative">
-        <div className="inline-flex items-center gap-2 text-blue-200 select-none">
-          <span className="font-semibold">İpucu</span>
+          <input
+            type="text"
+            name="q"
+            defaultValue={defaultParams.q || ""}
+            placeholder="Kelime veya Esas No..."
+            onChange={() => {
+              try { if (kwRef.current) kwRef.current.value = ""; if (aiqRef.current) aiqRef.current.value = ""; } catch {}
+            }}
+            className={`${inputClass} pl-9 pr-14 h-11 shadow-inner`}
+          />
           <button
-            ref={infoBtnRef}
-            type="button"
-            onClick={openTips}
-            className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-600/90 hover:bg-blue-600 text-white shadow focus:outline-none focus:ring-2 focus:ring-offset-0 focus:ring-blue-400"
-            aria-label="Arama ipuçlarını göster"
-            title="Arama ipuçlarını göster"
+            type="submit"
+            className="absolute right-1.5 top-1.5 bottom-1.5 px-3 rounded-md bg-cyan-600 hover:bg-cyan-500 text-white text-[10px] font-bold tracking-wider transition-colors shadow-lg shadow-cyan-900/20"
           >
-            <IconInfo className="w-4 h-4" />
+            ARA
           </button>
         </div>
 
-        {showTips && createPortal(
-          <>
-            {/* Opaque backdrop (very high z-index) */}
-            <div
-              className="fixed inset-0 bg-slate-950/70"
-              style={{ zIndex: 2147483646 }}
-              onClick={() => setShowTips(false)}
-            />
-            {/* Popover – always above everything */}
-            <div
-              className="fixed w-[min(92vw,560px)] max-w-[560px] bg-slate-900 border border-slate-700 rounded-lg p-5 shadow-[0_20px_60px_rgba(0,0,0,0.6)] text-slate-200"
-              style={{ top: tipPos.top, left: tipPos.left, zIndex: 2147483647 }}
-              role="dialog"
-              aria-label="Arama ipuçları"
-            >
-              <ul className="space-y-4 list-disc pl-5 text-sm leading-7">
-                <li>
-                  <span className="text-blue-100 font-semibold">Kelime Araması Yap</span> Karar metninde arama yapar. 
-                   ( <span className="italic">Örneğin; ''kıdem tazminatı'' yazdığınızda içerisinde ''kıdem'' ve ''tazminat'' olan kararları çıkarır  </span>).
-                </li>
-                <li>
-                  <span className="text-blue-100 font-semibold">Kelime Öbeği</span> yazdığınız kelime öbeğini <em>aynen</em> arar
-                  (<span className="italic">Örneğin; ''kıdem tazminatı'' yazıldığında içerisinde direkt ''kıdem tazminatı'' olan kararları çıkarır  </span>).
-                </li>
-                <li>
-                  <span className="text-blue-100 font-semibold">Hariç Tut</span> alanındaki terimler içerikten çıkarılır; birden fazla terimi
-                  <span className="italic"> virgülle</span> ayırabilirsiniz (örn. <span className="italic">ihbar, fesih</span>).
-                </li>
-                <li>
-                  <span className="text-blue-100 font-semibold">Karar Özeti İçinde Ara</span> yalnızca özet alanında, <span className="text-blue-100 font-semibold">Anahtar Kelimeler</span> ise yalnızca
-                  <span className="italic"> anahtar kelimeler</span> alanında arama yapar.
-                </li>
-                <li>
-                  <span className="text-blue-100 font-semibold">Esas/Karar</span> alanlarını <span className="font-mono">Yıl/No</span> şeklinde doldurabilirsiniz.
-                </li>
-              </ul>
+        {/* --- 2. DETAYLI FİLTRELEME (Accordion) --- */}
+        <details className="group/details overflow-hidden rounded-xl border border-slate-800 bg-[#020617]/50 transition-all duration-300 open:bg-[#020617]">
+          <summary className="flex items-center justify-between p-3 cursor-pointer select-none text-slate-400 hover:text-white transition-colors">
+            <div className="flex items-center gap-2">
+               <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_5px_#6366f1]"></span>
+               <span className="text-xs font-semibold tracking-wide">Detaylı Filtreler</span>
+            </div>
+            <span className="transform transition-transform duration-300 group-open/details:rotate-180 text-slate-600 group-hover:text-slate-400">
+              <IconChevronDown />
+            </span>
+          </summary>
 
-              <div className="mt-4 flex justify-end">
-                <button
-                  type="button"
-                  onClick={() => setShowTips(false)}
-                  className="px-3 py-1.5 rounded-md bg-blue-600 hover:bg-blue-700 text-white text-sm"
-                >
-                  Kapat
-                </button>
+          <div className="px-3 pb-4 pt-2 space-y-4 animate-in slide-in-from-top-2 duration-200">
+            
+            {/* Daire Seçimi */}
+            <div>
+              <label className={labelClass}>Yargıtay Dairesi</label>
+              <div className="relative">
+                <select name="organ" defaultValue={defaultParams.organ || ""} className={`${inputClass} appearance-none cursor-pointer`}>
+                  {organOptions.map(({ label, value }) => (
+                    <option key={label || "blank"} value={value} className="bg-[#020617] text-slate-300">
+                      {label}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-600">
+                   <IconChevronDown className="w-3 h-3" />
+                </div>
               </div>
             </div>
-          </>,
-          document.body
-        )}
-      </div>
 
-      {/* Bölümler navigasyonu */}
-      <div className="bg-blue-900/20 border border-blue-700/40 rounded-lg p-4">
-        <h4 className="font-semibold text-blue-200 mb-3 flex items-center gap-2">
-          Bölümler
-          <span className="text-[11px] font-normal text-blue-300/80">Kısayollar</span>
-        </h4>
-        <nav className="mt-1 space-y-2">
-          <a
-            href="#featured"
-            className="group flex items-center justify-start w-full px-3 py-2 rounded-lg border border-blue-700/50 bg-blue-900/30 hover:bg-blue-800/40 text-blue-100 transition-colors overflow-hidden max-w-full box-border"
-            onClick={(e) => { e.preventDefault(); const el = document.querySelector('#featured'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
-          >
-            <span className="whitespace-normal break-words"> Nitelikli Kararlar</span>
-          </a>
+            {/* Esas & Karar No */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className={labelClass}>Esas</label>
+                <div className="flex items-center gap-1">
+                  <input type="text" name="esasYili" placeholder="Yıl" defaultValue={defaultParams.esasYili || ""} className={`${inputClass} text-center`} />
+                  <span className="text-slate-600">/</span>
+                  <input type="text" name="esasNo" placeholder="No" defaultValue={defaultParams.esasNo || ""} className={`${inputClass} text-center`} />
+                </div>
+              </div>
+              <div>
+                <label className={labelClass}>Karar</label>
+                <div className="flex items-center gap-1">
+                  <input type="text" name="kararYili" placeholder="Yıl" defaultValue={defaultParams.kararYili || ""} className={`${inputClass} text-center`} />
+                  <span className="text-slate-600">/</span>
+                  <input type="text" name="kararNo" placeholder="No" defaultValue={defaultParams.kararNo || ""} className={`${inputClass} text-center`} />
+                </div>
+              </div>
+            </div>
 
-          <a
-            href="#new"
-            className="group flex items-center justify-start w-full px-3 py-2 rounded-lg border border-blue-700/50 bg-blue-900/30 hover:bg-blue-800/40 text-blue-100 transition-colors overflow-hidden max-w-full box-border"
-            onClick={(e) => { e.preventDefault(); const el = document.querySelector('#new'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
-          >
-            <span className="whitespace-normal break-words">Yeni Kararlar</span>
-          </a>
+            {/* Metin Filtreleri */}
+            <div className="pt-3 border-t border-slate-800 space-y-3">
+               <div>
+                  <label className={labelClass}>Özet İçinde Ara</label>
+                  <input ref={aiqRef} type="text" name="aiq" placeholder="örn. iş kazası" defaultValue={defaultParams.aiq || ""} className={inputClass} />
+               </div>
+               <div>
+                  <label className={labelClass}>Tam Eşleşme (Kelime Öbeği)</label>
+                  <input type="text" name="phrase" placeholder="örn. mutlak muvazaa" defaultValue={defaultParams.phrase || ""} className={inputClass} />
+               </div>
+               <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className={labelClass}>Anahtar Kelime</label>
+                    <input ref={kwRef} type="text" name="kw" placeholder="örn. kira" defaultValue={defaultParams.kw || ""} className={inputClass} />
+                  </div>
+                  <div>
+                    <label className={labelClass}>Hariç Tut</label>
+                    <input type="text" name="qnot" placeholder="örn. ihbar" defaultValue={defaultParams.qnot || ""} className={inputClass} />
+                  </div>
+               </div>
+            </div>
 
-          <a
-            href="#ibk"
-            className="group flex items-center justify-start w-full px-3 py-2 rounded-lg border border-blue-700/50 bg-blue-900/30 hover:bg-blue-800/40 text-blue-100 transition-colors overflow-hidden max-w-full box-border"
-            onClick={(e) => { e.preventDefault(); const el = document.querySelector('#ibk'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
-          >
-            <span className="whitespace-normal break-words">İçtihadı Birleştirme Kararları</span>
-          </a>
-        </nav>
-      </div>
+            {/* Butonlar */}
+            <div className="flex gap-2 pt-2 border-t border-slate-800">
+              <button type="submit" className="flex-1 py-2.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-cyan-900/20 transition-all">
+                Filtrele
+              </button>
+              <a href="/kararlar" className="px-4 py-2.5 rounded-lg border border-slate-700 bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 text-xs font-bold uppercase transition-colors">
+                Sıfırla
+              </a>
+            </div>
+          </div>
+        </details>
+
+        {/* --- 3. KISAYOLLAR & İPUCU --- */}
+        <div className="space-y-3">
+           <div className="flex items-center justify-between px-1">
+              <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Hızlı Erişim</span>
+              <button ref={infoBtnRef} type="button" onClick={openTips} className="flex items-center gap-1 text-[10px] font-bold text-cyan-500 hover:text-cyan-400 transition-colors uppercase tracking-wide">
+                İpuçları <IconInfo className="w-3 h-3" />
+              </button>
+           </div>
+           
+           <nav className="space-y-1">
+             {[
+               { id: "#featured", label: "Editörün Seçimi", color: "bg-amber-500 shadow-[0_0_6px_#f59e0b]" },
+               { id: "#new", label: "Son Eklenenler", color: "bg-emerald-500 shadow-[0_0_6px_#10b981]" },
+               { id: "#ibk", label: "İçtihadı Birleştirme", color: "bg-indigo-500 shadow-[0_0_6px_#6366f1]" }
+             ].map((item) => (
+               <a
+                 key={item.id}
+                 href={item.id}
+                 onClick={(e) => { e.preventDefault(); const el = document.querySelector(item.id); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }}
+                 className="flex items-center justify-between w-full px-3 py-2.5 rounded-lg text-xs font-medium text-slate-400 hover:bg-[#1e293b] hover:text-cyan-400 transition-all border border-transparent hover:border-slate-800"
+               >
+                 <div className="flex items-center gap-3">
+                    <span className={`w-1.5 h-1.5 rounded-full ${item.color}`}></span>
+                    <span>{item.label}</span>
+                 </div>
+                 <svg className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+               </a>
+             ))}
+           </nav>
+        </div>
       </form>
-    </>
-  );
-}
 
-function LabeledInput({ name, label, placeholder, defaultValue }) {
-  return (
-    <div>
-      <label className="block text-sm mb-1 text-blue-300">{label}</label>
-      <input
-        type="text"
-        name={name}
-        inputMode="text"
-        defaultValue={defaultValue || ""}
-        placeholder={placeholder}
-        className="w-full px-3 py-2 rounded-lg border border-blue-700/60 bg-blue-900/30 text-blue-100 placeholder-blue-300/70 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-    </div>
+      {/* --- İPUCU MODALI --- */}
+      {showTips && createPortal(
+        <>
+          <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[9998]" onClick={() => setShowTips(false)} />
+          <div
+            className="fixed w-[400px] max-w-[90vw] bg-[#0f172a] border border-slate-700 rounded-2xl p-5 shadow-2xl z-[9999] animate-in zoom-in-95 duration-200"
+            style={{ top: tipPos.top, left: tipPos.left }}
+          >
+            <div className="flex items-center gap-2 mb-3 pb-3 border-b border-slate-800">
+               <span className="text-cyan-500"><IconInfo /></span>
+               <h3 className="text-sm font-bold text-white uppercase tracking-wide">Arama Rehberi</h3>
+            </div>
+            <ul className="space-y-2 text-xs text-slate-300 leading-relaxed">
+              <li className="flex gap-2"><span className="text-cyan-500">•</span> <span><strong>Anahtar Kelime:</strong> Metin içinde serbest arama yapar.</span></li>
+              <li className="flex gap-2"><span className="text-cyan-500">•</span> <span><strong>Tam Eşleşme:</strong> Yazdığınız ifadeyi birebir arar.</span></li>
+              <li className="flex gap-2"><span className="text-cyan-500">•</span> <span><strong>Hariç Tut:</strong> Bu kelimeleri içeren kararları gizler.</span></li>
+            </ul>
+            <button onClick={() => setShowTips(false)} className="mt-4 w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-colors">Tamam</button>
+          </div>
+        </>,
+        document.body
+      )}
+    </>
   );
 }

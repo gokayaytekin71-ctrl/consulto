@@ -6,13 +6,12 @@ import BasicFilter from "@/components/BasicFilter";
 import SectionRow from "@/components/SectionRow";
 import SearchResults from "@/components/SearchResults";
 
-
+// ——— Logic Helpers ———
 function orderBySlugList(rows, slugs) {
   const map = new Map(rows.map((r) => [r.fileName?.replace(/\.txt$/, ""), r]));
   return slugs.map((s) => map.get(s)).filter(Boolean);
 }
 
-// —— IBK helpers (build PDF path from "YYYY/N Esas" + "YYYY/N Karar") ——
 function parseEsasText(s = "") {
   const m = String(s || "").match(/(\d{4})\s*[\/-]\s*(\d+)\s*Esas/i);
   return m ? { year: m[1], no: m[2] } : null;
@@ -29,7 +28,7 @@ function buildIbkPdfPath(karar_code = "", birlesme_no = "") {
   return `/ibk/${file}`;
 }
 
-// ——— Editörden Seçmeler ———
+// ——— Data Fetching ———
 async function getFeaturedDecisions() {
   const featuredSlugs = [
     "Hukuk_Genel_Kurulu_2020-603E_2024-224K",
@@ -40,29 +39,18 @@ async function getFeaturedDecisions() {
   const files = featuredSlugs.map((s) => `${s}.txt`);
   const rows = await prisma.karar.findMany({
     where: { fileName: { in: files } },
-    select: {
-      id: true,
-      fileName: true,
-      type: true,
-      code: true,
-      aiSummary: true,
-      keywords: true,
-      contentLength: true,
-    },
+    select: { id: true, fileName: true, type: true, code: true, aiSummary: true, keywords: true, contentLength: true },
   });
   return orderBySlugList(rows, featuredSlugs);
 }
 
-// ——— Yeni Kararlar ———
 async function getNewDecisions() {
-  // Sadece Karar tablosu; İBK/İBGK içerikleri hariç
   return prisma.karar.findMany({
-    take: 36,
+    take: 48,
     orderBy: { createdAt: "desc" },
     where: {
       NOT: {
         OR: [
-          // type alanında izler
           { type: { contains: "Birleş", mode: "insensitive" } },
           { type: { contains: "Birles", mode: "insensitive" } },
           { type: { contains: "İçtihad", mode: "insensitive" } },
@@ -71,10 +59,8 @@ async function getNewDecisions() {
           { type: { contains: "IBGK", mode: "insensitive" } },
           { type: { contains: "İBK", mode: "insensitive" } },
           { type: { contains: "IBK", mode: "insensitive" } },
-          // code alanında ibk
           { code: { contains: "İBK", mode: "insensitive" } },
           { code: { contains: "IBK", mode: "insensitive" } },
-          // fileName'de ibk/ibgk/içtihad/birleştirme izleri
           { fileName: { contains: "İçtihad", mode: "insensitive" } },
           { fileName: { contains: "Ictihad", mode: "insensitive" } },
           { fileName: { contains: "Birleştirme", mode: "insensitive" } },
@@ -86,26 +72,16 @@ async function getNewDecisions() {
         ],
       },
     },
-    select: {
-      id: true,
-      fileName: true,
-      type: true,
-      code: true,
-      aiSummary: true,
-      keywords: true,
-      contentLength: true,
-    },
+    select: { id: true, fileName: true, type: true, code: true, aiSummary: true, keywords: true, contentLength: true },
   });
 }
 
-// ——— İBGK (yeni tablo: public.ibbgk) ———
 async function getIbbgkFromNewTable() {
-  // public.ibbgk sadece IBK alanlarını tutuyor; Karar tablosu ile join yok.
   const rows = await prisma.$queryRaw`
     SELECT id, karar_code, birlesme_no, icerik, ozet, created_at
     FROM public.ibbgk
     ORDER BY created_at DESC
-    LIMIT 36
+    LIMIT 48
   `;
   return (rows || []).map((r) => ({
     id: r.id,
@@ -115,42 +91,18 @@ async function getIbbgkFromNewTable() {
     ozet: r.ozet,
     created_at: r.created_at,
     pdfHref: buildIbkPdfPath(r.karar_code, r.birlesme_no),
+    fileName: `ibk-${r.id}`, 
+    type: "İçtihadı Birleştirme",
   }));
 }
 
+// ——— Page Component ———
 export default async function KararlarPage({ searchParams }) {
-  const {
-    q,
-    mahkeme,
-    organ,
-    esasYili,
-    esasNo,
-    kararYili,
-    kararNo,
-    kw,
-    aiq,
-    cursor,
-    sort,
-    phrase,
-    qnot,
-  } = searchParams;
+  const { q, mahkeme, organ, esasYili, esasNo, kararYili, kararNo, kw, aiq, cursor, sort, phrase, qnot } = searchParams;
 
   const searchField = kw ? "keywords" : aiq ? "aiSummary" : "content";
   const searchTerm = kw || aiq || phrase || q || "";
-
-  const hasSearch = !!(
-    q ||
-    phrase ||
-    qnot ||
-    mahkeme ||
-    organ ||
-    esasYili ||
-    esasNo ||
-    kararYili ||
-    kararNo ||
-    kw ||
-    aiq
-  );
+  const hasSearch = !!(q || phrase || qnot || mahkeme || organ || esasYili || esasNo || kararYili || kararNo || kw || aiq);
 
   let searchResults = [];
   let nextCursor = undefined;
@@ -167,134 +119,133 @@ export default async function KararlarPage({ searchParams }) {
   const [featuredRows, newRows, ibbgkRows] = await Promise.all([
     getFeaturedDecisions(),
     getNewDecisions(),
-    getIbbgkFromNewTable(),  // İBGK: ibbgk tablosu
+    getIbbgkFromNewTable(),
   ]);
 
   return (
-    <div className="bg-[#001f3f] min-h-screen text-[0.9rem]">
-      {/* HEADER */}
-      <header className="w-full bg-blue-900/30 border-b border-blue-700/60 shadow-xl py-4">
-        <div className="max-w-screen-2xl mx-auto px-4">
-          <h1 className="text-xl md:text-2xl font-bold text-blue-200">
-            Karar Arşivi
-          </h1>
-          <p className="text-sm text-blue-300/90 mt-1">
-            Yargıtay içtihatlarına hızlı erişim
-          </p>
+    // ZEMİN: Analiz sayfasıyla aynı (#020617)
+    <div className="relative min-h-screen bg-[#020617] text-slate-300 font-sans selection:bg-cyan-500/30 overflow-hidden">
+      
+      {/* --- BACKGROUND FX (Analiz Sayfası Stili) --- */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-900/10 rounded-full blur-[120px] animate-pulse"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-900/10 rounded-full blur-[120px] animate-pulse" style={{animationDelay: '2s'}}></div>
+        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
+      </div>
+
+      {/* --- HEADER --- */}
+      <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#020617]/80 backdrop-blur-xl">
+        <div className="max-w-screen-2xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+             {/* Analiz sayfasındaki logo kutusu stili */}
+             <div className="relative w-10 h-10 bg-[#0f172a] rounded-lg border border-slate-700 flex items-center justify-center text-cyan-400 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+             </div>
+             <div>
+                <h1 className="text-xl font-bold text-white tracking-tight">
+                  Karar Arşivi
+                </h1>
+                <p className="text-[10px] text-cyan-600/80 font-mono tracking-[0.2em] uppercase mt-0.5">
+                  INTELLIGENCE SYSTEM
+                </p>
+             </div>
+          </div>
+          <div className="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-[#0f172a] border border-slate-800 text-[10px] text-slate-400 font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 shadow-[0_0_5px_#06b6d4]"></span>
+            VERİ TABANI: GÜNCEL
+          </div>
         </div>
       </header>
 
-      {/* LAYOUT: grid + sticky sidebar */}
-      <div className="max-w-screen-2xl mx-auto px-4 py-8 lg:grid lg:grid-cols-[260px_1fr] lg:gap-8">
-        {/* SIDEBAR */}
+      {/* --- CONTENT LAYOUT --- */}
+      <div className="relative z-10 max-w-screen-2xl mx-auto px-4 py-8 lg:grid lg:grid-cols-[280px_1fr] lg:gap-8 xl:gap-12">
+        
+        {/* --- SIDEBAR (FILTER) --- */}
         <aside className="hidden lg:block">
-          <div className="lg:sticky lg:top-24 space-y-4">
-            <div className="bg-blue-900/30 border border-blue-700/50 rounded-xl p-4">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="inline-block w-2 h-2 rounded-full bg-blue-300" />
-                <h2 className="text-base md:text-xl font-semibold text-blue-100">Arama</h2>
-              </div>
-              <BasicFilter
-                defaultParams={{
-                  q,
-                  phrase,
-                  qnot,
-                  mahkeme,
-                  organ,
-                  esasYili,
-                  esasNo,
-                  kararYili,
-                  kararNo,
-                  kw,
-                  aiq,
-                  sort,
-                }}
-              />
+          <div className="lg:sticky lg:top-28 space-y-6">
+            {/* Kart Stili: Analiz Sidebar'ı gibi */}
+            <div className="rounded-2xl border border-slate-700/50 bg-[#0f172a]/80 backdrop-blur-md shadow-xl">
+               <div className="p-5">
+                  <div className="flex items-center gap-3 mb-5 pb-3 border-b border-white/5">
+                    <div className="text-cyan-400">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                      </svg>
+                    </div>
+                    <h2 className="text-xs font-bold text-slate-200 uppercase tracking-widest">Filtreleme</h2>
+                  </div>
+                  
+                  <BasicFilter
+                    defaultParams={{ q, phrase, qnot, mahkeme, organ, esasYili, esasNo, kararYili, kararNo, kw, aiq, sort }}
+                  />
+               </div>
             </div>
           </div>
         </aside>
 
-        {/* CONTENT */}
-        <main className="space-y-12">
+        {/* --- MAIN FEED --- */}
+        <main className="space-y-12 pb-20">
+          
+          {/* 1. ARAMA SONUÇLARI */}
           {hasSearch && (
-            <SearchResults
-              items={searchResults}
-              query={searchTerm}
-              field={searchField}
-              initialNextCursor={nextCursor}
-            />
+            <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+               <div className="mb-6 flex items-center gap-3">
+                  <div className="h-px flex-1 bg-slate-800"></div>
+                  <span className="text-cyan-500 font-mono text-xs font-bold tracking-widest">ARAMA SONUÇLARI</span>
+                  <div className="h-px flex-1 bg-slate-800"></div>
+               </div>
+              <SearchResults
+                items={searchResults}
+                query={searchTerm}
+                field={searchField}
+                initialNextCursor={nextCursor}
+              />
+            </section>
           )}
 
-          <SectionRow
-            id="featured"
-            title="Nitelikli Kararlar"
-            subtitle="Özenle seçilmiş, referans niteliğindeki kararlar"
-            items={featuredRows}
-            initialVisible={3}
-            perRow={3}
-            addRows={2}
-          />
+          {/* 2. ÖNE ÇIKANLAR */}
+          <section>
+             <SectionRow
+                id="featured"
+                title="Editörün Seçimi"
+                subtitle="Hukuki derinliği yüksek, emsal niteliğindeki kararlar"
+                items={featuredRows}
+                initialVisible={3}
+                perRow={3}
+                addRows={3}
+              />
+          </section>
 
-          <SectionRow
-            id="new"
-            title="Yeni Kararlar"
-            subtitle="Arşive yeni eklenen kararlar"
-            items={newRows}
-            initialVisible={3}
-            perRow={3}
-            addRows={2}
-          />
+          {/* 3. SON EKLENENLER */}
+          <section>
+            <SectionRow
+              id="new"
+              title="Son Eklenenler"
+              subtitle="Arşivimize yeni dahil edilen güncel kararlar"
+              items={newRows}
+              initialVisible={6}
+              perRow={3}
+              addRows={3}
+              autoLoad={false}
+            />
+          </section>
 
-          {Array.isArray(ibbgkRows) && ibbgkRows.length ? (
-            <section id="ibk" className="space-y-3 scroll-mt-24" aria-labelledby="ibk-title">
-              <header className="mb-1">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-blue-300" />
-                  <h2 id="ibk-title" className="text-base md:text-xl font-bold text-blue-100">
-                    İçtihadı Birleştirme Kararları
-                  </h2>
-                </div>
-              </header>
-              <div className="space-y-4">
-                {ibbgkRows.map((r) => {
-                  const href = r.pdfHref || "#";
-                  const badgeClass =
-                    "inline-flex items-center rounded-full border border-blue-600/60 px-3 py-1 text-blue-100 font-semibold text-sm";
-                  const content = (
-                    <article
-                      key={`ibbgk-${r.id}`}
-                      className="rounded-xl border border-blue-700/50 bg-blue-900/20 p-4 hover:bg-blue-900/30 transition"
-                    >
-                      <div className="flex items-center gap-3">
-                        <span className={badgeClass}>{r.karar_code || "—/— Esas"}</span>
-                        <span className={badgeClass}>{r.birlesme_no || "—/— Karar"}</span>
-                      </div>
-
-                      <p className="mt-3 text-[15px] leading-7 text-blue-100 text-justify">
-                        <span className="font-semibold text-blue-200">Özet: </span>
-                        {r.ozet || "Özet ekli değil."}
-                      </p>
-                    </article>
-                  );
-
-                  // Tıklanınca PDF'e gitsin (yoksa tıklanamaz kutu)
-                  return r.pdfHref ? (
-                    <a
-                      key={`ibbgk-link-${r.id}`}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl"
-                    >
-                      {content}
-                    </a>
-                  ) : (
-                    content
-                  );
-                })}
-              </div>
+          {/* 4. İÇTİHADI BİRLEŞTİRME */}
+          {Array.isArray(ibbgkRows) && ibbgkRows.length > 0 && (
+            <section>
+              <SectionRow
+                id="ibk"
+                title="İçtihadı Birleştirme"
+                subtitle="Yargıtay'ın en üst düzey normatif kararları (IBK)"
+                items={ibbgkRows}
+                variant="ibk"
+                initialVisible={6}
+                perRow={3}
+                addRows={6}
+              />
             </section>
-          ) : null}
+          )}
+          
         </main>
       </div>
     </div>

@@ -1,77 +1,45 @@
 // app/mevzuat/page.js
-// Sade fakat şık bir liste: tüm mevzuatlar. Arama / sayfalama yok.
-
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 
 export const metadata = {
-  title: "Mevzuat | Karar Platformu",
-  description: "Tüm mevzuatların listesi. Arama ve filtre yok; hızlı erişim için sade görünüm.",
+  title: "Mevzuat Kütüphanesi | Karar Platformu",
+  description: "Güncel mevzuat arşivi.",
 };
 
-// Her istekte taze veri
 export const dynamic = "force-dynamic";
 
+// --- YARDIMCILAR (Aynen korundu) ---
 function sanitizeTrText(s = "") {
-  const n = String(s || "").normalize("NFC");
-  // 'i' + COMBINING DOT ABOVE -> 'i'
-  // 'I' + COMBINING DOT ABOVE -> 'İ'
-  return n
-    .replace(/\u0069\u0307/g, "i")
-    .replace(/\u0049\u0307/g, "İ");
+  return String(s || "").normalize("NFC").replace(/\u0069\u0307/g, "i").replace(/\u0049\u0307/g, "İ");
 }
-
 function pickTitle(it) {
   const t = sanitizeTrText((it.shortName || "").trim());
-  if (t) return t;
-  return sanitizeTrText(it.name || "(Başlık Yok)");
+  return t || sanitizeTrText(it.name || "(Başlık Yok)");
 }
-
 function pickSubtitle(it) {
   const s = sanitizeTrText((it.shortName || "").trim());
   const n = sanitizeTrText((it.name || "").trim());
-  if (s && n && s !== n) return n;
-  return null;
+  return (s && n && s !== n) ? n : null;
 }
-
-// TR uyumlu ilk harf (gruplama için)
 function firstLetterTR(s = "") {
   const tr = s.trim();
   if (!tr) return "#";
-  const c = tr[0]
-    .replace("İ", "I")
-    .replace("ı", "i");
-  return c.toUpperCase();
+  return tr[0].replace("İ", "I").replace("ı", "i").toUpperCase();
 }
 
 export default async function MevzuatPage() {
-  // Tüm mevzuatları oku
   const rows = await prisma.mevzuat.findMany({
     orderBy: [{ shortName: "asc" }, { name: "asc" }],
-    select: {
-      id: true,
-      slug: true,
-      name: true,
-      shortName: true,
-      year: true,
-      articleCount: true,
-      key: true,
-    },
+    select: { id: true, slug: true, name: true, shortName: true, year: true, articleCount: true, key: true },
   });
 
-  // Görünüm modeline çevir + grupla
   const items = rows.map((it) => {
     const title = pickTitle(it);
     const kanunNo = String(it.key || "").match(/\d+/)?.[0] || null;
     return {
-      id: it.id,
-      slug: it.slug,
-      title,
-      subtitle: pickSubtitle(it),
-      year: it.year,
-      articleCount: it.articleCount,
-      letter: firstLetterTR(title),
-      kanunNo,
+      id: it.id, slug: it.slug, title, subtitle: pickSubtitle(it), year: it.year,
+      articleCount: it.articleCount, letter: firstLetterTR(title), kanunNo,
     };
   });
 
@@ -80,81 +48,95 @@ export default async function MevzuatPage() {
   const groups = items.reduce((acc, it) => {
     (acc[it.letter] ||= []).push(it);
     return acc;
-  }, /** @type {Record<string, typeof items>} */ ({}));
+  }, {});
 
   const letters = Object.keys(groups).sort((a, b) => a.localeCompare(b, "tr"));
 
   return (
-    <div lang="tr" className="min-h-screen bg-[#001f3f]">
-      {/* HEADER */}
-      <header className="w-full bg-blue-900/30 border-b border-blue-700/60 shadow-xl py-6">
-        <div className="max-w-screen-2xl mx-auto px-4 flex items-end justify-between">
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-blue-200">Mevzuat</h1>
-            <p className="text-sm text-blue-300/90 mt-1">Tüm mevzuatlar listelenir</p>
+    <div lang="tr" className="min-h-screen bg-[#0f172a] text-slate-200 font-sans selection:bg-indigo-500/30">
+      
+      {/* --- HEADER --- */}
+      <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-[#0f172a]/80 backdrop-blur-xl">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+             <div className="h-8 w-1 bg-gradient-to-b from-indigo-400 to-cyan-500 rounded-full"></div>
+             <div>
+                <h1 className="text-xl md:text-2xl font-bold text-white tracking-tight">Mevzuat Arşivi</h1>
+                <p className="text-xs text-slate-400 hidden md:block">Güncel kanun ve yönetmelikler</p>
+             </div>
           </div>
-          <span className="rounded-full border border-blue-700/70 bg-blue-900/20 px-3 py-1 text-xs text-blue-200/90">
-            {items.length} kayıt
+          <span className="inline-flex items-center px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs font-mono text-slate-300">
+            {items.length} Kayıt
           </span>
         </div>
       </header>
 
-      {/* CONTENT */}
-      <main className="max-w-screen-2xl mx-auto px-4 py-8 space-y-8">
+      {/* --- CONTENT --- */}
+      <main className="max-w-7xl mx-auto px-6 py-10 space-y-12">
         {letters.map((L) => (
-          <section key={L} className="space-y-4">
-            {/* Grup başlığı */}
-            <div className="sticky top-20 z-10 -mx-1 w-fit rounded-full border border-blue-700/50 bg-blue-900/40 px-3 py-1 text-xs font-semibold text-blue-200/90 backdrop-blur">
-              {L}
-            </div>
+          <section key={L} className="relative">
+            
+            {/* Grup Başlığı (Sol Tarafta Yapışkan Harf) */}
+            <div className="flex flex-col md:flex-row gap-6">
+               <div className="md:w-12 shrink-0">
+                  <div className="sticky top-24 flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-xl font-black text-indigo-400 shadow-lg backdrop-blur-sm">
+                     {L}
+                  </div>
+               </div>
 
-            {/* Grid kartlar */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {groups[L].map((it) => (
-                <Link
-                  href={`/mevzuat/${it.slug ?? ""}`}
-                  key={it.id}
-                  className="group block rounded-xl border border-blue-700/50 bg-blue-900/20 p-4 hover:bg-blue-900/35 hover:border-blue-500/60 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                  <div className="flex items-start justify-between gap-4">
-                    <div className="min-w-0">
-                      <h3 className="text-blue-100 font-semibold leading-6 group-hover:text-white truncate">
-                        {it.title}
-                      </h3>
-                      {it.subtitle ? (
-                        <p className="mt-1 text-sm text-blue-300/85 line-clamp-2">{it.subtitle}</p>
-                      ) : null}
-                    </div>
+               {/* Grid Kartlar */}
+               <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                 {groups[L].map((it) => (
+                   <Link
+                     href={`/mevzuat/${it.slug ?? ""}`}
+                     key={it.id}
+                     className="group relative flex flex-col justify-between rounded-xl border border-white/5 bg-[#1e293b] p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-[#1e293b]/80 hover:shadow-xl hover:shadow-indigo-500/10"
+                   >
+                     <div>
+                       <div className="flex justify-between items-start gap-4 mb-2">
+                          <h3 className="text-lg font-bold text-slate-100 group-hover:text-white leading-snug line-clamp-2 transition-colors">
+                            {it.title}
+                          </h3>
+                          {it.year && (
+                             <span className="shrink-0 px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700">
+                                {it.year}
+                             </span>
+                          )}
+                       </div>
+                       
+                       {it.subtitle && (
+                         <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed mb-4 group-hover:text-slate-300 transition-colors">{it.subtitle}</p>
+                       )}
+                     </div>
 
-                    {/* Sağ rozetler */}
-                    <div className="shrink-0 text-right space-y-1">
-                      {typeof it.year === "number" ? (
-                        <span className="inline-block rounded-full border border-blue-700/60 bg-blue-800/40 px-2 py-0.5 text-[11px] text-blue-200/90">
-                          {it.year}
-                        </span>
-                      ) : null}
-                      {it.kanunNo ? (
-                        <div className="text-[11px] text-blue-300/80">
-                          {`${it.kanunNo} s. kanun`}
+                     <div className="flex items-center justify-between pt-4 mt-2 border-t border-white/5">
+                        <div className="flex items-center gap-2">
+                           {it.kanunNo && (
+                              <span className="text-[10px] font-mono text-cyan-400 bg-cyan-500/10 px-1.5 py-0.5 rounded border border-cyan-500/20">
+                                 No: {it.kanunNo}
+                              </span>
+                           )}
+                           {it.articleCount > 0 && (
+                              <span className="text-[10px] text-slate-500 font-medium">
+                                 {it.articleCount} Madde
+                              </span>
+                           )}
                         </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  {/* Alt çizgi ve ok */}
-                  <div className="mt-3 flex items-center justify-between text-xs text-blue-300/70">
-                    <span>Detay sayfasına git</span>
-                    <span className="transition-transform group-hover:translate-x-0.5">→</span>
-                  </div>
-                </Link>
-              ))}
+                        <span className="text-indigo-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                        </span>
+                     </div>
+                   </Link>
+                 ))}
+               </div>
             </div>
           </section>
         ))}
 
         {!items.length && (
-          <div className="rounded-xl border border-blue-700/50 bg-blue-900/20 p-8 text-center text-sm text-blue-200/80">
-            Şu anda listelenecek mevzuat bulunamadı.
+          <div className="flex flex-col items-center justify-center py-20 text-slate-500">
+             <div className="p-4 rounded-full bg-slate-800 mb-4"><svg className="w-8 h-8 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg></div>
+             <p>Kayıtlı mevzuat bulunamadı.</p>
           </div>
         )}
       </main>

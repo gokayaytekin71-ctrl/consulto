@@ -1,1237 +1,499 @@
-// /app/bot/page.js
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
+import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import { useAnalysisBot } from "../hooks/useAnalysisBot";
+import TokenBalance from "@/components/TokenBalance"; // <-- YENİ EKLENDİ
 
-const steps = [
-  "Mevzuat taranıyor...",
-  "Kararlar taranıyor...",
-  "Emsal kararlar inceleniyor...",
-  "Analiz tamamlanıyor...",
-];
-const colors = ["#FFA500", "#FFD700", "#FF69B4"];
+// --- UI Bileşenleri ---
 
-const LoadingSteps = () => {
-  const [stepIndex, setStepIndex] = useState(0);
+// 1. Cyber Loader
+const CyberLoader = () => {
+  const [msgIndex, setMsgIndex] = useState(0);
+  const messages = [
+    "SİSTEM BAŞLATILIYOR...",
+    "MEVZUAT VERİ TABANI TARANIYOR...",
+    "YARGITAY İÇTİHATLARI EŞLEŞTİRİLİYOR...",
+    "SEMANTİK ANALİZ YAPILIYOR...",
+    "HUKUKİ GÖRÜŞ OLUŞTURULUYOR..."
+  ];
+
   useEffect(() => {
-    const it = setInterval(() => {
-      setStepIndex((i) => (i + 1 < steps.length ? i + 1 : i));
-    }, 7000);
-    return () => clearInterval(it);
+    const interval = setInterval(() => {
+      setMsgIndex((prev) => (prev + 1) % messages.length);
+    }, 2500);
+    return () => clearInterval(interval);
   }, []);
-  const currentStep = steps[stepIndex];
+
   return (
-    <div className="flex flex-col items-center justify-center text-white mt-6">
-      <div className="text-lg font-medium text-white">{currentStep}</div>
-      <div className="flex mt-2">
-        {colors.map((color, i) => (
-          <span key={i} className="animate-bounce" style={{ animationDelay: `${i * 0.3}s`, color, fontSize: "1.5rem", margin: "0 0.3rem" }}>•</span>
-        ))}
+    <div className="flex flex-col items-center justify-center h-full w-full bg-slate-900/50 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(6,182,212,0.1)]">
+      <div className="relative">
+        <div className="w-16 h-16 border-4 border-cyan-900/30 rounded-full animate-spin-slow"></div>
+        <div className="absolute top-0 left-0 w-16 h-16 border-t-4 border-cyan-400 rounded-full animate-spin"></div>
+        <div className="absolute top-2 left-2 w-12 h-12 border-b-4 border-indigo-500 rounded-full animate-pulse"></div>
+      </div>
+      <div className="mt-6 flex flex-col items-center gap-2">
+        <span className="text-xs font-mono text-cyan-400 tracking-[0.2em] animate-pulse">AI PROCESSING</span>
+        <span className="text-[10px] font-mono text-slate-400">{messages[msgIndex]}</span>
+      </div>
+      <div className="w-48 h-1 bg-slate-800 rounded-full mt-4 overflow-hidden">
+        <div className="h-full bg-gradient-to-r from-cyan-500 via-indigo-500 to-cyan-500 w-full animate-shimmer"></div>
       </div>
     </div>
   );
 };
 
+// 2. Premium Kart Yapısı
+const PremiumCard = ({ title, icon, children, className = "", noPadding = false, action }) => (
+  <div className={`relative flex flex-col bg-[#0f172a]/80 backdrop-blur-md border border-slate-700/50 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:border-cyan-500/30 hover:shadow-cyan-500/10 ${className}`}>
+    {(title || icon) && (
+      <div className="flex-none flex items-center justify-between px-5 py-4 border-b border-white/5 bg-white/5">
+        <div className="flex items-center gap-3">
+          {icon && <div className="text-cyan-400 drop-shadow-md">{icon}</div>}
+          <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase font-mono">{title}</h3>
+        </div>
+        {action}
+      </div>
+    )}
+    <div className={`flex-1 min-h-0 relative ${noPadding ? "" : "p-5"}`}>{children}</div>
+    {/* Dekoratif Köşe */}
+    <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+  </div>
+);
+
+// 3. Mevzuat Popover (Overlay Olmadan - Click Outside ile Kapanan)
+const MevzuatPopover = ({ data, position, onClose }) => {
+  if (!data || !position) return null;
+  
+  return (
+    <div 
+      data-mevzuat-popover="1" 
+      className="fixed z-[9999] w-[450px] max-w-[90vw] flex flex-col bg-[#0B1120] border border-cyan-500/30 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-in fade-in zoom-in-95 duration-200"
+      style={{
+        top: position.top,
+        left: position.left,
+        transform: "translate(-50%, 0)"
+      }}
+      onClick={(e) => e.stopPropagation()} 
+    >
+      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-cyan-950 to-transparent border-b border-cyan-900/50 rounded-t-xl">
+        <div className="flex items-center gap-2">
+           <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></div>
+           <span className="text-xs font-bold text-cyan-100 uppercase tracking-wider font-mono">
+             {data.mevzuat_adi} {data.madde ? `m.${data.madde}` : ''}
+           </span>
+        </div>
+        <button 
+          onClick={onClose}
+          className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div className="p-4 max-h-[350px] overflow-y-auto custom-scrollbar">
+        <div className="text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-wrap">
+          {data.preview}
+        </div>
+      </div>
+      <div className="h-1 w-full bg-gradient-to-r from-cyan-500/50 via-indigo-500/50 to-transparent opacity-50"></div>
+    </div>
+  );
+};
+
+// --- Ana Sayfa ---
 export default function AnalysisPage() {
-  const { data: session } = useSession();
+  const {
+    chats, activeId, setActiveId, input, setInput, isLoading, search, setSearch,
+    confirmDel, setConfirmDel, openMevzuat, setOpenMevzuat,
+    active, filteredChats, activeMarkdown, activeUserQuery,
+    handleAnalyze, deleteChatById, createEmptyAnalysis, calcMevzuatPopover, getMevzuatPreview,
+    utils
+  } = useAnalysisBot();
 
-  const [chats, setChats] = useState([]);
-  const [activeId, setActiveId] = useState(null);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [search, setSearch] = useState("");
-  const analysisEndRef = useRef(null);
-  const [confirmDel, setConfirmDel] = useState({ open: false, id: null });
-
-  // Popover state for mevzuat madde preview
-  // Shape: { key: string, el: HTMLElement, top: number, left: number, placement: 'left'|'right'|'top'|'bottom' } | null
-  const [openMevzuat, setOpenMevzuat] = useState(null);
-
-  // Calculate popover position relative to the badge (viewport coords for position:fixed)
-  function calcMevzuatPopover(el) {
-    if (!el || !el.getBoundingClientRect) return { top: 0, left: 0, placement: 'bottom' };
-    const GAP = 10;
-    const POP_W = Math.min(672, Math.floor(window.innerWidth * 0.92)); // 42rem or 92vw
-    const POP_H = 320; // approx height for placement decision
-    const rect = el.getBoundingClientRect();
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-
-    const spaceLeft   = rect.left;
-    const spaceRight  = vw - rect.right;
-    const spaceTop    = rect.top;
-    const spaceBottom = vh - rect.bottom;
-
-    let placement, top, left;
-
-    // Prefer LEFT, then RIGHT, then TOP, else BOTTOM
-    if (spaceLeft >= POP_W + GAP) {
-      placement = 'left';
-      top  = Math.round(rect.top + rect.height / 2);
-      left = Math.round(rect.left - GAP);
-    } else if (spaceRight >= POP_W + GAP) {
-      placement = 'right';
-      top  = Math.round(rect.top + rect.height / 2);
-      left = Math.round(rect.right + GAP);
-    } else if (spaceTop >= POP_H + GAP) {
-      placement = 'top';
-      top  = Math.round(rect.top - GAP);
-      left = Math.round(rect.left + rect.width / 2);
-    } else {
-      placement = 'bottom';
-      top  = Math.round(rect.bottom + GAP);
-      left = Math.round(rect.left + rect.width / 2);
-    }
-    return { top, left, placement };
-  }
-
-  useEffect(() => {
-    function onDocClick(e) {
-      // Close only if click is OUTSIDE any mevzuat popover wrapper
-      const t = e?.target;
-      if (t && t.closest && t.closest('[data-mevzuat-popover="1"]')) return;
-      setOpenMevzuat(null);
-    }
-    function onEsc(e) { if (e.key === "Escape") setOpenMevzuat(null); }
-    document.addEventListener("click", onDocClick);
-    document.addEventListener("keydown", onEsc);
-    return () => {
-      document.removeEventListener("click", onDocClick);
-      document.removeEventListener("keydown", onEsc);
-    };
-  }, []);
-
-  // Reposition popover on scroll/resize so it follows the badge
-  useEffect(() => {
-    if (!openMevzuat?.el) return;
-    function update() {
-      setOpenMevzuat(prev => {
-        if (!prev?.el) return prev;
-        const pos = calcMevzuatPopover(prev.el);
-        return { ...prev, ...pos };
-      });
-    }
-    update();
-    window.addEventListener("scroll", update, true);
-    window.addEventListener("resize", update);
-    return () => {
-      window.removeEventListener("scroll", update, true);
-      window.removeEventListener("resize", update);
-    };
-  }, [openMevzuat?.el]);
-
-  // Cache for madde metin fetched from API
-  const [maddeCache, setMaddeCache] = useState({});
-  const pendingMadde = useRef(new Set());
-
-  // persist sequencing
-  const lastComputedNextRef = useRef(null);
-  const persistedOnceRef = useRef(false);
-  const saveSeq = useRef(0);
-  const latestCommitted = useRef(0);
-
-  const saveChats = async (nextChats, reason = "unspecified") => {
-    const payload = JSON.parse(JSON.stringify(nextChats ?? []));
-    const seq = ++saveSeq.current;
-    console.log("[saveChats] begin seq=", seq, "items=", payload.length, "reason=", reason);
-
-    // Build JSON once and warn if unusually large to avoid silent browser drops.
-    const bodyJson = JSON.stringify({ chats: payload });
-    const approxKb = Math.round(bodyJson.length / 1024);
-    if (approxKb > 800) {
-      console.warn("[saveChats] payload is large (~KB):", approxKb);
-    }
-
-    try {
-      const res = await fetch("/api/chats", {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: bodyJson,
-        cache: "no-store",
-        credentials: "include",
-      });
-      const text = await res.text().catch(() => "");
-      console.log("[saveChats] end   seq=", seq, "status=", res.status, "body=", text.slice(0, 300));
-      if (!res.ok) return;
-      if (seq > latestCommitted.current) latestCommitted.current = seq;
-    } catch (e) {
-      console.error("[saveChats] network error seq=", seq, e);
-    }
+  const onDeleteClick = (e, id) => { 
+    e?.stopPropagation(); 
+    if (id) setConfirmDel({ open: true, id }); 
   };
 
-  const active = useMemo(() => chats.find(c => c.id === activeId) || null, [chats, activeId]);
-
-  // Initial load
-  useEffect(() => {
-    if (!session) return;
-    let cancelled = false;
-    (async () => {
-      console.log("[boot] fetching chats…");
-      try {
-        const r = await fetch("/api/chats", { cache: "no-store", credentials: "include" });
-        const data = r.ok ? await r.json() : { chats: [] };
-        console.log("[boot] GET /api/chats status=", r.status, "keys=", Object.keys(data || {}));
-        let stored = (data?.chats || []).slice()
-          .sort((a, b) => new Date(b?.createdAt || 0) - new Date(a?.createdAt || 0));
-
-        if ((!stored || stored.length === 0) && typeof window !== "undefined") {
-          console.log("[boot] no server chats, trying local backup…");
-          try {
-            const backup = JSON.parse(localStorage.getItem("chats_backup") || "[]");
-            if (Array.isArray(backup) && backup.length) {
-              stored = backup.slice().sort((a, b) => new Date(b?.createdAt || 0) - new Date(a?.createdAt || 0));
-            }
-          } catch {}
-        }
-        if (cancelled) return;
-
-        setChats(prev => (prev && prev.length ? prev : stored));
-        setActiveId(prev => {
-          if (prev) return prev;
-          let fromLs = null;
-          try { fromLs = localStorage.getItem("active_chat_id"); } catch {}
-          const pick = stored.find(c => c?.id === fromLs) ? fromLs : (stored[0]?.id ?? null);
-          return pick;
-        });
-      } catch (e) {
-        console.error("[boot] GET /api/chats failed", e);
-        if (cancelled) return;
-        try {
-          const backup = JSON.parse(localStorage.getItem("chats_backup") || "[]");
-          if (Array.isArray(backup) && backup.length) {
-            setChats(prev => (prev && prev.length ? prev : backup));
-            setActiveId(prev => prev ?? backup[0]?.id ?? null);
-          }
-        } catch {}
-      }
-    })();
-    return () => { cancelled = true; };
-  }, [session]);
-
-  useEffect(() => {
-    try { if (Array.isArray(chats)) localStorage.setItem("chats_backup", JSON.stringify(chats)); } catch {}
-  }, [chats]);
-
-  useEffect(() => {
-    try { if (activeId) localStorage.setItem("active_chat_id", activeId); } catch {}
-  }, [activeId]);
-
-  function createEmptyAnalysis(initialQuery = "") {
-    const id = crypto.randomUUID();
-    const title = initialQuery ? `${initialQuery.slice(0, 40)}${initialQuery.length > 40 ? "…" : ""}` : "Yeni";
-    return {
-      id,
-      title,
-      messages: initialQuery ? [{ id: crypto.randomUUID(), sender: "user", text: initialQuery }] : [],
-      createdAt: new Date().toISOString(),
-    };
-  }
-
-  function onDeleteClick(e, id) {
-    e?.stopPropagation?.(); if (!id) return;
-    setConfirmDel({ open: true, id });
-  }
-
-  async function deleteChatById(id) {
-    if (!id) return;
-    let nextChats;
-    setChats(prev => {
-      const idx = prev.findIndex(c => c.id === id);
-      nextChats = prev.filter(c => c.id !== id);
-      if (activeId === id) {
-        const candidate = nextChats[Math.min(idx, Math.max(0, nextChats.length - 1))];
-        setActiveId(candidate?.id || null);
-      }
-      return nextChats;
-    });
-    await saveChats(nextChats, "after-delete-local");
-    try {
-      const delRes = await fetch(`/api/chats?id=${encodeURIComponent(id)}`, {
-        method: "DELETE", cache: "no-store", credentials: "include",
-      });
-      console.log("[delete] status", delRes.status);
-      if (!delRes.ok) {
-        await fetch("/api/chats", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ chats: JSON.parse(JSON.stringify(nextChats || [])) }),
-          cache: "no-store",
-          credentials: "include",
-        });
-      }
-    } catch {}
-  }
-
-  async function handleAnalyze(e) {
-    e?.preventDefault?.();
-    if (!input.trim() || isLoading) return;
-
-    setIsLoading(true);
-    persistedOnceRef.current = false;
-    console.time("[analyze] total");
-
-    const draft = createEmptyAnalysis(input.trim());
-    setChats(prev => [draft, ...prev]);
-    setActiveId(draft.id);
-
-    try {
-      console.log("[analyze] POST /api/chats body keys", ["sorgu"]);
-      const res = await fetch("/api/chats", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sorgu: input.trim() }),
-        cache: "no-store",
-        credentials: "include",
-      });
-
-      const raw = await res.text();
-      let payload;
-      try {
-        payload = raw ? JSON.parse(raw) : {};
-      } catch (e) {
-        console.error("[analyze] invalid JSON from /api/chats", e, raw?.slice(0, 500));
-        throw new Error("API_JSON_PARSE");
-      }
-
-      // Insert diagnostic log for analysis text length
-      try {
-        const diagSonuc = (payload?.dataFromPython?.sonuc_ve_degerlendirme ?? payload?.sonuc_ve_degerlendirme ?? "");
-        console.log("[analyze] diag sonuc len=", typeof diagSonuc === "string" ? diagSonuc.length : -1);
-      } catch {}
-
-      console.log("[analyze] /api/chats status=", res.status, "keys=", Object.keys(payload || {}));
-
-      if (!res.ok || payload?.ok === false) {
-        const reason = payload?.error || `HTTP_${res.status}`;
-        const diag = payload?.diag || payload;
-        throw new Error(`API_ERROR:${reason}:${JSON.stringify(diag || {})}`);
-      }
-
-      const data = payload?.dataFromPython ?? payload ?? {};
-      const analysisText = data?.sonuc_ve_degerlendirme ?? null;
-
-      // UI güncelle (çıplak metin, sonra zenginleştirme)
-      const botId = crypto.randomUUID();
-      setChats(prev => {
-        const next = prev.map(c =>
-          c.id === draft.id
-            ? {
-                ...c,
-                messages: [...(c.messages || []), { id: botId, sender: "bot", text: analysisText || "Analiz metni bulunamadı." }],
-                sources: {
-                  mevzuat: (data?.ilgili_mevzuat_parsed || []).map((src) => {
-                    const read = (k) => (src?.[k] ?? "").toString().trim();
-                    const props = src?.properties || {};
-                    const readP = (k) => (props?.[k] ?? "").toString().trim();
-
-                    const mevzuat_adi =
-                      read("mevzuat_adi") || read("kanun_adi") || read("adi") || read("name") || read("title") ||
-                      readP("mevzuat_adi") || readP("kanun_adi") || readP("adi") || readP("name") || readP("title") ||
-                      "Mevzuat";
-
-                    const madde =
-                      read("madde_no") || read("madde") || readP("madde_no") || readP("madde") || "";
-
-                    const baslik =
-                      read("madde_baslik") || read("baslik") || readP("madde_baslik") || readP("baslik") || "";
-
-                    // Only use maddeMetin from top-level or properties
-                    const maddeMetinRaw = read("maddeMetin") || readP("maddeMetin") || "";
-                    const metin = maddeMetinRaw ? stripHtmlTags(maddeMetinRaw) : "";
-
-                    return {
-                      mevzuat_adi: mevzuat_adi || "Mevzuat",
-                      madde: madde || undefined,
-                      baslik: baslik || undefined,
-                      metin: metin || undefined,
-                      maddeMetin: metin || undefined,
-                      raw: src,
-                    };
-                  }),
-                  kararlar: (() => {
-                    const uniq = new Map();
-                    (data?.ilgili_kararlar || []).forEach(k => {
-                      const id = k?.properties?.orijinal_karar_id || k?.properties?.dosya_adi;
-                      if (!id) return;
-                      if (!uniq.has(id)) {
-                        uniq.set(id, {
-                          id,
-                          dosya: k?.properties?.dosya_adi,
-                          tip:   k?.properties?.kaynak_turu,
-                          metin: k?.properties?.metin_parcasi,
-                          code:  k?.properties?.code || "",
-                          type:  k?.properties?.type || "",
-                        });
-                      }
-                    });
-                    return [...uniq.values()];
-                  })(),
-                  karar_kartlari: data?.karar_kartlari || [],
-                  makaleler: (data?.ilgili_makaleler || []).map(a => ({
-                    dosya: a?.properties?.dosya_adi,
-                    metin: a?.properties?.metin_parcasi,
-                  })),
-                },
-                updatedAt: new Date().toISOString(),
-              }
-            : c
-        );
-        lastComputedNextRef.current = next;
-        return next;
-      });
-
-      // Persist once right after plain bot message so we see it in PUT logs
-      if (lastComputedNextRef.current && !persistedOnceRef.current) {
-        await saveChats(lastComputedNextRef.current, "after-plain-bot");
-        persistedOnceRef.current = true;
-      }
-
-      // Zenginleştirme (atıf) — hata verirse UI devam eder
-      try {
-        const enriched = buildWithInlineCitations(analysisText || "", data?.ilgili_kararlar || []);
-        setChats(prev => {
-          const next = prev.map(c =>
-            c.id === draft.id
-              ? {
-                  ...c,
-                  messages: c.messages.map(m => (m.id === botId ? { ...m, text: enriched } : m)),
-                }
-              : c
-          );
-          lastComputedNextRef.current = next;
-          return next;
-        });
-        // Persist enriched version for final state
-        if (lastComputedNextRef.current) {
-          await saveChats(lastComputedNextRef.current, "after-enrich");
-          persistedOnceRef.current = true;
-        }
-      } catch (enrichErr) {
-        console.error("[analyze] enrich failed", enrichErr);
-      }
-    } catch (err) {
-      console.error("[analyze] FAILED", err);
-      const errText = "Analiz yapmak için giriş yapmanız gereklidir! (401 Yetkisiz erişim)";
-      setChats(prev => {
-        const next = prev.map(c =>
-          c.id === draft.id ? { ...c, messages: [...(c.messages || []), { id: crypto.randomUUID(), sender: "bot", text: errText }] } : c
-        );
-        lastComputedNextRef.current = next;
-        return next;
-      });
-    } finally {
-      try {
-        const toPersist = lastComputedNextRef.current;
-        if (toPersist && !persistedOnceRef.current) {
-          await saveChats(toPersist, "finally");
-          persistedOnceRef.current = true;
-        }
-      } catch (pErr) {
-        console.error("[analyze] persist failed", pErr);
-      }
-      console.timeEnd("[analyze] total");
-      setIsLoading(false);
-      setInput("");
-      analysisEndRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }
-
-  // ---- helpers ----
-  function buildWithInlineCitations(analysisText, ilgili_kararlar) {
-    let enriched = analysisText || "";
-    const citations = [];
-    let counter = 1;
-    const allDecisionProps = (ilgili_kararlar || []).map(k => k?.properties || {});
-
-    (ilgili_kararlar || []).forEach(k => {
-      const p = k?.properties || {};
-      const typeLabel = p.type || p.mahkeme || "";
-      const codeOnly  = p.code || deduceEsasKararFromProps(p) || p.orijinal_karar_id || "";
-      if (!codeOnly) return;
-
-      const displayCode = normalizeDecision(typeLabel, codeOnly);
-      const slug = bestSlugTypeCodeFirst(p, allDecisionProps) || (p.orijinal_karar_id || p.dosya_adi || "");
-      const court = deduceCourtLabelFromProps(p) || formatDecisionType(typeLabel);
-
-      const escapeForRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      const codeToRegexPart = (s) => escapeForRegex(s).replace(/\\-/g, "[-/]").replace(/\//g, "[-/]");
-
-      const patterns = [];
-      try { patterns.push(new RegExp(codeToRegexPart(codeOnly), "g")); } catch {}
-      try { patterns.push(new RegExp(codeToRegexPart(`${displayCode}`), "g")); } catch {}
-
-      for (const re of patterns) {
-        if (re.test(enriched) && !citations.some(c => c.displayCode === displayCode)) {
-          const url = slug ? `/kararlar/${encodeURIComponent(slug)}` : "";
-          enriched = enriched.replace(re, url ? ` **[[${counter}]](${url})**` : ` **[[${counter}]]**`);
-          citations.push({ number: counter, displayCode, slug, court, code: deduceEsasKararFromProps(p) || codeOnly });
-          counter++;
-          break;
-        }
-      }
-    });
-
-    if (citations.length) {
-      enriched += "\n\n---\n\n### Metin İçi Atıflar\n\n";
-      citations.forEach(c => {
-        const label = [c.court || "", (c.court && (c.code || c.slug)) ? " · " : "", c.code || (c.slug || "")].join("");
-        if (c.slug) {
-          enriched += `**[${c.number}]**: [${label}](/kararlar/${encodeURIComponent(c.slug)})\n`;
-        } else {
-          enriched += `**[${c.number}]**: ${label || c.displayCode}\n`;
-        }
-      });
-    }
-    return enriched;
-  }
-
-  function formatDecisionType(t = "") {
-    if (!t) return "";
-    return t.replace(/^Hukuk\s+Genel\s+Kurulu\b/i, "HGK");
-  }
-  function normalizeDecision(typeRaw = "", codeRaw = "") {
-    let type = (typeRaw || "").trim();
-    let code = (codeRaw || "").trim();
-    code = code.replace(/^[—–-]\s*/, "");
-    if (/Dairesi\b/i.test(type) && !/^Yargıtay\s/i.test(type)) {
-      type = `Yargıtay ${type}`;
-    }
-    code = code.replace(/\b(\d{4})-(\d+)\b/g, "$1/$2");
-    return `${type} ${code}`.replace(/\s+/g, " ").trim();
-  }
-  function deduceEsasKararFromProps(p = {}) {
-    const clean = (s) => (s || "").toString().trim();
-    const bad = (s) => !s || /^belirtilmemi[şs]/i.test(s) || /^n\/?a$/i.test(s);
-    const codeField = clean(p.code);
-    if (!bad(codeField)) return codeField;
-    const esas = clean(p.esas_no);
-    const karar = clean(p.karar_no);
-    if (!bad(esas) && !bad(karar)) return `${esas} E. ${karar} K.`;
-    const fnameRaw = clean(p.orijinal_karar_id || p.dosya_adi || p.dosya || p.slug);
-    if (fnameRaw) {
-      const base = fnameRaw.replace(/\.txt$/i, "");
-      let m = base.match(/^(\d+)_Hukuk_Dairesi_(\d{4}-[0-9A-Za-z()\-\/]+)E_(\d{4}-[0-9A-Za-z()\-\/]+)K$/i);
-      if (m) return `${m[2].replace(/\s*-\s*/g, "/")} E. ${m[3].replace(/\s*-\s*/g, "/")} K.`;
-      m = base.match(/^(Hukuk|Ceza)_Genel_Kurulu_(\d{4}-[0-9A-Za-z()\-\/]+)E_(\d{4}-[0-9A-Za-z()\-\/]+)K$/i);
-      if (m) return `${m[2].replace(/\s*-\s*/g, "/")} E. ${m[3].replace(/\s*-\s*/g, "/")} K.`;
-    }
-    return "";
-  }
-  function deduceCourtLabelFromProps(p = {}) {
-    const clean = (s) => (s || "").toString().trim();
-    const mahkeme = clean(p.mahkeme || p.type || "");
-    if (mahkeme) return mahkeme;
-    const fnameRaw = clean(p.orijinal_karar_id || p.dosya_adi || p.dosya || p.slug);
-    if (!fnameRaw) return "";
-    const base = fnameRaw.replace(/\.txt$/i, "");
-    let m = base.match(/^(\d+)_Hukuk_Dairesi_/i);
-    if (m) return `${m[1]}. Hukuk Dairesi`;
-    m = base.match(/^(\d+)_Ceza_Dairesi_/i);
-    if (m) return `${m[1]}. Ceza Dairesi`;
-    m = base.match(/^(Hukuk|Ceza)_Genel_Kurulu_/i);
-    if (m) return `${m[1]} Genel Kurulu`;
-    return "";
-  }
-  function bestSlugFromProps(p = {}, allArr = []) {
-    const primary = (p.orijinal_karar_id || p.dosya_adi || p.karar_id || p.slug || "").toString().replace(/\.txt$/i, "");
-    if (looksLikeSlug(primary)) return primary;
-    const rid = (p.orijinal_karar_id || p.karar_id || "").toString().replace(/\.txt$/i, "");
-    if (rid) {
-      for (const q of allArr) {
-        const typeRaw = String(q.kaynak_turu || q.tur || "").toLowerCase();
-        const isSummaryName = /(?:\bözet\b|\bozet\b|gemini)/i.test(String(q.dosya_adi || ""));
-        const isSummary = typeRaw === "ai_ozet" || isSummaryName;
-        const candidate = (q.dosya_adi || q.orijinal_karar_id || "").toString().replace(/\.txt$/i, "");
-        if (looksLikeSlug(candidate) && !isSummary && (String(q.orijinal_karar_id || "").replace(/\.txt$/i, "") === rid)) {
-          return candidate;
-        }
-      }
-    }
-    const fallback = (p.dosya_adi || "").toString().replace(/\.txt$/i, "");
-    return looksLikeSlug(fallback) ? fallback : "";
-  }
-
-  // New: slugFromTypeAndCode
-  function slugFromTypeAndCode(typeRaw = "", codeRaw = "") {
-    // Turkish normalization
-    const trMap = {
-      "ı": "i", "İ": "i", "ş": "s", "Ş": "s", "ç": "c", "Ç": "c",
-      "ö": "o", "Ö": "o", "ü": "u", "Ü": "u", "ğ": "g", "Ğ": "g"
-    };
-    function normalizeTr(str) {
-      return (str || "").replace(/[ıİşŞçÇöÖüÜğĞ]/g, c => trMap[c] || c);
-    }
-    let type = normalizeTr(typeRaw || "").trim();
-    // Remove leading "Yargıtay" (case-insensitive), dots, spaces->-, to lower, collapse --
-    type = type.replace(/^Yargıtay\s*/i, "");
-    type = type.replace(/\./g, "");
-    type = type.replace(/\s+/g, "-");
-    type = type.toLowerCase();
-    type = type.replace(/-+/g, "-");
-    const typeSlug = type;
-    // Parse code: E and K
-    const code = normalizeTr(codeRaw || "").trim();
-    // Regex: (year1)-(E), (year2)-(K)
-    const m = code.match(/^(?:.*?)(\d{4})\s*[/-]\s*([0-9A-Za-z-]+)\s*E\b.*?(\d{4})\s*[/-]\s*([0-9A-Za-z-]+)\s*K\b/i);
-    if (!m) return "";
-    const y1 = m[1], e = (m[2] || "").replace(/\s+/g, ""), y2 = m[3], k = (m[4] || "").replace(/\s+/g, "");
-    const codeSlug = `${y1}-${e}E_${y2}-${k}K`;
-    if (!typeSlug || !codeSlug) return "";
-    return `${typeSlug}__${codeSlug}`;
-  }
-
-  // New: bestSlugTypeCodeFirst
-  function bestSlugTypeCodeFirst(p = {}, allArr = []) {
-    const code = deduceEsasKararFromProps(p);
-    const court = deduceCourtLabelFromProps(p) || p.type || p.mahkeme || "";
-    const slug = slugFromTypeAndCode(court, code);
-    if (slug) return slug;
-    return bestSlugFromProps(p, allArr);
-  }
-
-  function looksLikeSlug(s = "") {
-    const base = String(s).replace(/\.txt$/i, "");
-    if (!base) return false;
-    // Old style: file-like
-    if (/(Hukuk|Ceza)_(Dairesi|Genel_Kurulu)/i.test(base) && /E_/i.test(base) && /K\b/i.test(base)) return true;
-    // New style: type__YYYY-EEE E_YYYY-KKKK K
-    if (/__(\d{4})-[^_]+E_\d{4}-[^_]+K$/i.test(base)) return true;
-    return false;
-  }
-
-  // --- Mevzuat helpers ---
-  function slugifyMevzuatAdi(name = "") {
-  const trMap = { "ı":"i","İ":"i","ş":"s","Ş":"s","ç":"c","Ç":"c","ö":"o","Ö":"o","ü":"u","Ü":"u","ğ":"g","Ğ":"g" };
-  let s = (name || "").toString().trim();
-
-  // Başındaki “XXXX sayılı / sayili / numaralı / no.lu …” öneklerini KALDIR
-  s = s.replace(/^\s*\d+(?:\s*\/\s*\d+)?\s*(?:say[ıi]l[ıi]|numaral[ıi]|no\.?lu?)\s+/i, "");
-
-  // Baştaki yalnız yıl/sayı varsa onu da indir
-  s = s.replace(/^\s*\d{3,5}\s+/, "");
-
-  // TR normalize + slug
-  s = s.replace(/[ıİşŞçÇöÖüÜğĞ]/g, c => trMap[c] || c).toLowerCase();
-  return s
-    .replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-  // Metin temizleyici (HTML -> düz metin, satır sonlarını korur)
-  function stripHtmlTags(s = "") {
-    // Preserve meaningful line breaks while stripping tags.
-    // Handles both raw HTML (<br>, <p>) and HTML-escaped tags (&lt;br&gt;, &lt;p&gt;).
-    let t = (s ?? "").toString();
-
-    // Normalize Windows newlines first
-    t = t.replace(/\r\n/g, "\n");
-
-    // Convert common break tags to real newlines
-    t = t
-      // HTML-escaped variants
-      .replace(/&lt;br\s*\/?&gt;/gi, "\n")
-      .replace(/&lt;\/p\s*&gt;/gi, "\n")
-      .replace(/&lt;p[^&gt;]*&gt;/gi, "")
-      // Raw HTML variants
-      .replace(/<br\s*\/?>/gi, "\n")
-      .replace(/<\/p\s*>/gi, "\n")
-      .replace(/<p[^>]*>/gi, "");
-
-    // Strip any remaining tags (both escaped and raw)
-    t = t
-      .replace(/&lt;[^&gt;]*&gt;/g, " ")
-      .replace(/<[^>]*>/g, " ");
-
-    // Normalize nbsp and stray carriage returns
-    t = t.replace(/&nbsp;/gi, " ").replace(/\r/g, "");
-
-    // Collapse consecutive spaces/tabs but KEEP newlines
-    t = t.replace(/[ \t\f\v]+/g, " ");
-
-    // Trim spaces around newlines
-    t = t.replace(/[ \t]+\n/g, "\n").replace(/\n[ \t]+/g, "\n");
-
-    // Collapse excessive blank lines to at most one empty line
-    t = t.replace(/\n{3,}/g, "\n\n");
-
-    return t.trim();
-  }
-
-  // Tam madde metnini döndürür; sonda kalan "1. Başlık", "I. Bölüm" vb. başlık kırıntılarını ayıklar
-  function sanitizeMaddeTextFull(s = "") {
-    const txt = stripHtmlTags(s || "");
-    let out = txt;
-
-    // Split and remove trailing heading-like lines
-    const lines = out.split(/\r?\n/);
-
-    const isUpperHeading = (t) =>
-      /^(?:BİRİNCİ|İKİNCİ|ÜÇÜNCÜ|DÖRDÜNCÜ|BEŞİNCİ|ALTINCI|YEDİNCİ|SEKİZİNCİ|DOKUZUNCU|ONUNCU)\s+(?:KİTAP|BÖLÜM|KISIM|AYRIM)\b/.test(t);
-
-    const isOutline = (t) =>
-      /^(?:[IVXLCDM]+|[0-9]+|[A-ZÇĞİÖŞÜ])\.\s+\S/.test(t); // I., 1., A. + metin
-
-    // Sondaki başlık görünümlü satırları at
-    while (lines.length) {
-      const last = (lines[lines.length - 1] || "").trim();
-      if (!last) { lines.pop(); continue; }
-      if (isOutline(last) || isUpperHeading(last)) {
-        lines.pop();
-        while (lines.length && !lines.length == 0 && !lines[lines.length - 1].trim()) lines.pop();
-        while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
-        continue;
-      }
-      break;
-    }
-
-    out = lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
-
-    // --- NEW: trailing inline heading fragments at the very end of the text ---
-    // Examples: "... reddedilmiş sayılır. 2. Süre", "... reddedilmiş sayılır. II.", "... — I. Başlık"
-    // 1) Remove a dash followed by an outline-like token
-    out = out.replace(/\s*[—–-]\s*(?=(?:[IVXLCDM]+|[0-9]+|[A-ZÇĞİÖŞÜ])\.)[^\n]*$/u, "");
-    // 2) Remove "2. Süre", "II. Başlık", "A. Giriş" (short tail at end)
-    out = out.replace(/\s*(?:\b(?:[IVXLCDM]+|[0-9]+|[A-ZÇĞİÖŞÜ])\.\s*[A-ZÇĞİÖŞÜ][^\n]{0,60})\s*$/u, "");
-    // 3) Remove bare "II." / "2." tails
-    out = out.replace(/\s*(?:\b(?:[IVXLCDM]+|[0-9]+))\.\s*$/u, "");
-
-    return out.trim();
-  }
-
-  function mevzuatCacheKey(kanun = "", madde = "") {
-    const id = (madde || "").toString().match(/\d+/)?.[0] || (madde || "").toString();
-    return `${slugifyMevzuatAdi(kanun || "")}::${id}`;
-  }
-
-  async function ensureMaddeInCache(kanun = "", madde = "") {
-    if (!kanun || !madde) return;
-    const key = mevzuatCacheKey(kanun, madde);
-    if (maddeCache[key] || pendingMadde.current.has(key)) return;
-    pendingMadde.current.add(key);
-    try {
-      const url = `/api/mevzuat/madde?kanun=${encodeURIComponent(kanun)}&madde=${encodeURIComponent(madde)}`;
-      const res = await fetch(url, { cache: "no-store" });
-      const data = await res.json().catch(() => ({}));
-      const metin = sanitizeMaddeTextFull(data?.maddeMetin || "");
-      setMaddeCache(prev => ({ ...prev, [key]: metin }));
-    } catch (e) {
-      console.warn("[mevzuat] fetch madde failed", kanun, madde, e);
-      setMaddeCache(prev => ({ ...prev, [key]: "" }));
-    } finally {
-      pendingMadde.current.delete(key);
-    }
-  }
-
-  // Ham objeden sadece maddeMetin'i çek
-  function extractMevzuatTextFromAny(raw) {
-    const v = raw?.maddeMetin || raw?.properties?.maddeMetin || "";
-    return stripHtmlTags(String(v || ""));
-  }
-
-  // Önizleme değil: TAM madde metni (temizlenmiş)
-  function getMevzuatPreview(entry) {
-    if (!entry) return "";
-    const kanun = entry.mevzuat_adi || entry.kanun_adi || entry.name || "";
-    const madde = entry.madde || entry.madde_no || "";
-    if (kanun && madde) {
-      const key = mevzuatCacheKey(kanun, madde);
-      const cached = maddeCache[key];
-      if (typeof cached === "string" && cached.length) return cached;
-    }
-    if (entry?.maddeMetin) return sanitizeMaddeTextFull(entry.maddeMetin);
-    if (entry?.metin) return sanitizeMaddeTextFull(entry.metin);
-    return sanitizeMaddeTextFull(extractMevzuatTextFromAny(entry?.raw ?? entry));
-  }
-
-  function maddeAnchor(madde) {
-    const raw = (madde ?? "").toString();
-    // Prefer first number; fallback to clean text
-    const num = (raw.match(/\d+/)?.[0] ?? raw)
-      .toString()
-      .trim()
-      .replace(/\s+/g, "-")
-      .toLowerCase();
-    return num ? `#madde-${num}` : "";
-  }
-
-  function shorten(s = "", max = 420) {
-    const txt = (s || "").toString().replace(/\s+/g, " ").trim();
-    if (!txt) return "";
-    if (txt.length <= max) return txt;
-    const slice = txt.slice(0, max);
-    return slice.replace(/[,;.:!?]?\s+\S*$/, "") + "…";
-  }
-
-  function excerptWords(s = "", maxWords = 50) {
-    const txt = (s || "").toString().replace(/\s+/g, " ").trim();
-    if (!txt) return "";
-    const words = txt.split(" ");
-    if (words.length <= maxWords) return txt;
-    return words.slice(0, maxWords).join(" ") + "…";
-  }
-  function cleanTitle(title = "") {
-    return (title || "").replace(/^\s*Analiz\s*[—–-]\s*/i, "").trim();
-  }
-
-  const filteredChats = useMemo(() => {
-    const term = search.trim().toLowerCase();
-    if (!term) return chats;
-    return chats.filter(c => c.title?.toLowerCase().includes(term));
-  }, [chats, search]);
-
-  const activeMarkdown = useMemo(() => {
-    const msgs = active?.messages || [];
-    for (let i = msgs.length - 1; i >= 0; i--) {
-      const s = String(msgs[i]?.sender || "").toLowerCase();
-      if (s && s !== "user") return msgs[i]?.text || "";
-    }
-    return "";
-  }, [active]);
-
-  const activeUserQuery = useMemo(() => {
-    const msgs = active?.messages || [];
-    for (let i = msgs.length - 1; i >= 0; i--) {
-      if (String(msgs[i]?.sender || "").toLowerCase() === "user") return msgs[i]?.text || "";
-    }
-    return "";
-  }, [active]);
-
-  useEffect(() => {
-    const arr = active?.sources?.mevzuat || [];
-    arr.forEach((m) => {
-      const kanun = m?.mevzuat_adi || m?.kanun_adi || m?.name || "";
-      const madde = m?.madde || m?.madde_no || "";
-      if (kanun && madde) {
-        // Her zaman sunucudan tam metni çekmeye çalış (satır sonlarını koruyan sürüm).
-        // ensureMaddeInCache kendi içinde cache/pending kontrolü yapıyor.
-        ensureMaddeInCache(kanun, madde);
-      }
-    });
-  }, [active?.sources?.mevzuat]);
+  const icons = {
+    bot: <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" /></svg>,
+    send: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>,
+    plus: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>,
+    trash: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>,
+    book: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
+    scale: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-800 to-slate-900 text-slate-100">
-      <header className="sticky top-0 z-20 bg-[#0f1a2b] text-white border-b border-cyan-500">
-        <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="size-9 rounded-xl bg-cyan-600 text-white grid place-items-center shadow"><span className="font-bold">A</span></div>
-            <div>
-              <h1 className="text-lg font-semibold leading-tight">Analiz Bot Pro</h1>
-              <p className="text-xs text-slate-200">Özel eğitilmiş botumuzdan istediğiniz konuya ilişkin analiz isteyin.</p>
-            </div>
+    <div className="flex flex-col h-screen bg-[#020617] text-slate-100 font-sans overflow-hidden selection:bg-cyan-500/30 selection:text-cyan-100">
+      
+      {/* Global Style overrides */}
+      <style jsx global>{`
+        footer, .footer { display: none !important; }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
+
+        @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .animate-spin-slow { animation: spin-slow 3s linear infinite; }
+        
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .animate-shimmer { animation: shimmer 2s infinite linear; }
+        
+        @keyframes pulse-slow { 0%, 100% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.2; transform: scale(1.1); } }
+        .animate-pulse-slow { animation: pulse-slow 8s infinite ease-in-out; }
+      `}</style>
+
+      {/* Arkaplan */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-cyan-900/10 rounded-full blur-[120px] animate-pulse-slow"></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-900/10 rounded-full blur-[120px] animate-pulse-slow" style={{animationDelay: '2s'}}></div>
+      </div>
+
+      {/* Header - Z-Index 50 */}
+      <header className="flex-none z-50 h-16 border-b border-white/5 bg-[#020617]/70 backdrop-blur-xl flex items-center justify-between px-6 shadow-lg shadow-black/20">
+        <div className="flex items-center gap-4">
+          <div className="relative group cursor-pointer">
+             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-200"></div>
+             <div className="relative w-10 h-10 bg-[#0f172a] rounded-lg border border-slate-700 flex items-center justify-center text-cyan-400 shadow-xl">
+               {icons.scale}
+             </div>
           </div>
-          <div className="hidden md:flex items-center gap-2 text-sm">
-            <span className="px-2 py-1 rounded-full bg-[#1f2a3a] text-white">Toplam: {chats.length}</span>
-            <span className="px-2 py-1 rounded-full bg-[#1f2a3a] text-white">Aktif: {active ? 1 : 0}</span>
+          <div className="flex flex-col">
+             <h1 className="text-lg font-bold tracking-tight text-white leading-none">
+               Analiz <span className="text-cyan-500 font-light">AI</span>
+             </h1>
+             <span className="text-[10px] text-cyan-600/80 font-mono tracking-[0.2em] uppercase mt-1">Legal Intellıgence System v2.0</span>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-[10px] text-slate-400 gap-3">
+             <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></span>ONLINE</span>
+             <span className="w-px h-3 bg-slate-700"></span>
+             <span>VERİ TABANI: GÜNCEL</span>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] gap-5">
-        <aside className="rounded-2xl bg-slate-800 shadow-sm border border-slate-700 p-3 lg:sticky lg:top-16 h-fit text-slate-100 lg:-ml-4">
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-semibold">Son Analizler</h2>
-            <button
-              className="text-sm px-2 py-1 rounded-lg bg-cyan-600 text-white hover:bg-cyan-700"
-              onClick={() => {
-                const c = createEmptyAnalysis("");
-                setChats(prev => [c, ...prev]);
-                setActiveId(c.id);
-              }}
-            >Yeni</button>
-          </div>
-          <div className="relative mb-3">
-            <input
-              placeholder="Listede ara…"
-              className="w-full rounded-xl border border-slate-600 bg-slate-900 px-3 py-2 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-400"
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
-          </div>
-          <ul className="space-y-2 max-h-[60vh] overflow-auto pr-1">
-            {filteredChats.length === 0 && <li className="text-xs text-slate-500">Kayıt bulunamadı.</li>}
-            {filteredChats.map(item => (
-              <li key={item.id}>
-                <div className="group grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2">
-                  <button
-                    onClick={() => setActiveId(item.id)}
-                    title={cleanTitle(item.title) || (item.messages?.find(m => m.sender === "user")?.text || "Başlıksız")}
-                    className={`min-w-0 text-left px-5 py-3 rounded-2xl border transition ${
-                      item.id === activeId ? "bg-cyan-600 border-cyan-500 text-white" : "border-slate-700 hover:bg-slate-700 text-slate-200"
-                    }`}
-                  >
-                    <div className="text-base font-medium truncate">
-                      {cleanTitle(item.title) || (item.messages?.find(m => m.sender === "user")?.text || "Başlıksız")}
-                    </div>
-                  </button>
-                  <button
-                    aria-label="Analizi Sil" title="Sil"
-                    onClick={(e) => onDeleteClick(e, item.id)}
-                    className="inline-flex items-center justify-center w-9 h-9 rounded-xl border border-slate-700 bg-slate-800 text-slate-300 hover:text-white hover:bg-red-600/20 hover:border-red-400 focus:outline-none focus:ring-2 focus:ring-red-400"
-                  >
-                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18" /><path d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6" /><path d="M10 11v6M14 11v6" /><path d="M9 6l1-2h4l1 2" /></svg>
-                  </button>
+      {/* --- Main Layout --- */}
+      <div className="flex-1 flex overflow-hidden relative z-10 px-6 py-6 gap-6">
+        
+        {/* SOL: Geçmiş Analizler Sidebar - Z-Index 40 */}
+        <aside className="w-[300px] flex-none z-40 flex flex-col">
+          <PremiumCard className="h-full bg-[#020617]/80 backdrop-blur-sm" noPadding>
+            <div className="flex flex-col h-full">
+              
+              {/* --- TOKEN BAKİYESİ --- */}
+              <div className="pt-4">
+                 <TokenBalance />
+              </div>
+              {/* ------------------- */}
+
+              <div className="p-5 space-y-4 flex-none">
+                <button 
+                  onClick={() => { const c = createEmptyAnalysis(""); setActiveId(c.id); }}
+                  className="group relative w-full flex items-center justify-center gap-2 overflow-hidden bg-cyan-950/30 hover:bg-cyan-900/50 border border-cyan-800/50 hover:border-cyan-500 text-cyan-100 text-sm font-medium py-3 rounded-xl transition-all duration-300"
+                >
+                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
+                  {icons.plus} <span>YENİ ANALİZ BAŞLAT</span>
+                </button>
+                <div className="relative">
+                  <input 
+                    type="text" 
+                    placeholder="Analizlerde ara..." 
+                    value={search}
+                    onChange={e => setSearch(e.target.value)}
+                    className="w-full bg-[#0f172a] border border-slate-800 rounded-lg py-2.5 px-4 text-xs text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 transition-all"
+                  />
                 </div>
-              </li>
-            ))}
-          </ul>
+              </div>
+              <div className="flex-1 overflow-y-auto px-3 pb-3 custom-scrollbar">
+                <div className="space-y-1">
+                  {filteredChats.map(item => {
+                    const isActive = item.id === activeId;
+                    const title = utils.cleanTitle(item.title) || (item.messages?.find(m => m.sender === "user")?.text || "Başlıksız");
+                    return (
+                      <div 
+                        key={item.id}
+                        onClick={() => setActiveId(item.id)}
+                        className={`group relative p-3 rounded-lg cursor-pointer transition-all duration-200 border ${isActive ? "bg-slate-800/80 border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.1)]" : "border-transparent hover:bg-slate-800/40 hover:border-slate-800"}`}
+                      >
+                          <div className="flex justify-between items-start gap-2">
+                            <div className="min-w-0 flex-1">
+                              <h4 className={`text-xs font-medium truncate mb-1 ${isActive ? "text-cyan-100" : "text-slate-400 group-hover:text-slate-200"}`}>{title}</h4>
+                              <span className="text-[10px] text-slate-600 font-mono">{new Date(item.createdAt || Date.now()).toLocaleDateString('tr-TR')}</span>
+                            </div>
+                            {isActive && <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_8px_#22d3ee]"></div>}
+                          </div>
+                          <button 
+                            onClick={(e) => onDeleteClick(e, item.id)}
+                            className={`absolute right-2 bottom-2 p-1.5 rounded bg-slate-900/80 text-slate-500 hover:text-red-400 hover:bg-red-900/20 opacity-0 group-hover:opacity-100 transition-all z-10`}
+                          >
+                            {icons.trash}
+                          </button>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+          </PremiumCard>
         </aside>
 
-        <section className="space-y-6">
-          <form onSubmit={handleAnalyze} className="rounded-2xl bg-slate-800 shadow-sm border border-slate-700 p-4 text-slate-100">
-            <div className="flex items-start gap-3">
-              <div className="flex-1 relative">
-                <label className={`block text-sm font-medium mb-2 transition-opacity duration-300 ${isLoading ? "opacity-0 pointer-events-none select-none" : "opacity-100"}`}>
-                  Hukuki sorunuzu yazın
-                </label>
-                <div className="relative w-full">
-                  <textarea
-                    rows={4}
-                    placeholder="Örn: Kamulaştırmasız el atma davalarında zamanaşımı işler mi?"
-                    className={`w-full rounded-xl border border-slate-600 bg-slate-900 px-4 py-3 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all duration-200 ${isLoading ? "text-center" : ""}`}
-                    value={input}
-                    onChange={e => setInput(e.target.value)}
-                    disabled={isLoading}
-                  />
-                  {isLoading && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center z-10 pointer-events-none gap-2 bg-slate-900/80">
-                      <div className="flex flex-col items-center justify-center gap-2 mt-6 w-full">
-                        <LoadingSteps />
+        {/* ORTA: Chat & Analiz Alanı - Z-Index 10 */}
+        <main className="flex-1 overflow-y-auto custom-scrollbar min-w-0 bg-transparent z-10">
+          <div className="max-w-4xl mx-auto flex flex-col gap-6">
+              
+              {/* Soru Alanı */}
+              <PremiumCard className="z-10 bg-gradient-to-b from-[#0f172a] to-[#0B1120]">
+                  <form onSubmit={handleAnalyze} className="relative">
+                      <textarea 
+                          disabled={isLoading}
+                          value={input}
+                          onChange={e => setInput(e.target.value)}
+                          placeholder="Hukuki meseleyi, dava türünü ve delil durumunu buraya detaylıca yazın..." 
+                          className={`w-full bg-[#020617] border border-slate-800 rounded-xl p-4 min-h-[120px] text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 focus:shadow-[0_0_20px_rgba(6,182,212,0.05)] transition-all resize-y ${isLoading ? "opacity-30 pointer-events-none" : ""}`}
+                      />
+                      
+                      {isLoading && (
+                          <div className="absolute inset-0 flex items-center justify-center z-20">
+                            <CyberLoader />
+                          </div>
+                      )}
+
+                      <div className="flex items-center justify-between mt-4">
+                          <div className="flex gap-2">
+                              {["YARGITAY", "BAM", "ANAYASA", "MEVZUAT"].map(tag => (
+                                  <span key={tag} className="text-[9px] font-mono text-cyan-900 bg-cyan-900/10 border border-cyan-900/20 px-2 py-1 rounded select-none">
+                                    {tag}
+                                  </span>
+                              ))}
+                          </div>
+                          <div className="flex gap-3">
+                              {input && !isLoading && (
+                                  <button type="button" onClick={() => setInput("")} className="px-4 py-2 text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors">Vazgeç</button>
+                              )}
+                              <button 
+                                  type="submit" 
+                                  disabled={isLoading || !input.trim()}
+                                  className="group relative inline-flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-sm font-bold tracking-wide rounded-lg shadow-lg shadow-cyan-900/30 hover:shadow-cyan-500/40 disabled:opacity-50 disabled:shadow-none transition-all duration-300 overflow-hidden"
+                              >
+                                  <span className="relative z-10 flex items-center gap-2">ANALİZ ET {icons.send}</span>
+                                  <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                              </button>
+                          </div>
                       </div>
-                    </div>
-                  )}
-                </div>
-                <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-slate-300">
-                  <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-200">Yargıtay Kararlarına Atıf</span>
-                  <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-200">Detaylı Analiz</span>
-                  <span className="px-2 py-1 rounded-full bg-slate-700 text-slate-200">Mevzuat-Karar Listesi</span>
-                </div>
-              </div>
-              <div className="flex flex-col gap-2">
-                <button type="submit" disabled={isLoading || !input.trim()} className="px-4 py-2 rounded-xl bg-cyan-600 text-white hover:bg-cyan-700 disabled:bg-cyan-400 disabled:text-white/70 flex items-center justify-center">
-                  {isLoading ? <div className="border-t-2 border-white border-solid rounded-full w-5 h-5 animate-spin mx-auto"></div> : "Analiz İste"}
-                </button>
-                <button type="button" className="px-4 py-2 rounded-xl border" onClick={() => setInput("")} disabled={isLoading}>Temizle</button>
-              </div>
-            </div>
-          </form>
+                  </form>
+              </PremiumCard>
 
-          <div className="rounded-2xl bg-slate-800 shadow-sm border border-slate-700 p-0 overflow-hidden text-slate-100">
-            <div className="flex items-center justify-between border-b border-slate-700 px-4 py-3 bg-slate-900 text-slate-200">
-              <div>
-                <div className="text-xs uppercase tracking-wide text-slate-400">Analiz Sonucu</div>
-                <h3 className="text-base font-semibold truncate max-w-[60vw]">{cleanTitle(active?.title) || "Seçili analiz yok"}</h3>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-[minmax(0,1fr)_280px]">
-              <div className="p-5 prose prose-invert max-w-none">
-                {active ? (
-                  activeMarkdown ? (
-                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}
-                      components={{
-                        p: ({ node, ...props }) => <p className="leading-relaxed text-sm text-white" {...props} />,
-                        strong: ({ node, ...props }) => <strong className="text-white font-semibold" {...props} />,
-                      }}
-                    >{activeMarkdown}</ReactMarkdown>
-                  ) : <div className="text-sm text-slate-500">Bu analiz için henüz sonuç yok. Üstteki formdan sorgunuzu gönderin.</div>
-                ) : <div className="text-sm text-slate-500">Sağdaki listeden bir analiz seçin veya yeni bir analiz başlatın.</div>}
-                <div ref={analysisEndRef} />
-              </div>
-
-              <aside className="border-l border-slate-700 bg-slate-900 p-4 space-y-4">
-                <Panel title="Soru"><div className="text-sm text-white whitespace-pre-wrap break-words">{activeUserQuery || "—"}</div></Panel>
-                <Panel title="Mevzuat">
-                  {active?.sources?.mevzuat?.length ? (
-                    <div className="flex flex-wrap gap-2">
-                      {active.sources.mevzuat.map((m, i) => (
-                        <div key={i} className="w-full space-y-1">
-                          <div className="flex items-stretch gap-2" data-mevzuat-popover="1">
-                            {(() => {
-                const slug = slugifyMevzuatAdi(m.mevzuat_adi || "");
-                const anchor = m.madde ? maddeAnchor(m.madde) : "";
-                const href = slug ? `/mevzuat/${encodeURIComponent(slug)}${anchor}` : "";
-                const popKey = `${slug || "mevzuat"}::${m.madde || ""}`;
-                const preview = getMevzuatPreview(m); // Tam metin göster
-                const titleText = (m.mevzuat_adi || "Mevzuat");
-                const maddeNo = m.madde || "";
-
-                // Name element stays a link (no tooltip)
-                const NameEl = href ? (
-                  <a
-                    className="flex-1 inline-flex items-center px-3 py-2 rounded-lg bg-slate-700/60 text-[11px] text-slate-300 font-medium leading-tight min-h-[32px] hover:text-cyan-300 hover:bg-slate-600/60 transition-colors"
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(e)=>e.stopPropagation()}
-                  >
-                    {titleText}
-                  </a>
-                ) : (
-                  <span className="flex-1 inline-flex items-center px-3 py-2 rounded-lg bg-slate-700/60 text-[11px] text-slate-300 font-medium leading-tight min-h-[32px]">
-                    {titleText}
-                  </span>
-                );
-
-                // RETURN (badge + name + click popover)
-                return (
-                  <> 
-                    {m.madde ? (
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          const el = e.currentTarget;
-                          const pos = calcMevzuatPopover(el);
-                          setOpenMevzuat(prev => (prev?.key === popKey ? null : { key: popKey, el, ...pos }));
-                        }}
-                        aria-expanded={openMevzuat?.key === popKey}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 text-[12px] font-semibold rounded-lg bg-cyan-600/40 text-white whitespace-nowrap leading-none hover:bg-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-300/30 transition-colors"
-                      >
-                        <span>m.</span>
-                        <span className="tabular-nums">{maddeNo}</span>
-                      </button>
-                    ) : null}
-
-                    <div className="relative flex-1">
-                      {NameEl}
-                      {openMevzuat?.key === popKey && preview ? (
-                        <div
-                          data-mevzuat-popover="1"
-                          role="dialog"
-                          aria-modal="true"
-                          onClick={(e)=>e.stopPropagation()}
-                          className={
-                            "fixed z-[999] w-[42rem] max-w-[92vw] max-h-[70vh] overflow-auto rounded-2xl " +
-                            "border border-white/10 bg-slate-900/95 backdrop-blur-md " +
-                            "shadow-[0_20px_60px_rgba(0,0,0,0.55),0_0_24px_rgba(34,211,238,0.2)] ring-1 ring-cyan-400/35 p-4 " +
-                            "text-[12px] text-slate-100 transition-transform duration-150 ease-out will-change-transform " +
-                            (openMevzuat?.placement === 'left'
-                              ? "-translate-x-full -translate-y-1/2"
-                              : openMevzuat?.placement === 'right'
-                                ? "-translate-y-1/2"
-                                : openMevzuat?.placement === 'bottom'
-                                  ? "-translate-x-1/2"
-                                  : "-translate-x-1/2 -translate-y-full")
-                          }
-                          style={{ top: openMevzuat.top, left: openMevzuat.left }}
-                        >
-                          {/* Directional arrow */}
-                          {openMevzuat?.placement === 'left' && (
-                            <div className="pointer-events-none absolute top-1/2 -translate-y-1/2 -right-2 w-3.5 h-3.5 rotate-45 bg-slate-900/95 border-t border-r border-white/10 shadow-[0_0_10px_rgba(34,211,238,0.18)]"></div>
-                          )}
-                          {openMevzuat?.placement === 'right' && (
-                            <div className="pointer-events-none absolute top-1/2 -translate-y-1/2 -left-2 w-3.5 h-3.5 rotate-45 bg-slate-900/95 border-b border-l border-white/10 shadow-[0_0_10px_rgba(34,211,238,0.18)]"></div>
-                          )}
-                          {openMevzuat?.placement === 'top' && (
-                            <div className="pointer-events-none absolute -bottom-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rotate-45 bg-slate-900/95 border-l border-b border-white/10 shadow-[0_0_10px_rgba(34,211,238,0.18)]"></div>
-                          )}
-                          {openMevzuat?.placement === 'bottom' && (
-                            <div className="pointer-events-none absolute -top-2 left-1/2 -translate-x-1/2 w-3.5 h-3.5 rotate-45 bg-slate-900/95 border-t border-r border-white/10 shadow-[0_0_10px_rgba(34,211,238,0.18)]"></div>
-                          )}
-                          {/* Accent bar */}
-                          <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"></div>
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <div className="text-slate-100">
-                              <div className="font-semibold">{titleText}</div>
-                              {maddeNo ? <div className="text-xs text-slate-300 mt-0.5">m. {maddeNo}</div> : null}
+              {/* Sonuç Alanı */}
+              {active ? (
+                  <div className="space-y-6 animate-in fade-in slide-in-from-bottom-6 duration-700">
+                        {activeUserQuery && (
+                            <div className="flex items-start gap-4 p-5 rounded-2xl bg-[#0f172a]/40 border border-dashed border-slate-700/50">
+                                <div className="shrink-0 w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center border border-slate-700 text-slate-400 text-xs font-bold">SORGU:</div>
+                                <div className="text-sm text-slate-300 leading-relaxed font-light">{activeUserQuery}</div>
                             </div>
-                            <button
-                              type="button"
-                              onClick={() => setOpenMevzuat(null)}
-                              className="shrink-0 w-8 h-8 grid place-items-center rounded-md bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white ring-1 ring-white/15 focus:outline-none focus:ring-2 focus:ring-cyan-400/40"
-                              aria-label="Kapat"
-                              title="Kapat"
-                            >
-                              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-                            </button>
-                          </div>
-                          <div className="leading-snug whitespace-pre-wrap break-words font-medium">{preview}</div>
-                        </div>
-                      ) : null}
-                    </div>
-                  </>
-                );
-              })()}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="text-sm text-slate-500">Kayıt yok</div>
-                  )}
-                </Panel>
+                        )}
 
-                <Panel title="Yargıtay Kararları">
-                  {(() => {
-                    const pref = active?.sources?.karar_kartlari;
-                    if (pref?.length) {
-                      return (
-                        <ul className="space-y-2">
-                          {pref.map((r, i) => {
-                            const autoSlug = slugFromTypeAndCode(r.type || "", r.code || "");
-                            const slug = autoSlug || r.slug;
-                            const hasSlug = slug && looksLikeSlug(slug);
-                            const content = (
-                              <span className="inline-flex flex-col leading-tight">
-                                {r.type ? <span className="font-medium">{r.type}</span> : null}
-                                <span className="tabular-nums text-slate-300">{r.code || slug}</span>
-                              </span>
-                            );
-                            return (
-                              <li key={i} className="text-[12px] leading-tight">
-                                {hasSlug ? (
-                                  <a
-                                    className="text-white no-underline inline-flex flex-col leading-tight hover:text-cyan-400 hover:bg-cyan-500/10 hover:rounded px-1 transition-transform"
-                                    href={`/kararlar/${encodeURIComponent(slug)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {content}
-                                  </a>
+                        <PremiumCard className="min-h-[400px]" noPadding>
+                          <div className="p-8">
+                            <div className="prose prose-invert max-w-none 
+                                prose-p:text-slate-300 prose-p:leading-7 prose-p:font-light
+                                prose-headings:text-cyan-50 prose-headings:font-semibold prose-headings:tracking-tight
+                                prose-strong:text-cyan-200 prose-strong:font-bold
+                                prose-li:text-slate-300
+                                prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline hover:prose-a:text-cyan-300
+                                prose-blockquote:border-l-cyan-500 prose-blockquote:bg-cyan-950/10 prose-blockquote:py-2 prose-blockquote:px-4 prose-blockquote:rounded-r-lg prose-blockquote:text-cyan-100 prose-blockquote:not-italic
+                            ">
+                                {activeMarkdown ? (
+                                    <ReactMarkdown 
+                                        remarkPlugins={[remarkGfm]} 
+                                        rehypePlugins={[rehypeRaw]} 
+                                        components={{
+                                            a: ({node, ...props}) => {
+                                                const isCitation = props.href && props.href.startsWith("/kararlar/");
+                                                if(isCitation) {
+                                                    return (
+                                                        <a {...props} target="_blank" className="inline-flex items-center justify-center min-w-[20px] px-1.5 h-5 mx-0.5 rounded text-[10px] font-bold bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 hover:bg-cyan-500 hover:text-white transition-all no-underline align-middle">
+                                                            {props.children}
+                                                        </a>
+                                                    );
+                                                }
+                                                return <a {...props} />;
+                                            }
+                                        }}
+                                    >
+                                        {activeMarkdown}
+                                    </ReactMarkdown>
                                 ) : (
-                                  content
+                                    !isLoading && <div className="flex flex-col items-center justify-center py-20 opacity-50"><span className="text-4xl mb-4">⚖️</span><p>Analiz sonucu bekleniyor...</p></div>
                                 )}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      );
-                    }
-                    if (active?.sources?.kararlar?.length) {
-                      const allRaw = active.sources.kararlar || [];
-                      const allProps = allRaw.map((k) => ({
-                        code: k?.code || "",
-                        type: k?.type || "",
-                        orijinal_karar_id: k?.id || "",
-                        dosya_adi: k?.dosya || "",
-                        kaynak_turu: k?.tip || "",
-                      }));
+                            </div>
+                          </div>
+                        </PremiumCard>
+                  </div>
+              ) : (
+                  <div className="flex flex-col items-center justify-center h-[50vh] text-slate-600 bg-[#0f172a]/30 rounded-3xl border border-dashed border-slate-800">
+                      <div className="w-24 h-24 rounded-full bg-slate-900 flex items-center justify-center mb-6 shadow-inner border border-slate-800"><span className="text-cyan-900/40 text-4xl">{icons.scale}</span></div>
+                      <h3 className="text-xl font-bold text-slate-400 mb-2">Sistem Hazır</h3>
+                      <p className="text-sm text-slate-500 max-w-xs text-center">Hukuki analiz motorunu başlatmak için sol menüden yeni bir analiz oluşturun.</p>
+                  </div>
+              )}
+          </div>
+        </main>
 
-                      const dict = new Map();
-                      for (const p of allProps) {
-                        const typeRaw = String(p.kaynak_turu || "").toLowerCase();
-                        const isSummaryName = /(?:\bözet\b|\bozet\b|gemini)/i.test(String(p.dosya_adi || ""));
-                        const isSummary = typeRaw === "ai_ozet" || isSummaryName;
-                        let slug = bestSlugFromProps(p, allProps);
-                        const key = slug || String(p.orijinal_karar_id || p.dosya_adi || "").replace(/\.txt$/i, "");
-                        if (!key) continue;
-                        const code = deduceEsasKararFromProps(p);
-                        const court = deduceCourtLabelFromProps(p);
-                        const rec = dict.get(key) || { slug, code: "", court: "", hasOriginal: false };
-                        if (!rec.slug && slug) rec.slug = slug;
-                        if (code && !rec.code) rec.code = code;
-                        if (court && !rec.court) rec.court = court;
-                        if (!isSummary) rec.hasOriginal = true;
-                        // Attach autogenerated slug if not present
-                        const auto = slugFromTypeAndCode(rec.court || "", rec.code || "");
-                        if (auto && !rec.slug) rec.slug = auto;
-                        dict.set(key, rec);
-                      }
+        {/* SAĞ: Kaynaklar Sidebar - Z-Index 40 */}
+        <aside className="hidden lg:flex w-[350px] flex-none flex-col h-full z-40">
+            <PremiumCard className="h-full bg-[#020617]/50 backdrop-blur-sm" noPadding>
+              <div className="flex flex-col h-full">
+                
+                {/* Mevzuat Bölümü */}
+                <div className="flex-shrink-0 h-[45%] flex flex-col min-h-0 border-b border-white/5">
+                    <div className="p-4 border-b border-white/5 bg-white/5 flex items-center gap-2 flex-none">
+                        <div className="text-cyan-400">{icons.book}</div>
+                        <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase">İlgili Mevzuat</h3>
+                    </div>
+                    <div className="flex-1 overflow-y-auto custom-scrollbar">
+                        <div className="divide-y divide-white/5">
+                            {active?.sources?.mevzuat?.length ? active.sources.mevzuat.map((m, i) => {
+                                const slug = utils.slugifyMevzuatAdi(m.mevzuat_adi || "");
+                                const popKey = `${slug}::${m.madde}`;
+                                const preview = getMevzuatPreview(m);
+                                
+                                return (
+                                    <div 
+                                        key={i} 
+                                        data-mevzuat-popover="1"
+                                        onClick={(e) => { 
+                                            e.stopPropagation(); 
+                                            const el = e.currentTarget; 
+                                            const pos = calcMevzuatPopover(el);
+                                            setOpenMevzuat(prev => (
+                                                prev?.key === popKey 
+                                                  ? null 
+                                                  : { 
+                                                      key: popKey, 
+                                                      preview, 
+                                                      mevzuat_adi: m.mevzuat_adi, 
+                                                      madde: m.madde, 
+                                                      el, 
+                                                      ...pos 
+                                                    }
+                                            )); 
+                                        }}
+                                        className="group/item relative hover:bg-white/5 transition-colors cursor-pointer"
+                                    >
+                                        <div className="p-4 flex gap-3 items-start">
+                                            {m.madde && (
+                                                <button type="button" className={`shrink-0 flex items-center justify-center w-10 h-8 rounded text-[10px] font-bold border transition-all ${openMevzuat?.key === popKey ? "bg-cyan-500 text-white border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.4)]" : "bg-slate-900 text-slate-400 border-slate-700 group-hover/item:border-cyan-500/50 group-hover/item:text-cyan-400"}`}>
+                                                    m.{m.madde}
+                                                </button>
+                                            )}
+                                            <div className="min-w-0 flex-1 pt-1">
+                                                <div className="text-xs font-medium text-slate-300 group-hover/item:text-white transition-colors">{m.mevzuat_adi}</div>
+                                            </div>
+                                        </div>
+                                        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500 opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
+                                    </div>
+                                );
+                            }) : <div className="p-6 text-center text-xs text-slate-500">Kayıt bulunamadı.</div>}
+                        </div>
+                    </div>
+                </div>
 
-                      const list = Array.from(dict.values())
-                        .filter((r) => r.code || r.court || r.slug)
-                        .sort((a, b) => (a.court || "").localeCompare(b.court || "") || (a.code || "").localeCompare(b.code || ""));
+                {/* Kararlar Bölümü */}
+                <div className="flex-1 flex flex-col min-h-0">
+                    <div className="p-4 border-b border-white/5 bg-white/5 flex items-center gap-2 flex-none">
+                        <div className="text-cyan-400">{icons.bot}</div>
+                        <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase">Emsal Kararlar</h3>
+                    </div>
+                    <div className="flex-1 overflow-y-auto custom-scrollbar">
+                        <div className="divide-y divide-white/5">
+                            {(() => {
+                                const renderList = (items) => items.map((r, i) => (
+                                    <div key={i} className="p-4 hover:bg-white/5 transition-colors group/karar">
+                                        <div className="flex flex-col gap-1">
+                                            {r.court && <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">{r.court}</span>}
+                                            {r.slug && utils.looksLikeSlug(r.slug) ? (
+                                                <a href={`/kararlar/${encodeURIComponent(r.slug)}`} target="_blank" className="text-xs text-cyan-400 hover:text-cyan-300 hover:underline decoration-cyan-500/30 underline-offset-4 transition-all">
+                                                    {r.code || r.slug}
+                                                </a>
+                                            ) : (
+                                                <span className="text-xs text-slate-300">{r.code || r.slug}</span>
+                                            )}
+                                        </div>
+                                    </div>
+                                ));
 
-                      if (!list.length) return <div className="text-sm text-slate-500">Kayıt yok</div>;
-                      return (
-                        <ul className="space-y-2">
-                          {list.map((r, i) => {
-                            const hasSlug = r.slug && looksLikeSlug(r.slug);
-                            const content = (
-                              <span className="inline-flex flex-col leading-tight">
-                                {r.court ? <span className="font-medium">{r.court}</span> : null}
-                                <span className="tabular-nums text-slate-300">{r.code || r.slug}</span>
-                              </span>
-                            );
-                            return (
-                              <li key={i} className="text-[12px] leading-tight">
-                                {hasSlug ? (
-                                  <a
-                                    className="text-white no-underline inline-flex flex-col leading-tight hover:text-cyan-400 hover:bg-cyan-500/10 hover:rounded px-1 transition-transform"
-                                    href={`/kararlar/${encodeURIComponent(r.slug)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    {content}
-                                  </a>
-                                ) : (
-                                  <span className="inline-flex flex-col leading-tight">{content}</span>
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      );
-                    }
-                    return <div className="text-sm text-slate-500">Kayıt yok</div>;
-                  })()}
-                </Panel>
+                                if (active?.sources?.karar_kartlari?.length) {
+                                    return renderList(active.sources.karar_kartlari.map(r => ({ slug: utils.slugFromTypeAndCode(r.type || "", r.code || "") || r.slug, code: r.code || r.slug, court: r.type })));
+                                }
+                                if (active?.sources?.kararlar?.length) {
+                                    const allProps = active.sources.kararlar.map(k => ({ code: k?.code || "", type: k?.type || "", orijinal_karar_id: k?.id || "", dosya_adi: k?.dosya || "", kaynak_turu: k?.tip || "" }));
+                                    const dict = new Map();
+                                    allProps.forEach(p => {
+                                        const slug = utils.bestSlugFromProps(p, allProps);
+                                        const key = slug || String(p.orijinal_karar_id || p.dosya_adi || "").replace(/\.txt$/i, "");
+                                        if (!key) return;
+                                        const rec = dict.get(key) || { slug, code: "", court: "" };
+                                        if (slug && !rec.slug) rec.slug = slug;
+                                        if (!rec.code) rec.code = utils.deduceEsasKararFromProps(p);
+                                        if (!rec.court) rec.court = utils.deduceCourtLabelFromProps(p);
+                                        const auto = utils.slugFromTypeAndCode(rec.court, rec.code);
+                                        if (auto && !rec.slug) rec.slug = auto;
+                                        dict.set(key, rec);
+                                    });
+                                    const list = Array.from(dict.values()).filter(r => r.code || r.court || r.slug).sort((a,b) => (a.court||"").localeCompare(b.court||""));
+                                    if(list.length) return renderList(list);
+                                }
+                                return <div className="p-6 text-center text-xs text-slate-500">Kayıt bulunamadı.</div>;
+                            })()}
+                        </div>
+                    </div>
+                </div>
 
-              </aside>
+              </div>
+            </PremiumCard>
+        </aside>
+
+      </div>
+
+      {/* --- Popovers & Modals (Z-Index 9999) --- */}
+      {openMevzuat && (
+          <MevzuatPopover 
+              data={openMevzuat} 
+              position={{ top: openMevzuat.top, left: openMevzuat.left }} 
+              onClose={() => setOpenMevzuat(null)} 
+          />
+      )}
+
+      {confirmDel.open && (
+         <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setConfirmDel({ open: false, id: null })} />
+            <div className="relative w-full max-w-sm bg-[#0f172a] border border-slate-700 rounded-2xl shadow-2xl p-6 overflow-hidden animate-in zoom-in-95">
+                <div className="text-center">
+                    <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-900/20 text-red-500 mb-4 border border-red-900/50">
+                        {icons.trash}
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-100">Analizi Sil</h3>
+                    <p className="mt-2 text-sm text-slate-400">
+                         {(() => {
+                            const doomed = chats.find(c => c.id === confirmDel.id);
+                            const t = (doomed?.title || doomed?.messages?.find(m => m.sender === "user")?.text || "").trim();
+                            return t ? `"${t.slice(0, 30)}${t.length > 30 ? "..." : ""}"` : "Seçili analiz";
+                        })()} kalıcı olarak silinecek.
+                    </p>
+                </div>
+                <div className="mt-6 flex gap-3">
+                    <button onClick={() => setConfirmDel({ open: false, id: null })} className="flex-1 px-4 py-2 text-sm font-medium text-slate-300 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors border border-slate-700">İptal</button>
+                    <button onClick={() => { const id = confirmDel.id; setConfirmDel({ open: false, id: null }); deleteChatById(id); }} className="flex-1 px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg shadow-lg shadow-red-900/20 transition-colors">Sil</button>
+                </div>
             </div>
-          </div>
-        </section>
-      </div>
-
-      {/* ConfirmDialog */}
-      {confirmDel.open ? (
-        <ConfirmDialog
-          title="Analizi silmek istiyor musunuz?"
-          description={() => {
-            const doomed = chats.find(c => c.id === confirmDel.id);
-            const t = (doomed?.title || doomed?.messages?.find(m => m.sender === "user")?.text || "").trim();
-            return t ? `“${t.slice(0, 80)}${t.length > 80 ? "…”" : "”"} silinecek.` : "";
-          }}
-          confirmText="Sil"
-          cancelText="İptal"
-          onCancel={() => setConfirmDel({ open: false, id: null })}
-          onConfirm={() => {
-            const id = confirmDel.id;
-            setConfirmDel({ open: false, id: null });
-            deleteChatById(id);
-          }}
-        />
-      ) : null}
-    </div>
-  );
-}
-
-function Panel({ title, children }) {
-  return (
-    <div className="rounded-xl bg-slate-800 border border-slate-700 shadow-sm text-slate-100">
-      <div className="px-3 py-2 text-xs font-semibold tracking-wide uppercase bg-[#0f1a2b] text-white">{title}</div>
-      <div className="p-3">{children}</div>
-    </div>
-  );
-}
-
-function ConfirmDialog({ title = "Emin misiniz?", description = "", confirmText = "Evet", cancelText = "Vazgeç", onCancel, onConfirm }) {
-  const [desc, setDesc] = useState(typeof description === "function" ? description() : description);
-  useEffect(() => { if (typeof description === "function") setDesc(description()); }, [description]);
-  useEffect(() => {
-    function onKey(e) { if (e.key === "Escape") onCancel?.(); if (e.key === "Enter") onConfirm?.(); }
-    window.addEventListener("keydown", onKey); return () => window.removeEventListener("keydown", onKey);
-  }, [onCancel, onConfirm]);
-
-  return (
-    <div className="fixed inset-0 z-50">
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={onCancel} />
-      <div className="absolute inset-0 flex items-center justify-center p-4">
-        <div className="w-full max-w-md rounded-2xl border border-slate-600 bg-gradient-to-b from-slate-800 to-slate-900 shadow-xl text-slate-100">
-          <div className="px-5 py-4 border-b border-slate-700"><h4 className="text-lg font-semibold">{title}</h4></div>
-          <div className="px-5 py-4">{desc ? <p className="text-sm text-slate-300">{desc}</p> : null}</div>
-          <div className="px-5 py-4 border-t border-slate-700 flex items-center justify-end gap-2">
-            <button onClick={onCancel} className="px-4 py-2 rounded-xl border border-slate-600 bg-slate-800 text-slate-200 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400">{cancelText}</button>
-            <button onClick={onConfirm} className="px-4 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400">{confirmText}</button>
-          </div>
-        </div>
-      </div>
+         </div>
+      )}
     </div>
   );
 }

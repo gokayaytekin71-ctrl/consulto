@@ -35,9 +35,23 @@ module.exports = {
           '0%, 80%, 100%': { transform: 'scale(0)' },
           '40%': { transform: 'scale(1)' },
         },
+        shimmer: {
+        '0%': { transform: 'translateX(-100%)' },
+        '100%': { transform: 'translateX(100%)' },
+      },
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        pulse: { // Standart pulse'u biraz özelleştirdik
+          '0%, 100%': { opacity: 0.4, transform: 'scale(1)' },
+          '50%': { opacity: 0.6, transform: 'scale(1.1)' },
+        }
+        
       },
       animation: {
         aurora: 'aurora 20s ease-in-out infinite',
+        scroll: 'scroll 30s linear infinite',
         spinSlow: 'spinSlow 3s linear infinite',
         dot: 'dot 1.4s infinite ease-in-out both',
       },

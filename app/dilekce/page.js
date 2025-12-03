@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import TokenBalance from "@/components/TokenBalance"; // <-- YENİ: Bakiye Göstergesi
 
 // Markdown render (SSR kapalı, projeye uygun)
 const ReactMarkdown = dynamic(() => import("react-markdown"), { ssr: false });
@@ -164,82 +165,82 @@ async function downloadAsDocxFromPreviewNode(previewNode, filenameBase, setError
     );
     if (!docx || !window.docx || !window.docx.Packer) throw new Error("docx kütüphanesi yüklenemedi");
 
-const { Document, Paragraph, TextRun, AlignmentType } = window.docx;
+    const { Document, Paragraph, TextRun, AlignmentType } = window.docx;
 
-// HTML'den görünen metni satır satır işle (manuel numaralar innerText'e düşmüş durumda)
-const plain = (previewNode.innerText || "").replace(/\r\n/g, "\n");
-const lines = plain.split("\n");
+    // HTML'den görünen metni satır satır işle (manuel numaralar innerText'e düşmüş durumda)
+    const plain = (previewNode.innerText || "").replace(/\r\n/g, "\n");
+    const lines = plain.split("\n");
 
-// Ana başlıklar: AÇIKLAMALAR, HUKUKİ DELİLLER, HUKUKİ NEDEN, SONUÇ VE İSTEM, EKLER, DAVA DEĞERİ, DAVACI, DAVALI, KONU
-const sectionRegex = /^(AÇIKLAMALAR|HUKUK[İI]\s*(NEDEN(LER)?|DEL[İI]LLER)|SONUÇ\s*VE\s*İSTEM|EKLER|DAVA DEĞER[İI]|DAVACI|DAVALI|KONU)$/i;
+    // Ana başlıklar: AÇIKLAMALAR, HUKUKİ DELİLLER, HUKUKİ NEDEN, SONUÇ VE İSTEM, EKLER, DAVA DEĞERİ, DAVACI, DAVALI, KONU
+    const sectionRegex = /^(AÇIKLAMALAR|HUKUK[İI]\s*(NEDEN(LER)?|DEL[İI]LLER)|SONUÇ\s*VE\s*İSTEM|EKLER|DAVA DEĞER[İI]|DAVACI|DAVALI|KONU)$/i;
 
-const paragraphs = [];
-for (const rawLine of lines) {
-  const line = rawLine.trim();
+    const paragraphs = [];
+    for (const rawLine of lines) {
+      const line = rawLine.trim();
 
-  // Boş satır → araya biraz boşluk
-  if (!line) {
-    paragraphs.push(new Paragraph({ children: [new TextRun("")], spacing: { after: 200 } }));
-    continue;
-  }
+      // Boş satır → araya biraz boşluk
+      if (!line) {
+        paragraphs.push(new Paragraph({ children: [new TextRun("")], spacing: { after: 200 } }));
+        continue;
+      }
 
-  // “... MAHKEMESİNE” satırı → ortalı + kalın
-  if (/\bMAHKEMES[İI]NE\b/i.test(line)) {
-    paragraphs.push(
-      new Paragraph({
-        alignment: AlignmentType.CENTER,
-        children: [new TextRun({ text: line, bold: true })],
-        spacing: { after: 200 },
-      })
-    );
-    continue;
-  }
+      // “... MAHKEMESİNE” satırı → ortalı + kalın
+      if (/\bMAHKEMES[İI]NE\b/i.test(line)) {
+        paragraphs.push(
+          new Paragraph({
+            alignment: AlignmentType.CENTER,
+            children: [new TextRun({ text: line, bold: true })],
+            spacing: { after: 200 },
+          })
+        );
+        continue;
+      }
 
-  // "BAŞLIK: Değer" satırları → başlık kısmını kalın yap
-  const kv = line.match(/^(.+?)\s*:\s*(.+)$/);
-  if (kv) {
-    paragraphs.push(
-      new Paragraph({
-        children: [
-          new TextRun({ text: kv[1] + ": ", bold: true }),
-          new TextRun({ text: kv[2] }),
-        ],
-        spacing: { after: 120 },
-      })
-    );
-    continue;
-  }
+      // "BAŞLIK: Değer" satırları → başlık kısmını kalın yap
+      const kv = line.match(/^(.+?)\s*:\s*(.+)$/);
+      if (kv) {
+        paragraphs.push(
+          new Paragraph({
+            children: [
+              new TextRun({ text: kv[1] + ": ", bold: true }),
+              new TextRun({ text: kv[2] }),
+            ],
+            spacing: { after: 120 },
+          })
+        );
+        continue;
+      }
 
-  // Tam başlık satırı (iki nokta olmadan) → kalın
-  if (sectionRegex.test(line)) {
-    paragraphs.push(
-      new Paragraph({
-        children: [new TextRun({ text: line, bold: true })],
-        spacing: { after: 120 },
-      })
-    );
-    continue;
-  }
+      // Tam başlık satırı (iki nokta olmadan) → kalın
+      if (sectionRegex.test(line)) {
+        paragraphs.push(
+          new Paragraph({
+            children: [new TextRun({ text: line, bold: true })],
+            spacing: { after: 120 },
+          })
+        );
+        continue;
+      }
 
-  // Normal paragraf
-  paragraphs.push(
-    new Paragraph({
-      children: [new TextRun(line)],
-      spacing: { after: 120 },
-    })
-  );
-}
+      // Normal paragraf
+      paragraphs.push(
+        new Paragraph({
+          children: [new TextRun(line)],
+          spacing: { after: 120 },
+        })
+      );
+    }
 
-const doc = new Document({
-  sections: [
-    {
-      properties: {},
-      children: paragraphs.length ? paragraphs : [new Paragraph(" ")],
-    },
-  ],
-});
+    const doc = new Document({
+      sections: [
+        {
+          properties: {},
+          children: paragraphs.length ? paragraphs : [new Paragraph(" ")],
+        },
+      ],
+    });
 
-const blob = await window.docx.Packer.toBlob(doc);
+    const blob = await window.docx.Packer.toBlob(doc);
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
@@ -1689,6 +1690,19 @@ async function finalizeResult(finalObj) {
         data = undefined;
       }
 
+      // --- TOKEN / BAKİYE KONTROLÜ ---
+      if (res && res.status === 402) {
+         setLoading(false);
+         setStep(1);
+         if (confirm("Yetersiz Bakiye! Dilekçe oluşturmak için token satın almak ister misiniz?")) {
+             window.location.href = "/paketler-ucretler";
+         } else {
+             setError("Yetersiz bakiye. İşlem gerçekleştirilemedi.");
+         }
+         return; 
+      }
+      // -------------------------------
+
       // --- Quota / Auth guard: do not fall back to direct API on these ---
       if (res && !res.ok) {
         if (res.status === 402 && data?.error === "QUOTA_EXCEEDED") {
@@ -1922,9 +1936,12 @@ async function finalizeResult(finalObj) {
       <div className="relative z-10 py-6 md:py-8 px-3 sm:px-4 lg:px-6">
         <div className="max-w-6xl mx-auto space-y-8">
           <div className="bg-slate-900/40 border border-slate-700/60 rounded-xl shadow-xl backdrop-blur-sm">
+            
             {/* Header */}
             <header className="p-6 md:p-8 border-b border-slate-700/60">
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                
+                {/* Sol: Başlık */}
                 <div className="flex items-center gap-3">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -1940,17 +1957,27 @@ async function finalizeResult(finalObj) {
                     Dilekçe Oluşturucu Pro
                   </h1>
                 </div>
-                <div className="flex items-center gap-3">
+
+                {/* Sağ: Butonlar ve Bakiye */}
+                <div className="flex flex-col md:flex-row items-end md:items-center gap-3">
+                  
+                  {/* --- TOKEN BAKİYESİ --- */}
+                  <div className="w-full md:w-auto">
+                    <TokenBalance />
+                  </div>
+                  {/* ------------------- */}
+
                   <button
                     type="button"
                     onClick={() => { fetchRecentDrafts(); setShowDrafts(true); }}
-                    className="ml-0 mr-auto rounded-xl border border-slate-200 px-4 py-2 text-sm hover:bg-slate-600 transition self-start"
+                    className="rounded-xl border border-slate-200 px-4 py-2 text-sm hover:bg-slate-600 transition"
                     title="Son dilekçelerinizi görüntüleyin"
                   >
                     Son Dilekçeleriniz
                   </button>
                   <Stepper />
                 </div>
+
               </div>
               <p className="mt-2 text-slate-400 text-sm">
                 Önce dava türünü seçin, ardından olay özetinizi ve talebinizi girin. Diğer alanlar

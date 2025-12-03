@@ -1,12 +1,10 @@
-// Proje yolunuz: /app/api/chats/route.js (veya pages/api/chats.js)
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
-import { checkQuota, incrementUsage } from "@/lib/quota";
+import { consumeToken } from "@/lib/tokens"; // YENİ: Token mantığı
+
 export const dynamic = "force-dynamic";
 export const runtime = 'nodejs';
-
 
 const API_ENDPOINT =
   process.env.API_ENDPOINT ||
@@ -78,22 +76,22 @@ export async function POST(request) {
 
   const userId = session.user.id;
 
-  // --- Üyelik kotası kontrolü: ANALİZ ---
-  const q = await checkQuota(userId, "analysis");
-  if (!q.allowed) {
+  // --- YENİ TOKEN SİSTEMİ ---
+  // Analiz başına 1 Token düşer
+  const consumption = await consumeToken(userId, "ANALYSIS", 1);
+
+  if (!consumption.ok) {
     return new Response(
       JSON.stringify({
         error: "QUOTA_EXCEEDED",
-        message: "Analiz kotanız doldu.",
-        type: "analysis",
-        remaining: q.remaining,
-        limit: q.limit,
-        plan: q.planCode,
-        weekKey: q.weekKey,
+        message: "Yeterli tokeniniz yok. Analiz yapmak için lütfen token satın alın.",
+        requirePayment: true, // Frontend'de popup açmak için işaret
+        remaining: 0
       }),
       { status: 402, headers: { "Content-Type": "application/json" } }
     );
   }
+  // -------------------------
 
   try {
     const body = await request.json();
@@ -103,14 +101,14 @@ export async function POST(request) {
       body: JSON.stringify(body),
     });
 
-    if (!apiRes.ok) { return new Response(JSON.stringify({ error: "Arama servisi hatası." }), { status: 502 }); }
+    if (!apiRes.ok) { 
+        return new Response(JSON.stringify({ error: "Arama servisi hatası." }), { status: 502 }); 
+    }
 
     let dataFromPython = await apiRes.json();
 
     if (Array.isArray(dataFromPython.ilgili_kararlar) && dataFromPython.ilgili_kararlar.length > 0) {
       // Weaviate sonuçlarını DB'deki Karar kayıtlarıyla eşleştirmek için filename türet:
-      // 1) Eğer properties.dosya_adi '.txt' ile bitiyorsa onu kullan.
-      // 2) Değilse properties.orijinal_karar_id + '.txt' kullan.
       const fileNames = Array.from(new Set(
         dataFromPython.ilgili_kararlar
           .map(k => k?.properties)
@@ -135,7 +133,6 @@ export async function POST(request) {
           kararlarFromDb.map(k => [k.fileName, { code: k.code, type: k.type }])
         );
 
-        // Her bir sonucu, DB'den gelen type+code ile zenginleştir
         dataFromPython.ilgili_kararlar.forEach(item => {
           const p = item?.properties || {};
           const key =
@@ -153,7 +150,7 @@ export async function POST(request) {
       }
     }
 
-    await incrementUsage(userId, "analysis");
+    // ESKİ incrementUsage KALDIRILDI. consumeToken zaten bakiyeyi düştü.
 
     return new Response(JSON.stringify(dataFromPython), {
       status: 200,
@@ -180,8 +177,6 @@ export async function DELETE(req) {
   }
 
   const userId = session.user.id;
-
-  // id'yi önce query'den, yoksa gövdeden al
   const url = new URL(req.url);
   let id = url.searchParams.get("id");
   if (!id) {
@@ -200,7 +195,6 @@ export async function DELETE(req) {
     });
   }
 
-  // Mevcut listeyi çek
   const user = await prisma.user.findUnique({
     where: { id: userId },
     select: { chats: true },
@@ -210,15 +204,12 @@ export async function DELETE(req) {
   const exists = current.some((c) => c?.id === id);
   const updated = current.filter((c) => c?.id !== id);
 
-  // Güncelle
   await prisma.user.update({
     where: { id: userId },
     data: { chats: updated },
   });
 
-  // In-memory session güncellemesi (mümkünse)
   if (session && session.user) {
-    // Eğer session.user.chats varsa güncelle
     if (Array.isArray(session.user.chats)) {
       session.user.chats = updated;
     }

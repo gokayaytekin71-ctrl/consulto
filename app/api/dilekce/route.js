@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { consumeQuota } from "@/lib/quota";
+import { consumeToken } from "@/lib/tokens"; // YENİ: Token mantığı
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -19,7 +19,6 @@ function normalizePerson(v) {
     return s ? { ad_soyad: s } : undefined;
   }
   if (v && typeof v === 'object') {
-    // Allow already-shaped objects like { ad_soyad, tc, vekil_mi, ... }
     return Object.keys(v).length ? v : undefined;
   }
   return undefined;
@@ -36,22 +35,23 @@ export async function POST(req) {
     }
 
     const userId = session.user.id;
-    // Atomic kota kontrolü + tüketim
-    const qc = await consumeQuota(userId, "dilekce");
-    if (!qc.ok) {
+    
+    // --- YENİ TOKEN SİSTEMİ ---
+    // Dilekçe başına 1 Token düşer
+    const consumption = await consumeToken(userId, "DILEKCE", 1);
+    
+    if (!consumption.ok) {
       return NextResponse.json(
         {
           error: "QUOTA_EXCEEDED",
-          message: "Haftalık dilekçe kotanız doldu.",
+          message: "Dilekçe oluşturmak için yeterli tokeniniz yok.",
           type: "dilekce",
-          remaining: qc.remaining,
-          limit: qc.limit,
-          plan: qc.planCode,
-          weekKey: qc.weekKey,
+          requirePayment: true // Frontend'de ödeme popup'ı için
         },
         { status: 402 }
       );
     }
+    // -------------------------
 
     const body = await req.json();
     const {

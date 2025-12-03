@@ -6,6 +6,16 @@ import { useState } from "react";
 
 const MAX_CONTENT_LENGTH_FOR_BAR = 90000;
 
+// Daire isimlerini kısaltan yardımcı fonksiyon
+const formatChamberName = (name) => {
+  if (!name) return "";
+  return name
+    .replace(/Hukuk Genel Kurulu/gi, "HGK")
+    .replace(/Ceza Genel Kurulu/gi, "CGK")
+    .replace(/Hukuk Dairesi/gi, "H.D.")
+    .replace(/Ceza Dairesi/gi, "C.D.");
+};
+
 export default function DecisionCard({
   id,
   type,
@@ -14,114 +24,131 @@ export default function DecisionCard({
   keywords,
   contentLength = 0,
 }) {
-  const aiSummaryIconPath = "M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.898 20.553L16.5 21.75l-.398-1.197a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.197-.398a2.25 2.25 0 001.423-1.423L16.5 15.75l.398 1.197a2.25 2.25 0 001.423 1.423L19.5 18.75l-1.197.398a2.25 2.25 0 00-1.423 1.423z";
+  const [isNavigating, setIsNavigating] = useState(false);
+
+  // Kısaltılmış başlık
+  const abbreviatedType = formatChamberName(type);
 
   const keywordList = typeof keywords === 'string'
     ? keywords.split(',').map(kw => kw.trim()).filter(Boolean)
     : [];
 
   const qualityPercentage = Math.min(100, Math.max(0, (contentLength / MAX_CONTENT_LENGTH_FOR_BAR) * 100));
-  let qualityText = "";
-  let barColorClass = "";
-
+  
+  // Renk Paleti
+  let statusColor = "";
+  let statusText = "";
   if (qualityPercentage < 30) {
-    qualityText = "Kısa";
-    barColorClass = "bg-red-500";
+    statusText = "Özet";
+    statusColor = "bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]";
   } else if (qualityPercentage < 60) {
-    qualityText = "Orta";
-    barColorClass = "bg-yellow-500";
+    statusText = "Gerekçeli";
+    statusColor = "bg-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]";
   } else {
-    qualityText = "Uzun";
-    barColorClass = "bg-green-500";
+    statusText = "Kapsamlı";
+    statusColor = "bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]";
   }
 
-  const [isNavigating, setIsNavigating] = useState(false);
-
   return (
-    <div className="group relative bg-white/95 backdrop-blur-sm rounded-2xl border border-slate-200 shadow-md hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 flex flex-col overflow-hidden h-[440px] text-[0.85rem] max-w-[340px] mx-auto mb-8">
-      <div className="bg-gradient-to-r from-[#002a5c] via-[#003c7a] to-[#004365] px-3 py-2.5 flex items-center justify-between">
-        <div className="flex items-center gap-2 min-w-0">
-          <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-white/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12 3v18m-7 0h14M5 7l-2 4h4l-2-4zm14 0l-2 4h4l-2-4zM5 7h14" />
-            </svg>
-          </span>
-          <h2 className="text-[12px] font-semibold text-white/95 truncate" title={type}>{type}</h2>
-        </div>
-        {code && (
-          <span className="shrink-0 ml-2 rounded-full bg-white/10 text-[#D8EBFF] px-2 py-0.5 text-[11px] ring-1 ring-white/15" title={code}>
-            {code}
-          </span>
-        )}
+    <div className="group relative flex flex-col h-[500px] w-full max-w-[340px] mx-auto bg-white rounded-xl border border-slate-200 shadow-lg hover:shadow-[0_20px_50px_-12px_rgba(0,42,92,0.2)] transition-all duration-300 hover:-translate-y-1.5 overflow-hidden">
+      
+      {/* --- HEADER: Daha kompakt --- */}
+      <div className="shrink-0 relative px-5 py-3.5 bg-gradient-to-r from-[#002a5c] to-[#004080] text-white flex items-center justify-between z-10">
+         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+         
+         <div className="flex flex-col z-10 min-w-0">
+             <div className="flex items-center gap-1.5 mb-0.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shadow-[0_0_6px_#fbbf24]"></span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-blue-200/80">Karar Merci</span>
+             </div>
+             {/* Font boyutu biraz küçüldü: text-lg */}
+             <h2 className="text-lg font-serif font-bold tracking-tight leading-none text-white drop-shadow-md truncate" title={type}>
+               {abbreviatedType}
+             </h2>
+         </div>
+
+         {code && (
+           <div className="shrink-0 ml-3 flex items-center justify-center px-2 py-0.5 bg-white/10 backdrop-blur-md border border-white/20 rounded shadow-sm group-hover:bg-white/20 transition-colors">
+             <span className="text-[11px] font-mono font-bold text-amber-300 tracking-wider">
+               {code}
+             </span>
+           </div>
+         )}
       </div>
 
-      <div className="pt-3 px-4 pb-0 flex flex-col flex-1 space-y-4 overflow-y-auto min-h-0">
-        {/* Uzunluk Göstergesi */}
-        <div className="w-full mb-2">
-          <div className="flex justify-between text-xs text-gray-500 mb-1">
-            <span>Karar Uzunluğu</span>
-            
-          </div>
-          <div className="w-full bg-slate-200/80 rounded-full h-2 relative overflow-hidden">
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_0_10px,rgba(255,255,255,0.35)_10px,transparent_11px)] bg-[length:12px_100%] opacity-50"></div>
-            <div
-              className={`h-2 rounded-full transition-all duration-500 ease-out ${qualityPercentage < 30 ? 'bg-gradient-to-r from-red-500 to-rose-400' : qualityPercentage < 60 ? 'bg-gradient-to-r from-amber-500 to-yellow-400' : 'bg-gradient-to-r from-emerald-500 to-green-400'}`}
-              style={{ width: `${qualityPercentage}%` }}
-              title={`Karar uzunluğu: ${contentLength} karakter`}
-            />
-          </div>
+      {/* --- BODY --- */}
+      <div className="flex-1 flex flex-col bg-slate-50/30 min-h-0 relative">
+        
+        {/* 1. UZUNLUK BARI (Sıkılaştırıldı) */}
+        <div className="px-5 pt-4 pb-2">
+            <div className="flex justify-between items-end mb-1">
+                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide">İçerik Yoğunluğu</span>
+                <span className="text-[10px] font-bold text-[#002a5c]">{statusText}</span>
+            </div>
+            <div className="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                <div className={`h-full ${statusColor} rounded-full relative transition-all duration-1000`} style={{ width: `${qualityPercentage}%` }}>
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent animate-[shimmer_2s_infinite]"></div>
+                </div>
+            </div>
         </div>
 
-        {/* Anahtar Kelimeler */}
+        {/* 2. ANAHTAR KELİMELER (Padding ve Font küçüldü) */}
         {keywordList.length > 0 && (
-          <div className="mb-2">
-            <div className="flex flex-wrap gap-2">
-              {keywordList.map((kw, index) => (
-                <Link
-                  key={index}
-                  href={`/kararlar?kw=${encodeURIComponent(kw)}`}
-                  className="bg-sky-50 text-sky-700/90 px-2 py-0.5 rounded-full text-[11px] font-medium ring-1 ring-sky-200 hover:bg-sky-100 hover:text-sky-800 transition-colors"
-                >
-                  {kw}
-                </Link>
-              ))}
+            <div className="px-5 py-2">
+                <div className="flex flex-wrap gap-1.5">
+                    {keywordList.map((kw, i) => (
+                        <span key={i} className="px-2.5 py-0.5 text-[10px] font-semibold text-[#002a5c] bg-white border border-slate-200 rounded-md shadow-sm hover:border-amber-400 hover:shadow-md transition-all cursor-default">
+                            {kw}
+                        </span>
+                    ))}
+                </div>
             </div>
-          </div>
         )}
 
-        {/* AI Özeti */}
+        {/* 3. AI SUMMARY */}
         {aiSummary && (
-          <div className="flex flex-col flex-1 min-h-0">
-            <h3 className="flex items-center gap-1.5 text-[11px] font-semibold text-blue-700/90 mb-1">
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5 text-blue-700/90" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d={aiSummaryIconPath} />
-              </svg>
-              <span>AI Özeti</span>
-              <span className="ml-auto h-px w-16 bg-blue-200/70"></span>
-            </h3>
-            <div className="leading-relaxed/6 space-y-2 flex-1 overflow-y-auto pr-1">
-              <FormattedSummary summary={aiSummary} />
+            <div className="flex-1 px-5 pb-2 overflow-y-auto custom-scrollbar-thin relative group/text">
+                <div className="sticky top-0 bg-slate-50/95 backdrop-blur-sm py-1.5 mb-1 z-10 border-b border-slate-200/50 flex items-center gap-1.5">
+                    <svg className="w-3.5 h-3.5 text-amber-600 drop-shadow-sm" viewBox="0 0 24 24" fill="currentColor">
+                        <path fillRule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813a3.75 3.75 0 002.576-2.576l.813-2.846A.75.75 0 019 4.5z" clipRule="evenodd" />
+                    </svg>
+                    <span className="text-[10px] font-bold text-[#002a5c] uppercase tracking-wider">Yapay Zeka Özeti</span>
+                </div>
+                
+                <div className="text-[12.5px] leading-relaxed text-slate-700 font-medium">
+                    <FormattedSummary summary={aiSummary} />
+                </div>
+                
+                <div className="sticky bottom-0 left-0 right-0 h-4 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none"></div>
             </div>
-          </div>
         )}
 
-        {/* Detay Butonu - içerik bitti */}
       </div>
-      <div className="shrink-0 mt-2">
+
+      {/* --- FOOTER: Daha ince buton --- */}
+      <div className="shrink-0 p-3 bg-white border-t border-slate-100 z-20">
         <Link
           href={`/kararlar/${id}`}
           onClick={() => setIsNavigating(true)}
-          className="block w-full text-center bg-gradient-to-r from-orange-500 to-amber-500 text-white font-semibold text-[13px] py-2 hover:from-orange-600 hover:to-amber-600 transition-all duration-200 rounded-b-2xl group-hover:shadow-md"
+          className="group/btn relative w-full flex items-center justify-center gap-2 overflow-hidden rounded-lg py-2.5 shadow-lg shadow-orange-500/20 active:scale-[0.98] transition-all duration-200 hover:shadow-orange-500/40"
         >
-          Tam Karar Metnini Gör
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 bg-[length:200%_100%] transition-[background-position] duration-500 group-hover/btn:bg-right"></div>
+          <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-[-20deg] animate-[shimmer_2.5s_infinite]"></div>
+
+          <span className="relative z-10 text-xs font-bold text-white tracking-wide uppercase drop-shadow-md">Kararı İncele</span>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="relative z-10 w-3.5 h-3.5 text-white drop-shadow-md transition-transform group-hover/btn:translate-x-1">
+             <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+          </svg>
         </Link>
       </div>
+
+      {/* Loading */}
       {isNavigating && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm">
-          <div className="flex flex-col items-center gap-3 text-white">
-            <div className="h-8 w-8 rounded-full border-2 border-white/60 border-t-transparent animate-spin" />
-            <p className="text-sm font-medium">Yükleniyor…</p>
-          </div>
+        <div className="absolute inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-[4px] transition-all duration-300">
+           <div className="flex flex-col items-center gap-2">
+              <div className="h-8 w-8 border-4 border-slate-200 border-t-[#002a5c] rounded-full animate-spin"></div>
+              <span className="text-[10px] font-bold text-[#002a5c] animate-pulse">YÜKLENİYOR</span>
+           </div>
         </div>
       )}
     </div>

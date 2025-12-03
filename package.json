@@ -23,6 +23,7 @@
     "dotenv": "^16.6.1",
     "html-docx-js": "^0.1.0",
     "html2pdf.js": "^0.10.3",
+    "iyzipay": "^2.0.64",
     "langchain": "^0.3.29",
     "lottie-react": "^2.4.1",
     "next": "^14.2.30",
