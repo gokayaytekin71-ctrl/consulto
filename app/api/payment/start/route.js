@@ -6,7 +6,7 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 
 const PACKAGES = {
-  1: { tokens: 10, price: 0.1, name: "10 Token Paketi" },
+  1: { tokens: 10, price: 1, name: "10 Token Paketi" },
   2: { tokens: 50, price: 400, name: "50 Token Paketi" },
   3: { tokens: 100, price: 700, name: "100 Token Paketi" },
 };
