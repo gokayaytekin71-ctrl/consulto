@@ -116,18 +116,22 @@ function deduceEsasKararFromProps(p = {}) {
 
 function deduceCourtLabelFromProps(p = {}) {
   const clean = (s) => (s || "").toString().trim();
-  const mahkeme = clean(p.mahkeme || p.type || "");
-  if (mahkeme) return mahkeme;
+
+  // Önce dosya adından (orijinal_karar_id / dosya_adi / slug) tam mahkeme adını çıkarmaya çalış
   const fnameRaw = clean(p.orijinal_karar_id || p.dosya_adi || p.dosya || p.slug);
-  if (!fnameRaw) return "";
-  const base = fnameRaw.replace(/\.txt$/i, "");
-  let m = base.match(/^(\d+)_Hukuk_Dairesi_/i);
-  if (m) return `${m[1]}. Hukuk Dairesi`;
-  m = base.match(/^(\d+)_Ceza_Dairesi_/i);
-  if (m) return `${m[1]}. Ceza Dairesi`;
-  m = base.match(/^(Hukuk|Ceza)_Genel_Kurulu_/i);
-  if (m) return `${m[1]} Genel Kurulu`;
-  return "";
+  if (fnameRaw) {
+    const base = fnameRaw.replace(/\.txt$/i, "");
+    let m = base.match(/^(\d+)_Hukuk_Dairesi_/i);
+    if (m) return `${m[1]}. Hukuk Dairesi`;
+    m = base.match(/^(\d+)_Ceza_Dairesi_/i);
+    if (m) return `${m[1]}. Ceza Dairesi`;
+    m = base.match(/^(Hukuk|Ceza)_Genel_Kurulu_/i);
+    if (m) return `${m[1]} Genel Kurulu`;
+  }
+
+  // Dosya adından çıkarılamazsa, mahkeme/type alanını olduğu gibi kullan (HGK vb. kısaltmalar için fallback)
+  const mahkeme = clean(p.mahkeme || p.type || "");
+  return mahkeme;
 }
 
 function slugFromTypeAndCode(typeRaw = "", codeRaw = "") {

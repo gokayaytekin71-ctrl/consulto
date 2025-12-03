@@ -12,11 +12,11 @@ const PACKAGES = [
     price: "₺100",
     tokenCount: "10 Token",
     badge: null,
-    summary: "Bireysel denemeler ve kısa analizler için ideal.",
+    summary: "Bireysel denemeler için ideal.",
     features: [
       "10 Kredi Yüklenir",
       "Dilekçe Oluşturma (1 Kredi)",
-      "Vaka Analizi (1 Kredi)",
+      "Analiz İsteme (1 Kredi)",
       "Süre sınırı yok",
       "İstediğin zaman harca",
     ],
@@ -30,10 +30,10 @@ const PACKAGES = [
     summary: "Aktif hukuk büroları ve sık kullanım için tasarruflu seçim.",
     features: [
       "50 Kredi Yüklenir",
-      "Yaklaşık %20 İndirimli",
+      "Yaklaşık %20 daha ucuz",
       "Dilekçe & Analiz Botu",
-      "Öncelikli İşlem",
-      "Hukuki Araçlar Tam Erişim",
+      "Sınırsız Akıllı Arama",
+      "Hesaplama Araçları Tam Erişim",
     ],
   },
   {
@@ -42,12 +42,12 @@ const PACKAGES = [
     price: "₺700",
     tokenCount: "100 Token",
     badge: "Fırsat",
-    summary: "Yüksek hacimli işler ve geniş ekipler için maksimum avantaj.",
+    summary: "Maksimum avantaj.",
     features: [
       "100 Kredi Yüklenir",
-      "Yaklaşık %30 İndirimli",
+      "Yaklaşık %30 daha ucuz",
       "Tam kapsamlı erişim",
-      "Ekip kullanımına uygun",
+      "Kaçırılmayacak fırsat",
       "Ömür boyu geçerli",
     ],
   },
@@ -101,6 +101,9 @@ export default function PricingPage() {
         </h1>
         <p className="text-base sm:text-lg text-slate-400 max-w-2xl">
           Consülto'da abonelik yok, taahhüt yok. İhtiyacın kadar token al, dilediğin zaman dilekçe veya analiz için kullan.
+          <span className="ml-1 inline-block bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent font-semibold">
+            Üstelik Açılışa özel %50 indirimli!
+          </span>
         </p>
       </section>
 
@@ -123,6 +126,9 @@ export default function PricingPage() {
               )}
 
               <div className="mb-6">
+                <div className="inline-flex items-center rounded-full bg-pink-600/80 text-[11px] font-semibold text-white px-3 py-1 mb-3 shadow-md shadow-pink-900/40">
+                  <span className="mr-1">✨</span> Açılışa Özel %50 İndirim
+                </div>
                 <h3 className="text-xl font-semibold text-white mb-2">{p.name}</h3>
                 <div className="flex items-baseline gap-2">
                   <span className="text-3xl font-bold text-white">{p.price}</span>

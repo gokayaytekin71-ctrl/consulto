@@ -162,7 +162,7 @@ export default async function Home() {
                                         <div className="h-2 w-full bg-slate-200 rounded animate-pulse delay-75"></div>
                                         <div className="h-2 w-5/6 bg-slate-200 rounded animate-pulse delay-150"></div>
                                         <div className="mt-4 p-2 bg-blue-50 rounded text-xs text-blue-700 font-mono">
-                                            {">"} 1 Token Harcandı...
+                                            {">"} Dava açma zorunluluğu hasıl olmuştur...
                                         </div>
                                     </div>
                                 </div>
