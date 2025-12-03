@@ -27,10 +27,8 @@ export async function POST(req) {
       return new Response("Sunucu yapılandırma hatası (Shopier Keys Missing)", { status: 500 });
     }
 
-    // --- KRİTİK FİYAT FORMATLAMA BAŞLANGIÇ ---
-    // Shopier'ın imza hesaplaması için fiyatı zorla 2 ondalık basamağa ("100.00") çeviriyoruz.
+    // Fiyatı 2 ondalık basamağa ("100.00") formatla (İmza tutarlılığı için)
     const formattedPrice = Number(selectedPkg.price).toFixed(2); 
-    // ------------------------------------------
 
     const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
@@ -51,7 +49,7 @@ export async function POST(req) {
     // Shopier Parametreleri
     const args = {
       API_key: process.env.SHOPIER_API_KEY, 
-      website_index: 1,
+      website_index: 2, // <-- KRİTİK DÜZELTME: Artık 2. URL'yi (redirector) kullan
       platform_order_id: orderId,
       product_name: selectedPkg.name,
       product_type: 1, 
@@ -61,6 +59,7 @@ export async function POST(req) {
       buyer_account_age: 0,
       buyer_id_nr: 0,
       buyer_phone: "05555555555",
+      
       billing_address: "Dijital Teslimat",
       billing_city: "Istanbul",
       billing_country: "TR",
@@ -69,7 +68,8 @@ export async function POST(req) {
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
-      total_order_value: formattedPrice, // <-- FORMATLANMIŞ FİYATI GÖNDER
+      
+      total_order_value: formattedPrice, // Formatlanmış fiyatı gönder ("100.00")
       currency: 0, 
       platform: 0,
       is_in_frame: 0,
@@ -78,11 +78,11 @@ export async function POST(req) {
       random_nr: randomNr,
     };
 
-    // İmza Oluşturma (KRİTİK: total_order_value'yu formatlı kullanıyoruz)
+    // İmza Oluşturma
     const dataToSign =
       String(args.random_nr) +
       String(args.platform_order_id) +
-      String(args.total_order_value) + // <-- "100.00" stringi ile imzalıyoruz
+      String(args.total_order_value) +
       String(args.currency);
 
     const signature = crypto
