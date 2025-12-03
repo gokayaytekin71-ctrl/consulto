@@ -6,8 +6,7 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 
 const PACKAGES = {
-  // NOT: 1 TL testin bittiyse, buradaki fiyatı 100 olarak eski haline getirebilirsin.
-  1: { tokens: 10, price: 100, name: "10 Token Paketi" }, 
+  1: { tokens: 10, price: 1, name: "10 Token Paketi" },
   2: { tokens: 50, price: 400, name: "50 Token Paketi" },
   3: { tokens: 100, price: 700, name: "100 Token Paketi" },
 };
@@ -25,19 +24,19 @@ export async function POST(req) {
 
     // Güvenlik Kontrolü
     if (!process.env.SHOPIER_API_KEY || !process.env.SHOPIER_API_SECRET) {
-      console.error("SHOPIER API ANAHTARLARI EKSİK!");
-      return new Response("Server Config Error", { status: 500 });
+      console.error("SHOPIER API ANAHTARLARI EKSİK VEYA BOŞ!");
+      return new Response("Server Config Error: Shopier Keys Missing", { status: 500 });
     }
+
+    // Fiyatı 2 ondalık basamağa (Örn: "100.00") formatla
+    const formattedPrice = Number(selectedPkg.price).toFixed(2); 
 
     const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-    // Fiyatı 2 ondalık basamağa (örnek: 1.00) formatla
-    const formattedPrice = Number(selectedPkg.price).toFixed(2); // <-- KRİTİK DEĞİŞİKLİK
-
-    // DB Kaydı (Amount hala tam sayı/float olarak kaydedilir)
+    // KRİTİK: DB Kaydı (İşlem burada başarısız oluyorsa DATABASE_URL yanlıştır)
     await prisma.payment.create({
       data: {
-        id: crypto.randomUUID(),
+        id: crypto.randomUUID(), // ID'yi manuel oluşturuyoruz
         userId: user.id,
         orderId,
         amount: selectedPkg.price,
@@ -54,13 +53,14 @@ export async function POST(req) {
       website_index: 1,
       platform_order_id: orderId,
       product_name: selectedPkg.name,
-      product_type: 1, // Dijital ürün
+      product_type: 1, 
       buyer_name: user.name || "Kullanici",
       buyer_surname: "Musteri",
       buyer_email: user.email || "info@consultohukuk.com",
       buyer_account_age: 0,
       buyer_id_nr: 0,
       buyer_phone: "05555555555",
+      
       billing_address: "Dijital Teslimat",
       billing_city: "Istanbul",
       billing_country: "TR",
@@ -69,7 +69,8 @@ export async function POST(req) {
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
-      total_order_value: formattedPrice, // <-- FORMATLANMIŞ FİYATI GÖNDER
+      
+      total_order_value: formattedPrice, // Formatlanmış fiyatı gönder
       currency: 0, 
       platform: 0,
       is_in_frame: 0,
@@ -82,7 +83,7 @@ export async function POST(req) {
     const dataToSign =
       String(args.random_nr) +
       String(args.platform_order_id) +
-      String(args.total_order_value) + // <-- KRİTİK: total_order_value (Örn: "1.00")
+      String(args.total_order_value) + // <-- "100.00" stringi ile imzalıyoruz
       String(args.currency);
 
     const signature = crypto
@@ -92,10 +93,7 @@ export async function POST(req) {
 
     args.signature = signature;
     
-    // Callback URL'yi buraya da ekleyelim (Güvenlik için paneldeki ayar çalışmazsa diye)
-    args.callback = `${process.env.NEXT_PUBLIC_APP_URL}/api/payment/callback`;
-
-
+    // Yönlendirme Formu
     const formInputs = Object.entries(args)
       .map(([key, val]) => `<input type="hidden" name="${key}" value="${val}">`)
       .join("");
@@ -114,7 +112,8 @@ export async function POST(req) {
 
     return new Response(html, { headers: { "Content-Type": "text/html" } });
   } catch (err) {
-    console.error("Payment Start Error:", err);
-    return new Response("Ödeme başlatılamadı", { status: 500 });
+    // DB bağlantı hatası burada yakalanır ve frontend'e 500 döner
+    console.error("KRİTİK DB BAĞLANTI HATASI (Payment Start):", err);
+    return new Response("Veritabanı bağlantı hatası veya sunucu hatası.", { status: 500 });
   }
 }
