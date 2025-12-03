@@ -6,7 +6,7 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 
 const PACKAGES = {
-  1: { tokens: 10, price: 1, name: "10 Token Paketi" },
+  1: { tokens: 10, price: 1, name: "10 Token Paketi" }, // Test için 1 TL
   2: { tokens: 50, price: 400, name: "50 Token Paketi" },
   3: { tokens: 100, price: 700, name: "100 Token Paketi" },
 };
@@ -24,14 +24,9 @@ export async function POST(req) {
       where: { id: session.user.id },
     });
 
-    if (!process.env.SHOPIER_API_KEY || !process.env.SHOPIER_API_SECRET) {
-      console.error("SHOPIER API ANAHTARLARI EKSİK!");
-      return new Response("Server Config Error", { status: 500 });
-    }
-
     const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-    // DB kayıt
+    // DB Kaydı
     await prisma.payment.create({
       data: {
         id: crypto.randomUUID(),
@@ -47,39 +42,36 @@ export async function POST(req) {
 
     // ---- SHOPIER PARAMETRELERİ ----
     const args = {
-      API_key: process.env.SHOPIER_API_KEY, // DİKKAT: API_key
-      website_index: 1, // Shopier panelinde bu site kaçıncı index ise
+      API_key: process.env.SHOPIER_API_KEY, 
+      website_index: 1,
       platform_order_id: orderId,
       product_name: selectedPkg.name,
-      product_type: 1, // 1: dijital, 0: fiziksel (çok önemli değil, ama dijital olduğu için 1)
+      product_type: 1, // Dijital ürün
       buyer_name: user.name || "Kullanici",
       buyer_surname: "Musteri",
       buyer_email: user.email || "info@consultohukuk.com",
       buyer_account_age: 0,
       buyer_id_nr: 0,
       buyer_phone: "05555555555",
-
       billing_address: "Dijital Teslimat",
       billing_city: "Istanbul",
       billing_country: "TR",
       billing_postcode: "34000",
-
       shipping_address: "Dijital Teslimat",
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
-
-      total_order_value: selectedPkg.price, // FİYAT (data değil)
-      currency: 0, // 0: TL
-
+      total_order_value: selectedPkg.price, // Burası kritik
+      currency: 0, 
       platform: 0,
       is_in_frame: 0,
       current_language: 0,
-      modul_version: "1.0.8",
+      modul_version: "1.0.4", // Sürüm 1.0.4 daha stabil çalışır
       random_nr: randomNr,
     };
 
     // ---- İMZA OLUŞTURMA ----
+    // Shopier'in beklediği imza sırası: random_nr + platform_order_id + total_order_value + currency
     const dataToSign =
       String(args.random_nr) +
       String(args.platform_order_id) +
@@ -92,14 +84,13 @@ export async function POST(req) {
       .digest("base64");
 
     args.signature = signature;
-
-    // (İstersen gönder, istersen panelden ayarla – zorunlu değil)
-    args.callback = `${process.env.NEXT_PUBLIC_APP_URL}/api/payment/callback`;
+    
+    // Callback URL'yi buraya eklemiyoruz, panelden alıyor.
 
     const formInputs = Object.entries(args)
       .map(
         ([key, val]) =>
-          `<input type="hidden" name="${key}" value="${String(val)}">`
+          `<input type="hidden" name="${key}" value="${val}">`
       )
       .join("");
 
