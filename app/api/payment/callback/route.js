@@ -7,23 +7,45 @@ export async function POST(req) {
   try {
     const formData = await req.formData();
     const body = {};
-    formData.forEach((value, key) => (body[key] = value));
+    formData.forEach((value, key) => {
+      body[key] = value;
+    });
 
-    const { status, platform_order_id, payment_id, random_nr, signature } = body;
+    const {
+      status,
+      platform_order_id,
+      payment_id,
+      random_nr,
+      signature,
+      total_order_value,
+      currency,
+    } = body;
 
-    // 1. İmza Doğrulama (Güvenlik)
-    const expectedData = random_nr + platform_order_id;
-    const expectedSignature = crypto
+    // ---- İMZA DOĞRULAMA ----
+    const dataToSign =
+      String(random_nr) +
+      String(platform_order_id) +
+      String(total_order_value) +
+      String(currency);
+
+    const expectedSigBuffer = crypto
       .createHmac("sha256", process.env.SHOPIER_API_SECRET)
-      .update(expectedData)
-      .digest("base64");
+      .update(dataToSign)
+      .digest(); // Buffer
 
-    if (signature !== expectedSignature) {
+    const incomingSigBuffer = Buffer.from(signature, "base64");
+
+    // timingSafeEqual kullanmak daha güvenli
+    const isValid =
+      incomingSigBuffer.length === expectedSigBuffer.length &&
+      crypto.timingSafeEqual(incomingSigBuffer, expectedSigBuffer);
+
+    if (!isValid) {
       console.error("Shopier imza hatası!");
       return new Response("Gecersiz Imza", { status: 400 });
     }
 
-    // 2. Siparişi Bul
+    // ---- SİPARİŞİ BUL ----
     const payment = await prisma.payment.findUnique({
       where: { orderId: platform_order_id },
     });
@@ -31,22 +53,18 @@ export async function POST(req) {
     if (!payment) return new Response("Siparis Bulunamadi", { status: 404 });
     if (payment.status === "SUCCESS") return new Response("OK", { status: 200 });
 
-    // 3. Başarılıysa Token Yükle
     if (status && status.toLowerCase() === "success") {
       await prisma.$transaction([
-        // Ödemeyi güncelle
         prisma.payment.update({
           where: { id: payment.id },
           data: { status: "SUCCESS", paymentId: payment_id },
         }),
-        // Kullanıcıya token ekle
         prisma.user.update({
           where: { id: payment.userId },
           data: { tokenBalance: { increment: payment.tokenAmount } },
         }),
       ]);
     } else {
-      // Başarısızsa güncelle
       await prisma.payment.update({
         where: { id: payment.id },
         data: { status: "FAILED" },
