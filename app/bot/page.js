@@ -4,11 +4,11 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { useAnalysisBot } from "../hooks/useAnalysisBot";
-import TokenBalance from "@/components/TokenBalance"; // <-- YENİ EKLENDİ
+import TokenBalance from "@/components/TokenBalance";
 
 // --- UI Bileşenleri ---
 
-// 1. Cyber Loader
+// 1. Cyber Loader (Değişiklik yok)
 const CyberLoader = () => {
   const [msgIndex, setMsgIndex] = useState(0);
   const messages = [
@@ -44,11 +44,11 @@ const CyberLoader = () => {
   );
 };
 
-// 2. Premium Kart Yapısı
+// 2. Premium Kart Yapısı (Ufak mobil padding ayarı eklendi)
 const PremiumCard = ({ title, icon, children, className = "", noPadding = false, action }) => (
   <div className={`relative flex flex-col bg-[#0f172a]/80 backdrop-blur-md border border-slate-700/50 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:border-cyan-500/30 hover:shadow-cyan-500/10 ${className}`}>
     {(title || icon) && (
-      <div className="flex-none flex items-center justify-between px-5 py-4 border-b border-white/5 bg-white/5">
+      <div className="flex-none flex items-center justify-between px-4 py-3 md:px-5 md:py-4 border-b border-white/5 bg-white/5">
         <div className="flex items-center gap-3">
           {icon && <div className="text-cyan-400 drop-shadow-md">{icon}</div>}
           <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase font-mono">{title}</h3>
@@ -56,25 +56,19 @@ const PremiumCard = ({ title, icon, children, className = "", noPadding = false,
         {action}
       </div>
     )}
-    <div className={`flex-1 min-h-0 relative ${noPadding ? "" : "p-5"}`}>{children}</div>
-    {/* Dekoratif Köşe */}
+    <div className={`flex-1 min-h-0 relative ${noPadding ? "" : "p-4 md:p-5"}`}>{children}</div>
     <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
   </div>
 );
 
-// 3. Mevzuat Popover (Overlay Olmadan - Click Outside ile Kapanan)
+// 3. Mevzuat Popover (Değişiklik yok)
 const MevzuatPopover = ({ data, position, onClose }) => {
   if (!data || !position) return null;
-  
   return (
     <div 
       data-mevzuat-popover="1" 
       className="fixed z-[9999] w-[450px] max-w-[90vw] flex flex-col bg-[#0B1120] border border-cyan-500/30 rounded-xl shadow-[0_0_50px_rgba(0,0,0,0.8)] animate-in fade-in zoom-in-95 duration-200"
-      style={{
-        top: position.top,
-        left: position.left,
-        transform: "translate(-50%, 0)"
-      }}
+      style={{ top: position.top, left: position.left, transform: "translate(-50%, 0)" }}
       onClick={(e) => e.stopPropagation()} 
     >
       <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-cyan-950 to-transparent border-b border-cyan-900/50 rounded-t-xl">
@@ -84,17 +78,12 @@ const MevzuatPopover = ({ data, position, onClose }) => {
              {data.mevzuat_adi} {data.madde ? `m.${data.madde}` : ''}
            </span>
         </div>
-        <button 
-          onClick={onClose}
-          className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white transition-colors"
-        >
+        <button onClick={onClose} className="p-1 rounded hover:bg-white/10 text-slate-400 hover:text-white transition-colors">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
       </div>
       <div className="p-4 max-h-[350px] overflow-y-auto custom-scrollbar">
-        <div className="text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-wrap">
-          {data.preview}
-        </div>
+        <div className="text-xs text-slate-300 leading-relaxed font-sans whitespace-pre-wrap">{data.preview}</div>
       </div>
       <div className="h-1 w-full bg-gradient-to-r from-cyan-500/50 via-indigo-500/50 to-transparent opacity-50"></div>
     </div>
@@ -111,6 +100,16 @@ export default function AnalysisPage() {
     utils
   } = useAnalysisBot();
 
+  // MOBİL STATE'LERİ EKLENDİ
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+
+  // Linke tıklandığında menüyü kapat
+  const handleSelectChat = (id) => {
+    setActiveId(id);
+    setMobileMenuOpen(false);
+  };
+
   const onDeleteClick = (e, id) => { 
     e?.stopPropagation(); 
     if (id) setConfirmDel({ open: true, id }); 
@@ -122,26 +121,24 @@ export default function AnalysisPage() {
     plus: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>,
     trash: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>,
     book: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
-    scale: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+    scale: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>,
+    menu: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>,
+    close: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
   };
 
   return (
     <div className="flex flex-col h-screen bg-[#020617] text-slate-100 font-sans overflow-hidden selection:bg-cyan-500/30 selection:text-cyan-100">
       
-      {/* Global Style overrides */}
       <style jsx global>{`
         footer, .footer { display: none !important; }
         .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 5px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #475569; }
-
         @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .animate-spin-slow { animation: spin-slow 3s linear infinite; }
-        
         @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
         .animate-shimmer { animation: shimmer 2s infinite linear; }
-        
         @keyframes pulse-slow { 0%, 100% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.2; transform: scale(1.1); } }
         .animate-pulse-slow { animation: pulse-slow 8s infinite ease-in-out; }
       `}</style>
@@ -152,10 +149,18 @@ export default function AnalysisPage() {
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-900/10 rounded-full blur-[120px] animate-pulse-slow" style={{animationDelay: '2s'}}></div>
       </div>
 
-      {/* Header - Z-Index 50 */}
-      <header className="flex-none z-50 h-16 border-b border-white/5 bg-[#020617]/70 backdrop-blur-xl flex items-center justify-between px-6 shadow-lg shadow-black/20">
-        <div className="flex items-center gap-4">
-          <div className="relative group cursor-pointer">
+      {/* --- HEADER --- */}
+      <header className="flex-none z-50 h-16 border-b border-white/5 bg-[#020617]/70 backdrop-blur-xl flex items-center justify-between px-4 md:px-6 shadow-lg shadow-black/20">
+        <div className="flex items-center gap-3">
+          {/* Mobil Menü Butonu (Sadece mobilde görünür) */}
+          <button 
+            onClick={() => setMobileMenuOpen(true)}
+            className="md:hidden p-1.5 text-slate-300 hover:text-white bg-slate-800/50 rounded-lg"
+          >
+            {icons.menu}
+          </button>
+
+          <div className="relative group cursor-pointer hidden sm:block">
              <div className="absolute -inset-1 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg blur opacity-40 group-hover:opacity-75 transition duration-200"></div>
              <div className="relative w-10 h-10 bg-[#0f172a] rounded-lg border border-slate-700 flex items-center justify-center text-cyan-400 shadow-xl">
                {icons.scale}
@@ -165,10 +170,20 @@ export default function AnalysisPage() {
              <h1 className="text-lg font-bold tracking-tight text-white leading-none">
                Analiz <span className="text-cyan-500 font-light">AI</span>
              </h1>
-             <span className="text-[10px] text-cyan-600/80 font-mono tracking-[0.2em] uppercase mt-1">Legal Intellıgence System v2.0</span>
+             <span className="text-[10px] text-cyan-600/80 font-mono tracking-[0.2em] uppercase mt-1">Legal Intellıgence</span>
           </div>
         </div>
-        <div className="flex items-center gap-4">
+        
+        <div className="flex items-center gap-2">
+           {/* Mobilde Kaynaklar/Mevzuat Butonu */}
+           <button 
+             onClick={() => setMobileResourcesOpen(true)}
+             className="lg:hidden p-2 text-cyan-400 hover:text-cyan-300 bg-cyan-900/20 rounded-full border border-cyan-800/50"
+             aria-label="Kaynaklar"
+           >
+             {icons.book}
+           </button>
+
           <div className="hidden md:flex items-center px-4 py-1.5 rounded-full bg-slate-900/80 border border-slate-800 text-[10px] text-slate-400 gap-3">
              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></span>ONLINE</span>
              <span className="w-px h-3 bg-slate-700"></span>
@@ -178,22 +193,38 @@ export default function AnalysisPage() {
       </header>
 
       {/* --- Main Layout --- */}
-      <div className="flex-1 flex overflow-hidden relative z-10 px-6 py-6 gap-6">
+      <div className="flex-1 flex overflow-hidden relative z-10 px-2 py-4 md:px-6 md:py-6 gap-6">
         
-        {/* SOL: Geçmiş Analizler Sidebar - Z-Index 40 */}
-        <aside className="w-[300px] flex-none z-40 flex flex-col">
+        {/* SOL: Geçmiş Analizler Sidebar */}
+        {/* MOBİL DÜZELTME: Sabit position yerine, mobilde 'fixed' ve 'overlay' yapısı kullanıldı */}
+        <div 
+          className={`fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm transition-opacity duration-300 md:hidden ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          onClick={() => setMobileMenuOpen(false)}
+        />
+        
+        <aside 
+          className={`
+            fixed inset-y-0 left-0 z-[61] w-[280px] bg-[#020617] md:bg-transparent shadow-2xl md:shadow-none
+            transform transition-transform duration-300 ease-in-out border-r border-slate-800 md:border-none
+            flex flex-col h-full md:relative md:transform-none md:w-[300px] md:flex-none
+            ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+          `}
+        >
+          {/* Mobilde Kapatma Butonu */}
+          <div className="flex justify-end p-2 md:hidden">
+             <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-white">{icons.close}</button>
+          </div>
+
           <PremiumCard className="h-full bg-[#020617]/80 backdrop-blur-sm" noPadding>
             <div className="flex flex-col h-full">
               
-              {/* --- TOKEN BAKİYESİ --- */}
               <div className="pt-4">
                  <TokenBalance />
               </div>
-              {/* ------------------- */}
 
               <div className="p-5 space-y-4 flex-none">
                 <button 
-                  onClick={() => { const c = createEmptyAnalysis(""); setActiveId(c.id); }}
+                  onClick={() => { const c = createEmptyAnalysis(""); setActiveId(c.id); setMobileMenuOpen(false); }}
                   className="group relative w-full flex items-center justify-center gap-2 overflow-hidden bg-cyan-950/30 hover:bg-cyan-900/50 border border-cyan-800/50 hover:border-cyan-500 text-cyan-100 text-sm font-medium py-3 rounded-xl transition-all duration-300"
                 >
                   <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent -translate-x-full group-hover:animate-shimmer"></span>
@@ -217,7 +248,7 @@ export default function AnalysisPage() {
                     return (
                       <div 
                         key={item.id}
-                        onClick={() => setActiveId(item.id)}
+                        onClick={() => handleSelectChat(item.id)}
                         className={`group relative p-3 rounded-lg cursor-pointer transition-all duration-200 border ${isActive ? "bg-slate-800/80 border-cyan-500/30 shadow-[0_0_15px_rgba(6,182,212,0.1)]" : "border-transparent hover:bg-slate-800/40 hover:border-slate-800"}`}
                       >
                           <div className="flex justify-between items-start gap-2">
@@ -242,7 +273,7 @@ export default function AnalysisPage() {
           </PremiumCard>
         </aside>
 
-        {/* ORTA: Chat & Analiz Alanı - Z-Index 10 */}
+        {/* ORTA: Chat & Analiz Alanı */}
         <main className="flex-1 overflow-y-auto custom-scrollbar min-w-0 bg-transparent z-10">
           <div className="max-w-4xl mx-auto flex flex-col gap-6">
               
@@ -263,15 +294,15 @@ export default function AnalysisPage() {
                           </div>
                       )}
 
-                      <div className="flex items-center justify-between mt-4">
-                          <div className="flex gap-2">
-                              {["YARGITAY", "BAM", "ANAYASA", "MEVZUAT"].map(tag => (
-                                  <span key={tag} className="text-[9px] font-mono text-cyan-900 bg-cyan-900/10 border border-cyan-900/20 px-2 py-1 rounded select-none">
+                      <div className="flex flex-col sm:flex-row items-center justify-between mt-4 gap-4 sm:gap-0">
+                          <div className="flex gap-2 w-full sm:w-auto overflow-x-auto pb-2 sm:pb-0 scrollbar-hide">
+                              {["YARGITAY", "MEVZUAT"].map(tag => (
+                                  <span key={tag} className="text-[9px] font-mono text-cyan-900 bg-cyan-900/10 border border-cyan-900/20 px-2 py-1 rounded select-none whitespace-nowrap">
                                     {tag}
                                   </span>
                               ))}
                           </div>
-                          <div className="flex gap-3">
+                          <div className="flex gap-3 w-full sm:w-auto justify-end">
                               {input && !isLoading && (
                                   <button type="button" onClick={() => setInput("")} className="px-4 py-2 text-xs font-medium text-slate-500 hover:text-slate-300 transition-colors">Vazgeç</button>
                               )}
@@ -299,9 +330,9 @@ export default function AnalysisPage() {
                         )}
 
                         <PremiumCard className="min-h-[400px]" noPadding>
-                          <div className="p-8">
+                          <div className="p-4 md:p-8">
                             <div className="prose prose-invert max-w-none 
-                                prose-p:text-slate-300 prose-p:leading-7 prose-p:font-light
+                                prose-p:text-slate-300 prose-p:leading-7 prose-p:font-light prose-p:text-sm md:prose-p:text-base
                                 prose-headings:text-cyan-50 prose-headings:font-semibold prose-headings:tracking-tight
                                 prose-strong:text-cyan-200 prose-strong:font-bold
                                 prose-li:text-slate-300
@@ -339,14 +370,32 @@ export default function AnalysisPage() {
                   <div className="flex flex-col items-center justify-center h-[50vh] text-slate-600 bg-[#0f172a]/30 rounded-3xl border border-dashed border-slate-800">
                       <div className="w-24 h-24 rounded-full bg-slate-900 flex items-center justify-center mb-6 shadow-inner border border-slate-800"><span className="text-cyan-900/40 text-4xl">{icons.scale}</span></div>
                       <h3 className="text-xl font-bold text-slate-400 mb-2">Sistem Hazır</h3>
-                      <p className="text-sm text-slate-500 max-w-xs text-center">Hukuki analiz motorunu başlatmak için sol menüden yeni bir analiz oluşturun.</p>
+                      <p className="text-sm text-slate-500 max-w-xs text-center px-4">Hukuki analiz motorunu başlatmak için sol menüden yeni bir analiz oluşturun.</p>
                   </div>
               )}
           </div>
         </main>
 
-        {/* SAĞ: Kaynaklar Sidebar - Z-Index 40 */}
-        <aside className="hidden lg:flex w-[350px] flex-none flex-col h-full z-40">
+        {/* SAĞ: Kaynaklar Sidebar */}
+        {/* MOBİL DÜZELTME: Mobilde sağ panel drawer olarak açılıyor */}
+        <div 
+          className={`fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileResourcesOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+          onClick={() => setMobileResourcesOpen(false)}
+        />
+
+        <aside 
+          className={`
+            fixed inset-y-0 right-0 z-[61] w-[300px] bg-[#020617] lg:bg-transparent shadow-2xl lg:shadow-none
+            transform transition-transform duration-300 ease-in-out border-l border-slate-800 lg:border-none
+            flex flex-col h-full lg:relative lg:transform-none lg:w-[350px] lg:flex-none
+            ${mobileResourcesOpen ? 'translate-x-0' : 'translate-x-full'}
+          `}
+        >
+             {/* Mobilde Kapatma Butonu */}
+             <div className="flex justify-start p-2 lg:hidden">
+                <button onClick={() => setMobileResourcesOpen(false)} className="p-2 text-slate-400 hover:text-white">{icons.close}</button>
+             </div>
+
             <PremiumCard className="h-full bg-[#020617]/50 backdrop-blur-sm" noPadding>
               <div className="flex flex-col h-full">
                 

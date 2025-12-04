@@ -102,7 +102,7 @@ export default function PricingPage() {
         <p className="text-base sm:text-lg text-slate-400 max-w-2xl">
           Consülto'da abonelik yok, taahhüt yok. İhtiyacın kadar token al, dilediğin zaman dilekçe veya analiz için kullan.
           <span className="ml-1 inline-block bg-gradient-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent font-semibold">
-            Üstelik Açılışa özel %50 indirimli!
+            Üstelik Consulto v2.0'a özel %50 indirimli!
           </span>
         </p>
       </section>

@@ -28,14 +28,14 @@ export default function AboutPage() {
           {[
             {
               title: "Dilekçe Botu",
-              desc: "Şablon uyumlu, düzenlenebilir ve kaynak gösterimi güçlü taslaklar.",
+              desc: "Profesyonel Hukukçu elinden çıkmış gibi,karar atıflı kaynak gösterimli dilekçelerinize ek olarak; risk, gelebilecek karşı argüman ve sunulması gereken delilleri de içeren güçlü taslaklar.",
               icon: (
                 <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
               ),
             },
             {
               title: "Analiz Botu",
-              desc: "Yargıtay kararlarını akıllı özetlerle hızlıca kavrayın; kritik noktaları kaçırmayın.",
+              desc: "Uyuşmazlıklara ilişkin Yargıtay uygulamaları ve mevzuatları gözeterek, yol haritası çıkarın. Strateji oluşturun, olası riskleri belirleyin. Emsal kararlarla uygulamayı kavrayın; kritik noktaları kaçırmayın.",
               icon: (
                 <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19h16"/><path d="M6 17V9"/><path d="M12 17V5"/><path d="M18 17v-7"/></svg>
               ),
@@ -77,17 +77,17 @@ export default function AboutPage() {
             <ul className="mt-3 space-y-2 text-sm text-slate-300 list-disc pl-5">
               <li>Hız: Rutin işleri dakikalara indiren akışlar.</li>
               <li>Doğruluk: Büyük karar korpusu ve mevzuat ile tutarlı sonuçlar.</li>
-              <li>Şeffaflık: Varsayımlar ve formüller görünür, müdahaleye açık.</li>
-              <li>Uyum: KVKK prensipleri ve veri minimizasyonu yaklaşımı.</li>
+              <li>Kalite: Piyasadaki en iyi hukuk yapay zekası.</li>
+              <li>Uyum: Sürekli güncellenen ve eğitimine devam eden Yapay Zeka.</li>
             </ul>
           </div>
 
           <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 shadow-sm">
             <h3 className="text-white font-semibold">Nasıl çalışır?</h3>
             <ol className="mt-3 space-y-2 text-sm text-slate-300 list-decimal pl-5">
-              <li>1.000.000+ karar ve destekleyici veriyle eğitilmiş modeller.</li>
+              <li>1.000.000+ nitelikli karar ve destekleyici veriyle eğitilmiş modeller.</li>
               <li>Bağlama duyarlı çıkarım ve hukuki şablon/kurallar.</li>
-              <li>Şeffaf çıktılar; istenirse parametrelerle ince ayar.</li>
+              <li>Yargıtay kararlarına atıflar; Üstelik yalnızca 2-3 dakikada.</li>
             </ol>
             <div className="mt-4 text-xs text-slate-400">İrtibat: info@consulto.com.tr</div>
           </div>
