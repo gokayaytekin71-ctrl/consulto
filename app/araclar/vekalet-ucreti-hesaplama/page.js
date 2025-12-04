@@ -46,6 +46,8 @@ const MAKTU_2025 = {
   "sulh-ceza-infaz": 18_000,      // Sulh Ceza / İnfaz Hâkimliği — örnek
   // İcra takipleri (maktu asgari ücrete tabi alt sınır)
   "icra-takip": 13_500,
+  "agir-ceza": 65_000,
+  "cocuk-ceza": 45_000,
 };
 
 const ASLIYE_MAKTU = MAKTU_2025["asliye"] ?? 0; // para davaları için referans maktû eşik (meblağ altındaysa meblağ kadar)
@@ -74,6 +76,8 @@ const CATEGORIES = [
   { id: "fikri-sinai", label: "Fikri ve Sınai Haklar Mahkemeleri (maktû)" },
   { id: "idare-durusmali", label: "İdare & Vergi Mahkemeleri — Duruşmalı (maktû)" },
   { id: "idare-durusmasiz", label: "İdare & Vergi Mahkemeleri — Duruşmasız (maktû)" },
+  { id: "agir-ceza", label: "Ağır Ceza Mahkemeleri (maktû)" },
+  { id: "cocuk-ceza", label: "Çocuk Ceza Mahkemeleri (maktû)" },
 ];
 
 export default function VekaletUcreti() {
