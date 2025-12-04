@@ -74,7 +74,7 @@ export default function Footer() {
                   <path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" /><path d="M22 6l-10 7L2 6" />
                 </svg>
               </SocialButton>
-              <SocialButton href="https://x.com/" label="X (Twitter)">
+              <SocialButton href="https://x.com/Consulto_ai" label="X (Twitter)">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </SocialButton>
               <SocialButton href="https://linkedin.com/" label="LinkedIn">
@@ -141,7 +141,7 @@ export default function Footer() {
         {/* Alt Bar: Copyright */}
         <div className="mt-16 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-slate-500 font-medium">
-            © {new Date().getFullYear()} Consülto Teknoloji A.Ş. — Tüm hakları saklıdır.
+            © {new Date().getFullYear()} Consülto Legal Tech Platform — Tüm hakları saklıdır.
           </p>
           <div className="flex items-center gap-4">
              <span className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] font-mono text-slate-400">

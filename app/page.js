@@ -4,12 +4,17 @@ import Script from "next/script";
 import DecisionCard from '@/components/DecisionCard'; 
 
 // --- BİLEŞEN: TOOL CARD (ARAÇ KARTI) ---
-function ToolCard({ href, title, subtitle, icon }) {
+function ToolCard({ href, title, subtitle, icon, badge }) {
   return (
     <Link
       href={href}
       className="group relative flex items-center gap-4 p-5 rounded-2xl bg-white border border-slate-200/60 shadow-[0_2px_15px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-15px_rgba(0,42,92,0.12)] hover:-translate-y-1 transition-all duration-300 overflow-hidden"
     >
+      {badge && (
+        <span className="absolute -top-2 -right-2 text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-600 font-semibold border border-blue-100 shadow-sm">
+          {badge}
+        </span>
+      )}
       <div className="absolute inset-0 bg-gradient-to-r from-slate-50 to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
       <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       <div className="relative flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-slate-50 text-slate-500 group-hover:bg-[#002a5c] group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-blue-900/20 group-hover:scale-110">
@@ -78,7 +83,15 @@ export default async function Home() {
     });
 
     return (
-        <main className="min-h-screen bg-[#F8FAFC] text-slate-800 selection:bg-cyan-100 selection:text-cyan-900 overflow-x-hidden relative">
+        <main
+          className="
+            min-h-screen text-slate-800 selection:bg-cyan-100 selection:text-cyan-900 overflow-x-hidden relative
+            bg-[#F8FAFC]
+            before:absolute before:inset-0 before:-z-10
+            before:bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)]
+            before:bg-[size:40px_40px]
+          "
+        >
             
             {/* --- SAYFA GENELİ ARKA PLAN --- */}
             <div className="fixed inset-0 -z-50 pointer-events-none">
@@ -121,19 +134,60 @@ export default async function Home() {
                             Aylık sabit ücret yok. İhtiyacınız kadar <strong>Token</strong> alın, dilekçe ve analiz botlarını dilediğiniz zaman kullanın.
                         </p>
 
+                        <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-[13px] font-semibold text-green-700 mb-4">
+    <span className="text-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" 
+             className="w-5 h-5 text-green-600" 
+             viewBox="0 0 24 24" 
+             fill="none" 
+             stroke="currentColor" 
+             strokeWidth="2" 
+             strokeLinecap="round" 
+             strokeLinejoin="round">
+            <path d="M9 18l6-6-6-6" /> 
+            <circle cx="12" cy="12" r="10" />
+        </svg>
+    </span>
+    <span>
+        Üstelik Consulto AI v2.0'a özel <span className="font-extrabold">%50 indirimli!</span>
+    </span>
+</p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                            <Link 
-                                href="/paketler-ucretler" 
-                                className="px-8 py-4 rounded-xl bg-[#002a5c] text-white font-bold text-lg shadow-lg hover:shadow-blue-900/20 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
-                            >
-                                🚀 Token Yükle & Başla
-                            </Link>
-                            <Link 
-                                href="/dilekce" 
-                                className="px-8 py-4 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold text-lg shadow-sm hover:bg-slate-50 transition-all duration-300"
-                            >
-                                Hemen Dene
-                            </Link>
+                          <Link
+                            href="/paketler-ucretler"
+                            className="px-8 py-4 rounded-2xl bg-[#002a5c] text-white font-bold text-lg shadow-lg hover:shadow-blue-900/30 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+                          >
+                                                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/10 border border-white/30">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth={2}
+                                        className="w-3.5 h-3.5"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m7-7H5" />
+                                    </svg>
+                                </span>
+                                <span>Token Yükle & Başla</span>
+                          </Link>
+                          <Link
+                            href="/akilli-arama"
+                            className="px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-600 via-blue-600 to-cyan-500 text-white font-bold text-sm shadow-lg hover:shadow-blue-900/40 hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+                          >
+                          <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-white/20 border border-white/30">
+                          <svg xmlns="http://www.w3.org/2000/svg" 
+                            className="w-3.5 h-3.5" 
+                            fill="none" 
+                            viewBox="0 0 24 24" 
+                            stroke="currentColor" 
+                            strokeWidth="2">
+                         <path strokeLinecap="round" strokeLinejoin="round" 
+                             d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        </span>
+                        <span>Semantik Karar Arama Yap</span>
+                          </Link>
                         </div>
                     </div>
 
@@ -201,14 +255,24 @@ export default async function Home() {
 
                             {/* KART C: İSTATİSTİKLER */}
                             <div className="h-[140px] grid grid-cols-2 gap-4">
-                                <div className="rounded-[2rem] bg-white border border-slate-200 p-6 flex flex-col justify-center items-center text-center shadow-lg hover:border-emerald-200 transition-colors">
-                                    <div className="text-3xl font-black text-slate-900 mb-1">₺100</div>
-                                    <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Başlangıç</div>
+                              <div className="rounded-[2rem] bg-white border border-slate-200 p-6 flex flex-col justify-center items-center text-center shadow-lg hover:border-emerald-200 transition-colors">
+                                <div className="relative text-xl font-bold text-red-500">
+                                  <span className="relative z-10">₺200</span>
+                                  <span className="absolute inset-0 block rotate-[-12deg] border-t-2 border-red-500 top-1/2"></span>
                                 </div>
-                                <div className="rounded-[2rem] bg-gradient-to-br from-indigo-500 to-blue-600 p-6 flex flex-col justify-center items-center text-center shadow-lg text-white">
-                                    <div className="text-3xl font-black mb-1">∞</div>
-                                    <div className="text-xs font-bold text-white/70 uppercase tracking-wider">Süre Sınırı Yok</div>
+                                <div className="text-3xl font-black text-slate-900 mb-1">₺100</div>
+                                <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Başlangıç</div>
+                                <div className="text-xs text-slate-500 mt-1">
+                                  10 Token paketiyle hemen başlayın
                                 </div>
+                              </div>
+                              <div className="rounded-[2rem] bg-gradient-to-br from-indigo-500 to-blue-600 p-6 flex flex-col justify-center items-center text-center shadow-lg text-white">
+                                <div className="text-3xl font-black mb-1">∞</div>
+                                <div className="text-xs font-bold text-white/70 uppercase tracking-wider">Süre Sınırı Yok</div>
+                                <div className="text-xs text-white/80 mt-1">
+                                  Aldığın tokenler süresiz kullanılır
+                                </div>
+                              </div>
                             </div>
                         </div>
 
@@ -254,8 +318,150 @@ export default async function Home() {
             {/* =====================================================================================
                 BÖLÜM 2: İÇERİK
                ===================================================================================== */}
-            <div className="max-w-screen-xl mx-auto px-4 md:px-6 space-y-24 py-16 relative z-10">
+            <div
+              className="
+                max-w-screen-xl mx-auto px-4 md:px-6 space-y-16 md:space-y-24 py-16 relative z-10
+                before:absolute before:inset-0 before:-z-10
+                before:bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)]
+                before:bg-[size:40px_40px]
+              "
+            >
                 
+                {/* --- GALERİ BÖLÜMÜ (TANITICI - PREMIUM SLIDER) --- */}
+                <section className="mb-28 relative">
+  <h2 className="text-4xl font-black text-[#002a5c] tracking-tight mb-10 flex items-center gap-3">
+    <span className="flex items-center justify-center w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 shadow-sm">
+      <svg xmlns="http://www.w3.org/2000/svg" className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </span>
+    Consülto Ne İşe Yarar ?
+  </h2>
+
+  {/*
+    Tanıtıcı görseller için dinamik dizi
+  */}
+  {(() => {
+    // Highlighted keywords
+    const highlightKeywords = [
+      "Analiz Pro",
+      "Dilekçe Pro",
+      "Ajanda",
+      "Vektörel (Semantik) Arama"
+    ];
+    // Regex for keywords
+    const highlightRegex = new RegExp(
+      `(${highlightKeywords.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join("|")})`,
+      "g"
+    );
+    // Format title with highlight (fosfor efektli, JSX uyumlu)
+    const formatTitle = (title) => {
+      return title.replace(
+        highlightRegex,
+        (_, match) =>
+          `<span class="relative inline-block px-1">` +
+            `<span class="absolute inset-0 bg-orange-300 opacity-50 -skew-y-6 rotate-1 blur-sm mix-blend-multiply rounded-sm z-0"></span>` +
+            `<span class="relative z-10 font-semibold tracking-wide text-orange-950 drop-shadow-sm">${match}</span>` +
+          `</span>`
+      );
+    };
+    const taniticiGorseller = [
+      {
+        src: "/images/gorsel1.jpg",
+        title: "Analiz Pro İle Uyuşmazlıklarınıza Karşı Strateji Oluşturur",
+        description: "Yargıtay uygulamalarını gözeterek, olası riskleri ve potansiyel sonucu değerlendirir. Kullanıcıya en doğru yönlendirmeleri yaparak işlerini kolaylaştırmayı amaçlar.",
+      },
+      {
+        src: "/images/gorsel2.jpg",
+        title: "Analiz Pro Karar Uydurmaz, Veritabanındaki Kararlara Atıflarda Bulunur ",
+        description: "Uyuşmazlıklarınıza ilişkin Yargıtay Kararlarını değerlendirir ve sizi yönlendirir. Bu kararları Emsal Kararlar başlığı altında sizinle paylaşır.",
+      },
+      {
+        src: "/images/gorsel3.jpg",
+        title: "Dilekçe Pro Usta Bir Hukukçunun Elinden Çıkmış Gibi",
+        description: "Hukuki literatür ile eğitildi, Yargıtay Kararlarına atıfta bulunan dilekçeler 2 dakikada hazır! ",
+      },
+      {
+        src: "/images/gorsel4.jpg",
+        title: "Dilekçe Pro Olası Senaryolara Karşı Sizi Hazırlar",
+        description: "Dilekçesi yazılan konu ile ilgili olası riskleri, karşı taraftan gelecek muhtemel iddiaları analiz eder, mutlaka sunmanız gereken deliller konusunda sizi yönlendirir.",
+      },
+      {
+        src: "/images/gorsel5.jpg",
+        title: "Ajanda İle Planlı ve İstikrarlı Olun",
+        description: "Yaklaşan işler hakkında sizlere bildirim gönderir, profesyonel görünümü ile hiçbir süreyi kaçırmamanıza yardımcı olur.",
+      },
+      {
+        src: "/images/gorsel6.jpg",
+        title: "Vektörel (Semantik) Arama ile 'Akıllı' Karar Arayın",
+        description: "Text by text karar arama artık çağ dışı. Vektörel arama ile yalnızca kelime bazlı değil, yapay zeka desteğiyle anlamsal bazlı aramalar yapın.",
+      },
+    ];
+    return (
+      <div className="space-y-12">
+        {taniticiGorseller.map((item, i) => (
+          <div
+            key={i}
+            className={
+              "relative w-full flex flex-col md:flex-row items-stretch gap-10 md:gap-16 mb-16 group " +
+              (i % 2 === 1 ? "md:flex-row-reverse" : "")
+            }
+          >
+            {/* Timeline connector */}
+{/* Timeline connector (görsel ile açıklama arasındaki efektli çizgi) */}
+<div className="hidden md:flex absolute top-4 bottom-4 left-1/2 -translate-x-1/2 items-center pointer-events-none">
+  <div className="relative w-px h-full bg-gradient-to-b from-[#002a5c]/0 via-[#002a5c]/40 to-[#002a5c]/0">
+    {/* Üst parlak nokta */}
+    <div className="absolute -left-[3px] top-6 w-2 h-2 rounded-full bg-[#f97316] shadow-[0_0_0_4px_rgba(249,115,22,0.25)] animate-pulse" />
+    {/* Orta sabit nokta */}
+    <div className="absolute -left-[3px] top-1/2 w-2 h-2 rounded-full bg-white shadow-[0_0_0_3px_rgba(15,23,42,0.2)]" />
+    {/* Alt parlak nokta */}
+    <div className="absolute -left-[3px] bottom-6 w-2 h-2 rounded-full bg-[#0ea5e9] shadow-[0_0_0_4px_rgba(14,165,233,0.25)] animate-pulse" />
+  </div>
+</div>            {/* Image browser frame */}
+            <div className="w-full md:w-1/2 rounded-3xl shadow-2xl bg-white border border-slate-200 overflow-hidden">
+              {/* Apple Browser Top Bar */}
+              <div className="h-12 bg-slate-100 border-b border-slate-200 flex items-center px-4 gap-3">
+                <span className="w-3 h-3 rounded-full bg-red-400 shadow-sm"></span>
+                <span className="w-3 h-3 rounded-full bg-yellow-400 shadow-sm"></span>
+                <span className="w-3 h-3 rounded-full bg-green-500 shadow-sm"></span>
+                <span className="ml-4 text-xs text-slate-500 font-medium">www.consultohukuk.com</span>
+              </div>
+
+              {/* Image Block */}
+              <div className="relative bg-[#001a33]/80 flex items-center justify-center p-0">
+                {/* Blurred Background */}
+                <div className="absolute inset-0">
+                  <img
+                    src={item.src}
+                    className="w-full h-auto object-cover blur-2xl opacity-30 scale-110"
+                  />
+                </div>
+
+                {/* Foreground Image */}
+                <img
+                  src={item.src}
+                  className="relative w-full h-auto object-contain z-10 transition-transform duration-700 ease-out hover:scale-[1.02]"
+                />
+              </div>
+            </div>
+
+            {/* Text Content (placed in leftover space) */}
+            <div className="w-full md:w-1/2 flex flex-col justify-center px-2 transform transition-all duration-500 ease-out group-hover:-translate-y-1">
+              <h3
+                className="text-[#002a5c] text-3xl font-black mb-4 leading-tight"
+                dangerouslySetInnerHTML={{ __html: formatTitle(item.title) }}
+              />
+              <p className="text-slate-600 text-lg leading-relaxed">
+                {item.description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  })()}
+</section>
                 {/* --- 1. KOMUTA MERKEZİ --- */}
                 <section>
                     <div className="flex items-end gap-4 mb-8">
@@ -270,10 +476,10 @@ export default async function Home() {
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                         {[
-                            { title: "Favori Kararlar", href: "/profilim/favori-kararlar", color: "from-blue-500 to-indigo-600", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" },
-                            { title: "Kütüphanem", href: "/profilim/favori-makaleler", color: "from-teal-400 to-cyan-500", icon: "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" },
-                            { title: "Görevlerim", href: "/profilim/gorevlerim", color: "from-purple-500 to-pink-500", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" },
-                            { title: "Notlarım", href: "/profilim/notlarim", color: "from-amber-400 to-orange-500", icon: "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" }
+                            { title: "Favori Kararlarım", href: "/profilim/favori-kararlar", color: "from-blue-500 to-indigo-600", icon: "M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5", desc: "İşaretlediğin emsal kararlar" },
+                            { title: "Kütüphanem", href: "/profilim/favori-makaleler", color: "from-teal-400 to-cyan-500", icon: "M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25", desc: "Kaydettiğin akademik makaleler" },
+                            { title: "Ajandam", href: "/profilim/gorevlerim", color: "from-purple-500 to-pink-500", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4", desc: "Duruşma ve yapılacak iş listesi" },
+                            { title: "Notlarım", href: "/profilim/notlarim", color: "from-amber-400 to-orange-500", icon: "M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z", desc: "Kişisel not ve şablonların" }
                         ].map((item, i) => (
                             <Link key={i} href={item.href} className="group relative h-40 rounded-3xl overflow-hidden bg-white shadow-lg hover:shadow-2xl hover:shadow-slate-200 transition-all duration-300 hover:-translate-y-2">
                                 <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${item.color} rounded-full blur-[60px] opacity-10 group-hover:opacity-30 group-hover:scale-125 transition-all duration-500`}></div>
@@ -283,7 +489,16 @@ export default async function Home() {
                                             <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
                                         </svg>
                                     </div>
-                                    <span className="text-lg font-bold text-slate-800 group-hover:text-[#002a5c] transition-colors">{item.title}</span>
+                                    <div className="text-center">
+                                      <span className="text-lg font-bold text-slate-800 group-hover:text-[#002a5c] transition-colors">
+                                        {item.title}
+                                      </span>
+                                      {item.desc && (
+                                        <p className="text-xs text-slate-500 mt-1">
+                                          {item.desc}
+                                        </p>
+                                      )}
+                                    </div>
                                 </div>
                             </Link>
                         ))}
@@ -306,12 +521,12 @@ export default async function Home() {
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                        <ToolCard href="/araclar/arac-deger-kaybi" title="Araç Değer Kaybı" subtitle="Sigorta Tahkim Uyumlu" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /></svg>} />
+                        <ToolCard href="/araclar/arac-deger-kaybi" title="Araç Değer Kaybı" subtitle="Sigorta Tahkim Uyumlu"  icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><circle cx="17" cy="17" r="2" /></svg>} />
                         <ToolCard href="/araclar/yaralanmali-trafik-kazasi" title="Yaralanmalı Kaza" subtitle="Tazminat Hesabı" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2h-1a.3.3 0 1 0 0 .3" /><path d="M8 9h2" /><rect x="3" y="14" width="18" height="8" rx="2" /><path d="M12 14v8" /><path d="M3 18h18" /></svg>} />
                         <ToolCard href="/araclar/destekten-yoksun-kalma" title="Destekten Yoksun" subtitle="Aktüeryal Hesap" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>} />
                         <ToolCard href="/araclar/kidem-tazminati" title="Kıdem Tazminatı" subtitle="İşçilik Alacakları" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>} />
                         <ToolCard href="/araclar/infaz-hesaplama" title="İnfaz Hesaplama" subtitle="Yatar Hesabı" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><line x1="9" y1="3" x2="9" y2="21" /><line x1="15" y1="3" x2="15" y2="21" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="3" y1="15" x2="21" y2="15" /></svg>} />
-                        <ToolCard href="/araclar/vekalet-ucreti/hesaplama" title="Vekâlet Ücreti" subtitle="AAÜT 2024" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>} />
+                        <ToolCard href="/araclar/vekalet-ucreti-hesaplama" title="Vekâlet Ücreti" subtitle="AAÜT 2024" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>} />
                         <ToolCard href="/araclar/faiz-hesaplama" title="Faiz Hesaplama" subtitle="Yasal ve Ticari" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z" /></svg>} />
                         <ToolCard href="/araclar/islah-harci-hesaplama" title="Islah Harcı" subtitle="Dava Harçları" icon={<svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 14l6-6m-5.5.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0zM19.5 10.5a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" /></svg>} />
                     </div>
@@ -326,7 +541,18 @@ export default async function Home() {
                             <h2 className="text-3xl font-black text-[#002a5c] tracking-tight mb-1">
                                 Öne Çıkan Emsaller
                             </h2>
-                            <p className="text-slate-500 text-sm">Yargıtay'ın en güncel ve tartışmalı kararlarını inceleyin.</p>
+                            
+                            <div className="mt-3 flex flex-wrap gap-2 text-xs">
+                              {["Nitelikli İçtihatlar", "Editörden Seçme", "Öğretici İçtihatlar"].map((label) => (
+                                <button
+                                  key={label}
+                                  type="button"
+                                  className="px-3 py-1 rounded-full border border-slate-200 text-slate-500 hover:bg-slate-100 transition-colors"
+                                >
+                                  {label}
+                                </button>
+                              ))}
+                            </div>
                         </div>
                         
                         <div className="flex gap-2">
@@ -399,7 +625,7 @@ export default async function Home() {
                                                 <span className="text-lg font-black text-slate-800 leading-none">{d.getDate()}</span>
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-slate-800 group-hover/item:text-red-600 transition-colors">Resmî Gazete</h4>
+                                                <h4 className="font-bold text-slate-800 group-hover/item:text-red-600 group-hover/item:underline underline-offset-4 transition-colors">Resmî Gazete</h4>
                                                 <p className="text-xs text-slate-500 font-medium">{d.toLocaleDateString('tr-TR', { weekday: 'long' })} Sayısı</p>
                                             </div>
                                         </div>
