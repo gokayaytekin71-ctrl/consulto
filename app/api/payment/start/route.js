@@ -58,13 +58,13 @@ export async function POST(req) {
       buyer_email: user.email || "info@consultohukuk.com",
       buyer_account_age: 0,
       buyer_id_nr: 0,
-      buyer_phone: "05555555555",
+
       
-      billing_address: "Dijital Teslimat",
+      billing_address: "Dijital Ürün",
       billing_city: "Istanbul",
       billing_country: "TR",
       billing_postcode: "34000",
-      shipping_address: "Dijital Teslimat",
+      shipping_address: "Dijital Ürün",
       shipping_city: "Istanbul",
       shipping_country: "TR",
       shipping_postcode: "34000",
