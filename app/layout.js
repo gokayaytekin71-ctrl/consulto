@@ -34,7 +34,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className={`${cormorantGaramond.variable} ${ebGaramond.variable}`}>
-      <body className="min-h-screen flex flex-col">
+      <head>
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=AW-17782177556"
@@ -47,6 +47,8 @@ export default function RootLayout({ children }) {
             gtag('config', 'AW-17782177556');
           `}
         </Script>
+      </head>
+      <body className="min-h-screen flex flex-col">
         <AuthProvider>
           <Header />
           <main className="flex-1 pt-24">{children}</main>
