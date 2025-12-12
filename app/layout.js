@@ -44,9 +44,11 @@ export default function RootLayout({ children }) {
         <Analytics />
         <SpeedInsights />
 
-        {/* 👇 Google Araçlarını BODY'nin içine, en alta aldık. En güvenli yer burasıdır. */}
-        <GoogleTag gaId="AW-17782177556" />
+        {/* 👇 Google Analytics 4 (GA4) – Ölçüm Kimliği */}
         <GoogleAnalytics gaId="G-SFHDMDW721" />
+
+        {/* 👇 Google Ads – Dönüşüm ve Reklam Etiketi */}
+        <GoogleTag gaId="AW-17782177556" />
       </body>
     </html>
   );
