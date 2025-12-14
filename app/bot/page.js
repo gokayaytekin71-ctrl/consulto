@@ -104,6 +104,15 @@ export default function AnalysisPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
 
+  // --- Panel çakışmasını engelle (aynı anda açık olmasın)
+  useEffect(() => {
+    if (mobileMenuOpen) setMobileResourcesOpen(false);
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileResourcesOpen) setMobileMenuOpen(false);
+  }, [mobileResourcesOpen]);
+
   // Linke tıklandığında menüyü kapat
   const handleSelectChat = (id) => {
     setActiveId(id);
@@ -141,6 +150,9 @@ export default function AnalysisPage() {
         .animate-shimmer { animation: shimmer 2s infinite linear; }
         @keyframes pulse-slow { 0%, 100% { opacity: 0.1; transform: scale(1); } 50% { opacity: 0.2; transform: scale(1.1); } }
         .animate-pulse-slow { animation: pulse-slow 8s infinite ease-in-out; }
+        .pt-safe {
+          padding-top: env(safe-area-inset-top);
+        }
       `}</style>
 
       {/* Arkaplan */}
@@ -150,11 +162,18 @@ export default function AnalysisPage() {
       </div>
 
       {/* --- HEADER --- */}
-      <header className="flex-none z-50 h-16 border-b border-white/5 bg-[#020617]/70 backdrop-blur-xl flex items-center justify-between px-4 md:px-6 shadow-lg shadow-black/20">
+      <header
+        className={`
+          flex-none z-[70] h-16 border-b border-white/5 bg-[#020617]/70 backdrop-blur-xl
+          items-center justify-between px-4 md:px-6 shadow-lg shadow-black/20
+          ${mobileMenuOpen || mobileResourcesOpen ? "hidden md:flex" : "flex"}
+          ${mobileMenuOpen || mobileResourcesOpen ? "pointer-events-none" : "pointer-events-auto"}
+        `}
+      >
         <div className="flex items-center gap-3">
           {/* Mobil Menü Butonu (Sadece mobilde görünür) */}
           <button 
-            onClick={() => setMobileMenuOpen(true)}
+            onClick={() => setMobileMenuOpen(prev => !prev)}
             className="md:hidden p-1.5 text-slate-300 hover:text-white bg-slate-800/50 rounded-lg"
           >
             {icons.menu}
@@ -177,7 +196,7 @@ export default function AnalysisPage() {
         <div className="flex items-center gap-2">
            {/* Mobilde Kaynaklar/Mevzuat Butonu */}
            <button 
-             onClick={() => setMobileResourcesOpen(true)}
+             onClick={() => setMobileResourcesOpen(prev => !prev)}
              className="lg:hidden p-2 text-cyan-400 hover:text-cyan-300 bg-cyan-900/20 rounded-full border border-cyan-800/50"
              aria-label="Kaynaklar"
            >
@@ -194,29 +213,43 @@ export default function AnalysisPage() {
 
       {/* --- Main Layout --- */}
       <div className="flex-1 flex overflow-hidden relative z-10 px-2 py-4 md:px-6 md:py-6 gap-6">
+        {/* --- MOBİL OVERLAY (Tek) --- */}
+        {(mobileMenuOpen || mobileResourcesOpen) && (
+          <div
+            className="fixed inset-x-0 bottom-0 top-16 z-[55] bg-black/80 backdrop-blur-md md:hidden"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setMobileResourcesOpen(false);
+            }}
+          />
+        )}
         
         {/* SOL: Geçmiş Analizler Sidebar */}
-        {/* MOBİL DÜZELTME: Sabit position yerine, mobilde 'fixed' ve 'overlay' yapısı kullanıldı */}
-        <div 
-          className={`fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm transition-opacity duration-300 md:hidden ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-          onClick={() => setMobileMenuOpen(false)}
-        />
-        
         <aside 
           className={`
-            fixed inset-y-0 left-0 z-[61] w-[280px] bg-[#020617] md:bg-transparent shadow-2xl md:shadow-none
+            fixed top-16 bottom-0 left-0 z-[80] w-[85vw] max-w-[320px] bg-[#020617] md:bg-transparent shadow-2xl md:shadow-none
             transform transition-transform duration-300 ease-in-out border-r border-slate-800 md:border-none
-            flex flex-col h-full md:relative md:transform-none md:w-[300px] md:flex-none
+            flex flex-col h-[100dvh] overscroll-contain md:relative md:transform-none md:w-[300px] md:flex-none
             ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+            pt-safe
           `}
         >
+          {/* Mobil Drawer Başlık (Tek Başlık) */}
+          <div className="md:hidden px-4 py-3 border-b border-white/5 bg-[#020617]/80">
+            <h2 className="text-sm font-bold text-white">
+              Analiz <span className="text-cyan-500 font-light">AI</span>
+            </h2>
+            <p className="text-[10px] text-cyan-600/80 font-mono tracking-[0.2em] uppercase">
+              Legal Intelligence
+            </p>
+          </div>
           {/* Mobilde Kapatma Butonu */}
           <div className="flex justify-end p-2 md:hidden">
              <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-white">{icons.close}</button>
           </div>
 
           <PremiumCard className="h-full bg-[#020617]/80 backdrop-blur-sm" noPadding>
-            <div className="flex flex-col h-full">
+            <div className="flex flex-col h-[100dvh] overscroll-contain">
               
               <div className="pt-4">
                  <TokenBalance />
@@ -274,7 +307,12 @@ export default function AnalysisPage() {
         </aside>
 
         {/* ORTA: Chat & Analiz Alanı */}
-        <main className="flex-1 overflow-y-auto custom-scrollbar min-w-0 bg-transparent z-10">
+        <main
+          className={`
+            flex-1 overflow-y-auto custom-scrollbar min-w-0 bg-transparent z-10
+            ${(mobileMenuOpen || mobileResourcesOpen) ? "hidden md:block" : "block"}
+          `}
+        >
           <div className="max-w-4xl mx-auto flex flex-col gap-6">
               
               {/* Soru Alanı */}
@@ -285,7 +323,7 @@ export default function AnalysisPage() {
                           value={input}
                           onChange={e => setInput(e.target.value)}
                           placeholder="Hukuki meseleyi, dava türünü ve delil durumunu buraya detaylıca yazın..." 
-                          className={`w-full bg-[#020617] border border-slate-800 rounded-xl p-4 min-h-[120px] text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 focus:shadow-[0_0_20px_rgba(6,182,212,0.05)] transition-all resize-y ${isLoading ? "opacity-30 pointer-events-none" : ""}`}
+                          className={`w-full bg-[#020617] border border-slate-800 rounded-xl p-4 min-h-[120px] text-sm text-slate-200 placeholder:text-slate-600 focus:outline-none focus:border-cyan-500/50 focus:ring-1 focus:ring-cyan-500/20 focus:shadow-[0_0_20px_rgba(6,182,212,0.05)] transition-all resize-y ${isLoading ? "opacity-30 pointer-events-none" : ""} max-h-[40vh] md:max-h-none`}
                       />
                       
                       {isLoading && (
@@ -377,27 +415,34 @@ export default function AnalysisPage() {
         </main>
 
         {/* SAĞ: Kaynaklar Sidebar */}
-        {/* MOBİL DÜZELTME: Mobilde sağ panel drawer olarak açılıyor */}
-        <div 
-          className={`fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm transition-opacity duration-300 lg:hidden ${mobileResourcesOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-          onClick={() => setMobileResourcesOpen(false)}
-        />
-
         <aside 
           className={`
-            fixed inset-y-0 right-0 z-[61] w-[300px] bg-[#020617] lg:bg-transparent shadow-2xl lg:shadow-none
+            fixed top-16 bottom-0 right-0 z-[80] w-[300px] bg-[#020617] lg:bg-transparent shadow-2xl lg:shadow-none
             transform transition-transform duration-300 ease-in-out border-l border-slate-800 lg:border-none
-            flex flex-col h-full lg:relative lg:transform-none lg:w-[350px] lg:flex-none
+            flex flex-col h-[100dvh] overscroll-contain lg:relative lg:transform-none lg:w-[350px] lg:flex-none
             ${mobileResourcesOpen ? 'translate-x-0' : 'translate-x-full'}
+            pt-safe
           `}
         >
-             {/* Mobilde Kapatma Butonu */}
-             <div className="flex justify-start p-2 lg:hidden">
-                <button onClick={() => setMobileResourcesOpen(false)} className="p-2 text-slate-400 hover:text-white">{icons.close}</button>
-             </div>
+            {/* Mobil Sağ Drawer Başlık + Kapatma */}
+            <div className="lg:hidden px-4 py-3 border-b border-white/5 bg-[#020617]/80 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className="text-cyan-400">{icons.book}</div>
+                <div>
+                  <h2 className="text-sm font-bold text-white">Yararlanılan Kaynaklar</h2>
+                </div>
+              </div>
+              <button
+                onClick={() => setMobileResourcesOpen(false)}
+                className="p-2 text-slate-400 hover:text-white"
+                aria-label="Kapat"
+              >
+                {icons.close}
+              </button>
+            </div>
 
-            <PremiumCard className="h-full bg-[#020617]/50 backdrop-blur-sm" noPadding>
-              <div className="flex flex-col h-full">
+            <PremiumCard className="h-full bg-[#020617]/80 backdrop-blur-md" noPadding>
+              <div className="flex flex-col h-[100dvh] overscroll-contain">
                 
                 {/* Mevzuat Bölümü */}
                 <div className="flex-shrink-0 h-[45%] flex flex-col min-h-0 border-b border-white/5">

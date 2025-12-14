@@ -197,7 +197,7 @@ export default async function Home() {
                         {/* KART A: DİLEKÇE PRO */}
                         <Link href="/dilekce" className="md:col-span-7 group relative h-full overflow-hidden rounded-[2.5rem] bg-white border border-slate-200 shadow-2xl shadow-blue-900/5 hover:shadow-blue-900/10 transition-all duration-500 hover:-translate-y-1">
                             <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:16px_16px] opacity-[0.03]"></div>
-                            <div className="relative h-full flex flex-col justify-between p-10 z-20">
+                            <div className="relative h-full flex flex-col justify-between p-10 pr-10 sm:pr-[260px] z-20">
                                 <div>
                                     <div className="w-14 h-14 rounded-2xl bg-blue-600 text-white flex items-center justify-center text-2xl mb-6 shadow-lg shadow-blue-500/30 group-hover:scale-110 transition-transform duration-300">
                                         ✍️
@@ -205,7 +205,15 @@ export default async function Home() {
                                     <h3 className="text-3xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">Dilekçe Pro</h3>
                                     <p className="text-lg text-slate-500 max-w-md">Olay örgüsünü anlatın, profesyonel hukuki dille yazılmış, Yargıtay atıflı dilekçeniz 1 Token karşılığında hazır.</p>
                                 </div>
-                                <div className="absolute right-[-40px] bottom-[-40px] md:right-[-20px] md:bottom-[-20px] w-[300px] h-[200px] bg-slate-50 rounded-tl-3xl border-t border-l border-slate-200 shadow-xl p-4 transition-transform duration-500 group-hover:translate-x-[-10px] group-hover:translate-y-[-10px]">
+                                <div className="absolute right-[-40px] bottom-[-40px] md:right-[-20px] md:bottom-[-20px]
+    w-[300px] h-[200px]
+    scale-90 sm:scale-100
+    opacity-60 sm:opacity-100
+    bg-slate-50 rounded-tl-3xl
+    border-t border-l border-slate-200
+    shadow-xl p-4
+    transition-transform duration-500
+    group-hover:translate-x-[-10px] group-hover:translate-y-[-10px]">
                                     <div className="flex gap-2 mb-3">
                                         <div className="w-2 h-2 rounded-full bg-red-400"></div>
                                         <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
