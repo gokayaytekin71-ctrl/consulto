@@ -14,7 +14,7 @@ const inputClass = "w-full bg-[#020617] border border-slate-800 rounded-lg px-3 
 const labelClass = "block text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1.5";
 
 const organOptions = [
-  { label: "Tümü / Farketmez", value: "" },
+  { label: "Tümü", value: "" },
   { label: "Yargıtay HGK", value: "Hukuk Genel Kurulu" },
   { label: "Yargıtay 1. Hukuk Dairesi",  value: "1. Hukuk Dairesi" },
   { label: "Yargıtay 2. Hukuk Dairesi",  value: "2. Hukuk Dairesi" },
@@ -76,7 +76,7 @@ export default function BasicFilter({ defaultParams = {} }) {
             type="text"
             name="q"
             defaultValue={defaultParams.q || ""}
-            placeholder="Kelime veya Esas No..."
+            placeholder="Karar İçeriğinde Ara..."
             onChange={() => {
               try { if (kwRef.current) kwRef.current.value = ""; if (aiqRef.current) aiqRef.current.value = ""; } catch {}
             }}
@@ -95,7 +95,7 @@ export default function BasicFilter({ defaultParams = {} }) {
           <summary className="flex items-center justify-between p-3 cursor-pointer select-none text-slate-400 hover:text-white transition-colors">
             <div className="flex items-center gap-2">
                <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 shadow-[0_0_5px_#6366f1]"></span>
-               <span className="text-xs font-semibold tracking-wide">Detaylı Filtreler</span>
+               <span className="text-xs font-semibold tracking-wide">Detaylı Arama</span>
             </div>
             <span className="transform transition-transform duration-300 group-open/details:rotate-180 text-slate-600 group-hover:text-slate-400">
               <IconChevronDown />
@@ -148,7 +148,7 @@ export default function BasicFilter({ defaultParams = {} }) {
                   <input ref={aiqRef} type="text" name="aiq" placeholder="örn. iş kazası" defaultValue={defaultParams.aiq || ""} className={inputClass} />
                </div>
                <div>
-                  <label className={labelClass}>Tam Eşleşme (Kelime Öbeği)</label>
+                  <label className={labelClass}>Kelime Öbeği</label>
                   <input type="text" name="phrase" placeholder="örn. mutlak muvazaa" defaultValue={defaultParams.phrase || ""} className={inputClass} />
                </div>
                <div className="grid grid-cols-2 gap-3">
@@ -215,16 +215,82 @@ export default function BasicFilter({ defaultParams = {} }) {
             className="fixed w-[400px] max-w-[90vw] bg-[#0f172a] border border-slate-700 rounded-2xl p-5 shadow-2xl z-[9999] animate-in zoom-in-95 duration-200"
             style={{ top: tipPos.top, left: tipPos.left }}
           >
-            <div className="flex items-center gap-2 mb-3 pb-3 border-b border-slate-800">
-               <span className="text-cyan-500"><IconInfo /></span>
-               <h3 className="text-sm font-bold text-white uppercase tracking-wide">Arama Rehberi</h3>
+            <div className="flex items-center gap-3 mb-4 pb-3 border-b border-slate-800">
+              <div className="w-9 h-9 flex items-center justify-center rounded-xl bg-cyan-500/10 text-cyan-400">
+                <IconInfo className="w-4 h-4" />
+              </div>
+              <div>
+                <h3 className="text-sm font-bold text-white tracking-wide">
+                  Arama İpuçları
+                </h3>
+                <p className="text-[11px] text-slate-400">
+                  Daha isabetli sonuçlar için aşağıdaki filtreleri birlikte veya ayrı ayrı kullanabilirsiniz.
+                </p>
+              </div>
             </div>
-            <ul className="space-y-2 text-xs text-slate-300 leading-relaxed">
-              <li className="flex gap-2"><span className="text-cyan-500">•</span> <span><strong>Anahtar Kelime:</strong> Metin içinde serbest arama yapar.</span></li>
-              <li className="flex gap-2"><span className="text-cyan-500">•</span> <span><strong>Tam Eşleşme:</strong> Yazdığınız ifadeyi birebir arar.</span></li>
-              <li className="flex gap-2"><span className="text-cyan-500">•</span> <span><strong>Hariç Tut:</strong> Bu kelimeleri içeren kararları gizler.</span></li>
+
+            <ul className="space-y-4 text-xs text-slate-300 leading-relaxed">
+              <li className="flex gap-3">
+                <span className="mt-1 w-2 h-2 rounded-full bg-cyan-400 shrink-0"></span>
+                <div>
+                  <p className="font-semibold text-slate-100">Anahtar Kelime</p>
+                  <p className="text-slate-400">
+                    Kararın anahtar kelimeleri alanında arama yapar.
+                  </p>
+                  <p className="mt-1 font-mono text-[11px] text-cyan-300">
+                    Örnek: kira, muris muvazaası
+                  </p>
+                </div>
+              </li>
+
+              <li className="flex gap-3">
+                <span className="mt-1 w-2 h-2 rounded-full bg-indigo-400 shrink-0"></span>
+                <div>
+                  <p className="font-semibold text-slate-100">Tam Eşleşme</p>
+                  <p className="text-slate-400">
+                    Yazdığınız ifade karar metninde birebir aranır.
+                  </p>
+                  <p className="mt-1 font-mono text-[11px] text-indigo-300">
+                    Örnek: &quot;mutlak muvazaa&quot;
+                  </p>
+                </div>
+              </li>
+
+              <li className="flex gap-3">
+                <span className="mt-1 w-2 h-2 rounded-full bg-rose-400 shrink-0"></span>
+                <div>
+                  <p className="font-semibold text-slate-100">Hariç Tut</p>
+                  <p className="text-slate-400">
+                    Belirttiğiniz kelimeleri içeren kararlar sonuçlardan çıkarılır.
+                  </p>
+                  <p className="mt-1 font-mono text-[11px] text-rose-300">
+                    Örnek: ihbar, kusur
+                  </p>
+                </div>
+              </li>
+
+              <li className="flex gap-3">
+                <span className="mt-1 w-2 h-2 rounded-full bg-emerald-400 shrink-0"></span>
+                <div>
+                  <p className="font-semibold text-slate-100">Özet İçinde Ara</p>
+                  <p className="text-slate-400">
+                    Yalnızca yapay zekâ karar özetleri içinde arama yapar.
+                  </p>
+                  <p className="mt-1 font-mono text-[11px] text-emerald-300">
+                    Örnek: iş kazası, hizmet tespiti
+                  </p>
+                </div>
+              </li>
             </ul>
-            <button onClick={() => setShowTips(false)} className="mt-4 w-full py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold transition-colors">Tamam</button>
+
+            <div className="mt-5 pt-4 border-t border-slate-800">
+              <button
+                onClick={() => setShowTips(false)}
+                className="w-full py-2.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold tracking-wide transition-colors shadow-md shadow-cyan-900/20"
+              >
+                Anladım
+              </button>
+            </div>
           </div>
         </>,
         document.body

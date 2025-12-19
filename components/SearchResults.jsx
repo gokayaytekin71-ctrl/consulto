@@ -61,6 +61,14 @@ const formatAiSummary = (text = "") => {
   return s;
 };
 
+const extractUyuşmazlıkLine = (aiSummary = "") => {
+  if (!aiSummary) return "";
+  const m = aiSummary.match(/Uyuşmazlık:\s*([\s\S]*?)(?:\n|Gerekçe|Sonuç|$)/i);
+  if (!m || !m[1]) return "";
+  const line = m[1].trim().replace(/\s+/g, " ");
+  return line.length > 260 ? line.slice(0, 157) + "…" : line;
+};
+
 export default function SearchResults({ items = [], query = "", field = "content", initialNextCursor }) {
   const [results, setResults] = useState(() => dedupeRows(items));
   const [nextCursor, setNextCursor] = useState(initialNextCursor);
@@ -73,6 +81,18 @@ export default function SearchResults({ items = [], query = "", field = "content
   const router = useRouter();
   const searchParams = useSearchParams();
   const currentSort = searchParams?.get("sort") || "relevance";
+  const handleSortChange = (e) => {
+    const value = e.target.value;
+    const sp = new URLSearchParams(searchParams?.toString() || "");
+    if (value && value !== "relevance") {
+      sp.set("sort", value);
+    } else {
+      sp.delete("sort");
+    }
+    sp.delete("cursor");
+    setIsNavigating(true);
+    router.push(`/kararlar?${sp.toString()}`);
+  };
   const fieldBadge = field === "keywords" ? "Anahtar Kelimeler" : field === "aiSummary" ? "Karar Özeti" : null;
 
   const baseParams = useMemo(() => {
@@ -151,6 +171,24 @@ export default function SearchResults({ items = [], query = "", field = "content
     <>
       {(isNavigating || isMoreLoading) && <LoadingOverlay />}
       <section className="space-y-6">
+        {/* Sonuç içi Sıralama */}
+        <div className="flex justify-end">
+          <div className="flex items-center gap-2 bg-slate-800/60 border border-slate-700 rounded-lg px-3 py-2">
+            <IconSort className="w-4 h-4 text-slate-400" />
+            <select
+              value={currentSort}
+              onChange={handleSortChange}
+              className="bg-transparent text-xs text-slate-200 focus:outline-none"
+            >
+              <option value="relevance">İlgililik</option>
+              <option value="newest">En Yeni</option>
+              <option value="esasNoDesc">Esas (Yeni → Eski)</option>
+              <option value="esasNoAsc">Esas (Eski → Yeni)</option>
+              <option value="kararNoDesc">Karar (Yeni → Eski)</option>
+              <option value="kararNoAsc">Karar (Eski → Yeni)</option>
+            </select>
+          </div>
+        </div>
         <ul className="space-y-4">
           {results.map((it) => {
             const slug = makeSlug(it);
@@ -165,6 +203,12 @@ export default function SearchResults({ items = [], query = "", field = "content
                       <h3 className="text-white font-bold text-lg hover:text-cyan-400 transition">{it.type}</h3>
                     </Link>
                     <p className="text-slate-400 text-xs">{it.code}</p>
+                    {it.aiSummary && extractUyuşmazlıkLine(it.aiSummary) && (
+                      <p className="mt-1 text-[13px] text-slate-300 italic leading-snug">
+                        <span className="text-slate-400 font-semibold not-italic">Uyuşmazlık:</span>{" "}
+                        {extractUyuşmazlıkLine(it.aiSummary)}
+                      </p>
+                    )}
                     {kwList.length > 0 && (
                       <div className="flex gap-2 flex-wrap">
                         {kwList.map((k, i) => (
