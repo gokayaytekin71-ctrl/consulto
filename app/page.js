@@ -271,7 +271,7 @@ export default async function Home() {
                                 <div className="text-3xl font-black text-slate-900 mb-1">₺100</div>
                                 <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Başlangıç</div>
                                 <div className="text-xs text-slate-500 mt-1">
-                                  10 Token paketiyle hemen başlayın
+                                  5 Token paketiyle hemen başlayın
                                 </div>
                               </div>
                               <div className="rounded-[2rem] bg-gradient-to-br from-indigo-500 to-blue-600 p-6 flex flex-col justify-center items-center text-center shadow-lg text-white">
