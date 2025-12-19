@@ -10,7 +10,7 @@ const PACKAGES = [
     id: 1,
     name: "Başlangıç Paketi",
     price: "₺100",
-    tokenCount: "10 Token",
+    tokenCount: "5 Token",
     badge: null,
     summary: "Bireysel denemeler için ideal.",
     features: [
@@ -25,7 +25,7 @@ const PACKAGES = [
     id: 2,
     name: "Profesyonel Paket",
     price: "₺400",
-    tokenCount: "50 Token",
+    tokenCount: "25 Token",
     badge: "En Popüler",
     summary: "Aktif hukuk büroları ve sık kullanım için tasarruflu seçim.",
     features: [
@@ -40,7 +40,7 @@ const PACKAGES = [
     id: 3,
     name: "Uzman Paket",
     price: "₺700",
-    tokenCount: "100 Token",
+    tokenCount: "50 Token",
     badge: "Fırsat",
     summary: "Maksimum avantaj.",
     features: [
