@@ -58,5 +58,8 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: [
+    // API ve Next.js internal HARİÇ, geri kalan HER ŞEY
+    "/((?!api|_next|favicon.ico).*)",
+  ],
 };
