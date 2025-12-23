@@ -1,5 +1,3 @@
-"use client";
-
 export const metadata = {
   title: "Bakımdayız",
   robots: {
@@ -7,6 +5,8 @@ export const metadata = {
     follow: false,
   },
 };
+
+import ReloadButton from "./ReloadButton";
 
 export default function MaintenancePage() {
   return (
@@ -29,12 +29,7 @@ export default function MaintenancePage() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
-          <button
-            onClick={() => location.reload()}
-            className="rounded-xl bg-blue-500/20 border border-blue-400/30 px-5 py-2 text-white hover:bg-blue-500/30 transition"
-          >
-            Sayfayı Yenile
-          </button>
+          <ReloadButton />
 
           <a
             href="mailto:info@siteniz.com"
