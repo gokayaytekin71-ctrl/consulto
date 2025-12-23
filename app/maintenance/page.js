@@ -1,6 +1,11 @@
+"use client";
+
 export const metadata = {
   title: "Bakımdayız",
-  robots: "noindex,nofollow",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function MaintenancePage() {
