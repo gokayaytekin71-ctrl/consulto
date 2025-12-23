@@ -25,14 +25,14 @@ export default function MaintenancePage() {
 
         <p className="text-gray-300 leading-relaxed mb-6">
           Daha hızlı ve güvenli bir deneyim için kısa süreliğine bakım
-          çalışması yapıyoruz. En kısa sürede tekrar buradayız.
+          çalışması yapıyoruz. 1 milyondan fazla yeni karar eklenecektir. En kısa sürede tekrar buradayız.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <ReloadButton />
 
           <a
-            href="mailto:info@siteniz.com"
+            href="mailto:info@consultohukuk.com"
             className="rounded-xl border border-white/20 px-5 py-2 text-white hover:bg-white/10 transition"
           >
             İletişime Geç
@@ -40,7 +40,7 @@ export default function MaintenancePage() {
         </div>
 
         <p className="mt-6 text-xs text-gray-400">
-          © {new Date().getFullYear()} Siteniz
+          © {new Date().getFullYear()} Consülto
         </p>
       </div>
     </main>
