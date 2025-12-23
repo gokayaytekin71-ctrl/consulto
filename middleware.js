@@ -1,7 +1,7 @@
 // middleware.js
 import { NextResponse } from "next/server";
 
-// 👉 ENV ile kontrol (önerilen)
+// Bakım modu ENV ile kontrol edilir
 const MAINTENANCE_MODE =
   process.env.NEXT_PUBLIC_MAINTENANCE === "true";
 
@@ -9,44 +9,38 @@ export function middleware(req) {
   const { pathname } = req.nextUrl;
 
   /* ─────────────────────────────────────────────
-     1️⃣ BAKIM MODU (EN ÜSTE)
+     1️⃣ BAKIM MODU — TÜM SAYFALAR
      ───────────────────────────────────────────── */
   if (MAINTENANCE_MODE) {
-    // bakım sayfası + next static + favicon serbest
+    // izin verilen yollar (loop önleme)
     if (
-      pathname.startsWith("/maintenance") ||
+      pathname === "/maintenance" ||
       pathname.startsWith("/_next") ||
-      pathname === "/favicon.ico"
+      pathname === "/favicon.ico" ||
+      pathname.startsWith("/api")
     ) {
       return NextResponse.next();
     }
 
-    // API'leri de istersen açık bırakabilirsin
-    if (pathname.startsWith("/api")) {
-      return NextResponse.next();
-    }
-
+    // her şeyi /maintenance'a yönlendir
     const url = req.nextUrl.clone();
     url.pathname = "/maintenance";
     return NextResponse.redirect(url, 307);
   }
 
   /* ─────────────────────────────────────────────
-     2️⃣ MEVCUT KARAR SLUG NORMALIZATION (AYNEN)
+     2️⃣ MEVCUT KARAR SLUG NORMALIZATION (DEĞİŞMEDİ)
      ───────────────────────────────────────────── */
 
   // Sadece /kararlar/<slug> eşleşsin
   const m = pathname.match(/^\/kararlar\/([^/]+)$/);
   if (!m) return NextResponse.next();
 
-  // Eski slug'ı normalize et
   const raw = decodeURIComponent(m[1]);
-  if (raw.includes("__")) return NextResponse.next(); // yeni formatsa dokunma
+  if (raw.includes("__")) return NextResponse.next(); // yeni format
 
-  // " ... 12.14.30" gibi boşluktan sonrası çöpü at
   const clean = raw.replace(/\s+.*$/, "");
 
-  // <MAHKEME>_<YYYY-...E_YYYY-...K> kalıbını yakala
   const match = clean.match(
     /^(.+?)_(\d{4}-[A-Za-z0-9()/.\-]+E_\d{4}-[A-Za-z0-9()/.\-]+K)$/
   );
@@ -64,5 +58,5 @@ export function middleware(req) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
