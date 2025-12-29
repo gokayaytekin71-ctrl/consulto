@@ -8,6 +8,7 @@ import HighlightedKararBody from '@/components/HighlightedKararBody';
 import BackButton from '@/components/BackButton';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { Suspense } from 'react';
+import DownloadPDFButton from '@/components/DownloadPDFButton';
 
 // --- CONFIG ---
 export const dynamic = 'force-dynamic';
@@ -353,10 +354,14 @@ export default async function KararDetayPage({ params }) {
                      <BackButton className="w-full text-xs font-medium text-[var(--text-secondary)] hover:text-white transition-colors text-left flex items-center gap-2">
                         ← Geri Dön
                      </BackButton>
-                     <button className="w-full py-2 bg-[var(--border-color)] hover:bg-[#334155] text-xs font-bold rounded text-white transition-colors">
-                        PDF İndir
-                     </button>
-                </div>
+                    {/* Eski butonu siliyoruz, yerine bunu koyuyoruz: */}
+     <DownloadPDFButton karar={{
+         type: type,
+         code: code,
+         content: karar.content, // İçerik metni
+         keywords: keywordsFromKarar // İsterseniz PDF'e keywordleri de ekleyebilirsiniz
+     }} />
+       </div>
            </aside>
 
 

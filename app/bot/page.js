@@ -8,7 +8,7 @@ import TokenBalance from "@/components/TokenBalance";
 
 // --- UI Bileşenleri ---
 
-// 1. Cyber Loader (Değişiklik yok)
+// 1. Cyber Loader
 const CyberLoader = () => {
   const [msgIndex, setMsgIndex] = useState(0);
   const messages = [
@@ -44,7 +44,7 @@ const CyberLoader = () => {
   );
 };
 
-// 2. Premium Kart Yapısı (Ufak mobil padding ayarı eklendi)
+// 2. Premium Kart Yapısı
 const PremiumCard = ({ title, icon, children, className = "", noPadding = false, action }) => (
   <div className={`relative flex flex-col bg-[#0f172a]/80 backdrop-blur-md border border-slate-700/50 rounded-2xl shadow-xl overflow-hidden transition-all duration-300 hover:border-cyan-500/30 hover:shadow-cyan-500/10 ${className}`}>
     {(title || icon) && (
@@ -56,12 +56,12 @@ const PremiumCard = ({ title, icon, children, className = "", noPadding = false,
         {action}
       </div>
     )}
-    <div className={`flex-1 min-h-0 relative ${noPadding ? "" : "p-4 md:p-5"}`}>{children}</div>
+    <div className={`flex-1 min-h-0 relative flex flex-col ${noPadding ? "" : "p-4 md:p-5"}`}>{children}</div>
     <div className="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
   </div>
 );
 
-// 3. Mevzuat Popover (Değişiklik yok)
+// 3. Mevzuat Popover
 const MevzuatPopover = ({ data, position, onClose }) => {
   if (!data || !position) return null;
   return (
@@ -100,11 +100,18 @@ export default function AnalysisPage() {
     utils
   } = useAnalysisBot();
 
-  // MOBİL STATE'LERİ EKLENDİ
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+  
+  const [openSections, setOpenSections] = useState({
+    mevzuat: true,
+    kararlar: true
+  });
 
-  // --- Panel çakışmasını engelle (aynı anda açık olmasın)
+  const toggleSection = (section) => {
+    setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
+  };
+
   useEffect(() => {
     if (mobileMenuOpen) setMobileResourcesOpen(false);
   }, [mobileMenuOpen]);
@@ -113,7 +120,6 @@ export default function AnalysisPage() {
     if (mobileResourcesOpen) setMobileMenuOpen(false);
   }, [mobileResourcesOpen]);
 
-  // Linke tıklandığında menüyü kapat
   const handleSelectChat = (id) => {
     setActiveId(id);
     setMobileMenuOpen(false);
@@ -132,7 +138,9 @@ export default function AnalysisPage() {
     book: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>,
     scale: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>,
     menu: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>,
-    close: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+    close: <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>,
+    chevronDown: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>,
+    chevronUp: <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" /></svg>
   };
 
   return (
@@ -171,7 +179,6 @@ export default function AnalysisPage() {
         `}
       >
         <div className="flex items-center gap-3">
-          {/* Mobil Menü Butonu (Sadece mobilde görünür) */}
           <button 
             onClick={() => setMobileMenuOpen(prev => !prev)}
             className="md:hidden p-1.5 text-slate-300 hover:text-white bg-slate-800/50 rounded-lg"
@@ -194,7 +201,6 @@ export default function AnalysisPage() {
         </div>
         
         <div className="flex items-center gap-2">
-           {/* Mobilde Kaynaklar/Mevzuat Butonu */}
            <button 
              onClick={() => setMobileResourcesOpen(prev => !prev)}
              className="lg:hidden p-2 text-cyan-400 hover:text-cyan-300 bg-cyan-900/20 rounded-full border border-cyan-800/50"
@@ -212,8 +218,12 @@ export default function AnalysisPage() {
       </header>
 
       {/* --- Main Layout --- */}
-      <div className="flex-1 flex overflow-hidden relative z-10 px-2 py-4 md:px-6 md:py-6 gap-6">
-        {/* --- MOBİL OVERLAY (Tek) --- */}
+      {/* DEĞİŞİKLİK BURADA: 
+          1. h-[calc(100vh-4rem)]: Header yüksekliğini düşerek ekranı tam kapla.
+          2. pb-6: Alt tarafa kullanıcının istediği boşluğu ekle.
+      */}
+      <div className="flex w-full h-[calc(100vh-4rem)] overflow-hidden relative z-10 px-2 pt-4 pb-6 md:px-6 gap-6">
+        
         {(mobileMenuOpen || mobileResourcesOpen) && (
           <div
             className="fixed inset-x-0 bottom-0 top-16 z-[55] bg-black/80 backdrop-blur-md md:hidden"
@@ -229,12 +239,13 @@ export default function AnalysisPage() {
           className={`
             fixed top-16 bottom-0 left-0 z-[80] w-[85vw] max-w-[320px] bg-[#020617] md:bg-transparent shadow-2xl md:shadow-none
             transform transition-transform duration-300 ease-in-out border-r border-slate-800 md:border-none
-            flex flex-col h-[100dvh] overscroll-contain md:relative md:transform-none md:w-[300px] md:flex-none
+            flex flex-col 
+            md:relative md:transform-none md:w-[300px] md:flex-none
             ${mobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}
+            md:h-full
             pt-safe
           `}
         >
-          {/* Mobil Drawer Başlık (Tek Başlık) */}
           <div className="md:hidden px-4 py-3 border-b border-white/5 bg-[#020617]/80">
             <h2 className="text-sm font-bold text-white">
               Analiz <span className="text-cyan-500 font-light">AI</span>
@@ -243,13 +254,12 @@ export default function AnalysisPage() {
               Legal Intelligence
             </p>
           </div>
-          {/* Mobilde Kapatma Butonu */}
           <div className="flex justify-end p-2 md:hidden">
              <button onClick={() => setMobileMenuOpen(false)} className="p-2 text-slate-400 hover:text-white">{icons.close}</button>
           </div>
 
           <PremiumCard className="h-full bg-[#020617]/80 backdrop-blur-sm" noPadding>
-            <div className="flex flex-col h-[100dvh] overscroll-contain">
+            <div className="flex flex-col h-full overscroll-contain">
               
               <div className="pt-4">
                  <TokenBalance />
@@ -273,7 +283,7 @@ export default function AnalysisPage() {
                   />
                 </div>
               </div>
-              <div className="flex-1 overflow-y-auto px-3 pb-3 custom-scrollbar">
+              <div className="flex-1 overflow-y-auto px-3 pb-20 custom-scrollbar">
                 <div className="space-y-1">
                   {filteredChats.map(item => {
                     const isActive = item.id === activeId;
@@ -311,9 +321,10 @@ export default function AnalysisPage() {
           className={`
             flex-1 overflow-y-auto custom-scrollbar min-w-0 bg-transparent z-10
             ${(mobileMenuOpen || mobileResourcesOpen) ? "hidden md:block" : "block"}
+            h-full
           `}
         >
-          <div className="max-w-4xl mx-auto flex flex-col gap-6">
+          <div className="max-w-4xl mx-auto flex flex-col gap-6 pb-20">
               
               {/* Soru Alanı */}
               <PremiumCard className="z-10 bg-gradient-to-b from-[#0f172a] to-[#0B1120]">
@@ -415,16 +426,21 @@ export default function AnalysisPage() {
         </main>
 
         {/* SAĞ: Kaynaklar Sidebar */}
+        {/* DEĞİŞİKLİK BURADA: 
+            1. 'fixed' yerine esnek yapıda tutuldu (md:relative)
+            2. h-full: Ana kapsayıcının yüksekliğine uy.
+        */}
         <aside 
           className={`
             fixed top-16 bottom-0 right-0 z-[80] w-[300px] bg-[#020617] lg:bg-transparent shadow-2xl lg:shadow-none
             transform transition-transform duration-300 ease-in-out border-l border-slate-800 lg:border-none
-            flex flex-col h-[100dvh] overscroll-contain lg:relative lg:transform-none lg:w-[350px] lg:flex-none
+            flex flex-col
+            lg:relative lg:transform-none lg:w-[350px] lg:flex-none
             ${mobileResourcesOpen ? 'translate-x-0' : 'translate-x-full'}
+            md:h-full
             pt-safe
           `}
         >
-            {/* Mobil Sağ Drawer Başlık + Kapatma */}
             <div className="lg:hidden px-4 py-3 border-b border-white/5 bg-[#020617]/80 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="text-cyan-400">{icons.book}</div>
@@ -442,111 +458,135 @@ export default function AnalysisPage() {
             </div>
 
             <PremiumCard className="h-full bg-[#020617]/80 backdrop-blur-md" noPadding>
-              <div className="flex flex-col h-[100dvh] overscroll-contain">
+              <div className="flex flex-col h-full overscroll-contain">
                 
                 {/* Mevzuat Bölümü */}
-                <div className="flex-shrink-0 h-[45%] flex flex-col min-h-0 border-b border-white/5">
-                    <div className="p-4 border-b border-white/5 bg-white/5 flex items-center gap-2 flex-none">
-                        <div className="text-cyan-400">{icons.book}</div>
-                        <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase">İlgili Mevzuat</h3>
-                    </div>
-                    <div className="flex-1 overflow-y-auto custom-scrollbar">
-                        <div className="divide-y divide-white/5">
-                            {active?.sources?.mevzuat?.length ? active.sources.mevzuat.map((m, i) => {
-                                const slug = utils.slugifyMevzuatAdi(m.mevzuat_adi || "");
-                                const popKey = `${slug}::${m.madde}`;
-                                const preview = getMevzuatPreview(m);
-                                
-                                return (
-                                    <div 
-                                        key={i} 
-                                        data-mevzuat-popover="1"
-                                        onClick={(e) => { 
-                                            e.stopPropagation(); 
-                                            const el = e.currentTarget; 
-                                            const pos = calcMevzuatPopover(el);
-                                            setOpenMevzuat(prev => (
-                                                prev?.key === popKey 
-                                                  ? null 
-                                                  : { 
-                                                      key: popKey, 
-                                                      preview, 
-                                                      mevzuat_adi: m.mevzuat_adi, 
-                                                      madde: m.madde, 
-                                                      el, 
-                                                      ...pos 
-                                                    }
-                                            )); 
-                                        }}
-                                        className="group/item relative hover:bg-white/5 transition-colors cursor-pointer"
-                                    >
-                                        <div className="p-4 flex gap-3 items-start">
-                                            {m.madde && (
-                                                <button type="button" className={`shrink-0 flex items-center justify-center w-10 h-8 rounded text-[10px] font-bold border transition-all ${openMevzuat?.key === popKey ? "bg-cyan-500 text-white border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.4)]" : "bg-slate-900 text-slate-400 border-slate-700 group-hover/item:border-cyan-500/50 group-hover/item:text-cyan-400"}`}>
-                                                    m.{m.madde}
-                                                </button>
-                                            )}
-                                            <div className="min-w-0 flex-1 pt-1">
-                                                <div className="text-xs font-medium text-slate-300 group-hover/item:text-white transition-colors">{m.mevzuat_adi}</div>
-                                            </div>
-                                        </div>
-                                        <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500 opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
-                                    </div>
-                                );
-                            }) : <div className="p-6 text-center text-xs text-slate-500">Kayıt bulunamadı.</div>}
+                <div className={`flex flex-col min-h-0 border-b border-white/5 transition-all duration-300 ${openSections.mevzuat ? (openSections.kararlar ? "flex-1" : "flex-[2]") : "flex-none"}`}>
+                    <div 
+                      onClick={() => toggleSection('mevzuat')}
+                      className="p-4 border-b border-white/5 bg-white/5 flex items-center justify-between flex-none cursor-pointer hover:bg-white/10 transition-colors"
+                    >
+                        <div className="flex items-center gap-2">
+                          <div className="text-cyan-400">{icons.book}</div>
+                          <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase">İlgili Mevzuat</h3>
+                        </div>
+                        <div className="text-slate-400">
+                          {openSections.mevzuat ? icons.chevronUp : icons.chevronDown}
                         </div>
                     </div>
+                    
+                    {openSections.mevzuat && (
+                      <div className="flex-1 overflow-y-auto custom-scrollbar">
+                          {/* DEĞİŞİKLİK BURADA: pb-10 ekleyerek en alttaki elemanın görünmesini sağladık */}
+                          <div className="divide-y divide-white/5 pb-10">
+                              {active?.sources?.mevzuat?.length ? active.sources.mevzuat.map((m, i) => {
+                                  const slug = utils.slugifyMevzuatAdi(m.mevzuat_adi || "");
+                                  const popKey = `${slug}::${m.madde}`;
+                                  const preview = getMevzuatPreview(m);
+                                  
+                                  return (
+                                      <div 
+                                          key={i} 
+                                          data-mevzuat-popover="1"
+                                          onClick={(e) => { 
+                                              e.stopPropagation(); 
+                                              const el = e.currentTarget; 
+                                              const pos = calcMevzuatPopover(el);
+                                              setOpenMevzuat(prev => (
+                                                  prev?.key === popKey 
+                                                    ? null 
+                                                    : { 
+                                                        key: popKey, 
+                                                        preview, 
+                                                        mevzuat_adi: m.mevzuat_adi, 
+                                                        madde: m.madde, 
+                                                        el, 
+                                                        ...pos 
+                                                      }
+                                              )); 
+                                          }}
+                                          className="group/item relative hover:bg-white/5 transition-colors cursor-pointer"
+                                      >
+                                          <div className="p-4 flex gap-3 items-start">
+                                              {m.madde && (
+                                                  <button type="button" className={`shrink-0 flex items-center justify-center w-10 h-8 rounded text-[10px] font-bold border transition-all ${openMevzuat?.key === popKey ? "bg-cyan-500 text-white border-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.4)]" : "bg-slate-900 text-slate-400 border-slate-700 group-hover/item:border-cyan-500/50 group-hover/item:text-cyan-400"}`}>
+                                                      m.{m.madde}
+                                                  </button>
+                                              )}
+                                              <div className="min-w-0 flex-1 pt-1">
+                                                  <div className="text-xs font-medium text-slate-300 group-hover/item:text-white transition-colors">{m.mevzuat_adi}</div>
+                                              </div>
+                                          </div>
+                                          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-cyan-500 opacity-0 group-hover/item:opacity-100 transition-opacity"></div>
+                                      </div>
+                                  );
+                              }) : <div className="p-6 text-center text-xs text-slate-500">Kayıt bulunamadı.</div>}
+                          </div>
+                      </div>
+                    )}
                 </div>
 
                 {/* Kararlar Bölümü */}
-                <div className="flex-1 flex flex-col min-h-0">
-                    <div className="p-4 border-b border-white/5 bg-white/5 flex items-center gap-2 flex-none">
-                        <div className="text-cyan-400">{icons.bot}</div>
-                        <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase">Emsal Kararlar</h3>
-                    </div>
-                    <div className="flex-1 overflow-y-auto custom-scrollbar">
-                        <div className="divide-y divide-white/5">
-                            {(() => {
-                                const renderList = (items) => items.map((r, i) => (
-                                    <div key={i} className="p-4 hover:bg-white/5 transition-colors group/karar">
-                                        <div className="flex flex-col gap-1">
-                                            {r.court && <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">{r.court}</span>}
-                                            {r.slug && utils.looksLikeSlug(r.slug) ? (
-                                                <a href={`/kararlar/${encodeURIComponent(r.slug)}`} target="_blank" className="text-xs text-cyan-400 hover:text-cyan-300 hover:underline decoration-cyan-500/30 underline-offset-4 transition-all">
-                                                    {r.code || r.slug}
-                                                </a>
-                                            ) : (
-                                                <span className="text-xs text-slate-300">{r.code || r.slug}</span>
-                                            )}
-                                        </div>
-                                    </div>
-                                ));
-
-                                if (active?.sources?.karar_kartlari?.length) {
-                                    return renderList(active.sources.karar_kartlari.map(r => ({ slug: utils.slugFromTypeAndCode(r.type || "", r.code || "") || r.slug, code: r.code || r.slug, court: r.type })));
-                                }
-                                if (active?.sources?.kararlar?.length) {
-                                    const allProps = active.sources.kararlar.map(k => ({ code: k?.code || "", type: k?.type || "", orijinal_karar_id: k?.id || "", dosya_adi: k?.dosya || "", kaynak_turu: k?.tip || "" }));
-                                    const dict = new Map();
-                                    allProps.forEach(p => {
-                                        const slug = utils.bestSlugFromProps(p, allProps);
-                                        const key = slug || String(p.orijinal_karar_id || p.dosya_adi || "").replace(/\.txt$/i, "");
-                                        if (!key) return;
-                                        const rec = dict.get(key) || { slug, code: "", court: "" };
-                                        if (slug && !rec.slug) rec.slug = slug;
-                                        if (!rec.code) rec.code = utils.deduceEsasKararFromProps(p);
-                                        if (!rec.court) rec.court = utils.deduceCourtLabelFromProps(p);
-                                        const auto = utils.slugFromTypeAndCode(rec.court, rec.code);
-                                        if (auto && !rec.slug) rec.slug = auto;
-                                        dict.set(key, rec);
-                                    });
-                                    const list = Array.from(dict.values()).filter(r => r.code || r.court || r.slug).sort((a,b) => (a.court||"").localeCompare(b.court||""));
-                                    if(list.length) return renderList(list);
-                                }
-                                return <div className="p-6 text-center text-xs text-slate-500">Kayıt bulunamadı.</div>;
-                            })()}
+                <div className={`flex flex-col min-h-0 transition-all duration-300 ${openSections.kararlar ? "flex-1" : "flex-none"}`}>
+                    <div 
+                      onClick={() => toggleSection('kararlar')}
+                      className="p-4 border-b border-white/5 bg-white/5 flex items-center justify-between flex-none cursor-pointer hover:bg-white/10 transition-colors"
+                    >
+                        <div className="flex items-center gap-2">
+                          <div className="text-cyan-400">{icons.bot}</div>
+                          <h3 className="text-xs font-bold tracking-widest text-slate-200 uppercase">Emsal Kararlar</h3>
+                        </div>
+                        <div className="text-slate-400">
+                          {openSections.kararlar ? icons.chevronUp : icons.chevronDown}
                         </div>
                     </div>
+                    
+                    {openSections.kararlar && (
+                      <div className="flex-1 overflow-y-auto custom-scrollbar">
+                          {/* DEĞİŞİKLİK BURADA: pb-20 ekleyerek en alttaki elemanın görünmesini sağladık */}
+                          <div className="divide-y divide-white/5 pb-20">
+                              {(() => {
+                                  const renderList = (items) => items.map((r, i) => (
+                                      <div key={i} className="p-4 hover:bg-white/5 transition-colors group/karar">
+                                          <div className="flex flex-col gap-1">
+                                              {r.court && <span className="text-[10px] font-mono font-bold text-slate-500 uppercase">{r.court}</span>}
+                                              {r.slug && utils.looksLikeSlug(r.slug) ? (
+                                                  <a href={`/kararlar/${encodeURIComponent(r.slug)}`} target="_blank" className="text-xs text-cyan-400 hover:text-cyan-300 hover:underline decoration-cyan-500/30 underline-offset-4 transition-all">
+                                                      {r.code || r.slug}
+                                                  </a>
+                                              ) : (
+                                                  <span className="text-xs text-slate-300">{r.code || r.slug}</span>
+                                              )}
+                                          </div>
+                                      </div>
+                                  ));
+
+                                  if (active?.sources?.karar_kartlari?.length) {
+                                      return renderList(active.sources.karar_kartlari.map(r => ({ slug: utils.slugFromTypeAndCode(r.type || "", r.code || "") || r.slug, code: r.code || r.slug, court: r.type })));
+                                  }
+                                  if (active?.sources?.kararlar?.length) {
+                                      const allProps = active.sources.kararlar.map(k => ({ code: k?.code || "", type: k?.type || "", orijinal_karar_id: k?.id || "", dosya_adi: k?.dosya || "", kaynak_turu: k?.tip || "" }));
+                                      const dict = new Map();
+                                      allProps.forEach(p => {
+                                          const slug = utils.bestSlugFromProps(p, allProps);
+                                          const key = slug || String(p.orijinal_karar_id || p.dosya_adi || "").replace(/\.txt$/i, "");
+                                          if (!key) return;
+                                          const rec = dict.get(key) || { slug, code: "", court: "" };
+                                          if (slug && !rec.slug) rec.slug = slug;
+                                          if (!rec.code) rec.code = utils.deduceEsasKararFromProps(p);
+                                          if (!rec.court) rec.court = utils.deduceCourtLabelFromProps(p);
+                                          const auto = utils.slugFromTypeAndCode(rec.court, rec.code);
+                                          if (auto && !rec.slug) rec.slug = auto;
+                                          dict.set(key, rec);
+                                      });
+                                      const list = Array.from(dict.values()).filter(r => r.code || r.court || r.slug).sort((a,b) => (a.court||"").localeCompare(b.court||""));
+                                      if(list.length) return renderList(list);
+                                  }
+                                  return <div className="p-6 text-center text-xs text-slate-500">Kayıt bulunamadı.</div>;
+                              })()}
+                          </div>
+                      </div>
+                    )}
                 </div>
 
               </div>
