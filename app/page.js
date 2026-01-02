@@ -149,7 +149,7 @@ export default async function Home() {
         </svg>
     </span>
     <span>
-        Üstelik Consulto AI v2.0'a özel <span className="font-extrabold">%50 indirimli!</span>
+        Consulto AI v2.1 yayında! <span className="font-extrabold">Daha Akıllı, Daha Bilgili!</span>
     </span>
 </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -268,7 +268,7 @@ export default async function Home() {
                                   <span className="relative z-10">₺200</span>
                                   <span className="absolute inset-0 block rotate-[-12deg] border-t-2 border-red-500 top-1/2"></span>
                                 </div>
-                                <div className="text-3xl font-black text-slate-900 mb-1">₺100</div>
+                                <div className="text-3xl font-black text-slate-900 mb-1">₺150</div>
                                 <div className="text-xs font-bold text-slate-400 uppercase tracking-wider">Başlangıç</div>
                                 <div className="text-xs text-slate-500 mt-1">
                                   5 Token paketiyle hemen başlayın
@@ -276,9 +276,9 @@ export default async function Home() {
                               </div>
                               <div className="rounded-[2rem] bg-gradient-to-br from-indigo-500 to-blue-600 p-6 flex flex-col justify-center items-center text-center shadow-lg text-white">
                                 <div className="text-3xl font-black mb-1">∞</div>
-                                <div className="text-xs font-bold text-white/70 uppercase tracking-wider">Süre Sınırı Yok</div>
+                                <div className="text-xs font-bold text-white/70 uppercase tracking-wider"> Sınırsız Paketler</div>
                                 <div className="text-xs text-white/80 mt-1">
-                                  Aldığın tokenler süresiz kullanılır
+                                  Kısıtlamalara takılmadan sınırsız dilekçe ve analiz iste!
                                 </div>
                               </div>
                             </div>

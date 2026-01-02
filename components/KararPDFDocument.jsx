@@ -1,12 +1,15 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Font } from '@react-pdf/renderer';
 
+// NOTE: react-pdf requires absolute URLs for fonts
+const SITE_URL = 'https://www.consultohukuk.com';
+
 // 1. FONT KAYDI
 Font.register({
   family: 'Roboto',
   fonts: [
-    { src: '/fonts/Roboto-Regular.ttf', fontWeight: 400 },
-    { src: '/fonts/Roboto-Bold.ttf', fontWeight: 700 },
+    { src: `${SITE_URL}/fonts/Roboto-Regular.ttf`, fontWeight: 400 },
+    { src: `${SITE_URL}/fonts/Roboto-Bold.ttf`, fontWeight: 700 },
   ],
 });
 

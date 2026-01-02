@@ -28,6 +28,17 @@ const organOptions = [
   { label: "Yargıtay 10. Hukuk Dairesi", value: "10. Hukuk Dairesi" },
   { label: "Yargıtay 11. Hukuk Dairesi", value: "11. Hukuk Dairesi" },
   { label: "Yargıtay 12. Hukuk Dairesi", value: "12. Hukuk Dairesi" },
+  { label: "Yargıtay 13. Hukuk Dairesi", value: "13. Hukuk Dairesi" },
+  { label: "Yargıtay 14. Hukuk Dairesi", value: "14. Hukuk Dairesi" },
+  { label: "Yargıtay 15. Hukuk Dairesi", value: "15. Hukuk Dairesi" },
+  { label: "Yargıtay 16. Hukuk Dairesi", value: "16. Hukuk Dairesi" },
+  { label: "Yargıtay 17. Hukuk Dairesi", value: "17. Hukuk Dairesi" },
+  { label: "Yargıtay 18. Hukuk Dairesi", value: "18. Hukuk Dairesi" },
+  { label: "Yargıtay 19. Hukuk Dairesi", value: "19. Hukuk Dairesi" },
+  { label: "Yargıtay 20. Hukuk Dairesi", value: "20. Hukuk Dairesi" },
+  { label: "Yargıtay 21. Hukuk Dairesi", value: "21. Hukuk Dairesi" },
+  { label: "Yargıtay 22. Hukuk Dairesi", value: "22. Hukuk Dairesi" },
+  { label: "Yargıtay 23. Hukuk Dairesi", value: "23. Hukuk Dairesi" },
 ];
 
 export default function BasicFilter({ defaultParams = {} }) {
