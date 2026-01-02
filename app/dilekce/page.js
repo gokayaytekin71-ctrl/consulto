@@ -2346,7 +2346,7 @@ async function finalizeResult(finalObj) {
                   {activeTab === "dilekce" && (
                     <div
                       ref={dilekcePreviewRef}
-                      className="rounded-xl border border-slate-700/60 p-4 prose prose-invert max-w-none"
+                      className="rounded-xl border border-slate-700/60 p-4 prose prose-invert max-w-none whitespace-pre-wrap"
                     >
                       <ReactMarkdown components={{ p: ParagraphRenderer }}>
                         {dilekceMd || "_Dilekçe metni yok._"}
