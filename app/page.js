@@ -119,7 +119,7 @@ export default async function Home() {
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase">Abonelik Yok, Sadece Kullandığını Öde</span>
+                            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase"> İster Kullandığın Kadar Öde, İster Sınırsız Eriş!</span>
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 leading-[1.1] mb-6">
@@ -131,7 +131,7 @@ export default async function Home() {
                         </h1>
                         
                         <p className="max-w-2xl mx-auto text-xl text-slate-600 font-medium leading-relaxed mb-8">
-                            Aylık sabit ücret yok. İhtiyacınız kadar <strong>Token</strong> alın, dilekçe ve analiz botlarını dilediğiniz zaman kullanın.
+                            Milyonlarca Türk Hukuk Tezi ve Yargıtay Kararı ile <strong>Eğitilmiş</strong> Yapay Zeka Asistanı.
                         </p>
 
                         <p className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-50 border border-green-200 text-[13px] font-semibold text-green-700 mb-4">
@@ -169,7 +169,7 @@ export default async function Home() {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v14m7-7H5" />
                                     </svg>
                                 </span>
-                                <span>Token Yükle & Başla</span>
+                                <span> Paketleri İncele & Başla</span>
                           </Link>
                           <Link
                             href="/akilli-arama"
