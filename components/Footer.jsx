@@ -146,7 +146,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
              <span className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] font-mono text-slate-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                System v2.0
+                System v2.1
              </span>
           </div>
         </div>
