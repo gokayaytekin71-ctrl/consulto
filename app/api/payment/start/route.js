@@ -6,9 +6,9 @@ import crypto from "crypto";
 export const dynamic = "force-dynamic";
 
 const PACKAGES = {
-  1: { tokens: 9999, price: 150, name: "5 Token Paketi" }, 
-  2: { tokens: 9999, price: 500, name: "25 Token Paketi" },
-  3: { tokens: 9999, price: 850, name: "50 Token Paketi" },
+  1: { tokens: 5, price: 150, name: "5 Token Paketi" }, 
+  2: { tokens: 20, price: 500, name: "25 Token Paketi" },
+  3: { tokens: 50, price: 850, name: "50 Token Paketi" },
   4: { tokens: 99999, price: 3600, name: "3 Aylık Sınırsız Erişim Paketi" }, 
   5: { tokens: 99999, price: 6000, name: "6 Aylık Sınırsız Erişim Paketi" },
   6: { tokens: 99999, price: 9500, name: "1 Yıllık Sınırsız Erişim Paketi Paketi" },
