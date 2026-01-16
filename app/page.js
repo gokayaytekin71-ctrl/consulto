@@ -203,7 +203,18 @@ export default async function Home() {
                                         ✍️
                                     </div>
                                     <h3 className="text-3xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">Dilekçe Pro</h3>
-                                    <p className="text-lg text-slate-500 max-w-md">Olay örgüsünü anlatın, profesyonel hukuki dille yazılmış, Yargıtay atıflı dilekçeniz 1 Token karşılığında hazır.</p>
+                                    <div className="text-lg text-slate-500 max-w-md space-y-2">
+                                      <p><strong>Dilekçeyi yazmakla uğraşmayın.</strong></p>
+                                      <p>Siz yalnızca olayları özetleyin.</p>
+                                      <p>
+                                        Emsal kararlarla desteklenen <strong>Açıklama</strong>,
+                                        hukuki temeli güçlü <strong>Deliller</strong> ve
+                                        hak kaybını önleyici <strong>Sonuç & İstem</strong> bölümleriyle
+                                      </p>
+                                      <p className="font-semibold text-slate-700">
+                                        profesyonel dilekçeniz sizin için hazırlansın.
+                                      </p>
+                                    </div>
                                 </div>
                                 <div className="absolute right-[-40px] bottom-[-40px] md:right-[-20px] md:bottom-[-20px]
     w-[300px] h-[200px]
@@ -250,7 +261,18 @@ export default async function Home() {
                                         </span>
                                     </div>
                                     <h3 className="text-2xl font-bold text-white mb-2">Analiz Pro</h3>
-                                    <p className="text-slate-400 text-sm mb-6">Dosya risk analizi, strateji ve emsal kararlar. Her analiz sadece 1 Token.</p>
+                                    <div className="text-slate-300 text-sm mb-6 space-y-2">
+                                      <p><strong>Dosyanızı analiz etmekle vakit kaybetmeyin.</strong></p>
+                                      <p>Uyuşmazlığınızı kısaca anlatın.</p>
+                                      <p>
+                                        Olası riskler, muhtemel senaryolar ve
+                                        <strong> emsal Yargıtay kararları</strong> ışığında
+                                        hukuki durumunuz değerlendirilsin.
+                                      </p>
+                                      <p className="font-semibold text-white">
+                                        Stratejinizi netleştirin, doğru adımı atın.
+                                      </p>
+                                    </div>
                                     <div className="w-full bg-white/10 rounded-full h-1.5 mb-1 overflow-hidden">
                                         <div className="bg-gradient-to-r from-orange-400 to-red-500 h-full w-[85%] rounded-full animate-[width_1.5s_ease-out]"></div>
                                     </div>
