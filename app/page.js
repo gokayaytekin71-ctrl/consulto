@@ -375,12 +375,12 @@ export default async function Home() {
     };
     const taniticiGorseller = [
       {
-        src: "/images/gorsel1.jpg",
+        src: "/images/gorsel1.png",
         title: "Analiz Pro İle Uyuşmazlıklarınıza Karşı Strateji Oluşturur",
         description: "Yargıtay uygulamalarını gözeterek, olası riskleri ve potansiyel sonucu değerlendirir. Kullanıcıya en doğru yönlendirmeleri yaparak işlerini kolaylaştırmayı amaçlar.",
       },
       {
-        src: "/images/gorsel2.jpg",
+        src: "/images/gorsel2.png",
         title: "Analiz Pro Karar Uydurmaz, Veritabanındaki Kararlara Atıflarda Bulunur ",
         description: "Uyuşmazlıklarınıza ilişkin Yargıtay Kararlarını değerlendirir ve sizi yönlendirir. Bu kararları Emsal Kararlar başlığı altında sizinle paylaşır.",
       },
