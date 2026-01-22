@@ -23,6 +23,7 @@
     "cli-progress": "^3.12.0",
     "date-fns": "^4.1.0",
     "dotenv": "^16.6.1",
+    "file-saver": "^2.0.5",
     "html-docx-js": "^0.1.0",
     "html2pdf.js": "^0.10.3",
     "iyzipay": "^2.0.64",

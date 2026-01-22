@@ -172,6 +172,45 @@ function bestSlugTypeCodeFirst(p = {}, allArr = []) {
   if (slug) return slug;
   return bestSlugFromProps(p, allArr);
 }
+// --- YENİLENDİ (V4 - FİNAL): Tüm Tire Karakterleri ve Temiz Linkleme ---
+function autoLinkDecisionsInText(text) {
+  if (!text) return "";
+
+  // Regex Açıklaması:
+  // 1. (?:\[\s*)? -> Opsiyonel açılan köşeli parantez
+  // 2. Mahkeme Adı
+  // 3. [\/\-\u2013\u2014] -> BURASI KRİTİK: Standart tire, En-dash, Em-dash veya Taksim işaretini kabul et.
+  // 4. (?:\s*\])? -> Opsiyonel kapanan köşeli parantez
+  
+  const regex = /(?:\[\s*)?(?:Yargıtay[\s\W]+)?((?:Hukuk|Ceza)[\s\W]+Genel[\s\W]+Kurulu|(?:\d+)\.[\s\W]+(?:Hukuk|Ceza)[\s\W]+Dairesi)[\s\W,;]*(\d{4})\s*[\/\-\u2013\u2014]\s*(\d+)[\s\W]*E\.?[\s\W,;]*(\d{4})\s*[\/\-\u2013\u2014]\s*(\d+)[\s\W]*K\.?(?:\s*\])?/gi;
+
+  return text.replace(regex, (match, courtName, eYear, eNo, kYear, kNo) => {
+    // 1. TEMİZLİK: Match içindeki köşeli parantezleri (hem baştan hem sondan) tamamen soy.
+    // Böylece "[[Yargıtay...]]" gibi iç içe giren bozuk yapılar oluşmaz.
+    let label = match.trim();
+    while (label.startsWith("[") || label.endsWith("]")) {
+        if (label.startsWith("[")) label = label.slice(1).trim();
+        if (label.endsWith("]")) label = label.slice(0, -1).trim();
+    }
+
+    // 2. SLUG OLUŞTURMA
+    const trMap = { "ı": "i", "İ": "i", "ş": "s", "Ş": "s", "ç": "c", "Ç": "c", "ö": "o", "Ö": "o", "ü": "u", "Ü": "u", "ğ": "g", "Ğ": "g" };
+    const normalizeTr = (str) => (str || "").replace(/[*_]/g, "").replace(/[ıİşŞçÇöÖüÜğĞ]/g, c => trMap[c] || c).toLowerCase();
+
+    // courtName içindeki bold (**) veya diğer markdown karakterlerini temizle
+    let cleanCourtName = courtName.replace(/[*_]/g, "").trim();
+
+    let courtSlug = normalizeTr(cleanCourtName)
+      .replace(/\./g, "")      // Noktaları kaldır
+      .replace(/\s+/g, "-");   // Boşlukları tire yap
+
+    // Slug formatı: hukuk-genel-kurulu__2014-7448E_2015-1504K
+    const slug = `${courtSlug}__${eYear}-${eNo}E_${kYear}-${kNo}K`;
+    
+    // 3. SONUÇ: Temizlenmiş etiket + Link
+    return `[${label}](/kararlar/${slug})`;
+  });
+}
 
 // --- Ana Hook ---
 export function useAnalysisBot() {
@@ -440,7 +479,12 @@ export function useAnalysisBot() {
       }
 
       try {
+        // Dipnotları (citation) işle. autoLinkDecisionsInText artık activeMarkdown içinde otomatik çalışıyor,
+        // ama veritabanına kaydederken de işlenmiş halini saklayabiliriz veya olduğu gibi bırakabiliriz.
+        // Karışıklığı önlemek için burada SADECE dipnotları ekleyelim.
+        // Linkleme işini 'display' zamanında (render) activeMarkdown hook'una bıraktık.
         const enriched = buildWithInlineCitations(analysisText || "", data?.ilgili_kararlar || []);
+        
         setChats(prev => {
           const next = prev.map(c => c.id === draft.id ? { ...c, messages: c.messages.map(m => (m.id === botId ? { ...m, text: enriched } : m)) } : c);
           lastComputedNextRef.current = next;
@@ -504,12 +548,20 @@ export function useAnalysisBot() {
     return chats.filter(c => c.title?.toLowerCase().includes(term));
   }, [chats, search]);
 
+  // --- KRİTİK DEĞİŞİKLİK BURADA: ---
+  // Metin ekrana basılmak üzere hazırlanırken (render time) otomatik linkleme yapılıyor.
+  // Böylece eski kayıtlar ve sayfa yenilemeleri dahil her durumda linkler çalışır.
   const activeMarkdown = useMemo(() => {
     const msgs = active?.messages || [];
+    let rawText = "";
     for (let i = msgs.length - 1; i >= 0; i--) {
-      if (String(msgs[i]?.sender || "").toLowerCase() !== "user") return msgs[i]?.text || "";
+      if (String(msgs[i]?.sender || "").toLowerCase() !== "user") {
+        rawText = msgs[i]?.text || "";
+        break;
+      }
     }
-    return "";
+    // Metni otomatik olarak işle ve linkleri oluştur
+    return autoLinkDecisionsInText(rawText);
   }, [active]);
 
   const activeUserQuery = useMemo(() => {

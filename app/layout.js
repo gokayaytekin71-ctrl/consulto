@@ -6,6 +6,8 @@ import Footer from "@/components/Footer";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+// YENİ EKLENEN: Tema Sağlayıcısı
+import { ThemeProvider } from "./context/ThemeContext";
 
 const cormorantGaramond = Cormorant_Garamond({
   subsets: ["latin", "latin-ext"],
@@ -34,7 +36,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="tr" className={`${cormorantGaramond.variable} ${ebGaramond.variable}`}>
       <body className="min-h-screen flex flex-col">
-        {/* Google Ads Etiketi - Body içine alındı */}
+        {/* Google Ads Etiketi */}
         <Script
           strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=AW-17782177556"
@@ -48,11 +50,16 @@ export default function RootLayout({ children }) {
           `}
         </Script>
 
-        <AuthProvider>
-          <Header />
-          <main className="flex-1 pt-24">{children}</main>
-          <Footer />
-        </AuthProvider>
+        {/* ThemeProvider: Tüm uygulamayı sarmalar. 
+            Böylece Header, Footer ve tüm sayfalar (children) tema verisine erişebilir.
+        */}
+        <ThemeProvider>
+          <AuthProvider>
+            <Header />
+            <main className="flex-1 pt-24">{children}</main>
+            <Footer />
+          </AuthProvider>
+        </ThemeProvider>
         
         <Analytics />
         <SpeedInsights />
