@@ -198,8 +198,8 @@ export default function AnalysisPage() {
       <header
         className={`
           flex-none z-[70] h-16 border-b backdrop-blur-xl
-          items-center justify-between px-4 md:px-6 shadow-sm mb-0
-          ${isDarkMode ? "bg-[#020617] border-white/5 shadow-black/20" : "bg-slate-100 border-slate-200 shadow-sm"}
+          items-center justify-between px-4 md:px-6 shadow-sm 
+          ${isDarkMode ? "bg-[#020617]/70 border-white/5 shadow-black/20" : "bg-slate-100/80 border-slate-200 shadow-sm"}
           ${mobileMenuOpen || mobileResourcesOpen ? "hidden md:flex" : "flex"}
           ${mobileMenuOpen || mobileResourcesOpen ? "pointer-events-none" : "pointer-events-auto"}
         `}
@@ -253,10 +253,6 @@ export default function AnalysisPage() {
       </header>
 
       {/* --- Main Layout --- */}
-      {/* HEADER ALTINDAKİ GRADIENT (SADECE DARK MODE'DA) */}
-      {isDarkMode && (
-        <div className="absolute inset-0 bg-gradient-to-b from-[#020617] to-transparent pointer-events-none z-40" />
-      )}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 w-full h-[calc(100vh-4rem)] overflow-hidden relative z-10 px-4 md:px-6 pt-0 pb-6">
         
         {(mobileMenuOpen || mobileResourcesOpen) && (
