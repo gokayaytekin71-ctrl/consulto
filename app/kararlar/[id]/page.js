@@ -291,6 +291,15 @@ export default async function KararDetayPage({ params }) {
   const prevId = prevKarar ? buildKararIdFromRecord(prevKarar) : null;
   const nextId = nextKarar ? buildKararIdFromRecord(nextKarar) : null;
 
+  // DEBUG (Vercel prod): which component import is undefined?
+  console.log("COMP CHECK", {
+    FavoriteButton: typeof FavoriteButton,
+    HighlightedKararBody: typeof HighlightedKararBody,
+    BackButton: typeof BackButton,
+    ScrollProgressBar: typeof ScrollProgressBar,
+    DownloadPDFButton: typeof DownloadPDFButton,
+  });
+
   return (
     <main className="min-h-screen text-white">
        
