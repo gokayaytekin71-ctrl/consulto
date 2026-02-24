@@ -29,7 +29,6 @@ const Icons = {
   Scroll: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M19 3h-1a1 1 0 0 0-1 1v13H4a2 2 0 0 0-2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3z" /><path d="M8 21h12a2 2 0 0 0 2-2v-1h-10" /><path d="M10 3v16" /></svg>,
   Logout: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>,
   Plus: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>,
-  // Yeni eklenen ikonlar
   Hamburger: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>,
   X: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
 };
@@ -44,11 +43,10 @@ export default function Header() {
   const { data: session, status } = useSession();
   const [isMounted, setIsMounted] = useState(false);
   
-  // Menü State'leri
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isOtherOpen, setIsOtherOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Yeni Mobil Menü State
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
 
   const [notifications, setNotifications] = useState([]);
   const [isLoadingNotifications, setIsLoadingNotifications] = useState(false);
@@ -59,7 +57,6 @@ export default function Header() {
 
   useEffect(() => { setIsMounted(true); }, []);
 
-  // Mobil Menü açıkken scroll'u kilitle
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -99,7 +96,7 @@ export default function Header() {
       setIsMobileMenuOpen(false);
       return;
     }
-    setIsMobileMenuOpen(false); // Menüden bir şeye tıklanınca kapat
+    setIsMobileMenuOpen(false);
     startTransition(() => router.push(path)); 
   };
   
@@ -109,11 +106,16 @@ export default function Header() {
 
   const authButtonsPlaceholder = <div className="w-8 h-8 bg-slate-700/50 animate-pulse rounded-full"></div>;
 
-  const NavItem = ({ onClick, icon: Icon, label, active }) => (
+  const NavItem = ({ onClick, icon: Icon, label, active, badge }) => (
     <button onClick={onClick} className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-full transition-all duration-300 ${active ? "bg-white/10 text-white shadow-[0_0_10px_rgba(56,189,248,0.25)]" : "text-slate-300 hover:text-white hover:bg-white/5"}`}>
       <Icon />
-      <span className="text-[11px] font-medium tracking-wide hidden lg:block group-hover:block transition-all duration-300">{label}</span>
+      <span className="text-[11px] font-medium tracking-wide hidden lg:block group-hover:block transition-all duration-300 whitespace-nowrap">{label}</span>
       {active && <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full shadow-[0_0_3px_cyan]"></span>}
+      {badge && (
+        <span className="absolute -top-1.5 -right-1 bg-gradient-to-r from-pink-500 to-orange-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
+          {badge}
+        </span>
+      )}
     </button>
   );
 
@@ -123,13 +125,10 @@ export default function Header() {
       
       {/* MOBİL MENÜ OVERLAY */}
       <div className={`fixed inset-0 z-[10000] bg-[#001f3f] transition-all duration-500 md:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-        
-        {/* Dekoratif Arkaplan Efektleri */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
         <div className="flex flex-col h-full relative z-10">
-          {/* Mobil Menü Header */}
           <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
             <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
               <Image src="/images/logo.png" alt="Logo" width={100} height={28} className="object-contain brightness-110" priority />
@@ -139,14 +138,14 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobil Menü Linkler */}
-          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-2">
+          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-2 custom-scrollbar">
              <div className="space-y-1">
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 pl-2">Menü</p>
                 {[
                   { label: "Kararlar", path: "/kararlar", icon: Icons.Gavel },
                   { label: "Akıllı Arama", path: "/akilli-arama", icon: Icons.Search },
                   { label: "Dilekçe", path: "/dilekce", icon: Icons.FileText },
+                  { label: "Bilgi Kartları", path: "/Flash-Cards", icon: Icons.Library, badge: "YENİ!" },
                   { label: "Analiz", path: "/bot", icon: Icons.Cpu },
                   { label: "Araçlar", path: "/araclar", icon: Icons.Tool },
                   { label: "Paketler", path: "/paketler-ucretler", icon: Icons.Package },
@@ -159,7 +158,14 @@ export default function Header() {
                     <div className={`p-2 rounded-lg ${pathname === item.path ? "bg-cyan-500 text-white" : "bg-white/5 text-slate-400"}`}>
                       <item.icon />
                     </div>
-                    <span className="text-sm font-medium">{item.label}</span>
+                    <span className="text-sm font-medium relative">
+                      {item.label}
+                      {item.badge && (
+                        <span className="absolute -top-2 -right-8 bg-gradient-to-r from-pink-500 to-orange-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
+                          {item.badge}
+                        </span>
+                      )}
+                    </span>
                   </button>
                 ))}
              </div>
@@ -184,7 +190,6 @@ export default function Header() {
              </div>
           </div>
           
-          {/* Mobil Menü Footer (Profil yoksa giriş butonu) */}
           {!session && (
             <div className="p-6 border-t border-white/10">
                <button onClick={() => { setIsMobileMenuOpen(false); signIn(undefined, { callbackUrl: "/profilim" }); }} className="w-full py-3 rounded-xl bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold shadow-lg shadow-orange-900/20 active:scale-95 transition-all">
@@ -196,25 +201,27 @@ export default function Header() {
       </div>
       {/* END MOBİL MENÜ OVERLAY */}
 
-      <header className="fixed top-3 left-1/2 transform -translate-x-1/2 z-[9999] w-[92%] max-w-[850px]">
-        <div className="relative flex items-center justify-between px-3 py-2.5 rounded-full bg-[#001f3f]/90 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20 transition-all duration-500 hover:border-white/20 hover:shadow-cyan-900/15">
+      {/* HEADER WIDE MOBIL UYUM */}
+      <header className="fixed top-3 left-1/2 transform -translate-x-1/2 z-[9999] w-[95%] sm:w-[92%] max-w-[850px]">
+        <div className="relative flex items-center justify-between px-2 sm:px-3 py-2.5 rounded-full bg-[#001f3f]/90 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20 transition-all duration-500 hover:border-white/20 hover:shadow-cyan-900/15">
 
           {/* LOGO */}
-          <div className="flex-shrink-0 pl-1 pr-3 border-r border-white/10">
+          <div className="flex-shrink-0 pl-1 pr-2 sm:pr-3 border-r border-white/10">
             <Link href="/" className="block transition-transform hover:scale-105 active:scale-95">
-              <Image src="/images/logo.png" alt="Logo" width={90} height={24} className="object-contain brightness-110 drop-shadow-lg" priority />
+              <Image src="/images/logo.png" alt="Logo" width={90} height={24} className="object-contain brightness-110 drop-shadow-lg w-[75px] sm:w-[90px]" priority />
             </Link>
           </div>
           
           <div className="hidden lg:flex items-center pl-2 pr-4 opacity-90"><div className="w-10 h-10"><Lottie animationData={animationData} loop autoPlay /></div></div>
 
-          {/* MENÜ - DESKTOP (md:flex -> Sadece orta ve büyük ekranlarda) */}
+          {/* MENÜ - DESKTOP */}
           <nav className="hidden md:flex flex-1 items-center justify-center gap-0.5 px-2">
             <NavItem onClick={() => handleNav("/kararlar")} icon={Icons.Gavel} label="Kararlar" active={pathname === "/kararlar"} />
             <NavItem onClick={() => handleNav("/akilli-arama")} icon={Icons.Search} label="Arama" active={pathname === "/akilli-arama"} />
             <NavItem onClick={() => handleNav("/dilekce")} icon={Icons.FileText} label="Dilekçe" active={pathname === "/dilekce"} />
+            <NavItem onClick={() => handleNav("/Flash-Cards")} icon={Icons.Library} label="Kartlar" active={pathname === "/Flash-Cards"} badge="YENİ!" />
             <NavItem onClick={() => handleNav("/bot")} icon={Icons.Cpu} label="Analiz" active={pathname === "/bot"} />
-            <NavItem onClick={() => handleNav("/araclar")} icon={Icons.Tool} label="Araçlar" active={pathname === "/araclar"} />
+            {/* Araçlar burdan kaldırıldı, Diğer menüsüne eklendi */}
             <NavItem onClick={() => handleNav("/paketler-ucretler")} icon={Icons.Package} label="Paketler" active={pathname === "/paketler-ucretler"} />
 
             {/* Diğer Dropdown */}
@@ -226,6 +233,7 @@ export default function Header() {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-40 p-1.5 rounded-xl bg-[#0a1b2b]/95 backdrop-blur-md border border-white/10 shadow-lg ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-200">
                   <div className="flex flex-col gap-0.5">
                     {[
+                      { href: "/araclar", label: "Araçlar", icon: <Icons.Tool /> }, // Araçlar buraya taşındı
                       { href: "/mevzuat", label: "Mevzuat", icon: <Icons.Library /> },
                       { href: "/makaleler", label: "Makaleler", icon: <Icons.Feather /> },
                       { href: "/gazete", label: "Resmî Gazete", icon: <Icons.Scroll /> }
@@ -241,8 +249,8 @@ export default function Header() {
             </div>
           </nav>
 
-          {/* SAĞ KISIM */}
-          <div className="flex items-center gap-2 pl-3 border-l border-white/10">
+          {/* SAĞ KISIM - flex-shrink-0 EKLENDİ */}
+          <div className="flex items-center gap-1 sm:gap-2 pl-2 sm:pl-3 border-l border-white/10 flex-shrink-0">
             {isMounted ? (status === "loading" ? authButtonsPlaceholder : session ? (
               <>
                 {/* Bildirimler */}
@@ -252,7 +260,7 @@ export default function Header() {
                     {notifications.length > 0 && <span className="absolute top-1.5 right-1.5 flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 border border-[#001f3f]"></span></span>}
                   </button>
                   {isNotificationsOpen && (
-                    <div className="absolute top-full right-0 mt-3 w-80 rounded-2xl bg-[#0f263d]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200 z-[10001] fixed sm:absolute sm:right-0 right-[-60px]">
+                    <div className="absolute top-full right-0 mt-3 w-[290px] sm:w-80 rounded-2xl bg-[#0f263d]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200 z-[10001] origin-top-right">
                       <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5"><h3 className="font-semibold text-white text-sm">Bildirimler</h3><span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-full text-slate-300">{notifications.length} Yeni</span></div>
                       <div className="max-h-[250px] overflow-y-auto custom-scrollbar">
                         {isLoadingNotifications ? <div className="p-4 text-center text-slate-400 text-xs">Yükleniyor...</div> : notifications.length > 0 ? (
@@ -289,7 +297,7 @@ export default function Header() {
                   </button>
 
                   {isProfileOpen && (
-                    <div className="absolute top-full right-0 mt-4 w-72 rounded-2xl bg-[#0f263d]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200 ring-1 ring-black/10 z-[10001] fixed sm:absolute sm:right-0 right-[-10px]">
+                    <div className="absolute top-full right-0 mt-4 w-[280px] sm:w-72 rounded-2xl bg-[#0f263d]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200 ring-1 ring-black/10 z-[10001] origin-top-right">
                       <div className="px-5 py-4 border-b border-white/5 bg-white/5">
                         <p className="text-sm font-bold text-white truncate">{session.user.name || "Kullanıcı"}</p>
                         <p className="text-[11px] text-slate-400 truncate mt-0.5">{session.user.email}</p>
@@ -334,7 +342,7 @@ export default function Header() {
             {/* --- HAMBURGER MENU BUTTON (MOBILE ONLY) --- */}
             <button 
               onClick={() => setIsMobileMenuOpen(true)} 
-              className="md:hidden p-1 text-slate-300 hover:text-white transition-colors"
+              className="md:hidden p-1 text-slate-300 hover:text-white transition-colors ml-1"
             >
               <Icons.Hamburger />
             </button>
