@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Papa from 'papaparse';
-import FlashcardsUI from './FlashcardsUI';
+import FlashcardsUI from './FlashCardsUI';
 
 export default async function FlashcardsPage() {
   const flashcardsData = {};
