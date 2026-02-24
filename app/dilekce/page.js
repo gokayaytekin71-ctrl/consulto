@@ -10,14 +10,20 @@ import { CASE_TYPES } from "./caseData";
 
 // --- Dilekçe Satır Satır Renderer ---
 const renderDilekce = (text) => {
-  const lines = text.split("\n");
+  const lines = (text || "").split("\n");
+
+  // Markdown temizleme: **bold**, _italic_ vb. işaretleri kaldır
+  const stripMd = (s = "") => String(s)
+    .replace(/[\*_`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
 
   return lines.map((line, i) => {
     const trimmed = line.trim();
+    const plain = stripMd(trimmed);
 
     // === BÖLÜM BAŞLIKLARI (HUKUKİ NEDENLER / DELİLLER / SONUÇ VE İSTEM) ===
-    const normalized = trimmed
-      .replace(/[*_]/g, "")   // **bold** işaretlerini temizle
+    const normalized = plain
       .replace(/\s*:\s*$/, "") // sondaki ":" ve boşlukları temizle
       .toUpperCase();
 
@@ -40,32 +46,32 @@ const renderDilekce = (text) => {
     }
 
     // MAHKEME BAŞLIĞI
-    if (/MAHKEMES[İI]NE$/i.test(trimmed)) {
+    if (/MAHKEMES[İI]NE$/i.test(plain)) {
       return (
         <p key={i} className="text-center font-bold mb-4">
-          {trimmed}
+          {plain}
         </p>
       );
     }
 
     // === TAMAMI BÜYÜK HARFLE YAZILMIŞ SATIRLAR → KALIN ===
-    const upperOnly = trimmed === trimmed.toUpperCase();
+    const upperOnly = plain === plain.toUpperCase();
 
     // NUMARALI + TAMAMI BÜYÜK HARF BAŞLIKLAR (örn: "6. 01.04.1974 TARİHLİ ...")
     if (
       upperOnly &&
-      /^[0-9IVX]+\./.test(trimmed) &&
-      trimmed.length > 8
+      /^[0-9IVX]+\./.test(plain) &&
+      plain.length > 8
     ) {
       return (
         <p key={i} className="font-bold mb-2">
-          {trimmed}
+          {plain}
         </p>
       );
     }
 
     // ETİKETLİ SATIRLAR
-    const labelMatch = trimmed.match(
+    const labelMatch = plain.match(
       /^(DAVACI|VEK[İI]L[İI]|DAVALI|ADRES|DAVA DEĞER[İI]|KONU|AÇIKLAMALAR)\s*:?\s*(.*)$/i
     );
 
@@ -82,15 +88,15 @@ const renderDilekce = (text) => {
 
     // NORMAL SATIR
     const isSignatureBlock =
-      trimmed === "Davacı Vekili" ||
-      /^Av\.\s*\[.*\]/i.test(trimmed);
+      plain === "Davacı Vekili" ||
+      /^Av\.\s*\[.*\]/i.test(plain);
 
     return (
       <p
         key={i}
         className={`mb-2 ${isSignatureBlock ? "text-right font-medium" : ""}`}
       >
-        {line}
+        {plain || line}
       </p>
     );
   });
