@@ -8,9 +8,9 @@ import HighlightedKararBody from '@/components/HighlightedKararBody';
 import BackButton from '@/components/BackButton';
 import ScrollProgressBar from '@/components/ScrollProgressBar';
 import { Suspense } from 'react';
-import dynamic from 'next/dynamic';
+import dynamicImport from 'next/dynamic';
 
-const DownloadPDFButton = dynamic(
+const DownloadPDFButton = dynamicImport(
   () => import('@/components/DownloadPDFButton'), 
   { ssr: false }
 );
