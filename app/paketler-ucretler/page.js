@@ -136,9 +136,18 @@ export default function PricingPage() {
   };
   // ---------------------------
 
-  // Paketleri iki gruba ayır
-  const starterPackages = PACKAGES.filter(p => p.id <= 3);
-  const unlimitedPackages = PACKAGES.filter(p => p.id >= 4);
+  // Paketleri gruplara ayır
+  const featuredIds = [1, 5, 2]; // En Avantajlı Paketler (sıra önemli)
+  const featuredPackages = featuredIds
+    .map((id) => PACKAGES.find((p) => p.id === id))
+    .filter(Boolean);
+
+  const starterPackages = PACKAGES.filter(
+    (p) => p.id <= 3 && !featuredIds.includes(p.id)
+  );
+  const unlimitedPackages = PACKAGES.filter(
+    (p) => p.id >= 4 && !featuredIds.includes(p.id)
+  );
 
   // Kart render fonksiyonu
   const renderPackageCard = (p) => {
@@ -282,6 +291,22 @@ export default function PricingPage() {
 
       {/* Paketler Grid */}
       <section className="relative mx-auto max-w-7xl px-4 sm:px-6 pb-32 z-10">
+        {/* En Avantajlı Paketler */}
+        <div className="mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center bg-gradient-to-r from-amber-300 to-cyan-300 bg-clip-text text-transparent drop-shadow">
+            En Avantajlı Paketler
+          </h2>
+          <p className="text-base md:text-lg text-slate-300 mb-16 text-center">
+            En çok tercih edilen ve en iyi fiyat/performans seçenekleri
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 items-start">
+            {featuredPackages.map(renderPackageCard)}
+          </div>
+        </div>
+
+        {/* Divider */}
+        <div className="my-24 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent" />
+
         {/* Başlangıç Paketleri */}
         <div className="mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2 text-center bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent drop-shadow">
