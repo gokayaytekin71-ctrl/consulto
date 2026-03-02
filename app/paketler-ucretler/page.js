@@ -142,12 +142,8 @@ export default function PricingPage() {
     .map((id) => PACKAGES.find((p) => p.id === id))
     .filter(Boolean);
 
-  const starterPackages = PACKAGES.filter(
-    (p) => p.id <= 3 && !featuredIds.includes(p.id)
-  );
-  const unlimitedPackages = PACKAGES.filter(
-    (p) => p.id >= 4 && !featuredIds.includes(p.id)
-  );
+  const starterPackages = PACKAGES.filter((p) => p.id <= 3);
+  const unlimitedPackages = PACKAGES.filter((p) => p.id >= 4);
 
   // Kart render fonksiyonu
   const renderPackageCard = (p) => {
