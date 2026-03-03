@@ -44,7 +44,7 @@ const PACKAGES = [
     badge: "Fırsat",
     summary: "Maksimum avantaj isteyen profesyoneller için.",
     features: [
-      "100 Token Yüklenir",
+      "50 Token Yüklenir",
       "Yaklaşık %30 daha ucuz",
       "Tam kapsamlı erişim",
       "Kaçırılmayacak fırsat",
