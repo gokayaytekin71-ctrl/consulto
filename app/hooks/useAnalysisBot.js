@@ -182,7 +182,7 @@ function autoLinkDecisionsInText(text) {
   // 3. [\/\-\u2013\u2014] -> BURASI KRİTİK: Standart tire, En-dash, Em-dash veya Taksim işaretini kabul et.
   // 4. (?:\s*\])? -> Opsiyonel kapanan köşeli parantez
   
-  const regex = /(?:\[\s*)?(?:Yargıtay[\s\W]+)?((?:Hukuk|Ceza)[\s\W]+Genel[\s\W]+Kurulu|(?:\d+)\.[\s\W]+(?:Hukuk|Ceza)[\s\W]+Dairesi)[\s\W,;]*(\d{4})\s*[\/\-\u2013\u2014]\s*(\d+)[\s\W]*E\.?[\s\W,;]*(\d{4})\s*[\/\-\u2013\u2014]\s*(\d+)[\s\W]*K\.?(?:\s*\])?/gi;
+  const regex = /(?:\[\s*)?(?:Yargıtay[\s\W]+)?((?:Hukuk|Ceza)[\s\W]+Genel[\s\W]+Kurulu|(?:\d+)\.?\s*(?:Hukuk|Ceza)[\s\W]+Dairesi)(?:\s*['’]?(?:nin|nın|nun|nün|in|ın|un|ün))?[\s\W,;]*(\d{4})\s*[\/\-\u2013\u2014]\s*(\d+)[\s\W]*E\.?[\s\W,;]*(\d{4})\s*[\/\-\u2013\u2014]\s*(\d+)[\s\W]*K\.?(?:\s*\])?/gi;
 
   return text.replace(regex, (match, courtName, eYear, eNo, kYear, kNo) => {
     // 1. TEMİZLİK: Match içindeki köşeli parantezleri (hem baştan hem sondan) tamamen soy.
