@@ -467,6 +467,27 @@ export default async function KararDetayPage({ params }) {
 
        </div>
       
+      {/* --- STRUCTURED DATA (SEO) --- */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LegalCase",
+            name: `${type} ${code}`,
+            identifier: code,
+            datePublished: karar.createdAt,
+            text: (karar.content || "").slice(0, 5000),
+            publisher: {
+              "@type": "Organization",
+              name: "Consulto Hukuk",
+              url: "https://www.consultohukuk.com"
+            },
+            url: `https://www.consultohukuk.com/kararlar/${kararSlug}`
+          })
+        }}
+      />
+
       <style dangerouslySetInnerHTML={{__html: GLOBAL_CSS}} />
     </main>
   );
