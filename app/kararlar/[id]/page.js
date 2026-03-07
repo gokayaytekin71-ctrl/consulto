@@ -216,11 +216,71 @@ const GLOBAL_CSS = `
 `;
 
 // --- HELPER FUNCTIONS ---
-function slugifyType(t = "") { const map = { ç: "c", Ç: "c", ğ: "g", Ğ: "g", ı: "i", İ: "i", ö: "o", Ö: "o", ş: "s", Ş: "s", ü: "u", Ü: "u" }; return String(t || "").replace(/[·.]/g, " ").replace(/[çÇğĞıİöÖşŞüÜ]/g, m => map[m] || m).replace(/[^a-zA-Z0-9\s-]/g, " ").trim().replace(/\s+/g, "-").replace(/-+/g, "-").toLowerCase() || "mahkeme"; }
-function codeToSegment(code = "") { const s = String(code || "").replace(/\s+/g, " ").trim(); const m = s.match(/(\d{4})[\/\-]([0-9A-Za-z\-]+)\s*E.*?(\d{4})[\/\-]([0-9A-Za-z\-]+)\s*K/i); if (!m) return s.replace(/[^0-9A-Za-z\/-]/g, "").replace(/[\/]/g, "-") || "code"; return `${m[1]}-${m[2]}E_${m[3]}-${m[4]}K`; }
-function segmentToCode(seg = "") { const m = String(seg || "").match(/^(\d{4})-([0-9A-Za-z\-]+)E_(\d{4})-([0-9A-Za-z\-]+)K$/i); return m ? `${m[1]}/${m[2]} E. ${m[3]}/${m[4]} K.` : ""; }
-function buildKararIdFromRecord(k) { const type = (k?.type || "").trim(); const code = (k?.code || "").trim(); if (type && code) return `${slugifyType(type)}__${codeToSegment(code)}`; return (k?.fileName || "").replace(/\.txt$/i, "") || ""; }
-function parseParamsId(paramsId = "") { const id = String(paramsId || ""); if (id.includes("__")) { const [typeSeg, codeSeg] = id.split("__"); return { typeSeg, code: segmentToCode(codeSeg), mode: "type+code" }; } return { fileNameBase: id, mode: "filename" }; }
+function slugifyType(t = "") {
+  const map = {
+    ç: "c",
+    Ç: "C",
+    ğ: "g",
+    Ğ: "G",
+    ı: "i",
+    İ: "I",
+    ö: "o",
+    Ö: "O",
+    ş: "s",
+    Ş: "S",
+    ü: "u",
+    Ü: "U",
+  };
+
+  return String(t || "")
+    .replace(/[·.]/g, " ")
+    .replace(/[çÇğĞıİöÖşŞüÜ]/g, (m) => map[m] || m)
+    .replace(/[^a-zA-Z0-9\s-]/g, " ")
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/-+/g, "-") || "Mahkeme";
+}
+
+function codeToSegment(code = "") {
+  const s = String(code || "").replace(/\s+/g, " ").trim();
+  const m = s.match(/(\d{4})[\/\-]([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})[\/\-]([0-9A-Za-z\-()\/]+)\s*K/i);
+
+  if (!m) {
+    return s.replace(/[^0-9A-Za-z/_\-()]/g, "").replace(/\//g, "-") || "code";
+  }
+
+  const eYear = m[1];
+  const eNo = m[2].replace(/\//g, "-");
+  const kYear = m[3];
+  const kNo = m[4].replace(/\//g, "-");
+
+  return `${eYear}-${eNo}E_${kYear}-${kNo}K`;
+}
+
+function segmentToCode(seg = "") {
+  const m = String(seg || "").match(/^(\d{4})-([0-9A-Za-z\-()\/]+)E_(\d{4})-([0-9A-Za-z\-()\/]+)K$/i);
+  return m ? `${m[1]}/${m[2]} E. ${m[3]}/${m[4]} K.` : "";
+}
+
+function buildKararIdFromRecord(k) {
+  const type = (k?.type || "").trim();
+  const code = (k?.code || "").trim();
+
+  if (type && code) {
+    return `${slugifyType(type)}__${codeToSegment(code)}`;
+  }
+
+  return (k?.fileName || "").replace(/\.txt$/i, "") || "";
+}
+
+function parseParamsId(paramsId = "") {
+  const id = String(paramsId || "");
+  if (id.includes("__")) {
+    const [typeSeg, codeSeg] = id.split("__");
+    return { typeSeg, code: segmentToCode(codeSeg), mode: "type+code" };
+  }
+  return { fileNameBase: id, mode: "filename" };
+}
 
 export async function generateMetadata({ params }) { return { alternates: { canonical: `https://www.consultohukuk.com/kararlar/${params.id}` }, robots: { index: true, follow: true } }; }
 export async function generateStaticParams() { return []; }
@@ -258,7 +318,7 @@ export default async function KararDetayPage({ params }) {
 
   // --- DATA FETCHING ---
   if (parsed.mode === "type+code" && parsed.code) {
-     const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z-]+)\s*E.*?(\d{4})\/([0-9A-Za-z-]+)/i);
+     const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})\/([0-9A-Za-z\-()\/]+)/i);
      const rawTypeSeg = String(parsed.typeSeg || "").trim();
      const tBase = rawTypeSeg.replace(/-/g, " ").replace(/\./g, "").trim();
      const typeFilters = [{ type: { contains: tBase, mode: "insensitive" } }];
