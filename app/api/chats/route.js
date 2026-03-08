@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
 import { consumeToken } from "@/lib/tokens"; // YENİ: Token mantığı
+import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
 export const runtime = 'nodejs';
@@ -26,10 +27,13 @@ export async function GET(req) {
   const userId = session.user.id;
   const user = await prisma.user.findUnique({
     where: { id: userId },
-    select: { chats: true },
+    select: { chats: true, userQueries: true },
   });
   return new Response(
-    JSON.stringify({ chats: user?.chats || [] }),
+    JSON.stringify({
+      chats: user?.chats || [],
+      userQueries: user?.userQueries || [],
+    }),
     { status: 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } }
   );
 }
@@ -95,6 +99,40 @@ export async function POST(request) {
 
   try {
     const body = await request.json();
+
+    const queryText =
+      body?.query ||
+      body?.input ||
+      body?.message ||
+      body?.text ||
+      body?.sorgu ||
+      "";
+
+    if (String(queryText).trim()) {
+      const userRecord = await prisma.user.findUnique({
+        where: { id: userId },
+        select: { userQueries: true },
+      });
+
+      const currentQueries = Array.isArray(userRecord?.userQueries)
+        ? userRecord.userQueries
+        : [];
+
+      const newQueryItem = {
+        id: crypto.randomUUID(),
+        text: String(queryText).trim(),
+        createdAt: new Date().toISOString(),
+        chatId: body?.chatId || null,
+      };
+
+      await prisma.user.update({
+        where: { id: userId },
+        data: {
+          userQueries: [...currentQueries, newQueryItem],
+        },
+      });
+    }
+
     const apiRes = await fetch(API_ENDPOINT, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
