@@ -2,8 +2,25 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { semanticSearchWithSnippets } from '@/lib/weaviate';
-export const runtime = 'nodejs';
-export const dynamic = 'force-dynamic';
+
+// --- Senin Link Üretim Fonksiyonların (Eksiksiz) ---
+function slugifyType(t = "") {
+  const map = { ç:"c", Ç:"C", ğ:"g", Ğ:"G", ı:"i", İ:"I", ö:"o", Ö:"O", ş:"s", Ş:"S", ü:"u", Ü:"U" };
+  return String(t || "").replace(/[·.]/g, " ").replace(/[çÇğĞıİöÖşŞüÜ]/g, (m) => map[m] || m)
+    .replace(/[^a-zA-Z0-9\s-]/g, " ").trim().replace(/\s+/g, "-").replace(/-+/g, "-") || "Mahkeme";
+}
+
+function codeToSegment(code = "") {
+  const s = String(code || "").replace(/\s+/g, " ").trim();
+  const m = s.match(/(\d{4})[\/\-]([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})[\/\-]([0-9A-Za-z\-()\/]+)\s*K/i);
+  if (!m) return s.replace(/[^0-9A-Za-z/_\-()]/g, "").replace(/\//g, "-") || "code";
+  return `${m[1]}-${m[2].replace(/\//g, "-")}E_${m[3]}-${m[4].replace(/\//g, "-")}K`;
+}
+
+function buildKararIdFromRecord(k) {
+  if (k?.type && k?.code) return `${slugifyType(k.type)}__${codeToSegment(k.code)}`;
+  return (k?.fileName || "").replace(/\.txt$/i, "") || "karar-detay";
+}
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -11,36 +28,38 @@ export async function GET(req) {
   if (!q) return NextResponse.json([]);
 
   try {
-    // Weaviate’den daha çok karar çek (örn. 60)
     const raw = await semanticSearchWithSnippets(q, 60);
 
-    // Dosya adlarını topla (Weaviate tarafında ‘fileName’ gönderiyorsun)
-    const names = [...new Set(raw.map(r => r.fileName).filter(Boolean))];
+    // 1. Prisma için arama çiftlerini (type + code) hazırla
+    const pairs = raw.filter(r => r.type && r.code).map(r => ({ type: r.type, code: r.code }));
 
-    // BenimDB’den topluca type/code al
-    const rows = await prisma.karar.findMany({
-      where: { fileName: { in: names } },
-      select: { fileName: true, type: true, code: true }
+    // 2. Prisma'da bu kararları topluca bul
+    const dbRows = await prisma.karar.findMany({
+      where: { OR: pairs },
+      select: { type: true, code: true, fileName: true, aiSummary: true }
     });
-    const map = new Map(rows.map(r => [r.fileName, r]));
 
-    // Zenginleştir + tekilleştir (aynı karar bir kere)
+    // 3. Hızlı eşleştirme Map'i oluştur
+    const dbMap = new Map(dbRows.map(r => [`${r.type}|${r.code}`, r]));
+
+    // 4. Verileri birleştir (Fallback mantığı ile)
     const enriched = raw.map(r => {
-      const m = map.get(r.fileName);
+      const dbMatch = dbMap.get(`${r.type}|${r.code}`);
+      
       return {
         ...r,
-        type: m?.type ?? r.type,   // DB > fallback
-        code: m?.code ?? r.code
+        // Prisma'da varsa oradakini, yoksa Weaviate'tekini kullan (Asla "Belirtilmemiş" yazmaz)
+        typeLabel: dbMatch?.type || r.type || "Yargıtay Kararı",
+        code: dbMatch?.code || r.code,
+        aiSummary: dbMatch?.aiSummary || null,
+        // Link üretimi
+        slug: buildKararIdFromRecord(dbMatch || r)
       };
     });
 
-    const uniqueByFile = Array.from(
-      new Map(enriched.map(r => [r.fileName || r.id, r])).values()
-    );
-
-    return NextResponse.json(uniqueByFile);
+    return NextResponse.json(enriched);
   } catch (e) {
-    console.error('API Semantik Arama Hatası:', e);
-    return NextResponse.json({ error: 'Semantik arama hatası.' }, { status: 500 });
+    console.error('API Hatası:', e);
+    return NextResponse.json({ error: 'Arama başarısız.' }, { status: 500 });
   }
 }
