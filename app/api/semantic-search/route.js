@@ -3,24 +3,7 @@ import { NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { semanticSearchWithSnippets } from '@/lib/weaviate';
 
-// --- Senin Link Üretim Fonksiyonların (Eksiksiz) ---
-function slugifyType(t = "") {
-  const map = { ç:"c", Ç:"C", ğ:"g", Ğ:"G", ı:"i", İ:"I", ö:"o", Ö:"O", ş:"s", Ş:"S", ü:"u", Ü:"U" };
-  return String(t || "").replace(/[·.]/g, " ").replace(/[çÇğĞıİöÖşŞüÜ]/g, (m) => map[m] || m)
-    .replace(/[^a-zA-Z0-9\s-]/g, " ").trim().replace(/\s+/g, "-").replace(/-+/g, "-") || "Mahkeme";
-}
-
-function codeToSegment(code = "") {
-  const s = String(code || "").replace(/\s+/g, " ").trim();
-  const m = s.match(/(\d{4})[\/\-]([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})[\/\-]([0-9A-Za-z\-()\/]+)\s*K/i);
-  if (!m) return s.replace(/[^0-9A-Za-z/_\-()]/g, "").replace(/\//g, "-") || "code";
-  return `${m[1]}-${m[2].replace(/\//g, "-")}E_${m[3]}-${m[4].replace(/\//g, "-")}K`;
-}
-
-function buildKararIdFromRecord(k) {
-  if (k?.type && k?.code) return `${slugifyType(k.type)}__${codeToSegment(k.code)}`;
-  return (k?.fileName || "").replace(/\.txt$/i, "") || "karar-detay";
-}
+// Slug ve ID fonksiyonlarını buraya ekle (buildKararIdFromRecord vb.)
 
 export async function GET(req) {
   const { searchParams } = new URL(req.url);
@@ -30,29 +13,36 @@ export async function GET(req) {
   try {
     const raw = await semanticSearchWithSnippets(q, 60);
 
-    // 1. Prisma için arama çiftlerini (type + code) hazırla
-    const pairs = raw.filter(r => r.type && r.code).map(r => ({ type: r.type, code: r.code }));
+    // 1. Prisma sorgu listesi (Hem fileName hem Type+Code çiftleri ile ara)
+    const fileNames = raw.map(r => r.fileName).filter(Boolean);
+    const typeCodePairs = raw.filter(r => r.type && r.code).map(r => ({ type: r.type, code: r.code }));
 
-    // 2. Prisma'da bu kararları topluca bul
+    // 2. Prisma lookup (Daha kapsamlı arama)
     const dbRows = await prisma.karar.findMany({
-      where: { OR: pairs },
+      where: {
+        OR: [
+          { fileName: { in: fileNames } },
+          { OR: typeCodePairs }
+        ]
+      },
       select: { type: true, code: true, fileName: true, aiSummary: true }
     });
 
-    // 3. Hızlı eşleştirme Map'i oluştur
-    const dbMap = new Map(dbRows.map(r => [`${r.type}|${r.code}`, r]));
+    // 3. Eşleştirme Map'leri (Hız için)
+    const nameMap = new Map(dbRows.map(r => [r.fileName, r]));
+    const pairMap = new Map(dbRows.map(r => [`${r.type}|${r.code}`, r]));
 
-    // 4. Verileri birleştir (Fallback mantığı ile)
+    // 4. Verileri Birleştir (Buradaki fallback hayat kurtarır)
     const enriched = raw.map(r => {
-      const dbMatch = dbMap.get(`${r.type}|${r.code}`);
+      // Önce fileName ile bulmaya çalış, olmazsa type+code ile dene
+      const dbMatch = nameMap.get(r.fileName) || pairMap.get(`${r.type}|${r.code}`);
       
       return {
         ...r,
-        // Prisma'da varsa oradakini, yoksa Weaviate'tekini kullan (Asla "Belirtilmemiş" yazmaz)
+        // ÖNCELİK: Prisma (DB), YOKSA: Weaviate (Python), O DA YOKSA: Fallback
         typeLabel: dbMatch?.type || r.type || "Yargıtay Kararı",
-        code: dbMatch?.code || r.code,
+        code: dbMatch?.code || r.code || "Karar No Belirtilmemiş",
         aiSummary: dbMatch?.aiSummary || null,
-        // Link üretimi
         slug: buildKararIdFromRecord(dbMatch || r)
       };
     });
