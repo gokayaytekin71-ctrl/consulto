@@ -149,7 +149,7 @@ export default async function Home() {
         </svg>
     </span>
     <span>
-        Consulto AI v2.1 yayında! <span className="font-extrabold">Daha Akıllı, Daha Bilgili!</span>
+        Hemen Giriş Yap! <span className="font-extrabold">2 Token ÜCRETSİZ Tanımlansın ve Anında Dene</span>
     </span>
 </p>
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -398,13 +398,13 @@ export default async function Home() {
     const taniticiGorseller = [
       {
         src: "/images/gorsel1.png",
-        title: "Analiz Pro İle Uyuşmazlıklarınıza Karşı Strateji Oluşturur",
-        description: "Yargıtay uygulamalarını gözeterek, olası riskleri ve potansiyel sonucu değerlendirir. Kullanıcıya en doğru yönlendirmeleri yaparak işlerini kolaylaştırmayı amaçlar.",
+        title: "Analiz Pro Uyuşmazlıklarınıza Karşı Strateji Oluşturur",
+        description: "Yargıtay uygulamalarını gözeterek, olası riskleri ve potansiyel sonuçları değerlendirir. Kullanıcıya en doğru yönlendirmeleri yaparak işlerini kolaylaştırmayı amaçlar. Ona soru sorun ve arkanıza yaslanın!",
       },
       {
         src: "/images/gorsel2.png",
         title: "Analiz Pro Karar Uydurmaz, Veritabanındaki Kararlara Atıflarda Bulunur ",
-        description: "Uyuşmazlıklarınıza ilişkin Yargıtay Kararlarını değerlendirir ve sizi yönlendirir. Bu kararları Emsal Kararlar başlığı altında sizinle paylaşır.",
+        description: "Uyuşmazlıklarınıza veya sorunuza ilişkin Yargıtay Kararlarını değerlendirir ve sizi yönlendirir. Bu kararları Emsal Kararlar başlığı altında sizinle paylaşır.",
       },
       {
         src: "/images/gorsel3.jpg",
