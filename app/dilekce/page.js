@@ -11,6 +11,7 @@ import { CASE_TYPES } from "./caseData";
 // --- Dilekçe Satır Satır Renderer ---
 const renderDilekce = (text) => {
   const lines = (text || "").split("\n");
+  let konuYakalandi = false;
 
   // Markdown temizleme: **bold**, _italic_ vb. işaretleri kaldır
   const stripMd = (s = "") => String(s)
@@ -76,10 +77,23 @@ const renderDilekce = (text) => {
     );
 
     if (labelMatch) {
+      const label = labelMatch[1].toUpperCase();
+
+      if (label === "KONU") {
+        if (konuYakalandi) {
+          return (
+            <p key={i} className="mb-2">
+              {plain}
+            </p>
+          );
+        }
+        konuYakalandi = true;
+      }
+
       return (
         <div key={i} className="grid grid-cols-[180px_1fr] gap-2 mb-1">
           <div className="font-bold">
-            {labelMatch[1].toUpperCase()}:
+            {label}:
           </div>
           <div>{labelMatch[2]}</div>
         </div>
