@@ -25,7 +25,7 @@ export default function MaintenancePage() {
 
         <p className="text-gray-300 leading-relaxed mb-6">
           Daha hızlı ve güvenli bir deneyim için kısa süreliğine bakım
-          çalışması yapıyoruz. 1 milyondan fazla yeni karar eklenecektir. En kısa sürede tekrar buradayız.
+          çalışması yapıyoruz. Artan kullanıcı sayımıza serverlarımız yetişemediği için yeni, daha güçlü, daha hızlı sunucuya taşınıyoruz!
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
