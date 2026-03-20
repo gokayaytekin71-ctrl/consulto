@@ -182,7 +182,7 @@ export default function PricingPage() {
             <span className={`text-5xl lg:text-6xl font-extrabold tracking-tight ${isFeatured ? 'text-transparent bg-clip-text bg-gradient-to-r from-white to-cyan-200' : 'text-white'}`}>
                 {p.price}
             </span>
-            <span className="text-lg text-slate-400 font-medium pb-1">/ tek seferlik</span>
+            <span className="text-lg text-slate-400 font-medium pb-1">/ Taksit İmkanı</span>
           </div>
           
           {/* Token Sayısı Göstergesi */}
