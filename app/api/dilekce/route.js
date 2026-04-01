@@ -6,7 +6,7 @@ import { consumeToken } from "@/lib/tokens"; // YENİ: Token mantığı
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const DILEKCE_API_URL = process.env.DILEKCE_API_URL || 'http://51.159.28.179:5003';
+const DILEKCE_API_URL = process.env.DILEKCE_API_URL || 'http://45.141.151.34:5003';
 
 function isJson(res) {
   const ct = res.headers.get('content-type') || '';

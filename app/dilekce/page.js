@@ -816,7 +816,7 @@ export default function DilekcePage() {
     if (!validateForm()) return;
     setLoading(true);
     setStep(2);
-    const API_BASE = process.env.NEXT_PUBLIC_DILEKCE_API_BASE || "http://51.159.28.179:5003";
+    const API_BASE = process.env.NEXT_PUBLIC_DILEKCE_API_BASE || "http://45.141.151.34:5003";
     try {
       const payload = {
         olay_ozet: olayOzet.trim(),
