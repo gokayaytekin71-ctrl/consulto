@@ -607,11 +607,17 @@ export default function DilekcePage() {
   const dilekcePreviewRef = useRef(null);
   const pollTimerRef = useRef(null);
 
-  const processedMd = useMemo(() => {
+const processedMd = useMemo(() => {
     if (!dilekceMd) return "";
-    // Numaralı başlıkları Markdown'da bold yap (örn: "1. Başlık" -> "**1. Başlık**")
-    // Bu sayede ReactMarkdown bunları otomatik olarak strong etiketi içine alır.
-    return dilekceMd.replace(/^(\d+|[IVX]+)\.\s+([A-ZÇĞİÖŞÜ0-9\s\-\(\)\"\']+)$/gm, "**$1. $2**");
+    
+    // 1. <br> veya <br/> etiketlerini gerçek satır atlamasına (\n) çevir
+    let cleaned = dilekceMd.replace(/<br\s*\/?>/gi, "\n");
+    
+    // 2. Kalan tüm gereksiz HTML etiketlerini (<b>, <center>, <i> vb.) yok et
+    cleaned = cleaned.replace(/<[^>]*>?/gm, "");
+    
+    // 3. Numaralı başlıkları Markdown'da bold yap (Mevcut kodun)
+    return cleaned.replace(/^(\d+|[IVX]+)\.\s+([A-ZÇĞİÖŞÜ0-9\s\-\(\)\"\']+)$/gm, "**$1. $2**");
   }, [dilekceMd]);
 
   const deliller = useMemo(() => delillerInput.split("\n").map((s) => s.trim()).filter(Boolean), [delillerInput]);
@@ -816,7 +822,6 @@ export default function DilekcePage() {
     if (!validateForm()) return;
     setLoading(true);
     setStep(2);
-    const API_BASE = process.env.NEXT_PUBLIC_DILEKCE_API_BASE || "http://45.141.151.34:5003";
     try {
       const payload = {
         olay_ozet: olayOzet.trim(),
@@ -829,81 +834,43 @@ export default function DilekcePage() {
         ...(deliller.length ? { eldeki_deliller: deliller } : {}),
         ...(caseType === "cevap" ? { gelen_dava_dilekcesi: (extraValues["gelen_dava_dilekcesi"] || "").trim() } : {}),
       };
-      let data;
-      let res;
-      try {
-        res = await fetch("/api/dilekce", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), });
-        data = await res.json().catch(() => undefined);
-      } catch (_) { data = undefined; }
-      if (res && res.status === 402) {
-        setLoading(false); setStep(1);
-        if (confirm("Yetersiz Bakiye! Dilekçe oluşturmak için token satın almak ister misiniz?")) { window.location.href = "/paketler-ucretler"; } else { setError("Yetersiz bakiye. İşlem gerçekleştirilemedi."); }
-        return;
-      }
-      if (res && !res.ok) {
-        if (res.status === 402 && data?.error === "QUOTA_EXCEEDED") {
-          setLoading(false); setStep(1);
-          setError(data?.message || `Haftalık dilekçe kotanız dolmuştur. Plan: ${data?.plan ?? "-"}, limit: ${data?.limit ?? "-"}, kalan: ${data?.remaining ?? 0}.`);
+      const res = await fetch("/api/dilekce", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => undefined);
+
+      if (!res.ok) {
+        if (res.status === 402) {
+          setLoading(false);
+          setStep(1);
+          if (confirm("Yetersiz Bakiye! Dilekçe oluşturmak için token satın almak ister misiniz?")) {
+            window.location.href = "/paketler-ucretler";
+          } else {
+            setError("Yetersiz bakiye. İşlem gerçekleştirilemedi.");
+          }
           return;
         }
-        if (res.status === 401) { setLoading(false); setStep(1); setError("Lütfen giriş yapın. Dilekçe oluşturmak için oturum gereklidir."); return; }
+        setLoading(false);
+        setStep(1);
+        setError(data?.message || "Sunucu tarafında bir hata oluştu.");
+        return;
       }
-      if (res?.ok && data && (data?.dilekce || data?.taslak_md || data?.durum === "completed")) {
-        const finalObj = data?.dilekce ? data : { dilekce: { dilekce_md: data?.taslak_md || "" }, kaynaklar: data?.kaynaklar, girdi_ozeti: data?.girdi_ozeti };
+
+      if (data && (data.dilekce || data.taslak_md)) {
+        const finalObj = data.dilekce
+          ? data
+          : {
+              dilekce: { dilekce_md: data.taslak_md || "" },
+              kaynaklar: data.kaynaklar,
+              girdi_ozeti: data.girdi_ozeti,
+            };
         await finalizeResult(finalObj);
-        return;
+      } else {
+        throw new Error("Sunucudan beklenen dilekçe formatı alınamadı.");
       }
-      if (res?.ok && data?.id) {
-        const id = data.id;
-        const startTs = Date.now();
-        const timeoutMs = 180_000;
-        const pollOnce = async () => {
-          let j;
-          try { const r = await fetch(`/api/dilekce?id=${encodeURIComponent(id)}`, { cache: "no-store" }); j = await r.json().catch(() => undefined); } catch (_) { j = undefined; }
-          if (!j) { const dr = await fetch(`${API_BASE}/dilekce/durum/${encodeURIComponent(id)}`, { cache: "no-store" }); j = await dr.json().catch(() => undefined); }
-          if (j?.durum === "completed") { await finalizeResult(j); return true; }
-          if (j?.durum === "failed") { throw new Error(j?.hata || "Dilekçe hazırlama başarısız."); }
-          return false;
-        };
-        let done = await pollOnce();
-        while (!done) {
-          if (Date.now() - startTs > timeoutMs) { throw new Error("İşlem zaman aşımına uğradı. Lütfen tekrar deneyin."); }
-          await new Promise((r) => setTimeout(r, 1500));
-          done = await pollOnce();
-        }
-        return;
-      }
-      const directRes = await fetch(`${API_BASE}/dilekce/olustur`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload), });
-      const directJson = await directRes.json().catch(() => undefined);
-      if (!directRes.ok) {
-        if (directRes.status === 402 && directJson?.error === "QUOTA_EXCEEDED") { setLoading(false); setStep(1); setError(directJson?.message || `Haftalık dilekçe kotanız dolmuştur.`); return; }
-        if (directRes.status === 401) { setLoading(false); setStep(1); setError("Lütfen giriş yapın."); return; }
-      }
-      if (directJson?.dilekce || directJson?.taslak_md || directJson?.durum === "completed") {
-        const finalObj = directJson?.dilekce ? directJson : { dilekce: { dilekce_md: directJson?.taslak_md || "" }, kaynaklar: directJson?.kaynaklar, girdi_ozeti: directJson?.girdi_ozeti };
-        await finalizeResult(finalObj);
-        return;
-      }
-      if (directJson?.id) {
-        const id = directJson.id;
-        const startTs = Date.now();
-        const timeoutMs = 60_000;
-        const pollOnce = async () => {
-          let j;
-          try { const dr = await fetch(`${API_BASE}/dilekce/durum/${encodeURIComponent(id)}`, { cache: "no-store" }); j = await dr.json().catch(() => undefined); } catch (_) { j = undefined; }
-          if (j?.durum === "completed") { await finalizeResult(j); return true; }
-          if (j?.durum === "failed") { throw new Error(j?.hata || "Dilekçe hazırlama başarısız."); }
-          return false;
-        };
-        let done = await pollOnce();
-        while (!done) {
-          if (Date.now() - startTs > timeoutMs) { throw new Error("İşlem zaman aşımına uğradı."); }
-          await new Promise((r) => setTimeout(r, 1500));
-          done = await pollOnce();
-        }
-        return;
-      }
-      throw new Error("Sunucudan beklenen veri alınamadı.");
     } catch (err) {
       console.error(err);
       setError("Bilinmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.");

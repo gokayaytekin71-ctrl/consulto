@@ -29,6 +29,26 @@ function mergeKaynaklarAndDayanaklar(kaynaklar, dayanaklarArr) {
   return { dayanaklar: dayanaklarArr };
 }
 
+function normalizeNullableString(v) {
+  if (typeof v !== "string") return null;
+  const s = v.trim();
+  return s ? s : null;
+}
+
+function normalizeJsonValue(v) {
+  if (v == null) return null;
+  if (
+    typeof v === "string" ||
+    typeof v === "number" ||
+    typeof v === "boolean" ||
+    Array.isArray(v) ||
+    (typeof v === "object" && v.constructor === Object)
+  ) {
+    return v;
+  }
+  return null;
+}
+
 // ---------- GET ----------
 export async function GET(req) {
   try {
@@ -45,7 +65,18 @@ export async function GET(req) {
       );
     }
 
-    const userId = session.user.id;
+    const userId = session?.user?.id;
+    if (!userId) {
+      return NextResponse.json(
+        {
+          error: "UNAUTHORIZED_DRAFTS",
+          message: "Oturum bilgisi eksik. Lütfen yeniden giriş yapın.",
+          requireLogin: true,
+          type: "drafts",
+        },
+        { status: 401 }
+      );
+    }
 
     const { searchParams } = new URL(req.url);
     const limit = Number(searchParams.get("limit") || 6);
@@ -88,7 +119,18 @@ export async function POST(req) {
       );
     }
 
-    const userId = session.user.id;
+    const userId = session?.user?.id;
+    if (!userId) {
+      return NextResponse.json(
+        {
+          error: "UNAUTHORIZED_DRAFTS",
+          message: "Oturum bilgisi eksik. Lütfen yeniden giriş yapın.",
+          requireLogin: true,
+          type: "drafts",
+        },
+        { status: 401 }
+      );
+    }
 
     const body = await req.json();
     const {
@@ -112,20 +154,20 @@ export async function POST(req) {
       dayanaklar ?? dilekce?.dayanaklar ?? dilekce_json?.dayanaklar
     );
 
-    const kaynaklarToSave = mergeKaynaklarAndDayanaklar(kaynaklar ?? null, dayArr);
+    const kaynaklarToSave = normalizeJsonValue(mergeKaynaklarAndDayanaklar(normalizeJsonValue(kaynaklar), dayArr));
 
     // ŞEMADA OLAN alanlarla kaydı oluştur
     const created = await prisma.draft.create({
       data: {
         userId,
-        dava_turu: dava_turu || null,
-        olay_ozet: olay_ozet || null,
-        talep: talep || null,
+        dava_turu: normalizeNullableString(dava_turu),
+        olay_ozet: normalizeNullableString(olay_ozet),
+        talep: normalizeNullableString(talep),
         dilekce_md: dilekce_md.trim(),
-        kaynaklar: kaynaklarToSave ?? null,
-        girdi_ozeti: girdi_ozeti ?? null,
-        dilekce_json: (dilekce_json ?? dilekce ?? null),
-        dayanaklar:   dayArr.length ? dayArr : null,
+        kaynaklar: kaynaklarToSave,
+        girdi_ozeti: normalizeNullableString(girdi_ozeti),
+        dilekce_json: normalizeJsonValue(dilekce_json ?? dilekce ?? null),
+        dayanaklar: dayArr.length ? dayArr : null,
       },
     });
 
