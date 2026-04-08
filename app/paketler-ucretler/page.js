@@ -173,7 +173,7 @@ export default function PricingPage() {
           <div className={`inline-flex items-center rounded-lg text-xs font-bold text-white px-3 py-1.5 mb-4 shadow-md
             ${isFeatured ? "bg-gradient-to-r from-pink-600 to-purple-600 shadow-pink-900/30" : "bg-slate-700/80"}
           `}>
-            <span className="mr-1.5 animate-pulse">✨</span> Özel Mart İndirimleri!
+            <span className="mr-1.5 animate-pulse">✨</span> Sınırlı Süre İçin Özel İndirim!
           </div>
 
           <h3 className={`text-2xl font-bold mb-4 ${isFeatured ? 'text-white' : 'text-slate-100'}`}>{p.name}</h3>
