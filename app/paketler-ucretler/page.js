@@ -54,7 +54,7 @@ const PACKAGES = [
   {
     id: 4,
     name: "Sınırsız Paket – 3 Aylık",
-    price: "₺3.600",
+    price: "₺1.500",
     tokenCount: "Sınırsız Kullanım",
     badge: "Yeni",
     summary: "3 ay boyunca dilekçe, analiz ve arama işlemlerinde limitsiz erişim.",
@@ -69,9 +69,9 @@ const PACKAGES = [
   {
     id: 5,
     name: "Sınırsız Paket – 6 Aylık",
-    price: "₺6.000",
+    price: "₺2.500",
     tokenCount: "Sınırsız Kullanım",
-    badge: "Avantajlı",
+    badge: "%70 indirim",
     summary: "6 ay boyunca tüm özelliklerde kesintisiz ve sınırsız kullanım.",
     features: [
       "6 Ay Sınırsız Dilekçe",
@@ -84,7 +84,7 @@ const PACKAGES = [
   {
     id: 6,
     name: "Sınırsız Paket – 1 Yıllık",
-    price: "₺9.500",
+    price: "₺4.000",
     tokenCount: "Sınırsız Kullanım",
     badge: "En Kârlı",
     summary: "1 yıl boyunca Consülto’nun tüm gücü, tek paketle tamamen sizin.",
