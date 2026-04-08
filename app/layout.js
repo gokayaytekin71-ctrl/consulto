@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-// YENİ EKLENEN: Tema Sağlayıcısı
 import { ThemeProvider } from "./context/ThemeContext";
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -24,35 +23,35 @@ const ebGaramond = EB_Garamond({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://consultohukuk.com'),
+  metadataBase: new URL("https://consultohukuk.com"),
   title: {
-    default: 'Consülto Yapay Zeka Hukuk Asistanı',
-    template: '%s | CONSÜLTO Hukuk',
+    default: "Consülto Yapay Zeka Hukuk Asistanı",
+    template: "%s | CONSÜLTO Hukuk",
   },
-  description: 'Consülto – Yapay Zeka Destekli Hukuk Asistanı…',
+  description: "Consülto – Yapay Zeka Destekli Hukuk Asistanı…",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="tr" className={`${cormorantGaramond.variable} ${ebGaramond.variable}`}>
+    <html
+      lang="tr"
+      className={`${cormorantGaramond.variable} ${ebGaramond.variable}`}
+    >
       <body className="min-h-screen flex flex-col">
-        {/* Google Ads Etiketi */}
         <Script
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17782177556"
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18028288601"
         />
         <Script id="google-ads-tag" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
+            window.gtag = gtag;
             gtag('js', new Date());
-            gtag('config', 'AW-17782177556');
+            gtag('config', 'AW-18028288601');
           `}
         </Script>
 
-        {/* ThemeProvider: Tüm uygulamayı sarmalar. 
-            Böylece Header, Footer ve tüm sayfalar (children) tema verisine erişebilir.
-        */}
         <ThemeProvider>
           <AuthProvider>
             <Header />
@@ -60,7 +59,7 @@ export default function RootLayout({ children }) {
             <Footer />
           </AuthProvider>
         </ThemeProvider>
-        
+
         <Analytics />
         <SpeedInsights />
       </body>

@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+
 
 // Backend'deki ID ve Fiyatlarla eşleşmeli (Veri yapısı korundu)
 const PACKAGES = [
@@ -102,6 +104,14 @@ export default function PricingPage() {
   const { data: session } = useSession();
   const router = useRouter();
   const [loadingId, setLoadingId] = useState(null);
+  useEffect(() => {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "conversion", {
+      send_to: "AW-18028288601/mny3CK7Jr5gcENm0x5RD",
+      transaction_id: "",
+    });
+  }
+}, []);
 
   // --- Mantık Aynen Korundu ---
   const handleBuy = async (pkg) => {
