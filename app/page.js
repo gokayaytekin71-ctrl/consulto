@@ -119,7 +119,7 @@ export default async function Home() {
                               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                               <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                             </span>
-                            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase"> İster Kullandığın Kadar Öde, İster Sınırsız Eriş!</span>
+                            <span className="text-xs font-bold tracking-wide text-slate-600 uppercase"> Sınırsız Paketlerimizde %70 indirim! 6 aylık paket sadece 2.500 TL!</span>
                         </div>
 
                         <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-slate-900 leading-[1.1] mb-6">
