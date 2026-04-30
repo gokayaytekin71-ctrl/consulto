@@ -4,42 +4,71 @@ import { useState, useEffect, useTransition } from "react";
 import { useSession, signIn } from "next-auth/react";
 import { StarIcon as SolidStarIcon } from "@heroicons/react/24/solid";
 import { StarIcon as OutlineStarIcon } from "@heroicons/react/24/outline";
-import { ArrowPathIcon } from "@heroicons/react/24/outline"; // Yükleme ikonu için outline daha uygun olabilir
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export default function FavoriteButton({
   itemId,                   // Karar ID'si veya Mevzuat Key'i
   itemType,                 // "karar" veya "mevzuat"
-  initialIsFavorited,       // Sayfa yüklenirkenki favori durumu
-  mevzuatMaddeNo = null,    // Sadece itemType="mevzuat" ise kullanılır
-  className = "p-1.5 rounded-full text-yellow-500 hover:bg-yellow-500/10 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2", // Dışarıdan stil alabilmesi için
-  iconSize = "h-6 w-6",      // İkon boyutunu prop olarak alalım
-  onSuccess                  // onSuccess callback prop
+  // initialIsFavorited prop'unu kaldırdık çünkü artık statik sayfadan gelmeyecek
+  mevzuatMaddeNo = null,    
+  className = "p-1.5 rounded-full text-yellow-500 hover:bg-yellow-500/10 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-offset-2",
+  iconSize = "h-6 w-6",      
+  onSuccess                  
 }) {
   const { data: session, status } = useSession();
-  const [isFavorited, setIsFavorited] = useState(initialIsFavorited);
-  const [isPending, startTransition] = useTransition(); // İsteğe bağlı: Optimistic update için
+  const [isFavorited, setIsFavorited] = useState(false); // Varsayılan olarak false
+  const [isLoadingInitialState, setIsLoadingInitialState] = useState(false); // İlk yükleme state'i
+  const [isPending, startTransition] = useTransition(); 
   const [error, setError] = useState(null);
 
-  // initialIsFavorited prop'u değiştiğinde state'i güncelle
+  // Component yüklendiğinde ve kullanıcı giriş yapmışsa favori durumunu kontrol et
   useEffect(() => {
-    setIsFavorited(initialIsFavorited);
-  }, [initialIsFavorited]);
+    async function checkFavoriteStatus() {
+      if (status !== "authenticated" || !itemId) return;
+
+      setIsLoadingInitialState(true);
+      try {
+        // Not: Mevcut bir endpoint'in varsa onu kullanmalısın. 
+        // Yoksa basit bir GET endpoint'i yazman gerekecek (Aşağıda detayını vereceğim).
+        let checkUrl = "";
+        if (itemType === "karar") {
+            checkUrl = `/api/favorites/check?type=karar&id=${itemId}`;
+        } else if (itemType === "mevzuat") {
+            checkUrl = `/api/favorites/check?type=mevzuat&id=${itemId}&madde=${mevzuatMaddeNo || ""}`;
+        } else if (itemType === "makale") {
+            checkUrl = `/api/favorites/check?type=makale&id=${itemId}`;
+        }
+
+        const res = await fetch(checkUrl);
+        if (res.ok) {
+          const data = await res.json();
+          // API'nin favori durumunu nasıl döndürdüğüne göre burayı uyarla
+          setIsFavorited(!!data.isFavorited); 
+        }
+      } catch (err) {
+        console.error("Favori durumu kontrol edilemedi:", err);
+      } finally {
+        setIsLoadingInitialState(false);
+      }
+    }
+
+    checkFavoriteStatus();
+  }, [itemId, itemType, mevzuatMaddeNo, status]);
+
 
   const handleToggleFavorite = async () => {
     if (status === "unauthenticated") {
-      // Kullanıcı giriş yapmamışsa, giriş yapmaya yönlendir (opsiyonel)
-      signIn("google"); // Veya genel signIn()
+      signIn("google"); 
       return;
     }
 
-    if (status === "loading" || isPending) {
-      return; // Eğer oturum yükleniyorsa veya zaten bir işlem varsa bir şey yapma
+    if (status === "loading" || isPending || isLoadingInitialState) {
+      return; 
     }
 
     const optimisticNewState = !isFavorited;
     
     startTransition(async () => {
-      // Önce UI'ı anında güncelle (Optimistic Update)
       setIsFavorited(optimisticNewState);
       setError(null);
 
@@ -70,7 +99,6 @@ export default function FavoriteButton({
           throw new Error(data.error || "Bir hata oluştu.");
         }
 
-        // API returns { added: true } or { removed: true }
         const newFavoritedState = data.hasOwnProperty("isFavorited")
           ? data.isFavorited
           : data.added
@@ -78,7 +106,9 @@ export default function FavoriteButton({
           : data.removed
           ? false
           : optimisticNewState;
+          
         setIsFavorited(newFavoritedState);
+        
         if (typeof onSuccess === "function") {
           onSuccess({ isFavorited: newFavoritedState });
         }
@@ -86,47 +116,42 @@ export default function FavoriteButton({
       } catch (err) {
         console.error("Favori toggle API hatası:", err);
         setError(err.message);
-        // Hata durumunda UI'ı eski haline geri döndür
         setIsFavorited(!optimisticNewState);
       }
     });
   };
 
-  // Oturum yükleniyorsa veya kullanıcı giriş yapmamışsa (veya belirli bir durumda gizlemek istiyorsak)
-  // null döndürmek yerine, butonu pasif (disabled) gösterebilir veya bir placeholder gösterebiliriz.
-  // Senin kodundaki gibi null döndürmek de bir tercih. Şimdilik pasif yapalım.
-  // if (status !== "authenticated") {
-  //   return (
-  //     <button className={`${className} cursor-not-allowed opacity-50`} title="Favorilere eklemek için giriş yapın" disabled>
-  //       <OutlineHeartIcon className={iconSize} />
-  //     </button>
-  //   );
-  // }
-  // Senin kodundaki gibi null dönelim şimdilik, bu sayede buton hiç görünmez.
-  if (status !== "authenticated" && !initialIsFavorited) return null; 
-  // Eğer favorilerdeyse ve kullanıcı çıkış yapmışsa bile butonu gösterelim (kaldırabilsin diye değil, sadece UI tutarlılığı için veya login'e yönlendirmek için)
-  // Bu kısım UX tercihine göre değişebilir. En basit hali:
-  if (status === "loading") {
-      return <div className={`${iconSize} ${className} bg-gray-200 rounded-full animate-pulse`} />;
-  }
+  // Kullanıcı giriş yapmamışsa buton hiç görünmesin
+  if (status !== "authenticated") return null; 
 
+  // İlk durum API'den çekilirken veya genel oturum yüklenirken bir "Skeleton/Loading" durumu göster
+  if (status === "loading" || isLoadingInitialState) {
+      return (
+        <div className={`flex items-center justify-center ${className}`} title="Favori durumu kontrol ediliyor...">
+             <ArrowPathIcon className={`${iconSize} text-gray-500 animate-spin opacity-50`} />
+        </div>
+      );
+  }
 
   const IconToRender = isFavorited ? SolidStarIcon : OutlineStarIcon;
 
   return (
-    <button
-      onClick={handleToggleFavorite}
-      disabled={isPending || status !== "authenticated"}
-      className={`${className} disabled:opacity-60 disabled:cursor-not-allowed`}
-      title={isFavorited ? "Favorilerden Kaldır" : "Favorilere Ekle"}
-      aria-pressed={isFavorited}
-    >
-      {isPending ? (
-        <ArrowPathIcon className={`${iconSize} animate-spin`} />
-      ) : (
-        <IconToRender className={iconSize} />
-      )}
-      {error && <p className="text-xs text-red-500 mt-1 absolute -bottom-4 whitespace-nowrap">{error}</p>}
-    </button>
+    <div className="relative inline-flex flex-col items-center">
+      <button
+        onClick={handleToggleFavorite}
+        disabled={isPending || status !== "authenticated"}
+        className={`${className} disabled:opacity-60 disabled:cursor-not-allowed`}
+        title={isFavorited ? "Favorilerden Kaldır" : "Favorilere Ekle"}
+        aria-pressed={isFavorited}
+      >
+        {isPending ? (
+          <ArrowPathIcon className={`${iconSize} animate-spin`} />
+        ) : (
+          <IconToRender className={iconSize} />
+        )}
+      </button>
+      {/* Hata mesajı kapsayıcının dışına taşmasın diye ufak bir düzenleme */}
+      {error && <p className="text-[10px] text-red-500 mt-1 absolute top-full whitespace-nowrap">{error}</p>}
+    </div>
   );
 }

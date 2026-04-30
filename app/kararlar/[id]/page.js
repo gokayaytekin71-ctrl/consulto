@@ -339,14 +339,6 @@ export default async function KararDetayPage({ params }) {
     const canonicalId = buildKararIdFromRecord(karar);
     if (canonicalId && canonicalId !== kararSlug) redirect(`/kararlar/${canonicalId}`);
   }
-
-  const session = await getServerSession(authOptions);
-  let isInitiallyFavorited = false;
-  if (session?.user?.id) {
-    const favorite = await prisma.favoriteKarar.findUnique({ where: { userId_kararId: { userId: session.user.id, kararId: karar.id } } });
-    isInitiallyFavorited = !!favorite;
-  }
-
   const type = karar.type || 'Başlık Yok';
   const code = karar.code || 'Dosya No Yok';
   const aiSummary = karar.aiSummary || 'Analiz verisi bulunamadı.';
@@ -389,7 +381,7 @@ export default async function KararDetayPage({ params }) {
                         </h2>
                      </div>
                      <div className="scale-90 origin-top-right">
-                        <FavoriteButton itemId={karar.id} itemType="karar" initialIsFavorited={isInitiallyFavorited} />
+                        <FavoriteButton itemId={karar.id} itemType="karar" />
                      </div>
                 </div>
 
