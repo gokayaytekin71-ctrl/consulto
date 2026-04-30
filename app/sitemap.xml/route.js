@@ -1,4 +1,3 @@
-// app/sitemap.xml/route.js
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma"; // 👈 default import
 
@@ -21,16 +20,18 @@ export async function GET() {
     // noop: boş index de Google için geçerlidir, alt haritalar sonra eklenebilir
   }
 
-  const lastmod = new Date().toISOString();
+  // lastmod değişkenini buradan tamamen sildik
+
   const items = [
     `${BASE_URL}/sitemaps/static`,
     `${BASE_URL}/sitemaps/araclar`,
     ...Array.from({ length: pageCount }, (_, i) => `${BASE_URL}/sitemaps/kararlar/${i + 1}`),
   ];
 
+  // Aşağıdaki XML çıktısının içinden <lastmod> etiketlerini sildik
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${items.map((url) => `  <sitemap><loc>${url}</loc><lastmod>${lastmod}</lastmod></sitemap>`).join("\n")}
+${items.map((url) => `  <sitemap><loc>${url}</loc></sitemap>`).join("\n")}
 </sitemapindex>`;
 
   return xmlResponse(xml);

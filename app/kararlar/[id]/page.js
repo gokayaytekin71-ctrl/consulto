@@ -16,8 +16,9 @@ const DownloadPDFButton = dynamicImport(
 );
 
 // --- CONFIG ---
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+// --- CONFIG ---
+// Kararların 30 gün boyunca (2592000 saniye) statik olarak önbellekte kalmasını sağlar
+export const revalidate = 2592000;
 
 // --- GLOBAL CSS (DARK TECH - FINAL REVISION) ---
 const GLOBAL_CSS = `
