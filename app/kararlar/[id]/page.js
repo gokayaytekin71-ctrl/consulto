@@ -218,19 +218,14 @@ const GLOBAL_CSS = `
 
 // --- HELPER FUNCTIONS ---
 function slugifyType(t = "") {
+  // Haritayı tamamen küçük harf çıktı verecek şekilde güncelledik
   const map = {
-    ç: "c",
-    Ç: "C",
-    ğ: "g",
-    Ğ: "G",
-    ı: "i",
-    İ: "I",
-    ö: "o",
-    Ö: "O",
-    ş: "s",
-    Ş: "S",
-    ü: "u",
-    Ü: "U",
+    ç: "c", Ç: "c",
+    ğ: "g", Ğ: "g",
+    ı: "i", İ: "i",
+    ö: "o", Ö: "o",
+    ş: "s", Ş: "s",
+    ü: "u", Ü: "u",
   };
 
   return String(t || "")
@@ -239,7 +234,8 @@ function slugifyType(t = "") {
     .replace(/[^a-zA-Z0-9\s-]/g, " ")
     .trim()
     .replace(/\s+/g, "-")
-    .replace(/-+/g, "-") || "Mahkeme";
+    .replace(/-+/g, "-")
+    .toLowerCase() || "mahkeme"; // <-- URL'yi standart küçük harfe zorluyoruz
 }
 
 function codeToSegment(code = "") {
@@ -289,12 +285,16 @@ export async function generateStaticParams() { return []; }
 // --- UI HELPERS ---
 const renderAiSummary = (txt) => {
   const lines = (txt || "").split(/\r?\n/).filter(line => line.trim() !== '');
+  
   return lines.map((line, i) => {
-    const lower = line.toLowerCase();
+    // Markdown yıldızlarını temizle ve boşlukları al
+    const cleanLine = line.replace(/\*\*/g, '').trim();
+    const lower = cleanLine.toLowerCase();
+    
     if (lower.startsWith("gerekçe ve sonuç") || lower.startsWith("uyuşmazlık") || lower.startsWith("konu")) {
-        const parts = line.split(':');
+        const parts = cleanLine.split(':');
         const title = parts[0] + (parts.length > 1 ? ':' : '');
-        const content = parts.length > 1 ? parts.slice(1).join(':') : '';
+        const content = parts.length > 1 ? parts.slice(1).join(':').trim() : '';
         
         return (
             <div key={i} className="mb-4">
@@ -303,9 +303,10 @@ const renderAiSummary = (txt) => {
             </div>
         );
     }
+    
     return (
         <div key={i} className="mb-3 pl-2 border-l border-[#334155]">
-            <p className="ai-text">{line}</p>
+            <p className="ai-text">{cleanLine}</p>
         </div>
     );
   });
