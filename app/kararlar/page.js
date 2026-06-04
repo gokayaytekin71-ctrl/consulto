@@ -5,9 +5,239 @@ import { getKararlarFromDB } from "@/lib/data";
 import BasicFilter from "@/components/BasicFilter";
 import SectionRow from "@/components/SectionRow";
 import SearchResults from "@/components/SearchResults";
-import MobileFilterDrawer from "@/components/MobileFilterDrawer"; // YENİ EKLENDİ
+import MobileFilterDrawer from "@/components/MobileFilterDrawer";
 
-// ... (Helper fonksiyonlar aynı kalacak: orderBySlugList, parseEsasText vb.)
+/* ============================================================
+   GLOBAL CSS — "Editorial Law Review" (liste sayfası)
+   Detay sayfasıyla (kararlar/[id]) birebir görsel dil:
+   sıcak kağıt zemin · lacivert + amber · serif tipografi · grain
+   ============================================================ */
+const GLOBAL_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --paper:        #f6f3ec;
+    --paper-2:      #efebe1;
+    --surface:      #ffffff;
+    --ink:          #1a1f2b;
+    --ink-soft:     #4a5160;
+    --ink-faint:    #8a8f9c;
+    --navy:         #0f2a4a;
+    --navy-2:       #163a63;
+    --amber:        #b8860b;
+    --amber-soft:   #c79a2e;
+    --line:         #e3ddd0;
+    --line-strong:  #d3ccba;
+  }
+
+  .law-root {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    background-image:
+      radial-gradient(900px 500px at 100% -5%, rgba(15,42,74,0.05), transparent 60%),
+      radial-gradient(700px 400px at -10% 110%, rgba(184,134,11,0.06), transparent 60%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  /* grain dokusu */
+  .law-root::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+  .law-root > * { position: relative; z-index: 1; }
+
+  /* ---------------- HEADER ---------------- */
+  .law-header {
+    position: sticky; top: 0; z-index: 40;
+    width: 100%;
+    border-bottom: 1px solid var(--line);
+    background: rgba(246,243,236,0.82);
+    backdrop-filter: blur(14px);
+  }
+  .law-header-inner {
+    max-width: 1240px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 28px;
+  }
+  .brand { display: flex; align-items: center; gap: 13px; text-decoration: none; }
+  .brand-mark {
+    width: 42px; height: 42px; border-radius: 12px;
+    background: var(--navy); color: #f3d27a;
+    display: grid; place-items: center; flex-shrink: 0;
+    box-shadow: 0 5px 16px -5px rgba(15,42,74,0.45);
+  }
+  .brand-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em;
+    color: var(--navy); line-height: 1; display: block;
+  }
+  .brand-sub {
+    font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.22em;
+    color: var(--ink-faint); margin-top: 6px; display: block;
+  }
+  .db-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    padding: 7px 14px; border-radius: 999px;
+  }
+  .db-pill .dot { width: 7px; height: 7px; border-radius: 50%; background: #2f9e6b; box-shadow: 0 0 0 3px rgba(47,158,107,0.15); }
+
+  /* ---------------- LAYOUT ---------------- */
+  .law-wrap {
+    max-width: 1240px; margin: 0 auto;
+    padding: 44px 28px 120px;
+  }
+  .law-grid {
+    display: grid;
+    grid-template-columns: 296px 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* ---------------- SIDEBAR / PANEL ---------------- */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .panel-head {
+    display: flex; align-items: center; gap: 11px;
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .panel-head .ic {
+    display: grid; place-items: center;
+    width: 30px; height: 30px; border-radius: 9px;
+    background: rgba(184,134,11,0.08); color: var(--amber);
+    flex-shrink: 0;
+  }
+  .panel-title {
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--navy);
+  }
+  .sidebar-sticky { position: sticky; top: 96px; max-height: calc(100vh - 7rem); overflow-y: auto; overscroll-behavior: contain; padding-right: 2px; }
+
+  /* ---------------- HERO SEARCH ---------------- */
+  .hero { margin-bottom: 40px; }
+  .hero-kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.24em;
+    color: var(--amber); margin-bottom: 12px;
+  }
+  .hero-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(1.7rem, 3.2vw, 2.5rem);
+    line-height: 1.12; letter-spacing: -0.018em;
+    color: var(--navy); max-width: 16ch;
+    margin-bottom: 24px;
+  }
+  .hero-form { position: relative; }
+  .hero-form .ic-search {
+    position: absolute; inset-block: 0; left: 0; display: flex; align-items: center;
+    padding-left: 18px; color: var(--ink-faint); pointer-events: none;
+  }
+  .hero-input {
+    height: 60px; width: 100%;
+    border-radius: 4px;
+    border: 1px solid var(--line-strong);
+    background: var(--surface);
+    padding: 0 124px 0 50px;
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.08rem; color: var(--ink);
+    box-shadow: 0 1px 0 var(--line), 0 24px 48px -38px rgba(26,31,43,0.4);
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+  .hero-input::placeholder { color: var(--ink-faint); }
+  .hero-input:focus {
+    outline: none; border-color: var(--navy);
+    box-shadow: 0 1px 0 var(--line), 0 0 0 3px rgba(15,42,74,0.1);
+  }
+  .hero-submit {
+    position: absolute; top: 8px; bottom: 8px; right: 8px;
+    border: none; cursor: pointer;
+    border-radius: 3px;
+    background: var(--navy); color: #fff;
+    padding: 0 26px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
+    transition: background .18s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+  }
+  .hero-submit:hover { background: var(--navy-2); }
+
+  .hero-spinner {
+    width: 15px;
+    height: 15px;
+    border-radius: 999px;
+    border: 2px solid rgba(255,255,255,0.38);
+    border-top-color: #fff;
+    display: none;
+    animation: heroSpin .75s linear infinite;
+  }
+  .hero-form.is-loading .hero-spinner { display: inline-block; }
+  .hero-form.is-loading .hero-submit {
+    cursor: wait;
+    opacity: 0.94;
+    pointer-events: none;
+  }
+  @keyframes heroSpin { to { transform: rotate(360deg); } }
+
+  /* hızlı atlama çipleri */
+  .jump { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+  .jump a {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.74rem; font-weight: 500; color: var(--ink-soft);
+    text-decoration: none;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    padding: 7px 14px; border-radius: 999px;
+    transition: all .16s ease;
+  }
+  .jump a:hover { color: var(--navy); border-color: var(--navy); transform: translateY(-1px); }
+  .jump .d { width: 6px; height: 6px; border-radius: 50%; }
+
+  /* ---------------- SECTION DIVIDER ---------------- */
+  .results-head {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 22px;
+  }
+  .results-head .lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.66rem; font-weight: 500; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--amber);
+  }
+  .results-head .rule { height: 1px; flex: 1; background: var(--line-strong); }
+
+  .stack { display: flex; flex-direction: column; gap: 40px; }
+
+  @keyframes lawIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .anim-in { animation: lawIn .5s ease both; }
+
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width: 980px) {
+    .law-grid { grid-template-columns: 1fr; gap: 28px; }
+    .law-wrap { padding: 28px 16px 90px; }
+    .law-header-inner { padding: 14px 16px; }
+    .sidebar-sticky { position: relative; top: 0; max-height: none; }
+    .law-sidebar { display: none; }
+  }
+`;
+
+/* ----------------------------- Yardımcılar ----------------------------- */
 function orderBySlugList(rows, slugs) {
   const map = new Map(rows.map((r) => [r.fileName?.replace(/\.txt$/, ""), r]));
   return slugs.map((s) => map.get(s)).filter(Boolean);
@@ -29,6 +259,7 @@ function buildIbkPdfPath(karar_code = "", birlesme_no = "") {
   return `/ibk/${file}`;
 }
 
+/* ------------------------------- Veri ---------------------------------- */
 async function getFeaturedDecisions() {
   const featuredSlugs = [
     "Hukuk_Genel_Kurulu_2020-603E_2024-224K",
@@ -39,7 +270,7 @@ async function getFeaturedDecisions() {
   const files = featuredSlugs.map((s) => `${s}.txt`);
   const rows = await prisma.karar.findMany({
     where: { fileName: { in: files } },
-    select: { id: true, fileName: true, type: true, code: true, aiSummary: true, keywords: true, contentLength: true },
+    select: { id: true, fileName: true, type: true, code: true, aiSummary: true, keywords: true, contentLength: true, createdAt: true },
   });
   return orderBySlugList(rows, featuredSlugs);
 }
@@ -56,7 +287,7 @@ async function getNewDecisions() {
         ],
       },
     },
-    select: { id: true, fileName: true, type: true, code: true, aiSummary: true, keywords: true, contentLength: true },
+    select: { id: true, fileName: true, type: true, code: true, aiSummary: true, keywords: true, contentLength: true, createdAt: true },
   });
 }
 
@@ -75,11 +306,12 @@ async function getIbbgkFromNewTable() {
     ozet: r.ozet,
     created_at: r.created_at,
     pdfHref: buildIbkPdfPath(r.karar_code, r.birlesme_no),
-    fileName: `ibk-${r.id}`, 
+    fileName: `ibk-${r.id}`,
     type: "İçtihadı Birleştirme",
   }));
 }
 
+/* ------------------------------- Sayfa --------------------------------- */
 export default async function KararlarPage({ searchParams = {} }) {
   const { q, mahkeme, organ, esasYili, esasNo, kararYili, kararNo, kw, aiq, cursor, sort, phrase, qnot } = searchParams;
 
@@ -105,130 +337,200 @@ export default async function KararlarPage({ searchParams = {} }) {
     getIbbgkFromNewTable(),
   ]);
 
-  // Filtreleme parametreleri (Her iki BasicFilter'a da geçmek için)
   const filterParams = { q, phrase, qnot, mahkeme, organ, esasYili, esasNo, kararYili, kararNo, kw, aiq, sort };
 
   return (
-    <div className="relative min-h-screen bg-slate-900 text-slate-300 font-sans selection:bg-cyan-500/30 selection:text-white overflow-x-hidden">
-      
-      {/* Arkaplan Efektleri */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:30px_30px] lg:bg-[size:40px_40px]"></div>
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] lg:h-[700px] bg-gradient-to-b from-slate-800/80 via-slate-900/20 to-transparent pointer-events-none"></div>
-      </div>
+    <div className="law-root">
+      {/* ------------------------------ Header ------------------------------ */}
+      <header className="law-header">
+        <div className="law-header-inner">
+          <a href="/kararlar" className="brand">
+            <span className="brand-mark">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+              </svg>
+            </span>
+            <span>
+              <span className="brand-name">Karar Arşivi</span>
+              <span className="brand-sub">Yargıtay İçtihat Veritabanı</span>
+            </span>
+          </a>
 
-      <header className="sticky top-0 z-40 w-full border-b border-slate-700/60 bg-slate-900/90 backdrop-blur-xl">
-        <div className="max-w-screen-2xl mx-auto px-4 lg:px-6 py-3 lg:py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3 lg:gap-4">
-             <div className="relative w-9 h-9 lg:w-10 lg:h-10 bg-slate-800 rounded-xl border border-slate-700 flex items-center justify-center text-cyan-400 shadow-sm shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
-             </div>
-             <div>
-                <h1 className="text-lg lg:text-xl font-bold text-slate-100 tracking-tight leading-none">
-                  Karar Arşivi
-                </h1>
-                <p className="text-[9px] lg:text-[10px] text-slate-400 font-mono tracking-widest uppercase mt-0.5">
-                  INTELLIGENCE SYSTEM
-                </p>
-             </div>
-          </div>
-          
-          <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-[10px] text-slate-300 font-medium tracking-wide shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_#10b981]"></span>
-            VERİ TABANI: GÜNCEL
+          <div className="db-pill">
+            <span className="dot" />
+            Veritabanı güncel
           </div>
         </div>
       </header>
 
-      <div className="relative z-10 max-w-screen-2xl mx-auto px-4 lg:px-4 py-6 lg:py-10 lg:grid lg:grid-cols-[280px_1fr] lg:gap-8 xl:gap-10">
-        
-        {/* SIDEBAR: Sadece Desktopta Görünür */}
-        <aside className="hidden lg:block">
-          <div className="lg:sticky lg:top-28 space-y-6">
-            <div className="rounded-2xl border border-slate-700 bg-slate-800/60 backdrop-blur-md shadow-xl">
-               <div className="p-6">
-                  <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700/50">
-                    <div className="text-slate-400">
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-                      </svg>
-                    </div>
-                    <h2 className="text-sm font-bold text-slate-200 uppercase tracking-widest">Filtreleme</h2>
-                  </div>
-                  
+      {/* ------------------------------ İçerik ------------------------------ */}
+      <div className="law-wrap">
+        <div className="law-grid">
+          {/* SIDEBAR — detaylı filtreler (desktop) */}
+          <aside className="law-sidebar">
+            <div className="sidebar-sticky">
+              <div className="panel">
+                <div className="panel-head">
+                  <span className="ic">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                    </svg>
+                  </span>
+                  <h2 className="panel-title">Detaylı Filtreleme</h2>
+                </div>
+                <div style={{ padding: "20px" }}>
                   <BasicFilter defaultParams={filterParams} />
-               </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </aside>
+          </aside>
 
-        <main className="space-y-8 lg:space-y-12 pb-16 lg:pb-24">
-          
-          {/* MOBİL FİLTRE BUTONU: Sadece Mobilde Görünür */}
-          {/* Drawer içine BasicFilter'ı koyuyoruz. */}
-          <MobileFilterDrawer>
-            <BasicFilter defaultParams={filterParams} />
-          </MobileFilterDrawer>
+          <main>
+            {/* ARAMA HERO — birincil giriş noktası */}
+            <section className="hero">
+              <p className="hero-kicker">İçtihat Araması</p>
+              <h2 className="hero-title">Yargıtay kararlarında derinlemesine arama</h2>
 
-          {hasSearch && (
-            <section className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-               <div className="mb-6 lg:mb-8 flex items-center gap-3 lg:gap-4">
-                  <div className="h-px flex-1 bg-slate-700"></div>
-                  <span className="text-cyan-500 font-mono text-[10px] lg:text-xs font-bold tracking-widest bg-slate-800 px-3 py-1 lg:px-4 lg:py-1.5 rounded-full border border-slate-700">ARAMA SONUÇLARI</span>
-                  <div className="h-px flex-1 bg-slate-700"></div>
-               </div>
-               {/* SearchResults içine class geçilebiliyorsa grid-cols ayarları oradan da yapılabilir */}
-              <SearchResults
-                items={searchResults}
-                query={searchTerm}
-                field={searchField}
-                initialNextCursor={nextCursor}
-              />
+              <form action="/kararlar" method="GET" className="hero-form" data-hero-search-form>
+                <span className="ic-search">
+                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8" /><path strokeLinecap="round" d="M21 21l-4.35-4.35" /></svg>
+                </span>
+                <input
+                  type="text"
+                  name="q"
+                  defaultValue={q || ""}
+                  placeholder="Karar içeriğinde, özette veya anahtar kelimede ara…"
+                  aria-label="Karar ara"
+                  className="hero-input"
+                />
+                <button type="submit" className="hero-submit" data-hero-search-button>
+                  <span className="hero-spinner" aria-hidden="true" />
+                  <span data-hero-search-text>Ara</span>
+                </button>
+              </form>
+
+              {/* Bölümlere hızlı atlama */}
+              <div className="jump">
+                {[
+                  { id: "featured", label: "Editörün Seçimi", color: "var(--amber)" },
+                  { id: "new", label: "Son Eklenenler", color: "#2f9e6b" },
+                  { id: "ibk", label: "İçtihadı Birleştirme", color: "var(--navy)" },
+                ].map((c) => (
+                  <a key={c.id} href={`#${c.id}`}>
+                    <span className="d" style={{ background: c.color }} />
+                    {c.label}
+                  </a>
+                ))}
+              </div>
             </section>
-          )}
 
-          <section>
-             <SectionRow
-                id="featured"
-                title="Editörün Seçimi"
-                subtitle="Hukuki derinliği yüksek, emsal niteliğindeki kararlar"
-                items={featuredRows}
-                initialVisible={3}
-                perRow={3}
-                addRows={3}
-              />
-          </section>
+            {/* MOBİL FİLTRE BUTONU */}
+            <div style={{ marginBottom: "40px" }}>
+              <MobileFilterDrawer>
+                <BasicFilter defaultParams={filterParams} />
+              </MobileFilterDrawer>
+            </div>
 
-          <section>
-            <SectionRow
-              id="new"
-              title="Son Eklenenler"
-              subtitle="Arşivimize yeni dahil edilen güncel kararlar"
-              items={newRows}
-              initialVisible={6}
-              perRow={3}
-              addRows={3}
-              autoLoad={false}
-            />
-          </section>
+            <div className="stack">
+              {hasSearch && (
+                <section className="anim-in">
+                  <div className="results-head">
+                    <span className="lbl">Arama Sonuçları</span>
+                    <div className="rule" />
+                  </div>
 
-          {Array.isArray(ibbgkRows) && ibbgkRows.length > 0 && (
-            <section>
-              <SectionRow
-                id="ibk"
-                title="İçtihadı Birleştirme"
-                subtitle="Yargıtay'ın en üst düzey normatif kararları (IBK)"
-                items={ibbgkRows}
-                variant="ibk"
-                initialVisible={6}
-                perRow={3}
-                addRows={6}
-              />
-            </section>
-          )}
-          
-        </main>
+                  <SearchResults
+                    items={searchResults}
+                    query={searchTerm}
+                    field={searchField}
+                    initialNextCursor={nextCursor}
+                  />
+                </section>
+              )}
+
+              <section>
+                <SectionRow
+                  id="featured"
+                  title="Editörün Seçimi"
+                  subtitle="Hukuki derinliği yüksek, emsal niteliğindeki kararlar"
+                  items={featuredRows}
+                  initialVisible={4}
+                  perRow={3}
+                  addRows={3}
+                />
+              </section>
+
+              <section>
+                <SectionRow
+                  id="new"
+                  title="Son Eklenenler"
+                  subtitle="Arşive yeni dahil edilen güncel kararlar"
+                  items={newRows}
+                  initialVisible={6}
+                  perRow={3}
+                  addRows={3}
+                  autoLoad={false}
+                />
+              </section>
+
+              {Array.isArray(ibbgkRows) && ibbgkRows.length > 0 && (
+                <section>
+                  <SectionRow
+                    id="ibk"
+                    title="İçtihadı Birleştirme"
+                    subtitle="Yargıtay'ın en üst düzey normatif kararları (İBK)"
+                    items={ibbgkRows}
+                    variant="ibk"
+                    initialVisible={6}
+                    perRow={3}
+                    addRows={6}
+                  />
+                </section>
+              )}
+            </div>
+          </main>
+        </div>
       </div>
+
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function () {
+              function activateHeroSearchLoading(form) {
+                form.classList.add('is-loading');
+
+                var button = form.querySelector('[data-hero-search-button]');
+                var text = form.querySelector('[data-hero-search-text]');
+
+                if (button) {
+                  button.setAttribute('aria-busy', 'true');
+                  button.setAttribute('disabled', 'disabled');
+                }
+                if (text) text.textContent = 'Aranıyor';
+              }
+
+              document.addEventListener('submit', function (event) {
+                var form = event.target;
+                if (!form || !form.matches('[data-hero-search-form]')) return;
+                if (form.dataset.submitting === '1') return;
+
+                event.preventDefault();
+                form.dataset.submitting = '1';
+                activateHeroSearchLoading(form);
+
+                window.setTimeout(function () {
+                  if (form.requestSubmit) {
+                    form.requestSubmit();
+                  } else {
+                    form.submit();
+                  }
+                }, 80);
+              }, true);
+            })();
+          `,
+        }}
+      />
+      <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
     </div>
   );
 }

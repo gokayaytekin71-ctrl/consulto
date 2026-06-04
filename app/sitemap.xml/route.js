@@ -25,6 +25,7 @@ export async function GET() {
   const items = [
     `${BASE_URL}/sitemaps/static`,
     `${BASE_URL}/sitemaps/araclar`,
+    `${BASE_URL}/sitemaps/blog`,
     ...Array.from({ length: pageCount }, (_, i) => `${BASE_URL}/sitemaps/kararlar/${i + 1}`),
   ];
 

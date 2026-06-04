@@ -27,6 +27,8 @@ const Icons = {
   Library: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>,
   Feather: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>,
   Scroll: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M19 3h-1a1 1 0 0 0-1 1v13H4a2 2 0 0 0-2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3z" /><path d="M8 21h12a2 2 0 0 0 2-2v-1h-10" /><path d="M10 3v16" /></svg>,
+  Layout: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>,
+  Edit: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
   Logout: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>,
   Plus: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>,
   Hamburger: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>,
@@ -145,10 +147,11 @@ export default function Header() {
                   { label: "Kararlar", path: "/kararlar", icon: Icons.Gavel },
                   { label: "Akıllı Arama", path: "/akilli-arama", icon: Icons.Search },
                   { label: "Dilekçe", path: "/dilekce", icon: Icons.FileText },
-                  { label: "Bilgi Kartları", path: "/Flash-Cards", icon: Icons.Library, badge: "YENİ!" },
+                  { label: "Bilgi Kartları", path: "/Flash-Cards", icon: Icons.Library },
                   { label: "Analiz", path: "/bot", icon: Icons.Cpu },
                   { label: "Araçlar", path: "/araclar", icon: Icons.Tool },
                   { label: "Paketler", path: "/paketler-ucretler", icon: Icons.Package },
+                  
                 ].map((item) => (
                   <button 
                     key={item.path}
@@ -202,7 +205,7 @@ export default function Header() {
       {/* END MOBİL MENÜ OVERLAY */}
 
       {/* HEADER WIDE MOBIL UYUM */}
-      <header className="fixed top-3 left-1/2 transform -translate-x-1/2 z-[9999] w-[95%] sm:w-[92%] max-w-[850px]">
+      <header data-global-header="true" className="fixed top-3 left-1/2 transform -translate-x-1/2 z-[9999] w-[95%] sm:w-[92%] max-w-[850px]">
         <div className="relative flex items-center justify-between px-2 sm:px-3 py-2.5 rounded-full bg-[#001f3f]/90 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20 transition-all duration-500 hover:border-white/20 hover:shadow-cyan-900/15">
 
           {/* LOGO */}
@@ -214,14 +217,13 @@ export default function Header() {
           
           <div className="hidden lg:flex items-center pl-2 pr-4 opacity-90"><div className="w-10 h-10"><Lottie animationData={animationData} loop autoPlay /></div></div>
 
-          {/* MENÜ - DESKTOP */}
+{/* MENÜ - DESKTOP */}
           <nav className="hidden md:flex flex-1 items-center justify-center gap-0.5 px-2">
             <NavItem onClick={() => handleNav("/kararlar")} icon={Icons.Gavel} label="Kararlar" active={pathname === "/kararlar"} />
-            <NavItem onClick={() => handleNav("/akilli-arama")} icon={Icons.Search} label="Arama" active={pathname === "/akilli-arama"} />
             <NavItem onClick={() => handleNav("/dilekce")} icon={Icons.FileText} label="Dilekçe" active={pathname === "/dilekce"} />
-            <NavItem onClick={() => handleNav("/Flash-Cards")} icon={Icons.Library} label="Kartlar" active={pathname === "/Flash-Cards"} badge="YENİ!" />
+              <NavItem onClick={() => handleNav("/calisma-alani")} icon={Icons.Layout} label="Çalışma Alanı" active={pathname === "/calisma-alani"} badge="En Gelişmiş!" />
             <NavItem onClick={() => handleNav("/bot")} icon={Icons.Cpu} label="Analiz" active={pathname === "/bot"} />
-            {/* Araçlar burdan kaldırıldı, Diğer menüsüne eklendi */}
+            <NavItem onClick={() => handleNav("/blog")} icon={Icons.Edit} label="Blog" active={pathname.startsWith("/blog")} />
             <NavItem onClick={() => handleNav("/paketler-ucretler")} icon={Icons.Package} label="Paketler" active={pathname === "/paketler-ucretler"} />
 
             {/* Diğer Dropdown */}
@@ -230,10 +232,12 @@ export default function Header() {
                 <Icons.More />
               </button>
               {isOtherOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-40 p-1.5 rounded-xl bg-[#0a1b2b]/95 backdrop-blur-md border border-white/10 shadow-lg ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-200">
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-44 p-1.5 rounded-xl bg-[#0a1b2b]/95 backdrop-blur-md border border-white/10 shadow-lg ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-200">
                   <div className="flex flex-col gap-0.5">
                     {[
-                      { href: "/araclar", label: "Araçlar", icon: <Icons.Tool /> }, // Araçlar buraya taşındı
+                      { href: "/akilli-arama", label: "Akıllı Arama", icon: <Icons.Search /> },
+                      { href: "/Flash-Cards", label: "Bilgi Kartları", icon: <Icons.Library /> },
+                      { href: "/araclar", label: "Araçlar", icon: <Icons.Tool /> },
                       { href: "/mevzuat", label: "Mevzuat", icon: <Icons.Library /> },
                       { href: "/makaleler", label: "Makaleler", icon: <Icons.Feather /> },
                       { href: "/gazete", label: "Resmî Gazete", icon: <Icons.Scroll /> }

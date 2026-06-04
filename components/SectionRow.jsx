@@ -1,35 +1,29 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import DecisionCard from "@/components/DecisionCard";
+import DecisionRow from "@/components/DecisionRow";
 
 export default function SectionRow({
-  id, title, subtitle, items = [], initialVisible = 3, perRow = 3, addRows = 2,
+  id, title, subtitle, items = [], initialVisible = 6, perRow = 3, addRows = 2,
   isLoading = false, skeletonCount = 6, autoLoad = false, variant = "default",
 }) {
   const total = items.length;
   const [visible, setVisible] = useState(Math.min(initialVisible, total));
-  
+
   const canMore = visible < total;
   const canLess = visible > initialVisible;
-  
-  const isIbk = variant === "ibk";
-  const perRowEffective = isIbk ? 1 : perRow;
 
-  const gridClasses = useMemo(() => {
-    if (isIbk) return "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6";
-    const lgMap = { 1: "lg:grid-cols-1", 2: "lg:grid-cols-2", 3: "lg:grid-cols-3", 4: "lg:grid-cols-4" };
-    return `grid grid-cols-1 md:grid-cols-2 ${lgMap[perRow] || "lg:grid-cols-3"} gap-6`;
-  }, [perRow, isIbk]);
+  const isIbk = variant === "ibk";
+  const step = Math.max(1, isIbk ? addRows : perRow * addRows);
 
   const renderItems = useMemo(() => items.slice(0, Math.min(visible, total)), [items, visible, total]);
 
-  const handleMore = () => setVisible((v) => Math.min(total, v + perRowEffective * addRows));
-  
+  const handleMore = () => setVisible((v) => Math.min(total, v + step));
+
   const handleLess = () => {
     setVisible(initialVisible);
     const sectionElement = document.getElementById(id);
-    if (sectionElement) sectionElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (sectionElement) sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 
   const sentinelRef = useRef(null);
@@ -50,125 +44,195 @@ export default function SectionRow({
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [autoLoad, canMore, perRowEffective, addRows]);
+  }, [autoLoad, canMore, step]);
+
+  const ibkHeadline = (ozet = "") => {
+    const t = String(ozet || "").trim();
+    if (!t) return "İçtihadı Birleştirme Kararı";
+    return t.length > 130 ? t.slice(0, 128) + "…" : t;
+  };
 
   return (
-    <section id={id} aria-labelledby={`${id || "section"}-title`} className="scroll-mt-32">
-      
-      {/* DEĞİŞİKLİK BURADA:
-         bg-slate-800/40 -> Arka planı siyahtan griye çektim.
-         border-slate-700 -> Kenarlıkları belirginleştirdim.
-      */}
-      <div className="relative overflow-hidden rounded-2xl border border-slate-700 bg-slate-800/40 backdrop-blur-md p-8 shadow-xl">
-        
-        <header className="mb-8 flex flex-col gap-2 border-b border-slate-700 pb-6">
-          <div className="flex items-center gap-4">
-             {/* İkon kutusu daha parlak */}
-             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-cyan-400 border border-slate-600 shadow-sm">
-               {isIbk ? (
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
-               ) : (
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
-               )}
-             </div>
-             <div>
-                <h2 id={`${id || "section"}-title`} className="text-xl font-bold tracking-tight text-white">
-                  {title}
-                </h2>
-                {subtitle && <p className="text-sm text-slate-400 font-medium mt-0.5">{subtitle}</p>}
-             </div>
+    <section
+      id={id}
+      aria-labelledby={`${id || "section"}-title`}
+      className="scroll-mt-28"
+      style={{
+        background: "var(--surface, #fff)",
+        border: "1px solid var(--line, #e3ddd0)",
+        borderRadius: "4px",
+        boxShadow: "0 1px 0 var(--line, #e3ddd0), 0 30px 60px -48px rgba(26,31,43,0.22)",
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      {/* sol kenar renk şeridi — dergi hissi */}
+      <span
+        aria-hidden
+        style={{
+          position: "absolute", left: 0, top: 0, bottom: 0, width: "3px",
+          background: isIbk
+            ? "linear-gradient(var(--navy, #0f2a4a), var(--amber, #b8860b))"
+            : "linear-gradient(var(--amber, #b8860b), var(--navy, #0f2a4a))",
+        }}
+      />
+
+      <div style={{ padding: "26px clamp(20px, 3vw, 34px)" }}>
+        {/* Başlık */}
+        <header
+          style={{
+            marginBottom: "22px",
+            paddingBottom: "18px",
+            borderBottom: "1px solid var(--line, #e3ddd0)",
+            display: "flex",
+            alignItems: "center",
+            gap: "14px",
+          }}
+        >
+          <div
+            style={{
+              display: "grid", placeItems: "center",
+              width: "40px", height: "40px", borderRadius: "11px", flexShrink: 0,
+              background: "rgba(184,134,11,0.08)",
+              color: "var(--amber, #b8860b)",
+              border: "1px solid rgba(184,134,11,0.22)",
+            }}
+          >
+            {isIbk ? (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" /></svg>
+            ) : (
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+            )}
+          </div>
+          <div>
+            <h2
+              id={`${id || "section"}-title`}
+              style={{
+                fontFamily: "'Fraunces', serif",
+                fontWeight: 600,
+                fontSize: "1.32rem",
+                letterSpacing: "-0.01em",
+                color: "var(--navy, #0f2a4a)",
+                lineHeight: 1.15,
+              }}
+            >
+              {title}
+            </h2>
+            {subtitle && (
+              <p
+                style={{
+                  marginTop: "4px",
+                  fontSize: "0.84rem",
+                  color: "var(--ink-soft, #4a5160)",
+                  fontFamily: "'Newsreader', Georgia, serif",
+                }}
+              >
+                {subtitle}
+              </p>
+            )}
           </div>
         </header>
 
-        <div className={gridClasses}>
+        {/* Satır listesi */}
+        <div className="space-y-3">
           {renderItems.map((k) => {
-            // IBK KARTI - Zemin Rengi Açıldı (Slate-800/60)
             if (isIbk) {
-              const href = k?.pdfHref || null;
-              
-              const CardContent = (
-                <div className="relative z-10 flex flex-col h-full">
-                  <div className="flex justify-between items-start mb-5">
-                     <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-700 text-[11px] font-mono text-cyan-400 tracking-tight shadow-sm">
-                          {k.karar_code || "N/A"}
-                        </span>
-                        <span className="px-2.5 py-1 rounded-md bg-slate-900 border border-slate-700 text-[11px] font-mono text-slate-400 tracking-tight shadow-sm">
-                          {k.birlesme_no || "N/A"}
-                        </span>
-                     </div>
-                     <div className={`flex h-8 w-8 items-center justify-center rounded-full border transition-colors ${href ? 'border-cyan-900/50 bg-cyan-950/50 text-cyan-400 group-hover:border-cyan-500/50 group-hover:text-cyan-300' : 'border-slate-700 bg-slate-800 text-slate-500'}`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                     </div>
-                  </div>
-
-                  <div className="flex-grow">
-                     <p className="text-sm leading-7 text-slate-300 line-clamp-4 group-hover:text-white transition-colors font-normal">
-                        <span className="text-cyan-500 font-bold text-[10px] uppercase tracking-wider mr-2">Özet:</span>
-                        {k.ozet || "Özet bulunamadı."}
-                     </p>
-                  </div>
-
-                  {href && (
-                    <div className="mt-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-widest text-cyan-500/80 group-hover:text-cyan-400 opacity-80 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
-                      <span>PDF İncele</span>
-                      <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                    </div>
-                  )}
-                </div>
-              );
-
-              const wrapperClass = `group relative overflow-hidden rounded-xl border border-slate-700 bg-slate-800/60 p-6 transition-all duration-300 hover:border-cyan-500/50 hover:bg-slate-800 hover:shadow-lg ${href ? 'cursor-pointer' : ''}`;
-
-              return href ? (
-                <a key={`ibk-link-${k.id}`} href={href} target="_blank" rel="noopener noreferrer" className={wrapperClass}>
-                  {CardContent}
-                </a>
-              ) : (
-                <div key={`ibk-${k.id}`} className={wrapperClass}>
-                  {CardContent}
-                </div>
+              return (
+                <DecisionRow
+                  key={`ibk-${k.id}`}
+                  externalHref={k.pdfHref || undefined}
+                  type="İçtihadı Birleştirme"
+                  code={[k.karar_code, k.birlesme_no].filter(Boolean).join(" · ")}
+                  createdAt={k.created_at}
+                  headline={ibkHeadline(k.ozet)}
+                />
               );
             }
-
             return (
-              <DecisionCard
+              <DecisionRow
                 key={k.id}
-                id={k.fileName?.replace(/\.txt$/i, "") ?? k.id}
+                slug={k.fileName?.replace(/\.txt$/i, "") ?? k.id}
                 type={k.type}
                 code={k.code}
+                createdAt={k.createdAt}
                 aiSummary={k.aiSummary}
                 keywords={k.keywords}
-                contentLength={k.contentLength || 0}
               />
             );
           })}
 
           {isLoading &&
             Array.from({ length: Math.max(0, skeletonCount - renderItems.length) }).map((_, idx) => (
-              <div key={`skeleton-${idx}`} className="rounded-xl border border-slate-700 bg-slate-800/50 p-6 animate-pulse">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="h-4 w-1/3 bg-slate-700 rounded" />
-                  <div className="h-5 w-12 bg-slate-700 rounded" />
+              <div
+                key={`skeleton-${idx}`}
+                className="animate-pulse"
+                style={{
+                  borderRadius: "12px",
+                  border: "1px solid var(--line, #e3ddd0)",
+                  background: "var(--paper-2, #efebe1)",
+                  padding: "18px 20px",
+                }}
+              >
+                <div className="mb-2 flex items-center gap-2">
+                  <div className="h-4 w-24 rounded" style={{ background: "var(--line-strong, #d3ccba)" }} />
+                  <div className="h-3 w-20 rounded" style={{ background: "var(--line-strong, #d3ccba)" }} />
                 </div>
-                <div className="h-2.5 w-full bg-slate-700 rounded mb-3" />
-                <div className="h-2.5 w-5/6 bg-slate-700 rounded mb-3" />
-                <div className="h-2.5 w-4/6 bg-slate-700 rounded mb-6" />
-                <div className="h-9 w-full bg-slate-700 rounded-lg mt-auto" />
+                <div className="mb-2 h-3.5 w-3/4 rounded" style={{ background: "var(--line-strong, #d3ccba)" }} />
+                <div className="mb-3 h-2.5 w-5/6 rounded" style={{ background: "var(--line-strong, #d3ccba)" }} />
+                <div className="h-7 w-28 rounded-md" style={{ background: "var(--line-strong, #d3ccba)" }} />
               </div>
             ))}
         </div>
 
         {(canMore || canLess) && (
-          <div className="pt-10 flex flex-col md:flex-row items-center justify-center gap-4 border-t border-slate-700/50 mt-4">
+          <div
+            style={{
+              marginTop: "22px",
+              paddingTop: "20px",
+              borderTop: "1px solid var(--line, #e3ddd0)",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "12px",
+            }}
+          >
             {canMore && (
-              <button onClick={handleMore} className="group relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-slate-700 px-8 py-3 text-xs font-bold text-white transition-all hover:bg-slate-600 hover:text-white active:scale-95 border border-slate-600 shadow-sm">
-                <span className="relative z-10 uppercase tracking-widest">Daha Fazla Göster</span>
-                <svg className="relative z-10 h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+              <button
+                onClick={handleMore}
+                className="group"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "8px",
+                  borderRadius: "10px", border: "none", cursor: "pointer",
+                  background: "var(--navy, #0f2a4a)", color: "#fff",
+                  padding: "11px 26px",
+                  fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase",
+                  boxShadow: "0 8px 22px -14px rgba(15,42,74,0.6)",
+                  transition: "background .18s ease, transform .12s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--navy-2, #163a63)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "var(--navy, #0f2a4a)")}
+              >
+                <span>Daha Fazla Göster</span>
+                <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
               </button>
             )}
             {canLess && (
-              <button onClick={handleLess} className="group inline-flex items-center gap-2 rounded-lg border border-slate-600 bg-transparent px-6 py-3 text-xs font-bold text-slate-400 uppercase tracking-widest transition-all hover:border-slate-500 hover:text-white active:scale-95">
+              <button
+                onClick={handleLess}
+                className="group"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: "8px",
+                  borderRadius: "10px", cursor: "pointer",
+                  border: "1px solid var(--line-strong, #d3ccba)",
+                  background: "var(--surface, #fff)", color: "var(--ink-soft, #4a5160)",
+                  padding: "11px 22px",
+                  fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase",
+                  transition: "color .18s ease, border-color .18s ease",
+                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--navy, #0f2a4a)"; e.currentTarget.style.borderColor = "var(--navy, #0f2a4a)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--ink-soft, #4a5160)"; e.currentTarget.style.borderColor = "var(--line-strong, #d3ccba)"; }}
+              >
                 <span>Daha Az</span>
                 <svg className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" /></svg>
               </button>
@@ -176,7 +240,7 @@ export default function SectionRow({
           </div>
         )}
       </div>
-      {autoLoad && canMore && <div ref={sentinelRef} className="h-10 w-full opacity-0 pointer-events-none" />}
+      {autoLoad && canMore && <div ref={sentinelRef} className="pointer-events-none h-10 w-full opacity-0" />}
     </section>
   );
 }

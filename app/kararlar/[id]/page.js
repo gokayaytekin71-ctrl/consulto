@@ -11,214 +11,293 @@ import { Suspense } from 'react';
 import dynamicImport from 'next/dynamic';
 
 const DownloadPDFButton = dynamicImport(
-  () => import('@/components/DownloadPDFButton'), 
+  () => import('@/components/DownloadPDFButton'),
   { ssr: false }
 );
 
 // --- CONFIG ---
-// --- CONFIG ---
 // Kararların 30 gün boyunca (2592000 saniye) statik olarak önbellekte kalmasını sağlar
 export const revalidate = 2592000;
 
-// --- GLOBAL CSS (DARK TECH - FINAL REVISION) ---
+/* ============================================================
+   GLOBAL CSS — "Editorial Law Review"
+   Sıcak kağıt zemin · lacivert + amber · serif okuma tipografisi
+   Liste sayfasıyla (—#0f2a4a / amber) görsel bütünlük
+   ============================================================ */
 const GLOBAL_CSS = `
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+
   :root {
-    --bg-main: #0B1121;       
-    --bg-sidebar: #0f1629;    
-    --bg-card: #141b2d;       
-    --border-color: #1e293b; 
-    
-    --text-primary: #ffffff;  
-    --text-secondary: #94a3b8; 
-    
-    --accent-cyan: #22d3ee; 
-    --accent-glow: rgba(34, 211, 238, 0.10);
+    /* Zemin & yüzeyler */
+    --paper:        #f6f3ec;   /* sıcak kağıt */
+    --paper-2:      #efebe1;   /* hafif koyu kağıt */
+    --surface:      #ffffff;   /* kart */
+    --ink:          #1a1f2b;   /* ana metin */
+    --ink-soft:     #4a5160;   /* ikincil metin */
+    --ink-faint:    #8a8f9c;   /* üçüncül / etiket */
+
+    /* Marka */
+    --navy:         #0f2a4a;   /* liste sayfasıyla aynı lacivert */
+    --navy-2:       #163a63;
+    --amber:        #b8860b;   /* koyu altın — kağıt üzerinde okunur */
+    --amber-soft:   #c79a2e;
+
+    --line:         #e3ddd0;   /* ince ayraç */
+    --line-strong:  #d3ccba;
   }
+
+  * { box-sizing: border-box; }
 
   body {
-    background-color: var(--bg-main);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    background-image: radial-gradient(circle at 50% 0%, #172033, var(--bg-main));
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', system-ui, sans-serif;
+    background-image:
+      radial-gradient(900px 500px at 100% -5%, rgba(15,42,74,0.05), transparent 60%),
+      radial-gradient(700px 400px at -10% 110%, rgba(184,134,11,0.06), transparent 60%);
+    background-attachment: fixed;
   }
 
-  /* Layout */
-  .layout-grid {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 30px;
-    max-width: 1600px;
+  /* İnce grain / kağıt dokusu */
+  .grain::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none; z-index: 0;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  }
+
+  /* ---------------- LAYOUT ---------------- */
+  .wrap {
+    position: relative; z-index: 1;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 30px;
-    min-height: 100vh;
+    padding: 0 28px 120px;
   }
 
-  /* --- LEFT SIDEBAR --- */
-  .sidebar-panel {
-    background-color: var(--bg-sidebar);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    position: sticky;
-    top: 24px;
-    height: calc(100vh - 48px);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  /* ÜST ŞERİT */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0 18px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 38px;
   }
+  .brand {
+    display: flex; align-items: center; gap: 12px;
+    text-decoration: none;
+  }
+  .brand-mark {
+    width: 38px; height: 38px; border-radius: 11px;
+    background: var(--navy); color: #f3d27a;
+    display: grid; place-items: center;
+    box-shadow: 0 4px 14px -4px rgba(15,42,74,0.4);
+  }
+  .brand-name {
+    font-family: 'Fraunces', serif;
+    font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em;
+    color: var(--navy); line-height: 1;
+  }
+  .brand-sub {
+    font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.2em;
+    color: var(--ink-faint); margin-top: 5px;
+  }
+  .pager {
+    display: flex; gap: 6px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+  }
+  .pager a, .pager span {
+    padding: 7px 13px; border-radius: 9px;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft); text-decoration: none;
+    transition: all .18s ease; background: var(--surface);
+  }
+  .pager a:hover { color: var(--navy); border-color: var(--navy); transform: translateY(-1px); }
+  .pager .off { opacity: 0.35; pointer-events: none; }
 
-  /* Header */
-  .sidebar-header {
-    margin-bottom: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border-color);
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+  /* ---------------- DOC HEADER ---------------- */
+  .doc-head { margin-bottom: 30px; }
+  .court-pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--amber);
+    background: rgba(184,134,11,0.08);
+    border: 1px solid rgba(184,134,11,0.25);
+    padding: 6px 12px; border-radius: 999px;
+    margin-bottom: 18px;
   }
-  .header-label {
-    font-size: 0.65rem;
-    font-weight: 700;
-    color: var(--text-secondary);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    display: block;
-    margin-bottom: 4px;
-  }
-  .court-name {
-    font-size: 1rem; /* Biraz daha kompakt */
-    font-weight: 800;
-    color: var(--text-primary);
-    letter-spacing: -0.01em;
-    line-height: 1.2;
-  }
+  .court-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
 
-  /* Metadata Box (Compact) */
-  .meta-compact {
-    background-color: rgba(0,0,0,0.2);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 8px 12px;
-    margin-bottom: 16px;
-  }
-  .meta-label-sm {
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    color: var(--text-secondary);
+  .doc-title {
+    font-family: 'Fraunces', serif;
     font-weight: 600;
-    display: block;
-    margin-bottom: 2px;
+    font-size: clamp(1.6rem, 3.4vw, 2.55rem);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    color: var(--navy);
+    max-width: 22ch;
   }
-  .meta-value-sm {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 0.75rem;
-    color: #e2e8f0;
+  .doc-meta {
+    display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
+    margin-top: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem; color: var(--ink-soft);
+  }
+  .doc-meta .k { color: var(--ink-faint); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.12em; margin-right: 8px; }
+  .doc-meta .code { color: var(--navy); font-weight: 500; }
+
+  /* ---------------- TWO COLUMN ---------------- */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 56px;
+    align-items: start;
   }
 
-  /* AI Summary Section */
-  .ai-section {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 6px;
-    margin-bottom: 16px;
-    /* Anahtar kelimeler altta sıkışmasın diye biraz boşluk */
-    padding-bottom: 10px; 
-    border-bottom: 1px solid var(--border-color);
+  /* ---- READING COLUMN ---- */
+  .reader {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 56px clamp(28px, 5vw, 72px);
+    box-shadow: 0 1px 0 var(--line), 0 30px 60px -40px rgba(26,31,43,0.25);
+    position: relative;
   }
-  .ai-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    position: sticky;
-    top: 0;
-    background: var(--bg-sidebar);
-    padding-bottom: 8px;
-    z-index: 10;
+  /* sol kenarda ince renk şeridi — dergi hissi */
+  .reader::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: linear-gradient(var(--navy), var(--amber));
+    border-radius: 4px 0 0 4px;
   }
-  .ai-title {
-    font-size: 0.7rem;
+
+  .reader .lead-cap p:first-of-type::first-letter {
+    font-family: 'Fraunces', serif;
     font-weight: 700;
-    color: var(--accent-cyan);
-    letter-spacing: 0.05em;
+    font-size: 3.4em; line-height: 0.8;
+    float: left; margin: 0.06em 0.12em 0 0;
+    color: var(--navy);
+  }
+
+  .prose p, .highlighted-body p {
+    font-family: 'Newsreader', Georgia, serif;
+    font-size: 1.16rem;
+    line-height: 1.92;
+    color: var(--ink);
+    margin: 0 0 1.4em;
+    text-align: justify;
+    hyphens: auto;
+  }
+  .highlighted-body { font-family: 'Newsreader', Georgia, serif; }
+
+  .reader-foot {
+    margin-top: 56px; padding-top: 26px;
+    border-top: 1px solid var(--line);
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    color: var(--line-strong);
+  }
+  .reader-foot .rule { height: 1px; width: 60px; background: var(--line-strong); }
+  .reader-foot .sym { font-family: 'Fraunces', serif; color: var(--amber); letter-spacing: 0.4em; }
+
+  /* ---- SIDE RAIL ---- */
+  .rail {
+    position: sticky; top: 28px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .panel-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  .panel-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--navy);
+  }
+  .panel-title svg { color: var(--amber); }
+  .panel-body { padding: 16px; }
+
+  /* AI summary */
+  .ai-body { max-height: 46vh; overflow-y: auto; padding-right: 4px; }
+  .ai-block { margin-bottom: 16px; }
+  .ai-block:last-child { margin-bottom: 0; }
+  .ai-heading {
+    font-family: 'Fraunces', serif;
+    font-weight: 600; font-size: 0.9rem;
+    color: var(--navy); margin-bottom: 5px;
   }
   .ai-text {
-    font-size: 0.8rem;
-    line-height: 1.6;
-    color: #cbd5e1;
+    font-family: 'Newsreader', serif;
+    font-size: 0.94rem; line-height: 1.62; color: var(--ink-soft);
   }
-  .ai-highlight-cyan {
-    color: var(--accent-cyan);
-    font-weight: 700;
-    display: block;
-    margin-bottom: 4px;
-    margin-top: 12px;
-    font-size: 0.85rem;
+  .ai-loose {
+    border-left: 2px solid var(--line-strong);
+    padding-left: 12px; margin-bottom: 12px;
   }
 
-  /* Anahtar Kelimeler (Geri geldi) */
-  .keywords-section {
-    margin-bottom: 10px;
+  /* keywords */
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag {
+    font-size: 0.68rem; font-weight: 500;
+    color: var(--navy);
+    background: var(--paper-2);
+    border: 1px solid var(--line-strong);
+    padding: 4px 10px; border-radius: 7px;
+    transition: all .15s ease;
   }
-  .keyword-tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    color: var(--text-secondary);
-    background: rgba(255,255,255,0.03);
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-right: 6px;
-    margin-bottom: 6px;
-    border: 1px solid var(--border-color);
+  .tag:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+  /* actions */
+  .actions { display: flex; flex-direction: column; gap: 10px; }
+  .btn-back {
+    width: 100%; text-align: left;
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.82rem; font-weight: 600; color: var(--ink-soft);
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    padding: 11px 14px; border-radius: 11px;
+    transition: all .16s ease; cursor: pointer;
+  }
+  .btn-back:hover { color: var(--navy); border-color: var(--navy); }
+
+  /* fav konumu */
+  .fav-slot { transform: scale(0.92); transform-origin: center; }
+
+  /* progress bar üst çizgi */
+  .progress-track {
+    position: fixed; top: 0; left: 0; width: 100%; height: 3px;
+    background: var(--line); z-index: 60;
   }
 
-  /* --- RIGHT CONTENT --- */
-  .main-card {
-    background-color: var(--bg-sidebar);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 50px; 
-    min-height: 80vh;
-  }
-
-  /* Sağ taraftaki başlığı küçülttük */
-  .doc-title-small {
-    font-size: 1.25rem; /* 3xl'den xl'a indirildi */
-    font-weight: 600;
-    color: var(--text-secondary); /* Parlak beyazdan griye çekildi */
-    line-height: 1.4;
-    margin-bottom: 0;
-    letter-spacing: -0.01em;
-  }
-
-  .prose-dark p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #cbd5e1;
-    margin-bottom: 1.5em;
-    text-align: justify;
-  }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar { width: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+  ::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
 
-  @media (max-width: 1024px) {
-    .layout-grid { grid-template-columns: 1fr; padding: 16px; gap: 16px; }
-    .sidebar-panel { position: relative; top: 0; height: auto; }
-    .main-card { padding: 24px; }
+  /* ---------------- RESPONSIVE ---------------- */
+  @media (max-width: 980px) {
+    .grid { grid-template-columns: 1fr; gap: 28px; }
+    .rail { position: relative; top: 0; flex-direction: column-reverse; }
+    .reader { padding: 32px 22px; }
+    .wrap { padding: 0 16px 80px; }
   }
+
   @media print {
-    .layout-grid { display: block; }
-    .sidebar-panel, .no-print { display: none; }
-    body { background: white; color: black; }
+    .topbar, .rail, .reader-foot, .progress-track, .no-print { display: none !important; }
+    body { background: #fff; }
+    .grid { display: block; }
+    .reader { border: none; box-shadow: none; padding: 0; }
+    .reader::before { display: none; }
+    .prose p, .highlighted-body p { color: #000; }
   }
 `;
 
 // --- HELPER FUNCTIONS ---
 function slugifyType(t = "") {
-  // Haritayı tamamen küçük harf çıktı verecek şekilde güncelledik
   const map = {
     ç: "c", Ç: "c",
     ğ: "g", Ğ: "g",
@@ -235,7 +314,7 @@ function slugifyType(t = "") {
     .trim()
     .replace(/\s+/g, "-")
     .replace(/-+/g, "-")
-    .toLowerCase() || "mahkeme"; // <-- URL'yi standart küçük harfe zorluyoruz
+    .toLowerCase() || "mahkeme";
 }
 
 function codeToSegment(code = "") {
@@ -279,35 +358,104 @@ function parseParamsId(paramsId = "") {
   return { fileNameBase: id, mode: "filename" };
 }
 
-export async function generateMetadata({ params }) { return { alternates: { canonical: `https://www.consultohukuk.com/kararlar/${params.id}` }, robots: { index: true, follow: true } }; }
+export async function generateMetadata({ params }) {
+  const parsed = parseParamsId(params.id);
+  let karar = null;
+
+  // metadata için hafif bir sorgu — sadece gereken alanlar
+  try {
+    if (parsed.mode === "type+code" && parsed.code) {
+      const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})\/([0-9A-Za-z\-()\/]+)/i);
+      if (m) {
+        const [, eYear, eNo, kYear, kNo] = m;
+        karar = await prisma.karar.findFirst({
+          where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }] },
+          select: { type: true, code: true, aiSummary: true, keywords: true, createdAt: true },
+        });
+      }
+    }
+    if (!karar && parsed.mode === "filename") {
+      karar = await prisma.karar.findUnique({
+        where: { fileName: `${parsed.fileNameBase}.txt` },
+        select: { type: true, code: true, aiSummary: true, keywords: true, createdAt: true },
+      });
+    }
+  } catch (_) {}
+
+  const canonical = `https://www.consultohukuk.com/kararlar/${params.id}`;
+
+  if (!karar) {
+    return {
+      title: "Yargıtay Kararı | Consülto Hukuk",
+      alternates: { canonical },
+      robots: { index: true, follow: true },
+    };
+  }
+
+  const type = (karar.type || "Yargıtay Kararı").trim();
+  const code = (karar.code || "").trim();
+
+  // AI özetinin ilk anlamlı cümlesini description'a koy — her sayfada FARKLI olur
+  const summaryClean = (karar.aiSummary || "")
+    .replace(/\*\*/g, "")
+    .replace(/\r?\n/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  const description = summaryClean
+    ? `${type} ${code} sayılı karar. ${summaryClean}`.slice(0, 155)
+    : `${type} ${code} — Yargıtay kararının tam metni, yapay zekâ özeti ve emsal değerlendirmesi Consülto'da.`;
+
+  const title = `${type} ${code} – Yargıtay Kararı | Consülto`;
+
+  const kw = typeof karar.keywords === "string"
+    ? karar.keywords.split(",").map((s) => s.trim()).filter(Boolean)
+    : [];
+
+  return {
+    title,
+    description,
+    keywords: kw,
+    alternates: { canonical },
+    robots: { index: true, follow: true },
+    openGraph: {
+      type: "article",
+      locale: "tr_TR",
+      url: canonical,
+      siteName: "Consülto",
+      title,
+      description,
+      publishedTime: karar.createdAt,
+    },
+    twitter: { card: "summary", title, description },
+  };
+}
 export async function generateStaticParams() { return []; }
 
 // --- UI HELPERS ---
 const renderAiSummary = (txt) => {
-  const lines = (txt || "").split(/\r?\n/).filter(line => line.trim() !== '');
-  
+  const lines = (txt || "").split(/\r?\n/).filter((line) => line.trim() !== '');
+
   return lines.map((line, i) => {
-    // Markdown yıldızlarını temizle ve boşlukları al
     const cleanLine = line.replace(/\*\*/g, '').trim();
     const lower = cleanLine.toLowerCase();
-    
+
     if (lower.startsWith("gerekçe ve sonuç") || lower.startsWith("uyuşmazlık") || lower.startsWith("konu")) {
-        const parts = cleanLine.split(':');
-        const title = parts[0] + (parts.length > 1 ? ':' : '');
-        const content = parts.length > 1 ? parts.slice(1).join(':').trim() : '';
-        
-        return (
-            <div key={i} className="mb-4">
-                <span className="ai-highlight-cyan">{title}</span>
-                <p className="ai-text">{content}</p>
-            </div>
-        );
-    }
-    
-    return (
-        <div key={i} className="mb-3 pl-2 border-l border-[#334155]">
-            <p className="ai-text">{cleanLine}</p>
+      const parts = cleanLine.split(':');
+      const title = parts[0] + (parts.length > 1 ? ':' : '');
+      const content = parts.length > 1 ? parts.slice(1).join(':').trim() : '';
+
+      return (
+        <div key={i} className="ai-block">
+          <div className="ai-heading">{title}</div>
+          {content && <p className="ai-text">{content}</p>}
         </div>
+      );
+    }
+
+    return (
+      <div key={i} className="ai-loose">
+        <p className="ai-text">{cleanLine}</p>
+      </div>
     );
   });
 };
@@ -318,20 +466,20 @@ export default async function KararDetayPage({ params }) {
   const parsed = parseParamsId(kararSlug);
   let karar = null;
 
-  // --- DATA FETCHING ---
+  // --- DATA FETCHING (değiştirilmedi) ---
   if (parsed.mode === "type+code" && parsed.code) {
-     const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})\/([0-9A-Za-z\-()\/]+)/i);
-     const rawTypeSeg = String(parsed.typeSeg || "").trim();
-     const tBase = rawTypeSeg.replace(/-/g, " ").replace(/\./g, "").trim();
-     const typeFilters = [{ type: { contains: tBase, mode: "insensitive" } }];
-     if (m) {
-       const [, eYear, eNo, kYear, kNo] = m;
-       karar = await prisma.karar.findFirst({ where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }, ...(typeFilters.length ? [{ OR: typeFilters }] : [])] } });
-       if (!karar) karar = await prisma.karar.findFirst({ where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }] } });
-     } else {
-       karar = await prisma.karar.findFirst({ where: { AND: [{ code: { equals: parsed.code } }, ...(typeFilters.length ? [{ OR: typeFilters }] : [])] } });
-       if (!karar) karar = await prisma.karar.findFirst({ where: { code: { contains: parsed.code.replace(/\s+/g, " ").trim() } } });
-     }
+    const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})\/([0-9A-Za-z\-()\/]+)/i);
+    const rawTypeSeg = String(parsed.typeSeg || "").trim();
+    const tBase = rawTypeSeg.replace(/-/g, " ").replace(/\./g, "").trim();
+    const typeFilters = [{ type: { contains: tBase, mode: "insensitive" } }];
+    if (m) {
+      const [, eYear, eNo, kYear, kNo] = m;
+      karar = await prisma.karar.findFirst({ where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }, ...(typeFilters.length ? [{ OR: typeFilters }] : [])] } });
+      if (!karar) karar = await prisma.karar.findFirst({ where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }] } });
+    } else {
+      karar = await prisma.karar.findFirst({ where: { AND: [{ code: { equals: parsed.code } }, ...(typeFilters.length ? [{ OR: typeFilters }] : [])] } });
+      if (!karar) karar = await prisma.karar.findFirst({ where: { code: { contains: parsed.code.replace(/\s+/g, " ").trim() } } });
+    }
   }
   if (!karar && parsed.mode === "filename") karar = await prisma.karar.findUnique({ where: { fileName: `${parsed.fileNameBase}.txt` } });
   if (!karar && kararSlug) karar = await prisma.karar.findFirst({ where: { fileName: `${kararSlug}.txt` } });
@@ -340,128 +488,146 @@ export default async function KararDetayPage({ params }) {
     const canonicalId = buildKararIdFromRecord(karar);
     if (canonicalId && canonicalId !== kararSlug) redirect(`/kararlar/${canonicalId}`);
   }
+
   const type = karar.type || 'Başlık Yok';
   const code = karar.code || 'Dosya No Yok';
   const aiSummary = karar.aiSummary || 'Analiz verisi bulunamadı.';
-  const keywordsFromKarar = typeof karar.keywords === 'string' ? karar.keywords.split(',').map(kw => kw.trim()).filter(Boolean) : [];
-  
+  const keywordsFromKarar = typeof karar.keywords === 'string'
+    ? karar.keywords.split(',').map((kw) => kw.trim()).filter(Boolean)
+    : [];
+
   const prevKarar = await prisma.karar.findFirst({ where: { createdAt: { lt: karar.createdAt } }, orderBy: { createdAt: 'desc' }, select: { fileName: true, type: true, code: true } });
   const nextKarar = await prisma.karar.findFirst({ where: { createdAt: { gt: karar.createdAt } }, orderBy: { createdAt: 'asc' }, select: { fileName: true, type: true, code: true } });
   const prevId = prevKarar ? buildKararIdFromRecord(prevKarar) : null;
   const nextId = nextKarar ? buildKararIdFromRecord(nextKarar) : null;
 
-  // DEBUG (Vercel prod): which component import is undefined?
-  console.log("COMP CHECK", {
-    FavoriteButton: typeof FavoriteButton,
-    HighlightedKararBody: typeof HighlightedKararBody,
-    BackButton: typeof BackButton,
-    ScrollProgressBar: typeof ScrollProgressBar,
-    DownloadPDFButton: typeof DownloadPDFButton,
-  });
+  const courtLabel = type.includes("Genel") ? "Hukuk Genel Kurulu" : "Yargıtay";
 
   return (
-    <main className="min-h-screen text-white">
-       
-       <Suspense fallback={null}>
-            <div className="fixed top-0 left-0 w-full h-[2px] z-50 bg-[#1e293b]">
-                <ScrollProgressBar />
+    <main className="grain min-h-screen">
+
+      <Suspense fallback={null}>
+        <div className="progress-track">
+          <ScrollProgressBar />
+        </div>
+      </Suspense>
+
+      <div className="wrap">
+
+        {/* ÜST ŞERİT */}
+        <header className="topbar no-print">
+          <Link href="/kararlar" className="brand">
+            <span className="brand-mark">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+              </svg>
+            </span>
+            <span>
+              <span className="brand-name">Karar Arşivi</span>
+              <span className="brand-sub">Yargıtay İçtihat Veritabanı</span>
+            </span>
+          </Link>
+
+          <nav className="pager">
+            {prevId ? <Link href={`/kararlar/${prevId}`}>← Önceki</Link> : <span className="off">← Önceki</span>}
+            {nextId ? <Link href={`/kararlar/${nextId}`}>Sonraki →</Link> : <span className="off">Sonraki →</span>}
+          </nav>
+        </header>
+
+        {/* BAŞLIK BLOĞU */}
+        <div className="doc-head">
+          <span className="court-pill">
+            <span className="dot" />
+            {courtLabel}
+          </span>
+          <h1 className="doc-title">{type}</h1>
+          <div className="doc-meta">
+            <span><span className="k">Dosya</span><span className="code">{code}</span></span>
+          </div>
+        </div>
+
+        {/* İKİ KOLON */}
+        <div className="grid">
+
+          {/* OKUMA KOLONU */}
+          <article className="reader">
+            <div className="prose lead-cap">
+              <div className="highlighted-body">
+                <HighlightedKararBody fullContent={karar.content || ""} />
+              </div>
             </div>
-       </Suspense>
 
-       <div className="layout-grid">
-           
-           {/* --- LEFT SIDEBAR --- */}
-           <aside className="sidebar-panel">
-                
-                {/* Header (Mahkeme + Fav) */}
-                <div className="sidebar-header">
-                     <div>
-                        <span className="header-label">MAHKEME</span>
-                        <h2 className="court-name">
-                            {type.includes("Genel") ? "HGK" : "YARGITAY"}
-                        </h2>
-                     </div>
-                     <div className="scale-90 origin-top-right">
-                        <FavoriteButton itemId={karar.id} itemType="karar" />
-                     </div>
+            <div className="reader-foot">
+              <span className="rule" />
+              <span className="sym">§</span>
+              <span className="rule" />
+            </div>
+          </article>
+
+          {/* YAN RAY */}
+          <aside className="rail no-print">
+
+            {/* Eylemler + Favori */}
+            <div className="panel">
+              <div className="panel-head">
+                <span className="panel-title">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" /></svg>
+                  İşlemler
+                </span>
+                <div className="fav-slot">
+                  <FavoriteButton itemId={karar.id} itemType="karar" />
                 </div>
+              </div>
+              <div className="panel-body actions">
+                <BackButton className="btn-back">← Geri Dön</BackButton>
+                <DownloadPDFButton karar={{
+                  type: type,
+                  code: code,
+                  content: karar.content,
+                  keywords: keywordsFromKarar,
+                }} />
+              </div>
+            </div>
 
-                {/* Metadata Compact */}
-                <div className="meta-compact">
-                    <span className="meta-label-sm">DOSYA NUMARASI</span>
-                    <span className="meta-value-sm block">{code}</span>
+            {/* AI ÖZETİ */}
+            <div className="panel">
+              <div className="panel-head">
+                <span className="panel-title">
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                  Yapay Zekâ Özeti
+                </span>
+              </div>
+              <div className="panel-body">
+                <div className="ai-body">
+                  {renderAiSummary(aiSummary)}
                 </div>
+              </div>
+            </div>
 
-                {/* AI Summary */}
-                <div className="ai-section custom-scrollbar">
-                    <div className="ai-header">
-                        <svg className="w-4 h-4 text-[var(--accent-cyan)]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                        <span className="ai-title">YAPAY ZEKA ÖZETİ</span>
-                    </div>
-                    <div>
-                        {renderAiSummary(aiSummary)}
-                    </div>
+            {/* ETİKETLER */}
+            {keywordsFromKarar.length > 0 && (
+              <div className="panel">
+                <div className="panel-head">
+                  <span className="panel-title">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M7 7h.01M7 3h5a2 2 0 011.414.586l7 7a2 2 0 010 2.828l-5 5a2 2 0 01-2.828 0l-7-7A2 2 0 013 11V6a3 3 0 013-3z" /></svg>
+                    Etiketler
+                  </span>
                 </div>
-
-                {/* Keywords (Anahtar Kelimeler - GERİ EKLENDİ) */}
-                {keywordsFromKarar.length > 0 && (
-                    <div className="keywords-section">
-                        <span className="meta-label-sm mb-2">ETİKETLER</span>
-                        <div className="flex flex-wrap">
-                            {keywordsFromKarar.map((kw, i) => (
-                                <span key={i} className="keyword-tag">
-                                    {kw}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* Footer Buttons */}
-                <div className="mt-auto pt-4 border-t border-[var(--border-color)] space-y-3">
-                     <BackButton className="w-full text-xs font-medium text-[var(--text-secondary)] hover:text-white transition-colors text-left flex items-center gap-2">
-                        ← Geri Dön
-                     </BackButton>
-                    {/* Eski butonu siliyoruz, yerine bunu koyuyoruz: */}
-     <DownloadPDFButton karar={{
-         type: type,
-         code: code,
-         content: karar.content, // İçerik metni
-         keywords: keywordsFromKarar // İsterseniz PDF'e keywordleri de ekleyebilirsiniz
-     }} />
-       </div>
-           </aside>
-
-
-           {/* --- RIGHT CONTENT --- */}
-           <div className="main-card">
-                
-                <div className="mb-6 pb-4 border-b border-[var(--border-color)]">
-                    <div className="flex justify-end gap-4 mb-2 text-xs font-mono text-[var(--text-secondary)] print-hidden">
-                        {prevId ? <Link href={`/kararlar/${prevId}`} className="hover:text-[var(--accent-cyan)] transition-colors">← ÖNCEKİ</Link> : <span className="opacity-20">← ÖNCEKİ</span>}
-                        {nextId ? <Link href={`/kararlar/${nextId}`} className="hover:text-[var(--accent-cyan)] transition-colors">SONRAKİ →</Link> : <span className="opacity-20">SONRAKİ →</span>}
-                    </div>
-
-                    {/* Sağ Taraf Başlığı - KÜÇÜLTÜLDÜ */}
-                    <h1 className="doc-title-small">
-                        {type}
-                    </h1>
+                <div className="panel-body">
+                  <div className="tags">
+                    {keywordsFromKarar.map((kw, i) => (
+                      <span key={i} className="tag">{kw}</span>
+                    ))}
+                  </div>
                 </div>
+              </div>
+            )}
 
-                <article className="prose-dark">
-                    <div className="highlighted-body">
-                        <HighlightedKararBody fullContent={karar.content || ""} />
-                    </div>
-                </article>
+          </aside>
+        </div>
+      </div>
 
-                <div className="mt-16 flex justify-center text-[#334155] opacity-50 text-sm">
-                     ***
-                </div>
-           </div>
-
-       </div>
-      
-      {/* --- STRUCTURED DATA (SEO) --- */}
+      {/* --- STRUCTURED DATA (SEO) — değiştirilmedi --- */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -475,14 +641,14 @@ export default async function KararDetayPage({ params }) {
             publisher: {
               "@type": "Organization",
               name: "Consulto Hukuk",
-              url: "https://www.consultohukuk.com"
+              url: "https://www.consultohukuk.com",
             },
-            url: `https://www.consultohukuk.com/kararlar/${kararSlug}`
-          })
+            url: `https://www.consultohukuk.com/kararlar/${kararSlug}`,
+          }),
         }}
       />
 
-      <style dangerouslySetInnerHTML={{__html: GLOBAL_CSS}} />
+      <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
     </main>
   );
 }

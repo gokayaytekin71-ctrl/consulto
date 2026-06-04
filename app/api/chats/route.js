@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
-import { consumeToken } from "@/lib/tokens"; // YENİ: Token mantığı
+import { checkTokenBalance, consumeToken } from "@/lib/tokens"; // Token mantığı
 import crypto from "crypto";
 
 export const dynamic = "force-dynamic";
@@ -80,17 +80,17 @@ export async function POST(request) {
 
   const userId = session.user.id;
 
-  // --- YENİ TOKEN SİSTEMİ ---
-  // Analiz başına 1 Token düşer
-  const consumption = await consumeToken(userId, "ANALYSIS", 1);
+  // --- TOKEN KONTROLÜ ---
+  // Burada sadece bakiye kontrolü yapılır; token, Python API başarılı cevap verdikten sonra düşülür.
+  const balanceCheck = await checkTokenBalance(userId, 1);
 
-  if (!consumption.ok) {
+  if (!balanceCheck.ok) {
     return new Response(
       JSON.stringify({
         error: "QUOTA_EXCEEDED",
         message: "Yeterli tokeniniz yok. Analiz yapmak için lütfen token satın alın.",
-        requirePayment: true, // Frontend'de popup açmak için işaret
-        remaining: 0
+        requirePayment: true,
+        remaining: balanceCheck.remaining ?? 0,
       }),
       { status: 402, headers: { "Content-Type": "application/json" } }
     );
@@ -188,9 +188,28 @@ export async function POST(request) {
       }
     }
 
-    // ESKİ incrementUsage KALDIRILDI. consumeToken zaten bakiyeyi düştü.
+    // Python başarılı cevap verdikten sonra token düş.
+    const consumption = await consumeToken(userId, "ANALYSIS", 1, {
+      chatId: body?.chatId || null,
+      query: queryText ? String(queryText).trim().slice(0, 500) : null,
+    });
 
-    return new Response(JSON.stringify(dataFromPython), {
+    if (!consumption.ok) {
+      return new Response(
+        JSON.stringify({
+          error: "QUOTA_EXCEEDED",
+          message: "Yeterli tokeniniz yok. Analiz yapmak için lütfen token satın alın.",
+          requirePayment: true,
+          remaining: consumption.remaining ?? 0,
+        }),
+        { status: 402, headers: { "Content-Type": "application/json" } }
+      );
+    }
+
+    return new Response(JSON.stringify({
+      ...dataFromPython,
+      tokenRemaining: consumption.remaining,
+    }), {
       status: 200,
       headers: { "Content-Type": "application/json" }
     });

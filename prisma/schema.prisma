@@ -53,7 +53,11 @@ model User {
   chats              Json              @default("[]")
   userQueries        Json              @default("[]")
   tokenBalance       Int               @default(2)
+  lastLoginAt        DateTime?
+  lastSeenAt         DateTime?
+  loginCount         Int               @default(0)
   accounts           Account[]
+  activityLogs       UserActivityLog[]
   favoriteKararlar   FavoriteKarar[]
   favoriteMakaleler  FavoriteMakale[]
   favoriteMevzuatlar FavoriteMevzuat[]
@@ -64,6 +68,23 @@ model User {
   sessions           Session[]
   tasks              Task[]
   TokenUsage         TokenUsage[]
+  workspaces         Workspace[]
+}
+
+model UserActivityLog {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String
+  path      String?
+  userAgent String?
+  ip        String?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([type])
+  @@index([createdAt])
+  @@index([userId, createdAt])
 }
 
 model VerificationToken {
@@ -75,28 +96,29 @@ model VerificationToken {
 }
 
 model Karar {
-  id            String                   @id @default(cuid())
-  fileName      String                   @unique
-  content       String
-  type          String?
-  code          String?
-  aiSummary     String?
-  createdAt     DateTime                 @default(now())
-  contentLength Int?
-  keywords      String?
+  id                 String                   @id @default(cuid())
+  fileName           String                   @unique
+  content            String
+  type               String?
+  code               String?
+  aiSummary          String?
+  createdAt          DateTime                 @default(now())
+  contentLength      Int?
+  keywords           String?
   /// PostgreSQL tsvector column used for full‑text search.
   /// Prisma Client does not support the `tsvector` type.
   /// We intentionally do NOT add `@ignore` here because this model defines GIN indexes
   /// that reference this field. Marking it `@ignore` would invalidate those index definitions
   /// and may cause future migrations to try dropping them.
-  tsv_main      Unsupported("tsvector")?
+  tsv_main           Unsupported("tsvector")?
   /// PostgreSQL tsvector column used for full‑text search.
   /// Prisma Client does not support the `tsvector` type.
   /// We intentionally do NOT add `@ignore` here because this model defines GIN indexes
   /// that reference this field (tsv_extra). Marking it `@ignore` would invalidate those index definitions
   /// and may cause future migrations to try dropping them.
-  tsv_extra     Unsupported("tsvector")?
-  favoriteUsers FavoriteKarar[]
+  tsv_extra          Unsupported("tsvector")?
+  favoriteUsers      FavoriteKarar[]
+  workspaceDecisions WorkspaceDecision[]
 
   @@index([contentLength])
   @@index([keywords])
@@ -191,6 +213,131 @@ model Note {
 
   @@index([userId])
   @@index([folderId])
+}
+
+model Workspace {
+  id        String              @id @default(cuid())
+  userId    String
+  title     String
+  subtitle  String?
+  status    String              @default("Aktif")
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @default(now()) @updatedAt
+  user      User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages  WorkspaceMessage[]
+  notes     WorkspaceNote[]
+  files     WorkspaceFile[]
+  decisions WorkspaceDecision[]
+  statutes  WorkspaceStatute[]
+
+  @@index([userId])
+  @@index([userId, updatedAt])
+}
+
+model WorkspaceMessage {
+  id          String    @id @default(cuid())
+  workspaceId String
+  role        String
+  content     String
+  sources     Json?
+  createdAt   DateTime  @default(now())
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([workspaceId, createdAt])
+}
+
+model WorkspaceNote {
+  id          String    @id @default(cuid())
+  workspaceId String
+  type        String    @default("Kullanıcı Notu")
+  content     String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([workspaceId, createdAt])
+}
+
+model WorkspaceFile {
+  id                String    @id @default(cuid())
+  workspaceId       String
+  name              String
+  type              String?
+  size              Int?
+  url               String?
+  storageKey        String?
+  extractedText     String?
+  aiSummary         String?
+  detailedSummary   String?
+  documentType      String?
+  legalKeywords     Json?
+  detectedStatutes  Json?
+  keyFacts          Json?
+  keyDates          Json?
+  parties           Json?
+  evidenceList      Json?
+  risks             Json?
+  defenseIssues     Json?
+  searchSummary     String?
+  aiProfile         Json?
+  profiledAt        DateTime?
+  createdAt         DateTime  @default(now())
+  workspace         Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  chunks            WorkspaceFileChunk[]
+
+  @@index([workspaceId])
+  @@index([workspaceId, createdAt])
+}
+
+model WorkspaceFileChunk {
+  id          String        @id @default(cuid())
+  workspaceId String
+  fileId      String
+  chunkIndex  Int
+  content     String
+  createdAt   DateTime      @default(now())
+  file        WorkspaceFile @relation(fields: [fileId], references: [id], onDelete: Cascade)
+
+  @@unique([fileId, chunkIndex])
+  @@index([workspaceId])
+  @@index([fileId])
+}
+
+model WorkspaceDecision {
+  id          String    @id @default(cuid())
+  workspaceId String
+  kararId     String?
+  slug        String?
+  court       String?
+  code        String?
+  tag         String?
+  source      String    @default("AI")
+  createdAt   DateTime  @default(now())
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  karar       Karar?    @relation(fields: [kararId], references: [id], onDelete: SetNull)
+
+  @@unique([workspaceId, kararId])
+  @@index([workspaceId])
+  @@index([kararId])
+}
+
+model WorkspaceStatute {
+  id          String    @id @default(cuid())
+  workspaceId String
+  mevzuatAdi  String
+  madde       String?
+  baslik      String?
+  note        String?
+  content     String?
+  createdAt   DateTime  @default(now())
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, mevzuatAdi, madde])
+  @@index([workspaceId])
+  @@index([workspaceId, createdAt])
 }
 
 model Task {

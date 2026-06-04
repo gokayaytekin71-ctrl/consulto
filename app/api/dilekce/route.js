@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { consumeToken } from "@/lib/tokens"; // YENİ: Token mantığı
+import { checkTokenBalance, consumeToken } from "@/lib/tokens"; // Token mantığı
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -35,18 +35,19 @@ export async function POST(req) {
     }
 
     const userId = session.user.id;
-    
-    // --- YENİ TOKEN SİSTEMİ ---
-    // Dilekçe başına 1 Token düşer
-    const consumption = await consumeToken(userId, "DILEKCE", 1);
-    
-    if (!consumption.ok) {
+
+    // --- TOKEN KONTROLÜ ---
+    // Burada sadece bakiye kontrolü yapılır; token, dilekçe servisi başarılı cevap verdikten sonra düşülür.
+    const balanceCheck = await checkTokenBalance(userId, 1);
+
+    if (!balanceCheck.ok) {
       return NextResponse.json(
         {
           error: "QUOTA_EXCEEDED",
           message: "Dilekçe oluşturmak için yeterli tokeniniz yok.",
           type: "dilekce",
-          requirePayment: true // Frontend'de ödeme popup'ı için
+          requirePayment: true,
+          remaining: balanceCheck.remaining ?? 0,
         },
         { status: 402 }
       );
@@ -113,7 +114,38 @@ export async function POST(req) {
     }
 
     const data = await resp.json();
-    return NextResponse.json(data, { status: resp.status });
+
+    if (!resp.ok) {
+      return NextResponse.json(data, { status: resp.status });
+    }
+
+    // Dilekçe servisi başarılı cevap verdikten sonra token düş.
+    const consumption = await consumeToken(userId, "DILEKCE", 1, {
+      dava_turu: dava_turu || null,
+      konu: konu || null,
+      mahkeme: mahkeme || null,
+    });
+
+    if (!consumption.ok) {
+      return NextResponse.json(
+        {
+          error: "QUOTA_EXCEEDED",
+          message: "Dilekçe oluşturmak için yeterli tokeniniz yok.",
+          type: "dilekce",
+          requirePayment: true,
+          remaining: consumption.remaining ?? 0,
+        },
+        { status: 402 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        ...data,
+        tokenRemaining: consumption.remaining,
+      },
+      { status: resp.status }
+    );
   } catch (error) {
     console.error('API Dilekçe Oluşturma Hatası:', error);
     return NextResponse.json(

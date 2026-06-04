@@ -214,7 +214,7 @@ function autoLinkDecisionsInText(text) {
 
 // --- Ana Hook ---
 export function useAnalysisBot() {
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
 
   const [chats, setChats] = useState([]);
   const [activeId, setActiveId] = useState(null);
@@ -411,7 +411,7 @@ export function useAnalysisBot() {
     try {
       const res = await fetch("/api/chats", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sorgu: input.trim() }), cache: "no-store", credentials: "include",
+        body: JSON.stringify({ sorgu: input.trim(), chatId: draft.id }), cache: "no-store", credentials: "include",
       });
 
       // --- TOKEN / BAKİYE KONTROLÜ ---
@@ -439,6 +439,11 @@ export function useAnalysisBot() {
       if (!res.ok || payload?.ok === false) throw new Error(payload.message || "API Error");
 
       const data = payload?.dataFromPython ?? payload ?? {};
+
+      if (payload?.tokenRemaining !== undefined) {
+        await update({ tokenBalance: payload.tokenRemaining });
+      }
+
       const analysisText = data?.sonuc_ve_degerlendirme ?? null;
       const botId = crypto.randomUUID();
 

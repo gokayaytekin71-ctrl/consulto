@@ -24,8 +24,9 @@ export default function MaintenancePage() {
         </h1>
 
         <p className="text-gray-300 leading-relaxed mb-6">
-          Daha hızlı ve güvenli bir deneyim için kısa süreliğine bakım
-          çalışması yapıyoruz. Birkaç saat içinde geri döneceğiz!
+          Consülto v3 Çok yakında sizlerle!
+          Daha hızlı bir sunucuya taşınıyoruz. Yeni Consülto Yapay Zeka aracı ile;
+          yeni sunucumuzda çok kısa bir süre içerisinde tekrar hizmetinizde olacağız!
         </p>
 
         <div className="flex flex-col sm:flex-row gap-3 justify-center">

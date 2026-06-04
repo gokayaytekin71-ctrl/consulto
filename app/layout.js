@@ -2,6 +2,7 @@ import "./globals.css";
 import { Cormorant_Garamond, EB_Garamond } from "next/font/google";
 import Header from "@/components/Header";
 import AuthProvider from "@/components/AuthProvider";
+import ActivityTracker from "@/components/ActivityTracker";
 import Footer from "@/components/Footer";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
 
         <ThemeProvider>
           <AuthProvider>
+            <ActivityTracker />
             <Header />
             <main className="flex-1 pt-24">{children}</main>
             <Footer />
