@@ -100,6 +100,9 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
             const isEditing = editingFileNameId === file.id;
             const isSaving = savingFileNameId === file.id;
             const hasAnalysis = file.aiSummary || file.detailedSummary;
+            const fileOpenUrl = activeWorkspaceId && file.id
+              ? `/api/workspaces/${activeWorkspaceId}/files?fileId=${file.id}`
+              : "";
 
             return (
               <div
@@ -156,9 +159,9 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
                         </svg>
                       </div>
                       <div className="min-w-0 flex-1">
-                        {file.url ? (
+                        {fileOpenUrl ? (
                           <a
-                            href={file.url}
+                            href={fileOpenUrl}
                             target="_blank"
                             rel="noreferrer"
                             className="block truncate text-[11.5px] font-bold leading-tight text-slate-800 hover:text-blue-700 hover:underline"

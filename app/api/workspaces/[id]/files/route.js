@@ -269,7 +269,7 @@ function attachUserPerspective(file) {
   };
 }
 
-export async function GET(_request, { params }) {
+export async function GET(request, { params }) {
   const { session, response } = await requireSession();
   if (response) return response;
 
@@ -298,12 +298,92 @@ export async function GET(_request, { params }) {
       );
     }
 
+    const url = new URL(request.url);
+    const fileId = url.searchParams.get("fileId");
+
+    if (fileId) {
+      const file = await prisma.workspaceFile.findFirst({
+        where: {
+          id: fileId,
+          workspaceId,
+        },
+        select: {
+          name: true,
+          type: true,
+          fileData: true,
+        },
+      });
+
+      if (!file || !file.fileData) {
+        return Response.json(
+          {
+            error: "NOT_FOUND",
+            message: "Dosya içeriği bulunamadı.",
+          },
+          { status: 404 }
+        );
+      }
+
+      const extension = String(file.type || "").toLowerCase();
+      const contentTypeMap = {
+        pdf: "application/pdf",
+        txt: "text/plain; charset=utf-8",
+        doc: "application/msword",
+        docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        rtf: "application/rtf",
+        jpg: "image/jpeg",
+        jpeg: "image/jpeg",
+        png: "image/png",
+        webp: "image/webp",
+      };
+      const contentType = contentTypeMap[extension] || "application/octet-stream";
+      const encodedFileName = encodeURIComponent(file.name || "dosya");
+
+      return new Response(file.fileData, {
+        status: 200,
+        headers: {
+          "Content-Type": contentType,
+          "Content-Disposition": `inline; filename*=UTF-8''${encodedFileName}`,
+          "Cache-Control": "private, no-store",
+          "X-Content-Type-Options": "nosniff",
+        },
+      });
+    }
+
     const files = await prisma.workspaceFile.findMany({
       where: {
         workspaceId,
       },
       orderBy: {
         createdAt: "desc",
+      },
+      select: {
+        id: true,
+        workspaceId: true,
+        name: true,
+        type: true,
+        size: true,
+        url: true,
+        storageKey: true,
+        createdAt: true,
+        extractedText: true,
+        aiSummary: true,
+        detailedSummary: true,
+        documentType: true,
+        documentClass: true,
+        legalKeywords: true,
+        detectedStatutes: true,
+        keyFacts: true,
+        keyDates: true,
+        parties: true,
+        evidenceList: true,
+        claimsOrAccusations: true,
+        fields: true,
+        risks: true,
+        defenseIssues: true,
+        searchSummary: true,
+        aiProfile: true,
+        profiledAt: true,
       },
     });
 
@@ -597,10 +677,12 @@ export async function POST(request, { params }) {
       },
     });
 
+    const responseFiles = savedFiles.map(({ fileData, ...file }) => attachUserPerspective(file));
+
     return Response.json(
       {
         ok: true,
-        files: savedFiles.map(attachUserPerspective),
+        files: responseFiles,
         tokenBalance: tokenBalanceAfterUpload,
       },
       { status: 201 }
@@ -718,10 +800,12 @@ export async function PATCH(request, { params }) {
       },
     });
 
+    const { fileData, ...safeUpdatedFile } = updatedFile;
+
     return Response.json(
       {
         ok: true,
-        file: attachUserPerspective(updatedFile),
+        file: attachUserPerspective(safeUpdatedFile),
       },
       { status: 200 }
     );
