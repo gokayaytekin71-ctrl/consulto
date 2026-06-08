@@ -283,7 +283,7 @@ export default function useCalismaAlani() {
     {
       id: "m1",
       role: "assistant",
-      text: "Çalışma masası hazır. Bu alanda aynı dosya üzerinde birden fazla soru sorabilir, kararları kaydedebilir, not alabilir ve dosya ekleyebilirsiniz.",
+      text: "Çalışma alanı yükleniyor...",
       createdAt: new Date().toISOString(),
     },
   ]);
@@ -430,7 +430,7 @@ export default function useCalismaAlani() {
         {
           id: "m-empty-assistant",
           role: "assistant",
-          text: "Bu çalışma alanı hazır. İstediğiniz hukuki sorularınızı sorabilir, dosyalarınızı ekleyebilir ve bunlar hakkında da görüş isteyebilir, notlarınızı ve kararlarınızı burada toplayabilirsiniz.",
+          text: "Başlamak için önce bir çalışma alanı oluşturun. Çalışma alanı oluşturduktan sonra hukuki sorularınızı sorabilir, dosyalarınızı ekleyebilir, notlarınızı ve kararlarınızı burada toplayabilirsiniz.",
           createdAt: new Date().toISOString(),
         },
       ]);

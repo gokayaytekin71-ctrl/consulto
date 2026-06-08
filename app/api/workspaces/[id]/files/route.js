@@ -20,7 +20,7 @@ const FILE_PROFILE_TOKEN_COST = 1;
 const WORKSPACE_AI_API_BASE =
   process.env.WORKSPACE_AI_API_BASE ||
   process.env.NEXT_PUBLIC_WORKSPACE_AI_API_BASE ||
-  "http://45.141.151.34:5005";
+  "https://api.consultohukuk.com";
 
 const FILE_PROFILE_TIMEOUT_MS = 190000;
 const FILE_OCR_TIMEOUT_MS = 180000;

@@ -32,6 +32,7 @@ export default function ChatPanel({ vm }) {
     tokenBalance,
     currentMessageTokenCost,
     isLoadingTokenBalance,
+    setIsCreateWorkspaceModalOpen,
   } = vm;
 
   return (
@@ -129,6 +130,21 @@ export default function ChatPanel({ vm }) {
              <div className="mb-2 text-2xl opacity-50">⏳</div>
              <div className="text-xs font-bold text-slate-500">Çalışma alanı yükleniyor...</div>
            </div>
+         </div>
+       ) : !activeWorkspaceId ? (
+         <div className="flex h-full min-h-[220px] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-slate-200 bg-white/50 p-8 text-center">
+           <div className="mb-3 text-3xl opacity-50">📁</div>
+           <div className="text-sm font-black text-slate-700">Henüz bir çalışma alanınız yok</div>
+           <p className="mt-1.5 max-w-xs text-xs font-medium leading-5 text-slate-500">
+             Başlamak için bir çalışma alanı oluşturun. Dosyalarınızı, kararları ve sohbetlerinizi orada toplayabilirsiniz.
+           </p>
+           <button
+             type="button"
+             onClick={() => setIsCreateWorkspaceModalOpen(true)}
+             className="mt-4 rounded-2xl bg-blue-600 px-5 py-3 text-xs font-black text-white shadow-[0_4px_14px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+           >
+             Yeni Çalışma Alanı Oluştur
+           </button>
          </div>
        ) : messages.map((message) => {
          const isUser = message.role === "user";
