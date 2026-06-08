@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../../auth/[...nextauth]/route"; // authOptions yolunu projene göre düzelt
 import prisma from "@/lib/prisma";
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
 
 export async function GET(request) {
   try {

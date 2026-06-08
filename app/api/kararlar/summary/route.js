@@ -4,6 +4,9 @@
 // code'u tam eşleştirmek yerine esas ve karar numaralarını ayrı ayrı `contains`
 // ile ara; type filtresi tutmazsa code-only'ye düş.
 
+export const dynamic = "force-dynamic";
+export const runtime = "nodejs";
+
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma"; // page.js ile aynı import (default export)
 
