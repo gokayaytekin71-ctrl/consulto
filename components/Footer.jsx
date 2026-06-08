@@ -64,7 +64,7 @@ export default function Footer() {
                 Keşfet
               </h3>
               <p className="mt-4 text-sm leading-relaxed text-slate-400 max-w-sm">
-                Yapay zeka destekli dilekçe botları, anlık içtihat analizleri ve hukuki hesaplama araçlarıyla mesleki süreçlerinizi hızlandırın.
+                Yapay zeka destekli dilekçe botları, çalışma alanları, akıllı içtihat arama ve hukuki hesaplama araçlarıyla mesleki süreçlerinizi hızlandırın.
               </p>
             </div>
             
@@ -94,6 +94,7 @@ export default function Footer() {
                 <NavLink href="/bot">Analiz Botu</NavLink>
                 <NavLink href="/araclar">Hukuk Araçları</NavLink>
                 <NavLink href="/akilli-arama">Akıllı Arama</NavLink>
+                <NavLink href="/calisma-alani">Çalışma Alanı</NavLink>
               </nav>
             </div>
             <div>
@@ -146,7 +147,7 @@ export default function Footer() {
           <div className="flex items-center gap-4">
              <span className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] font-mono text-slate-400">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                System v2.1
+                System v3
              </span>
           </div>
         </div>

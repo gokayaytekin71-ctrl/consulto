@@ -9,9 +9,9 @@ const PACKAGES = {
   1: { tokens: 5, price: 150, name: "5 Token Paketi" }, 
   2: { tokens: 25, price: 500, name: "25 Token Paketi" },
   3: { tokens: 50, price: 850, name: "50 Token Paketi" },
-  4: { tokens: 99999, price: 1500, name: "3 Aylık Sınırsız Erişim Paketi" }, 
-  5: { tokens: 99999, price: 2500, name: "6 Aylık Sınırsız Erişim Paketi" },
-  6: { tokens: 99999, price: 4000, name: "1 Yıllık Sınırsız Erişim Paketi Paketi" },
+  4: { tokens: 99999, price: 2699, name: "3 Aylık Sınırsız Erişim Paketi" }, 
+  5: { tokens: 99999, price: 4750, name: "6 Aylık Sınırsız Erişim Paketi" },
+  6: { tokens: 99999, price: 7000, name: "1 Yıllık Sınırsız Erişim Paketi Paketi" },
 };
 
 export async function POST(req) {

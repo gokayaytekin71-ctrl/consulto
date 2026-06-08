@@ -248,45 +248,52 @@ model WorkspaceMessage {
 }
 
 model WorkspaceNote {
-  id          String    @id @default(cuid())
+  id          String         @id @default(cuid())
   workspaceId String
-  type        String    @default("Kullanıcı Notu")
+  fileId      String?
+  type        String         @default("Kullanıcı Notu")
   content     String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @default(now()) @updatedAt
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @default(now()) @updatedAt
+  workspace   Workspace      @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  file        WorkspaceFile? @relation(fields: [fileId], references: [id], onDelete: Cascade)
 
   @@index([workspaceId])
+  @@index([fileId])
   @@index([workspaceId, createdAt])
 }
 
 model WorkspaceFile {
-  id                String    @id @default(cuid())
-  workspaceId       String
-  name              String
-  type              String?
-  size              Int?
-  url               String?
-  storageKey        String?
-  extractedText     String?
-  aiSummary         String?
-  detailedSummary   String?
-  documentType      String?
-  legalKeywords     Json?
-  detectedStatutes  Json?
-  keyFacts          Json?
-  keyDates          Json?
-  parties           Json?
-  evidenceList      Json?
-  risks             Json?
-  defenseIssues     Json?
-  searchSummary     String?
-  aiProfile         Json?
-  profiledAt        DateTime?
-  createdAt         DateTime  @default(now())
-  workspace         Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  id                  String    @id @default(cuid())
+  workspaceId         String
+  name                String
+  type                String?
+  size                Int?
+  url                 String?
+  storageKey          String?
+  extractedText       String?
+  aiSummary           String?
+  detailedSummary     String?
+  documentType        String?
+  documentClass       String?
+  legalKeywords       Json?
+  detectedStatutes    Json?
+  keyFacts            Json?
+  keyDates            Json?
+  parties             Json?
+  evidenceList        Json?
+  claimsOrAccusations Json?
+  fields              Json?
+  risks               Json?
+  defenseIssues       Json?
+  searchSummary       String?
+  aiProfile           Json?
+  profiledAt          DateTime?
+  createdAt           DateTime  @default(now())
+  workspace           Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
-  chunks            WorkspaceFileChunk[]
+  chunks              WorkspaceFileChunk[]
+  notes               WorkspaceNote[]
 
   @@index([workspaceId])
   @@index([workspaceId, createdAt])

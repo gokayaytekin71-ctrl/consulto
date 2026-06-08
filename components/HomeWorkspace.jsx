@@ -125,7 +125,7 @@ const TEXT_TO_SELECT = "Bu kapsamda Yargıtay 5. Ceza Dairesi'nin 2021/15352 E.,
 const WORKSPACE_MODES = [
   { id: "general_analysis",        label: "Genel Analiz",        desc: "Dosyayı geniş açıdan analiz eder." },
   { id: "file_strategy",           label: "Dosya Stratejisi",    desc: "Güçlü/zayıf yön ve yol haritası." },
-  { id: "contradiction_detection", label: "Çelişki Bul",         desc: "Belge ve beyanlardaki tutarsızlıklar." },
+  { id: "contract_protocol_drafting", label: "Sözleşme-Protokol Taslağı",         desc: "Sözleşme-Protokol Hazırlar." },
   { id: "evidence_analysis",       label: "Delil Analizi",       desc: "Delillerin ispat gücünü değerlendirir." },
   { id: "document_summary",        label: "Özetle",              desc: "Sade ve kronolojik özet." },
   { id: "petition_draft",          label: "Dilekçe Taslağı",     desc: "Dosya bağlamına göre taslak üretir." },

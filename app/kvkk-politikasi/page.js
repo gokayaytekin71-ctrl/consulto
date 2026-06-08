@@ -63,17 +63,18 @@ export default function KvkkPolitikasiPage() {
       <section className="mx-auto max-w-4xl px-4 sm:px-6 py-2">
         <div className="rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm p-6">
           <h2 className="text-lg font-semibold text-white">4) Veri Kategorileri ve İşleme Amaçları</h2>
-          <p className="mt-2 text-sm text-slate-300">İşlenen başlıca veri kategorileri ve örnek amaçlar aşağıdadır:</p>
+          <p className="mt-2 text-sm text-slate-300">İşlenen başlıca veri kategorileri ve amaçlar aşağıdadır:</p>
           <div className="mt-3 grid gap-3 sm:grid-cols-2">
             <ul className="space-y-1 text-sm text-slate-300 list-disc pl-5">
-              <li>Kimlik ve iletişim bilgileri — üyelik/iletişim, sözleşme süreçleri, destek.</li>
+              <li>Kullanıcılarının ; Google hesap bilgileri, sisteme yükledikleri dosyalar, yapay zeka uygulamalarına sorular ve bunların cevapları— kullanıcıların deneyimini optimize etmek ve işlerini kolaylaştırmak, verilerine kolay erişmesini sağlamak amacıyla şifrelenerek kaydedilir.</li>
+              
               <li>Hukuki işlem/işlem güvenliği — talep/şikâyet yönetimi, güvenlik ve denetim.</li>
               <li>Finans/ticari bilgiler — faturalama, tahsilat, muhasebe.</li>
             </ul>
             <ul className="space-y-1 text-sm text-slate-300 list-disc pl-5">
               <li>Kullanım ve log verileri — hizmetin iyileştirilmesi, performans ve güvenlik.</li>
               <li>Pazarlama tercihleri — açık rıza ile bülten/kampanya iletişimi.</li>
-              <li>Özel nitelikli veriler — yalnızca kanuni istisna veya açık rıza ile ve ek tedbirlerle.</li>
+              <li>Özel nitelikli veriler işlenmez.</li>
             </ul>
           </div>
         </div>
@@ -86,7 +87,7 @@ export default function KvkkPolitikasiPage() {
           <p className="mt-2 text-sm text-slate-300">
             Veriler; ilgili mevzuatta öngörülen veya işleme amaçları için gerekli süre kadar saklanır. Süre dolduğunda
             periyodik imha prosedürleri işletilerek silme, yok etme veya anonimleştirme yapılır. Süreçler kayıt
-            altındadır.
+            altındadır. Kullanıcı bir belgeyi, analizi, dilekçeyi, görevi vs. her türlü silinebilir verisini sildiğinde işbu veri tüm veritabanlarından anında silinir. Verilerin yedeği güvenlik amaçlı tutulmaz.
           </p>
         </div>
       </section>

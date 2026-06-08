@@ -17,6 +17,7 @@ const PACKAGES = [
     summary: "Bireysel denemeler için ideal giriş seviyesi.",
     features: [
       "5 Token Yüklenir",
+      "Çalışma Alanı",
       "Dilekçe Oluşturma (1 Token)",
       "Analiz İsteme (1 Token)",
       "Süre sınırı yok",
@@ -34,6 +35,7 @@ const PACKAGES = [
       "25 Token Yüklenir",
       "Yaklaşık %33 daha ucuz",
       "Dilekçe & Analiz Botu",
+      "Çalışma Alanı",
       "Sınırsız Akıllı Arama",
       "Hesaplama Araçları Tam Erişim",
     ],
@@ -56,13 +58,14 @@ const PACKAGES = [
   {
     id: 4,
     name: "Sınırsız Paket – 3 Aylık",
-    price: "₺1.500",
+    price: "₺2.699",
     tokenCount: "Sınırsız Kullanım",
     badge: "Yeni",
     summary: "3 ay boyunca dilekçe, analiz ve arama işlemlerinde limitsiz erişim.",
     features: [
       "3 Ay Sınırsız Dilekçe",
       "3 Ay Sınırsız Analiz",
+      "3 Ay Sınırsız Çalışma Alanı",
       "Sınırsız Akıllı Arama",
       "Tüm Hesaplama Araçları",
       "Öncelikli Destek",
@@ -71,13 +74,14 @@ const PACKAGES = [
   {
     id: 5,
     name: "Sınırsız Paket – 6 Aylık",
-    price: "₺2.500",
+    price: "₺4.750",
     tokenCount: "Sınırsız Kullanım",
     badge: "%70 indirim",
     summary: "6 ay boyunca tüm özelliklerde kesintisiz ve sınırsız kullanım.",
     features: [
       "6 Ay Sınırsız Dilekçe",
       "6 Ay Sınırsız Analiz",
+      "6 Ay Sınırsız Çalışma Alanı",
       "Sınırsız Akıllı Arama",
       "Tüm Hesaplama Araçları",
       "Öncelikli Destek",
@@ -86,13 +90,14 @@ const PACKAGES = [
   {
     id: 6,
     name: "Sınırsız Paket – 1 Yıllık",
-    price: "₺4.000",
+    price: "₺7.000",
     tokenCount: "Sınırsız Kullanım",
     badge: "En Kârlı",
     summary: "1 yıl boyunca Consülto’nun tüm gücü, tek paketle tamamen sizin.",
     features: [
       "12 Ay Sınırsız Dilekçe",
       "12 Ay Sınırsız Analiz",
+      "12 Ay Sınırsız Çalışma Alanı",
       "Sınırsız Akıllı Arama",
       "Tüm Hesaplama Araçları",
       "VIP Destek",
@@ -286,7 +291,7 @@ export default function PricingPage() {
           </span>
         </h1>
         <p className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
-          Consülto v2.1 ile hukuk teknolojilerinin zirvesine en uygun fiyatlarla eriş.
+          Consülto v3 ile hukuk teknolojilerinin zirvesine en uygun fiyatlarla eriş.
         </p>
         <div className="mt-16 flex justify-center">
           <div className="relative w-6 h-10 border-2 border-cyan-400 rounded-full flex justify-center">

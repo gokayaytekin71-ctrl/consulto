@@ -24,13 +24,25 @@ export default function AboutPage() {
 
       {/* Özellikler */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 py-8">
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {[
             {
               title: "Dilekçe Botu",
               desc: "Profesyonel Hukukçu elinden çıkmış gibi,karar atıflı kaynak gösterimli dilekçelerinize ek olarak; risk, gelebilecek karşı argüman ve sunulması gereken delilleri de içeren güçlü taslaklar.",
               icon: (
                 <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
+              ),
+            },
+            {
+              title: "Çalışma Alanı",
+              desc: "Belge yükleyebileceğiniz, yapay zekâ ile karşılıklı çalışabileceğiniz ve hukuki dosyalarınızı tek merkezden yönetebileceğiniz akıllı çalışma alanı.",
+              icon: (
+                <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2" />
+                  <path d="M3 9h18" />
+                  <path d="M8 14h4" />
+                  <path d="M8 17h8" />
+                </svg>
               ),
             },
             {

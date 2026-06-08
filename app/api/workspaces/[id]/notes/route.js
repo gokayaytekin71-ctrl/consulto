@@ -133,6 +133,7 @@ export async function POST(request, { params }) {
 
   const content = String(body?.content || body?.text || "").trim();
   const type = String(body?.type || "Kullanıcı Notu").trim() || "Kullanıcı Notu";
+  const fileId = body?.fileId ? String(body.fileId).trim() : null;
 
   if (!content) {
     return Response.json(
@@ -157,9 +158,32 @@ export async function POST(request, { params }) {
       );
     }
 
+    if (fileId) {
+      const file = await prisma.workspaceFile.findFirst({
+        where: {
+          id: fileId,
+          workspaceId,
+        },
+        select: {
+          id: true,
+        },
+      });
+
+      if (!file) {
+        return Response.json(
+          {
+            error: "NOT_FOUND",
+            message: "Not bağlanacak belge bulunamadı.",
+          },
+          { status: 404 }
+        );
+      }
+    }
+
     const note = await prisma.workspaceNote.create({
       data: {
         workspaceId,
+        fileId,
         type,
         content,
       },

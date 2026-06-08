@@ -207,10 +207,10 @@ function getExpandedQueryTerms(query = "", mode = "") {
   }
 
   if (
-    normalizedMode.includes("contradiction") ||
-    normalizedMode.includes("contradiction_detection") ||
-    normalizedQuery.includes("çeliş") ||
-    normalizedQuery.includes("tutarsız")
+    normalizedMode.includes("Contract") ||
+    normalizedMode.includes("contract_protocol_drafting") ||
+    normalizedQuery.includes("Sözleşme") ||
+    normalizedQuery.includes("Protokol")
   ) {
     expandedTerms.push(...contradictionTerms);
   }
