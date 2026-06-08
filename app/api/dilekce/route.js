@@ -6,7 +6,7 @@ import { checkTokenBalance, consumeToken } from "@/lib/tokens"; // Token mantÄ±Ä
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const DILEKCE_API_URL = process.env.DILEKCE_API_URL || 'http://45.141.151.34:5003';
+const DILEKCE_API_URL = process.env.DILEKCE_API_URL || 'https://api.consultohukuk.com/dilekce';
 
 function isJson(res) {
   const ct = res.headers.get('content-type') || '';

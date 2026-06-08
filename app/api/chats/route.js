@@ -10,7 +10,7 @@ export const runtime = 'nodejs';
 const API_ENDPOINT =
   process.env.API_ENDPOINT ||
   process.env.NEXT_PUBLIC_API_URL ||
-  "http://localhost:5001/arama_yap";
+  "https://api.consultohukuk.com/semantic/arama_yap";
 
 export async function GET(req) {
   const session = await getServerSession(authOptions);

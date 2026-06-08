@@ -430,7 +430,7 @@ export default function useCalismaAlani() {
         {
           id: "m-empty-assistant",
           role: "assistant",
-          text: "Bu çalışma alanı hazır. Dosyalarınızı ekleyip soru sorabilir, notlarınızı ve kararlarınızı burada toplayabilirsiniz.",
+          text: "Bu çalışma alanı hazır. İstediğiniz hukuki sorularınızı sorabilir, dosyalarınızı ekleyebilir ve bunlar hakkında da görüş isteyebilir, notlarınızı ve kararlarınızı burada toplayabilirsiniz.",
           createdAt: new Date().toISOString(),
         },
       ]);
@@ -520,7 +520,7 @@ export default function useCalismaAlani() {
                 {
                   id: "m-empty-assistant",
                   role: "assistant",
-                  text: "Bu çalışma alanı hazır. Dosyalarınızı ekleyip soru sorabilir, notlarınızı ve kararlarınızı burada toplayabilirsiniz.",
+                  text: "Bu çalışma alanı hazır. İstediğiniz hukuki sorularınızı sorabilir, dosyalarınızı ekleyebilir ve bunlar hakkında da görüş isteyebilir, notlarınızı ve kararlarınızı burada toplayabilirsiniz.",
                   createdAt: new Date().toISOString(),
                 },
               ]
