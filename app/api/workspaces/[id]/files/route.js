@@ -5,10 +5,8 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
 import { checkTokenBalance, consumeToken } from "@/lib/tokens";
 import path from "path";
-import { createRequire } from "module";
 import mammoth from "mammoth";
 
-const require = createRequire(import.meta.url);
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
@@ -426,21 +424,11 @@ export async function POST(request, { params }) {
 
       try {
         if (extension === "pdf") {
-          const pdfParse = require("pdf-parse");
-          const pdfData = await pdfParse(buffer);
-          extractedText = pdfData.text || "";
-
-          if (String(extractedText || "").trim().length < MIN_EXTRACTED_TEXT_LENGTH) {
-            const ocrText = await extractTextWithOcr({
-              buffer,
-              fileName: originalName,
-              fileType: extension.toUpperCase(),
-            });
-
-            if (ocrText) {
-              extractedText = ocrText;
-            }
-          }
+          extractedText = await extractTextWithOcr({
+            buffer,
+            fileName: originalName,
+            fileType: extension.toUpperCase(),
+          });
         }
         else if (extension === "docx") {
           const result = await mammoth.extractRawText({ buffer });
