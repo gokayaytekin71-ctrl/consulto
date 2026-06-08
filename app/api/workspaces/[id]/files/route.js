@@ -5,7 +5,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
 import { checkTokenBalance, consumeToken } from "@/lib/tokens";
 import path from "path";
-import fs from "fs/promises";
 import { createRequire } from "module";
 import mammoth from "mammoth";
 
@@ -393,15 +392,6 @@ export async function POST(request, { params }) {
     const savedFiles = [];
     let tokenBalanceAfterUpload = null;
 
-    const uploadDir = path.join(
-      process.cwd(),
-      "public",
-      "uploads",
-      "workspaces",
-      workspaceId
-    );
-
-    await fs.mkdir(uploadDir, { recursive: true });
 
     for (const file of uploadedFiles) {
       if (!file || typeof file.arrayBuffer !== "function") continue;
@@ -429,12 +419,7 @@ export async function POST(request, { params }) {
         );
       }
 
-      const uniquePrefix = `${Date.now()}-${crypto.randomUUID()}`;
-      const storageName = `${uniquePrefix}-${originalName}`;
-      const storagePath = path.join(uploadDir, storageName);
-      const publicUrl = `/uploads/workspaces/${workspaceId}/${storageName}`;
-      const storageKey = `workspaces/${workspaceId}/${storageName}`;
-
+      const storageKey = `db/workspaces/${workspaceId}/${Date.now()}-${crypto.randomUUID()}-${originalName}`;
       const buffer = Buffer.from(await file.arrayBuffer());
 
       let extractedText = "";
@@ -469,7 +454,6 @@ export async function POST(request, { params }) {
         console.error("Dosya text extraction hatası:", extractError);
       }
 
-      await fs.writeFile(storagePath, buffer);
 
       let savedFile = await prisma.workspaceFile.create({
         data: {
@@ -477,8 +461,9 @@ export async function POST(request, { params }) {
           name: originalName,
           type: extension.toUpperCase(),
           size: file.size,
-          url: publicUrl,
+          url: null,
           storageKey,
+          fileData: buffer,
           extractedText,
         },
       });
@@ -824,10 +809,6 @@ export async function DELETE(request, { params }) {
       );
     }
 
-    if (file.storageKey) {
-      const physicalPath = path.join(process.cwd(), "public", "uploads", file.storageKey);
-      await fs.unlink(physicalPath).catch(() => null);
-    }
 
     await prisma.workspaceFile.delete({
       where: {

@@ -271,6 +271,7 @@ model WorkspaceFile {
   size                Int?
   url                 String?
   storageKey          String?
+  fileData            Bytes?
   extractedText       String?
   aiSummary           String?
   detailedSummary     String?
