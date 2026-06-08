@@ -103,17 +103,32 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
             const fileOpenUrl = activeWorkspaceId && file.id
               ? `/api/workspaces/${activeWorkspaceId}/files?fileId=${file.id}`
               : "";
+            const openFile = () => {
+              if (!fileOpenUrl) return;
+              window.open(fileOpenUrl, "_blank", "noopener,noreferrer");
+            };
 
             return (
               <div
                 key={file.id}
-                className="group relative rounded-lg pl-2.5 pr-1.5 py-2 transition-colors hover:bg-slate-50"
+                role={fileOpenUrl ? "button" : undefined}
+                tabIndex={fileOpenUrl ? 0 : undefined}
+                onClick={openFile}
+                onKeyDown={(event) => {
+                  if (!fileOpenUrl) return;
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openFile();
+                  }
+                }}
+                className={`group relative rounded-lg pl-2.5 pr-1.5 py-2 transition-colors hover:bg-slate-50 ${fileOpenUrl ? "cursor-pointer" : ""}`}
               >
                 {/* sol vurgu çubuğu (hover) */}
                 <span className="absolute left-0 top-1/2 h-0 w-[3px] -translate-y-1/2 rounded-full bg-blue-500 transition-all duration-200 group-hover:h-6" />
 
                 {isEditing ? (
                   <form
+                    onClick={(event) => event.stopPropagation()}
                     onSubmit={(event) => {
                       event.preventDefault();
                       handleUpdateFileName(file);
@@ -164,6 +179,7 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
                             href={fileOpenUrl}
                             target="_blank"
                             rel="noreferrer"
+                            onClick={(event) => event.stopPropagation()}
                             className="block truncate text-[11.5px] font-bold leading-tight text-slate-800 hover:text-blue-700 hover:underline"
                             title={file.name}
                           >
@@ -187,7 +203,8 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
                           {hasAnalysis && (
                             <button
                               type="button"
-                              onClick={() => {
+                              onClick={(event) => {
+                                event.stopPropagation();
                                 setActiveFileSummary(file);
                                 setActiveFileDetailTab("analysis");
                               }}
@@ -202,7 +219,8 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
                           )}
                           <button
                             type="button"
-                            onClick={() => {
+                            onClick={(event) => {
+                              event.stopPropagation();
                               setActiveFileSummary(file);
                               setActiveFileDetailTab("notes");
                             }}
@@ -217,7 +235,8 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
                           </button>
                           <button
                             type="button"
-                            onClick={() => {
+                            onClick={(event) => {
+                              event.stopPropagation();
                               setEditingFileNameId(file.id);
                               setEditingFileNameValue(file.name || "");
                             }}
@@ -232,7 +251,10 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
                           </button>
                           <button
                             type="button"
-                            onClick={() => handleDeleteFile(file)}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              handleDeleteFile(file);
+                            }}
                             title="Sil"
                             aria-label="Sil"
                             className="ml-auto flex h-7 w-7 items-center justify-center rounded-md bg-slate-100 text-slate-400 transition-colors hover:bg-red-50 hover:text-red-600"

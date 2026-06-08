@@ -5,7 +5,7 @@
 // =============================================================================
 
 export const WORKSPACE_AI_API_BASE =
-  process.env.NEXT_PUBLIC_WORKSPACE_AI_API_BASE || "http://45.141.151.34:5005";
+  process.env.NEXT_PUBLIC_WORKSPACE_AI_API_BASE || "https://api.consultohukuk.com";
 
 export const MAX_WORKSPACE_FILE_SIZE_MB = 10;
 export const MAX_WORKSPACE_FILE_SIZE_BYTES = MAX_WORKSPACE_FILE_SIZE_MB * 1024 * 1024;
