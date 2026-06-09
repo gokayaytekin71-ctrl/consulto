@@ -145,20 +145,27 @@ export default function Header() {
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 pl-2">Menü</p>
                 {[
                   { label: "Kararlar", path: "/kararlar", icon: Icons.Gavel },
-                  { label: "Akıllı Arama", path: "/akilli-arama", icon: Icons.Search },
                   { label: "Dilekçe", path: "/dilekce", icon: Icons.FileText },
-                  { label: "Bilgi Kartları", path: "/Flash-Cards", icon: Icons.Library },
+                  { label: "Çalışma Alanı", path: "/calisma-alani", icon: Icons.Layout, badge: "En Gelişmiş!" },
                   { label: "Analiz", path: "/bot", icon: Icons.Cpu },
-                  { label: "Araçlar", path: "/araclar", icon: Icons.Tool },
+                  { label: "Blog", path: "/blog", icon: Icons.Edit },
                   { label: "Paketler", path: "/paketler-ucretler", icon: Icons.Package },
                   
                 ].map((item) => (
                   <button 
                     key={item.path}
                     onClick={() => handleNav(item.path)} 
-                    className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all ${pathname === item.path ? "bg-cyan-500/20 text-white border border-cyan-500/30" : "text-slate-300 hover:bg-white/5 hover:text-white"}`}
+                    className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all ${
+                      (item.path === "/blog" ? pathname.startsWith("/blog") : pathname === item.path)
+                        ? "bg-cyan-500/20 text-white border border-cyan-500/30"
+                        : "text-slate-300 hover:bg-white/5 hover:text-white"
+                    }`}
                   >
-                    <div className={`p-2 rounded-lg ${pathname === item.path ? "bg-cyan-500 text-white" : "bg-white/5 text-slate-400"}`}>
+                    <div className={`p-2 rounded-lg ${
+                      (item.path === "/blog" ? pathname.startsWith("/blog") : pathname === item.path)
+                        ? "bg-cyan-500 text-white"
+                        : "bg-white/5 text-slate-400"
+                    }`}>
                       <item.icon />
                     </div>
                     <span className="text-sm font-medium relative">
@@ -176,6 +183,9 @@ export default function Header() {
              <div className="mt-6 pt-6 border-t border-white/10 space-y-1">
                 <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 pl-2">Diğer</p>
                 {[
+                  { href: "/akilli-arama", label: "Akıllı Arama", icon: Icons.Search },
+                  { href: "/Flash-Cards", label: "Bilgi Kartları", icon: Icons.Library },
+                  { href: "/araclar", label: "Araçlar", icon: Icons.Tool },
                   { href: "/mevzuat", label: "Mevzuat", icon: Icons.Library },
                   { href: "/makaleler", label: "Makaleler", icon: Icons.Feather },
                   { href: "/gazete", label: "Resmî Gazete", icon: Icons.Scroll }
@@ -221,7 +231,7 @@ export default function Header() {
           <nav className="hidden md:flex flex-1 items-center justify-center gap-0.5 px-2">
             <NavItem onClick={() => handleNav("/kararlar")} icon={Icons.Gavel} label="Kararlar" active={pathname === "/kararlar"} />
             <NavItem onClick={() => handleNav("/dilekce")} icon={Icons.FileText} label="Dilekçe" active={pathname === "/dilekce"} />
-              <NavItem onClick={() => handleNav("/calisma-alani")} icon={Icons.Layout} label="Çalışma Alanı" active={pathname === "/calisma-alani"} badge="En Gelişmiş!" />
+            <NavItem onClick={() => handleNav("/calisma-alani")} icon={Icons.Layout} label="Çalışma Alanı" active={pathname === "/calisma-alani"} badge="En Gelişmiş!" />
             <NavItem onClick={() => handleNav("/bot")} icon={Icons.Cpu} label="Analiz" active={pathname === "/bot"} />
             <NavItem onClick={() => handleNav("/blog")} icon={Icons.Edit} label="Blog" active={pathname.startsWith("/blog")} />
             <NavItem onClick={() => handleNav("/paketler-ucretler")} icon={Icons.Package} label="Paketler" active={pathname === "/paketler-ucretler"} />
