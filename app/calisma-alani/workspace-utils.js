@@ -7,7 +7,7 @@
 export const WORKSPACE_AI_API_BASE =
   process.env.NEXT_PUBLIC_WORKSPACE_AI_API_BASE || "https://api.consultohukuk.com";
 
-export const MAX_WORKSPACE_FILE_SIZE_MB = 10;
+export const MAX_WORKSPACE_FILE_SIZE_MB = 4.5;
 export const MAX_WORKSPACE_FILE_SIZE_BYTES = MAX_WORKSPACE_FILE_SIZE_MB * 1024 * 1024;
 
 export const FIRST_TIER_MESSAGE_LIMIT = 3;
