@@ -10,6 +10,18 @@ const FIRST_TIER_MESSAGE_LIMIT = 3;
 const FIRST_TIER_MESSAGE_COST = 1;
 const NEXT_TIER_MESSAGE_COST = 2;
 
+// --- Context yanıt boyutu sınırları (Vercel serverless yanıt limiti ~4.5 MB) ---
+// Tek tek alanları ve toplam yanıtı güvenli bir tavanın altında tutar.
+const MAX_CHUNK_CONTENT_CHARS = 2000;   // her chunk içeriği en fazla bu kadar karakter
+const MAX_PROFILE_FIELD_CHARS = 1500;   // uzun profil metin alanları için tavan
+const MAX_CONTEXT_CHUNKS = 8;           // yanıta giren chunk sayısı
+const MAX_CONTEXT_BYTES = 3 * 1024 * 1024; // toplam yanıt için güvenli tavan (~3 MB)
+
+function truncateText(value = "", max = MAX_PROFILE_FIELD_CHARS) {
+  const str = String(value || "");
+  return str.length > max ? `${str.slice(0, max)}…` : str;
+}
+
 function getWorkspaceMessageTokenCost(existingUserMessageCount = 0) {
   return existingUserMessageCount < FIRST_TIER_MESSAGE_LIMIT
     ? FIRST_TIER_MESSAGE_COST
@@ -255,8 +267,8 @@ function profileToContextItem(file) {
     fileType: file.type || "Dosya",
     contentType: "file_profile",
     documentType: file.documentType || "",
-    aiSummary: file.aiSummary || "",
-    detailedSummary: file.detailedSummary || "",
+    aiSummary: truncateText(file.aiSummary || "", MAX_PROFILE_FIELD_CHARS),
+    detailedSummary: truncateText(file.detailedSummary || "", MAX_PROFILE_FIELD_CHARS),
     legalKeywords: toArray(file.legalKeywords),
     detectedStatutes: toArray(file.detectedStatutes),
     keyFacts: toArray(file.keyFacts),
@@ -265,7 +277,7 @@ function profileToContextItem(file) {
     evidenceList: toArray(file.evidenceList),
     risks: toArray(file.risks),
     defenseIssues: toArray(file.defenseIssues),
-    searchSummary: file.searchSummary || "",
+    searchSummary: truncateText(file.searchSummary || "", MAX_PROFILE_FIELD_CHARS),
     profiledAt: file.profiledAt || null,
     score: 9999,
   };
@@ -364,8 +376,12 @@ export async function GET(request, { params }) {
         orderBy: {
           createdAt: "desc",
         },
-        take: 500,
-        include: {
+        take: 300,
+        select: {
+          id: true,
+          fileId: true,
+          chunkIndex: true,
+          content: true,
           file: {
             select: {
               id: true,
@@ -384,14 +400,25 @@ export async function GET(request, { params }) {
           fileType: chunk.file?.type || "Dosya",
           contentType: "file_chunk",
           chunkIndex: chunk.chunkIndex,
-          content: chunk.content,
+          // Skor TAM içerik üzerinden hesaplanır; yanıta giren metin kırpılır.
           score: scoreChunkContent(chunk.content, terms),
+          content: truncateText(chunk.content, MAX_CHUNK_CONTENT_CHARS),
         }))
         .filter((chunk) => chunk.score > 0)
         .sort((a, b) => b.score - a.score)
-        .slice(0, 8);
+        .slice(0, MAX_CONTEXT_CHUNKS);
 
-      const workspaceContext = [...fileProfileContext, ...selectedChunks];
+      let workspaceContext = [...fileProfileContext, ...selectedChunks];
+
+      // Son güvenlik ağı: toplam yanıt boyutu tavanı aşarsa en düşük skorlu
+      // chunk'lardan başlayarak kırp. Profil bağlamı her zaman korunur.
+      const byteSize = (obj) => Buffer.byteLength(JSON.stringify(obj));
+      while (
+        workspaceContext.length > fileProfileContext.length &&
+        byteSize({ ok: true, workspaceContext }) > MAX_CONTEXT_BYTES
+      ) {
+        workspaceContext.pop();
+      }
 
       return Response.json(
         {
