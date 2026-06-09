@@ -5,17 +5,6 @@ import prisma from "@/lib/prisma";
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-// --- Yanıt boyutu sınırları (Vercel serverless yanıt limiti ~4.5 MB) ---
-const MAX_AI_SUMMARY_CHARS = 1500;       // dosya AI özeti tavanı
-const MAX_MESSAGE_CONTENT_CHARS = 8000;  // tek mesaj içeriği tavanı
-const MAX_NOTE_CONTENT_CHARS = 4000;     // tek not içeriği tavanı
-const MAX_RESPONSE_BYTES = 3 * 1024 * 1024; // toplam yanıt için güvenli tavan (~3 MB)
-
-function truncateText(value, max) {
-  const str = String(value || "");
-  return str.length > max ? `${str.slice(0, max)}…` : str;
-}
-
 async function requireSession() {
   const session = await getServerSession(authOptions);
 
@@ -58,38 +47,15 @@ export async function GET(_request, { params }) {
         id: workspaceId,
         userId: session.user.id,
       },
-      select: {
-        id: true,
-        userId: true,
-        title: true,
-        subtitle: true,
-        status: true,
-        createdAt: true,
-        updatedAt: true,
+      include: {
         messages: {
           orderBy: {
-            createdAt: "desc",
-          },
-          take: 40,
-          select: {
-            id: true,
-            workspaceId: true,
-            role: true,
-            content: true,
-            createdAt: true,
+            createdAt: "asc",
           },
         },
         notes: {
           orderBy: {
             createdAt: "desc",
-          },
-          take: 50,
-          select: {
-            id: true,
-            workspaceId: true,
-            content: true,
-            type: true,
-            createdAt: true,
           },
         },
         files: {
@@ -105,9 +71,23 @@ export async function GET(_request, { params }) {
             url: true,
             storageKey: true,
             createdAt: true,
+            extractedText: true,
             aiSummary: true,
+            detailedSummary: true,
             documentType: true,
             documentClass: true,
+            legalKeywords: true,
+            detectedStatutes: true,
+            keyFacts: true,
+            keyDates: true,
+            parties: true,
+            evidenceList: true,
+            claimsOrAccusations: true,
+            fields: true,
+            risks: true,
+            defenseIssues: true,
+            searchSummary: true,
+            aiProfile: true,
             profiledAt: true,
           },
         },
@@ -115,13 +95,7 @@ export async function GET(_request, { params }) {
           orderBy: {
             createdAt: "desc",
           },
-          take: 100,
-          select: {
-            id: true,
-            workspaceId: true,
-            kararId: true,
-            slug: true,
-            createdAt: true,
+          include: {
             karar: {
               select: {
                 id: true,
@@ -144,49 +118,6 @@ export async function GET(_request, { params }) {
         { status: 404 }
       );
     }
-
-    workspace.messages = [...(workspace.messages || [])].reverse();
-
-    // --- Büyük metin alanlarını kırp (413 FUNCTION_PAYLOAD_TOO_LARGE önlemi) ---
-    workspace.files = (workspace.files || []).map((f) => ({
-      ...f,
-      aiSummary: truncateText(f.aiSummary, MAX_AI_SUMMARY_CHARS),
-    }));
-
-    workspace.messages = (workspace.messages || []).map((m) => ({
-      ...m,
-      content: truncateText(m.content, MAX_MESSAGE_CONTENT_CHARS),
-    }));
-
-    workspace.notes = (workspace.notes || []).map((n) => ({
-      ...n,
-      content: truncateText(n.content, MAX_NOTE_CONTENT_CHARS),
-    }));
-
-    // Son güvenlik ağı: hâlâ tavanı aşıyorsa en eski mesajlardan başlayarak at.
-    const byteSize = (obj) => Buffer.byteLength(JSON.stringify(obj));
-    while (
-      workspace.messages.length > 0 &&
-      byteSize({ ok: true, workspace }) > MAX_RESPONSE_BYTES
-    ) {
-      workspace.messages.shift();
-    }
-
-    // --- TEŞHİS: hangi alanın büyük olduğunu Vercel loglarında göster ---
-    // Sorun çözülünce bu blok silinebilir.
-    try {
-      const kb = (v) => Math.round(Buffer.byteLength(JSON.stringify(v ?? "")) / 1024);
-      console.log("[ws-size] total KB:", kb(workspace));
-      console.log("[ws-size] messages KB:", kb(workspace.messages));
-      console.log("[ws-size] notes KB:", kb(workspace.notes));
-      console.log("[ws-size] decisions KB:", kb(workspace.decisions));
-      console.log("[ws-size] files KB:", kb(workspace.files));
-      for (const f of workspace.files || []) {
-        console.log(
-          `[ws-size] file "${f.name}" -> url:${kb(f.url)}KB storageKey:${kb(f.storageKey)}KB aiSummary:${kb(f.aiSummary)}KB`
-        );
-      }
-    } catch {}
 
     return Response.json(
       {
