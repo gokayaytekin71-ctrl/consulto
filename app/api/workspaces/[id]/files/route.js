@@ -394,21 +394,49 @@ export async function GET(request, { params }) {
         risks: true,
         defenseIssues: true,
         searchSummary: true,
+        // aiProfile DB'den okunur ama yanita SADECE userPerspective alt-alani
+        // konur; geri kalan (cok buyuk olabilen) icerik atilir. Boylece liste
+        // yaniti kucuk kalir ve 413 FUNCTION_PAYLOAD_TOO_LARGE olusmaz.
         aiProfile: true,
         profiledAt: true,
       },
     });
 
-    // Ek guvenlik: buyuk metin alanlarini da makul bir tavanda kirp.
+    // Ek guvenlik: buyuk metin alanlarini kirp; aiProfile'i userPerspective'e indir.
     const safeFiles = files.map((file) => {
+      const aiProfile =
+        file.aiProfile && typeof file.aiProfile === "object" ? file.aiProfile : null;
+
       const trimmed = {
         ...file,
         aiSummary: truncateText(file.aiSummary, MAX_AI_SUMMARY_CHARS),
         detailedSummary: truncateText(file.detailedSummary, MAX_DETAILED_SUMMARY_CHARS),
         searchSummary: truncateText(file.searchSummary, MAX_SEARCH_SUMMARY_CHARS),
+        // Buyuk ham aiProfile'i yanita koyma; userPerspective asagida eklenecek.
+        aiProfile: undefined,
       };
-      return attachUserPerspective(trimmed);
+
+      return {
+        ...trimmed,
+        userPerspective: normalizeUserPerspective({ profile: aiProfile }),
+      };
     });
+
+    // --- Son guvenlik agi + teshis ---
+    // Beklenmedik bir alan hala buyukse, hangi dosya/alan oldugunu logla.
+    try {
+      const bytes = (v) => Buffer.byteLength(JSON.stringify(v ?? ""));
+      const totalKB = Math.round(bytes(safeFiles) / 1024);
+      if (totalKB > 1024) {
+        console.warn(`[files-size] toplam liste ${totalKB}KB - alan dokumu:`);
+        for (const f of safeFiles) {
+          const parts = Object.entries(f)
+            .map(([k, v]) => `${k}:${Math.round(bytes(v) / 1024)}KB`)
+            .filter((s) => !s.endsWith(":0KB"));
+          console.warn(`[files-size] "${f.name}" -> ${parts.join(" ")}`);
+        }
+      }
+    } catch {}
 
     return Response.json(
       {
