@@ -47,15 +47,40 @@ export async function GET(_request, { params }) {
         id: workspaceId,
         userId: session.user.id,
       },
-      include: {
+      select: {
+        id: true,
+        userId: true,
+        title: true,
+        subtitle: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
         messages: {
           orderBy: {
-            createdAt: "asc",
+            createdAt: "desc",
+          },
+          take: 40,
+          select: {
+            id: true,
+            workspaceId: true,
+            role: true,
+            content: true,
+            createdAt: true,
           },
         },
         notes: {
           orderBy: {
             createdAt: "desc",
+          },
+          take: 50,
+          select: {
+            id: true,
+            workspaceId: true,
+            title: true,
+            content: true,
+            type: true,
+            createdAt: true,
+            updatedAt: true,
           },
         },
         files: {
@@ -72,21 +97,8 @@ export async function GET(_request, { params }) {
             storageKey: true,
             createdAt: true,
             aiSummary: true,
-            detailedSummary: true,
             documentType: true,
             documentClass: true,
-            legalKeywords: true,
-            detectedStatutes: true,
-            keyFacts: true,
-            keyDates: true,
-            parties: true,
-            evidenceList: true,
-            claimsOrAccusations: true,
-            fields: true,
-            risks: true,
-            defenseIssues: true,
-            searchSummary: true,
-            aiProfile: true,
             profiledAt: true,
           },
         },
@@ -94,7 +106,16 @@ export async function GET(_request, { params }) {
           orderBy: {
             createdAt: "desc",
           },
-          include: {
+          take: 100,
+          select: {
+            id: true,
+            workspaceId: true,
+            kararId: true,
+            slug: true,
+            title: true,
+            court: true,
+            code: true,
+            createdAt: true,
             karar: {
               select: {
                 id: true,
@@ -117,6 +138,8 @@ export async function GET(_request, { params }) {
         { status: 404 }
       );
     }
+
+    workspace.messages = [...(workspace.messages || [])].reverse();
 
     return Response.json(
       {
