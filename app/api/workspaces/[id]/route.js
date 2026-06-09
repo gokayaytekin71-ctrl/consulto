@@ -76,11 +76,9 @@ export async function GET(_request, { params }) {
           select: {
             id: true,
             workspaceId: true,
-            title: true,
             content: true,
             type: true,
             createdAt: true,
-            updatedAt: true,
           },
         },
         files: {
@@ -112,9 +110,6 @@ export async function GET(_request, { params }) {
             workspaceId: true,
             kararId: true,
             slug: true,
-            title: true,
-            court: true,
-            code: true,
             createdAt: true,
             karar: {
               select: {
