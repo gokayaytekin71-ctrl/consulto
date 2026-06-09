@@ -1,5 +1,3 @@
-
-
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
@@ -22,6 +20,17 @@ const WORKSPACE_AI_API_BASE =
 const FILE_PROFILE_TIMEOUT_MS = 190000;
 const FILE_OCR_TIMEOUT_MS = 180000;
 const MIN_EXTRACTED_TEXT_LENGTH = 80;
+
+// --- Liste yaniti boyutu sinirlari (Vercel serverless yanit limiti ~4.5 MB) ---
+// Dosya listesinde buyuk metin alanlarini kirpar; extractedText hic donmez.
+const MAX_AI_SUMMARY_CHARS = 1500;
+const MAX_DETAILED_SUMMARY_CHARS = 3000;
+const MAX_SEARCH_SUMMARY_CHARS = 1500;
+
+function truncateText(value, max) {
+  const str = String(value || "");
+  return str.length > max ? `${str.slice(0, max)}…` : str;
+}
 
 const ALLOWED_EXTENSIONS = new Set([
   "pdf",
@@ -357,6 +366,10 @@ export async function GET(request, { params }) {
       orderBy: {
         createdAt: "desc",
       },
+      // NOT: extractedText ve fileData LISTEDE DONDURULMEZ.
+      // extractedText 9 MB'lik dosyalarda tek basina 4.5 MB yanit limitini
+      // asiyor ve FUNCTION_PAYLOAD_TOO_LARGE (413) hatasina sebep oluyordu.
+      // Tam metne ihtiyac duyan yerler dosyayi ayrica (fileId ile) cekmelidir.
       select: {
         id: true,
         workspaceId: true,
@@ -366,7 +379,6 @@ export async function GET(request, { params }) {
         url: true,
         storageKey: true,
         createdAt: true,
-        extractedText: true,
         aiSummary: true,
         detailedSummary: true,
         documentType: true,
@@ -387,10 +399,21 @@ export async function GET(request, { params }) {
       },
     });
 
+    // Ek guvenlik: buyuk metin alanlarini da makul bir tavanda kirp.
+    const safeFiles = files.map((file) => {
+      const trimmed = {
+        ...file,
+        aiSummary: truncateText(file.aiSummary, MAX_AI_SUMMARY_CHARS),
+        detailedSummary: truncateText(file.detailedSummary, MAX_DETAILED_SUMMARY_CHARS),
+        searchSummary: truncateText(file.searchSummary, MAX_SEARCH_SUMMARY_CHARS),
+      };
+      return attachUserPerspective(trimmed);
+    });
+
     return Response.json(
       {
         ok: true,
-        files: files.map(attachUserPerspective),
+        files: safeFiles,
       },
       {
         status: 200,
@@ -561,7 +584,7 @@ export async function POST(request, { params }) {
               requirePayment: true,
               tokenBalance: balanceCheck.balance ?? 0,
               remaining: balanceCheck.balance ?? 0,
-              files: savedFiles.map(attachUserPerspective),
+              files: savedFiles.map(({ fileData, extractedText, ...f }) => attachUserPerspective(f)),
             },
             { status: 402 }
           );
@@ -623,7 +646,7 @@ export async function POST(request, { params }) {
                 requirePayment: true,
                 tokenBalance: tokenConsumption.remaining ?? 0,
                 remaining: tokenConsumption.remaining ?? 0,
-                files: [...savedFiles, savedFile].map(attachUserPerspective),
+                files: [...savedFiles, savedFile].map(({ fileData, extractedText, ...f }) => attachUserPerspective(f)),
               },
               { status: 402 }
             );
@@ -677,7 +700,10 @@ export async function POST(request, { params }) {
       },
     });
 
-    const responseFiles = savedFiles.map(({ fileData, ...file }) => attachUserPerspective(file));
+    // Yanitta fileData VE extractedText dondurulmez (buyuk alanlar).
+    const responseFiles = savedFiles.map(({ fileData, extractedText, ...file }) =>
+      attachUserPerspective(file)
+    );
 
     return Response.json(
       {
@@ -800,7 +826,7 @@ export async function PATCH(request, { params }) {
       },
     });
 
-    const { fileData, ...safeUpdatedFile } = updatedFile;
+    const { fileData, extractedText, ...safeUpdatedFile } = updatedFile;
 
     return Response.json(
       {
