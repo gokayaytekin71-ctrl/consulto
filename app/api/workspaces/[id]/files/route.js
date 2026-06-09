@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
+const MAX_FILE_SIZE = 4.5 * 1024 * 1024; // 4.5 MB
 const FILE_PROFILE_TOKEN_COST = 1;
 const WORKSPACE_AI_API_BASE =
   process.env.WORKSPACE_AI_API_BASE ||
@@ -491,7 +491,7 @@ export async function POST(request, { params }) {
         return Response.json(
           {
             error: "VALIDATION_ERROR",
-            message: `${originalName} dosyası çok büyük. En fazla 10 MB yüklenebilir.`,
+            message: `${originalName} dosyası çok büyük. En fazla 4.5 MB yüklenebilir.`,
           },
           { status: 413 }
         );
