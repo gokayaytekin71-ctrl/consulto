@@ -71,7 +71,6 @@ export async function GET(_request, { params }) {
             url: true,
             storageKey: true,
             createdAt: true,
-            extractedText: true,
             aiSummary: true,
             detailedSummary: true,
             documentType: true,
