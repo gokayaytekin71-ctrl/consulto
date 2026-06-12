@@ -11,7 +11,7 @@ const res = await fetch("https://api.shopier.com/v1/webhooks", { // ⚠️ base 
   },
   body: JSON.stringify({
     event: "order.created", // ⚠️ event enum değerini referanstan doğrula (ödeme tamamlanma eventi)
-    url: "https://www.consultohukuk.com/api/shopier/webhook",
+    url: "https://consultohukuk.com/api/shopier/webhook",
 
   }),
 });

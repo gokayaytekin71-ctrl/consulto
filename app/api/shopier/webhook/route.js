@@ -27,6 +27,12 @@ export async function POST(req) {
     return new Response("invalid signature", { status: 401 });
   }
 
+    console.log("sig.received:", JSON.stringify(signature));
+  console.log("sig.b64:", b64);
+  console.log("sig.hex:", hex);
+  console.log("token.len:", token?.length);
+  console.log("rawBody.len:", rawBody.length);
+
   // 3) Parse
   let event = {};
   try { event = JSON.parse(rawBody); } catch {}
