@@ -118,38 +118,35 @@ export default function PricingPage() {
   }
 }, []);
 
-  // --- Mantık Aynen Korundu ---
   const handleBuy = async (pkg) => {
-    if (!session) {
-      alert("Satın alma işlemi için lütfen önce giriş yapınız.");
-      router.push("/auth/signin?callbackUrl=/paketler-ucretler");
-      return;
-    }
+  if (!session) {
+    alert("Satın alma işlemi için lütfen önce giriş yapınız.");
+    router.push("/auth/signin?callbackUrl=/paketler-ucretler");
+    return;
+  }
 
-    setLoadingId(pkg.id);
+  setLoadingId(pkg.id);
 
-    try {
-      const res = await fetch("/api/payment/start", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ packageId: pkg.id }),
-      });
+  try {
+    const res = await fetch("/api/payment/start", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ packageId: pkg.id }),
+    });
 
-      if (!res.ok) {
-        throw new Error("Ödeme başlatılamadı.");
-      }
+    if (!res.ok) throw new Error("Ödeme başlatılamadı.");
 
-      const html = await res.text();
-      document.open();
-      document.write(html);
-      document.close();
-    } catch (error) {
-      console.error(error);
-      alert("Bir hata oluştu: " + error.message);
-      setLoadingId(null);
-    }
-  };
-  // ---------------------------
+    const { redirectUrl } = await res.json();
+    if (!redirectUrl) throw new Error("Yönlendirme linki alınamadı.");
+
+    // Shopier ürün/ödeme sayfasına yönlendir
+    window.location.href = redirectUrl;
+  } catch (error) {
+    console.error(error);
+    alert("Bir hata oluştu: " + error.message);
+    setLoadingId(null);
+  }
+};
 
   // Paketleri gruplara ayır
   const featuredIds = [1, 5, 2]; // En Avantajlı Paketler (sıra önemli)

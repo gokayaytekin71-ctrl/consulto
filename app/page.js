@@ -184,7 +184,7 @@ export default async function Home() {
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
-          Sınırsız paketlerde <span className="font-black text-blue-600">%70 indirim</span> — 6 aylık paket yalnızca <span className="font-black text-[#002a5c]">2.500 TL</span>
+          Sınırsız paketlerde <span className="font-black text-blue-600">Dev İndirim</span> — 6 aylık paket yalnızca <span className="font-black text-[#002a5c]">4.750 TL</span>
           <Link href="/paketler-ucretler" className="ml-1 hidden rounded-full bg-[#002a5c] px-3 py-0.5 text-[11px] font-bold text-white transition hover:bg-blue-700 sm:inline-block">İncele →</Link>
         </div>
       </div>
@@ -209,19 +209,19 @@ export default async function Home() {
           </div>
  
           <h1 className="anim-up text-5xl font-black leading-[1.04] tracking-tighter text-[#002a5c] md:text-7xl" style={{ animationDelay: ".08s" }}>
-            Hukukta yeni bir
+            En Gelişmiş
             <br className="hidden sm:block" />{" "}
-            <span className="text-shine">çalışma çağı</span>
+            <span className="text-shine">Hukuk Yapay Zekası!</span>
           </h1>
  
           <p className="anim-up mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-500 md:text-xl" style={{ animationDelay: ".16s" }}>
-            Dosyanı yükle, soru sor. Consülto analiz eder, ilgili Yargıtay kararlarını getirir, dilekçeni yazar ve stratejini kurar — hepsi tek bir çalışma masasında.
+            Sorunu sor, uyuşmazlığı anlat veya dosyanı yükle; geri kalanı gelişmiş yapay zeka programımız halletsin. Emsal Yargıtay Kararlarına referans veren cevaplarınız gelsin.
           </p>
  
           <div className="anim-up mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row" style={{ animationDelay: ".24s" }}>
             <Link href="/bot" className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 px-8 py-4 text-lg font-bold text-white shadow-[0_10px_40px_-8px_rgba(34,211,238,0.55)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_50px_-8px_rgba(34,211,238,0.7)] sm:w-auto">
               <span className="relative flex items-center justify-center gap-2">
-                Dosyanı Yükle &amp; Başla
+                Gelişmiş Yapay Zekasını &amp; Hemen Dene
                 <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </span>
             </Link>
