@@ -118,7 +118,7 @@ export default function PricingPage() {
   }
 }, []);
 
-  const handleBuy = async (pkg) => {
+const handleBuy = async (pkg) => {
   if (!session) {
     alert("Satın alma işlemi için lütfen önce giriş yapınız.");
     router.push("/auth/signin?callbackUrl=/paketler-ucretler");
@@ -133,13 +133,11 @@ export default function PricingPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ packageId: pkg.id }),
     });
-
     if (!res.ok) throw new Error("Ödeme başlatılamadı.");
 
     const { redirectUrl } = await res.json();
     if (!redirectUrl) throw new Error("Yönlendirme linki alınamadı.");
 
-    // Shopier ürün/ödeme sayfasına yönlendir
     window.location.href = redirectUrl;
   } catch (error) {
     console.error(error);

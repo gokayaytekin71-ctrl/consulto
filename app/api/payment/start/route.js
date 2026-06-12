@@ -1,4 +1,3 @@
-// app/api/payment/start/route.js
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import prisma from "@/lib/prisma";
@@ -15,15 +14,12 @@ export async function POST(req) {
   const pkg = PACKAGES[packageId];
   if (!pkg) return new Response("Geçersiz paket", { status: 400 });
 
-  const user = await prisma.user.findUnique({ where: { id: session.user.id } });
-
   const orderId = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
 
-  // Bekleyen sipariş kaydı — webhook bununla eşleşecek
   await prisma.payment.create({
     data: {
       id: crypto.randomUUID(),
-      userId: user.id,
+      userId: session.user.id,
       orderId,
       amount: pkg.price,
       tokenAmount: pkg.tokens,
@@ -31,6 +27,5 @@ export async function POST(req) {
     },
   });
 
-  // İmza/form YOK. Sadece Shopier ürün linkine gönder.
   return Response.json({ redirectUrl: pkg.shopierUrl });
 }
