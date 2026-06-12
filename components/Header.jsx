@@ -44,6 +44,8 @@ export default function Header() {
 
   const { data: session, status } = useSession();
   const [isMounted, setIsMounted] = useState(false);
+  const [tokenBalance, setTokenBalance] = useState(null);
+  const [isLoadingTokenBalance, setIsLoadingTokenBalance] = useState(false);
   
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -58,6 +60,27 @@ export default function Header() {
   const profileRef = useRef(null);
 
   useEffect(() => { setIsMounted(true); }, []);
+
+  useEffect(() => {
+    const fetchTokenBalance = async () => {
+      if (status !== "authenticated") return;
+      setIsLoadingTokenBalance(true);
+      try {
+        const res = await fetch("/api/user/balance", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = await res.json();
+        setTokenBalance(data.tokenBalance ?? 0);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setIsLoadingTokenBalance(false);
+      }
+    };
+
+    fetchTokenBalance();
+    window.addEventListener("token-balance-updated", fetchTokenBalance);
+    return () => window.removeEventListener("token-balance-updated", fetchTokenBalance);
+  }, [status]);
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -326,7 +349,9 @@ export default function Header() {
                                 </div>
                             </div>
                             <div className="flex items-baseline gap-1 relative z-10">
-                                <span className="text-2xl font-mono font-bold text-white">{session?.user?.tokenBalance ?? 0}</span>
+                                <span className="text-2xl font-mono font-bold text-white">
+                                  {isLoadingTokenBalance ? "..." : (tokenBalance ?? session?.user?.tokenBalance ?? 0)}
+                                </span>
                                 <span className="text-xs text-slate-500 font-sans font-medium">Token</span>
                             </div>
                             <Link href="/paketler-ucretler" onClick={() => setIsProfileOpen(false)} className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold transition-all shadow-lg shadow-cyan-900/20 active:scale-[0.98]">

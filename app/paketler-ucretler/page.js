@@ -142,7 +142,8 @@ const handleBuy = async (pkg) => {
     if (!res.ok) throw new Error("Ödeme başlatılamadı.");
     const { redirectUrl } = await res.json();
     if (!redirectUrl) throw new Error("Yönlendirme linki alınamadı.");
-    window.location.href = redirectUrl;
+    window.open(redirectUrl, "_blank", "noopener,noreferrer");
+    setLoadingId(null);
   } catch (error) {
     console.error(error);
     alert("Bir hata oluştu: " + error.message);

@@ -412,7 +412,7 @@ function TourSpotlight({ selector }) {
 /* =============================================================================
    TUR — TOOLTIP
    ============================================================================= */
-function TourTooltip({ step, index, total, onNext, onPrev, onSkip, onFinish }) {
+function TourTooltip({ step, index, total, onNext, onPrev, onSkip, onFinish, isMobile }) {
   const [pos, setPos] = useState(null);
   const tooltipRef = useRef(null);
 
@@ -435,7 +435,7 @@ function TourTooltip({ step, index, total, onNext, onPrev, onSkip, onFinish }) {
       const r = el.getBoundingClientRect();
       const vw = window.innerWidth;
       const vh = window.innerHeight;
-      const TW = 360;
+      const TW = vw < 480 ? Math.min(320, vw - 24) : 360;
       const TH = tooltipRef.current?.getBoundingClientRect().height || 220;
       const GAP = 18;
 
@@ -858,6 +858,10 @@ export default function HomeWorkspace() {
   const [visiblePanels, setVisiblePanels] = useState({ decisions: true, statutes: true, notes: true });
   const [selectedChatText, setSelectedChatText] = useState("");
 
+  // Mobil: tek seferde tek panel gösterilir (sekme yapısı)
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobileTab, setMobileTab] = useState("chat");
+
   // Tour
   const TOUR_STORAGE_KEY = "consulto-home-tour-seen";
   const [tourActive, setTourActive] = useState(false);
@@ -879,6 +883,42 @@ export default function HomeWorkspace() {
   const activeWorkspace = useMemo(() => DEMO_WORKSPACES.find((w) => w.id === activeWorkspaceId) || DEMO_WORKSPACES[0], [activeWorkspaceId]);
   const activeMode = useMemo(() => WORKSPACE_MODES.find((m) => m.id === workspaceMode) || WORKSPACE_MODES[0], [workspaceMode]);
   const currentTourAction = useMemo(() => tourActive ? TOUR_STEPS[tourStep]?.action : null, [tourActive, tourStep]);
+  // Mobilde hedefi yeniden eşlenmiş, referansı kararlı adım nesnesi (tooltip efektlerini gereksiz tetiklememek için)
+  const resolvedTourStep = useMemo(() => {
+    const s = TOUR_STEPS[tourStep];
+    if (!s) return null;
+    const target = isMobile && s.target === "[data-tour='panel-toggles']" ? "[data-tour='mobile-tabs']" : s.target;
+    return target === s.target ? s : { ...s, target };
+  }, [tourStep, isMobile]);
+
+  // xl altı = mobil/tablet: paneller sekmeli görünür
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(max-width: 1279px)");
+    const update = () => setIsMobile(mq.matches);
+    update();
+    if (mq.addEventListener) mq.addEventListener("change", update);
+    else mq.addListener(update);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", update);
+      else mq.removeListener(update);
+    };
+  }, []);
+
+  // Aktif mobil sekme gizlenmiş bir panele denk gelirse sohbete dön
+  useEffect(() => {
+    if (mobileTab !== "chat" && !visiblePanels[mobileTab]) setMobileTab("chat");
+  }, [mobileTab, visiblePanels]);
+
+  // Bir tur adımının hedefi hangi mobil sekmede yaşıyor?
+  function tabForTarget(target) {
+    if (!target) return null;
+    if (target.includes("chat-body") || target.includes("send-btn") || target.includes("mode-menu")) return "chat";
+    if (target.includes("decisions-panel") || target.includes("decision-save")) return "decisions";
+    if (target.includes("statutes-panel")) return "statutes";
+    if (target.includes("notes-panel") || target.includes("note-add")) return "notes";
+    return null;
+  }
 
   useEffect(() => {
     function handleStartHomeTour() {
@@ -911,6 +951,7 @@ export default function HomeWorkspace() {
       setIsStreaming(false);
       setCursorVisible(false);
       setCursorPressing(false);
+      setMobileTab("chat");
       setTourStep(0);
       setTourActive(true);
     }
@@ -1100,6 +1141,12 @@ export default function HomeWorkspace() {
     const cleanups = [];
     let stateCleanup = null;
 
+    // Mobilde: adımın hedefi hangi sekmedeyse o sekmeye geç ki eleman görünür olsun
+    if (isMobile) {
+      const tab = tabForTarget(step.target);
+      if (tab) setMobileTab(tab);
+    }
+
     if (step.action === "openFileSummary") {
       setActiveFileSummary(DEMO_FILE);
       stateCleanup = () => setActiveFileSummary(null);
@@ -1252,6 +1299,7 @@ export default function HomeWorkspace() {
     setIsStreaming(false);
     setCursorVisible(false);
     setCursorPressing(false);
+    setMobileTab("chat");
     setTourStep(0);
     setTourActive(true);
   }
@@ -1265,11 +1313,12 @@ export default function HomeWorkspace() {
     <>
       {tourActive && (
         <>
-          <TourSpotlight selector={TOUR_STEPS[tourStep]?.target} />
+          <TourSpotlight selector={resolvedTourStep?.target} />
           <TourTooltip
-            step={TOUR_STEPS[tourStep]}
+            step={resolvedTourStep}
             index={tourStep}
             total={TOUR_STEPS.length}
+            isMobile={isMobile}
             onNext={nextStep}
             onPrev={prevStep}
             onSkip={skipTour}
@@ -1280,14 +1329,14 @@ export default function HomeWorkspace() {
 
       <AnimatedCursor visible={cursorVisible} x={cursorX} y={cursorY} pressing={cursorPressing} />
 
-      <section className="relative overflow-hidden py-20 sm:py-24">
+      <section className="relative overflow-hidden py-10 sm:py-24">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,rgba(191,138,77,0.20),transparent_34%),radial-gradient(circle_at_bottom_right,rgba(15,23,42,0.18),transparent_30%)]" />
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
           {/* ================ HERO ================ */}
-          <div className="relative mb-14">
-            <div className="absolute -top-8 -right-8 w-64 h-64 opacity-[0.07] pointer-events-none"
+          <div className="relative mb-8 sm:mb-14">
+            <div className="absolute -top-8 -right-8 w-64 h-64 opacity-[0.07] pointer-events-none hidden sm:block"
               style={{
                 backgroundImage: "radial-gradient(#0f172a 1px, transparent 1px)",
                 backgroundSize: "16px 16px",
@@ -1390,31 +1439,31 @@ export default function HomeWorkspace() {
 
             {/* HEADER */}
             <header className="flex h-[70px] shrink-0 items-center justify-between border-b border-slate-200/70 bg-white/90 px-4 backdrop-blur-2xl md:px-5">
-              <div className="flex items-center gap-3 min-w-0 flex-1">
-                <div className="relative" ref={dropdownRef} data-tour="workspace-pill">
+              <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                <div className="relative min-w-0 shrink" ref={dropdownRef} data-tour="workspace-pill">
                   <button
                     onClick={() => !tourActive && setIsWorkspaceDropdownOpen((p) => !p)}
-                    className={`flex items-center justify-between gap-3 rounded-[1.2rem] border p-2 pl-3 pr-3.5 transition-all duration-200 ${isWorkspaceDropdownOpen ? "border-blue-200 bg-blue-50/80 ring-4 ring-blue-50 shadow-md" : "border-slate-200 bg-white shadow-sm hover:border-blue-200 hover:shadow-md"}`}>
-                    <div className="flex items-center gap-2.5">
+                    className={`flex w-full min-w-0 items-center justify-between gap-2 rounded-[1.2rem] border p-2 pl-2.5 pr-3 transition-all duration-200 ${isWorkspaceDropdownOpen ? "border-blue-200 bg-blue-50/80 ring-4 ring-blue-50 shadow-md" : "border-slate-200 bg-white shadow-sm hover:border-blue-200 hover:shadow-md"}`}>
+                    <div className="flex min-w-0 items-center gap-2.5">
                       <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-950 text-white shadow-sm">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
                       </div>
-                      <div className="text-left">
+                      <div className="min-w-0 text-left">
                         <div className="text-[9px] font-black uppercase tracking-[0.22em] text-slate-400">Aktif Çalışma</div>
-                        <div className="text-xs font-black text-slate-900">{activeWorkspace.title}</div>
+                        <div className="truncate text-xs font-black text-slate-900">{activeWorkspace.title}</div>
                       </div>
                     </div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3" className={`text-slate-400 transition-transform duration-200 ${isWorkspaceDropdownOpen ? "rotate-180 text-blue-600" : ""}`}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3" className={`shrink-0 text-slate-400 transition-transform duration-200 ${isWorkspaceDropdownOpen ? "rotate-180 text-blue-600" : ""}`}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                   </button>
                 </div>
 
                 <div
                   data-tour="file-pill"
                   onClick={() => !tourActive && setActiveFileSummary(DEMO_FILE)}
-                  className="hidden sm:flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 shadow-sm cursor-pointer hover:border-blue-200 hover:shadow-md transition-all">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#185FA5" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
-                  <span className="text-xs font-black text-slate-700">iddianame.pdf</span>
-                  <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-black text-emerald-700 border border-emerald-200">Analiz edildi</span>
+                  className="flex shrink-0 items-center gap-1.5 sm:gap-2 rounded-2xl border border-slate-200 bg-white px-2.5 sm:px-3 py-2 shadow-sm cursor-pointer hover:border-blue-200 hover:shadow-md transition-all">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="#185FA5" strokeWidth="2.5" className="shrink-0"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  <span className="text-xs font-black text-slate-700 truncate max-w-[88px] sm:max-w-[140px]">iddianame.pdf</span>
+                  <span className="hidden md:inline rounded-full bg-emerald-50 px-2 py-0.5 text-[9px] font-black text-emerald-700 border border-emerald-200">Analiz edildi</span>
                 </div>
               </div>
 
@@ -1438,27 +1487,53 @@ export default function HomeWorkspace() {
             </header>
 
             {/* CONTENT */}
-            <div className="grid min-h-0 gap-3 overflow-hidden p-3 xl:grid-cols-12" style={{ height: "620px" }}>
+            <div className="grid min-h-0 gap-3 p-3 xl:h-[620px] xl:grid-cols-12 xl:overflow-hidden">
+
+              {/* MOBİL SEKME ÇUBUĞU (sadece xl altında) */}
+              <div data-tour="mobile-tabs" className="min-w-0 xl:hidden">
+                <div className="flex w-full gap-1.5 overflow-x-auto pb-1" style={{ scrollbarWidth: "none" }}>
+                  {[
+                    { key: "chat",      label: "Sohbet",  dot: "bg-blue-500",    count: null },
+                    ...(visiblePanels.decisions ? [{ key: "decisions", label: "Kararlar", dot: "bg-blue-600",   count: aiDecisions.length }] : []),
+                    ...(visiblePanels.statutes  ? [{ key: "statutes",  label: "Mevzuat",  dot: "bg-indigo-600", count: aiStatutes.length }] : []),
+                    ...(visiblePanels.notes     ? [{ key: "notes",     label: "Notlar",   dot: "bg-emerald-600", count: notes.length }] : []),
+                  ].map((t) => {
+                    const active = mobileTab === t.key;
+                    return (
+                      <button
+                        key={t.key}
+                        onClick={() => setMobileTab(t.key)}
+                        className={`flex shrink-0 items-center gap-2 rounded-2xl px-3.5 py-2 text-xs font-black transition-all duration-200 ${active ? "bg-slate-950 text-white shadow-lg shadow-slate-950/25" : "bg-slate-100 text-slate-500 hover:bg-slate-200"}`}>
+                        <span className={`h-1.5 w-1.5 rounded-full ${active ? t.dot : "bg-slate-300"}`} />
+                        {t.label}
+                        {t.count !== null && (
+                          <span className={`rounded-full px-1.5 py-0.5 text-[9px] ${active ? "bg-white/20 text-white" : "bg-white text-slate-500"}`}>{t.count}</span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
 
               {/* CHAT */}
-              <div className={`min-h-0 ${chatColSpan}`}>
+              <div className={`min-h-0 min-w-0 ${mobileTab === "chat" ? "block" : "hidden"} h-[68vh] xl:block xl:h-auto ${chatColSpan}`}>
                 <div className="flex h-full min-h-[260px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
                   <div className="flex min-w-0 flex-1 flex-col">
-                    <div className="flex shrink-0 items-center justify-between gap-3 border-b border-slate-100 bg-slate-50/50 px-5 py-3.5">
-                      <div>
+                    <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 bg-slate-50/50 px-3.5 py-3.5 sm:px-5">
+                      <div className="min-w-0">
                         <h3 className="text-sm font-black text-slate-900">Çalışma Alanı</h3>
-                        <p className="text-[11px] font-medium text-slate-500 mt-0.5">Soru-cevap alanı</p>
+                        <p className="truncate text-[11px] font-medium text-slate-500 mt-0.5">Soru-cevap alanı</p>
                       </div>
-                      <div className="flex items-center gap-2" ref={modeMenuRef}>
-                        <div className="relative" data-tour="mode-menu-anchor">
+                      <div className="flex min-w-0 items-center gap-2" ref={modeMenuRef}>
+                        <div className="relative min-w-0" data-tour="mode-menu-anchor">
                           <button
                             data-tour="mode-btn"
                             onClick={() => !tourActive && setIsModeMenuOpen((p) => !p)}
                             disabled={isStreaming}
-                            className="flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-left shadow-sm hover:border-blue-200 hover:bg-blue-50/40 disabled:opacity-40 transition-all">
+                            className="flex min-w-0 max-w-[52vw] items-center gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-2 text-left shadow-sm hover:border-blue-200 hover:bg-blue-50/40 disabled:opacity-40 transition-all sm:max-w-none">
                             <span className="text-[9px] font-black uppercase tracking-[0.18em] text-slate-400 hidden sm:inline">Mod</span>
-                            <span className="text-xs font-black text-slate-900">{activeMode.label}</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3" className={`text-slate-400 transition-transform ${isModeMenuOpen ? "rotate-180 text-blue-600" : ""}`}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                            <span className="truncate text-xs font-black text-slate-900">{activeMode.label}</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3" className={`shrink-0 text-slate-400 transition-transform ${isModeMenuOpen ? "rotate-180 text-blue-600" : ""}`}><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                           </button>
                           {isModeMenuOpen && (
                             <div className={`absolute right-0 top-full mt-2 w-64 overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-[0_20px_55px_rgba(15,23,42,0.14)] ${tourActive ? "z-[100001]" : "z-50"}`}
@@ -1484,11 +1559,12 @@ export default function HomeWorkspace() {
                       {messages.map((msg) => {
                         const isUser = msg.role === "user";
                         return (
-                          <div key={msg.id} className="flex w-full">
+                          <div key={msg.id} className="flex w-full min-w-0">
                             <div className={[
+                              "min-w-0 break-words [overflow-wrap:anywhere]",
                               isUser
-                                ? "ml-auto max-w-[78%] rounded-3xl px-5 py-4 text-[12px] leading-6 shadow-sm border border-blue-800 bg-gradient-to-br from-blue-800 to-blue-950 text-white"
-                                : "mr-auto w-full rounded-3xl px-5 py-4 text-[12px] leading-6 shadow-sm border border-slate-200 bg-white text-slate-800",
+                                ? "ml-auto max-w-[85%] rounded-3xl px-4 py-3.5 sm:px-5 sm:py-4 text-[12px] leading-6 shadow-sm border border-blue-800 bg-gradient-to-br from-blue-800 to-blue-950 text-white"
+                                : "mr-auto w-full rounded-3xl px-4 py-3.5 sm:px-5 sm:py-4 text-[12px] leading-6 shadow-sm border border-slate-200 bg-white text-slate-800",
                             ].join(" ")}>
                               <RichText text={msg.text} isUser={isUser} />
                               {!isUser && !msg.loading && msg.id !== "m1" && (
@@ -1563,9 +1639,9 @@ export default function HomeWorkspace() {
 
               {/* KARARLAR & MEVZUAT */}
               {(visiblePanels.decisions || visiblePanels.statutes) && (
-                <div className="min-h-0 xl:col-span-4 flex flex-col gap-3">
+                <div className={`min-h-0 min-w-0 xl:col-span-4 flex-col gap-3 h-[68vh] xl:h-auto ${(mobileTab === "decisions" || mobileTab === "statutes") ? "flex" : "hidden"} xl:flex`}>
                   {visiblePanels.decisions && (
-                    <div data-tour="decisions-panel" className="flex-1 flex h-full min-h-[260px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm flex-col">
+                    <div data-tour="decisions-panel" className={`flex-1 h-full min-h-[260px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm flex-col ${mobileTab === "decisions" ? "flex" : "hidden"} xl:flex`}>
                       <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 bg-white/50 px-4 py-3 backdrop-blur-md">
                         <div>
                           <div className="text-[11px] font-black uppercase tracking-widest text-blue-900">{decisionView === "ai" ? "Yapay Zeka Buldu" : "Kayıtlı Kararlar"}</div>
@@ -1613,7 +1689,7 @@ export default function HomeWorkspace() {
                   )}
 
                   {visiblePanels.statutes && (
-                    <div data-tour="statutes-panel" className="flex-1 flex h-full min-h-[120px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm flex-col">
+                    <div data-tour="statutes-panel" className={`flex-1 h-full min-h-[120px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm flex-col ${mobileTab === "statutes" ? "flex" : "hidden"} xl:flex`}>
                       <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 bg-white/50 px-4 py-3">
                         <div>
                           <div className="text-[11px] font-black uppercase tracking-widest text-indigo-900">Mevzuat</div>
@@ -1637,7 +1713,7 @@ export default function HomeWorkspace() {
 
               {/* NOTLAR */}
               {visiblePanels.notes && (
-                <div data-tour="notes-panel" className={`min-h-0 ${(visiblePanels.decisions || visiblePanels.statutes) ? "xl:col-span-3" : "xl:col-span-4"}`}>
+                <div data-tour="notes-panel" className={`min-h-0 min-w-0 h-[68vh] xl:h-auto ${mobileTab === "notes" ? "block" : "hidden"} xl:block ${(visiblePanels.decisions || visiblePanels.statutes) ? "xl:col-span-3" : "xl:col-span-4"}`}>
                   <div className="flex h-full min-h-[260px] overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm flex-col">
                     <div className="flex shrink-0 items-center justify-between gap-3 border-b border-slate-100 bg-slate-50/50 px-5 py-3.5">
                       <div>
