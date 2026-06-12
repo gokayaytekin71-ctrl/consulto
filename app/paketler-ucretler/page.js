@@ -125,8 +125,14 @@ const handleBuy = async (pkg) => {
     return;
   }
 
-  setLoadingId(pkg.id);
+  // Kullanıcıyı doğru e-postayla ödemeye yönlendir
+  const onay = window.confirm(
+    `Önemli: Ödeme ekranında lütfen hesabınızın e-postasını kullanın:\n\n${session.user.email}\n\n` +
+    `Farklı bir e-posta yazarsanız tokenler bu hesaba tanımlanamaz. Devam edilsin mi?`
+  );
+  if (!onay) return;
 
+  setLoadingId(pkg.id);
   try {
     const res = await fetch("/api/payment/start", {
       method: "POST",
@@ -134,10 +140,8 @@ const handleBuy = async (pkg) => {
       body: JSON.stringify({ packageId: pkg.id }),
     });
     if (!res.ok) throw new Error("Ödeme başlatılamadı.");
-
     const { redirectUrl } = await res.json();
     if (!redirectUrl) throw new Error("Yönlendirme linki alınamadı.");
-
     window.location.href = redirectUrl;
   } catch (error) {
     console.error(error);
