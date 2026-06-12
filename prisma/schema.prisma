@@ -441,6 +441,19 @@ model TokenUsage {
   createdAt DateTime @default(now())
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
+model ShopierOrder {
+  id           String   @id          // Shopier sipariş id'si (event.id)
+  productId    String
+  productTitle String
+  email        String
+  amount       Float
+  tokens       Int
+  claimed      Boolean  @default(false)
+  claimedBy    String?
+  createdAt    DateTime @default(now())
+
+  @@index([email, claimed])
+}
 
 enum SubscriptionStatus {
   ACTIVE
