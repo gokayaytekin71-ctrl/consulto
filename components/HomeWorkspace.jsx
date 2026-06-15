@@ -158,7 +158,7 @@ const TOUR_STEPS = [
   },
   // 3 – Dosya modal AÇIK
   {
-    target: "[data-tour='file-pill']",
+    target: "[data-tour='file-summary-modal']",
     title: "AI dosya analizi",
     description: "İşte yapay zekanın çıkardığı profil: belge türü, temel vakıalar, hukuki anahtar kelimeler, riskler ve savunma noktaları. Bu detaylar tüm sorularınıza otomatik olarak eşlik eder.",
     placement: "left",
@@ -176,7 +176,7 @@ const TOUR_STEPS = [
     target: "[data-tour='mode-menu-anchor']",
     title: "Altı farklı çalışma modu",
     description: "Genel analiz, dosya stratejisi, çelişki bulma, delil analizi, özet ve dilekçe taslağı… Her mod farklı bir uzmanlık alanıdır.",
-    placement: "left",
+    placement: "top",
     action: "openModeMenu",
   },
   // 6 – Soru sor (typewriter + animasyonlu cursor + submit)
@@ -401,7 +401,7 @@ function TourSpotlight({ selector }) {
         border: "2px solid #3b82f6",
         boxShadow: "0 0 0 4px rgba(59,130,246,0.18), 0 0 32px rgba(59,130,246,0.45)",
         pointerEvents: "none",
-        zIndex: 99997,
+        zIndex: 99995,
         animation: "tourPulse 1.6s ease-in-out infinite",
         transition: "top 0.3s ease, left 0.3s ease, width 0.3s ease, height 0.3s ease",
       }}
@@ -809,7 +809,7 @@ function FileSummaryModal({ file, onClose }) {
   if (!file) return null;
   return (
     <div className="fixed inset-0 z-[99996] flex items-center justify-center bg-slate-900/60 p-4 backdrop-blur-sm">
-      <div className="flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-[2rem] bg-white shadow-2xl">
+      <div data-tour="file-summary-modal" className="flex max-h-[88vh] w-full max-w-3xl flex-col overflow-hidden rounded-[2rem] bg-white shadow-2xl">
         <div className="shrink-0 border-b border-slate-200 bg-gradient-to-br from-slate-50 to-blue-50 p-6">
           <div className="flex items-start justify-between gap-4">
             <div>
@@ -904,6 +904,40 @@ export default function HomeWorkspace() {
       else mq.removeListener(update);
     };
   }, []);
+
+  // İlk ziyarette: demo ekrana girince turu tıklamasız başlat
+const autoTourTriggeredRef = useRef(false);
+
+useEffect(() => {
+  if (typeof window === "undefined") return;
+
+  let alreadySeen = false;
+  try {
+    alreadySeen = window.localStorage.getItem(TOUR_STORAGE_KEY) === "true";
+  } catch {
+    alreadySeen = false;
+  }
+  if (alreadySeen) return; // daha önce gören için otomatik başlatma
+
+  const demo = document.getElementById("canli-demo");
+  if (!demo || !("IntersectionObserver" in window)) return;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !autoTourTriggeredRef.current) {
+          autoTourTriggeredRef.current = true;
+          observer.disconnect();
+          window.dispatchEvent(new CustomEvent("consulto:start-home-tour"));
+        }
+      });
+    },
+    { threshold: 0.15 } // demonun ~%40'ı görününce
+  );
+
+  observer.observe(demo);
+  return () => observer.disconnect();
+}, []);
 
   // Aktif mobil sekme gizlenmiş bir panele denk gelirse sohbete dön
   useEffect(() => {
@@ -1108,6 +1142,57 @@ export default function HomeWorkspace() {
     }, 1000);
   }
 
+  function ensureDemoAnswerShown() {
+  const hasUserQuestion = messages.some((m) => m.role === "user" && m.text === DEMO_USER_QUESTION);
+  const hasAiAnswer = messages.some(
+    (m) =>
+      m.role === "assistant" &&
+      String(m.text || "").includes("Dosya Kapsamında İlk Değerlendirme")
+  );
+
+  if (!hasUserQuestion || !hasAiAnswer) {
+    if (stopStreamRef.current) {
+      stopStreamRef.current();
+      stopStreamRef.current = null;
+    }
+
+    setInput("");
+    setIsStreaming(false);
+    setDecisionView("ai");
+    setAiDecisions(DEMO_DECISIONS);
+    setAiStatutes(DEMO_STATUTES);
+
+    setMessages((prev) => {
+      const withoutPendingDemo = prev.filter((m) => {
+        const isDemoUserQuestion =
+          m.role === "user" && m.text === DEMO_USER_QUESTION;
+        const isDemoAssistantLoading =
+          m.role === "assistant" && m.loading;
+        const isDemoAssistantPartial =
+          m.role === "assistant" &&
+          !m.loading &&
+          String(m.text || "").startsWith("### **Dosya Kapsamında İlk Değerlendirme**");
+        const isModePreparing =
+          m.role === "assistant" &&
+          String(m.text || "").includes("modunda analiz hazırlanıyor");
+
+        return (
+          !isDemoUserQuestion &&
+          !isDemoAssistantLoading &&
+          !isDemoAssistantPartial &&
+          !isModePreparing
+        );
+      });
+
+      return [
+        ...withoutPendingDemo,
+        { id: crypto.randomUUID(), role: "user", text: DEMO_USER_QUESTION },
+        { id: crypto.randomUUID(), role: "assistant", text: DEMO_AI_ANSWER, loading: false },
+      ];
+    });
+  }
+}
+
   function handleSubmit(e) {
     e?.preventDefault?.();
     const clean = input.trim();
@@ -1188,6 +1273,11 @@ export default function HomeWorkspace() {
       stateCleanup = () => { setCursorVisible(false); setCursorPressing(false); };
     }
 
+    if (step.target === "[data-tour='chat-body']" && tourStep >= 7) {
+
+  ensureDemoAnswerShown();
+
+}
     // ADIM 8 — animasyonlu cursor ile ilk kararın Kaydet butonuna tıkla
     if (step.action === "saveOneDecision") {
       cleanups.push(setTimeout(() => {
@@ -1256,7 +1346,7 @@ export default function HomeWorkspace() {
       cleanups.forEach((c) => clearTimeout(c));
       if (stateCleanup) stateCleanup();
     };
-  }, [tourStep, tourActive]); // eslint-disable-line react-hooks/exhaustive-deps
+}, [tourStep, tourActive, messages]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function markTourSeen() {
     try {
@@ -1267,8 +1357,14 @@ export default function HomeWorkspace() {
   }
 
   function nextStep() {
-    setTourStep((s) => Math.min(s + 1, TOUR_STEPS.length - 1));
+  const currentStep = TOUR_STEPS[tourStep];
+
+  if (currentStep?.action === "typeAndSubmit") {
+    ensureDemoAnswerShown();
   }
+
+  setTourStep((s) => Math.min(s + 1, TOUR_STEPS.length - 1));
+}
 
   function prevStep() {
     setTourStep((s) => Math.max(s - 1, 0));

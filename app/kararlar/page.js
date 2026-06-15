@@ -1,11 +1,13 @@
 export const dynamic = "force-dynamic";
-
+import { Suspense } from "react";
+import { unstable_cache } from "next/cache";
 import prisma from "@/lib/prisma";
 import { getKararlarFromDB } from "@/lib/data";
 import BasicFilter from "@/components/BasicFilter";
 import SectionRow from "@/components/SectionRow";
 import SearchResults from "@/components/SearchResults";
 import MobileFilterDrawer from "@/components/MobileFilterDrawer";
+import HeroSearch from "@/components/HeroSearch";
 
 /* ============================================================
    GLOBAL CSS — "Editorial Law Review" (liste sayfası)
@@ -227,6 +229,35 @@ const GLOBAL_CSS = `
   @keyframes lawIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
   .anim-in { animation: lawIn .5s ease both; }
 
+  /* ---------------- ARAMA VURGUSU (sarı) ---------------- */
+  /* ts_headline / SearchResults <mark> ile sardığı eşleşmeler buradan stillenir.
+     NOT: snippet'in dangerouslySetInnerHTML ile basıldığından emin ol. */
+  mark,
+  .search-snippet mark,
+  .highlighted-body mark {
+    background: #ffe27a;
+    color: var(--ink);
+    padding: 0 2px;
+    border-radius: 3px;
+    font-weight: 500;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* ---------------- LOADING SKELETON ---------------- */
+  .skeleton-card {
+    height: 130px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: linear-gradient(90deg, var(--paper-2) 25%, #f1ede3 37%, var(--paper-2) 63%);
+    background-size: 400% 100%;
+    animation: shimmer 1.4s ease infinite;
+  }
+  @keyframes shimmer {
+    0%   { background-position: 100% 0; }
+    100% { background-position: -100% 0; }
+  }
+
   /* ---------------- RESPONSIVE ---------------- */
   @media (max-width: 980px) {
     .law-grid { grid-template-columns: 1fr; gap: 28px; }
@@ -260,7 +291,7 @@ function buildIbkPdfPath(karar_code = "", birlesme_no = "") {
 }
 
 /* ------------------------------- Veri ---------------------------------- */
-async function getFeaturedDecisions() {
+async function _getFeaturedDecisions() {
   const featuredSlugs = [
     "Hukuk_Genel_Kurulu_2020-603E_2024-224K",
     "Hukuk_Genel_Kurulu_2022-1099E_2024-355K",
@@ -275,7 +306,7 @@ async function getFeaturedDecisions() {
   return orderBySlugList(rows, featuredSlugs);
 }
 
-async function getNewDecisions() {
+async function _getNewDecisions() {
   return prisma.karar.findMany({
     take: 48,
     orderBy: { createdAt: "desc" },
@@ -291,25 +322,64 @@ async function getNewDecisions() {
   });
 }
 
-async function getIbbgkFromNewTable() {
+// Postgres bigint -> JS BigInt gelir; JSON.stringify (unstable_cache) ve
+// client component prop'ları BigInt'i serileştiremez. String'e çeviriyoruz.
+function bigIntToString(v) {
+  return typeof v === "bigint" ? v.toString() : v;
+}
+
+async function _getIbbgkFromNewTable() {
   const rows = await prisma.$queryRaw`
     SELECT id, karar_code, birlesme_no, icerik, ozet, created_at
     FROM public.ibbgk
     ORDER BY created_at DESC
     LIMIT 48
   `;
-  return (rows || []).map((r) => ({
-    id: r.id,
-    karar_code: r.karar_code,
-    birlesme_no: r.birlesme_no,
-    icerik: r.icerik,
-    ozet: r.ozet,
-    created_at: r.created_at,
-    pdfHref: buildIbkPdfPath(r.karar_code, r.birlesme_no),
-    fileName: `ibk-${r.id}`,
-    type: "İçtihadı Birleştirme",
-  }));
+  return (rows || []).map((r) => {
+    const id = bigIntToString(r.id);
+    return {
+      id,
+      karar_code: r.karar_code,
+      birlesme_no: bigIntToString(r.birlesme_no),
+      icerik: r.icerik,
+      ozet: r.ozet,
+      created_at: r.created_at,
+      pdfHref: buildIbkPdfPath(r.karar_code, r.birlesme_no),
+      fileName: `ibk-${id}`,
+      type: "İçtihadı Birleştirme",
+    };
+  });
 }
+
+/* ⚡ Statik bölümler önbelleğe alınır — arama yoksa bile her açılışta
+   DB'ye gitmek yerine cache'ten servis edilir. createdAt serileştirme
+   sorunlarını önlemek için tarihleri ISO string'e çeviriyoruz. */
+const getFeaturedDecisions = unstable_cache(
+  async () => {
+    const rows = await _getFeaturedDecisions();
+    return rows.map((r) => ({ ...r, createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : null }));
+  },
+  ["kararlar-featured"],
+  { revalidate: 3600, tags: ["kararlar"] }
+);
+
+const getNewDecisions = unstable_cache(
+  async () => {
+    const rows = await _getNewDecisions();
+    return rows.map((r) => ({ ...r, createdAt: r.createdAt ? new Date(r.createdAt).toISOString() : null }));
+  },
+  ["kararlar-new"],
+  { revalidate: 600, tags: ["kararlar"] }
+);
+
+const getIbbgkFromNewTable = unstable_cache(
+  async () => {
+    const rows = await _getIbbgkFromNewTable();
+    return rows.map((r) => ({ ...r, created_at: r.created_at ? new Date(r.created_at).toISOString() : null }));
+  },
+  ["kararlar-ibbgk"],
+  { revalidate: 600, tags: ["kararlar"] }
+);
 
 /* ------------------------------- Sayfa --------------------------------- */
 export default async function KararlarPage({ searchParams = {} }) {
@@ -391,23 +461,10 @@ export default async function KararlarPage({ searchParams = {} }) {
               <p className="hero-kicker">İçtihat Araması</p>
               <h2 className="hero-title">Yargıtay kararlarında derinlemesine arama</h2>
 
-              <form action="/kararlar" method="GET" className="hero-form" data-hero-search-form>
-                <span className="ic-search">
-                  <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><circle cx="11" cy="11" r="8" /><path strokeLinecap="round" d="M21 21l-4.35-4.35" /></svg>
-                </span>
-                <input
-                  type="text"
-                  name="q"
-                  defaultValue={q || ""}
-                  placeholder="Karar içeriğinde, özette veya anahtar kelimede ara…"
-                  aria-label="Karar ara"
-                  className="hero-input"
-                />
-                <button type="submit" className="hero-submit" data-hero-search-button>
-                  <span className="hero-spinner" aria-hidden="true" />
-                  <span data-hero-search-text>Ara</span>
-                </button>
-              </form>
+              {/* client component: useTransition ile pürüzsüz loading, reload yok */}
+              <Suspense fallback={<div className="hero-form" aria-hidden="true" />}>
+                <HeroSearch defaultQ={q || ""} />
+              </Suspense>
 
               {/* Bölümlere hızlı atlama */}
               <div className="jump">
@@ -492,44 +549,6 @@ export default async function KararlarPage({ searchParams = {} }) {
         </div>
       </div>
 
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-            (function () {
-              function activateHeroSearchLoading(form) {
-                form.classList.add('is-loading');
-
-                var button = form.querySelector('[data-hero-search-button]');
-                var text = form.querySelector('[data-hero-search-text]');
-
-                if (button) {
-                  button.setAttribute('aria-busy', 'true');
-                  button.setAttribute('disabled', 'disabled');
-                }
-                if (text) text.textContent = 'Aranıyor';
-              }
-
-              document.addEventListener('submit', function (event) {
-                var form = event.target;
-                if (!form || !form.matches('[data-hero-search-form]')) return;
-                if (form.dataset.submitting === '1') return;
-
-                event.preventDefault();
-                form.dataset.submitting = '1';
-                activateHeroSearchLoading(form);
-
-                window.setTimeout(function () {
-                  if (form.requestSubmit) {
-                    form.requestSubmit();
-                  } else {
-                    form.submit();
-                  }
-                }, 80);
-              }, true);
-            })();
-          `,
-        }}
-      />
       <style dangerouslySetInnerHTML={{ __html: GLOBAL_CSS }} />
     </div>
   );

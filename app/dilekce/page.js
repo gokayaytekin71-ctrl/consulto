@@ -4,9 +4,30 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import TokenBalance from "@/components/TokenBalance";
+import { useTheme } from "@/app/context/ThemeContext";
 // SADECE BU SATIRI EKLEDİM: Veriyi dışarıdan çekiyoruz.
 import { CASE_TYPES } from "./caseData";
 // Markdown render (SSR kapalı, projeye uygun)
+
+/* ============================================================
+   CONSULTO · Dilekçe Oluşturucu
+   Modern "editöryel hukuk" arayüzü — krem/lacivert + altın aksan
+   Analiz sayfasıyla aynı görsel dil · Serif başlıklar
+   ============================================================ */
+const T = (dark) => ({
+  appBg:      dark ? "bg-[#0A0F1C]"        : "bg-[#F3EDE1]",
+  surface:    dark ? "bg-[#101626]"        : "bg-[#FBF7EE]",
+  surfaceAlt: dark ? "bg-[#0D1322]"        : "bg-white",
+  line:       dark ? "border-white/10"     : "border-[#E4DAC6]",
+  lineSoft:   dark ? "border-white/5"      : "border-[#ECE3D2]",
+  ink:        dark ? "text-slate-100"      : "text-[#1C2A47]",
+  inkSoft:    dark ? "text-slate-400"      : "text-[#5B6478]",
+  inkMute:    dark ? "text-slate-500"      : "text-[#8A8270]",
+  navy:       dark ? "text-amber-300"      : "text-[#1C2A47]",
+  gold:       dark ? "text-amber-400"      : "text-[#A77B2E]",
+  goldBg:     dark ? "bg-amber-400/10"     : "bg-[#F2E7CC]",
+  goldBorder: dark ? "border-amber-400/30" : "border-[#DCC68C]",
+});
 
 // --- Dilekçe Satır Satır Renderer ---
 const renderDilekce = (text) => {
@@ -547,8 +568,8 @@ const LOADING_MESSAGES = [
   "Uyuşmazlık ile ilgili analiz yapılıyor…", "Mevzuat taraması yapılıyor…", "Emsal Yargıtay kararları inceleniyor…", "Son rütuşlar yapılıyor…"
 ];
 
-function FieldInput({ field, value, onChange }) {
-  const common = "w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500";
+function FieldInput({ field, value, onChange, isDarkMode }) {
+  const common = `w-full rounded-xl border p-2.5 text-sm outline-none transition-all focus:ring-2 ${isDarkMode ? "border-white/10 bg-[#0D1322] text-slate-200 placeholder:text-slate-600 focus:border-amber-400/40 focus:ring-amber-400/10" : "border-[#E4DAC6] bg-white text-[#1C2A47] placeholder:text-[#A8A08C] focus:border-[#A77B2E] focus:ring-[#A77B2E]/15"}`;
   if (field.type === "textarea") {
     return <textarea className={common} rows={field.rows || 3} placeholder={field.placeholder || ""} value={value || ""} onChange={(e) => onChange(field.id, e.target.value)} required={!!field.required} />;
   }
@@ -582,6 +603,8 @@ function FieldInput({ field, value, onChange }) {
 // ANA BİLEŞEN
 // -----------------------------
 export default function DilekcePage() {
+  const { isDarkMode, toggleTheme } = useTheme();
+  const c = T(isDarkMode);
   // STATE TANIMLARI EN ÜSTE ALINDI
   const [olayOzet, setOlayOzet] = useState("");
   const [talep, setTalep] = useState("");
@@ -904,15 +927,18 @@ const processedMd = useMemo(() => {
   const Stepper = () => {
     const steps = [ { id: 1, label: "Bilgi" }, { id: 2, label: "Oluşturuluyor" }, { id: 3, label: "Sonuç" }, ];
     return (
-      <ol className="flex items-center gap-2 md:gap-4">
+      <ol className="flex items-center gap-2 md:gap-3">
         {steps.map((s) => {
-          const active = step === s.id;
+          const isActive = step === s.id;
           const done = step > s.id;
           return (
             <li key={s.id} className="flex items-center gap-2">
-              <span className={["h-8 w-8 rounded-full flex items-center justify-center text-sm font-semibold", done ? "bg-emerald-500 text-white" : active ? "bg-blue-600 text-white ring-2 ring-blue-300" : "bg-slate-800 text-slate-400"].join(" ")}>{done ? "✓" : s.id}</span>
-              <span className={active ? "text-slate-100" : "text-slate-400"}>{s.label}</span>
-              {s.id !== 3 && <span className="w-8 md:w-16 h-px bg-slate-700/70 mx-1 md:mx-2" />}
+              <span className={["h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold transition-all",
+                done ? (isDarkMode ? "bg-amber-400 text-[#0A0F1C]" : "bg-[#16223E] text-white")
+                : isActive ? (isDarkMode ? "bg-amber-400/20 text-amber-200 ring-2 ring-amber-400/40" : "bg-white text-[#A77B2E] ring-2 ring-[#DCC68C]")
+                : (isDarkMode ? "bg-white/5 text-slate-500" : "bg-[#EFE6D4] text-[#8A8270]")].join(" ")}>{done ? "✓" : s.id}</span>
+              <span className={`text-xs font-medium hidden sm:inline ${isActive ? c.ink : c.inkMute}`}>{s.label}</span>
+              {s.id !== 3 && <span className={`w-6 md:w-12 h-px mx-1 ${isDarkMode ? "bg-white/10" : "bg-[#E4DAC6]"}`} />}
             </li>
           );
         })}
@@ -921,12 +947,12 @@ const processedMd = useMemo(() => {
   };
 
   const LoaderCard = () => (
-    <div className="rounded-xl border border-slate-700/60 p-6 bg-slate-900/40 animate-pulse">
-      <div className="h-5 w-40 bg-slate-700/60 rounded mb-4" />
+    <div className={`rounded-2xl border ${c.line} ${c.surface} p-6 animate-pulse`}>
+      <div className={`h-5 w-40 rounded mb-4 ${isDarkMode ? "bg-white/10" : "bg-[#E4DAC6]"}`} />
       <div className="space-y-2">
-        <div className="h-4 w-full bg-slate-800/60 rounded" />
-        <div className="h-4 w-11/12 bg-slate-800/60 rounded" />
-        <div className="h-4 w-10/12 bg-slate-800/60 rounded" />
+        <div className={`h-4 w-full rounded ${isDarkMode ? "bg-white/5" : "bg-[#ECE3D2]"}`} />
+        <div className={`h-4 w-11/12 rounded ${isDarkMode ? "bg-white/5" : "bg-[#ECE3D2]"}`} />
+        <div className={`h-4 w-10/12 rounded ${isDarkMode ? "bg-white/5" : "bg-[#ECE3D2]"}`} />
       </div>
     </div>
   );
@@ -934,64 +960,99 @@ const processedMd = useMemo(() => {
   const iconPath = "M12 18.75a6 6 0 006-6v-1.5a.75.75 0 011.5 0v1.5a7.5 7.5 0 11-15 0v-1.5a.75.75 0 011.5 0v1.5a6 6 0 006 6zM12 9a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75V11.25a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75V9z";
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-black text-gray-100 relative overflow-hidden">
+    <main className={`min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ${c.appBg} ${c.ink} ${isDarkMode ? "selection:bg-amber-400/30 selection:text-amber-100" : "selection:bg-[#1C2A47]/15 selection:text-[#1C2A47]"}`}>
       {CanvasBackground ? <CanvasBackground /> : null}
-      <div className="relative z-10 py-6 md:py-8 px-3 sm:px-4 lg:px-6">
-        <div className="max-w-6xl mx-auto space-y-8">
-          <div className="bg-slate-900/40 border border-slate-700/60 rounded-xl shadow-xl backdrop-blur-sm">
-            <header className="p-6 md:p-8 border-b border-slate-700/60">
+
+      <style jsx global>{`
+        .paper-grain { background-image: radial-gradient(${isDarkMode ? "rgba(255,255,255,0.015)" : "rgba(28,42,71,0.025)"} 1px, transparent 1px); background-size: 22px 22px; }
+      `}</style>
+      <div className="fixed inset-0 z-0 pointer-events-none paper-grain"></div>
+
+      <div className="relative z-10 px-3 sm:px-4 lg:px-6 pt-4 pb-10">
+        <div className="max-w-6xl mx-auto space-y-6">
+
+          {/* ===== Yüzen pill navbar ===== */}
+          <div className={`flex items-center justify-between gap-3 h-14 px-3 md:px-5 rounded-2xl border backdrop-blur-xl ${isDarkMode ? "bg-[#0D1322]/90 border-white/10 shadow-lg shadow-black/40" : "bg-white border-[#E4DAC6] shadow-[0_8px_30px_-18px_rgba(28,42,71,0.35)]"}`}>
+            <div className="flex items-center gap-3">
+              <div className={`relative w-9 h-9 rounded-xl flex items-center justify-center shadow-inner ${isDarkMode ? "bg-amber-400/15 border border-amber-300/30 text-amber-300" : "bg-[#16223E] border border-[#16223E] text-amber-300"}`}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
+              </div>
+              <div className="flex flex-col leading-none">
+                <h1 className={`font-serif text-[17px] font-semibold tracking-tight ${isDarkMode ? "text-white" : "text-[#1C2A47]"}`}>Consulto <span className={`font-normal italic ${isDarkMode ? "text-amber-300" : "text-[#A77B2E]"}`}>Dilekçe</span></h1>
+                <span className={`text-[9px] font-mono tracking-[0.28em] uppercase mt-1 ${isDarkMode ? "text-white/45" : "text-[#8A8270]"}`}>Document Builder</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className={`hidden md:flex items-center gap-3 px-4 py-1.5 rounded-full border text-[10px] font-mono tracking-wider ${isDarkMode ? "border-white/10 bg-white/[0.04] text-white/60" : "border-[#E4DAC6] bg-[#F6EFE2] text-[#5B6478]"}`}>
+                <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#22c55e]"></span>ÇEVRİMİÇİ</span>
+                <span className={`w-px h-3 ${isDarkMode ? "bg-white/15" : "bg-[#E4DAC6]"}`}></span>
+                <span>VERİ TABANI · GÜNCEL</span>
+              </div>
+              <button onClick={toggleTheme} className={`p-2 rounded-full border transition-colors ${isDarkMode ? "border-white/10 bg-white/[0.04] text-white/80 hover:text-amber-300 hover:bg-white/10" : "border-[#E4DAC6] bg-[#F6EFE2] text-[#5B6478] hover:text-[#A77B2E] hover:bg-[#EFE6D4]"}`} title={isDarkMode ? "Açık Mod" : "Koyu Mod"}>
+                {isDarkMode
+                  ? <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                  : <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>}
+              </button>
+            </div>
+          </div>
+
+          <div className={`rounded-2xl border ${c.line} ${c.surface} shadow-xl ${isDarkMode ? "shadow-black/30" : "shadow-[0_8px_30px_-18px_rgba(28,42,71,0.35)]"} backdrop-blur-sm overflow-hidden`}>
+            <header className={`p-6 md:p-8 border-b ${c.lineSoft} ${isDarkMode ? "bg-white/[0.02]" : "bg-[#F6EFE2]"}`}>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-blue-400 relative -top-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d={iconPath} /></svg>
-                  <h1 className="text-xl lg:text-1xl font-bold text-gray-100 leading-tight">Dilekçe Oluşturucu Pro</h1>
+                <div>
+                  <span className={`block text-[9px] font-mono tracking-[0.22em] uppercase ${c.inkMute} mb-1`}>Hazırlık</span>
+                  <h2 className={`text-2xl font-serif font-semibold leading-tight ${c.ink}`}>Dilekçe Oluşturucu</h2>
                 </div>
-                <div className="flex flex-col md:flex-row items-end md:items-center gap-3">
+                <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
                   <div className="w-full md:w-auto"><TokenBalance /></div>
-                  <button type="button" onClick={() => { fetchRecentDrafts(); setShowDrafts(true); }} className="rounded-xl border border-slate-200 px-4 py-2 text-sm hover:bg-slate-600 transition" title="Son dilekçelerinizi görüntüleyin">Son Dilekçeleriniz</button>
+                  <button type="button" onClick={() => { fetchRecentDrafts(); setShowDrafts(true); }} className={`rounded-xl border px-4 py-2 text-sm font-medium transition ${isDarkMode ? "border-white/10 text-slate-300 hover:bg-white/[0.05]" : "border-[#E4DAC6] text-[#5B6478] hover:bg-white"}`} title="Son dilekçelerinizi görüntüleyin">Son Dilekçeleriniz</button>
                   <Stepper />
                 </div>
               </div>
-              <p className="mt-2 text-slate-400 text-sm">Önce dava türünü seçin, ardından olay özetinizi ve talebinizi girin. Diğer alanlar seçiminize göre dinamik olarak gelecektir.</p>
+              <p className={`mt-3 text-sm ${c.inkSoft}`}>Önce dava türünü seçin, ardından olay özetinizi ve talebinizi girin. Diğer alanlar seçiminize göre dinamik olarak gelecektir.</p>
             </header>
 
-            <div className="divide-y divide-slate-700/60">
-              {step === 1 && (
+            <div className={`divide-y ${c.lineSoft}`}>
+              {step === 1 && (() => {
+                const fieldCls = `w-full rounded-xl border p-2.5 text-sm outline-none transition-all focus:ring-2 ${isDarkMode ? "border-white/10 bg-[#0D1322] text-slate-200 placeholder:text-slate-600 focus:border-amber-400/40 focus:ring-amber-400/10" : "border-[#E4DAC6] bg-white text-[#1C2A47] placeholder:text-[#A8A08C] focus:border-[#A77B2E] focus:ring-[#A77B2E]/15"}`;
+                const labelCls = `block text-xs font-semibold tracking-wide mb-1.5 ${c.inkSoft}`;
+                return (
                 <section className="p-6 md:p-8">
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium mb-1">Dava Türü *</label>
-                        <select className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500" value={caseType} onChange={(e) => handleCaseTypeChange(e.target.value)} required>
+                        <label className={labelCls}>Dava Türü *</label>
+                        <select className={fieldCls} value={caseType} onChange={(e) => handleCaseTypeChange(e.target.value)} required>
                           {Object.entries(CASE_TYPES).map(([key, cfg]) => (<option key={key} value={key}>{cfg.label}</option>))}
                         </select>
-                        <p className="text-xs text-slate-400 mt-1">Örn: Kamulaştırmasız El Atma davası seçildiğinde taşınmaz ada parsel bilgisi gibi alanlar otomatik gelir.</p>
+                        <p className={`text-xs mt-1.5 ${c.inkMute}`}>Örn: Kamulaştırmasız El Atma davası seçildiğinde taşınmaz ada parsel bilgisi gibi alanlar otomatik gelir.</p>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">Davacı Adı (isteğe bağlı)</label>
-                        <input className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500" placeholder="Örn. Can Yılmaz" value={davaciAdSoyad} onChange={(e) => setDavaciAdSoyad(e.target.value)} />
+                        <label className={labelCls}>Davacı Adı (isteğe bağlı)</label>
+                        <input className={fieldCls} placeholder="Örn. Can Yılmaz" value={davaciAdSoyad} onChange={(e) => setDavaciAdSoyad(e.target.value)} />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">Talep *</label>
-                        <input className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500" placeholder="Boşanma, 20.000 TL Tazminat..." value={talep} onChange={(e) => setTalep(e.target.value)} required />
+                        <label className={labelCls}>Talep *</label>
+                        <input className={fieldCls} placeholder="Boşanma, 20.000 TL Tazminat..." value={talep} onChange={(e) => setTalep(e.target.value)} required />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium mb-1">Davalı Adı (isteğe bağlı)</label>
-                        <input className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500" placeholder="Örn. Cem Yılmaz" value={davaliAdSoyad} onChange={(e) => setDavaliAdSoyad(e.target.value)} />
+                        <label className={labelCls}>Davalı Adı (isteğe bağlı)</label>
+                        <input className={fieldCls} placeholder="Örn. Cem Yılmaz" value={davaliAdSoyad} onChange={(e) => setDavaliAdSoyad(e.target.value)} />
                       </div>
                       <div className="md:col-span-2">
-                        <label className="block text-sm font-medium mb-1">Davaya Sebebiyet Veren Somut Olaylar *</label>
-                        <textarea className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500" rows={4} placeholder="Örn. Müvekkilin kocası müvekkili aldatmıştır..." value={olayOzet} onChange={(e) => setOlayOzet(e.target.value)} required />
-                        <div className="flex justify-between text-xs text-slate-400 mt-1"><span>En az 20 karakter</span>{caseType === "cevap" && (<span className="ml-2 text-amber-300">(Cevap Dilekçesi modunda zorunlu değil)</span>)}<span>{olayCharCount} karakter</span></div>
+                        <label className={labelCls}>Davaya Sebebiyet Veren Somut Olaylar *</label>
+                        <textarea className={fieldCls} rows={4} placeholder="Örn. Müvekkilin kocası müvekkili aldatmıştır..." value={olayOzet} onChange={(e) => setOlayOzet(e.target.value)} required />
+                        <div className={`flex justify-between text-xs mt-1.5 ${c.inkMute}`}><span>En az 20 karakter</span>{caseType === "cevap" && (<span className={`ml-2 ${c.gold}`}>(Cevap Dilekçesi modunda zorunlu değil)</span>)}<span>{olayCharCount} karakter</span></div>
                       </div>
                       {activeFields.length > 0 && (
                         <div className="md:col-span-2">
-                          <div className="rounded-xl border border-slate-700 p-4">
-                            <h3 className="font-medium mb-3 text-gray-200">{CASE_TYPES[caseType]?.label} — Özel Bilgiler</h3>
+                          <div className={`rounded-xl border ${c.line} ${isDarkMode ? "bg-white/[0.02]" : "bg-[#F6EFE2]"} p-4`}>
+                            <h3 className={`font-serif font-semibold mb-3 ${c.ink}`}>{CASE_TYPES[caseType]?.label} — Özel Bilgiler</h3>
                             <div className="grid md:grid-cols-2 gap-4">
                               {activeFields.map((f) => (
                                 <div key={f.id}>
-                                  <label className="block text-sm font-medium mb-1">{f.label} {f.required ? "*" : ""}</label>
-                                  <FieldInput field={f} value={extraValues[f.id] || ""} onChange={handleExtraChange} />
+                                  <label className={labelCls}>{f.label} {f.required ? "*" : ""}</label>
+                                  <FieldInput field={f} value={extraValues[f.id] || ""} onChange={handleExtraChange} isDarkMode={isDarkMode} />
                                 </div>
                               ))}
                             </div>
@@ -999,37 +1060,38 @@ const processedMd = useMemo(() => {
                         </div>
                       )}
                       <div className="md:col-span-2">
-                        <label className="block text-sm font-medium mb-1">Eldeki Deliller (isteğe bağlı) — her satır bir delil</label>
-                        <textarea className="w-full rounded-xl border border-slate-700 bg-slate-900/60 p-2 outline-none focus:ring-2 focus:ring-blue-500" rows={2} placeholder={`Tanık Beyanları\nNüfus Kayıtları\nFaturalar`} value={delillerInput} onChange={(e) => setDelillerInput(e.target.value)} />
+                        <label className={labelCls}>Eldeki Deliller (isteğe bağlı) — her satır bir delil</label>
+                        <textarea className={fieldCls} rows={2} placeholder={`Tanık Beyanları\nNüfus Kayıtları\nFaturalar`} value={delillerInput} onChange={(e) => setDelillerInput(e.target.value)} />
                       </div>
                     </div>
-                    {error && (<div className="rounded-xl border border-red-400/60 bg-red-500/10 p-3 text-sm text-red-300">{error}</div>)}
+                    {error && (<div className={`rounded-xl border p-3 text-sm ${isDarkMode ? "border-red-400/40 bg-red-500/10 text-red-300" : "border-red-300 bg-red-50 text-red-700"}`}>{error}</div>)}
                     <div className="flex items-center gap-3">
-                      <button type="submit" disabled={loading} className="rounded-xl bg-blue-600 text-white px-5 py-2 hover:bg-blue-500 disabled:opacity-60 transition">{loading ? "Gönderiliyor..." : "Dilekçe Oluştur"}</button>
-                      <button type="button" onClick={resetForm} className="rounded-xl border border-slate-600 px-5 py-2 hover:bg-slate-800 transition">Temizle</button>
+                      <button type="submit" disabled={loading} className={`rounded-xl px-6 py-2.5 text-sm font-semibold shadow-lg disabled:opacity-50 transition ${isDarkMode ? "bg-amber-400 text-[#0A0F1C] hover:bg-amber-300 shadow-amber-900/30" : "bg-[#16223E] text-white hover:bg-[#1f2f54] shadow-[0_12px_28px_-12px_rgba(28,42,71,0.7)]"}`}>{loading ? "Gönderiliyor..." : "Dilekçe Oluştur"}</button>
+                      <button type="button" onClick={resetForm} className={`rounded-xl border px-5 py-2.5 text-sm font-medium transition ${isDarkMode ? "border-white/10 hover:bg-white/[0.05]" : "border-[#E4DAC6] hover:bg-white"}`}>Temizle</button>
                     </div>
                   </form>
                 </section>
-              )}
+                );
+              })()}
 
               {step === 2 && (
                 <section className="p-6 md:p-8 space-y-6">
                   <div className="space-y-4">
-                    <div className="text-slate-300">İşlemler sürüyor…</div>
-                    <div className="space-y-2">
+                    <div className={`font-serif italic ${c.inkSoft}`}>Consulto dilekçenizi hazırlıyor…</div>
+                    <div className="space-y-2.5">
                       {LOADING_MESSAGES.map((msg, i) => {
                         const done = i < loadStepIdx;
                         const active = i === loadStepIdx;
                         return (
                           <div key={i} className="flex items-center gap-3">
-                            {done ? (<span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-emerald-500/10 border border-emerald-400/50 text-emerald-300 text-xs">✓</span>) : active ? (<span className="inline-flex items-center justify-center h-5 w-5 rounded-full"><span className="h-4 w-4 rounded-full border-2 border-sky-400/30 border-t-sky-400 animate-spin" /></span>) : (<span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-slate-800 border border-slate-700 text-slate-500 text-xs">•</span>)}
-                            <span className={active ? "text-sky-300" : done ? "text-slate-300" : "text-slate-500"}>{msg}</span>
+                            {done ? (<span className={`inline-flex items-center justify-center h-5 w-5 rounded-full text-xs ${isDarkMode ? "bg-amber-400/10 border border-amber-400/50 text-amber-300" : "bg-[#F2E7CC] border border-[#DCC68C] text-[#A77B2E]"}`}>✓</span>) : active ? (<span className="inline-flex items-center justify-center h-5 w-5 rounded-full"><span className={`h-4 w-4 rounded-full border-2 animate-spin ${isDarkMode ? "border-amber-400/30 border-t-amber-400" : "border-[#A77B2E]/30 border-t-[#A77B2E]"}`} /></span>) : (<span className={`inline-flex items-center justify-center h-5 w-5 rounded-full text-xs ${isDarkMode ? "bg-white/5 border border-white/10 text-slate-500" : "bg-[#EFE6D4] border border-[#E4DAC6] text-[#8A8270]"}`}>•</span>)}
+                            <span className={`text-sm ${active ? c.gold : done ? c.inkSoft : c.inkMute}`}>{msg}</span>
                           </div>
                         );
                       })}
                     </div>
-                    <div className="h-1.5 bg-slate-800 rounded overflow-hidden">
-                      <div className="h-full bg-sky-500 transition-all duration-500" style={{ width: `${Math.round(((loadStepIdx + 1) / LOADING_MESSAGES.length) * 100)}%` }} />
+                    <div className={`h-1.5 rounded overflow-hidden ${isDarkMode ? "bg-white/10" : "bg-[#E4DAC6]"}`}>
+                      <div className={`h-full transition-all duration-500 ${isDarkMode ? "bg-amber-400" : "bg-[#16223E]"}`} style={{ width: `${Math.round(((loadStepIdx + 1) / LOADING_MESSAGES.length) * 100)}%` }} />
                     </div>
                   </div>
                   <LoaderCard /><LoaderCard />
@@ -1039,22 +1101,22 @@ const processedMd = useMemo(() => {
               {step === 3 && (
                 <section className="p-6 md:p-8 space-y-8">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex items-center rounded-full border border-emerald-500/50 bg-emerald-500/10 px-2.5 py-1 text-xs text-emerald-300">✓ Hazır</span>
-                      <h2 className="text-xl font-semibold text-gray-200">Taslak Dilekçe</h2>
-                      {saving && <span className="text-xs text-slate-400 ml-2">kaydediliyor…</span>}
+                    <div className="flex items-center gap-2.5">
+                      <span className={`inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-mono tracking-wider ${isDarkMode ? "border-amber-400/40 bg-amber-400/10 text-amber-300" : "border-[#DCC68C] bg-[#F2E7CC] text-[#A77B2E]"}`}>✓ HAZIR</span>
+                      <h2 className={`text-xl font-serif font-semibold ${c.ink}`}>Taslak Dilekçe</h2>
+                      {saving && <span className={`text-xs ml-1 ${c.inkMute}`}>kaydediliyor…</span>}
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
-                      <button onClick={handleCopy} className="rounded-xl border border-slate-600 px-4 py-2 hover:bg-slate-800 transition text-sm" title="Markdown'ı panoya kopyala">{copied ? "Kopyalandı ✓" : "Kopyala"}</button>
-                      <button onClick={() => downloadAsDocxFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError)} className="rounded-xl bg-indigo-600 text-white px-4 py-2 hover:bg-indigo-500 transition text-sm" title="Word (.docx) olarak indir">Word (.docx)</button>
-                      <button onClick={() => downloadAsPdfFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError)} className="rounded-xl bg-rose-600 text-white px-4 py-2 hover:bg-rose-500 transition text-sm" title="PDF olarak indir">PDF</button>
+                      <button onClick={handleCopy} className={`rounded-xl border px-4 py-2 text-sm font-medium transition ${isDarkMode ? "border-white/10 hover:bg-white/[0.05]" : "border-[#E4DAC6] hover:bg-white"}`} title="Markdown'ı panoya kopyala">{copied ? "Kopyalandı ✓" : "Kopyala"}</button>
+                      <button onClick={() => downloadAsDocxFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError)} className={`rounded-xl px-4 py-2 text-sm font-semibold text-white transition ${isDarkMode ? "bg-[#1f2f54] hover:bg-[#2a3d6b]" : "bg-[#16223E] hover:bg-[#1f2f54]"}`} title="Word (.docx) olarak indir">Word (.docx)</button>
+                      <button onClick={() => downloadAsPdfFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError)} className="rounded-xl bg-[#8B2E3C] text-white px-4 py-2 hover:bg-[#a23647] transition text-sm font-semibold" title="PDF olarak indir">PDF</button>
                     </div>
                   </div>
-                  {error && (<div className="w-full mt-2 rounded-xl border border-red-400/60 bg-red-500/10 p-2 text-xs text-red-300">{error}</div>)}
+                  {error && (<div className={`w-full mt-2 rounded-xl border p-2 text-xs ${isDarkMode ? "border-red-400/40 bg-red-500/10 text-red-300" : "border-red-300 bg-red-50 text-red-700"}`}>{error}</div>)}
 
-                  <div className="flex items-center gap-2 border-b border-slate-700/60">
+                  <div className={`flex items-center gap-1 border-b overflow-x-auto ${c.lineSoft}`}>
                     {[ { key: "dilekce", label: "Dilekçe Metni" }, { key: "kaynaklar", label: "Yararlanılan Kaynaklar" }, { key: "girdi", label: "Girdi Özeti" }, { key: "dikkat", label: "Davada Dikkat" }, ].map((t) => (
-                      <button key={t.key} onClick={() => setActiveTab(t.key)} className={["px-4 py-2 text-sm", activeTab === t.key ? "border-b-2 border-blue-500 text-blue-300" : "text-slate-400 hover:text-slate-200"].join(" ")}>{t.label}</button>
+                      <button key={t.key} onClick={() => setActiveTab(t.key)} className={["px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-colors", activeTab === t.key ? (isDarkMode ? "border-b-2 border-amber-400 text-amber-300" : "border-b-2 border-[#A77B2E] text-[#16223E]") : `${c.inkMute} hover:${isDarkMode ? "text-slate-300" : "text-[#1C2A47]"}`].join(" ")}>{t.label}</button>
                     ))}
                   </div>
 
@@ -1068,19 +1130,19 @@ const processedMd = useMemo(() => {
                         const isEmpty = (!riskler.length && !karsi.length && !deliller.length);
                         return (
                           <>
-                            {isEmpty ? ( <div className="rounded-xl border border-slate-700/60 p-4 text-slate-400 text-sm">Bu bölüm için özetlenmiş bir içerik oluşturulamadı.</div> ) : (
+                            {isEmpty ? ( <div className={`rounded-xl border ${c.line} p-4 text-sm ${c.inkMute}`}>Bu bölüm için özetlenmiş bir içerik oluşturulamadı.</div> ) : (
                               <div className="grid md:grid-cols-3 gap-4">
-                                <div className="rounded-xl border border-amber-500/40 bg-amber-500/5 p-4">
-                                  <div className="flex items-center justify-between mb-2"><h3 className="font-semibold text-amber-300">Olası Riskler</h3><span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300">{riskler.length}</span></div>
-                                  {riskler.length ? (<ul className="list-disc pl-5 space-y-1 text-sm">{riskler.map((it, idx) => (<li key={idx} className="text-amber-100/90">{it}</li>))}</ul>) : (<p className="text-slate-400 text-sm">Herhangi bir risk öne çıkmadı.</p>)}
+                                <div className={`rounded-xl border p-4 ${isDarkMode ? "border-amber-500/40 bg-amber-500/5" : "border-amber-300 bg-amber-50"}`}>
+                                  <div className="flex items-center justify-between mb-2"><h3 className={`font-serif font-semibold ${isDarkMode ? "text-amber-300" : "text-amber-800"}`}>Olası Riskler</h3><span className={`text-xs px-2 py-0.5 rounded-full border ${isDarkMode ? "bg-amber-500/10 border-amber-500/40 text-amber-300" : "bg-amber-100 border-amber-300 text-amber-800"}`}>{riskler.length}</span></div>
+                                  {riskler.length ? (<ul className="list-disc pl-5 space-y-1 text-sm">{riskler.map((it, idx) => (<li key={idx} className={isDarkMode ? "text-amber-100/90" : "text-amber-900"}>{it}</li>))}</ul>) : (<p className={`text-sm ${c.inkMute}`}>Herhangi bir risk öne çıkmadı.</p>)}
                                 </div>
-                                <div className="rounded-xl border border-sky-500/40 bg-sky-500/5 p-4">
-                                  <div className="flex items-center justify-between mb-2"><h3 className="font-semibold text-sky-300">Muhtemel Karşı İddialar</h3><span className="text-xs px-2 py-0.5 rounded-full bg-sky-500/10 border border-sky-500/40 text-sky-300">{karsi.length}</span></div>
-                                  {karsi.length ? (<ul className="list-disc pl-5 space-y-1 text-sm">{karsi.map((it, idx) => (<li key={idx} className="text-sky-100/90">{it}</li>))}</ul>) : (<p className="text-slate-400 text-sm">Öne çıkan bir karşı iddia listelenmedi.</p>)}
+                                <div className={`rounded-xl border p-4 ${isDarkMode ? "border-sky-500/40 bg-sky-500/5" : "border-sky-300 bg-sky-50"}`}>
+                                  <div className="flex items-center justify-between mb-2"><h3 className={`font-serif font-semibold ${isDarkMode ? "text-sky-300" : "text-sky-800"}`}>Muhtemel Karşı İddialar</h3><span className={`text-xs px-2 py-0.5 rounded-full border ${isDarkMode ? "bg-sky-500/10 border-sky-500/40 text-sky-300" : "bg-sky-100 border-sky-300 text-sky-800"}`}>{karsi.length}</span></div>
+                                  {karsi.length ? (<ul className="list-disc pl-5 space-y-1 text-sm">{karsi.map((it, idx) => (<li key={idx} className={isDarkMode ? "text-sky-100/90" : "text-sky-900"}>{it}</li>))}</ul>) : (<p className={`text-sm ${c.inkMute}`}>Öne çıkan bir karşı iddia listelenmedi.</p>)}
                                 </div>
-                                <div className="rounded-xl border border-emerald-500/40 bg-emerald-500/5 p-4">
-                                  <div className="flex items-center justify-between mb-2"><h3 className="font-semibold text-emerald-300">Mutlaka Sunulması Gereken Deliller</h3><span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-emerald-300">{deliller.length}</span></div>
-                                  {deliller.length ? (<ul className="list-disc pl-5 space-y-1 text-sm">{deliller.map((it, idx) => (<li key={idx} className="text-emerald-100/90">{it}</li>))}</ul>) : (<p className="text-slate-400 text-sm">Bu dava için kritik delil önerisi bulunamadı.</p>)}
+                                <div className={`rounded-xl border p-4 ${isDarkMode ? "border-emerald-500/40 bg-emerald-500/5" : "border-emerald-300 bg-emerald-50"}`}>
+                                  <div className="flex items-center justify-between mb-2"><h3 className={`font-serif font-semibold ${isDarkMode ? "text-emerald-300" : "text-emerald-800"}`}>Mutlaka Sunulması Gereken Deliller</h3><span className={`text-xs px-2 py-0.5 rounded-full border ${isDarkMode ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-300" : "bg-emerald-100 border-emerald-300 text-emerald-800"}`}>{deliller.length}</span></div>
+                                  {deliller.length ? (<ul className="list-disc pl-5 space-y-1 text-sm">{deliller.map((it, idx) => (<li key={idx} className={isDarkMode ? "text-emerald-100/90" : "text-emerald-900"}>{it}</li>))}</ul>) : (<p className={`text-sm ${c.inkMute}`}>Bu dava için kritik delil önerisi bulunamadı.</p>)}
                                 </div>
                               </div>
                             )}
@@ -1091,8 +1153,9 @@ const processedMd = useMemo(() => {
                   )}
 
                   {activeTab === "dilekce" && (
-                    <div ref={dilekcePreviewRef} className="max-w-none text-[15px] leading-[1.55] bg-slate-900/50 rounded-xl border border-slate-700/60 p-8">
-                      <div className="text-[15px] leading-[1.6]">
+                    <div className={`rounded-2xl p-3 md:p-6 ${isDarkMode ? "bg-white/[0.02] border border-white/10" : "bg-[#EDE5D5]"}`}>
+                      {/* Beyaz kağıt yüzeyi — gerçek belge hissi */}
+                      <div ref={dilekcePreviewRef} className="max-w-3xl mx-auto bg-[#FCFAF4] text-[#15233B] rounded-lg shadow-[0_12px_40px_-16px_rgba(28,42,71,0.45)] ring-1 ring-[#E4DAC6] px-7 py-10 md:px-14 md:py-16 text-[15px] leading-[1.7]" style={{ fontFamily: "'Times New Roman', Georgia, serif" }}>
                         {renderDilekce(dilekceMd || "_Dilekçe metni yok._")}
                       </div>
                     </div>
@@ -1100,13 +1163,13 @@ const processedMd = useMemo(() => {
 
                   {activeTab === "kaynaklar" && (
                     <div className="grid md:grid-cols-2 gap-4">
-                      <div className="rounded-xl border border-slate-700 p-4">
-                        <h3 className="font-medium mb-2 text-gray-200">Dayanaklar (Kanun Maddeleri)</h3>
+                      <div className={`rounded-xl border ${c.line} ${c.surfaceAlt} p-4`}>
+                        <h3 className={`font-serif font-semibold mb-3 ${c.ink}`}>Dayanaklar (Kanun Maddeleri)</h3>
                         {parsedDayanaklar && parsedDayanaklar.length ? (
                           <div className="flex flex-col gap-2">
                             {parsedDayanaklar.map((d, i) => {
                               const hasStruct = d.kanun && d.madde;
-                              if (!hasStruct) return <div key={i} className="text-sm text-slate-300">• {d.display}</div>;
+                              if (!hasStruct) return <div key={i} className={`text-sm ${c.inkSoft}`}>• {d.display}</div>;
                               const slug = slugifyMevzuatAdi(d.kanun);
                               const href = slug ? `/mevzuat/${encodeURIComponent(slug)}${maddeAnchor(d.madde)}` : "";
                               const popKey = `${slug || "mevzuat"}::${d.madde}`;
@@ -1114,14 +1177,14 @@ const processedMd = useMemo(() => {
                               return (
                                 <div key={i} className="w-full space-y-1" data-mevzuat-popover="1">
                                   <div className="flex items-stretch gap-2">
-                                    <button type="button" onClick={(e) => { e.stopPropagation(); const el = e.currentTarget; const pos = calcMevzuatPopover(el); setOpenMevzuat(prev => (prev?.key === popKey ? null : { key: popKey, el, ...pos })); }} aria-expanded={openMevzuat?.key === popKey} className="inline-flex items-center gap-1 px-2.5 py-1 text-[12px] font-semibold rounded-lg bg-cyan-600/40 text-white whitespace-nowrap leading-none hover:bg-cyan-500/50 focus:outline-none focus:ring-2 focus:ring-cyan-300/30 transition-colors"><span>m.</span><span className="tabular-nums">{d.madde}</span></button>
+                                    <button type="button" onClick={(e) => { e.stopPropagation(); const el = e.currentTarget; const pos = calcMevzuatPopover(el); setOpenMevzuat(prev => (prev?.key === popKey ? null : { key: popKey, el, ...pos })); }} aria-expanded={openMevzuat?.key === popKey} className={`inline-flex items-center gap-1 px-2.5 py-1 text-[12px] font-mono font-semibold rounded-lg whitespace-nowrap leading-none transition-colors focus:outline-none focus:ring-2 ${isDarkMode ? "bg-amber-400/15 text-amber-200 hover:bg-amber-400/25 focus:ring-amber-300/30" : "bg-[#16223E] text-white hover:bg-[#1f2f54] focus:ring-[#A77B2E]/30"}`}><span>m.</span><span className="tabular-nums">{d.madde}</span></button>
                                     <div className="relative flex-1">
-                                      {href ? (<a className="flex-1 inline-flex items-center px-3 py-2 rounded-lg bg-slate-700/60 text-[11px] text-slate-300 font-medium leading-tight min-h-[32px] hover:text-cyan-300 hover:bg-slate-600/60 transition-colors" href={href} target="_blank" rel="noreferrer" onClick={(e)=>e.stopPropagation()} title="Tam mevzuat sayfasına git">{d.kanun}</a>) : (<span className="flex-1 inline-flex items-center px-3 py-2 rounded-lg bg-slate-700/60 text-[11px] text-slate-300 font-medium leading-tight min-h-[32px]">{d.kanun}</span>)}
+                                      {href ? (<a className={`flex-1 inline-flex items-center px-3 py-2 rounded-lg text-[11px] font-medium leading-tight min-h-[32px] transition-colors ${isDarkMode ? "bg-white/5 text-slate-300 hover:text-amber-300 hover:bg-white/10" : "bg-[#F6EFE2] text-[#5B6478] hover:text-[#A77B2E] hover:bg-[#EFE6D4]"}`} href={href} target="_blank" rel="noreferrer" onClick={(e)=>e.stopPropagation()} title="Tam mevzuat sayfasına git">{d.kanun}</a>) : (<span className={`flex-1 inline-flex items-center px-3 py-2 rounded-lg text-[11px] font-medium leading-tight min-h-[32px] ${isDarkMode ? "bg-white/5 text-slate-300" : "bg-[#F6EFE2] text-[#5B6478]"}`}>{d.kanun}</span>)}
                                       {openMevzuat?.key === popKey && (
-                                        <div data-mevzuat-popover="1" role="dialog" aria-modal="true" onClick={(e)=>e.stopPropagation()} className={"fixed z-[999] w-[42rem] max-w-[92vw] max-h-[70vh] overflow-auto rounded-xl border border-white/10 bg-slate-900/95 backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.55),0_0_24px_rgba(34,211,238,0.2)] ring-1 ring-cyan-400/35 p-4 text-[12px] text-slate-100 transition-transform duration-150 ease-out will-change-transform " + (openMevzuat?.placement === 'left' ? "-translate-x-full -translate-y-1/2" : openMevzuat?.placement === 'right' ? "-translate-y-1/2" : openMevzuat?.placement === 'bottom' ? "-translate-x-1/2" : "-translate-x-1/2 -translate-y-full")} style={{ top: openMevzuat.top, left: openMevzuat.left }}>
-                                          <div className="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"></div>
-                                          <div className="flex items-center justify-between gap-2 mb-2"><div className="text-slate-100"><div className="font-semibold">{d.kanun}</div><div className="text-xs text-slate-300 mt-0.5">m. {d.madde}</div></div><button type="button" onClick={() => setOpenMevzuat(null)} className="shrink-0 w-8 h-8 grid place-items-center rounded-md bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white ring-1 ring-white/15 focus:outline-none focus:ring-2 focus:ring-cyan-400/40" aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
-                                          <div className="leading-snug whitespace-pre-wrap break-words font-medium">{preview || "Madde metni getirilemedi."}</div>
+                                        <div data-mevzuat-popover="1" role="dialog" aria-modal="true" onClick={(e)=>e.stopPropagation()} className={`fixed z-[999] w-[42rem] max-w-[92vw] max-h-[70vh] overflow-auto rounded-xl border p-4 text-[12px] transition-transform duration-150 ease-out will-change-transform ${isDarkMode ? "border-white/10 bg-[#0D1322]/95 backdrop-blur-md shadow-[0_24px_60px_rgba(0,0,0,0.6)] ring-1 ring-amber-400/25 text-slate-100" : "border-[#E4DAC6] bg-white shadow-[0_24px_60px_-20px_rgba(28,42,71,0.45)] ring-1 ring-[#DCC68C] text-[#1C2A47]"} ` + (openMevzuat?.placement === 'left' ? "-translate-x-full -translate-y-1/2" : openMevzuat?.placement === 'right' ? "-translate-y-1/2" : openMevzuat?.placement === 'bottom' ? "-translate-x-1/2" : "-translate-x-1/2 -translate-y-full")} style={{ top: openMevzuat.top, left: openMevzuat.left }}>
+                                          <div className={`pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent to-transparent ${isDarkMode ? "via-amber-400/30" : "via-[#A77B2E]/40"}`}></div>
+                                          <div className="flex items-center justify-between gap-2 mb-2"><div><div className="font-serif font-semibold">{d.kanun}</div><div className={`text-xs mt-0.5 font-mono ${c.inkSoft}`}>m. {d.madde}</div></div><button type="button" onClick={() => setOpenMevzuat(null)} className={`shrink-0 w-8 h-8 grid place-items-center rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? "bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white ring-1 ring-white/15 focus:ring-amber-400/40" : "bg-[#F6EFE2] text-[#5B6478] hover:bg-[#EFE6D4] hover:text-[#1C2A47] ring-1 ring-[#E4DAC6] focus:ring-[#A77B2E]/40"}`} aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+                                          <div className="leading-snug whitespace-pre-wrap break-words">{preview || "Madde metni getirilemedi."}</div>
                                         </div>
                                       )}
                                     </div>
@@ -1130,11 +1193,11 @@ const processedMd = useMemo(() => {
                               );
                             })}
                           </div>
-                        ) : (<ul className="list-disc pl-5 space-y-1 text-slate-300 text-sm"><li className="text-slate-400">Belirtilmedi</li></ul>)}
+                        ) : (<ul className={`list-disc pl-5 space-y-1 text-sm ${c.inkSoft}`}><li className={c.inkMute}>Belirtilmedi</li></ul>)}
                       </div>
-                      <div className="rounded-xl border border-slate-700 p-4">
-                        <h3 className="font-medium mb-2 text-gray-200">Yargıtay Kararları</h3>
-                        <ul className="list-disc pl-5 space-y-1 text-slate-300 text-sm">
+                      <div className={`rounded-xl border ${c.line} ${c.surfaceAlt} p-4`}>
+                        <h3 className={`font-serif font-semibold mb-3 ${c.ink}`}>Yargıtay Kararları</h3>
+                        <ul className={`list-disc pl-5 space-y-1 text-sm ${c.inkSoft}`}>
                           {(() => {
                             const all = result?.kaynaklar?.yargitay_kararlari || [];
                             const dict = new Map();
@@ -1155,11 +1218,11 @@ const processedMd = useMemo(() => {
                               dict.set(key, rec);
                             }
                             const list = Array.from(dict.values()).filter((r) => r.code || r.court || r.slug).sort((a, b) => (a.court || "").localeCompare(b.court || "") || (a.code || "").localeCompare(b.code || ""));
-                            if (!list.length) return <li className="text-slate-400">Belirtilmedi</li>;
+                            if (!list.length) return <li className={c.inkMute}>Belirtilmedi</li>;
                             return list.map((r, i) => {
                               const hasSlug = r.slug && looksLikeSlug(r.slug);
-                              const content = (<>{r.court ? <span>{r.court}</span> : null}{r.court && (r.code || r.slug) ? <span className="mx-1 text-slate-400">·</span> : null}{r.code ? <span className="tabular-nums">{r.code}</span> : (r.slug || "")}</>);
-                              if (hasSlug) { return (<li key={i}><Link href={`/kararlar/${encodeURIComponent(r.slug)}`} target="_blank" rel="noopener noreferrer" className="text-sky-400 hover:underline">{content}</Link></li>); }
+                              const content = (<>{r.court ? <span>{r.court}</span> : null}{r.court && (r.code || r.slug) ? <span className={`mx-1 ${c.inkMute}`}>·</span> : null}{r.code ? <span className="tabular-nums">{r.code}</span> : (r.slug || "")}</>);
+                              if (hasSlug) { return (<li key={i}><Link href={`/kararlar/${encodeURIComponent(r.slug)}`} target="_blank" rel="noopener noreferrer" className={`hover:underline ${isDarkMode ? "text-amber-400" : "text-[#A77B2E]"}`}>{content}</Link></li>); }
                               return <li key={i}>{content}</li>;
                             });
                           })()}
@@ -1168,19 +1231,22 @@ const processedMd = useMemo(() => {
                     </div>
                   )}
 
-                  {activeTab === "girdi" && (
-                    <div className="rounded-xl border border-slate-700/60 p-4 text-sm text-slate-300 space-y-2">
-                      <div><span className="text-slate-400">Dava Türü:</span> <span className="text-slate-200">{CASE_TYPES[caseType]?.label || "(belirtilmedi)"}</span></div>
-                      <div><span className="text-slate-400">Olay Özeti:</span> <span className="text-slate-200">{result?.girdi_ozeti?.olay_ozet || olayOzet}</span></div>
-                      <div><span className="text-slate-400">Talep:</span> <span className="text-slate-200">{result?.girdi_ozeti?.talep || talep}</span></div>
-                      <div><span className="text-slate-400">Davacı:</span> <span className="text-slate-200">{result?.girdi_ozeti?.davaci?.ad_soyad || davaciAdSoyad || "(belirtilmedi)"}</span></div>
-                      {activeFields.length > 0 && (<div><span className="text-slate-400">Özel Bilgiler:</span> <span className="text-slate-200">{Object.keys(extraValues).length ? activeFields.map((f) => `${f.label}: ${extraValues[f.id] || "-"}`).join(" • ") : "(belirtilmedi)"}</span></div>)}
-                      <div><span className="text-slate-400">Deliller:</span> <span className="text-slate-200">{Array.isArray(result?.girdi_ozeti?.eldeki_deliller) && result.girdi_ozeti.eldeki_deliller.length ? result.girdi_ozeti.eldeki_deliller.join(", ") : deliller.length ? deliller.join(", ") : "(belirtilmedi)"}</span></div>
+                  {activeTab === "girdi" && (() => {
+                    const k = c.inkMute; const v = c.ink;
+                    return (
+                    <div className={`rounded-xl border ${c.line} ${c.surfaceAlt} p-5 text-sm space-y-2.5`}>
+                      <div><span className={k}>Dava Türü:</span> <span className={v}>{CASE_TYPES[caseType]?.label || "(belirtilmedi)"}</span></div>
+                      <div><span className={k}>Olay Özeti:</span> <span className={v}>{result?.girdi_ozeti?.olay_ozet || olayOzet}</span></div>
+                      <div><span className={k}>Talep:</span> <span className={v}>{result?.girdi_ozeti?.talep || talep}</span></div>
+                      <div><span className={k}>Davacı:</span> <span className={v}>{result?.girdi_ozeti?.davaci?.ad_soyad || davaciAdSoyad || "(belirtilmedi)"}</span></div>
+                      {activeFields.length > 0 && (<div><span className={k}>Özel Bilgiler:</span> <span className={v}>{Object.keys(extraValues).length ? activeFields.map((f) => `${f.label}: ${extraValues[f.id] || "-"}`).join(" • ") : "(belirtilmedi)"}</span></div>)}
+                      <div><span className={k}>Deliller:</span> <span className={v}>{Array.isArray(result?.girdi_ozeti?.eldeki_deliller) && result.girdi_ozeti.eldeki_deliller.length ? result.girdi_ozeti.eldeki_deliller.join(", ") : deliller.length ? deliller.join(", ") : "(belirtilmedi)"}</span></div>
                     </div>
-                  )}
+                    );
+                  })()}
 
                   <div className="flex items-center gap-3">
-                    <button type="button" onClick={resetForm} className="rounded-xl border border-slate-600 px-5 py-2 hover:bg-slate-800 transition">Yeni Dilekçe</button>
+                    <button type="button" onClick={resetForm} className={`rounded-xl border px-5 py-2.5 text-sm font-medium transition ${isDarkMode ? "border-white/10 hover:bg-white/[0.05]" : "border-[#E4DAC6] hover:bg-white"}`}>Yeni Dilekçe</button>
                   </div>
                 </section>
               )}
@@ -1271,11 +1337,72 @@ const processedMd = useMemo(() => {
       
       {/* Geçmiş Modal */}
       {showDrafts && (
-        <div className="fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setShowDrafts(false)} />
-          <div className="absolute inset-y-0 right-0 w-full max-w-xl bg-slate-900 border-l border-slate-700 shadow-xl p-6 overflow-y-auto">
-            <div className="flex items-center justify-between mb-4"><h3 className="text-lg font-semibold text-gray-200">Son Dilekçeleriniz</h3><div className="flex items-center gap-2"><button onClick={() => fetchRecentDrafts()} className="text-xs px-3 py-1 rounded border border-slate-600 hover:bg-slate-800">Yenile</button><button onClick={() => setShowDrafts(false)} className="text-xs px-3 py-1 rounded bg-slate-800 border border-slate-600 hover:bg-slate-700">Kapat</button></div></div>
-            {Array.isArray(recentDrafts) && recentDrafts.length ? (<ul className="divide-y divide-slate-700/60">{recentDrafts.map((d) => { const created = d.createdAt || d.created_at; const when = created ? new Date(created).toLocaleString("tr-TR") : ""; return (<li key={d.id} className="py-3 flex items-center justify-between gap-3"><div className="min-w-0"><div className="text-sm text-slate-200 truncate">{d.dava_turu ? (CASE_TYPES[d.dava_turu]?.label || d.dava_turu) : "Taslak"}</div>{when && <div className="text-xs text-slate-400 truncate">{when}</div>}{d.olay_ozet && (<div className="text-xs text-slate-400 line-clamp-1">{d.olay_ozet}</div>)}</div><div className="flex items-center gap-2">{d?.dilekce_md ? (<button onClick={() => { loadDraft(d); setShowDrafts(false); }} className="text-xs px-3 py-1 rounded bg-slate-800 border border-slate-600 hover:bg-slate-700">Yükle</button>) : null}</div></li>); })}</ul>) : (<div className="text-sm text-slate-400">Kayıt bulunamadı.</div>)}
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setShowDrafts(false)} />
+          <div className={`relative w-full max-w-lg max-h-[85vh] flex flex-col rounded-2xl border shadow-2xl overflow-hidden ${c.line} ${isDarkMode ? "bg-[#0A0F1C]" : "bg-[#F3EDE1]"} animate-in fade-in zoom-in-95 duration-200`}>
+
+            {/* Başlık */}
+            <div className={`flex-none flex items-center justify-between gap-3 px-5 py-4 border-b ${c.lineSoft} ${isDarkMode ? "bg-white/[0.02]" : "bg-[#F6EFE2]"}`}>
+              <div className="flex items-center gap-2.5 min-w-0">
+                <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border ${isDarkMode ? "bg-amber-400/10 text-amber-300 border-amber-400/20" : "bg-[#F2E7CC] text-[#A77B2E] border-[#DCC68C]"}`}>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                </div>
+                <div className="min-w-0">
+                  <h3 className={`text-sm font-serif font-semibold leading-tight ${c.ink}`}>Son Dilekçeleriniz</h3>
+                  <span className={`text-[10px] font-mono tracking-[0.18em] ${c.inkMute}`}>{Array.isArray(recentDrafts) ? recentDrafts.length : 0} KAYIT</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <button onClick={() => fetchRecentDrafts()} title="Yenile" className={`p-2 rounded-lg border transition ${isDarkMode ? "border-white/10 text-slate-400 hover:text-white hover:bg-white/[0.05]" : "border-[#E4DAC6] text-[#5B6478] hover:text-[#1C2A47] hover:bg-white"}`}>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                </button>
+                <button onClick={() => setShowDrafts(false)} title="Kapat" className={`p-2 rounded-lg border transition ${isDarkMode ? "border-white/10 text-slate-400 hover:text-white hover:bg-white/[0.05]" : "border-[#E4DAC6] text-[#5B6478] hover:text-[#1C2A47] hover:bg-white"}`}>
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Liste */}
+            <div className="flex-1 overflow-y-auto p-4">
+              {Array.isArray(recentDrafts) && recentDrafts.length ? (
+                <div className="space-y-2.5">
+                  {recentDrafts.map((d) => {
+                    const created = d.createdAt || d.created_at;
+                    const when = created ? new Date(created).toLocaleString("tr-TR", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
+                    const label = d.dava_turu ? (CASE_TYPES[d.dava_turu]?.label || d.dava_turu) : "Taslak";
+                    const loadable = !!d?.dilekce_md;
+                    return (
+                      <div
+                        key={d.id}
+                        onClick={() => { if (loadable) { loadDraft(d); setShowDrafts(false); } }}
+                        className={`group rounded-xl border p-4 transition-all ${loadable ? "cursor-pointer" : "opacity-60"} ${isDarkMode ? "border-white/10 bg-white/[0.02] hover:border-amber-400/30 hover:bg-white/[0.04]" : "border-[#E4DAC6] bg-white hover:border-[#DCC68C] hover:shadow-[0_8px_20px_-12px_rgba(28,42,71,0.4)]"}`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0 flex-1">
+                            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-mono tracking-wide mb-2 border ${c.goldBg} ${c.goldBorder} ${c.gold}`}>{label}</span>
+                            {d.olay_ozet && <p className={`text-xs leading-relaxed line-clamp-2 ${c.inkSoft}`}>{d.olay_ozet}</p>}
+                            {when && <div className={`mt-2 text-[10px] font-mono ${c.inkMute}`}>{when}</div>}
+                          </div>
+                          {loadable && (
+                            <span className={`shrink-0 self-center transition-transform group-hover:translate-x-0.5 ${c.gold}`}>
+                              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className={`flex flex-col items-center justify-center text-center h-full min-h-[320px] gap-3 ${c.inkMute}`}>
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center border ${c.line} ${c.surfaceAlt}`}>
+                    <svg className="w-7 h-7 opacity-60" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.4} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                  </div>
+                  <p className={`text-sm font-serif italic ${c.inkSoft}`}>Henüz kayıtlı dilekçe yok</p>
+                  <p className="text-xs max-w-[230px]">Oluşturduğunuz dilekçeler otomatik kaydedilir ve burada listelenir.</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}

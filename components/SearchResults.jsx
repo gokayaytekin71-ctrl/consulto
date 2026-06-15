@@ -62,6 +62,7 @@ export default function SearchResults({ items = [], query = "", field = "content
     return sp;
   }, [searchParams]);
 
+  // Yeni arama / sıralama -> state'i sıfırla
   useEffect(() => {
     setResults(dedupeRows(items));
     setNextCursor(initialNextCursor);
@@ -84,7 +85,7 @@ export default function SearchResults({ items = [], query = "", field = "content
     } catch {
       const entries = await Promise.all(ids.map(async (id) => {
         try {
-          const r = await fetch(`/api/kararlar/snippet?id=${id}&field=${field}&term=${query}`);
+          const r = await fetch(`/api/kararlar/snippet?id=${id}&field=${field}&term=${encodeURIComponent(query)}`);
           const j = await r.json();
           return [id, j?.snippet || ""];
         } catch {
@@ -95,9 +96,14 @@ export default function SearchResults({ items = [], query = "", field = "content
     }
   };
 
+  // Snippet'i SADECE henüz çekilmemiş satırlar için getir.
+  // Böylece load-more sonrası tüm liste yeniden çekilmez (çift istek/flicker yok).
   useEffect(() => {
-    fetchSnippetsFor(results);
-  }, [results, query, field]);
+    if (!query) return;
+    const missing = results.filter((r) => snips[r.id] === undefined);
+    if (missing.length) fetchSnippetsFor(missing);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [results, query, field, snips]);
 
   const handleLoadMore = async () => {
     if (!nextCursor || isMoreLoading) return;
@@ -106,13 +112,20 @@ export default function SearchResults({ items = [], query = "", field = "content
     try {
       const sp = new URLSearchParams(baseParams.toString());
       sp.set("cursor", nextCursor);
-      const res = await fetch(`/api/kararlar?${sp.toString()}`);
+      const res = await fetch(`/api/kararlar/search?${sp.toString()}`);
       if (!res.ok) throw new Error(`API ${res.status}`);
       const j = await res.json();
       const newRows = Array.isArray(j?.data) ? j.data : [];
+
+      // Hiç yeni satır gelmediyse (ör. hepsi tekrar/dedupe) butonu kapat
+      if (!newRows.length) {
+        setNextCursor(undefined);
+        return;
+      }
+
       setResults((prev) => dedupeRows([...prev, ...newRows]));
       setNextCursor(j?.nextCursor);
-      if (newRows.length && query) await fetchSnippetsFor(newRows);
+      // snippet'ler yukarıdaki effect tarafından otomatik çekilir
     } catch (e) {
       setLoadError("Daha fazla sonuç alınamadı.");
     } finally {
@@ -131,7 +144,8 @@ export default function SearchResults({ items = [], query = "", field = "content
 
   return (
     <>
-      {(isNavigating || isMoreLoading) && <LoadingOverlay />}
+      {/* Overlay SADECE sıralama/navigasyon değişiminde. Load-more inline buton gösterir. */}
+      {isNavigating && <LoadingOverlay />}
       <section className="space-y-4">
         {/* Üst bar: alan rozeti + sıralama */}
         <div className="flex items-center justify-between gap-3">
