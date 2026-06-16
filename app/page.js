@@ -1,10 +1,13 @@
 
 import Link from "next/link";
-import prisma from '../lib/prisma';
+import prisma from "@/lib/prisma";
 import Script from "next/script";
-import DecisionCard from '@/components/DecisionCard';
-import HomeWorkspace from '@/components/HomeWorkspace';
+import DecisionCard from "@/components/DecisionCard";
+import HomeWorkspace from "@/components/HomeWorkspace";
 import { getAllPosts } from "@/lib/blog";
+
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
  
 /* =============================================================================
    GLOBAL STİL — Açık / sinematik aydınlık tema (server-safe)
@@ -153,10 +156,15 @@ export default async function Home() {
     getFeaturedDecisions()
   ]);
  
-  const makaleler = await prisma.makale.findMany({
-    orderBy: { createdAt: 'desc' },
-    take: 3,
-  });
+  let makaleler = [];
+  try {
+    makaleler = await prisma.makale.findMany({
+      orderBy: { createdAt: "desc" },
+      take: 3,
+    });
+  } catch (error) {
+    console.error("Ana sayfa makale sorgusu başarısız:", error);
+  }
 
   const blogPosts = getAllPosts().slice(0, 3); // en yeni 3 yazı (MDX, senkron)
  
