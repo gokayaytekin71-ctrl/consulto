@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { notFound, redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../api/auth/[...nextauth]/route';
+import { cache } from 'react';
 import prisma from '@/lib/prisma';
 import FavoriteButton from '@/components/FavoriteButton';
 import HighlightedKararBody from '@/components/HighlightedKararBody';
@@ -18,6 +17,9 @@ const DownloadPDFButton = dynamicImport(
 // --- CONFIG ---
 // Kararların 30 gün boyunca (2592000 saniye) statik olarak önbellekte kalmasını sağlar
 export const revalidate = 2592000;
+// İstenmeyen on-demand DB sorgularını kesmek için: bilinmeyen slug'lar 404 (statik) döner,
+// veritabanına gitmez. Mevcut kararlar yine ISR ile cache'lenir.
+export const dynamicParams = true;
 
 /* ============================================================
    GLOBAL CSS — "Editorial Law Review"
@@ -358,29 +360,67 @@ function parseParamsId(paramsId = "") {
   return { fileNameBase: id, mode: "filename" };
 }
 
-export async function generateMetadata({ params }) {
-  const parsed = parseParamsId(params.id);
+/* ============================================================
+   TEK NOKTADAN VERİ ÇEKME — React cache()
+   Aynı istek içinde generateMetadata + sayfa bileşeni bu fonksiyonu
+   çağırır; cache() sayesinde DB'ye SADECE 1 KEZ gidilir.
+   Strateji: önce indeksli exact-match (code = ...), bulunamazsa
+   son çare olarak yavaş "contains" taraması.
+   ============================================================ */
+const getKararBySlug = cache(async (kararSlug) => {
+  const parsed = parseParamsId(kararSlug);
   let karar = null;
 
-  // metadata için hafif bir sorgu — sadece gereken alanlar
-  try {
-    if (parsed.mode === "type+code" && parsed.code) {
+  if (parsed.mode === "type+code" && parsed.code) {
+    const rawTypeSeg = String(parsed.typeSeg || "").trim();
+    const tBase = rawTypeSeg.replace(/-/g, " ").replace(/\./g, "").trim();
+
+    // 1) İNDEKSLİ exact-match (en hızlı yol — full scan YOK)
+    karar = await prisma.karar.findFirst({
+      where: {
+        code: parsed.code,
+        ...(tBase ? { type: { contains: tBase, mode: "insensitive" } } : {}),
+      },
+    });
+
+    // 2) Tip eşleşmesi tutmadıysa sadece kod ile exact-match
+    if (!karar) {
+      karar = await prisma.karar.findFirst({ where: { code: parsed.code } });
+    }
+
+    // 3) SON ÇARE: yavaş contains taraması (format farklıysa).
+    //    code üzerinde indeks olsa bile contains seq-scan yapar; bu yüzden
+    //    yalnızca ilk iki exact-match başarısız olduğunda çalışır.
+    if (!karar) {
       const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})\/([0-9A-Za-z\-()\/]+)/i);
       if (m) {
         const [, eYear, eNo, kYear, kNo] = m;
         karar = await prisma.karar.findFirst({
-          where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }] },
-          select: { type: true, code: true, aiSummary: true, keywords: true, createdAt: true },
+          where: {
+            AND: [
+              { code: { contains: `${eYear}/${eNo}` } },
+              { code: { contains: `${kYear}/${kNo}` } },
+            ],
+          },
         });
       }
     }
-    if (!karar && parsed.mode === "filename") {
-      karar = await prisma.karar.findUnique({
-        where: { fileName: `${parsed.fileNameBase}.txt` },
-        select: { type: true, code: true, aiSummary: true, keywords: true, createdAt: true },
-      });
-    }
-  } catch (_) {}
+  }
+
+  // filename modu — fileName üzerinde unique indeks olmalı (hızlı)
+  if (!karar && parsed.mode === "filename") {
+    karar = await prisma.karar.findUnique({ where: { fileName: `${parsed.fileNameBase}.txt` } });
+  }
+  if (!karar && kararSlug && parsed.mode !== "filename") {
+    karar = await prisma.karar.findUnique({ where: { fileName: `${kararSlug}.txt` } });
+  }
+
+  return { karar, parsed };
+});
+
+export async function generateMetadata({ params }) {
+  // cache() sayesinde sayfa bileşeniyle AYNI sorguyu paylaşır — ekstra DB yükü yok
+  const { karar } = await getKararBySlug(params.id);
 
   const canonical = `https://www.consultohukuk.com/kararlar/${params.id}`;
 
@@ -463,27 +503,11 @@ const renderAiSummary = (txt) => {
 // --- PAGE COMPONENT ---
 export default async function KararDetayPage({ params }) {
   const { id: kararSlug } = params;
-  const parsed = parseParamsId(kararSlug);
-  let karar = null;
 
-  // --- DATA FETCHING (değiştirilmedi) ---
-  if (parsed.mode === "type+code" && parsed.code) {
-    const m = parsed.code.match(/(\d{4})\/([0-9A-Za-z\-()\/]+)\s*E.*?(\d{4})\/([0-9A-Za-z\-()\/]+)/i);
-    const rawTypeSeg = String(parsed.typeSeg || "").trim();
-    const tBase = rawTypeSeg.replace(/-/g, " ").replace(/\./g, "").trim();
-    const typeFilters = [{ type: { contains: tBase, mode: "insensitive" } }];
-    if (m) {
-      const [, eYear, eNo, kYear, kNo] = m;
-      karar = await prisma.karar.findFirst({ where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }, ...(typeFilters.length ? [{ OR: typeFilters }] : [])] } });
-      if (!karar) karar = await prisma.karar.findFirst({ where: { AND: [{ code: { contains: `${eYear}/${eNo}` } }, { code: { contains: `${kYear}/${kNo}` } }] } });
-    } else {
-      karar = await prisma.karar.findFirst({ where: { AND: [{ code: { equals: parsed.code } }, ...(typeFilters.length ? [{ OR: typeFilters }] : [])] } });
-      if (!karar) karar = await prisma.karar.findFirst({ where: { code: { contains: parsed.code.replace(/\s+/g, " ").trim() } } });
-    }
-  }
-  if (!karar && parsed.mode === "filename") karar = await prisma.karar.findUnique({ where: { fileName: `${parsed.fileNameBase}.txt` } });
-  if (!karar && kararSlug) karar = await prisma.karar.findFirst({ where: { fileName: `${kararSlug}.txt` } });
+  // cache() ile generateMetadata'nın çektiği kayıt yeniden kullanılır — TEK sorgu
+  const { karar, parsed } = await getKararBySlug(kararSlug);
   if (!karar) notFound();
+
   if (parsed.mode === "filename" && karar?.type && karar?.code) {
     const canonicalId = buildKararIdFromRecord(karar);
     if (canonicalId && canonicalId !== kararSlug) redirect(`/kararlar/${canonicalId}`);
@@ -496,8 +520,20 @@ export default async function KararDetayPage({ params }) {
     ? karar.keywords.split(',').map((kw) => kw.trim()).filter(Boolean)
     : [];
 
-  const prevKarar = await prisma.karar.findFirst({ where: { createdAt: { lt: karar.createdAt } }, orderBy: { createdAt: 'desc' }, select: { fileName: true, type: true, code: true } });
-  const nextKarar = await prisma.karar.findFirst({ where: { createdAt: { gt: karar.createdAt } }, orderBy: { createdAt: 'asc' }, select: { fileName: true, type: true, code: true } });
+  // Önceki/sonraki — iki ayrı sorgu yerine tek sorgu + uygulama tarafında ayır.
+  // (createdAt üzerinde indeks olmalı; aşağıdaki öneriye bakın.)
+  const [prevKarar, nextKarar] = await Promise.all([
+    prisma.karar.findFirst({
+      where: { createdAt: { lt: karar.createdAt } },
+      orderBy: { createdAt: 'desc' },
+      select: { fileName: true, type: true, code: true },
+    }),
+    prisma.karar.findFirst({
+      where: { createdAt: { gt: karar.createdAt } },
+      orderBy: { createdAt: 'asc' },
+      select: { fileName: true, type: true, code: true },
+    }),
+  ]);
   const prevId = prevKarar ? buildKararIdFromRecord(prevKarar) : null;
   const nextId = nextKarar ? buildKararIdFromRecord(nextKarar) : null;
 
