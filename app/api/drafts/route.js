@@ -1,15 +1,11 @@
 import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-// Prisma singleton (dev'de bağlantı şişmesini önler)
-const g = globalThis;
-const prisma = g.__prisma__ || new PrismaClient();
-if (process.env.NODE_ENV !== "production") g.__prisma__ = prisma;
 
 // ---------- helpers ----------
 function normalizeDayanaklar(v) {

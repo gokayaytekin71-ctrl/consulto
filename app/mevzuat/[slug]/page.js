@@ -1,10 +1,7 @@
 // app/mevzuat/[slug]/page.js
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 
-const globalForPrisma = globalThis;
-const prisma = globalForPrisma.prisma ?? new PrismaClient({ log: ["error", "warn"] });
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 
 // --- YARDIMCILAR (Aynen korundu) ---
 function slugifyTr(s = "") {
