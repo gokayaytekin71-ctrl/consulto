@@ -2,9 +2,20 @@
 import Link from "next/link";
 import prisma from "@/lib/prisma";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 import DecisionCard from "@/components/DecisionCard";
-import HomeWorkspace from "@/components/HomeWorkspace";
 import { getAllPosts } from "@/lib/blog";
+
+const HomeWorkspace = dynamic(() => import("@/components/HomeWorkspace"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex h-[420px] items-center justify-center bg-slate-50 text-slate-400">
+      <svg className="h-6 w-6 animate-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+      </svg>
+    </div>
+  ),
+});
 
 const SITE_URL = "https://consultohukuk.com";
 const homeStructuredData = {
@@ -69,19 +80,23 @@ function ThemeStyles() {
     @keyframes marqueeX    { to { transform: translateX(-50%) } }
     @keyframes fadeUp      { from { opacity:0; transform: translateY(20px) } to { opacity:1; transform: translateY(0) } }
     @keyframes glowPulse   { 0%,100% { opacity:.4 } 50% { opacity:.8 } }
- 
+
     .aurora-a { animation: auroraA 20s ease-in-out infinite; }
     .aurora-b { animation: auroraB 26s ease-in-out infinite; }
     .aurora-c { animation: auroraC 30s ease-in-out infinite; }
     .float-y  { animation: floaty 6s ease-in-out infinite; }
     .glow-pulse { animation: glowPulse 4s ease-in-out infinite; }
     .anim-up  { animation: fadeUp .9s cubic-bezier(.22,1,.36,1) both; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-a, .aurora-b, .aurora-c, .float-y, .glow-pulse, .anim-up, .ticker-track { animation: none !important; }
+    }
  
     .text-shine {
       background: linear-gradient(110deg,#0f172a 8%,#2563eb 32%,#06b6d4 48%,#7c3aed 64%,#0f172a 92%);
       background-size: 220% auto;
       -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: shineMove 7s linear infinite;
+      animation: shineMove 7s 1.5s linear infinite both;
     }
  
     .ticker-track { animation: marqueeX 40s linear infinite; }
@@ -228,16 +243,16 @@ export default async function Home() {
       />
  
       {/* ===== GLOBAL ARKA PLAN ===== */}
-      <div className="pointer-events-none fixed inset-0 -z-50">
+      <div className="pointer-events-none fixed inset-0 -z-50" style={{ contain: "strict" }}>
         <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.04)_1px,transparent_1px)] bg-[size:46px_46px]" />
-        <div className="aurora-a absolute -top-32 left-[-10%] h-[560px] w-[560px] rounded-full bg-gradient-to-br from-blue-400/30 to-cyan-300/30 blur-[150px]" />
-        <div className="aurora-b absolute top-[30%] right-[-12%] h-[520px] w-[520px] rounded-full bg-gradient-to-br from-violet-400/25 to-fuchsia-300/20 blur-[150px]" />
-        <div className="aurora-c absolute bottom-[-10%] left-[25%] h-[520px] w-[520px] rounded-full bg-gradient-to-br from-cyan-300/25 to-emerald-300/20 blur-[160px]" />
+        <div className="aurora-a absolute -top-32 left-[-10%] h-[420px] w-[420px] rounded-full bg-gradient-to-br from-blue-400/25 to-cyan-300/25 blur-[80px]" />
+        <div className="aurora-b absolute top-[30%] right-[-12%] h-[380px] w-[380px] rounded-full bg-gradient-to-br from-violet-400/20 to-fuchsia-300/15 blur-[80px]" />
+        <div className="aurora-c absolute bottom-[-10%] left-[25%] h-[380px] w-[380px] rounded-full bg-gradient-to-br from-cyan-300/20 to-emerald-300/15 blur-[80px]" />
         <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-blue-400/50 to-transparent" />
       </div>
  
       {/* ===== PROMO STRIP ===== */}
-      <div className="relative z-10 border-b border-slate-200/60 bg-white/60 backdrop-blur">
+      <div className="relative z-10 border-b border-slate-200/60 bg-white/90">
         <div className="mx-auto flex max-w-7xl items-center justify-center gap-2 px-4 py-2.5 text-center text-[12px] font-semibold text-slate-600">
           <span className="relative flex h-2 w-2">
             <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -260,7 +275,7 @@ export default async function Home() {
         <div className="float-y pointer-events-none absolute right-[26%] bottom-[18%] h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_18px_4px_rgba(96,165,250,0.6)]" style={{ animationDelay: "2.5s" }} />
  
         <div className="mx-auto max-w-4xl text-center">
-          <div className="anim-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/70 px-4 py-2 shadow-sm backdrop-blur">
+          <div className="anim-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/90 px-4 py-2 shadow-sm">
             <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-400">
               <svg className="h-3 w-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
             </span>
@@ -284,7 +299,7 @@ export default async function Home() {
                 <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
               </span>
             </Link>
-            <Link href="/akilli-arama" className="grad-border w-full rounded-2xl bg-white/70 px-8 py-4 font-bold text-[#002a5c] shadow-sm backdrop-blur transition-all duration-300 hover:bg-white hover:-translate-y-1 sm:w-auto">
+            <Link href="/akilli-arama" className="grad-border w-full rounded-2xl bg-white px-8 py-4 font-bold text-[#002a5c] shadow-sm transition-all duration-300 hover:-translate-y-1 sm:w-auto">
               <span className="flex items-center justify-center gap-2">
                 <svg className="h-5 w-5 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                 Semantik Karar Arama
@@ -300,10 +315,10 @@ export default async function Home() {
             <a
               href="#canli-demo"
               data-start-home-tour="true"
-              className="group inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/75 px-5 py-3 text-sm font-bold text-slate-600 shadow-sm backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300 hover:bg-white hover:text-[#002a5c] hover:shadow-[0_18px_40px_-22px_rgba(6,182,212,0.75)]"
+              className="group inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/90 px-5 py-3 text-sm font-bold text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300 hover:bg-white hover:text-[#002a5c] hover:shadow-[0_18px_40px_-22px_rgba(6,182,212,0.75)]"
             >
               <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-cyan-600 transition-all duration-300 group-hover:bg-cyan-500 group-hover:text-white">
-                <svg className="h-4 w-4 animate-bounce" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
               </span>
@@ -319,7 +334,7 @@ export default async function Home() {
               { val: "2 dk", label: "Dilekçe Süresi", cls: "text-violet-600" },
               { val: "∞", label: "Çalışma Alanı", cls: "text-emerald-600" },
             ].map((s) => (
-              <div key={s.label} className="grad-border rounded-2xl bg-white/70 px-4 py-4 shadow-sm backdrop-blur">
+              <div key={s.label} className="grad-border rounded-2xl bg-white/90 px-4 py-4 shadow-sm">
                 <div className={`text-3xl font-black ${s.cls}`}>{s.val}</div>
                 <div className="mt-1 text-[10px] font-black uppercase tracking-widest text-slate-400">{s.label}</div>
               </div>
@@ -329,7 +344,7 @@ export default async function Home() {
  
         {/* gündem ticker */}
         {gundemTexts.length > 0 && (
-          <div className="mx-auto mt-12 max-w-6xl overflow-hidden rounded-2xl border border-slate-200/60 bg-white/70 shadow-sm backdrop-blur">
+          <div className="mx-auto mt-12 max-w-6xl overflow-hidden rounded-2xl border border-slate-200/60 bg-white/90 shadow-sm">
             <div className="flex items-center">
               <div className="flex flex-shrink-0 items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 text-[11px] font-black uppercase tracking-widest text-white">
                 <span className="relative flex h-2 w-2">
@@ -372,7 +387,7 @@ export default async function Home() {
  
         {/* parlayan çerçeve */}
         <div className="relative mx-auto max-w-7xl">
-          <div className="absolute -inset-x-10 -top-10 bottom-0 -z-10 rounded-[3rem] bg-[radial-gradient(ellipse_at_top,rgba(56,189,248,0.28),transparent_60%)] blur-2xl glow-pulse" />
+          <div className="absolute -inset-x-10 -top-10 bottom-0 -z-10 rounded-[3rem] bg-[radial-gradient(ellipse_at_top,rgba(56,189,248,0.28),transparent_60%)] blur-2xl" />
           <div className="grad-border grad-border-on overflow-hidden rounded-[2rem] bg-white shadow-[0_50px_120px_-35px_rgba(2,42,92,0.45)]">
             {/* tarayıcı üst barı */}
             <div className="flex items-center gap-3 border-b border-slate-200 bg-slate-100 px-5 py-3">
@@ -758,7 +773,7 @@ export default async function Home() {
          ===================================================================== */}
       <section className="mx-auto max-w-7xl px-4 pb-24 md:px-6">
         <div className="grad-border grad-border-on relative overflow-hidden rounded-[2.5rem] bg-white/70 px-8 py-16 text-center shadow-sm backdrop-blur md:py-20">
-          <div className="absolute left-1/2 top-0 h-72 w-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.28),transparent_60%)] blur-2xl glow-pulse" />
+          <div className="absolute left-1/2 top-0 h-72 w-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.28),transparent_60%)] blur-2xl" />
           <div className="dot-grid absolute inset-0 opacity-[0.05]" />
           <div className="relative">
             <h2 className="mx-auto max-w-3xl text-4xl font-black leading-tight tracking-tight text-[#002a5c] md:text-5xl">
