@@ -4,15 +4,15 @@ Consülto, hukukçular için yapay zeka destekli hukuki araştırma, Yargıtay k
 
 ## Ana Sayfalar
 
-- Ana sayfa: https://consultohukuk.com/
-- Akıllı karar arama: https://consultohukuk.com/akilli-arama
-- Karar arşivi: https://consultohukuk.com/kararlar
-- Dilekçe hazırlama: https://consultohukuk.com/dilekce
-- Analiz asistanı: https://consultohukuk.com/bot
-- Çalışma alanı: https://consultohukuk.com/calisma-alani
-- Hukuki araçlar: https://consultohukuk.com/araclar
-- Blog: https://consultohukuk.com/blog
-- Paketler ve ücretler: https://consultohukuk.com/paketler-ucretler
+- [Ana sayfa](https://consultohukuk.com/)
+- [Akıllı karar arama](https://consultohukuk.com/akilli-arama)
+- [Karar arşivi](https://consultohukuk.com/kararlar)
+- [Dilekçe hazırlama](https://consultohukuk.com/dilekce)
+- [Analiz asistanı](https://consultohukuk.com/bot)
+- [Çalışma alanı](https://consultohukuk.com/calisma-alani)
+- [Hukuki araçlar](https://consultohukuk.com/araclar)
+- [Blog](https://consultohukuk.com/blog)
+- [Paketler ve ücretler](https://consultohukuk.com/paketler-ucretler)
 
 ## LLM ve Ajan Kullanımı
 
@@ -28,18 +28,17 @@ Yapay zeka ajanları aşağıdaki amaçlarla siteyi kullanabilir:
 
 ## Önemli Formlar
 
-- Karar arama formu: `/kararlar`
-- Akıllı arama formu: `/akilli-arama`
-- Dilekçe oluşturma formu: `/dilekce`
-- Analiz asistanı mesaj formu: `/bot`
-- İletişim formu: `/iletisim`
+- [Karar arama formu](https://consultohukuk.com/kararlar)
+- [Akıllı arama formu](https://consultohukuk.com/akilli-arama)
+- [Dilekçe oluşturma formu](https://consultohukuk.com/dilekce)
+- [Analiz asistanı mesaj formu](https://consultohukuk.com/bot)
+- [İletişim formu](https://consultohukuk.com/iletisim)
 
 ## Tarama Tercihleri
 
 Herkese açık sayfalar ve indekslenebilir içerikler sitemap üzerinden duyurulur:
 
-- Sitemap: https://consultohukuk.com/sitemap.xml
-- Robots: https://consultohukuk.com/robots.txt
+- [Sitemap](https://consultohukuk.com/sitemap.xml)
+- [Robots](https://consultohukuk.com/robots.txt)
 
 Oturum gerektiren kullanıcı alanları, ödeme akışları, profil sayfaları ve API uçları eğitim veya indeksleme amacıyla kullanılmamalıdır.
-
