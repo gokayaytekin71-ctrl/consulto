@@ -1,0 +1,45 @@
+# Consülto
+
+Consülto, hukukçular için yapay zeka destekli hukuki araştırma, Yargıtay karar arama, dilekçe hazırlama, dosya analizi ve hesaplama araçları sunan bir hukuk teknolojisi platformudur.
+
+## Ana Sayfalar
+
+- Ana sayfa: https://consultohukuk.com/
+- Akıllı karar arama: https://consultohukuk.com/akilli-arama
+- Karar arşivi: https://consultohukuk.com/kararlar
+- Dilekçe hazırlama: https://consultohukuk.com/dilekce
+- Analiz asistanı: https://consultohukuk.com/bot
+- Çalışma alanı: https://consultohukuk.com/calisma-alani
+- Hukuki araçlar: https://consultohukuk.com/araclar
+- Blog: https://consultohukuk.com/blog
+- Paketler ve ücretler: https://consultohukuk.com/paketler-ucretler
+
+## LLM ve Ajan Kullanımı
+
+Bu site, hukukçulara yardımcı olmak için bilgi erişimi ve taslak üretimi sağlar. Yanıtlar nihai hukuki görüş yerine ön araştırma, taslak ve çalışma desteği olarak değerlendirilmelidir.
+
+Yapay zeka ajanları aşağıdaki amaçlarla siteyi kullanabilir:
+
+- Yargıtay kararlarını ve içtihat özetlerini bulmak.
+- Hukuki konu, anahtar kelime, daire, esas ve karar numarası ile karar aramak.
+- Dilekçe taslağı oluşturma akışını anlamak.
+- Hesaplama araçlarının hangi hukuki ihtiyaca hizmet ettiğini belirlemek.
+- Blog yazılarını ve rehber içerikleri kaynak olarak keşfetmek.
+
+## Önemli Formlar
+
+- Karar arama formu: `/kararlar`
+- Akıllı arama formu: `/akilli-arama`
+- Dilekçe oluşturma formu: `/dilekce`
+- Analiz asistanı mesaj formu: `/bot`
+- İletişim formu: `/iletisim`
+
+## Tarama Tercihleri
+
+Herkese açık sayfalar ve indekslenebilir içerikler sitemap üzerinden duyurulur:
+
+- Sitemap: https://consultohukuk.com/sitemap.xml
+- Robots: https://consultohukuk.com/robots.txt
+
+Oturum gerektiren kullanıcı alanları, ödeme akışları, profil sayfaları ve API uçları eğitim veya indeksleme amacıyla kullanılmamalıdır.
+

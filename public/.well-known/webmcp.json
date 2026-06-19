@@ -1,0 +1,63 @@
+{
+  "name": "Consülto",
+  "description": "Hukukçular için yapay zeka destekli hukuki araştırma, Yargıtay karar arama, dilekçe hazırlama, dosya analizi ve hesaplama araçları platformu.",
+  "url": "https://consultohukuk.com",
+  "llms": "https://consultohukuk.com/llms.txt",
+  "language": "tr-TR",
+  "forms": [
+    {
+      "name": "Karar Arama",
+      "url": "https://consultohukuk.com/kararlar",
+      "method": "GET",
+      "description": "Yargıtay kararlarını anahtar kelime, daire, tarih, esas ve karar numarasına göre arar.",
+      "fields": [
+        { "name": "kw", "type": "text", "description": "Karar metninde aranacak anahtar kelime." },
+        { "name": "aiq", "type": "text", "description": "Semantik arama için hukuki konu veya uyuşmazlık açıklaması." },
+        { "name": "phrase", "type": "text", "description": "Tam ifade olarak aranacak hukuki terim." },
+        { "name": "organ", "type": "select", "description": "Kararı veren daire veya kurul." },
+        { "name": "esas", "type": "text", "description": "Esas numarası filtresi." },
+        { "name": "karar", "type": "text", "description": "Karar numarası filtresi." }
+      ]
+    },
+    {
+      "name": "Dilekçe Oluşturma",
+      "url": "https://consultohukuk.com/dilekce",
+      "method": "POST",
+      "description": "Kullanıcının olay özeti, taraf bilgileri, talep ve delillerinden dilekçe taslağı oluşturur."
+    },
+    {
+      "name": "Analiz Asistanı",
+      "url": "https://consultohukuk.com/bot",
+      "method": "POST",
+      "description": "Hukuki sorun veya uyuşmazlık açıklamasına göre ön analiz, strateji ve ilgili karar önerileri üretir."
+    },
+    {
+      "name": "İletişim",
+      "url": "https://consultohukuk.com/iletisim",
+      "method": "POST",
+      "description": "Kullanıcıların Consülto ekibine mesaj göndermesini sağlar."
+    }
+  ],
+  "tools": [
+    {
+      "name": "semantic_case_search",
+      "description": "Hukuki konu veya uyuşmazlık açıklamasından ilgili Yargıtay kararlarını bulur.",
+      "entrypoint": "https://consultohukuk.com/akilli-arama"
+    },
+    {
+      "name": "petition_drafting",
+      "description": "Olay özeti ve taleplerden dilekçe taslağı üretir.",
+      "entrypoint": "https://consultohukuk.com/dilekce"
+    },
+    {
+      "name": "legal_analysis",
+      "description": "Uyuşmazlık açıklamasından hukuki ön analiz ve strateji önerisi üretir.",
+      "entrypoint": "https://consultohukuk.com/bot"
+    },
+    {
+      "name": "legal_calculators",
+      "description": "Kıdem tazminatı, faiz, vekalet ücreti, değer kaybı ve benzeri hukuki hesaplama araçlarına erişim sağlar.",
+      "entrypoint": "https://consultohukuk.com/araclar"
+    }
+  ]
+}

@@ -267,10 +267,10 @@ export default async function Home() {
             <span className="text-xs font-bold tracking-wide text-slate-600">Milyonlarca Yargıtay kararıyla eğitildi</span>
           </div>
  
-          <h1 className="anim-up text-5xl font-black leading-[1.04] tracking-tighter text-[#002a5c] md:text-7xl" style={{ animationDelay: ".08s" }}>
+          <h1 className="text-5xl font-black leading-[1.04] tracking-tighter text-[#002a5c] md:text-7xl">
             Hukukçular İçin
             <br className="hidden sm:block" />{" "}
-            <span className="text-shine">Yapay Zeka Destekli Araştırma ve Dilekçe Asistanı</span>
+            <span className="text-blue-600">Yapay Zeka Destekli Araştırma ve Dilekçe Asistanı</span>
           </h1>
  
           <p className="anim-up mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-500 md:text-xl" style={{ animationDelay: ".16s" }}>

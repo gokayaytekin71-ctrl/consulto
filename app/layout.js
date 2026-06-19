@@ -54,6 +54,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="tr">
+      <head>
+        <link rel="llms-txt" href="/llms.txt" />
+        <link rel="webmcp" type="application/json" href="/.well-known/webmcp.json" />
+      </head>
       <body className="min-h-screen flex flex-col">
         <Script
           strategy="afterInteractive"

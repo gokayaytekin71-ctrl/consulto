@@ -166,7 +166,12 @@ export default function Header() {
             <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
               <Image src="/images/logo.png" alt="Logo" width={100} height={28} className="object-contain brightness-110" priority />
             </Link>
-            <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-slate-300 hover:text-white bg-white/5 rounded-full hover:bg-white/10 transition-colors">
+            <button
+              type="button"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-label="Mobil menüyü kapat"
+              className="p-2 text-slate-300 hover:text-white bg-white/5 rounded-full hover:bg-white/10 transition-colors"
+            >
               <Icons.X />
             </button>
           </div>
@@ -269,7 +274,14 @@ export default function Header() {
 
             {/* Diğer Dropdown */}
             <div className="relative ml-1" ref={otherRef}>
-              <button onClick={() => setIsOtherOpen(!isOtherOpen)} className={`group flex items-center justify-center w-7 h-7 rounded-full transition-all duration-300 ${isOtherOpen ? 'bg-white/20 text-white rotate-90' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}>
+              <button
+                type="button"
+                onClick={() => setIsOtherOpen(!isOtherOpen)}
+                aria-label="Diğer menüyü aç veya kapat"
+                aria-expanded={isOtherOpen}
+                aria-haspopup="menu"
+                className={`group flex items-center justify-center w-7 h-7 rounded-full transition-all duration-300 ${isOtherOpen ? 'bg-white/20 text-white rotate-90' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
+              >
                 <Icons.More />
               </button>
               {isOtherOpen && (
@@ -300,7 +312,14 @@ export default function Header() {
               <>
                 {/* Bildirimler */}
                 <div className="relative" ref={notificationsRef}>
-                  <button onClick={() => setIsNotificationsOpen(!isNotificationsOpen)} className="relative w-8 h-8 flex items-center justify-center rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 active:scale-90">
+                  <button
+                    type="button"
+                    onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+                    aria-label="Bildirimleri aç veya kapat"
+                    aria-expanded={isNotificationsOpen}
+                    aria-haspopup="menu"
+                    className="relative w-8 h-8 flex items-center justify-center rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 active:scale-90"
+                  >
                     <Icons.Bell />
                     {notifications.length > 0 && <span className="absolute top-1.5 right-1.5 flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 border border-[#001f3f]"></span></span>}
                   </button>
@@ -329,7 +348,11 @@ export default function Header() {
                 {/* --- PROFIL DROPDOWN --- */}
                 <div className="relative" ref={profileRef}>
                   <button 
+                    type="button"
                     onClick={() => setIsProfileOpen(!isProfileOpen)} 
+                    aria-label="Profil menüsünü aç veya kapat"
+                    aria-expanded={isProfileOpen}
+                    aria-haspopup="menu"
                     className={`flex items-center gap-2 pl-1 pr-1 py-1 rounded-full transition-all duration-300 group ${isProfileOpen ? 'bg-white/10' : 'hover:bg-white/10'}`}
                   >
                     <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 p-[1.5px] shadow-md shadow-cyan-900/30 group-hover:shadow-cyan-500/30 transition-shadow">
@@ -388,7 +411,9 @@ export default function Header() {
 
             {/* --- HAMBURGER MENU BUTTON (MOBILE ONLY) --- */}
             <button 
+              type="button"
               onClick={() => setIsMobileMenuOpen(true)} 
+              aria-label="Mobil menüyü aç"
               className="md:hidden p-1 text-slate-300 hover:text-white transition-colors ml-1"
             >
               <Icons.Hamburger />
