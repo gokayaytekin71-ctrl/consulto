@@ -1,7 +1,4 @@
 // components/HighlightedKararBody.jsx
-
-"use client";
-
 import React from 'react';
 
 // --- TEMA RENK SINIFLARI (Editorial Law Review paletine uyarlandı) ---

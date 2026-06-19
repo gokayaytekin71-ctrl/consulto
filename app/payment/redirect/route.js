@@ -4,7 +4,7 @@
 import { NextResponse } from 'next/server';
 
 // Domaininizi buradan alıyoruz
-const DOMAIN = process.env.NEXT_PUBLIC_APP_URL || 'https://www.consultohukuk.com';
+const DOMAIN = process.env.NEXT_PUBLIC_APP_URL || 'https://consultohukuk.com';
 
 export const dynamic = 'force-dynamic';
 

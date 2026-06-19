@@ -1,5 +1,3 @@
-"use client";
-
 import KararAramaKutusu from '@/components/KararAramaKutusu';
 import ClientSearchResults from '@/components/ClientSearchResults.client';
 import CanvasBackground from '@/components/CanvasBackground'; // Animasyon bileşenimiz

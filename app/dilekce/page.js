@@ -33,16 +33,51 @@ const T = (dark) => ({
 const renderDilekce = (text) => {
   const lines = (text || "").split("\n");
   let konuYakalandi = false;
+  // Hangi bölümdeyiz? (AÇIKLAMALAR, DELİLLER, SONUÇ VE İSTEM, HUKUKİ NEDENLER vb.)
+  // Numaralı madde başlığı kalınlaştırma kuralı SADECE AÇIKLAMALAR içinde uygulanacak;
+  // aksi halde DELİLLER/SONUÇ VE İSTEM listelerindeki maddeler tutarsız şekilde kalınlaşıyor.
+  let currentSection = null;
 
-  // Markdown temizleme: **bold**, _italic_ vb. işaretleri kaldır
+  // Markdown + HTML temizleme: <h3>, <br>, **bold**, _italic_, "> alıntı" vb. işaretleri kaldır
   const stripMd = (s = "") => String(s)
-    .replace(/[\*_`]/g, "")
+    .replace(/<br\s*\/?>/gi, " ")      // <br> → boşluk
+    .replace(/<\/?[^>]+>/g, "")         // tüm HTML etiketleri kaldırılır, metin korunur
+    .replace(/^\s*#{1,6}\s*/, "")       // markdown başlık (#) işareti
+    .replace(/^\s*>+\s?/, "")           // markdown alıntı (>) işareti
+    .replace(/[\*_`]/g, "")             // **bold**, _italic_, `code`
     .replace(/\s+/g, " ")
     .trim();
 
   return lines.map((line, i) => {
     const trimmed = line.trim();
+
+    // Tamamen boş kaynak satırı → küçük dikey boşluk (paragraf aralığı)
+    if (!trimmed) return <div key={i} style={{ height: "8px" }} />;
+
+    // Alıntı (blockquote) satırı mı? — temizlemeden ÖNCE tespit et
+    const isQuote = /^>+\s?/.test(trimmed);
+
     const plain = stripMd(trimmed);
+
+    // Sadece işaretten ibaret olup içeriği boşalan satırları atla (örn. yalın ">")
+    if (!plain) return null;
+
+    // === ALINTI SATIRLARI (Yargıtay kararları vb.) — sol kenarlık + italik ===
+    if (isQuote) {
+      return (
+        <p
+          key={i}
+          style={{
+            borderLeft: "3px solid #C9A24B",
+            paddingLeft: "14px",
+            margin: "6px 0",
+            fontStyle: "italic",
+          }}
+        >
+          {plain}
+        </p>
+      );
+    }
 
     // === BÖLÜM BAŞLIKLARI (HUKUKİ NEDENLER / DELİLLER / SONUÇ VE İSTEM) ===
     const normalized = plain
@@ -51,44 +86,75 @@ const renderDilekce = (text) => {
 
     if (
       normalized === "HUKUKİ NEDENLER" ||
+      normalized === "HUKUKİ NEDEN" ||
+      normalized === "HUKUKİ SEBEP" ||
+      normalized === "HUKUKİ SEBEPLER" ||
       normalized === "HUKUKİ DELİLLER" ||
+      normalized === "DELİLLER" ||
       normalized === "SONUÇ VE İSTEM"
     ) {
+      currentSection = normalized;
       return (
-        <div
+        <p
           key={i}
-          className="grid grid-cols-[180px_1fr] gap-2 mt-4 mb-1"
+          className="font-extrabold uppercase mt-4 mb-1"
+          style={{ fontWeight: 800, textTransform: "uppercase", margin: "14px 0 6px" }}
         >
-          <div className="font-extrabold uppercase">
-            {normalized}:
-          </div>
-          <div></div>
-        </div>
+          {normalized}:
+        </p>
       );
     }
 
     // MAHKEME BAŞLIĞI
     if (/MAHKEMES[İI]NE$/i.test(plain)) {
       return (
-        <p key={i} className="text-center font-bold mb-4">
+        <p
+          key={i}
+          className="text-center font-bold mb-4"
+          style={{ textAlign: "center", fontWeight: 700, margin: "20px 0", textTransform: "uppercase" }}
+        >
           {plain}
         </p>
       );
     }
 
-    // === TAMAMI BÜYÜK HARFLE YAZILMIŞ SATIRLAR → KALIN ===
-    const upperOnly = plain === plain.toUpperCase();
+    // === NUMARALI MADDE BAŞLIKLARI → KALIN ===
+    // Büyük/küçük harf farketmez. Örn: "6. 01.04.1974 TARİHLİ ..." (tamamı büyük)
+    // veya "6. Emsal Bedel Tespiti ve Tapu İptal Tescil Talebimiz" (Title Case).
+    // Başlık niteliğinde sayılması için: kısa olmalı ve içinde cümle bitirici
+    // (. ! ?) bulunmamalı — yoksa bu bir madde başlığı değil, normal bir cümledir.
+    const numberedHeadingMatch = plain.match(/^([0-9]+|[IVXLC]+)\.\s+(.+)$/);
+    if (numberedHeadingMatch && currentSection === "AÇIKLAMALAR") {
+      const headingText = numberedHeadingMatch[2];
+      const wordCount = headingText.trim().split(/\s+/).length;
+      const isShortTitle =
+        plain.length <= 100 &&
+        wordCount <= 14 &&
+        !/[.!?]/.test(headingText.replace(/\.\.\.$/, ""));
 
-    // NUMARALI + TAMAMI BÜYÜK HARF BAŞLIKLAR (örn: "6. 01.04.1974 TARİHLİ ...")
+      if (isShortTitle) {
+        return (
+          <p key={i} className="font-bold mb-2" style={{ fontWeight: 700, margin: "10px 0" }}>
+            {plain}
+          </p>
+        );
+      }
+    }
+
+    // === ÇOK TARAFLI DAVACI/DAVALI LİSTESİ ===
+    // Örn: "DAVALI:" etiketi boş değerle gelip altında "1- Ankara Büyükşehir Belediye
+    // Başkanlığı" / "2- Etimesgut Belediye Başkanlığı" gibi numaralı taraflar geldiğinde,
+    // bu satırlar DAVACI/VEKİLİ değer sütunuyla (etiketten sonraki 180px+gap) hizalı
+    // girintili gösterilir; sayfanın en solundan başlamaz.
+    const partyListMatch = plain.match(/^([0-9]+)[-.)]\s+(.+)$/);
     if (
-      upperOnly &&
-      /^[0-9IVX]+\./.test(plain) &&
-      plain.length > 8
+      partyListMatch &&
+      (currentSection === "DAVACI" || currentSection === "DAVALI")
     ) {
       return (
-        <p key={i} className="font-bold mb-2">
+        <div key={i} className="mb-1" style={{ paddingLeft: "188px" }}>
           {plain}
-        </p>
+        </div>
       );
     }
 
@@ -99,6 +165,7 @@ const renderDilekce = (text) => {
 
     if (labelMatch) {
       const label = labelMatch[1].toUpperCase();
+      currentSection = label;
 
       if (label === "KONU") {
         if (konuYakalandi) {
@@ -112,8 +179,12 @@ const renderDilekce = (text) => {
       }
 
       return (
-        <div key={i} className="grid grid-cols-[180px_1fr] gap-2 mb-1">
-          <div className="font-bold">
+        <div
+          key={i}
+          className="grid grid-cols-[180px_1fr] gap-2 mb-1"
+          style={{ margin: "3px 0" }}
+        >
+          <div className="font-bold" style={{ fontWeight: 700 }}>
             {label}:
           </div>
           <div>{labelMatch[2]}</div>
@@ -121,10 +192,28 @@ const renderDilekce = (text) => {
       );
     }
 
+    // === DAVACI/VEKİLİ/DAVALI ALTINDAKİ DEVAM SATIRLARI (örn. "[Adres]") ===
+    // Etiket satırından sonra gelen, yeni bir etiket/bölüm olmayan devam satırları
+    // (adres vb.) da değer sütunuyla hizalı girintili gösterilir; sayfanın en
+    // solundan başlamaz — DAVACI/VEKİLİ/DAVALI değeriyle aynı dikey çizgide durur.
+    if (
+      currentSection === "DAVACI" ||
+      currentSection === "VEKİLİ" ||
+      currentSection === "DAVALI"
+    ) {
+      return (
+        <div key={i} className="mb-1" style={{ paddingLeft: "188px" }}>
+          {plain}
+        </div>
+      );
+    }
+
     // NORMAL SATIR
     const isSignatureBlock =
       plain === "Davacı Vekili" ||
-      /^Av\.\s*\[.*\]/i.test(plain);
+      /^Av\.\s*\[.*\]/i.test(plain) ||
+      /^Av\.\s/i.test(plain) ||
+      /e-?imza/i.test(plain);
 
     return (
       <p

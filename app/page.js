@@ -6,8 +6,55 @@ import DecisionCard from "@/components/DecisionCard";
 import HomeWorkspace from "@/components/HomeWorkspace";
 import { getAllPosts } from "@/lib/blog";
 
+const SITE_URL = "https://consultohukuk.com";
+const homeStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Consülto",
+      url: SITE_URL,
+      logo: `${SITE_URL}/images/logo.png`,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: "Consülto",
+      publisher: {
+        "@id": `${SITE_URL}/#organization`,
+      },
+      inLanguage: "tr-TR",
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${SITE_URL}/akilli-arama?kw={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@type": "SoftwareApplication",
+      name: "Consülto",
+      applicationCategory: "LegalTechApplication",
+      operatingSystem: "Web",
+      url: SITE_URL,
+      description:
+        "Hukukçular için yapay zeka destekli Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma, dosya analizi ve hesaplama araçları platformu.",
+      offers: {
+        "@type": "Offer",
+        url: `${SITE_URL}/paketler-ucretler`,
+        priceCurrency: "TRY",
+      },
+    },
+  ],
+};
+
 export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+// Anasayfa kullanıcıya/session'a özel veri içermiyor (gündem, öne çıkan
+// kararlar, makaleler, blog — herkese aynı). force-dynamic her istekte
+// DB'ye gidip sıfırdan render ediyordu; ISR ile sayfa 60 saniyede bir
+// arka planda yenileniyor, ziyaretçiler cache'den anında alıyor.
+export const revalidate = 60;
  
 /* =============================================================================
    GLOBAL STİL — Açık / sinematik aydınlık tema (server-safe)
@@ -175,6 +222,10 @@ export default async function Home() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-[#F6F9FC] text-slate-700 antialiased selection:bg-cyan-100 selection:text-cyan-900">
       <ThemeStyles />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeStructuredData) }}
+      />
  
       {/* ===== GLOBAL ARKA PLAN ===== */}
       <div className="pointer-events-none fixed inset-0 -z-50">
@@ -217,13 +268,13 @@ export default async function Home() {
           </div>
  
           <h1 className="anim-up text-5xl font-black leading-[1.04] tracking-tighter text-[#002a5c] md:text-7xl" style={{ animationDelay: ".08s" }}>
-            En Gelişmiş
+            Hukukçular İçin
             <br className="hidden sm:block" />{" "}
-            <span className="text-shine">Hukuk Yapay Zekası!</span>
+            <span className="text-shine">Yapay Zeka Destekli Araştırma ve Dilekçe Asistanı</span>
           </h1>
  
           <p className="anim-up mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-500 md:text-xl" style={{ animationDelay: ".16s" }}>
-            Sorunu sor, uyuşmazlığı anlat veya dosyanı yükle; geri kalanı gelişmiş yapay zeka programımız halletsin. Emsal Yargıtay Kararlarına referans veren cevaplarınız gelsin.
+            Consülto; Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma, dosya analizi ve hesaplama araçlarını tek çalışma alanında birleştirir.
           </p>
  
           <div className="anim-up mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row" style={{ animationDelay: ".24s" }}>
@@ -331,7 +382,7 @@ export default async function Home() {
               <div className="ml-3 flex flex-1 items-center justify-center">
                 <div className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-1.5 text-xs font-medium text-slate-500 shadow-sm">
                   <svg className="h-3.5 w-3.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
-                  www.consultohukuk.com/calisma-alani
+                  consultohukuk.com/calisma-alani
                 </div>
               </div>
             </div>
@@ -731,4 +782,3 @@ export default async function Home() {
   );
 }
  
-

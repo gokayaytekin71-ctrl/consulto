@@ -1,4 +1,3 @@
-"use client"
 export default function AiBotIllustration({ className }) {
   return (
     <svg viewBox="0 0 200 200" className={className} xmlns="http://www.w3.org/2000/svg">

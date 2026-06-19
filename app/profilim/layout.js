@@ -35,7 +35,6 @@ export default async function ProfileLayout({ children }) {
         <div className="absolute top-[30%] left-[20%] w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-[90px]" />
         
         {/* Hafif Noise Dokusu (Kalite hissi için) */}
-        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
       </div>
 
       {/* --- SIDEBAR WRAPPER --- */}

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-const BASE_URL = "https://www.consultohukuk.com";
+const BASE_URL = "https://consultohukuk.com";
 const PAGE_SIZE = 5000;
 
 function xmlResponse(body) {

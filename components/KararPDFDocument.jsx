@@ -1,7 +1,7 @@
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, Font, Svg, Text as SvgText } from '@react-pdf/renderer';
 
-const SITE_URL = 'https://www.consultohukuk.com';
+const SITE_URL = 'https://consultohukuk.com';
 
 Font.register({
   family: 'Roboto',
@@ -205,7 +205,7 @@ const KararPDFDocument = ({ karar }) => {
 
         <View style={styles.footer} fixed>
           <Text style={styles.footerText}>Consülto. Tüm Hakları Saklıdır.</Text>
-          <Text style={styles.footerLink}>www.consultohukuk.com</Text>
+          <Text style={styles.footerLink}>consultohukuk.com</Text>
         </View>
 
       </Page>

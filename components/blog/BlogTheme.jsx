@@ -4,7 +4,8 @@
 // Sunucu bileşeni (server-safe): sadece <style> enjekte eder.
 
 export const BLOG_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+  /* Font aileleri app/globals.css içindeki sistem font değişkenlerinden gelir;
+     Google Fonts isteği ve woff2 indirmesi yapılmaz. */
 
   :root {
     --paper:        #f6f3ec;
@@ -24,7 +25,7 @@ export const BLOG_CSS = `
   .blog-root {
     background-color: var(--paper);
     color: var(--ink);
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
     background-image:
       radial-gradient(900px 500px at 100% -5%, rgba(15,42,74,0.05), transparent 60%),
       radial-gradient(700px 400px at -10% 110%, rgba(184,134,11,0.06), transparent 60%);
@@ -62,7 +63,7 @@ export const BLOG_CSS = `
     box-shadow: 0 5px 16px -5px rgba(15,42,74,0.45);
   }
   .brand-name {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em;
     color: var(--navy); line-height: 1; display: block;
   }
@@ -88,12 +89,12 @@ export const BLOG_CSS = `
   /* ---------------- HERO ---------------- */
   .blog-hero { margin-bottom: 56px; }
   .blog-kicker {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-ibm-plex-mono), monospace;
     font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.24em;
     color: var(--amber); margin-bottom: 14px;
   }
   .blog-h1 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 600;
     font-size: clamp(2rem, 4vw, 3.1rem);
     line-height: 1.08; letter-spacing: -0.02em;
@@ -101,7 +102,7 @@ export const BLOG_CSS = `
     margin-bottom: 20px;
   }
   .blog-lede {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-newsreader), Georgia, serif;
     font-size: 1.18rem; line-height: 1.6; color: var(--ink-soft);
     max-width: 56ch;
   }
@@ -136,21 +137,21 @@ export const BLOG_CSS = `
     position: absolute; inset: 0;
     display: grid; place-items: center;
     color: rgba(243,210,122,0.35);
-    font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 700;
+    font-family: var(--font-fraunces), serif; font-size: 3rem; font-weight: 700;
   }
   .post-card-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
   .post-cat {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-ibm-plex-mono), monospace;
     font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.14em;
     color: var(--amber); margin-bottom: 11px;
   }
   .post-card-title {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 600; font-size: 1.28rem; line-height: 1.22;
     color: var(--navy); margin-bottom: 11px; letter-spacing: -0.01em;
   }
   .post-card-desc {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-newsreader), Georgia, serif;
     font-size: 0.98rem; line-height: 1.55; color: var(--ink-soft);
     margin-bottom: 18px; flex: 1;
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
@@ -171,7 +172,7 @@ export const BLOG_CSS = `
   /* ---------------- BÖLÜM ETİKETİ ---------------- */
   .section-rule { display: flex; align-items: center; gap: 16px; margin: 56px 0 28px; }
   .section-rule .lbl {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-ibm-plex-mono), monospace;
     font-size: 0.66rem; font-weight: 500; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--amber);
   }
@@ -188,7 +189,7 @@ export const BLOG_CSS = `
   .breadcrumb .crumb-sep { color: var(--line-strong); }
 
   .article-title {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 600; font-size: clamp(2rem, 4.2vw, 3rem);
     line-height: 1.1; letter-spacing: -0.02em; color: var(--navy);
     margin-bottom: 22px;
@@ -207,18 +208,18 @@ export const BLOG_CSS = `
 
   /* ---- PROSE / makale gövdesi ---- */
   .prose {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-newsreader), Georgia, serif;
     font-size: 1.15rem; line-height: 1.75; color: var(--ink);
     margin-top: 38px;
   }
   .prose > * + * { margin-top: 1.4em; }
   .prose h2 {
-    font-family: 'Fraunces', serif; font-weight: 600;
+    font-family: var(--font-fraunces), serif; font-weight: 600;
     font-size: 1.7rem; line-height: 1.2; color: var(--navy);
     letter-spacing: -0.015em; margin-top: 2em; scroll-margin-top: 90px;
   }
   .prose h3 {
-    font-family: 'Fraunces', serif; font-weight: 600;
+    font-family: var(--font-fraunces), serif; font-weight: 600;
     font-size: 1.32rem; color: var(--navy-2); margin-top: 1.6em; scroll-margin-top: 90px;
   }
   .prose p { color: var(--ink); }
@@ -235,13 +236,13 @@ export const BLOG_CSS = `
     font-size: 1.18rem;
   }
   .prose code {
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.86em;
+    font-family: var(--font-ibm-plex-mono), monospace; font-size: 0.86em;
     background: var(--paper-2); padding: 2px 6px; border-radius: 4px;
     border: 1px solid var(--line);
   }
   .prose hr { border: none; border-top: 1px solid var(--line); margin: 2.4em 0; }
   .prose img { width: 100%; border-radius: 12px; border: 1px solid var(--line); }
-  .prose table { width: 100%; border-collapse: collapse; font-family: 'Inter', sans-serif; font-size: 0.95rem; }
+  .prose table { width: 100%; border-collapse: collapse; font-family: var(--font-inter), sans-serif; font-size: 0.95rem; }
   .prose th, .prose td { border: 1px solid var(--line); padding: 10px 14px; text-align: left; }
   .prose th { background: var(--paper-2); font-weight: 600; color: var(--navy); }
 
@@ -259,12 +260,12 @@ export const BLOG_CSS = `
     background: var(--navy); border-radius: 16px; color: #fff;
     box-shadow: 0 30px 70px -40px rgba(15,42,74,0.6);
   }
-  .article-cta h3 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; }
-  .article-cta p { color: rgba(255,255,255,0.78); font-family: 'Newsreader', serif; font-size: 1.05rem; margin-bottom: 22px; }
+  .article-cta h3 { font-family: var(--font-fraunces), serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; }
+  .article-cta p { color: rgba(255,255,255,0.78); font-family: var(--font-newsreader), serif; font-size: 1.05rem; margin-bottom: 22px; }
   .article-cta a {
     display: inline-flex; align-items: center; gap: 8px;
     background: #f3d27a; color: var(--navy);
-    font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.92rem;
+    font-family: var(--font-inter), sans-serif; font-weight: 700; font-size: 0.92rem;
     padding: 13px 26px; border-radius: 999px; text-decoration: none;
     transition: transform .16s ease, background .16s ease;
   }

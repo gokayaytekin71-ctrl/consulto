@@ -15,7 +15,8 @@ import HeroSearch from "@/components/HeroSearch";
    sıcak kağıt zemin · lacivert + amber · serif tipografi · grain
    ============================================================ */
 const GLOBAL_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+  /* Font aileleri app/globals.css içindeki sistem font değişkenlerinden gelir;
+     Google Fonts isteği ve woff2 indirmesi yapılmaz. */
 
   :root {
     --paper:        #f6f3ec;
@@ -35,7 +36,7 @@ const GLOBAL_CSS = `
   .law-root {
     background-color: var(--paper);
     color: var(--ink);
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
     background-image:
       radial-gradient(900px 500px at 100% -5%, rgba(15,42,74,0.05), transparent 60%),
       radial-gradient(700px 400px at -10% 110%, rgba(184,134,11,0.06), transparent 60%);
@@ -75,7 +76,7 @@ const GLOBAL_CSS = `
     box-shadow: 0 5px 16px -5px rgba(15,42,74,0.45);
   }
   .brand-name {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em;
     color: var(--navy); line-height: 1; display: block;
   }
@@ -132,12 +133,12 @@ const GLOBAL_CSS = `
   /* ---------------- HERO SEARCH ---------------- */
   .hero { margin-bottom: 40px; }
   .hero-kicker {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-ibm-plex-mono), monospace;
     font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.24em;
     color: var(--amber); margin-bottom: 12px;
   }
   .hero-title {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 600;
     font-size: clamp(1.7rem, 3.2vw, 2.5rem);
     line-height: 1.12; letter-spacing: -0.018em;
@@ -155,7 +156,7 @@ const GLOBAL_CSS = `
     border: 1px solid var(--line-strong);
     background: var(--surface);
     padding: 0 124px 0 50px;
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-newsreader), Georgia, serif;
     font-size: 1.08rem; color: var(--ink);
     box-shadow: 0 1px 0 var(--line), 0 24px 48px -38px rgba(26,31,43,0.4);
     transition: border-color .18s ease, box-shadow .18s ease;
@@ -171,7 +172,7 @@ const GLOBAL_CSS = `
     border-radius: 3px;
     background: var(--navy); color: #fff;
     padding: 0 26px;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em;
     transition: background .18s ease;
     display: inline-flex;
@@ -218,7 +219,7 @@ const GLOBAL_CSS = `
     margin-bottom: 22px;
   }
   .results-head .lbl {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-ibm-plex-mono), monospace;
     font-size: 0.66rem; font-weight: 500; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--amber);
   }

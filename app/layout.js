@@ -1,5 +1,4 @@
 import "./globals.css";
-import { Cormorant_Garamond, EB_Garamond } from "next/font/google";
 import Header from "@/components/Header";
 import AuthProvider from "@/components/AuthProvider";
 import ActivityTracker from "@/components/ActivityTracker";
@@ -9,35 +8,52 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "./context/ThemeContext";
 
-const cormorantGaramond = Cormorant_Garamond({
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-  variable: "--font-cormorant-garamond",
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const ebGaramond = EB_Garamond({
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-  variable: "--font-eb-garamond",
-  weight: ["400", "500", "600", "700", "800"],
-});
+const siteUrl = "https://consultohukuk.com";
+const siteTitle = "Consülto | Hukukçular İçin Yapay Zeka Destekli Hukuk Asistanı";
+const siteDescription =
+  "Consülto; hukukçular için Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma, dosya analizi ve hesaplama araçları sunan yapay zeka destekli hukuk platformudur.";
+const socialDescription =
+  "Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma ve dosya analizi için yapay zeka destekli hukuk platformu.";
 
 export const metadata = {
-  metadataBase: new URL("https://consultohukuk.com"),
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "Consülto Yapay Zeka Hukuk Asistanı",
-    template: "%s | CONSÜLTO Hukuk",
+    default: siteTitle,
+    template: "%s | Consülto",
   },
-  description: "Consülto – Yapay Zeka Destekli Hukuk Asistanı…",
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    locale: "tr_TR",
+    url: siteUrl,
+    siteName: "Consülto",
+    title: siteTitle,
+    description: socialDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: socialDescription,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html
-      lang="tr"
-      className={`${cormorantGaramond.variable} ${ebGaramond.variable}`}
-    >
+    <html lang="tr">
       <body className="min-h-screen flex flex-col">
         <Script
           strategy="afterInteractive"

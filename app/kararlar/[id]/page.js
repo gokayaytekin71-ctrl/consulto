@@ -27,7 +27,8 @@ export const dynamicParams = true;
    Liste sayfasıyla (—#0f2a4a / amber) görsel bütünlük
    ============================================================ */
 const GLOBAL_CSS = `
-  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap');
+  /* Font aileleri app/globals.css içindeki sistem font değişkenlerinden gelir;
+     Google Fonts isteği ve woff2 indirmesi yapılmaz. */
 
   :root {
     /* Zemin & yüzeyler */
@@ -53,7 +54,7 @@ const GLOBAL_CSS = `
   body {
     background-color: var(--paper);
     color: var(--ink);
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
     background-image:
       radial-gradient(900px 500px at 100% -5%, rgba(15,42,74,0.05), transparent 60%),
       radial-gradient(700px 400px at -10% 110%, rgba(184,134,11,0.06), transparent 60%);
@@ -95,7 +96,7 @@ const GLOBAL_CSS = `
     box-shadow: 0 4px 14px -4px rgba(15,42,74,0.4);
   }
   .brand-name {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 700; font-size: 1.05rem; letter-spacing: -0.01em;
     color: var(--navy); line-height: 1;
   }
@@ -105,7 +106,7 @@ const GLOBAL_CSS = `
   }
   .pager {
     display: flex; gap: 6px;
-    font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem;
+    font-family: var(--font-ibm-plex-mono), monospace; font-size: 0.7rem;
   }
   .pager a, .pager span {
     padding: 7px 13px; border-radius: 9px;
@@ -130,7 +131,7 @@ const GLOBAL_CSS = `
   .court-pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--amber); }
 
   .doc-title {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 600;
     font-size: clamp(1.6rem, 3.4vw, 2.55rem);
     line-height: 1.18;
@@ -141,7 +142,7 @@ const GLOBAL_CSS = `
   .doc-meta {
     display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
     margin-top: 18px;
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: var(--font-ibm-plex-mono), monospace;
     font-size: 0.78rem; color: var(--ink-soft);
   }
   .doc-meta .k { color: var(--ink-faint); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.12em; margin-right: 8px; }
@@ -172,7 +173,7 @@ const GLOBAL_CSS = `
   }
 
   .reader .lead-cap p:first-of-type::first-letter {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 700;
     font-size: 3.4em; line-height: 0.8;
     float: left; margin: 0.06em 0.12em 0 0;
@@ -180,7 +181,7 @@ const GLOBAL_CSS = `
   }
 
   .prose p, .highlighted-body p {
-    font-family: 'Newsreader', Georgia, serif;
+    font-family: var(--font-newsreader), Georgia, serif;
     font-size: 1.16rem;
     line-height: 1.92;
     color: var(--ink);
@@ -188,7 +189,7 @@ const GLOBAL_CSS = `
     text-align: justify;
     hyphens: auto;
   }
-  .highlighted-body { font-family: 'Newsreader', Georgia, serif; }
+  .highlighted-body { font-family: var(--font-newsreader), Georgia, serif; }
 
   .reader-foot {
     margin-top: 56px; padding-top: 26px;
@@ -197,7 +198,7 @@ const GLOBAL_CSS = `
     color: var(--line-strong);
   }
   .reader-foot .rule { height: 1px; width: 60px; background: var(--line-strong); }
-  .reader-foot .sym { font-family: 'Fraunces', serif; color: var(--amber); letter-spacing: 0.4em; }
+  .reader-foot .sym { font-family: var(--font-fraunces), serif; color: var(--amber); letter-spacing: 0.4em; }
 
   /* ---- SIDE RAIL ---- */
   .rail {
@@ -229,12 +230,12 @@ const GLOBAL_CSS = `
   .ai-block { margin-bottom: 16px; }
   .ai-block:last-child { margin-bottom: 0; }
   .ai-heading {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-fraunces), serif;
     font-weight: 600; font-size: 0.9rem;
     color: var(--navy); margin-bottom: 5px;
   }
   .ai-text {
-    font-family: 'Newsreader', serif;
+    font-family: var(--font-newsreader), serif;
     font-size: 0.94rem; line-height: 1.62; color: var(--ink-soft);
   }
   .ai-loose {
@@ -422,7 +423,7 @@ export async function generateMetadata({ params }) {
   // cache() sayesinde sayfa bileşeniyle AYNI sorguyu paylaşır — ekstra DB yükü yok
   const { karar } = await getKararBySlug(params.id);
 
-  const canonical = `https://www.consultohukuk.com/kararlar/${params.id}`;
+  const canonical = `https://consultohukuk.com/kararlar/${params.id}`;
 
   if (!karar) {
     return {
@@ -677,9 +678,9 @@ export default async function KararDetayPage({ params }) {
             publisher: {
               "@type": "Organization",
               name: "Consulto Hukuk",
-              url: "https://www.consultohukuk.com",
+              url: "https://consultohukuk.com",
             },
-            url: `https://www.consultohukuk.com/kararlar/${kararSlug}`,
+            url: `https://consultohukuk.com/kararlar/${kararSlug}`,
           }),
         }}
       />

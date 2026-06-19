@@ -11,7 +11,9 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import React from "react";
 
 const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
-import animationData from "../animations/Animation1.json";
+// Animation1.json (~45KB) artık statik import değil — Header her sayfada
+// yüklendiği için bu JSON her sayfanın JS bundle'ına gömülüyordu.
+// Aşağıda mount sonrası lazy import ile çekiliyor (bkz. useEffect).
 
 /* --- İKONLAR --- */
 const Icons = {
@@ -59,7 +61,13 @@ export default function Header() {
   const otherRef = useRef(null);
   const profileRef = useRef(null);
 
+  const [animationData, setAnimationData] = useState(null);
+
   useEffect(() => { setIsMounted(true); }, []);
+
+  useEffect(() => {
+    import("../animations/Animation1.json").then((mod) => setAnimationData(mod.default));
+  }, []);
 
   useEffect(() => {
     const fetchTokenBalance = async () => {
@@ -248,7 +256,7 @@ export default function Header() {
             </Link>
           </div>
           
-          <div className="hidden lg:flex items-center pl-2 pr-4 opacity-90"><div className="w-10 h-10"><Lottie animationData={animationData} loop autoPlay /></div></div>
+          <div className="hidden lg:flex items-center pl-2 pr-4 opacity-90"><div className="w-10 h-10">{animationData && <Lottie animationData={animationData} loop autoPlay />}</div></div>
 
 {/* MENÜ - DESKTOP */}
           <nav className="hidden md:flex flex-1 items-center justify-center gap-0.5 px-2">

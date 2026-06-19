@@ -1,7 +1,7 @@
 // app/sitemaps/static/route.js
 import { NextResponse } from "next/server";
 
-const BASE_URL = "https://www.consultohukuk.com";
+const BASE_URL = "https://consultohukuk.com";
 
 const STATIC_URLS = [
   "/",                 // Ana sayfa

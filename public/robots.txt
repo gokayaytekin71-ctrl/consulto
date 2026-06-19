@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 
 Disallow: /api/
-Disallow: /_next/
 Disallow: /profilim/
 Disallow: /auth/
 Disallow: /login/
@@ -14,4 +13,4 @@ Disallow: /*&sort=*
 Disallow: /*?page=*
 Disallow: /*&page=*
 
-Sitemap: https://www.consultohukuk.com/sitemap.xml
+Sitemap: https://consultohukuk.com/sitemap.xml

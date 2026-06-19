@@ -48,7 +48,6 @@ export default function Footer() {
       <div className="absolute inset-0 pointer-events-none z-0">
          <div className="absolute bottom-[-20%] left-[-10%] w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[120px]" />
          <div className="absolute top-[-20%] right-[-10%] w-[400px] h-[400px] bg-cyan-900/10 rounded-full blur-[100px]" />
-         <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 py-12 lg:py-16">

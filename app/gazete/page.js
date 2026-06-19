@@ -56,7 +56,6 @@ export default function ResmiGazeteListesi() {
       <div className="fixed inset-0 z-0 pointer-events-none">
         {/* Kırmızımsı Resmî Gazete Ruhu */}
         <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-red-900/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">

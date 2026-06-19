@@ -289,7 +289,7 @@ const AnalysisPDFDocument = ({ subject, content, date }) => {
         {/* FOOTER */}
         <View style={styles.footer} fixed>
             <Text style={styles.footerText}>Bu rapor yapay zeka tarafından oluşturulmuştur, hukuki tavsiye niteliği taşımaz.</Text>
-            <Text style={styles.footerLink}>www.consultohukuk.com</Text>
+            <Text style={styles.footerLink}>consultohukuk.com</Text>
         </View>
       </Page>
     </Document>

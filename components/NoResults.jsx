@@ -1,6 +1,4 @@
 // components/NoResults.jsx
-"use client";
-
 export default function NoResults() {
   return (
     // DEĞİŞİKLİK: Bileşen, referans alınan koyu tema kart stiline uyarlandı.

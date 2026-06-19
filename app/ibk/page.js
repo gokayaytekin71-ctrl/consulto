@@ -1,5 +1,7 @@
 // app/ibk/page.js
-export const dynamic = "force-dynamic";
+// İBK listesi herkese aynı, session'a bağlı değil ve nadiren güncellenir.
+// force-dynamic yerine ISR: sayfa 1 saatte bir arka planda yenilenir.
+export const revalidate = 3600;
 
 import prisma from "@/lib/prisma";
 

@@ -1,5 +1,3 @@
-"use client";
-
 // Çalışma Alanı sayfasına özel global stiller (scrollbar, shimmer, header gizleme).
 export default function WorkspaceStyles() {
   return (

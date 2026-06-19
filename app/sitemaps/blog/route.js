@@ -2,7 +2,7 @@
 import { NextResponse } from "next/server";
 import { getAllPosts } from "@/lib/blog";
 
-const BASE_URL = "https://www.consultohukuk.com";
+const BASE_URL = "https://consultohukuk.com";
 
 function xmlResponse(body) {
   return new NextResponse(body, {

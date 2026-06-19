@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * RelevanceRing
  * - score: sayı (tercihen 0..1 normalize edilmiş)

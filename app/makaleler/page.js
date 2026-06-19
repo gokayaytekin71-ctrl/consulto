@@ -49,7 +49,6 @@ export default async function MakalelerPage({ searchParams }) {
       {/* --- BACKGROUND FX --- */}
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-indigo-900/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] mix-blend-overlay"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8 py-12">

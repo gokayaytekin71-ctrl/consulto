@@ -7,7 +7,10 @@ export const metadata = {
   description: "Güncel mevzuat arşivi.",
 };
 
-export const dynamic = "force-dynamic";
+// Mevzuat listesi herkese aynı, session'a bağlı değil ve nadiren değişir
+// (kanun değişikliği). force-dynamic yerine ISR: sayfa 1 saatte bir
+// arka planda yenilenir, ziyaretçiler her seferinde DB sorgusu beklemez.
+export const revalidate = 3600;
 
 // --- YARDIMCILAR (Aynen korundu) ---
 function sanitizeTrText(s = "") {
