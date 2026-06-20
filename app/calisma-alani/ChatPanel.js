@@ -247,46 +247,46 @@ export default function ChatPanel({ vm }) {
 
      </div>
 
-                  <form onSubmit={handleSubmit} className="shrink-0 border-t border-slate-200 bg-white p-2.5 shadow-[0_-10px_40px_rgba(0,0,0,0.03)] z-10">
-                    <div className="relative rounded-2xl border-2 border-slate-100 bg-slate-50 transition-all focus-within:border-blue-500 focus-within:bg-white focus-within:shadow-[0_0_0_4px_rgba(59,130,246,0.08)]">
+                  <form onSubmit={handleSubmit} className="shrink-0 border-t border-slate-100 bg-white/80 p-3 backdrop-blur-sm z-10">
+                    <div className="chat-input relative rounded-2xl border border-slate-200 bg-slate-50/70 transition-all">
                       <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder={`${activeWorkspace.title} kapsamında ${activeWorkspaceMode.label} için sorunuzu yazın...`}
-                        className="min-h-[58px] w-full resize-none rounded-2xl bg-transparent px-4 pb-3 pt-3 text-[13px] font-medium leading-5 outline-none placeholder:text-slate-400 custom-scrollbar md:pb-12"
+                        className="min-h-[56px] w-full resize-none rounded-2xl bg-transparent px-4 pb-3 pt-3.5 text-[13px] font-medium leading-5 text-slate-800 outline-none placeholder:text-slate-400 custom-scrollbar md:pb-12"
                       />
 
-                      <div className="flex flex-wrap items-center justify-end gap-2 px-2 pb-2 md:absolute md:bottom-2 md:right-2 md:px-0 md:pb-0">
+                      <div className="flex flex-wrap items-center justify-end gap-1.5 px-2 pb-2 md:absolute md:bottom-2 md:right-2 md:px-0 md:pb-0">
                         <button
                           type="button"
                           onClick={() => setDeepThinkingEnabled((prev) => !prev)}
-                          className={`rounded-xl border px-3.5 py-2 text-[11px] font-black shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 disabled:shadow-none ${
+                          className={`rounded-full border px-3 py-1.5 text-[11px] font-black transition-all disabled:opacity-40 ${
                             deepThinkingEnabled
-                              ? "border-purple-700 bg-purple-700 text-white"
-                              : "border-purple-200 bg-white text-purple-800 hover:bg-purple-50"
+                              ? "border-purple-600 bg-purple-600 text-white shadow-[0_2px_8px_rgba(147,51,234,0.35)]"
+                              : "border-slate-200 bg-white text-slate-500 hover:border-purple-200 hover:text-purple-700"
                           }`}
                           disabled={!activeWorkspaceId || isLoadingWorkspaceDetail}
                           title={deepThinkingEnabled ? "Cevap ana modelle üretilecek" : "Cevap hızlı modelle üretilecek"}
                         >
-                          {deepThinkingEnabled ? "✓ Daha Uzun Düşün" : "Daha Uzun Düşün"}
+                          {deepThinkingEnabled ? "✦ Derin Düşünme" : "✦ Derin Düşünme"}
                         </button>
 
                         <button
                           type="button"
                           onClick={() => setForceCaseSearchEnabled((prev) => !prev)}
-                          className={`rounded-xl border px-3.5 py-2 text-[11px] font-black shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md disabled:opacity-50 disabled:shadow-none ${
+                          className={`rounded-full border px-3 py-1.5 text-[11px] font-black transition-all disabled:opacity-40 ${
                             forceCaseSearchEnabled
-                              ? "border-blue-700 bg-blue-700 text-white"
-                              : "border-blue-200 bg-white text-blue-800 hover:bg-blue-50"
+                              ? "border-blue-600 bg-blue-600 text-white shadow-[0_2px_8px_rgba(37,99,235,0.35)]"
+                              : "border-slate-200 bg-white text-slate-500 hover:border-blue-200 hover:text-blue-700"
                           }`}
                           disabled={!activeWorkspaceId || isLoadingWorkspaceDetail}
                         >
-                          {forceCaseSearchEnabled ? "✓ Karar Aranacak" : "Yeni Karar Ara"}
+                          {forceCaseSearchEnabled ? "⊕ Karar Aranıyor" : "⊕ Karar Ara"}
                         </button>
 
                         <button
                           type="submit"
-                          className="rounded-xl bg-blue-600 px-4 py-2 text-[13px] font-black text-white shadow-[0_4px_14px_rgba(37,99,235,0.3)] transition-all hover:-translate-y-0.5 hover:bg-blue-700 hover:shadow-[0_6px_20px_rgba(37,99,235,0.4)] disabled:opacity-50 disabled:shadow-none"
+                          className="rounded-full bg-gradient-to-r from-blue-600 to-blue-500 px-5 py-1.5 text-[13px] font-black text-white shadow-[0_2px_10px_rgba(37,99,235,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_4px_16px_rgba(37,99,235,0.45)] disabled:opacity-40 disabled:shadow-none disabled:translate-y-0"
                           disabled={
                             !input.trim() ||
                             !activeWorkspaceId ||
@@ -295,15 +295,15 @@ export default function ChatPanel({ vm }) {
                             (Number.isFinite(Number(tokenBalance)) && Number(tokenBalance) < currentMessageTokenCost)
                           }
                         >
-                          {Number.isFinite(Number(tokenBalance)) && Number(tokenBalance) < currentMessageTokenCost ? "Token Yok" : "Sor"}
+                          {Number.isFinite(Number(tokenBalance)) && Number(tokenBalance) < currentMessageTokenCost ? "Token Yok" : "Sor →"}
                         </button>
                       </div>
                     </div>
-                    <div className="mt-2 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 px-1 text-[10px] font-bold text-slate-400">
-                      <span>İlk 3 mesaj 1 token, sonraki mesajlar 2 token. Bu mesaj: {currentMessageTokenCost} token.</span>
+                    <div className="mt-1.5 flex flex-wrap items-center justify-between gap-x-2 gap-y-1 px-1 text-[10px] font-medium text-slate-400">
+                      <span>Bu mesaj: {currentMessageTokenCost} token</span>
                       {Number.isFinite(Number(tokenBalance)) && (
-                        <span className={Number(tokenBalance) < currentMessageTokenCost ? "text-red-600" : "text-emerald-600"}>
-                          Kalan token: {tokenBalance}
+                        <span className={`font-bold ${Number(tokenBalance) < currentMessageTokenCost ? "text-red-500" : "text-emerald-600"}`}>
+                          Kalan: {tokenBalance} token
                         </span>
                       )}
                     </div>

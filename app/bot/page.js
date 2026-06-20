@@ -188,7 +188,7 @@ export default function AnalysisPage() {
   };
 
   return (
-    <div className={`flex flex-col h-screen font-sans overflow-hidden transition-colors duration-500 ${c.appBg} ${c.ink} ${isDarkMode ? "selection:bg-amber-400/30 selection:text-amber-100" : "selection:bg-[#1C2A47]/15 selection:text-[#1C2A47]"}`}>
+    <div className={`flex flex-col h-[calc(100vh-4rem)] font-sans overflow-hidden transition-colors duration-500 ${c.appBg} ${c.ink} ${isDarkMode ? "selection:bg-amber-400/30 selection:text-amber-100" : "selection:bg-[#1C2A47]/15 selection:text-[#1C2A47]"}`}>
 
       <style jsx global>{`
         footer, .footer { display: none !important; }
@@ -210,59 +210,31 @@ export default function AnalysisPage() {
       {/* Arkaplan dokusu */}
       <div className="fixed inset-0 z-0 pointer-events-none paper-grain"></div>
 
-      {/* ====================== HEADER (yüzen pill nav) ====================== */}
-      <header
-        className={`flex-none z-[70] px-3 md:px-6 pt-3 ${mobileMenuOpen || mobileResourcesOpen ? "hidden md:block" : "block"}`}
-      >
-        <div className={`flex items-center justify-between gap-3 h-14 px-3 md:px-5 rounded-2xl border backdrop-blur-xl ${isDarkMode ? "bg-[#0D1322]/90 border-white/10 shadow-lg shadow-black/40" : "bg-white border-[#E4DAC6] shadow-[0_8px_30px_-18px_rgba(28,42,71,0.35)]"}`}>
-          {/* Sol: logo + başlık */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setMobileMenuOpen((p) => !p)}
-              className={`md:hidden p-1.5 rounded-lg ${isDarkMode ? "text-white/80 hover:text-white hover:bg-white/10" : "text-[#5B6478] hover:text-[#1C2A47] hover:bg-[#F6EFE2]"}`}
-            >
-              {icons.menu}
-            </button>
-
-            <div className="flex items-center gap-3">
-              <div className={`relative w-9 h-9 rounded-xl flex items-center justify-center shadow-inner ${isDarkMode ? "bg-amber-400/15 border border-amber-300/30 text-amber-300" : "bg-[#16223E] border border-[#16223E] text-amber-300"}`}>
-                {icons.scale}
-              </div>
-              <div className="flex flex-col leading-none">
-                <h1 className={`font-serif text-[17px] font-semibold tracking-tight ${isDarkMode ? "text-white" : "text-[#1C2A47]"}`}>
-                  Consulto <span className={`font-normal italic ${isDarkMode ? "text-amber-300" : "text-[#A77B2E]"}`}>Analiz</span>
-                </h1>
-                <span className={`text-[9px] font-mono tracking-[0.28em] uppercase mt-1 ${isDarkMode ? "text-white/45" : "text-[#8A8270]"}`}>Legal Intelligence</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Sağ: durum + aksiyonlar */}
-          <div className="flex items-center gap-2">
-            <div className={`hidden md:flex items-center gap-3 px-4 py-1.5 rounded-full border text-[10px] font-mono tracking-wider ${isDarkMode ? "border-white/10 bg-white/[0.04] text-white/60" : "border-[#E4DAC6] bg-[#F6EFE2] text-[#5B6478]"}`}>
-              <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#22c55e]"></span>ÇEVRİMİÇİ</span>
-              <span className={`w-px h-3 ${isDarkMode ? "bg-white/15" : "bg-[#E4DAC6]"}`}></span>
-              <span>VERİ TABANI · GÜNCEL</span>
-            </div>
-
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full border transition-colors ${isDarkMode ? "border-white/10 bg-white/[0.04] text-white/80 hover:text-amber-300 hover:bg-white/10" : "border-[#E4DAC6] bg-[#F6EFE2] text-[#5B6478] hover:text-[#A77B2E] hover:bg-[#EFE6D4]"}`}
-              title={isDarkMode ? "Açık Mod" : "Koyu Mod"}
-            >
-              {isDarkMode ? icons.sun : icons.moon}
-            </button>
-
-            <button
-              onClick={() => setMobileResourcesOpen((p) => !p)}
-              className={`lg:hidden p-2 rounded-full border ${isDarkMode ? "border-amber-300/30 bg-amber-400/10 text-amber-300 hover:bg-amber-400/20" : "border-[#DCC68C] bg-[#F2E7CC] text-[#A77B2E] hover:bg-[#EFE0BE]"}`}
-              aria-label="Kaynaklar"
-            >
-              {icons.book}
-            </button>
-          </div>
+      {/* Mobil: menu + kaynak + tema butonları (masaüstünde gizli) */}
+      <div className={`flex-none flex items-center justify-between px-3 py-2 md:hidden ${mobileMenuOpen || mobileResourcesOpen ? "hidden" : "flex"}`}>
+        <button
+          onClick={() => setMobileMenuOpen((p) => !p)}
+          className={`p-2 rounded-lg ${isDarkMode ? "text-white/70 hover:text-white hover:bg-white/10" : "text-[#5B6478] hover:text-[#1C2A47] hover:bg-black/[0.06]"}`}
+        >
+          {icons.menu}
+        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={toggleTheme}
+            className={`p-2 rounded-lg transition-colors ${isDarkMode ? "text-white/60 hover:text-amber-300 hover:bg-white/10" : "text-[#5B6478] hover:text-[#A77B2E] hover:bg-black/[0.06]"}`}
+            title={isDarkMode ? "Açık Mod" : "Koyu Mod"}
+          >
+            {isDarkMode ? icons.sun : icons.moon}
+          </button>
+          <button
+            onClick={() => setMobileResourcesOpen((p) => !p)}
+            className={`p-2 rounded-lg ${isDarkMode ? "text-amber-300/80 hover:bg-white/10" : "text-[#A77B2E] hover:bg-black/[0.06]"}`}
+            aria-label="Kaynaklar"
+          >
+            {icons.book}
+          </button>
         </div>
-      </header>
+      </div>
 
       {/* ====================== MAIN LAYOUT ====================== */}
       <div className="grid grid-cols-1 md:grid-cols-12 gap-4 w-full flex-1 min-h-0 overflow-hidden relative z-10 px-3 md:px-6 pt-4 pb-5">

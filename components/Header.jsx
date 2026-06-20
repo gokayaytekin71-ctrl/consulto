@@ -1,424 +1,492 @@
-// app/components/Header.jsx
 "use client";
 
 import Link from "next/link";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useState, useEffect, useRef, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import LoadingOverlay from "@/components/LoadingOverlay";
-import React from "react";
 
-const Lottie = dynamic(() => import("lottie-react"), { ssr: false });
-// Animation1.json (~45KB) artık statik import değil — Header her sayfada
-// yüklendiği için bu JSON her sayfanın JS bundle'ına gömülüyordu.
-// Aşağıda mount sonrası lazy import ile çekiliyor (bkz. useEffect).
+/* ─── küçük inline ikonlar (sadece gerekli yerlerde) ─── */
+const IcoBell    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-[18px] w-[18px]"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>;
+const IcoUser    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>;
+const IcoLogout  = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>;
+const IcoPlus    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>;
+const IcoChevron = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="h-3 w-3"><path d="M6 9l6 6 6-6"/></svg>;
+const IcoMenu    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><line x1="4" y1="8" x2="20" y2="8"/><line x1="4" y1="16" x2="20" y2="16"/></svg>;
+const IcoX       = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
+const IcoDot     = ({ className = "" }) => <span className={`h-1.5 w-1.5 rounded-full ${className}`} />;
 
-/* --- İKONLAR --- */
-const Icons = {
-  User: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
-  Bell: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>,
-  Gavel: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="m14.5 12.5-8 8a2.119 2.119 0 1 1-3-3l8-8"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg>,
-  Search: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>,
-  FileText: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>,
-  Cpu: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 20v3"/><path d="M15 20v3"/><path d="M20 9h3"/><path d="M20 14h3"/><path d="M1 9h3"/><path d="M1 14h3"/></svg>,
-  Tool: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>,
-  More: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg>,
-  Package: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>,
-  Library: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" /><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" /></svg>,
-  Feather: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>,
-  Scroll: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M19 3h-1a1 1 0 0 0-1 1v13H4a2 2 0 0 0-2 2 2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3z" /><path d="M8 21h12a2 2 0 0 0 2-2v-1h-10" /><path d="M10 3v16" /></svg>,
-  Layout: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>,
-  Edit: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>,
-  Logout: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>,
-  Plus: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3} strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>,
-  Hamburger: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>,
-  X: () => <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-};
+/* ─── nav tanımları ─── */
+const NAV_MAIN = [
+  { label: "Kararlar",      path: "/kararlar" },
+  { label: "Dilekçe",       path: "/dilekce" },
+  { label: "Çalışma Alanı", path: "/calisma-alani", badge: "Yeni" },
+  { label: "Analiz",        path: "/bot" },
+  { label: "Blog",          path: "/blog", matchPrefix: true },
+  { label: "Paketler",      path: "/paketler-ucretler" },
+];
 
+const NAV_MORE = [
+  { label: "Akıllı Arama",  path: "/akilli-arama" },
+  { label: "Bilgi Kartları", path: "/Flash-Cards" },
+  { label: "Araçlar",       path: "/araclar" },
+  { label: "Mevzuat",       path: "/mevzuat" },
+  { label: "Makaleler",     path: "/makaleler" },
+  { label: "Resmî Gazete",  path: "/gazete" },
+];
+
+/* ─── mini dropdown kapsayıcı ─── */
+function Menu({ children, align = "left", className = "" }) {
+  return (
+    <div
+      className={`absolute top-full mt-2.5 z-[10001] min-w-[200px] overflow-hidden rounded-xl
+        border border-slate-700/60 bg-[#0d1e30]
+        shadow-[0_24px_64px_-8px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.04)]
+        ${align === "right" ? "right-0" : "left-0"}
+        ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
+function MenuItem({ href, onClick, children, danger = false }) {
+  const cls = `flex w-full items-center gap-3 px-4 py-3 text-left text-sm font-medium transition-colors duration-150
+    ${danger ? "text-red-400 hover:bg-red-500/10 hover:text-red-300" : "text-slate-200 hover:bg-slate-800 hover:text-white"}`;
+  if (href) return <Link href={href} onClick={onClick} className={cls}>{children}</Link>;
+  return <button type="button" onClick={onClick} className={cls}>{children}</button>;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
 export default function Header() {
-  const pathname = usePathname();
-  const router = useRouter();
+  const pathname          = usePathname();
+  const router            = useRouter();
   const [isPending, startTransition] = useTransition();
 
   if (pathname.includes("/auth/signin") || pathname.includes("/api/auth/signin")) return null;
 
   const { data: session, status } = useSession();
-  const [isMounted, setIsMounted] = useState(false);
-  const [tokenBalance, setTokenBalance] = useState(null);
-  const [isLoadingTokenBalance, setIsLoadingTokenBalance] = useState(false);
-  
-  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isOtherOpen, setIsOtherOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); 
 
-  const [notifications, setNotifications] = useState([]);
+  const [isMounted,    setIsMounted]    = useState(false);
+  const [scrolled,     setScrolled]     = useState(false);
+  const [mobileOpen,   setMobileOpen]   = useState(false);
+  const [moreOpen,     setMoreOpen]     = useState(false);
+  const [bellOpen,     setBellOpen]     = useState(false);
+  const [profileOpen,  setProfileOpen]  = useState(false);
+
+  const [tokenBalance,           setTokenBalance]           = useState(null);
+  const [isLoadingTokenBalance,  setIsLoadingTokenBalance]  = useState(false);
+  const [notifications,          setNotifications]          = useState([]);
   const [isLoadingNotifications, setIsLoadingNotifications] = useState(false);
-  
-  const notificationsRef = useRef(null);
-  const otherRef = useRef(null);
+
+  const moreRef    = useRef(null);
+  const bellRef    = useRef(null);
   const profileRef = useRef(null);
 
-  const [animationData, setAnimationData] = useState(null);
+  /* mount */
+  useEffect(() => setIsMounted(true), []);
 
-  useEffect(() => { setIsMounted(true); }, []);
-
+  /* scroll */
   useEffect(() => {
-    import("../animations/Animation1.json").then((mod) => setAnimationData(mod.default));
+    const h = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", h, { passive: true });
+    h();
+    return () => window.removeEventListener("scroll", h);
   }, []);
 
-  useEffect(() => {
-    const fetchTokenBalance = async () => {
-      if (status !== "authenticated") return;
-      setIsLoadingTokenBalance(true);
-      try {
-        const res = await fetch("/api/user/balance", { cache: "no-store" });
-        if (!res.ok) return;
-        const data = await res.json();
-        setTokenBalance(data.tokenBalance ?? 0);
-      } catch (e) {
-        console.error(e);
-      } finally {
-        setIsLoadingTokenBalance(false);
-      }
-    };
+  /* body lock */
+  useEffect(() => { document.body.style.overflow = mobileOpen ? "hidden" : ""; }, [mobileOpen]);
 
-    fetchTokenBalance();
-    window.addEventListener("token-balance-updated", fetchTokenBalance);
-    return () => window.removeEventListener("token-balance-updated", fetchTokenBalance);
+  /* token balance */
+  useEffect(() => {
+    if (status !== "authenticated") return;
+    const fetch_ = () =>
+      fetch("/api/user/balance", { cache: "no-store" })
+        .then(r => r.ok ? r.json() : null)
+        .then(d => d && setTokenBalance(d.tokenBalance ?? 0))
+        .catch(console.error);
+    setIsLoadingTokenBalance(true);
+    fetch_().finally(() => setIsLoadingTokenBalance(false));
+    window.addEventListener("token-balance-updated", fetch_);
+    return () => window.removeEventListener("token-balance-updated", fetch_);
   }, [status]);
 
+  /* notifications */
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isMobileMenuOpen]);
-
-  useEffect(() => {
-    const fetchNotifications = async () => {
-      setIsLoadingNotifications(true);
-      try {
-        const [tasksRes, hearingsRes] = await Promise.all([fetch("/api/tasks"), fetch("/api/hearings")]);
-        const tasksData = tasksRes.ok ? await tasksRes.json() : [];
-        const hearingsData = hearingsRes.ok ? await hearingsRes.json() : [];
-        const combinedItems = [...tasksData.map(i => ({ ...i, type: 'Görev' })), ...hearingsData.map(i => ({ ...i, type: 'Duruşma' }))];
-        const today = new Date(); today.setHours(0, 0, 0, 0);
-        const upcomingItems = combinedItems.filter(i => new Date(i.date) >= today).sort((a, b) => new Date(a.date) - new Date(b.date));
-        setNotifications(upcomingItems);
-      } catch (error) { console.error("Bildirim hatası:", error); } finally { setIsLoadingNotifications(false); }
-    };
-    if (status === "authenticated") fetchNotifications();
+    if (status !== "authenticated") return;
+    setIsLoadingNotifications(true);
+    Promise.all([fetch("/api/tasks"), fetch("/api/hearings")])
+      .then(async ([tr, hr]) => {
+        const tasks    = tr.ok ? await tr.json() : [];
+        const hearings = hr.ok ? await hr.json() : [];
+        const today    = new Date(); today.setHours(0, 0, 0, 0);
+        return [...tasks.map(i => ({ ...i, type: "Görev" })), ...hearings.map(i => ({ ...i, type: "Duruşma" }))]
+          .filter(i => new Date(i.date) >= today)
+          .sort((a, b) => new Date(a.date) - new Date(b.date));
+      })
+      .then(setNotifications)
+      .catch(console.error)
+      .finally(() => setIsLoadingNotifications(false));
   }, [status]);
 
+  /* click-outside */
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (notificationsRef.current && !notificationsRef.current.contains(event.target)) setIsNotificationsOpen(false);
-      if (otherRef.current && !otherRef.current.contains(event.target)) setIsOtherOpen(false);
-      if (profileRef.current && !profileRef.current.contains(event.target)) setIsProfileOpen(false);
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    const h = (e) => {
+      if (moreRef.current    && !moreRef.current.contains(e.target))    setMoreOpen(false);
+      if (bellRef.current    && !bellRef.current.contains(e.target))    setBellOpen(false);
+      if (profileRef.current && !profileRef.current.contains(e.target)) setProfileOpen(false);
+    };
+    document.addEventListener("mousedown", h);
+    return () => document.removeEventListener("mousedown", h);
   }, []);
 
-  const handleNav = (path) => { 
-    if(pathname === path) {
-      setIsMobileMenuOpen(false);
-      return;
-    }
-    setIsMobileMenuOpen(false);
-    startTransition(() => router.push(path)); 
-  };
-  
-  const handleLogout = async () => {
-    await signOut({ callbackUrl: "/cikis" });
+  const go = (path) => {
+    setMobileOpen(false);
+    if (pathname !== path) startTransition(() => router.push(path));
   };
 
-  const authButtonsPlaceholder = <div className="w-8 h-8 bg-slate-700/50 animate-pulse rounded-full"></div>;
+  const isActive = (item) =>
+    item.matchPrefix ? pathname.startsWith(item.path) : pathname === item.path;
 
-  const NavItem = ({ onClick, icon: Icon, label, active, badge }) => (
-    <button onClick={onClick} className={`group relative flex items-center gap-1.5 px-2.5 py-1.5 rounded-full transition-all duration-300 ${active ? "bg-white/10 text-white shadow-[0_0_10px_rgba(56,189,248,0.25)]" : "text-slate-300 hover:text-white hover:bg-white/5"}`}>
-      <Icon />
-      <span className="text-[11px] font-medium tracking-wide hidden lg:block group-hover:block transition-all duration-300 whitespace-nowrap">{label}</span>
-      {active && <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full shadow-[0_0_3px_cyan]"></span>}
-      {badge && (
-        <span className="absolute -top-1.5 -right-1 bg-gradient-to-r from-pink-500 to-orange-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-sm animate-pulse">
-          {badge}
-        </span>
-      )}
-    </button>
-  );
+  /* ─── NAV LINK ─── */
+  const NavLink = ({ item }) => {
+    const active = isActive(item);
+    return (
+      <button
+        type="button"
+        onClick={() => go(item.path)}
+        className={`relative px-3.5 py-2 text-sm font-medium tracking-[-0.01em] transition-colors duration-200
+          ${active ? "text-white" : "text-slate-400 hover:text-slate-100"}`}
+      >
+        {item.label}
+        {item.badge && (
+          <span className="absolute -top-1.5 -right-0.5 rounded-full bg-blue-500 px-1.5 py-px text-[9px] font-bold text-white leading-none">
+            {item.badge}
+          </span>
+        )}
+        {active && (
+          <span className="absolute inset-x-3 -bottom-px h-px rounded-full bg-gradient-to-r from-transparent via-cyan-400/80 to-transparent" />
+        )}
+      </button>
+    );
+  };
 
+  /* ═══════════════════════════════════════ RENDER ═══════════════════════════════════════ */
   return (
     <>
       {isPending && <LoadingOverlay />}
-      
-      {/* MOBİL MENÜ OVERLAY */}
-      <div className={`fixed inset-0 z-[10000] bg-[#001f3f] transition-all duration-500 md:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
 
-        <div className="flex flex-col h-full relative z-10">
-          <div className="flex items-center justify-between px-6 py-5 border-b border-white/10">
-            <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-              <Image src="/images/logo.png" alt="Logo" width={100} height={28} className="object-contain brightness-110" priority />
-            </Link>
+      {/* ──────────────────────────────────
+          MOBİL DRAWER
+         ────────────────────────────────── */}
+      <div
+        className={`fixed inset-0 z-[10000] md:hidden transition-opacity duration-300
+          ${mobileOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+      >
+        {/* backdrop */}
+        <div
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          onClick={() => setMobileOpen(false)}
+        />
+
+        {/* drawer panel */}
+        <div
+          className={`absolute inset-y-0 right-0 flex w-72 flex-col bg-[#08131f] transition-transform duration-300
+            ${mobileOpen ? "translate-x-0" : "translate-x-full"}`}
+        >
+          {/* drawer header */}
+          <div className="flex items-center justify-between border-b border-white/[0.07] px-5 py-4">
+            <Image src="/images/logo.png" alt="Consülto" width={96} height={26} className="h-6 w-auto" />
             <button
               type="button"
-              onClick={() => setIsMobileMenuOpen(false)}
-              aria-label="Mobil menüyü kapat"
-              className="p-2 text-slate-300 hover:text-white bg-white/5 rounded-full hover:bg-white/10 transition-colors"
+              onClick={() => setMobileOpen(false)}
+              className="flex h-8 w-8 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/[0.07] hover:text-white"
             >
-              <Icons.X />
+              <IcoX />
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-2 custom-scrollbar">
-             <div className="space-y-1">
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 pl-2">Menü</p>
-                {[
-                  { label: "Kararlar", path: "/kararlar", icon: Icons.Gavel },
-                  { label: "Dilekçe", path: "/dilekce", icon: Icons.FileText },
-                  { label: "Çalışma Alanı", path: "/calisma-alani", icon: Icons.Layout, badge: "En Gelişmiş!" },
-                  { label: "Analiz", path: "/bot", icon: Icons.Cpu },
-                  { label: "Blog", path: "/blog", icon: Icons.Edit },
-                  { label: "Paketler", path: "/paketler-ucretler", icon: Icons.Package },
-                  
-                ].map((item) => (
-                  <button 
-                    key={item.path}
-                    onClick={() => handleNav(item.path)} 
-                    className={`w-full flex items-center gap-4 p-3 rounded-xl transition-all ${
-                      (item.path === "/blog" ? pathname.startsWith("/blog") : pathname === item.path)
-                        ? "bg-cyan-500/20 text-white border border-cyan-500/30"
-                        : "text-slate-300 hover:bg-white/5 hover:text-white"
-                    }`}
-                  >
-                    <div className={`p-2 rounded-lg ${
-                      (item.path === "/blog" ? pathname.startsWith("/blog") : pathname === item.path)
-                        ? "bg-cyan-500 text-white"
-                        : "bg-white/5 text-slate-400"
-                    }`}>
-                      <item.icon />
-                    </div>
-                    <span className="text-sm font-medium relative">
-                      {item.label}
-                      {item.badge && (
-                        <span className="absolute -top-2 -right-8 bg-gradient-to-r from-pink-500 to-orange-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full shadow-sm">
-                          {item.badge}
-                        </span>
-                      )}
-                    </span>
-                  </button>
-                ))}
-             </div>
+          {/* drawer nav */}
+          <nav className="flex-1 overflow-y-auto px-3 py-4">
+            <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-slate-600">Menü</p>
+            {NAV_MAIN.map((item) => (
+              <button
+                key={item.path}
+                type="button"
+                onClick={() => go(item.path)}
+                className={`group flex w-full items-center justify-between rounded-lg px-3 py-2.5 text-sm font-medium transition-colors duration-150
+                  ${isActive(item) ? "bg-white/[0.07] text-white" : "text-slate-400 hover:bg-white/[0.04] hover:text-white"}`}
+              >
+                <span className="flex items-center gap-2">
+                  {isActive(item) && <IcoDot className="bg-cyan-400" />}
+                  {item.label}
+                </span>
+                {item.badge && (
+                  <span className="rounded-full bg-blue-500/20 px-2 py-px text-[10px] font-semibold text-blue-400">
+                    {item.badge}
+                  </span>
+                )}
+              </button>
+            ))}
 
-             <div className="mt-6 pt-6 border-t border-white/10 space-y-1">
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3 pl-2">Diğer</p>
-                {[
-                  { href: "/akilli-arama", label: "Akıllı Arama", icon: Icons.Search },
-                  { href: "/Flash-Cards", label: "Bilgi Kartları", icon: Icons.Library },
-                  { href: "/araclar", label: "Araçlar", icon: Icons.Tool },
-                  { href: "/mevzuat", label: "Mevzuat", icon: Icons.Library },
-                  { href: "/makaleler", label: "Makaleler", icon: Icons.Feather },
-                  { href: "/gazete", label: "Resmî Gazete", icon: Icons.Scroll }
-                ].map((link) => (
-                   <Link 
-                    key={link.href} 
-                    href={link.href} 
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm text-slate-300 hover:bg-white/5 hover:text-white transition-colors"
-                  >
-                     <span className="w-5 h-5 flex items-center justify-center text-slate-400"><link.icon /></span>
-                     {link.label}
-                   </Link>
-                ))}
-             </div>
-          </div>
-          
+            <div className="mt-4 border-t border-white/[0.06] pt-4">
+              <p className="mb-2 px-2 text-[10px] font-semibold uppercase tracking-widest text-slate-600">Diğer</p>
+              {NAV_MORE.map((item) => (
+                <Link
+                  key={item.path}
+                  href={item.path}
+                  onClick={() => setMobileOpen(false)}
+                  className="flex w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-slate-500 transition-colors hover:bg-white/[0.04] hover:text-slate-300"
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
+          </nav>
+
+          {/* drawer footer */}
           {!session && (
-            <div className="p-6 border-t border-white/10">
-               <button onClick={() => { setIsMobileMenuOpen(false); signIn(undefined, { callbackUrl: "/profilim" }); }} className="w-full py-3 rounded-xl bg-gradient-to-r from-orange-500 to-pink-600 text-white font-bold shadow-lg shadow-orange-900/20 active:scale-95 transition-all">
-                 Giriş Yap
-               </button>
+            <div className="border-t border-white/[0.07] p-4">
+              <button
+                onClick={() => { setMobileOpen(false); signIn(undefined, { callbackUrl: "/profilim" }); }}
+                className="w-full rounded-xl bg-white py-3 text-sm font-bold text-slate-900 transition-all hover:bg-slate-100 active:scale-[0.98]"
+              >
+                Giriş Yap
+              </button>
             </div>
           )}
         </div>
       </div>
-      {/* END MOBİL MENÜ OVERLAY */}
 
-      {/* HEADER WIDE MOBIL UYUM */}
-      <header data-global-header="true" className="fixed top-3 left-1/2 transform -translate-x-1/2 z-[9999] w-[95%] sm:w-[92%] max-w-[850px]">
-        <div className="relative flex items-center justify-between px-2 sm:px-3 py-2.5 rounded-full bg-[#001f3f]/90 backdrop-blur-xl border border-white/10 shadow-xl shadow-black/20 transition-all duration-500 hover:border-white/20 hover:shadow-cyan-900/15">
+      {/* ──────────────────────────────────
+          HEADER BAR
+         ────────────────────────────────── */}
+      <header
+        data-global-header="true"
+        className={`fixed inset-x-0 top-0 z-[9999] h-16 transition-all duration-300
+          ${scrolled
+            ? "border-b border-white/[0.07] bg-[#04111e]/95 shadow-[0_1px_0_rgba(255,255,255,0.04)] backdrop-blur-2xl"
+            : "bg-[#04111e]/50 backdrop-blur-xl"
+          }`}
+      >
+        <div className="mx-auto flex h-full max-w-7xl items-center justify-between px-4 sm:px-6">
 
-          {/* LOGO */}
-          <div className="flex-shrink-0 pl-1 pr-2 sm:pr-3 border-r border-white/10">
-            <Link href="/" className="block transition-transform hover:scale-105 active:scale-95">
-              <Image src="/images/logo.png" alt="Logo" width={90} height={24} className="object-contain brightness-110 drop-shadow-lg w-[75px] sm:w-[90px]" priority />
-            </Link>
-          </div>
-          
-          <div className="hidden lg:flex items-center pl-2 pr-4 opacity-90"><div className="w-10 h-10">{animationData && <Lottie animationData={animationData} loop autoPlay />}</div></div>
+          {/* ── LOGO ── */}
+          <Link href="/" className="flex-shrink-0 transition-opacity hover:opacity-80">
+            <Image
+              src="/images/logo.png"
+              alt="Consülto"
+              width={100}
+              height={28}
+              className="h-7 w-auto"
+              priority
+            />
+          </Link>
 
-{/* MENÜ - DESKTOP */}
-          <nav className="hidden md:flex flex-1 items-center justify-center gap-0.5 px-2">
-            <NavItem onClick={() => handleNav("/kararlar")} icon={Icons.Gavel} label="Kararlar" active={pathname === "/kararlar"} />
-            <NavItem onClick={() => handleNav("/dilekce")} icon={Icons.FileText} label="Dilekçe" active={pathname === "/dilekce"} />
-            <NavItem onClick={() => handleNav("/calisma-alani")} icon={Icons.Layout} label="Çalışma Alanı" active={pathname === "/calisma-alani"} badge="En Gelişmiş!" />
-            <NavItem onClick={() => handleNav("/bot")} icon={Icons.Cpu} label="Analiz" active={pathname === "/bot"} />
-            <NavItem onClick={() => handleNav("/blog")} icon={Icons.Edit} label="Blog" active={pathname.startsWith("/blog")} />
-            <NavItem onClick={() => handleNav("/paketler-ucretler")} icon={Icons.Package} label="Paketler" active={pathname === "/paketler-ucretler"} />
+          {/* ── DESKTOP NAV ── */}
+          <nav className="hidden items-center gap-0.5 md:flex">
+            {NAV_MAIN.map((item) => (
+              <NavLink key={item.path} item={item} />
+            ))}
 
-            {/* Diğer Dropdown */}
-            <div className="relative ml-1" ref={otherRef}>
+            {/* Daha fazla */}
+            <div className="relative ml-1" ref={moreRef}>
               <button
                 type="button"
-                onClick={() => setIsOtherOpen(!isOtherOpen)}
-                aria-label="Diğer menüyü aç veya kapat"
-                aria-expanded={isOtherOpen}
-                aria-haspopup="menu"
-                className={`group flex items-center justify-center w-7 h-7 rounded-full transition-all duration-300 ${isOtherOpen ? 'bg-white/20 text-white rotate-90' : 'text-slate-300 hover:bg-white/10 hover:text-white'}`}
+                onClick={() => setMoreOpen(!moreOpen)}
+                className={`flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium transition-colors duration-200
+                  ${moreOpen ? "text-white" : "text-slate-500 hover:text-slate-200"}`}
               >
-                <Icons.More />
+                Daha fazla
+                <span className={`transition-transform duration-200 ${moreOpen ? "rotate-180" : ""}`}>
+                  <IcoChevron />
+                </span>
               </button>
-              {isOtherOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-44 p-1.5 rounded-xl bg-[#0a1b2b]/95 backdrop-blur-md border border-white/10 shadow-lg ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-200">
-                  <div className="flex flex-col gap-0.5">
-                    {[
-                      { href: "/akilli-arama", label: "Akıllı Arama", icon: <Icons.Search /> },
-                      { href: "/Flash-Cards", label: "Bilgi Kartları", icon: <Icons.Library /> },
-                      { href: "/araclar", label: "Araçlar", icon: <Icons.Tool /> },
-                      { href: "/mevzuat", label: "Mevzuat", icon: <Icons.Library /> },
-                      { href: "/makaleler", label: "Makaleler", icon: <Icons.Feather /> },
-                      { href: "/gazete", label: "Resmî Gazete", icon: <Icons.Scroll /> }
-                    ].map((link) => (
-                      <Link key={link.href} href={link.href} onClick={() => setIsOtherOpen(false)} className="flex items-center gap-2 px-3 py-2 rounded-lg text-xs text-slate-200 hover:bg-white/10 hover:text-white transition-colors">
-                        <span className="w-4 h-4 flex items-center justify-center">{link.icon}</span>
-                        {link.label}
-                      </Link>
+              {moreOpen && (
+                <Menu>
+                  <div className="py-1">
+                    {NAV_MORE.map((item) => (
+                      <MenuItem key={item.path} href={item.path} onClick={() => setMoreOpen(false)}>
+                        {item.label}
+                      </MenuItem>
                     ))}
                   </div>
-                </div>
+                </Menu>
               )}
             </div>
           </nav>
 
-          {/* SAĞ KISIM - flex-shrink-0 EKLENDİ */}
-          <div className="flex items-center gap-1 sm:gap-2 pl-2 sm:pl-3 border-l border-white/10 flex-shrink-0">
-            {isMounted ? (status === "loading" ? authButtonsPlaceholder : session ? (
+          {/* ── SAĞ: AKSIYONLAR ── */}
+          <div className="flex flex-shrink-0 items-center gap-2">
+
+            {/* ── AUTH ALANI ── sabit boyutlu kapsayıcı → layout shift yok */}
+            <div className="flex items-center gap-2">
+
+              {/* Yükleniyor skeleton — authenticated UI ile birebir aynı boyut */}
+              {(!isMounted || status === "loading") && (
+                <div className="flex items-center gap-2">
+                  <div className="h-10 w-10 rounded-lg bg-white/[0.05]" />
+                  <div className="hidden sm:flex items-center gap-2.5 rounded-lg py-1.5 pl-1.5 pr-3 bg-white/[0.03]">
+                    <div className="h-8 w-8 rounded-full bg-white/[0.07]" />
+                    <div className="h-2.5 w-14 rounded-full bg-white/[0.07]" />
+                    <div className="h-3 w-3 opacity-30" />
+                  </div>
+                  <div className="sm:hidden h-8 w-8 rounded-full bg-white/[0.07]" />
+                </div>
+              )}
+
+            {/* ---- oturum açık ---- */}
+            {isMounted && status === "authenticated" && session && (
               <>
-                {/* Bildirimler */}
-                <div className="relative" ref={notificationsRef}>
+                {/* Bildirim zili */}
+                <div className="relative" ref={bellRef}>
                   <button
                     type="button"
-                    onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
-                    aria-label="Bildirimleri aç veya kapat"
-                    aria-expanded={isNotificationsOpen}
-                    aria-haspopup="menu"
-                    className="relative w-8 h-8 flex items-center justify-center rounded-full text-slate-300 hover:text-white hover:bg-white/10 transition-all duration-300 active:scale-90"
+                    onClick={() => setBellOpen(!bellOpen)}
+                    aria-label="Bildirimler"
+                    className="relative flex h-10 w-10 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/[0.07] hover:text-white"
                   >
-                    <Icons.Bell />
-                    {notifications.length > 0 && <span className="absolute top-1.5 right-1.5 flex h-2 w-2"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span><span className="relative inline-flex rounded-full h-2 w-2 bg-red-500 border border-[#001f3f]"></span></span>}
+                    <IcoBell />
+                    {notifications.length > 0 && (
+                      <span className="absolute right-2 top-2 flex h-1.5 w-1.5">
+                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
+                        <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
+                      </span>
+                    )}
                   </button>
-                  {isNotificationsOpen && (
-                    <div className="absolute top-full right-0 mt-3 w-[290px] sm:w-80 rounded-2xl bg-[#0f263d]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200 z-[10001] origin-top-right">
-                      <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5"><h3 className="font-semibold text-white text-sm">Bildirimler</h3><span className="text-[10px] bg-white/10 px-2 py-0.5 rounded-full text-slate-300">{notifications.length} Yeni</span></div>
-                      <div className="max-h-[250px] overflow-y-auto custom-scrollbar">
-                        {isLoadingNotifications ? <div className="p-4 text-center text-slate-400 text-xs">Yükleniyor...</div> : notifications.length > 0 ? (
-                          <ul className="divide-y divide-white/5">
-                            {notifications.slice(0, 5).map((item) => (
-                              <li key={`${item.type}-${item.id}`}>
-                                <Link href="/profilim/gorevlerim" onClick={() => setIsNotificationsOpen(false)} className="flex items-start gap-3 px-4 py-3 hover:bg-white/5 transition-colors group">
-                                  <div className={`mt-1 w-1.5 h-1.5 rounded-full flex-shrink-0 ${item.type === 'Görev' ? 'bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.5)]' : 'bg-orange-400 shadow-[0_0_6px_rgba(251,146,60,0.5)]'}`}></div>
-                                  <div><p className="text-xs font-medium text-slate-200 group-hover:text-white transition-colors">{item.content}</p><p className="text-[10px] text-slate-500 mt-0.5 flex items-center gap-1"><span>{item.type}</span><span>•</span><span>{new Date(item.date).toLocaleDateString('tr-TR')}</span></p></div>
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        ) : <div className="p-6 text-center text-slate-500 text-xs">Her şey yolunda!</div>}
+
+                  {bellOpen && (
+                    <Menu align="right" className="w-80">
+                      <div className="flex items-center justify-between border-b border-slate-700/60 px-4 py-3.5">
+                        <span className="text-sm font-semibold text-white">Bildirimler</span>
+                        <span className="rounded-full bg-slate-700/80 px-2 py-px text-[11px] text-slate-300">
+                          {notifications.length}
+                        </span>
                       </div>
-                      <div className="p-1.5 bg-white/5 border-t border-white/5 text-center"><Link href="/profilim/gorevlerim" onClick={() => setIsNotificationsOpen(false)} className="block w-full py-1.5 text-[10px] font-medium text-cyan-400 hover:text-cyan-300 transition-colors">Tüm Ajandayı Görüntüle →</Link></div>
-                    </div>
+                      <div className="max-h-64 overflow-y-auto py-1">
+                        {isLoadingNotifications ? (
+                          <p className="px-4 py-4 text-center text-sm text-slate-400">Yükleniyor…</p>
+                        ) : notifications.length === 0 ? (
+                          <p className="px-4 py-6 text-center text-sm text-slate-400">Her şey yolunda 🎉</p>
+                        ) : (
+                          notifications.slice(0, 5).map((item) => (
+                            <Link
+                              key={`${item.type}-${item.id}`}
+                              href="/profilim/gorevlerim"
+                              onClick={() => setBellOpen(false)}
+                              className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-slate-800"
+                            >
+                              <IcoDot className={`mt-1.5 flex-shrink-0 ${item.type === "Görev" ? "bg-emerald-400" : "bg-orange-400"}`} />
+                              <div>
+                                <p className="text-sm font-medium text-slate-100 line-clamp-1">{item.content}</p>
+                                <p className="mt-0.5 text-xs text-slate-400">
+                                  {item.type} · {new Date(item.date).toLocaleDateString("tr-TR")}
+                                </p>
+                              </div>
+                            </Link>
+                          ))
+                        )}
+                      </div>
+                      <div className="border-t border-slate-700/60 px-4 py-3">
+                        <Link
+                          href="/profilim/gorevlerim"
+                          onClick={() => setBellOpen(false)}
+                          className="text-[12px] font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
+                        >
+                          Tüm ajandayı gör →
+                        </Link>
+                      </div>
+                    </Menu>
                   )}
                 </div>
 
-                {/* --- PROFIL DROPDOWN --- */}
-                <div className="relative" ref={profileRef}>
-                  <button 
+                {/* Avatar + profil dropdown */}
+                <div className="relative ml-1" ref={profileRef}>
+                  <button
                     type="button"
-                    onClick={() => setIsProfileOpen(!isProfileOpen)} 
-                    aria-label="Profil menüsünü aç veya kapat"
-                    aria-expanded={isProfileOpen}
-                    aria-haspopup="menu"
-                    className={`flex items-center gap-2 pl-1 pr-1 py-1 rounded-full transition-all duration-300 group ${isProfileOpen ? 'bg-white/10' : 'hover:bg-white/10'}`}
+                    onClick={() => setProfileOpen(!profileOpen)}
+                    aria-label="Profil"
+                    className={`flex items-center gap-2.5 rounded-lg py-1.5 pl-1.5 pr-3 transition-colors duration-150
+                      ${profileOpen ? "bg-white/[0.08]" : "hover:bg-white/[0.07]"}`}
                   >
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-cyan-500 to-blue-600 p-[1.5px] shadow-md shadow-cyan-900/30 group-hover:shadow-cyan-500/30 transition-shadow">
-                      {session?.user?.image ? (
-                        <Image src={session.user.image} alt="User" width={32} height={32} className="rounded-full object-cover w-full h-full" />
+                    {/* avatar */}
+                    <div className="h-8 w-8 overflow-hidden rounded-full ring-1 ring-white/15">
+                      {session.user?.image ? (
+                        <Image src={session.user.image} alt="Profil" width={32} height={32} className="h-full w-full object-cover" />
                       ) : (
-                        <div className="w-full h-full rounded-full bg-[#001f3f] flex items-center justify-center"><Icons.User /></div>
+                        <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-blue-600 to-cyan-500 text-white">
+                          <IcoUser />
+                        </div>
                       )}
                     </div>
+                    <span className="hidden text-sm font-medium text-slate-200 sm:block">
+                      {session.user?.name?.split(" ")[0] ?? "Profil"}
+                    </span>
+                    <span className="text-slate-600"><IcoChevron /></span>
                   </button>
 
-                  {isProfileOpen && (
-                    <div className="absolute top-full right-0 mt-4 w-[280px] sm:w-72 rounded-2xl bg-[#0f263d]/95 backdrop-blur-xl border border-white/10 shadow-2xl overflow-hidden animate-in slide-in-from-top-2 duration-200 ring-1 ring-black/10 z-[10001] origin-top-right">
-                      <div className="px-5 py-4 border-b border-white/5 bg-white/5">
-                        <p className="text-sm font-bold text-white truncate">{session.user.name || "Kullanıcı"}</p>
-                        <p className="text-[11px] text-slate-400 truncate mt-0.5">{session.user.email}</p>
+                  {profileOpen && (
+                    <Menu align="right" className="w-64">
+                      {/* kullanıcı bilgisi */}
+                      <div className="border-b border-slate-700/60 px-4 py-4">
+                        <p className="truncate text-sm font-semibold text-white">{session.user?.name ?? "Kullanıcı"}</p>
+                        <p className="mt-0.5 truncate text-xs text-slate-400">{session.user?.email}</p>
                       </div>
-                      <div className="p-3">
-                        <div className="rounded-xl bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 p-3.5 flex flex-col gap-3 group relative overflow-hidden">
-                            <div className="absolute top-0 right-0 w-20 h-20 bg-cyan-500/10 blur-2xl rounded-full pointer-events-none"></div>
-                            <div className="flex justify-between items-center relative z-10">
-                                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Bakiyem</span>
-                                <div className="h-5 w-5 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-3 h-3"><path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" /></svg>
-                                </div>
-                            </div>
-                            <div className="flex items-baseline gap-1 relative z-10">
-                                <span className="text-2xl font-mono font-bold text-white">
-                                  {isLoadingTokenBalance ? "..." : (tokenBalance ?? session?.user?.tokenBalance ?? 0)}
-                                </span>
-                                <span className="text-xs text-slate-500 font-sans font-medium">Token</span>
-                            </div>
-                            <Link href="/paketler-ucretler" onClick={() => setIsProfileOpen(false)} className="mt-1 flex items-center justify-center gap-1.5 w-full py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 text-white text-[11px] font-bold transition-all shadow-lg shadow-cyan-900/20 active:scale-[0.98]">
-                              <Icons.Plus />
-                              Bakiye Yükle
-                            </Link>
-                        </div>
-                      </div>
-                      <div className="p-1.5 pb-2">
-                        <Link href="/profilim" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">
-                          <span className="text-slate-400"><Icons.User /></span>
-                          Profilim & Ayarlar
+
+                      {/* token bakiye */}
+                      <div className="border-b border-slate-700/60 px-4 py-3.5">
+                        <p className="text-[11px] font-semibold uppercase tracking-widest text-slate-500">Bakiyem</p>
+                        <p className="mt-1 text-2xl font-bold text-white">
+                          {isLoadingTokenBalance ? "…" : (tokenBalance ?? session?.user?.tokenBalance ?? 0)}
+                          <span className="ml-1 text-sm font-normal text-slate-400">token</span>
+                        </p>
+                        <Link
+                          href="/paketler-ucretler"
+                          onClick={() => setProfileOpen(false)}
+                          className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-700/70 py-2 text-xs font-semibold text-slate-100 transition-colors hover:bg-slate-600 hover:text-white"
+                        >
+                          <IcoPlus /> Token Yükle
                         </Link>
-                        <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs font-medium text-red-400 hover:text-red-300 hover:bg-red-500/10 transition-colors text-left">
-                          <span className="text-red-400/80"><Icons.Logout /></span>
-                          Çıkış Yap
-                        </button>
                       </div>
-                    </div>
+
+                      {/* aksiyonlar */}
+                      <div className="py-1">
+                        <MenuItem href="/profilim" onClick={() => setProfileOpen(false)}>
+                          <IcoUser /> Profilim &amp; Ayarlar
+                        </MenuItem>
+                        <MenuItem onClick={async () => { setProfileOpen(false); await signOut({ callbackUrl: "/cikis" }); }} danger>
+                          <IcoLogout /> Çıkış Yap
+                        </MenuItem>
+                      </div>
+                    </Menu>
                   )}
                 </div>
               </>
-            ) : (
-              <button onClick={() => signIn(undefined, { callbackUrl: "/profilim" })} className="hidden sm:block px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500 to-pink-600 text-white text-xs font-bold shadow-md shadow-orange-900/20 hover:shadow-orange-500/30 hover:scale-105 active:scale-95 transition-all duration-300">Giriş</button>
-            )) : authButtonsPlaceholder}
+            )}
 
-            {/* --- HAMBURGER MENU BUTTON (MOBILE ONLY) --- */}
-            <button 
+            {/* ---- oturum kapalı ---- */}
+            {isMounted && status !== "loading" && !session && (
+              <button
+                onClick={() => signIn(undefined, { callbackUrl: "/profilim" })}
+                className="hidden rounded-lg bg-white px-4 py-1.5 text-[13px] font-semibold text-slate-900 transition-all hover:bg-slate-100 active:scale-95 sm:block"
+              >
+                Giriş Yap
+              </button>
+            )}
+
+            </div>
+            {/* ── AUTH ALANI sonu ── */}
+
+            {/* Hamburger (mobile) */}
+            <button
               type="button"
-              onClick={() => setIsMobileMenuOpen(true)} 
-              aria-label="Mobil menüyü aç"
-              className="md:hidden p-1 text-slate-300 hover:text-white transition-colors ml-1"
+              onClick={() => setMobileOpen(true)}
+              aria-label="Menüyü aç"
+              className="ml-1 flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/[0.06] hover:text-white md:hidden"
             >
-              <Icons.Hamburger />
+              <IcoMenu />
             </button>
-
           </div>
         </div>
       </header>

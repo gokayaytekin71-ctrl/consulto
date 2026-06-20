@@ -38,7 +38,7 @@ export default function CalismaAlaniPage() {
   const useMobile = hasMounted && isMobile;
 
   return (
-    <div className="h-screen overflow-hidden bg-slate-100 text-slate-900 font-sans">
+    <div className="h-[calc(100vh-4rem)] overflow-hidden workspace-bg text-slate-900 font-sans">
       <div className="flex h-full">
         {/* Sol Panel — yalnızca masaüstünde sütun olarak */}
         {!useMobile && vm.sidebarOpen && <DocumentSidebar vm={vm} />}

@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import Script from "next/script";
 import dynamic from "next/dynamic";
 import DecisionCard from "@/components/DecisionCard";
+
 import { getAllPosts } from "@/lib/blog";
 
 const HomeWorkspace = dynamic(() => import("@/components/HomeWorkspace"), {
@@ -67,6 +68,136 @@ export const runtime = "nodejs";
 // arka planda yenileniyor, ziyaretçiler cache'den anında alıyor.
 export const revalidate = 60;
  
+/* =============================================================================
+   ÜRÜN MOCKUP — hero sağ kolonu (server component, saf HTML/CSS)
+   ============================================================================= */
+function ProductMockup() {
+  return (
+    <div className="relative">
+      {/* arka ışık */}
+      <div className="pointer-events-none absolute -inset-8 rounded-[3rem] bg-gradient-to-br from-blue-500/20 via-cyan-300/12 to-violet-400/18 blur-3xl" />
+
+      {/* Canlı Demo etiketi — üst sol */}
+      <div className="absolute -top-4 left-5 z-10 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-3.5 py-1.5 shadow-[0_4px_16px_rgba(37,99,235,0.40)]">
+        <span className="relative flex h-1.5 w-1.5">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-80" />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
+        </span>
+        <span className="text-[11px] font-black uppercase tracking-[0.14em] text-white">Canlı Demo</span>
+      </div>
+
+      {/* Yanıt süresi — sağ üst */}
+      <div className="absolute -top-4 -right-4 z-10 flex items-center gap-2 rounded-2xl border border-slate-100 bg-white px-3.5 py-2 shadow-[0_8px_24px_-4px_rgba(2,42,92,0.18)]">
+        <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-base">⚡</span>
+        <div>
+          <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Yanıt süresi</div>
+          <div className="text-sm font-black text-slate-800">2.3 sn</div>
+        </div>
+      </div>
+
+      {/* kart */}
+      <div className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-[0_32px_80px_-20px_rgba(2,42,92,0.30),0_0_0_1px_rgba(37,99,235,0.06)]">
+
+        {/* tarayıcı chrome */}
+        <div className="flex items-center gap-2 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white px-4 py-3">
+          <div className="flex gap-1.5">
+            <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+          </div>
+          <div className="ml-3 flex flex-1 items-center gap-1.5 rounded-md border border-slate-100 bg-white px-3 py-1 shadow-sm">
+            <svg className="h-2.5 w-2.5 text-emerald-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <span className="text-[11px] text-slate-400">consultohukuk.com/calisma-alani</span>
+          </div>
+        </div>
+
+        {/* sohbet alanı */}
+        <div className="space-y-3.5 overflow-hidden p-4">
+
+          {/* dosya chip */}
+          <div className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-gradient-to-r from-slate-50 to-white px-3 py-2 shadow-sm">
+            <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-red-50">
+              <svg className="h-3.5 w-3.5 text-red-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+            <span className="text-xs font-semibold text-slate-700">iddianame.pdf</span>
+            <span className="text-xs text-slate-400">· Analiz edildi</span>
+            <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700">✓</span>
+          </div>
+
+          {/* kullanıcı mesajı */}
+          <div className="flex justify-end">
+            <div className="max-w-[88%] rounded-2xl rounded-tr-sm bg-gradient-to-br from-blue-600 to-blue-500 px-4 py-2.5 text-sm font-medium text-white shadow-[0_4px_16px_rgba(37,99,235,0.35)]">
+              Dosyada kast unsuru yeterince kanıtlanmış mı?
+            </div>
+          </div>
+
+          {/* AI yanıtı — workspace chat stili */}
+          <div className="rounded-3xl border border-slate-200 bg-white px-4 py-3 text-[12px] leading-6 text-slate-800 shadow-sm">
+            <p className="mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400">3 kritik eksiklik tespit edildi</p>
+            <ul className="space-y-1.5">
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-500" />
+                <span className="text-slate-600">Sanığın bilgisi gösterilmemiş</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" />
+                <span className="text-slate-600">Tutanaklar ihmali işaret ediyor</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
+                <span className="text-slate-600">Şüpheden sanık yararlanır → güçlü argüman</span>
+              </li>
+            </ul>
+
+            {/* emsal karar kartı */}
+            <div className="mt-3 rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-white px-3 py-2.5">
+              <div className="flex items-start gap-2.5">
+                <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-blue-700 to-blue-500 text-[9px] font-black text-white shadow-sm">YG</div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-blue-600">Emsal Karar</span>
+                    <span className="rounded-full bg-blue-100 px-1.5 py-px text-[9px] font-bold text-blue-700">CGK</span>
+                  </div>
+                  <div className="text-xs font-semibold text-slate-800">Yargıtay · 2023/421 K.</div>
+                  <div className="mt-0.5 truncate text-[11px] text-slate-400">&ldquo;Kastın ispatı için sanığın fiili bilgisi...&rdquo;</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* input bar */}
+        <div className="border-t border-slate-100 bg-gradient-to-r from-slate-50/60 to-white px-4 py-3">
+          <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 shadow-sm">
+            <svg className="h-3.5 w-3.5 flex-shrink-0 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+            </svg>
+            <span className="flex-1 text-sm text-slate-400">Dosya hakkında sorun…</span>
+            <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-sm">
+              <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Dilekçe hazırlandı — sol alt */}
+      <div className="absolute -bottom-5 left-4 flex items-center gap-2 rounded-2xl border border-slate-100 bg-white px-4 py-2.5 shadow-[0_8px_24px_-4px_rgba(2,42,92,0.16)]">
+        <span className="flex h-2 w-2">
+          <span className="absolute inline-flex h-2 w-2 animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+        </span>
+        <span className="text-sm font-bold text-slate-700">Dilekçe hazırlandı</span>
+      </div>
+    </div>
+  );
+}
+
 /* =============================================================================
    GLOBAL STİL — Açık / sinematik aydınlık tema (server-safe)
    ============================================================================= */
@@ -264,87 +395,82 @@ export default async function Home() {
       </div>
  
       {/* =====================================================================
-          1. HERO
+          1. HERO — split: sol metin + arama inputu, sağ ürün mockupu
          ===================================================================== */}
-      <section className="relative isolate px-4 pt-20 pb-16 md:pt-28 md:pb-20">
-        {/* spotlight */}
-        <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.22),transparent_60%)] blur-2xl" />
-        {/* floating dots */}
-        <div className="float-y pointer-events-none absolute left-[12%] top-[30%] h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_20px_4px_rgba(34,211,238,0.6)]" />
-        <div className="float-y pointer-events-none absolute right-[14%] top-[24%] h-1.5 w-1.5 rounded-full bg-violet-400 shadow-[0_0_18px_4px_rgba(167,139,250,0.6)]" style={{ animationDelay: "1.5s" }} />
-        <div className="float-y pointer-events-none absolute right-[26%] bottom-[18%] h-1.5 w-1.5 rounded-full bg-blue-400 shadow-[0_0_18px_4px_rgba(96,165,250,0.6)]" style={{ animationDelay: "2.5s" }} />
- 
-        <div className="mx-auto max-w-4xl text-center">
-          <div className="anim-up mb-7 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/90 px-4 py-2 shadow-sm">
-            <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-400">
-              <svg className="h-3 w-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-            </span>
-            <span className="text-xs font-bold tracking-wide text-slate-600">Milyonlarca Yargıtay kararıyla eğitildi</span>
-          </div>
- 
-          <h1 className="text-5xl font-black leading-[1.04] tracking-tighter text-[#002a5c] md:text-7xl">
-            Hukukçular İçin
-            <br className="hidden sm:block" />{" "}
-            <span className="text-blue-600">Yapay Zeka Destekli Araştırma ve Dilekçe Asistanı</span>
-          </h1>
- 
-          <p className="anim-up mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed text-slate-500 md:text-xl" style={{ animationDelay: ".16s" }}>
-            Consülto; Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma, dosya analizi ve hesaplama araçlarını tek çalışma alanında birleştirir.
-          </p>
- 
-          <div className="anim-up mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row" style={{ animationDelay: ".24s" }}>
-            <Link href="/bot" className="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 px-8 py-4 text-lg font-bold text-white shadow-[0_10px_40px_-8px_rgba(34,211,238,0.55)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_50px_-8px_rgba(34,211,238,0.7)] sm:w-auto">
-              <span className="relative flex items-center justify-center gap-2">
-                Gelişmiş Yapay Zekasını &amp; Hemen Dene
-                <svg className="h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" /></svg>
-              </span>
-            </Link>
-            <Link href="/akilli-arama" className="grad-border w-full rounded-2xl bg-white px-8 py-4 font-bold text-[#002a5c] shadow-sm transition-all duration-300 hover:-translate-y-1 sm:w-auto">
-              <span className="flex items-center justify-center gap-2">
-                <svg className="h-5 w-5 text-cyan-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-                Semantik Karar Arama
-              </span>
-            </Link>
-          </div>
- 
-          <p className="anim-up mt-5 text-sm font-medium text-slate-500" style={{ animationDelay: ".3s" }}>
-            <span className="font-bold text-emerald-600">2 token ücretsiz</span> · Aylık ödeme yok · Tokenler asla silinmez
-          </p>
+      <section className="relative isolate px-4 pt-14 pb-10 md:pt-20 md:pb-14">
+        <div className="pointer-events-none absolute left-1/3 top-0 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.18),transparent_65%)] blur-2xl" />
 
-          <div className="anim-up mt-7 flex justify-center" style={{ animationDelay: ".34s" }}>
-            <a
-              href="#canli-demo"
-              data-start-home-tour="true"
-              className="group inline-flex items-center gap-3 rounded-full border border-slate-200/80 bg-white/90 px-5 py-3 text-sm font-bold text-slate-600 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-cyan-300 hover:bg-white hover:text-[#002a5c] hover:shadow-[0_18px_40px_-22px_rgba(6,182,212,0.75)]"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-cyan-50 text-cyan-600 transition-all duration-300 group-hover:bg-cyan-500 group-hover:text-white">
-                <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </span>
-              Aşağı kaydır, canlı demoyu gör
-            </a>
-          </div>
- 
-          {/* stats */}
-          <div className="anim-up mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4" style={{ animationDelay: ".36s" }}>
-            {[
-              { val: "1M+", label: "Yargıtay Kararı", cls: "text-cyan-600" },
-              { val: "6", label: "Çalışma Modu", cls: "text-blue-600" },
-              { val: "2 dk", label: "Dilekçe Süresi", cls: "text-violet-600" },
-              { val: "∞", label: "Çalışma Alanı", cls: "text-emerald-600" },
-            ].map((s) => (
-              <div key={s.label} className="grad-border rounded-2xl bg-white/90 px-4 py-4 shadow-sm">
-                <div className={`text-3xl font-black ${s.cls}`}>{s.val}</div>
-                <div className="mt-1 text-[10px] font-black uppercase tracking-widest text-slate-400">{s.label}</div>
+        <div className="mx-auto max-w-7xl">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_460px] lg:gap-16">
+
+            {/* ---- SOL KOLON ---- */}
+            <div>
+              <div className="mb-6 inline-flex items-center gap-2.5 rounded-full border border-slate-200/70 bg-white/90 px-4 py-2 shadow-sm">
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-cyan-400">
+                  <svg className="h-3 w-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                </span>
+                <span className="text-xs font-bold tracking-wide text-slate-600">Milyonlarca Yargıtay kararıyla eğitildi</span>
               </div>
-            ))}
+
+              <h1 className="text-4xl font-black leading-[1.05] tracking-tighter text-[#002a5c] sm:text-5xl lg:text-6xl">
+                Hukukçular İçin<br />
+                <span className="text-blue-600">Yapay Zeka Destekli</span><br />
+                Araştırma ve Dilekçe<br className="hidden sm:block" /> Asistanı
+              </h1>
+
+              <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-slate-500">
+                Dosyanı yükle, soruyu sor — Yargıtay emsalleriyle desteklenen analiz ve dilekçe{" "}
+                <span className="font-bold text-slate-700">dakikalar içinde</span> hazır.
+              </p>
+
+              {/* CTA butonları */}
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="/calisma-alani"
+                  className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-6px_rgba(37,99,235,0.65)]"
+                >
+                  Dosya Analiz Et
+                  <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+                <Link
+                  href="/dilekce"
+                  className="inline-flex items-center gap-2.5 rounded-xl border border-slate-200 bg-white px-6 py-3.5 text-sm font-bold text-slate-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-blue-200 hover:shadow-md"
+                >
+                  Dilekçe Hazırla
+                </Link>
+              </div>
+
+              <p className="mt-4 text-sm font-medium text-slate-500">
+                <span className="font-bold text-emerald-600">2 token ücretsiz</span> · Aylık ödeme yok · Tokenler asla silinmez
+              </p>
+
+              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
+                {[
+                  { val: "1M+", label: "Yargıtay Kararı", cls: "text-cyan-600" },
+                  { val: "6",   label: "Çalışma Modu",    cls: "text-blue-600" },
+                  { val: "2 dk", label: "Dilekçe Süresi", cls: "text-violet-600" },
+                  { val: "∞",   label: "Çalışma Alanı",   cls: "text-emerald-600" },
+                ].map((s) => (
+                  <div key={s.label}>
+                    <div className={`text-2xl font-black ${s.cls}`}>{s.val}</div>
+                    <div className="mt-0.5 text-[10px] font-black uppercase tracking-widest text-slate-400">{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* ---- SAĞ KOLON: ürün mockupu ---- */}
+            <div className="hidden lg:block">
+              <ProductMockup />
+            </div>
           </div>
         </div>
- 
-        {/* gündem ticker */}
+
+        {/* gündem ticker — tam genişlik */}
         {gundemTexts.length > 0 && (
-          <div className="mx-auto mt-12 max-w-6xl overflow-hidden rounded-2xl border border-slate-200/60 bg-white/90 shadow-sm">
+          <div className="mx-auto mt-14 max-w-6xl overflow-hidden rounded-2xl border border-slate-200/60 bg-white/90 shadow-sm">
             <div className="flex items-center">
               <div className="flex flex-shrink-0 items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-500 px-5 py-3 text-[11px] font-black uppercase tracking-widest text-white">
                 <span className="relative flex h-2 w-2">
@@ -381,7 +507,7 @@ export default async function Home() {
             Anlatmıyoruz, <span className="text-shine">gösteriyoruz</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl font-medium text-slate-500 md:text-lg">
-            Aşağıdaki ekran demo değil — uygulamanın ta kendisi. Yukarıdaki çağrıdan gelirsen, daha önce izlemediysen tur tek seferlik otomatik başlar.
+            Aşağıdaki ekran demo değil — uygulamanın ta kendisi. İlk kez deneyenlere tur otomatik başlar.
           </p>
         </div>
  

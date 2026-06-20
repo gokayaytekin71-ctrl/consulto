@@ -13,7 +13,6 @@ export default function WorkspaceHeader({ vm }) {
     activeWorkspaceId, setActiveWorkspaceId,
     openDeleteWorkspaceModal,
     setIsCreateWorkspaceModalOpen,
-    isHeaderHidden, setIsHeaderHidden,
     tokenBalance,
     currentMessageTokenCost,
     isLoadingTokenBalance,
@@ -56,7 +55,7 @@ export default function WorkspaceHeader({ vm }) {
             }`}
           >
             <div className="flex items-center gap-3 min-w-0">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-slate-950 text-white shadow-sm">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-700 to-slate-900 text-white shadow-[0_2px_8px_rgba(29,78,216,0.35)]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
                 </svg>
@@ -193,26 +192,15 @@ export default function WorkspaceHeader({ vm }) {
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsHeaderHidden((prev) => !prev)}
-          className={`hidden shrink-0 items-center gap-2 rounded-[1.15rem] border px-3.5 py-2.5 text-[10px] font-black uppercase tracking-[0.16em] shadow-sm transition-all hover:-translate-y-0.5 xl:flex ${
-            isHeaderHidden
-              ? "border-slate-900 bg-slate-950 text-white hover:bg-slate-800"
-              : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
-          }`}
-          title={isHeaderHidden ? "Global header'ı göster" : "Global header'ı gizle"}
-        >
-          <span className={`h-1.5 w-1.5 rounded-full ${isHeaderHidden ? "bg-emerald-400" : "bg-slate-300"}`} />
-          {isHeaderHidden ? "Header Göster" : "Header Gizle"}
-        </button>
 
       </div>
 
       <div className="ml-4 hidden shrink-0 items-center gap-2 xl:flex">
-        <div className={`flex items-center gap-2 rounded-[1.15rem] border px-3 py-2 text-[11px] font-black shadow-sm ${Number.isFinite(Number(tokenBalance)) && Number(tokenBalance) < currentMessageTokenCost ? "border-red-200 bg-red-50 text-red-700" : "border-emerald-200 bg-emerald-50 text-emerald-700"}`}>
-          <span className="h-1.5 w-1.5 rounded-full bg-current" />
-          {isLoadingTokenBalance ? "Token yükleniyor" : `Token: ${Number.isFinite(Number(tokenBalance)) ? tokenBalance : "-"}`}
+        <div className={`flex items-center gap-2 rounded-2xl border px-3.5 py-2 text-[11px] font-black shadow-sm ${Number.isFinite(Number(tokenBalance)) && Number(tokenBalance) < currentMessageTokenCost ? "border-red-200 bg-red-50 text-red-600" : "border-emerald-200/70 bg-gradient-to-r from-emerald-50 to-teal-50 text-emerald-700"}`}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13 2L4.09 13H12L11 22L19.91 11H13L13 2Z" />
+          </svg>
+          {isLoadingTokenBalance ? "Yükleniyor…" : `${Number.isFinite(Number(tokenBalance)) ? tokenBalance : "–"} token`}
         </div>
 
         <div className="flex items-center rounded-[1.4rem] border border-slate-200 bg-white px-2 py-1.5 shadow-sm">

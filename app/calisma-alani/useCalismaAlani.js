@@ -24,7 +24,7 @@ import {
 export default function useCalismaAlani() {
   const [activeWorkspaceId, setActiveWorkspaceId] = useState(null);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [isHeaderHidden, setIsHeaderHidden] = useState(true);
+
   const [input, setInput] = useState("");
   const [newNoteText, setNewNoteText] = useState("");
   const [fileNoteDrafts, setFileNoteDrafts] = useState({});
@@ -206,15 +206,6 @@ export default function useCalismaAlani() {
     };
   }, [selectedChatText]);
 
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-
-    document.body.classList.toggle("calisma-global-header-hidden", isHeaderHidden);
-
-    return () => {
-      document.body.classList.remove("calisma-global-header-hidden");
-    };
-  }, [isHeaderHidden]);
 
   useEffect(() => {
     refreshTokenBalance();
@@ -2115,7 +2106,7 @@ async function confirmDeleteWorkspace() {
     hasMounted, isMobile,
     mobileTab, setMobileTab,
     mobileSidebarOpen, setMobileSidebarOpen,
-    isHeaderHidden, setIsHeaderHidden,
+
     input, setInput,
     newNoteText, setNewNoteText,
     fileNoteDrafts, setFileNoteDrafts,

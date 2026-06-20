@@ -77,7 +77,7 @@ export default function RootLayout({ children }) {
           <AuthProvider>
             <ActivityTracker />
             <Header />
-            <main className="flex-1 pt-24">{children}</main>
+            <main className="flex-1 pt-16">{children}</main>
             <Footer />
           </AuthProvider>
         </ThemeProvider>
