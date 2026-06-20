@@ -2,7 +2,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import AuthProvider from "@/components/AuthProvider";
 import ActivityTracker from "@/components/ActivityTracker";
-import Footer from "@/components/Footer";
+import ConditionalFooter from "@/components/ConditionalFooter";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -78,7 +78,7 @@ export default function RootLayout({ children }) {
             <ActivityTracker />
             <Header />
             <main className="flex-1 pt-16">{children}</main>
-            <Footer />
+            <ConditionalFooter />
           </AuthProvider>
         </ThemeProvider>
 

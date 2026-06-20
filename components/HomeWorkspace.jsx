@@ -1617,7 +1617,7 @@ useEffect(() => {
                   <div className="flex min-w-0 flex-1 flex-col">
                     <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 bg-slate-50/50 px-3.5 py-3.5 sm:px-5">
                       <div className="min-w-0">
-                        <h3 className="text-sm font-black text-slate-900">Çalışma Alanı</h3>
+                        <h3 className="text-sm font-black text-slate-900">Hukuk Chat</h3>
                         <p className="truncate text-[11px] font-medium text-slate-500 mt-0.5">Soru-cevap alanı</p>
                       </div>
                       <div className="flex min-w-0 items-center gap-2" ref={modeMenuRef}>
