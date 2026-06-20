@@ -343,13 +343,13 @@ export default function AnalysisPage() {
           <div className="flex flex-col gap-5 pb-16">
 
             {/* Soru Alanı — "danışma masası" */}
-            <PremiumCard isDarkMode={isDarkMode} eyebrow="Danışma" title="Hukuki Mesele" icon={icons.scale}>
+            <PremiumCard isDarkMode={isDarkMode} eyebrow="Akademisyen Titizliğinde" title="Analiz Raporları" icon={icons.scale}>
               <form onSubmit={handleAnalyze} className="relative">
                 <textarea
                   disabled={isLoading}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Hukuki meseleyi, dava türünü ve delil durumunu buraya detaylıca yazın…"
+                  placeholder="Hukuki meseleyi, analiz raporu istenen hususu veya uyuşmazlığı buraya detaylıca yazınız…"
                   className={`w-full rounded-xl p-4 min-h-[130px] text-sm leading-relaxed border transition-all resize-y max-h-[40vh] md:max-h-none focus:outline-none focus:ring-2
                     ${isDarkMode
                       ? "bg-[#0D1322] border-white/10 text-slate-200 placeholder:text-slate-600 focus:border-amber-400/40 focus:ring-amber-400/10"

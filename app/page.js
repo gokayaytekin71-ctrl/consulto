@@ -83,7 +83,7 @@ function ProductMockup() {
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-80" />
           <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-white" />
         </span>
-        <span className="text-[11px] font-black uppercase tracking-[0.14em] text-white">Canlı Demo</span>
+        <span className="text-[11px] font-black uppercase tracking-[0.14em] text-white">Hukuk AI Chat</span>
       </div>
 
       {/* Yanıt süresi — sağ üst */}
@@ -91,7 +91,7 @@ function ProductMockup() {
         <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-50 text-base">⚡</span>
         <div>
           <div className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">Yanıt süresi</div>
-          <div className="text-sm font-black text-slate-800">2.3 sn</div>
+          <div className="text-sm font-black text-slate-800">53 sn</div>
         </div>
       </div>
 
@@ -123,7 +123,7 @@ function ProductMockup() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
-            <span className="text-xs font-semibold text-slate-700">iddianame.pdf</span>
+            <span className="text-xs font-semibold text-slate-700">Kira Sözleşmesi.pdf</span>
             <span className="text-xs text-slate-400">· Analiz edildi</span>
             <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[10px] font-bold text-emerald-700">✓</span>
           </div>
@@ -131,25 +131,21 @@ function ProductMockup() {
           {/* kullanıcı mesajı */}
           <div className="flex justify-end">
             <div className="max-w-[88%] rounded-2xl rounded-tr-sm bg-gradient-to-br from-blue-600 to-blue-500 px-4 py-2.5 text-sm font-medium text-white shadow-[0_4px_16px_rgba(37,99,235,0.35)]">
-              Dosyada kast unsuru yeterince kanıtlanmış mı?
+              Kira sözleşmesinde kiralayan lehine olan unsurlar neler?
             </div>
           </div>
 
           {/* AI yanıtı — workspace chat stili */}
           <div className="rounded-3xl border border-slate-200 bg-white px-4 py-3 text-[12px] leading-6 text-slate-800 shadow-sm">
-            <p className="mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400">3 kritik eksiklik tespit edildi</p>
+            <p className="mb-2 text-[10px] font-black uppercase tracking-widest text-slate-400">Sayın Avukat, kiralayan lehine öne çıkan hukuki argümanlar:</p>
             <ul className="space-y-1.5">
               <li className="flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-red-500" />
-                <span className="text-slate-600">Sanığın bilgisi gösterilmemiş</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-amber-500" />
-                <span className="text-slate-600">Tutanaklar ihmali işaret ediyor</span>
+                <span className="text-slate-600">Sözleşmenin özel şartlarında yer alan uzama hükmü geçersizdir.TBK m. 347’nin emredici düzenlemesine aykırı olacak şekilde yorumlanamaz. Bu nedenle sözleşme kanun gereği ancak 1 yıl süreyle uzamış sayılır.</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-emerald-500" />
-                <span className="text-slate-600">Şüpheden sanık yararlanır → güçlü argüman</span>
+                <span className="text-slate-600">Sözleşmede kiralayanın yazılı izni olmaksızın tadilat yapılamayacağı düzenlenmiş olup, kiracının müdahaleleri sözleşmeye aykırıdır.</span>
               </li>
             </ul>
 
@@ -160,10 +156,10 @@ function ProductMockup() {
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
                     <span className="text-[10px] font-black uppercase tracking-wider text-blue-600">Emsal Karar</span>
-                    <span className="rounded-full bg-blue-100 px-1.5 py-px text-[9px] font-bold text-blue-700">CGK</span>
+                    <span className="rounded-full bg-blue-100 px-1.5 py-px text-[9px] font-bold text-blue-700">5. Hukuk Dairesi</span>
                   </div>
-                  <div className="text-xs font-semibold text-slate-800">Yargıtay · 2023/421 K.</div>
-                  <div className="mt-0.5 truncate text-[11px] text-slate-400">&ldquo;Kastın ispatı için sanığın fiili bilgisi...&rdquo;</div>
+                  <div className="text-xs font-semibold text-slate-800">Yargıtay · 2023/150 Esas 2024/100 K.</div>
+                  <div className="mt-0.5 truncate text-[11px] text-slate-400">&ldquo;TBK m. 347'nin emredici niteliği gözetildiğinde...&rdquo;</div>
                 </div>
               </div>
             </div>
@@ -176,7 +172,7 @@ function ProductMockup() {
             <svg className="h-3.5 w-3.5 flex-shrink-0 text-slate-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
             </svg>
-            <span className="flex-1 text-sm text-slate-400">Dosya hakkında sorun…</span>
+            <span className="flex-1 text-sm text-slate-400">Hukuki soru sorun…</span>
             <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 text-white shadow-sm">
               <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -419,8 +415,8 @@ export default async function Home() {
               </h1>
 
               <p className="mt-5 max-w-xl text-lg font-medium leading-relaxed text-slate-500">
-                Dosyanı yükle, soruyu sor — Yargıtay emsalleriyle desteklenen analiz ve dilekçe{" "}
-                <span className="font-bold text-slate-700">dakikalar içinde</span> hazır.
+                Hukuk Chat'e istediğin hukuki soruyu sor, Uyuşmazlıkla ilgili Yargıtay Kararı arattır, dilekçe yazdır.{" "}
+                <span className="font-bold text-slate-700">En ucuza en iyi hukuk yapay zekası.</span>
               </p>
 
               {/* CTA butonları */}
@@ -429,7 +425,7 @@ export default async function Home() {
                   href="/calisma-alani"
                   className="inline-flex items-center gap-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-500 px-6 py-3.5 text-sm font-bold text-white shadow-[0_8px_28px_-6px_rgba(37,99,235,0.55)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-6px_rgba(37,99,235,0.65)]"
                 >
-                  Dosya Analiz Et
+                  Hukuk Chat
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
@@ -443,15 +439,15 @@ export default async function Home() {
               </div>
 
               <p className="mt-4 text-sm font-medium text-slate-500">
-                <span className="font-bold text-emerald-600">2 token ücretsiz</span> · Aylık ödeme yok · Tokenler asla silinmez
+                <span className="font-bold text-emerald-600">2 token ücretsiz</span> · Hemen Dene · Yapay Zeka Avukat Uygulaması ·
               </p>
 
               <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
                 {[
-                  { val: "1M+", label: "Yargıtay Kararı", cls: "text-cyan-600" },
+                  { val: "7M+", label: "Yargıtay Kararı", cls: "text-cyan-600" },
                   { val: "6",   label: "Çalışma Modu",    cls: "text-blue-600" },
                   { val: "2 dk", label: "Dilekçe Süresi", cls: "text-violet-600" },
-                  { val: "∞",   label: "Çalışma Alanı",   cls: "text-emerald-600" },
+                  { val: "∞",   label: "Hukuki Sohbet",   cls: "text-emerald-600" },
                 ].map((s) => (
                   <div key={s.label}>
                     <div className={`text-2xl font-black ${s.cls}`}>{s.val}</div>

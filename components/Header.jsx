@@ -21,7 +21,7 @@ const IcoDot     = ({ className = "" }) => <span className={`h-1.5 w-1.5 rounded
 const NAV_MAIN = [
   { label: "Kararlar",      path: "/kararlar" },
   { label: "Dilekçe",       path: "/dilekce" },
-  { label: "Çalışma Alanı", path: "/calisma-alani", badge: "Yeni" },
+  { label: "Çalışma Alanı", path: "/calisma-alani", badge: "Chat" },
   { label: "Analiz",        path: "/bot" },
   { label: "Blog",          path: "/blog", matchPrefix: true },
   { label: "Paketler",      path: "/paketler-ucretler" },

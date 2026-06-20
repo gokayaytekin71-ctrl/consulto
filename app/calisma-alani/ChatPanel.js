@@ -38,7 +38,7 @@ export default function ChatPanel({ vm }) {
   return (
     <WorkspacePanel
       id="chat"
-      title="Çalışma Alanı"
+      title="Hukuk Chat"
       subtitle="Soru-cevap alanı"
       setActivePanel={setActivePanel}
       actions={
