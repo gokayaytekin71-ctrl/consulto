@@ -65,6 +65,7 @@ model User {
   folders            Folder[]
   hearings           Hearing[]
   notes              Note[]
+  notlarimDefter     NotlarimDefter?
   Payment            Payment[]
   sessions           Session[]
   tasks              Task[]
@@ -431,6 +432,16 @@ model Payment {
   status      String   @default("PENDING")
   createdAt   DateTime @default(now())
   User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model NotlarimDefter {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  data      Json
+  updatedAt DateTime @default(now()) @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 model TokenUsage {

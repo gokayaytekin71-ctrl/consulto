@@ -34,6 +34,7 @@ const NAV_MORE = [
   { label: "Mevzuat",       path: "/mevzuat" },
   { label: "Makaleler",     path: "/makaleler" },
   { label: "Resmî Gazete",  path: "/gazete" },
+  { label: "Notlarım",      path: "/notlarim" },
 ];
 
 /* ─── mini dropdown kapsayıcı ─── */

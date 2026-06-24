@@ -458,7 +458,7 @@ export default async function Home() {
             </div>
 
             {/* ---- SAĞ KOLON: ürün mockupu ---- */}
-            <div className="hidden lg:block">
+            <div className="lg:block">
               <ProductMockup />
             </div>
           </div>
@@ -490,7 +490,7 @@ export default async function Home() {
       {/* =====================================================================
           2. CANLI ÜRÜN GÖSTERİMİ — HomeWorkspace, parlayan monitör içinde
          ===================================================================== */}
-      <section id="canli-demo" className="relative scroll-mt-24 px-4 pb-8 md:pb-14">
+      <section id="canli-demo" className="relative hidden scroll-mt-24 px-4 pb-8 md:block md:pb-14">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-300/60 bg-amber-50 px-4 py-2">
             <span className="relative flex h-2 w-2">
