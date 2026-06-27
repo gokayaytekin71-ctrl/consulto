@@ -84,23 +84,33 @@ function AddStatuteForm({ form, setForm, onAdd, onCancel }) {
 
 export default function MevzuatPanel({ vm }) {
   const {
-    statutes,
+    activeStatutes: statutes,
     showStatuteForm, setShowStatuteForm,
     statuteForm, setStatuteForm,
     handleAddStatute, handleDeleteStatute,
+    setExpandedPanel,
   } = vm;
 
   const addButton = (
-    <button
-      type="button"
-      onClick={() => setShowStatuteForm(true)}
-      className="flex items-center gap-1.5 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-[10px] font-black text-indigo-700 transition-all hover:bg-indigo-100 hover:-translate-y-0.5"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-      </svg>
-      Ekle
-    </button>
+    <div className="flex items-center gap-2">
+      <button
+        type="button"
+        onClick={() => setShowStatuteForm(true)}
+        className="flex items-center gap-1.5 rounded-xl border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-[10px] font-black text-indigo-700 transition-all hover:bg-indigo-100 hover:-translate-y-0.5"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
+        Ekle
+      </button>
+      <button
+        type="button"
+        onClick={() => setExpandedPanel("mevzuat")}
+        className="rounded-xl border border-slate-200/80 bg-white px-3 py-1.5 text-[10px] font-black text-slate-500 shadow-sm transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+      >
+        Büyüt
+      </button>
+    </div>
   );
 
   return (

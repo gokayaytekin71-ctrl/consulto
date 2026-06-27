@@ -28,14 +28,16 @@ import CreateWorkspaceModal from "./CreateWorkspaceModal";
 import FocusModal from "./FocusModal";
 import UploadPerspectiveModal from "./UploadPerspectiveModal";
 import WorkspaceStyles from "./WorkspaceStyles";
+import DilekceDrawerPanel from "./DilekceDrawerPanel";
 
 export default function CalismaAlaniPage() {
   const vm = useCalismaAlani();
-  const { visiblePanels, hasMounted, isMobile, mobileTab } = vm;
+  const { visiblePanels, hasMounted, isMobile, mobileTab, dilekceDrawerOpen, workspaceMode } = vm;
 
   // SSR + ilk client render'da masaüstü düzeni gösterilir (hydration güvenliği),
   // mount sonrası gerçek ekran genişliğine göre mobil düzene geçilir.
   const useMobile = hasMounted && isMobile;
+  const isPetitionDesk = workspaceMode === "petition_draft";
 
   return (
     <div className="h-[calc(100vh-4rem)] overflow-hidden workspace-bg text-slate-900 font-sans">
@@ -56,15 +58,28 @@ export default function CalismaAlaniPage() {
                   {mobileTab === "decisions" && <DecisionsPanel vm={vm} />}
                   {mobileTab === "statutes" && <StatutesPanel vm={vm} />}
                   {mobileTab === "notes" && <NotesPanel vm={vm} />}
+                  {mobileTab === "dilekce" && workspaceMode === "petition_draft" && (
+                    <DilekceDrawerPanel vm={{ ...vm, setDilekceDrawerOpen: () => vm.setMobileTab("chat") }} />
+                  )}
                 </div>
               </section>
               <MobileTabBar vm={vm} />
             </>
+          ) : isPetitionDesk ? (
+            <section className="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-hidden p-4 xl:grid-cols-12">
+              <div className="min-h-0 xl:col-span-4">
+                <ChatPanel vm={vm} />
+              </div>
+              <div className="min-h-0 xl:col-span-8">
+                <DilekceDrawerPanel vm={vm} />
+              </div>
+            </section>
           ) : (
             /* ---------- MASAÜSTÜ: çok sütunlu grid ---------- */
             <section className="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-hidden p-4 xl:grid-cols-12">
+              {/* Chat + Dilekçe çekmecesi yan yana */}
               <div
-                className={`min-h-0 ${
+                className={`min-h-0 flex gap-4 ${
                   visiblePanels.decisions || visiblePanels.statutes || visiblePanels.notes
                     ? visiblePanels.notes && (visiblePanels.decisions || visiblePanels.statutes)
                       ? "xl:col-span-5"
@@ -72,7 +87,14 @@ export default function CalismaAlaniPage() {
                     : "xl:col-span-12"
                 }`}
               >
-                <ChatPanel vm={vm} />
+                <div className={`min-h-0 ${dilekceDrawerOpen && workspaceMode === "petition_draft" ? "xl:w-[40%]" : "flex-1 w-full"}`}>
+                  <ChatPanel vm={vm} />
+                </div>
+                {dilekceDrawerOpen && workspaceMode === "petition_draft" && (
+                  <div className="hidden xl:flex xl:w-[60%] min-h-0">
+                    <DilekceDrawerPanel vm={vm} />
+                  </div>
+                )}
               </div>
 
               <div className={`${visiblePanels.decisions || visiblePanels.statutes ? "grid" : "hidden"} min-h-0 gap-4 xl:col-span-4`}>

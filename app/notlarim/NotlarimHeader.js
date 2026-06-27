@@ -36,7 +36,7 @@ export default function NotlarimHeader({ vm }) {
     hasMounted, isMobile,
     mobileSidebarOpen, setMobileSidebarOpen,
     visiblePanels, togglePanel,
-    decisions, statutes,
+    activeDecisions, activeStatutes,
     setIsAddingNote, setAddingNoteTitle,
     syncStatus, isAuthenticated,
   } = vm;
@@ -86,7 +86,7 @@ export default function NotlarimHeader({ vm }) {
           >
             <span className={`h-1.5 w-1.5 rounded-full ${visiblePanels.kararlar ? "bg-violet-600" : "bg-slate-300"}`} />
             Kararlar
-            {decisions.length > 0 && <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${visiblePanels.kararlar ? "bg-white text-slate-700" : "bg-slate-100 text-slate-400"}`}>{decisions.length}</span>}
+            {activeDecisions.length > 0 && <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${visiblePanels.kararlar ? "bg-white text-slate-700" : "bg-slate-100 text-slate-400"}`}>{activeDecisions.length}</span>}
           </button>
           <div className="mx-1 h-6 w-px bg-slate-200" />
           <button type="button" onClick={() => togglePanel("mevzuat")}
@@ -94,7 +94,7 @@ export default function NotlarimHeader({ vm }) {
           >
             <span className={`h-1.5 w-1.5 rounded-full ${visiblePanels.mevzuat ? "bg-indigo-600" : "bg-slate-300"}`} />
             Mevzuat
-            {statutes.length > 0 && <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${visiblePanels.mevzuat ? "bg-white text-slate-700" : "bg-slate-100 text-slate-400"}`}>{statutes.length}</span>}
+            {activeStatutes.length > 0 && <span className={`rounded-full px-1.5 py-0.5 text-[10px] ${visiblePanels.mevzuat ? "bg-white text-slate-700" : "bg-slate-100 text-slate-400"}`}>{activeStatutes.length}</span>}
           </button>
         </div>
       </div>

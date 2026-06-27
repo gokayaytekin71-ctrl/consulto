@@ -5,6 +5,14 @@ import { MAX_WORKSPACE_FILE_SIZE_MB } from "./workspace-utils";
 export default function DocumentSidebar({ vm, drawer = false, onClose }) {
   const {
     files,
+    activeWorkspace,
+    workspaceMode, setWorkspaceMode,
+    setDilekceDrawerOpen,
+    setVisiblePanels,
+    hasMounted, isMobile,
+    setMobileTab,
+    aiDecisions,
+    notes,
     isUploadingFiles,
     activeWorkspaceId,
     handleFileSelect,
@@ -18,6 +26,21 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
     setActiveFileDetailTab,
     handleDeleteFile,
   } = vm;
+  const isPetitionDesk = workspaceMode === "petition_draft";
+  const analyzedFileCount = files.filter((file) => file.aiSummary || file.detailedSummary).length;
+
+  function openPetitionDesk() {
+    setWorkspaceMode("petition_draft");
+    setDilekceDrawerOpen(true);
+    if (hasMounted && isMobile) setMobileTab("dilekce");
+  }
+
+  function openAnalysisDesk() {
+    setWorkspaceMode("general_analysis");
+    setDilekceDrawerOpen(false);
+    setVisiblePanels({ decisions: true, statutes: true, notes: true });
+    if (hasMounted && isMobile) setMobileTab("chat");
+  }
 
   const body = (
     <>
@@ -31,7 +54,7 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
           </div>
           <div className="leading-none">
             <div className="text-[8px] font-black uppercase tracking-[0.25em] text-slate-400">Consülto</div>
-            <div className="mt-0.5 text-[13px] font-black tracking-tight text-slate-900">Belgelerim</div>
+            <div className="mt-0.5 text-[13px] font-black tracking-tight text-slate-900">Dosya Merkezi</div>
           </div>
         </div>
         {drawer && (
@@ -48,9 +71,33 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
         )}
       </div>
 
+      <div className="mb-2 rounded-xl border border-slate-200 bg-slate-50 p-2">
+        <div className="truncate text-[12px] font-black text-slate-900" title={activeWorkspace?.title}>
+          {activeWorkspace?.title || "Çalışma alanı"}
+        </div>
+        <div className="mt-2 grid grid-cols-2 gap-1">
+          <div className="rounded-lg bg-white px-1.5 py-1.5 text-center shadow-sm">
+            <div className="text-[9px] font-black uppercase tracking-widest text-slate-400">Dosya</div>
+            <div className="mt-0.5 text-sm font-black text-slate-900">{files.length}</div>
+          </div>
+          <div className="rounded-lg bg-white px-1.5 py-1.5 text-center shadow-sm">
+            <div className="text-[9px] font-black uppercase tracking-widest text-slate-400">Analiz</div>
+            <div className="mt-0.5 text-sm font-black text-blue-700">{analyzedFileCount}</div>
+          </div>
+          <div className="rounded-lg bg-white px-1.5 py-1.5 text-center shadow-sm">
+            <div className="text-[9px] font-black uppercase tracking-widest text-slate-400">Karar</div>
+            <div className="mt-0.5 text-sm font-black text-slate-900">{aiDecisions?.length || 0}</div>
+          </div>
+          <div className="rounded-lg bg-white px-1.5 py-1.5 text-center shadow-sm">
+            <div className="text-[9px] font-black uppercase tracking-widest text-slate-400">Not</div>
+            <div className="mt-0.5 text-sm font-black text-emerald-700">{notes?.length || 0}</div>
+          </div>
+        </div>
+      </div>
+
       {/* YÜKLEME: sürükle-bırak alanı */}
       <label
-        className={`group mb-4 flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-4 text-center transition-all ${
+        className={`group mb-3 flex flex-col items-center justify-center rounded-xl border-2 border-dashed py-3 text-center transition-all ${
           activeWorkspaceId && !isUploadingFiles
             ? "cursor-pointer border-slate-200 hover:border-blue-400 hover:bg-blue-50/50"
             : "cursor-not-allowed border-slate-200 opacity-50"
@@ -69,12 +116,13 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
               </svg>
             </div>
             <span className="mt-1.5 text-[11px] font-black text-slate-700">Dosya ekle</span>
-            <span className="text-[9px] font-bold text-slate-400">sürükle ya da seç · maks {MAX_WORKSPACE_FILE_SIZE_MB}MB</span>
+            <span className="text-[8.5px] font-bold text-slate-400">seç · maks {MAX_WORKSPACE_FILE_SIZE_MB}MB</span>
           </>
         )}
         <input
           type="file"
           multiple
+          accept=".pdf,.doc,.docx,.txt,.rtf,.udf,.jpg,.jpeg,.png,.webp"
           disabled={!activeWorkspaceId || isUploadingFiles}
           className="hidden"
           onChange={handleFileSelect}
@@ -284,7 +332,7 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
           className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={onClose}
         />
-        <aside className="absolute inset-y-0 left-0 flex w-[78%] max-w-[250px] flex-col border-r border-slate-200 bg-white p-3 shadow-2xl animate-in slide-in-from-left duration-200">
+        <aside className="absolute inset-y-0 left-0 flex w-[86%] max-w-[310px] flex-col border-r border-slate-200 bg-white p-3 shadow-2xl animate-in slide-in-from-left duration-200">
           {body}
         </aside>
       </div>
@@ -293,7 +341,7 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
 
   // Masaüstü: dar sabit sütun
   return (
-    <aside className="relative z-20 hidden w-[190px] shrink-0 flex-col border-r border-slate-200 bg-white p-3 xl:flex">
+    <aside className="relative z-20 hidden w-[190px] shrink-0 flex-col border-r border-slate-200 bg-white p-2.5 xl:flex">
       {body}
     </aside>
   );

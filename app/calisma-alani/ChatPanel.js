@@ -33,16 +33,37 @@ export default function ChatPanel({ vm }) {
     currentMessageTokenCost,
     isLoadingTokenBalance,
     setIsCreateWorkspaceModalOpen,
+    dilekceDrawerOpen, setDilekceDrawerOpen,
+    dilekceContent,
+    isMobile, hasMounted,
+    mobileTab, setMobileTab,
   } = vm;
+
+  const useMobile = hasMounted && isMobile;
+  const dilekceActive = useMobile ? mobileTab === "dilekce" : dilekceDrawerOpen;
+  const isPetitionDesk = workspaceMode === "petition_draft";
+  const modeOptions = useMobile
+    ? WORKSPACE_MODES
+    : WORKSPACE_MODES.filter((mode) => mode.id !== "petition_draft");
 
   return (
     <WorkspacePanel
       id="chat"
-      title="Hukuk Chat"
-      subtitle="Soru-cevap alanı"
+      title={isPetitionDesk ? "Dilekçe" : "Hukuk Chat"}
+      subtitle={isPetitionDesk ? "Dilekçe Talimatları" : "Soru-cevap alanı"}
       setActivePanel={setActivePanel}
       actions={
-        <div ref={modeMenuRef} className="relative flex min-w-0 flex-1 items-center justify-end px-2">
+        isPetitionDesk ? (
+          <div className="flex min-w-0 flex-1 items-center justify-end px-2">
+            <div className="flex items-center gap-2 rounded-2xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-[11px] font-black text-emerald-700 shadow-sm">
+              <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2" className="shrink-0">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              <span>Dilekçe Masası</span>
+            </div>
+          </div>
+        ) : (
+        <div ref={modeMenuRef} className="relative flex min-w-0 flex-1 items-center justify-end gap-2 px-2">
           <button
             type="button"
             onClick={() => setIsModeMenuOpen((prev) => !prev)}
@@ -76,7 +97,7 @@ export default function ChatPanel({ vm }) {
                 Çalışma Modu Seç
               </div>
               <div className="space-y-1">
-                {WORKSPACE_MODES.map((mode) => {
+                {modeOptions.map((mode) => {
                   const active = mode.id === workspaceMode;
 
                   return (
@@ -114,6 +135,7 @@ export default function ChatPanel({ vm }) {
             </div>
           )}
         </div>
+        )
       }
     >
    <div className="relative flex h-full min-h-0 flex-col">
@@ -248,15 +270,15 @@ export default function ChatPanel({ vm }) {
      </div>
 
                   <form onSubmit={handleSubmit} className="shrink-0 border-t border-slate-100 bg-white/80 p-3 backdrop-blur-sm z-10">
-                    <div className="chat-input relative rounded-2xl border border-slate-200 bg-slate-50/70 transition-all">
+                    <div className="chat-input flex flex-col rounded-2xl border border-slate-200 bg-slate-50/70 transition-all">
                       <textarea
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
                         placeholder={`${activeWorkspace.title} kapsamında ${activeWorkspaceMode.label} için sorunuzu yazın...`}
-                        className="min-h-[56px] w-full resize-none rounded-2xl bg-transparent px-4 pb-3 pt-3.5 text-[13px] font-medium leading-5 text-slate-800 outline-none placeholder:text-slate-400 custom-scrollbar md:pb-12"
+                        className="min-h-[96px] w-full resize-none rounded-2xl bg-transparent px-4 pb-3 pt-3.5 text-[13px] font-medium leading-5 text-slate-800 outline-none placeholder:text-slate-400 custom-scrollbar"
                       />
 
-                      <div className="flex flex-wrap items-center justify-end gap-1.5 px-2 pb-2 md:absolute md:bottom-2 md:right-2 md:px-0 md:pb-0">
+                      <div className="flex flex-wrap items-center justify-end gap-1.5 border-t border-slate-200/70 px-2 py-2">
                         <button
                           type="button"
                           onClick={() => setDeepThinkingEnabled((prev) => !prev)}
@@ -271,18 +293,49 @@ export default function ChatPanel({ vm }) {
                           {deepThinkingEnabled ? "✦ Derin Düşünme" : "✦ Derin Düşünme"}
                         </button>
 
-                        <button
-                          type="button"
-                          onClick={() => setForceCaseSearchEnabled((prev) => !prev)}
-                          className={`rounded-full border px-3 py-1.5 text-[11px] font-black transition-all disabled:opacity-40 ${
-                            forceCaseSearchEnabled
-                              ? "border-blue-600 bg-blue-600 text-white shadow-[0_2px_8px_rgba(37,99,235,0.35)]"
-                              : "border-slate-200 bg-white text-slate-500 hover:border-blue-200 hover:text-blue-700"
-                          }`}
-                          disabled={!activeWorkspaceId || isLoadingWorkspaceDetail}
-                        >
-                          {forceCaseSearchEnabled ? "⊕ Karar Aranıyor" : "⊕ Karar Ara"}
-                        </button>
+                        {workspaceMode !== "petition_draft" && (
+                          <button
+                            type="button"
+                            onClick={() => setForceCaseSearchEnabled((prev) => !prev)}
+                            className={`rounded-full border px-3 py-1.5 text-[11px] font-black transition-all disabled:opacity-40 ${
+                              forceCaseSearchEnabled
+                                ? "border-blue-600 bg-blue-600 text-white shadow-[0_2px_8px_rgba(37,99,235,0.35)]"
+                                : "border-slate-200 bg-white text-slate-500 hover:border-blue-200 hover:text-blue-700"
+                            }`}
+                            disabled={!activeWorkspaceId || isLoadingWorkspaceDetail}
+                          >
+                            {forceCaseSearchEnabled ? "⊕ Karar Aranıyor" : "⊕ Karar Ara"}
+                          </button>
+                        )}
+
+                        {workspaceMode === "petition_draft" && useMobile && (
+                          <button
+                            type="button"
+                            onClick={() => {
+                              if (useMobile) {
+                                setMobileTab(mobileTab === "dilekce" ? "chat" : "dilekce");
+                              } else {
+                                setDilekceDrawerOpen((prev) => !prev);
+                              }
+                            }}
+                            className={`flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-[11px] font-black transition-all disabled:opacity-40 hover:-translate-y-0.5 ${
+                              dilekceActive
+                                ? "border-emerald-300 bg-emerald-600 text-white shadow-[0_2px_8px_rgba(5,150,105,0.25)]"
+                                : dilekceContent?.trim()
+                                  ? "border-emerald-200 bg-emerald-50 text-emerald-700 hover:bg-emerald-100"
+                                  : "border-slate-200 bg-white text-slate-500 hover:border-emerald-200 hover:text-emerald-700"
+                            }`}
+                            disabled={!activeWorkspaceId || isLoadingWorkspaceDetail}
+                          >
+                            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.2">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                            Dilekçe
+                            {dilekceContent?.trim() && !dilekceActive && (
+                              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                            )}
+                          </button>
+                        )}
 
                         <button
                           type="submit"

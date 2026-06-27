@@ -276,31 +276,9 @@ async function copyToClipboard(text) {
 }
 
 // .docx indirme
-async function downloadAsDocxFromPreviewNode(previewNode, filenameBase, setError) {
-  if (!previewNode) {
-    setError && setError("Önizleme alanı bulunamadı.");
-    return;
-  }
+async function downloadAsDocxFromPreviewNode(previewNode, filenameBase, setError, mdText) {
   try {
-    const inner = serializeWithManualNumbering(previewNode);
-    const html = `<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="utf-8" />
-<title>Dilekçe</title>
-<style>
-  * { color: #000 !important; background: transparent !important; }
-  body { background: #fff !important; font-family: "Times New Roman", Times, serif; line-height: 1.3; font-size: 12pt; }
-  h1,h2,h3,h4,h5,h6{ margin: 0.8em 0 0.4em; }
-  p,li{ margin: 0.3em 0; }
-  .mahkemesine { text-align: center; font-weight: 700; margin-top: 1.5em; margin-bottom: 1.5em; text-transform: uppercase; }
-  .kv { display: grid; grid-template-columns: 160px 1fr; gap: 10px; margin: 2px 0; }
-  .kv .kv-key { font-weight: 700; }
-  .section-head { margin-top: 1em; margin-bottom: 0.5em; font-weight: 700; }
-</style>
-</head>
-<body>${inner}</body>
-</html>`;
+    const html = buildPdfHtml(mdText || "", filenameBase);
 
     const htmlDocx = await loadHtmlDocxUMD();
     if (htmlDocx && typeof htmlDocx.asBlob === "function") {
@@ -377,40 +355,313 @@ async function downloadAsDocxFromPreviewNode(previewNode, filenameBase, setError
   }
 }
 
-// .pdf indirme
-async function downloadAsPdfFromPreviewNode(previewNode, filenameBase, setError) {
-  if (!previewNode) {
-    setError && setError("Önizleme alanı bulunamadı.");
-    return;
+// Markdown metinden PDF için temiz HTML üretir (DOM snapshot almaz — Tailwind bağımlılığı yok)
+function buildPdfHtml(mdText, title = "Dilekçe") {
+  const stripMd = (s = "") => String(s)
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/?[^>]+>/g, "")
+    .replace(/^\s*#{1,6}\s*/, "")
+    .replace(/^\s*>+\s?/, "")
+    .replace(/[\*_`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const esc = (s = "") => String(s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+  const lines = (mdText || "").split("\n");
+  let bodyHtml = "";
+  let currentSection = null;
+  let konuYakalandi = false;
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed) { bodyHtml += '<div style="height:6px"></div>'; continue; }
+    const isQuote = /^>+\s?/.test(trimmed);
+    const plain = stripMd(trimmed);
+    if (!plain) continue;
+
+    if (isQuote) {
+      bodyHtml += `<p style="border-left:3px solid #888;padding-left:12px;margin:6px 0;font-style:italic;">${esc(plain)}</p>`;
+      continue;
+    }
+
+    const normalized = plain.replace(/\s*:\s*$/, "").toUpperCase();
+    const SECTION_HEADS = ["HUKUKİ NEDENLER","HUKUKİ NEDEN","HUKUKİ SEBEP","HUKUKİ SEBEPLER","HUKUKİ DELİLLER","DELİLLER","SONUÇ VE İSTEM"];
+    if (SECTION_HEADS.includes(normalized)) {
+      currentSection = normalized;
+      bodyHtml += `<p style="font-weight:800;text-transform:uppercase;margin:14px 0 6px;">${esc(normalized)}:</p>`;
+      continue;
+    }
+
+    if (/MAHKEMES[İI]NE$/i.test(plain)) {
+      bodyHtml += `<p style="text-align:center;font-weight:700;margin:20px 0;text-transform:uppercase;">${esc(plain)}</p>`;
+      continue;
+    }
+
+    const numberedMatch = plain.match(/^([0-9]+|[IVXLC]+)\.\s+(.+)$/);
+    if (numberedMatch && currentSection === "AÇIKLAMALAR") {
+      const heading = numberedMatch[2];
+      const isShort = plain.length <= 100 && heading.trim().split(/\s+/).length <= 14 && !/[.!?]/.test(heading.replace(/\.\.\.$/, ""));
+      if (isShort) { bodyHtml += `<p style="font-weight:700;margin:10px 0;">${esc(plain)}</p>`; continue; }
+    }
+
+    const labelMatch = plain.match(/^(DAVACI|VEK[İI]L[İI]|DAVALI|ADRES|DAVA DEĞER[İI]|KONU|AÇIKLAMALAR)\s*:?\s*(.*)$/i);
+    if (labelMatch) {
+      const label = labelMatch[1].toUpperCase();
+      currentSection = label;
+      if (label === "KONU") {
+        if (konuYakalandi) { bodyHtml += `<p style="margin-bottom:0.4em;">${esc(plain)}</p>`; continue; }
+        konuYakalandi = true;
+      }
+      bodyHtml += `<div style="page-break-inside:avoid;break-inside:avoid;"><table style="width:100%;border-collapse:collapse;margin:3px 0;">
+        <tr><td style="font-weight:700;width:180px;min-width:180px;vertical-align:top;padding-right:8px;">${esc(label)}:</td>
+        <td style="vertical-align:top;">${esc(labelMatch[2])}</td></tr></table></div>`;
+      continue;
+    }
+
+    if (currentSection === "DAVACI" || currentSection === "VEKİLİ" || currentSection === "DAVALI") {
+      bodyHtml += `<div style="page-break-inside:avoid;break-inside:avoid;"><table style="width:100%;border-collapse:collapse;margin:1px 0;">
+        <tr><td style="width:188px;min-width:188px;"></td><td>${esc(plain)}</td></tr></table></div>`;
+      continue;
+    }
+
+    const isSig = plain === "Davacı Vekili" || /^Av\.\s*\[.*\]/i.test(plain) || /^Av\.\s/i.test(plain) || /e-?imza/i.test(plain);
+    const wrapStyle = "page-break-inside:avoid;break-inside:avoid;";
+    bodyHtml += isSig
+      ? `<div style="${wrapStyle}"><p style="text-align:right;font-weight:500;margin-bottom:0.4em;">${esc(plain)}</p></div>`
+      : `<div style="${wrapStyle}"><p style="margin-bottom:0.4em;">${esc(plain)}</p></div>`;
   }
+
+  return `<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<title>${esc(title)}</title>
+<style>
+  * { box-sizing: border-box; }
+  body { font-family: "Times New Roman", Times, serif; font-size: 12pt; line-height: 1.75; color: #000; background: #fff; margin: 0; padding: 0; }
+  p {
+    margin: 0 0 0.5em 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    orphans: 3;
+    widows: 3;
+  }
+  table {
+    border-collapse: collapse;
+    page-break-inside: avoid;
+    break-inside: avoid;
+    width: 100%;
+  }
+</style>
+</head>
+<body>${bodyHtml}</body>
+</html>`;
+}
+
+// .pdf indirme
+async function downloadAsPdfFromPreviewNode(_previewNode, filenameBase, setError, mdText) {
   try {
-    const inner = serializeWithManualNumbering(previewNode);
-    const html = `<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8"><title>${filenameBase}</title>
-      <style>
-        * { color: #000 !important; background: transparent !important; }
-        body { background: #fff !important; font-family: "Times New Roman", serif; line-height: 1.3; font-size: 12pt; }
-        .mahkemesine { text-align: center; font-weight: 700; margin-top: 1.5em; margin-bottom: 1.5em; text-transform: uppercase; }
-        .kv { display: grid; grid-template-columns: 160px 1fr; gap: 10px; margin: 2px 0; }
-        .kv .kv-key { font-weight: 700; }
-        .section-head { margin-top: 1em; margin-bottom: 0.5em; font-weight: 700; }
-        p { margin-bottom: 0.5em; }
-      </style>
-    </head><body>${inner}</body></html>`;
+    const html = buildPdfHtml(mdText || "", filenameBase);
 
     const html2pdf = await ensureScriptLoaded("https://cdn.jsdelivr.net/npm/html2pdf.js@0.10.1/dist/html2pdf.bundle.min.js", "html2pdf");
     if (!html2pdf) throw new Error("html2pdf.js yüklenemedi");
 
     const opt = {
       filename: `${filenameBase}.pdf`,
-      margin: 20,
+      margin: [15, 20, 15, 20],
       image: { type: "jpeg", quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true },
+      html2canvas: { scale: 2, useCORS: true, logging: false },
       jsPDF: { unit: "mm", format: "a4", orientation: "portrait" },
+      pagebreak: { mode: "css" },
     };
     await window.html2pdf().set(opt).from(html).save();
   } catch (e) {
     console.error(e);
     setError && setError("PDF hazırlanırken bir hata oluştu.");
+  }
+}
+
+// UYAP UDF formatında content.xml oluşturur
+// Format: ZIP içinde content.xml; karakter-offset tabanlı <elements> ile bold/align stilleri
+function buildUdfXml(mdText) {
+  const stripMd = (s = "") => String(s)
+    .replace(/<br\s*\/?>/gi, " ")
+    .replace(/<\/?[^>]+>/g, "")
+    .replace(/^\s*#{1,6}\s*/, "")
+    .replace(/^\s*>+\s?/, "")
+    .replace(/[\*_`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const SECTION_HEADS = new Set([
+    "HUKUKİ NEDENLER","HUKUKİ NEDEN","HUKUKİ SEBEP","HUKUKİ SEBEPLER",
+    "HUKUKİ DELİLLER","DELİLLER","SONUÇ VE İSTEM","EKLER",
+  ]);
+
+  // paragraphs: { text, align: "1"|"2"|"3"|null, runs: [{len,bold,underline}]|null }
+  const paragraphs = [];
+  let currentSection = null;
+  let konuYakalandi = false;
+
+  for (const rawLine of (mdText || "").split("\n")) {
+    const trimmed = rawLine.trim();
+    if (!trimmed) { paragraphs.push({ text: "", align: null, runs: null }); continue; }
+    const isQuote = /^>+\s?/.test(trimmed);
+    const plain = stripMd(trimmed);
+    if (!plain) { paragraphs.push({ text: "", align: null, runs: null }); continue; }
+
+    // Mahkeme başlığı
+    if (/MAHKEMES[İI]NE$/i.test(plain)) {
+      const t = plain.toUpperCase();
+      paragraphs.push({ text: t, align: "1", runs: [{ len: t.length, bold: true, underline: false }] });
+      continue;
+    }
+
+    const normalized = plain.replace(/\s*:\s*$/, "").toUpperCase();
+
+    // Bölüm başlıkları (HUKUKİ NEDENLER, DELİLLER, SONUÇ VE İSTEM)
+    if (SECTION_HEADS.has(normalized)) {
+      currentSection = normalized;
+      const t = normalized + "\t:";
+      paragraphs.push({ text: t, align: null, runs: [{ len: t.length, bold: true, underline: true }] });
+      continue;
+    }
+
+    // Etiketli satırlar (DAVACI:, VEKİLİ:, vs.)
+    const labelMatch = plain.match(/^(DAVACI|VEK[İI]L[İI]|DAVALI|ADRES|DAVA DEĞER[İI]|KONU|AÇIKLAMALAR)\s*:?\s*(.*)$/i);
+    if (labelMatch) {
+      const label = labelMatch[1].toUpperCase();
+      const value = (labelMatch[2] || "").trim();
+      currentSection = label;
+
+      if (label === "KONU" && konuYakalandi) {
+        paragraphs.push({ text: "\t" + plain, align: "3", runs: null });
+        continue;
+      }
+      if (label === "KONU") konuYakalandi = true;
+
+      if (label === "AÇIKLAMALAR" && !value) {
+        paragraphs.push({ text: "AÇIKLAMALAR", align: null, runs: [{ len: 11, bold: true, underline: true }] });
+        continue;
+      }
+
+      // UYAP tab hizalaması: ≤8 karakter → 2 tab, >8 → 1 tab
+      const tabs = label.length <= 8 ? "\t\t" : "\t";
+      const after = tabs + ":" + (value ? " " + value : "");
+      const t = label + after;
+      paragraphs.push({ text: t, align: null, runs: [
+        { len: label.length, bold: true, underline: true },
+        { len: after.length, bold: false, underline: false },
+      ]});
+      continue;
+    }
+
+    // Taraf devam satırları (adres vb.)
+    if (["DAVACI", "VEKİLİ", "DAVALI"].includes(currentSection || "")) {
+      paragraphs.push({ text: "\t\t  " + plain, align: null, runs: null });
+      continue;
+    }
+
+    // Gövde metni
+    if (currentSection === "AÇIKLAMALAR" || SECTION_HEADS.has(currentSection || "")) {
+      if (isQuote) { paragraphs.push({ text: plain, align: "3", runs: null }); continue; }
+      const numMatch = plain.match(/^([0-9]+|[IVXLC]+)[-.]\s+(.+)$/);
+      if (numMatch && currentSection === "AÇIKLAMALAR") {
+        const head = numMatch[2];
+        if (plain.length <= 100 && head.split(/\s+/).length <= 14) {
+          paragraphs.push({ text: plain, align: null, runs: [{ len: plain.length, bold: true, underline: false }] });
+          continue;
+        }
+      }
+      paragraphs.push({ text: "\t" + plain, align: "3", runs: null });
+      continue;
+    }
+
+    // İmza
+    const isSig = plain === "Davacı Vekili" || /^Av\.\s/i.test(plain) || /e-?imza/i.test(plain);
+    if (isSig) {
+      paragraphs.push({ text: plain, align: "2", runs: [{ len: plain.length, bold: true, underline: false }] });
+      continue;
+    }
+
+    paragraphs.push({ text: plain, align: null, runs: null });
+  }
+
+  // Tam metin (her satır \n ile biter)
+  const fullText = paragraphs.map(p => p.text).join("\n") + "\n";
+
+  // <elements> XML'i; her paragraf karakterin CDATA offsetini belirtir
+  let offset = 0;
+  let elemXml = "";
+  for (const para of paragraphs) {
+    const tLen = para.text.length;
+    const alignAttr = para.align ? ` Alignment="${para.align}"` : "";
+    elemXml += `    <paragraph${alignAttr}>\n`;
+
+    if (!para.runs) {
+      elemXml += `      <content startOffset="${offset}" length="${tLen + 1}"/>\n`;
+    } else {
+      let rOff = offset;
+      for (const run of para.runs) {
+        if (run.len <= 0) continue;
+        const attrs = [run.bold ? 'bold="true"' : null, run.underline ? 'underline="true"' : null].filter(Boolean).join(" ");
+        elemXml += `      <content${attrs ? " " + attrs : ""} startOffset="${rOff}" length="${run.len}"/>\n`;
+        rOff += run.len;
+      }
+      const fr = para.runs[0];
+      const nlAttrs = [fr?.bold ? 'bold="true"' : null, fr?.underline ? 'underline="true"' : null].filter(Boolean).join(" ");
+      elemXml += `      <content${nlAttrs ? " " + nlAttrs : ""} startOffset="${offset + tLen}" length="1"/>\n`;
+    }
+
+    elemXml += `    </paragraph>\n`;
+    offset += tLen + 1;
+  }
+
+  const safeCdata = fullText.replace(/]]>/g, "]]]]><![CDATA[>");
+
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<template format_id="1.8">
+  <content><![CDATA[${safeCdata}]]></content>
+  <properties>
+    <pageFormat mediaSizeName="1" leftMargin="42.525000000000006" rightMargin="42.525000000000006" topMargin="42.525000000000006" bottomMargin="42.52500000000006" paperOrientation="1" headerFOffset="20.0" footerFOffset="20.0"/>
+  </properties>
+  <elements resolver="hvl-default">
+${elemXml}  </elements>
+  <styles>
+    <style name="default" description="Geçerli" family="Lucida Grande" size="13" bold="false" italic="false" FONT_ATTRIBUTE_KEY="com.apple.laf.AquaFonts$DerivedUIResourceFont[family=Lucida Grande,name=Lucida Grande,style=plain,size=13]"/>
+    <style name="hvl-default" family="Times New Roman" size="12" description="Gövde"/>
+  </styles>
+</template>`;
+}
+
+// UYAP UDF indirme (JSZip ile ZIP → .udf)
+async function downloadAsUdf(dilekceMd, filenameBase, setError) {
+  try {
+    const xmlContent = buildUdfXml(dilekceMd || "");
+
+    const loaded = await ensureScriptLoaded(
+      "https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js",
+      "JSZip"
+    );
+    if (!loaded || !window.JSZip) throw new Error("JSZip kütüphanesi yüklenemedi");
+
+    const zip = new window.JSZip();
+    zip.file("content.xml", xmlContent);
+    const blob = await zip.generateAsync({ type: "blob", compression: "DEFLATE" });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${filenameBase}.udf`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    console.error(e);
+    setError && setError("UDF dosyası hazırlanırken bir hata oluştu.");
   }
 }
 
@@ -719,6 +970,13 @@ export default function DilekcePage() {
   const dilekcePreviewRef = useRef(null);
   const pollTimerRef = useRef(null);
 
+  // --- Editör state ---
+  const [editMode, setEditMode] = useState(false);
+  const [selectedParaIdx, setSelectedParaIdx] = useState(null);
+  const [revisionInstruction, setRevisionInstruction] = useState("");
+  const [isRevising, setIsRevising] = useState(false);
+  const [reviseError, setReviseError] = useState("");
+
 const processedMd = useMemo(() => {
     if (!dilekceMd) return "";
     
@@ -1011,6 +1269,10 @@ const processedMd = useMemo(() => {
     setDilekceMd("");
     setStep(1);
     setActiveTab("dilekce");
+    setEditMode(false);
+    setSelectedParaIdx(null);
+    setRevisionInstruction("");
+    setReviseError("");
   }
 
   const Stepper = () => {
@@ -1177,8 +1439,18 @@ const processedMd = useMemo(() => {
                     </div>
                     <div className="flex items-center gap-2 flex-wrap">
                       <button onClick={handleCopy} className={`rounded-xl border px-4 py-2 text-sm font-medium transition ${isDarkMode ? "border-white/10 hover:bg-white/[0.05]" : "border-[#E4DAC6] hover:bg-white"}`} title="Markdown'ı panoya kopyala">{copied ? "Kopyalandı ✓" : "Kopyala"}</button>
-                      <button onClick={() => downloadAsDocxFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError)} className={`rounded-xl px-4 py-2 text-sm font-semibold text-white transition ${isDarkMode ? "bg-[#1f2f54] hover:bg-[#2a3d6b]" : "bg-[#16223E] hover:bg-[#1f2f54]"}`} title="Word (.docx) olarak indir">Word (.docx)</button>
-                      <button onClick={() => downloadAsPdfFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError)} className="rounded-xl bg-[#8B2E3C] text-white px-4 py-2 hover:bg-[#a23647] transition text-sm font-semibold" title="PDF olarak indir">PDF</button>
+                      <button
+                        onClick={() => { setEditMode(m => !m); setSelectedParaIdx(null); setReviseError(""); }}
+                        className={`rounded-xl border px-4 py-2 text-sm font-medium transition ${
+                          editMode
+                            ? (isDarkMode ? "border-amber-400/50 bg-amber-400/10 text-amber-300" : "border-[#A77B2E] bg-[#F2E7CC] text-[#A77B2E]")
+                            : (isDarkMode ? "border-white/10 hover:bg-white/[0.05]" : "border-[#E4DAC6] hover:bg-white")
+                        }`}
+                        title={editMode ? "Görüntüleme moduna geç" : "Düzenleme moduna geç"}
+                      >{editMode ? "Görüntüle" : "Düzenle"}</button>
+                      <button onClick={() => downloadAsDocxFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError, dilekceMd)} className={`rounded-xl px-4 py-2 text-sm font-semibold text-white transition ${isDarkMode ? "bg-[#1f2f54] hover:bg-[#2a3d6b]" : "bg-[#16223E] hover:bg-[#1f2f54]"}`} title="Word (.docx) olarak indir">Word (.docx)</button>
+                      <button onClick={() => downloadAsPdfFromPreviewNode(dilekcePreviewRef.current, "dilekce_taslak", setError, dilekceMd)} className="rounded-xl bg-[#8B2E3C] text-white px-4 py-2 hover:bg-[#a23647] transition text-sm font-semibold" title="PDF olarak indir">PDF</button>
+                      <button onClick={() => downloadAsUdf(dilekceMd, "dilekce_taslak", setError)} className={`rounded-xl px-4 py-2 text-sm font-semibold transition ${isDarkMode ? "bg-emerald-700 hover:bg-emerald-600 text-white" : "bg-[#1A5C3A] hover:bg-[#236b44] text-white"}`} title="UYAP UDF olarak indir">UYAP (.udf)</button>
                     </div>
                   </div>
                   {error && (<div className={`w-full mt-2 rounded-xl border p-2 text-xs ${isDarkMode ? "border-red-400/40 bg-red-500/10 text-red-300" : "border-red-300 bg-red-50 text-red-700"}`}>{error}</div>)}
@@ -1222,11 +1494,134 @@ const processedMd = useMemo(() => {
                   )}
 
                   {activeTab === "dilekce" && (
-                    <div className={`rounded-2xl p-3 md:p-6 ${isDarkMode ? "bg-white/[0.02] border border-white/10" : "bg-[#EDE5D5]"}`}>
-                      {/* Beyaz kağıt yüzeyi — gerçek belge hissi */}
-                      <div ref={dilekcePreviewRef} className="max-w-3xl mx-auto bg-[#FCFAF4] text-[#15233B] rounded-lg shadow-[0_12px_40px_-16px_rgba(28,42,71,0.45)] ring-1 ring-[#E4DAC6] px-7 py-10 md:px-14 md:py-16 text-[15px] leading-[1.7]" style={{ fontFamily: "'Times New Roman', Georgia, serif" }}>
-                        {renderDilekce(dilekceMd || "_Dilekçe metni yok._")}
-                      </div>
+                    <div className={`rounded-2xl p-3 md:p-6 relative ${isDarkMode ? "bg-white/[0.02] border border-white/10" : "bg-[#EDE5D5]"}`}>
+                      {editMode ? (
+                        /* --- DÜZENLEME MODU: Ham metin textarea --- */
+                        <div className="max-w-3xl mx-auto">
+                          <p className={`text-xs mb-2 font-medium ${c.inkMute}`}>Dilekçe metnini doğrudan düzenleyebilirsiniz. Değişiklikler otomatik kaydedilir.</p>
+                          <textarea
+                            className={`w-full min-h-[580px] rounded-lg border p-5 text-sm font-mono leading-relaxed resize-y outline-none focus:ring-2 transition-all ${
+                              isDarkMode
+                                ? "border-white/10 bg-[#0D1322] text-slate-200 focus:border-amber-400/40 focus:ring-amber-400/10"
+                                : "border-[#E4DAC6] bg-white text-[#15233B] focus:border-[#A77B2E] focus:ring-[#A77B2E]/15"
+                            }`}
+                            value={dilekceMd}
+                            onChange={(e) => { setDilekceMd(e.target.value); setSelectedParaIdx(null); }}
+                            spellCheck={false}
+                          />
+                        </div>
+                      ) : (
+                        /* --- GÖRÜNTÜLEME MODU: Seçilebilir paragraflar --- */
+                        <>
+                          {selectedParaIdx !== null && (
+                            <div className={`mb-3 max-w-3xl mx-auto rounded-xl border p-3 flex items-start gap-3 ${isDarkMode ? "border-amber-400/30 bg-amber-400/5" : "border-[#DCC68C] bg-[#FBF3E0]"}`}>
+                              <div className="flex-1 min-w-0">
+                                <p className={`text-[11px] font-semibold mb-1.5 ${c.gold}`}>Seçili bölümü revize et</p>
+                                <textarea
+                                  className={`w-full rounded-lg border p-2 text-xs outline-none resize-none focus:ring-1 transition-all ${
+                                    isDarkMode
+                                      ? "border-white/10 bg-[#0D1322] text-slate-200 placeholder:text-slate-600 focus:border-amber-400/40 focus:ring-amber-400/20"
+                                      : "border-[#E4DAC6] bg-white text-[#1C2A47] placeholder:text-[#A8A08C] focus:border-[#A77B2E] focus:ring-[#A77B2E]/20"
+                                  }`}
+                                  rows={2}
+                                  placeholder="Revizyon talimatı: 'Daha resmi yaz', 'Madde ekle', 'Bu kısmı sil'..."
+                                  value={revisionInstruction}
+                                  onChange={(e) => setRevisionInstruction(e.target.value)}
+                                />
+                                {reviseError && <p className="mt-1 text-[10px] text-red-500">{reviseError}</p>}
+                              </div>
+                              <div className="flex flex-col gap-1.5 shrink-0">
+                                <button
+                                  onClick={async () => {
+                                    const paras = dilekceMd.split(/\n{2,}/).filter(p => p.trim());
+                                    const selectedText = paras[selectedParaIdx];
+                                    if (!selectedText) return;
+                                    setIsRevising(true);
+                                    setReviseError("");
+                                    try {
+                                      const res = await fetch("/api/dilekce/revize", {
+                                        method: "POST",
+                                        headers: { "Content-Type": "application/json" },
+                                        body: JSON.stringify({ selected_text: selectedText, instruction: revisionInstruction }),
+                                      });
+                                      const data = await res.json().catch(() => ({}));
+                                      if (!res.ok) { setReviseError(data?.error || "Revizyon başarısız."); return; }
+                                      const revisedText = data.revised_text || "";
+                                      if (!revisedText) { setReviseError("AI boş yanıt döndürdü."); return; }
+                                      setDilekceMd(prev => {
+                                        const parts = prev.split(/\n{2,}/);
+                                        let ni = 0;
+                                        for (let i = 0; i < parts.length; i++) {
+                                          if (parts[i].trim()) {
+                                            if (ni === selectedParaIdx) parts[i] = revisedText;
+                                            ni++;
+                                          }
+                                        }
+                                        return parts.join("\n\n");
+                                      });
+                                      setSelectedParaIdx(null);
+                                      setRevisionInstruction("");
+                                    } catch (e) {
+                                      setReviseError("Bir hata oluştu.");
+                                    } finally {
+                                      setIsRevising(false);
+                                    }
+                                  }}
+                                  disabled={isRevising}
+                                  className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition disabled:opacity-50 ${isDarkMode ? "bg-amber-400 text-[#0A0F1C] hover:bg-amber-300" : "bg-[#16223E] text-white hover:bg-[#1f2f54]"}`}
+                                >{isRevising ? "Revize ediliyor…" : "Revize Et"}</button>
+                                <button
+                                  onClick={() => { setSelectedParaIdx(null); setRevisionInstruction(""); setReviseError(""); }}
+                                  className={`rounded-lg px-3 py-1.5 text-xs font-medium border transition ${isDarkMode ? "border-white/10 hover:bg-white/[0.05]" : "border-[#E4DAC6] hover:bg-white"}`}
+                                >İptal</button>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Beyaz kağıt yüzeyi */}
+                          <div
+                            ref={dilekcePreviewRef}
+                            className="max-w-3xl mx-auto bg-[#FCFAF4] text-[#15233B] rounded-lg shadow-[0_12px_40px_-16px_rgba(28,42,71,0.45)] ring-1 ring-[#E4DAC6] px-7 py-10 md:px-14 md:py-16 text-[15px] leading-[1.7]"
+                            style={{ fontFamily: "'Times New Roman', Georgia, serif" }}
+                          >
+                            {(() => {
+                              const paras = dilekceMd ? dilekceMd.split(/\n{2,}/) : [];
+                              if (!paras.length) return renderDilekce("_Dilekçe metni yok._");
+                              let nonEmptyIdx = 0;
+                              return paras.map((para, i) => {
+                                const isEmpty = !para.trim();
+                                const paraIdx = isEmpty ? null : nonEmptyIdx++;
+                                const isSelected = paraIdx !== null && paraIdx === selectedParaIdx;
+                                return (
+                                  <div
+                                    key={i}
+                                    onClick={() => {
+                                      if (isEmpty) return;
+                                      setSelectedParaIdx(prev => prev === paraIdx ? null : paraIdx);
+                                      setRevisionInstruction("");
+                                      setReviseError("");
+                                    }}
+                                    className={`transition-all rounded ${
+                                      isEmpty ? "" :
+                                      isSelected
+                                        ? "ring-2 ring-[#A77B2E] bg-[#FBF3E0] cursor-pointer px-1 -mx-1"
+                                        : "cursor-pointer hover:bg-[#F5EFE3] px-1 -mx-1"
+                                    }`}
+                                    title={isEmpty ? "" : "Tıklayarak bu bölümü seçin ve revize edin"}
+                                  >
+                                    {renderDilekce(para)}
+                                  </div>
+                                );
+                              });
+                            })()}
+                          </div>
+                          {dilekceMd && (
+                            <p className={`text-center text-[10px] mt-3 ${c.inkMute}`}>
+                              Bir bölüme tıklayarak seçin, ardından revize talimatınızı yazın.
+                            </p>
+                          )}
+                        </>
+                      )}
                     </div>
                   )}
 

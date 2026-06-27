@@ -611,3 +611,124 @@ export async function POST(request, { params }) {
     );
   }
 }
+
+export async function PATCH(request, { params }) {
+  const { session, response } = await requireSession();
+  if (response) return response;
+
+  const workspaceId = params?.id;
+
+  if (!workspaceId) {
+    return Response.json(
+      {
+        error: "VALIDATION_ERROR",
+        message: "Çalışma alanı id değeri zorunludur.",
+      },
+      { status: 400 }
+    );
+  }
+
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return Response.json(
+      {
+        error: "BAD_REQUEST",
+        message: "Geçersiz JSON gövdesi.",
+      },
+      { status: 400 }
+    );
+  }
+
+  const messageId = String(body?.messageId || "").trim();
+  const content = String(body?.content || body?.text || "").trim();
+
+  if (!messageId) {
+    return Response.json(
+      {
+        error: "VALIDATION_ERROR",
+        message: "Mesaj id değeri zorunludur.",
+      },
+      { status: 400 }
+    );
+  }
+
+  if (!content) {
+    return Response.json(
+      {
+        error: "VALIDATION_ERROR",
+        message: "Mesaj içeriği boş olamaz.",
+      },
+      { status: 400 }
+    );
+  }
+
+  try {
+    const workspace = await getOwnedWorkspace(workspaceId, session.user.id);
+
+    if (!workspace) {
+      return Response.json(
+        {
+          error: "NOT_FOUND",
+          message: "Çalışma alanı bulunamadı.",
+        },
+        { status: 404 }
+      );
+    }
+
+    const updateResult = await prisma.workspaceMessage.updateMany({
+      where: {
+        id: messageId,
+        workspaceId,
+      },
+      data: {
+        content,
+      },
+    });
+
+    if (!updateResult.count) {
+      return Response.json(
+        {
+          error: "NOT_FOUND",
+          message: "Güncellenecek mesaj bulunamadı.",
+        },
+        { status: 404 }
+      );
+    }
+
+    await prisma.workspace.update({
+      where: {
+        id: workspaceId,
+      },
+      data: {
+        updatedAt: new Date(),
+      },
+    });
+
+    const message = await prisma.workspaceMessage.findFirst({
+      where: {
+        id: messageId,
+        workspaceId,
+      },
+    });
+
+    return Response.json(
+      {
+        ok: true,
+        message,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("PATCH /api/workspaces/[id]/messages error:", error);
+
+    return Response.json(
+      {
+        error: "INTERNAL_SERVER_ERROR",
+        message: "Mesaj güncellenirken hata oluştu.",
+      },
+      { status: 500 }
+    );
+  }
+}

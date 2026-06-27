@@ -6,6 +6,7 @@ import prisma from "@/lib/prisma";
 import { checkTokenBalance, consumeToken } from "@/lib/tokens";
 import path from "path";
 import mammoth from "mammoth";
+import { inflateRawSync } from "zlib";
 
 
 export const dynamic = "force-dynamic";
@@ -28,6 +29,7 @@ const ALLOWED_EXTENSIONS = new Set([
   "doc",
   "docx",
   "txt",
+  "udf",
   "rtf",
   "jpg",
   "jpeg",
@@ -87,6 +89,86 @@ function sanitizeFileName(name = "dosya") {
 
 function getFileExtension(fileName = "") {
   return path.extname(fileName).replace(/^\./, "").toLowerCase();
+}
+
+function decodeXmlEntities(value = "") {
+  return String(value)
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, "&");
+}
+
+function extractZipEntry(buffer, entryName) {
+  const zipBuffer = Buffer.isBuffer(buffer) ? buffer : Buffer.from(buffer || []);
+  const eocdSignature = 0x06054b50;
+  const centralSignature = 0x02014b50;
+  const localSignature = 0x04034b50;
+  const minEocdOffset = Math.max(0, zipBuffer.length - 0xffff - 22);
+
+  let eocdOffset = -1;
+  for (let i = zipBuffer.length - 22; i >= minEocdOffset; i--) {
+    if (zipBuffer.readUInt32LE(i) === eocdSignature) {
+      eocdOffset = i;
+      break;
+    }
+  }
+  if (eocdOffset === -1) throw new Error("UDF ZIP dizini bulunamadı.");
+
+  const totalEntries = zipBuffer.readUInt16LE(eocdOffset + 10);
+  const centralDirOffset = zipBuffer.readUInt32LE(eocdOffset + 16);
+  let cursor = centralDirOffset;
+
+  for (let i = 0; i < totalEntries; i++) {
+    if (zipBuffer.readUInt32LE(cursor) !== centralSignature) {
+      throw new Error("UDF ZIP merkezi dizini okunamadı.");
+    }
+
+    const compressionMethod = zipBuffer.readUInt16LE(cursor + 10);
+    const compressedSize = zipBuffer.readUInt32LE(cursor + 20);
+    const fileNameLength = zipBuffer.readUInt16LE(cursor + 28);
+    const extraLength = zipBuffer.readUInt16LE(cursor + 30);
+    const commentLength = zipBuffer.readUInt16LE(cursor + 32);
+    const localHeaderOffset = zipBuffer.readUInt32LE(cursor + 42);
+    const fileName = zipBuffer
+      .slice(cursor + 46, cursor + 46 + fileNameLength)
+      .toString("utf8");
+
+    if (fileName === entryName) {
+      if (zipBuffer.readUInt32LE(localHeaderOffset) !== localSignature) {
+        throw new Error("UDF ZIP yerel başlığı okunamadı.");
+      }
+      const localFileNameLength = zipBuffer.readUInt16LE(localHeaderOffset + 26);
+      const localExtraLength = zipBuffer.readUInt16LE(localHeaderOffset + 28);
+      const dataStart = localHeaderOffset + 30 + localFileNameLength + localExtraLength;
+      const compressedData = zipBuffer.slice(dataStart, dataStart + compressedSize);
+
+      if (compressionMethod === 0) return compressedData;
+      if (compressionMethod === 8) return inflateRawSync(compressedData);
+      throw new Error(`UDF sıkıştırma yöntemi desteklenmiyor: ${compressionMethod}`);
+    }
+
+    cursor += 46 + fileNameLength + extraLength + commentLength;
+  }
+
+  return null;
+}
+
+function extractTextFromUdf(buffer) {
+  const contentXmlBuffer = extractZipEntry(buffer, "content.xml");
+  if (!contentXmlBuffer) throw new Error("UDF içinde content.xml bulunamadı.");
+
+  const xml = contentXmlBuffer.toString("utf8");
+  const cdataMatch = xml.match(/<content\b[^>]*><!\[CDATA\[([\s\S]*?)\]\]><\/content>/i);
+  if (cdataMatch) return cdataMatch[1].replace(/\r\n/g, "\n").trim();
+
+  const contentMatch = xml.match(/<content\b[^>]*>([\s\S]*?)<\/content>/i);
+  if (contentMatch) {
+    return decodeXmlEntities(contentMatch[1].replace(/<[^>]+>/g, "")).replace(/\r\n/g, "\n").trim();
+  }
+
+  return decodeXmlEntities(xml.replace(/<[^>]+>/g, " ")).replace(/[ \t]+/g, " ").trim();
 }
 
 function splitTextIntoChunks(text = "", chunkSize = 1200, overlap = 200) {
@@ -328,6 +410,7 @@ export async function GET(request, { params }) {
       const contentTypeMap = {
         pdf: "application/pdf",
         txt: "text/plain; charset=utf-8",
+        udf: "application/octet-stream",
         doc: "application/msword",
         docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         rtf: "application/rtf",
@@ -516,6 +599,9 @@ export async function POST(request, { params }) {
         }
         else if (extension === "txt") {
           extractedText = buffer.toString("utf8");
+        }
+        else if (extension === "udf") {
+          extractedText = extractTextFromUdf(buffer);
         }
         extractedText = extractedText.trim();
       } catch (extractError) {

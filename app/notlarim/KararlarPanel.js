@@ -262,7 +262,7 @@ function LinkForm({ onAdd, onCancel }) {
 }
 
 export default function KararlarPanel({ vm }) {
-  const { decisions, showDecisionForm, setShowDecisionForm, decisionForm, setDecisionForm, handleAddDecision, handleAddDecisionDirect, handleDeleteDecision } = vm;
+  const { activeDecisions: decisions, showDecisionForm, setShowDecisionForm, decisionForm, setDecisionForm, handleAddDecision, handleAddDecisionDirect, handleDeleteDecision, setExpandedPanel } = vm;
   const [mode, setMode] = useState("manual");
 
   const emptyForm = { title: "", court: "", date: "", uyusmazlik: "", gerekce: "", sonuc: "", personalNote: "", aiSummary: "", sourceUrl: "", fromLink: false };
@@ -272,14 +272,21 @@ export default function KararlarPanel({ vm }) {
   function addFromLink(data) { handleAddDecisionDirect(data); closeForm(); }
 
   const addButtons = (
-    <button type="button" onClick={() => openForm("link")}
-      className="flex items-center gap-1.5 rounded-xl border border-violet-200 bg-violet-50 px-3 py-1.5 text-[10px] font-black text-violet-700 hover:bg-violet-100 hover:-translate-y-0.5 transition-all"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
-      </svg>
-      Karar Ekle
-    </button>
+    <div className="flex items-center gap-2">
+      <button type="button" onClick={() => openForm("link")}
+        className="flex items-center gap-1.5 rounded-xl border border-violet-200 bg-violet-50 px-3 py-1.5 text-[10px] font-black text-violet-700 hover:bg-violet-100 hover:-translate-y-0.5 transition-all"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+        </svg>
+        Karar Ekle
+      </button>
+      <button type="button" onClick={() => setExpandedPanel("kararlar")}
+        className="rounded-xl border border-slate-200/80 bg-white px-3 py-1.5 text-[10px] font-black text-slate-500 shadow-sm transition-all hover:border-slate-300 hover:bg-slate-50 hover:text-slate-900"
+      >
+        Büyüt
+      </button>
+    </div>
   );
 
   return (

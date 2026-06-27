@@ -16,12 +16,29 @@ export default function WorkspaceHeader({ vm }) {
     tokenBalance,
     currentMessageTokenCost,
     isLoadingTokenBalance,
+    workspaceMode, setWorkspaceMode,
+    setDilekceDrawerOpen,
+    setMobileTab,
     toggleVisiblePanel,
-    visiblePanels,
+    visiblePanels, setVisiblePanels,
     aiDecisions,
     aiStatutes,
     notes,
   } = vm;
+  const isPetitionDesk = workspaceMode === "petition_draft";
+
+  function switchToAnalysisDesk() {
+    setWorkspaceMode("general_analysis");
+    setDilekceDrawerOpen(false);
+    setVisiblePanels({ decisions: true, statutes: true, notes: true });
+    if (hasMounted && isMobile) setMobileTab("chat");
+  }
+
+  function switchToPetitionDesk() {
+    setWorkspaceMode("petition_draft");
+    setDilekceDrawerOpen(true);
+    if (hasMounted && isMobile) setMobileTab("dilekce");
+  }
 
   return (
     <header className="relative z-30 flex h-[72px] shrink-0 items-center justify-between border-b border-slate-200/70 bg-white/85 px-3 backdrop-blur-2xl md:h-[86px] md:px-6">
@@ -192,6 +209,42 @@ export default function WorkspaceHeader({ vm }) {
           )}
         </div>
 
+        <div className="hidden min-w-[250px] items-center rounded-[1.35rem] border border-slate-200 bg-slate-50 p-1 shadow-sm lg:flex">
+          <button
+            type="button"
+            onClick={switchToAnalysisDesk}
+            disabled={!activeWorkspaceId || isLoadingWorkspaces}
+            aria-pressed={!isPetitionDesk}
+            className={`flex min-w-0 flex-1 items-center justify-center gap-2 rounded-2xl px-3 py-2 text-xs font-black transition-all disabled:opacity-40 ${
+              !isPetitionDesk
+                ? "bg-white text-blue-900 shadow-sm ring-1 ring-blue-100"
+                : "text-slate-500 hover:bg-white/70 hover:text-slate-800"
+            }`}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.4" className="shrink-0">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 5.5h16M4 12h10M4 18.5h7" />
+            </svg>
+            <span className="truncate">AI Chat</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={switchToPetitionDesk}
+            disabled={!activeWorkspaceId || isLoadingWorkspaces}
+            aria-pressed={isPetitionDesk}
+            className={`flex min-w-0 flex-1 items-center justify-center gap-2 rounded-2xl px-3 py-2 text-xs font-black transition-all disabled:opacity-40 ${
+              isPetitionDesk
+                ? "bg-emerald-600 text-white shadow-[0_4px_14px_rgba(5,150,105,0.22)]"
+                : "text-slate-500 hover:bg-white/70 hover:text-emerald-700"
+            }`}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.4" className="shrink-0">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span className="truncate">Dilekçe</span>
+          </button>
+        </div>
+
 
       </div>
 
@@ -203,6 +256,7 @@ export default function WorkspaceHeader({ vm }) {
           {isLoadingTokenBalance ? "Yükleniyor…" : `${Number.isFinite(Number(tokenBalance)) ? tokenBalance : "–"} token`}
         </div>
 
+        {!isPetitionDesk && (
         <div className="flex items-center rounded-[1.4rem] border border-slate-200 bg-white px-2 py-1.5 shadow-sm">
         <button
           type="button"
@@ -256,6 +310,7 @@ export default function WorkspaceHeader({ vm }) {
           </span>
         </button>
         </div>
+        )}
       </div>
     </header>
   );

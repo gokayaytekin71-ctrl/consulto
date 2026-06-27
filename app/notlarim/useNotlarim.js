@@ -13,13 +13,21 @@ function makeEntry(text) {
     starred: false,
     createdAt: new Date().toISOString(),
     updatedAt: null,
+    annotations: [],
   };
 }
 function makeSection(title = "Genel") {
   return { id: crypto.randomUUID(), title, entries: [] };
 }
 function makeNote(title = "Genel", color = DEFAULT_COLOR) {
-  return { id: crypto.randomUUID(), title, color, sections: [makeSection("Genel")] };
+  return {
+    id: crypto.randomUUID(),
+    title,
+    color,
+    decisions: [],
+    statutes: [],
+    sections: [makeSection("Genel")],
+  };
 }
 
 function persist(data) {
@@ -29,7 +37,18 @@ function persist(data) {
 function load() {
   try {
     const raw3 = localStorage.getItem(STORAGE_KEY_V3);
-    if (raw3) return JSON.parse(raw3);
+    if (raw3) {
+      const data = JSON.parse(raw3);
+      // Migrate: top-level decisions/statutes → first note
+      if (data.notes?.length && (data.decisions?.length || data.statutes?.length)) {
+        data.notes[0] = {
+          ...data.notes[0],
+          decisions: [...(data.notes[0].decisions ?? []), ...(data.decisions ?? [])],
+          statutes:  [...(data.notes[0].statutes  ?? []), ...(data.statutes  ?? [])],
+        };
+      }
+      return { notes: data.notes ?? [] };
+    }
     const raw2 = localStorage.getItem(STORAGE_KEY_V2);
     if (raw2) {
       const v2 = JSON.parse(raw2);
@@ -37,13 +56,16 @@ function load() {
         return {
           notes: v2.noteSections.map(s => ({
             id: s.id, title: s.title, color: s.color ?? DEFAULT_COLOR,
+            decisions: [],
+            statutes:  [],
             sections: [{
               id: crypto.randomUUID(), title: "Genel",
-              entries: (s.notes ?? []).map(n => ({ id: n.id, text: n.text, starred: false, createdAt: n.createdAt, updatedAt: null })),
+              entries: (s.notes ?? []).map(n => ({
+                id: n.id, text: n.text, starred: false,
+                createdAt: n.createdAt, updatedAt: null, annotations: [],
+              })),
             }],
           })),
-          decisions: v2.decisions ?? [],
-          statutes:  v2.statutes  ?? [],
         };
       }
     }
@@ -57,7 +79,7 @@ export default function useNotlarim() {
   const isAuthenticated = sessionStatus === "authenticated";
 
   const [hasMounted, setHasMounted]           = useState(false);
-  const [syncStatus, setSyncStatus]           = useState("idle"); // idle | saving | saved | error
+  const [syncStatus, setSyncStatus]           = useState("idle");
   const [isMobile,   setIsMobile]             = useState(false);
   const [sidebarOpen,       setSidebarOpen]       = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
@@ -87,26 +109,26 @@ export default function useNotlarim() {
   // Arama
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Kararlar
-  const [decisions,        setDecisions]        = useState([]);
+  // Karar formu
   const [showDecisionForm, setShowDecisionForm] = useState(false);
   const [decisionForm,     setDecisionForm]     = useState({ title: "", court: "", date: "", uyusmazlik: "", gerekce: "", sonuc: "", personalNote: "", aiSummary: "", sourceUrl: "", fromLink: false });
 
-  // Mevzuat
-  const [statutes,        setStatutes]        = useState([]);
+  // Mevzuat formu
   const [showStatuteForm, setShowStatuteForm] = useState(false);
   const [statuteForm,     setStatuteForm]     = useState({ name: "", article: "", note: "" });
 
   const [visiblePanels, setVisiblePanels] = useState({ kararlar: true, mevzuat: true });
 
+  // Genişletilmiş panel ("editor" | "kararlar" | "mevzuat" | null)
+  const [expandedPanel, setExpandedPanel] = useState(null);
+
   // ── Bootstrap ──────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (sessionStatus === "loading") return; // session henüz yüklenmedi, bekle
+    if (sessionStatus === "loading") return;
 
     async function bootstrap() {
       let data = null;
 
-      // Oturum açıksa önce API'den dene
       if (isAuthenticated) {
         try {
           const res = await fetch("/api/notlarim/defter");
@@ -114,28 +136,27 @@ export default function useNotlarim() {
         } catch {}
       }
 
-      // API'den gelen yoksa localStorage'a bak
       if (!data) data = load();
 
-      let ns   = data?.notes     ?? [];
-      const ds = data?.decisions ?? [];
-      const ss = data?.statutes  ?? [];
-
+      let ns = data?.notes ?? [];
       if (ns.length === 0) ns = [makeNote("Genel", DEFAULT_COLOR)];
-      // starred / updatedAt backfill
+
+      // Backfill: decisions, statutes, annotations
       ns = ns.map(n => ({
         ...n,
+        decisions: n.decisions ?? [],
+        statutes:  n.statutes  ?? [],
         sections: n.sections.map(s => ({
           ...s,
-          entries: s.entries.map(e => ({ starred: false, updatedAt: null, ...e })),
+          entries: s.entries.map(e => ({
+            starred: false, updatedAt: null, annotations: [], ...e,
+          })),
         })),
       }));
 
       setNotes(ns);
       setActiveNoteId(ns[0].id);
       setActiveSectionId(ns[0].sections[0]?.id ?? null);
-      setDecisions(ds);
-      setStatutes(ss);
 
       const check = () => setIsMobile(window.innerWidth < 1280);
       check();
@@ -152,10 +173,8 @@ export default function useNotlarim() {
   useEffect(() => {
     if (!hasMounted) return;
 
-    // Her zaman localStorage'a yaz (offline fallback)
-    persist({ notes, decisions, statutes });
+    persist({ notes });
 
-    // Oturum açıksa API'ye de kaydet (1.5 sn debounce)
     if (!isAuthenticated) return;
 
     setSyncStatus("saving");
@@ -164,7 +183,7 @@ export default function useNotlarim() {
         const res = await fetch("/api/notlarim/defter", {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ notes, decisions, statutes }),
+          body: JSON.stringify({ notes }),
         });
         setSyncStatus(res.ok ? "saved" : "error");
       } catch {
@@ -173,13 +192,16 @@ export default function useNotlarim() {
     }, 1500);
 
     return () => clearTimeout(timer);
-  }, [notes, decisions, statutes, hasMounted, isAuthenticated]);
+  }, [notes, hasMounted, isAuthenticated]);
 
   // ── Türetilenler ──────────────────────────────────────────────────────────
   const activeNote    = notes.find(n => n.id === activeNoteId)    ?? null;
   const activeSection = activeNote?.sections.find(s => s.id === activeSectionId) ?? null;
 
-  // Arama filtresi (aktif bölüm + tüm bölümler arası)
+  // Nota özel kararlar ve mevzuat
+  const activeDecisions = activeNote?.decisions ?? [];
+  const activeStatutes  = activeNote?.statutes  ?? [];
+
   const filteredEntries = (() => {
     if (!activeSection) return [];
     if (!searchQuery.trim()) return activeSection.entries;
@@ -187,7 +209,6 @@ export default function useNotlarim() {
     return activeSection.entries.filter(e => e.text.toLowerCase().includes(q));
   })();
 
-  // Not seçilince ilk bölümü aç
   const selectNote = useCallback((noteId) => {
     setActiveNoteId(noteId);
     const note = notes.find(n => n.id === noteId);
@@ -231,6 +252,25 @@ export default function useNotlarim() {
   const handleToggleStar = useCallback((entryId) => {
     updateEntries(entries =>
       entries.map(e => e.id === entryId ? { ...e, starred: !e.starred } : e)
+    );
+  }, [updateEntries]);
+
+  // ── Annotation işlemleri ──────────────────────────────────────────────────
+  const handleAddAnnotation = useCallback((entryId, annotation) => {
+    updateEntries(entries =>
+      entries.map(e => e.id !== entryId ? e : {
+        ...e,
+        annotations: [...(e.annotations ?? []), { id: crypto.randomUUID(), ...annotation }],
+      })
+    );
+  }, [updateEntries]);
+
+  const handleRemoveAnnotation = useCallback((entryId, annotationId) => {
+    updateEntries(entries =>
+      entries.map(e => e.id !== entryId ? e : {
+        ...e,
+        annotations: (e.annotations ?? []).filter(a => a.id !== annotationId),
+      })
     );
   }, [updateEntries]);
 
@@ -307,29 +347,46 @@ export default function useNotlarim() {
     setVisiblePanels(prev => ({ ...prev, [key]: !prev[key] }));
   }, []);
 
-  // ── Karar ─────────────────────────────────────────────────────────────────
+  // ── Karar (nota özel) ─────────────────────────────────────────────────────
+  const updateNoteDecisions = useCallback((updater) => {
+    setNotes(prev => prev.map(n =>
+      n.id !== activeNoteId ? n : { ...n, decisions: updater(n.decisions ?? []) }
+    ));
+  }, [activeNoteId]);
+
   const handleAddDecision = useCallback(() => {
     if (!decisionForm.title.trim()) return;
-    setDecisions(prev => [{ id: crypto.randomUUID(), ...decisionForm, createdAt: new Date().toISOString() }, ...prev]);
+    updateNoteDecisions(prev => [{ id: crypto.randomUUID(), ...decisionForm, createdAt: new Date().toISOString() }, ...prev]);
     setDecisionForm({ title: "", court: "", date: "", uyusmazlik: "", gerekce: "", sonuc: "", personalNote: "", aiSummary: "", sourceUrl: "", fromLink: false });
     setShowDecisionForm(false);
-  }, [decisionForm]);
+  }, [decisionForm, updateNoteDecisions]);
 
   const handleAddDecisionDirect = useCallback((data) => {
-    setDecisions(prev => [{ id: crypto.randomUUID(), ...data, createdAt: new Date().toISOString() }, ...prev]);
+    updateNoteDecisions(prev => [{ id: crypto.randomUUID(), ...data, createdAt: new Date().toISOString() }, ...prev]);
     setShowDecisionForm(false);
-  }, []);
+  }, [updateNoteDecisions]);
 
-  const handleDeleteDecision = useCallback((id) => setDecisions(prev => prev.filter(d => d.id !== id)), []);
+  const handleDeleteDecision = useCallback((id) => {
+    updateNoteDecisions(prev => prev.filter(d => d.id !== id));
+  }, [updateNoteDecisions]);
 
-  // ── Mevzuat ───────────────────────────────────────────────────────────────
+  // ── Mevzuat (nota özel) ───────────────────────────────────────────────────
+  const updateNoteStatutes = useCallback((updater) => {
+    setNotes(prev => prev.map(n =>
+      n.id !== activeNoteId ? n : { ...n, statutes: updater(n.statutes ?? []) }
+    ));
+  }, [activeNoteId]);
+
   const handleAddStatute = useCallback(() => {
     if (!statuteForm.name.trim()) return;
-    setStatutes(prev => [{ id: crypto.randomUUID(), ...statuteForm, createdAt: new Date().toISOString() }, ...prev]);
+    updateNoteStatutes(prev => [{ id: crypto.randomUUID(), ...statuteForm, createdAt: new Date().toISOString() }, ...prev]);
     setStatuteForm({ name: "", article: "", note: "" });
     setShowStatuteForm(false);
-  }, [statuteForm]);
-  const handleDeleteStatute = useCallback((id) => setStatutes(prev => prev.filter(s => s.id !== id)), []);
+  }, [statuteForm, updateNoteStatutes]);
+
+  const handleDeleteStatute = useCallback((id) => {
+    updateNoteStatutes(prev => prev.filter(s => s.id !== id));
+  }, [updateNoteStatutes]);
 
   return {
     hasMounted, isMobile, isAuthenticated, syncStatus,
@@ -337,6 +394,7 @@ export default function useNotlarim() {
     mobileSidebarOpen, setMobileSidebarOpen,
     mobileTab, setMobileTab,
     visiblePanels, togglePanel,
+    expandedPanel, setExpandedPanel,
 
     notes, activeNoteId, activeNote, selectNote,
     isAddingNote, setIsAddingNote, addingNoteTitle, setAddingNoteTitle, handleAddNote,
@@ -353,9 +411,11 @@ export default function useNotlarim() {
     handleToggleStar,
     searchQuery, setSearchQuery, filteredEntries,
 
-    decisions, showDecisionForm, setShowDecisionForm, decisionForm, setDecisionForm,
+    handleAddAnnotation, handleRemoveAnnotation,
+
+    activeDecisions, showDecisionForm, setShowDecisionForm, decisionForm, setDecisionForm,
     handleAddDecision, handleAddDecisionDirect, handleDeleteDecision,
-    statutes, showStatuteForm, setShowStatuteForm, statuteForm, setStatuteForm,
+    activeStatutes, showStatuteForm, setShowStatuteForm, statuteForm, setStatuteForm,
     handleAddStatute, handleDeleteStatute,
   };
 }

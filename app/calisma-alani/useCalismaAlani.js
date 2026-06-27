@@ -110,6 +110,10 @@ export default function useCalismaAlani() {
   const [tokenBalance, setTokenBalance] = useState(null);
   const [isLoadingTokenBalance, setIsLoadingTokenBalance] = useState(false);
 
+  // --- Dilekçe Drawer ---
+  const [dilekceContent, setDilekceContent] = useState("");
+  const [dilekceDrawerOpen, setDilekceDrawerOpen] = useState(false);
+
   const dropdownRef = useRef(null);
 
   const modeMenuRef = useRef(null);
@@ -124,6 +128,8 @@ export default function useCalismaAlani() {
   // eski gönderimin kararlarının yeni workspace'in state'ini ezmesini engellemek
   // için kullanılır.
   const activeWorkspaceIdRef = useRef(activeWorkspaceId);
+  // Dilekçe içeriğini son hangi mesajdan çektik — aynı mesajı tekrar işlememek için
+  const lastPetitionMsgIdRef = useRef(null);
   useEffect(() => {
     activeWorkspaceIdRef.current = activeWorkspaceId;
   }, [activeWorkspaceId]);
@@ -442,6 +448,8 @@ export default function useCalismaAlani() {
       setSavedStatutes([]);
       setExpandedNoteIds([]);
       setActiveFileSummary(null);
+      setDilekceContent("");
+      setWorkspaceMode("general_analysis");
       return;
     }
 
@@ -450,6 +458,9 @@ export default function useCalismaAlani() {
 
     setIsLoadingWorkspaceDetail(true);
     setWorkspaceError("");
+    setDilekceContent("");
+    lastPetitionMsgIdRef.current = null;
+    setWorkspaceMode("general_analysis");
     setMessages([
       {
         id: "m-loading-assistant",
@@ -641,6 +652,167 @@ export default function useCalismaAlani() {
       cancelled = true;
     };
   }, [activeWorkspaceId]);
+
+  // Dilekçe moduna geçince drawer açılır, sidebar + diğer paneller kapanır
+  useEffect(() => {
+    if (workspaceMode === "petition_draft") {
+      setDilekceDrawerOpen(true);
+      setSidebarOpen(false);
+      setVisiblePanels({ decisions: false, statutes: false, notes: false });
+      // İlk kez dilekçe yazılıyorsa derin düşünme otomatik açılır
+      if (!dilekceContent.trim()) {
+        setDeepThinkingEnabled(true);
+      }
+    } else {
+      setDilekceDrawerOpen(false);
+    }
+  }, [workspaceMode]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Petition modundan çıkılınca mobil dilekçe sekmesi sıfırlanır
+  useEffect(() => {
+    if (workspaceMode !== "petition_draft" && mobileTab === "dilekce") {
+      setMobileTab("chat");
+    }
+  }, [workspaceMode]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Dilekçe modunda tamamlanan bot mesajından dilekçe içeriğini çıkar.
+  // Aynı mesaj ID'si tekrar işlenmez — bu sayede manuel revizyonlar korunur.
+  useEffect(() => {
+    if (workspaceMode !== "petition_draft") return;
+    const lastBot = [...messages].reverse().find(
+      (m) => m.role === "assistant" && !m.sources?.loading && (m.text || "").trim().length > 80
+    );
+    if (!lastBot?.text) return;
+
+    // Aynı mesajı tekrar işleme — manuel düzenlemeler korunur
+    if (lastBot.id && lastBot.id === lastPetitionMsgIdRef.current) return;
+
+    const text = lastBot.text;
+
+    // §§DILEKCE§§ ... §§/DILEKCE§§ markerlarına bak
+    const MSTART = "§§DILEKCE§§";
+    const MEND   = "§§/DILEKCE§§";
+    const si = text.indexOf(MSTART);
+    const ei = text.indexOf(MEND);
+    if (si !== -1) {
+      const raw = ei > si ? text.slice(si + MSTART.length, ei) : text.slice(si + MSTART.length);
+      lastPetitionMsgIdRef.current = lastBot.id;
+      setDilekceContent(raw.trim());
+      return;
+    }
+
+    // Heuristik: marker yok ama metin dilekçe yapısındaysa
+    const looksLikePetition =
+      (/mahkemesine|mahkemesi'ne/i.test(text) || /\*\*DAVACI[:\*]/i.test(text)) &&
+      /SONUÇ VE İSTEM|HUKUKİ SEBEPLER|AÇIKLAMALAR/i.test(text);
+    if (looksLikePetition) {
+      const lines = text.split("\n");
+      const startIdx = lines.findIndex(
+        (l) => /mahkemesine|mahkemesi'ne/i.test(l) || /^\*\*DAVACI[:\*]/i.test(l.trim())
+      );
+      const petition = startIdx > 0 ? lines.slice(startIdx).join("\n") : text;
+      lastPetitionMsgIdRef.current = lastBot.id;
+      setDilekceContent(petition.trim());
+    }
+  }, [messages, workspaceMode]);
+
+  function isPetitionMessage(message) {
+    const text = String(message?.text || message?.content || "");
+    if (text.includes("§§DILEKCE§§")) return true;
+    return (
+      (/mahkemesine|mahkemesi'ne/i.test(text) || /\*\*DAVACI[:\*]/i.test(text)) &&
+      /SONUÇ VE İSTEM|HUKUKİ SEBEPLER|AÇIKLAMALAR/i.test(text)
+    );
+  }
+
+  function buildSavedPetitionMessageContent(content, previousContent = "") {
+    const clean = String(content || "").trim();
+    const MSTART = "§§DILEKCE§§";
+    const MEND = "§§/DILEKCE§§";
+    const start = previousContent.indexOf(MSTART);
+    const end = previousContent.indexOf(MEND);
+
+    if (start !== -1) {
+      const prefix = previousContent.slice(0, start + MSTART.length);
+      const suffix = end > start ? previousContent.slice(end) : `\n${MEND}`;
+      return `${prefix}\n${clean}\n${suffix}`;
+    }
+
+    if (isPetitionMessage({ text: previousContent })) {
+      return clean;
+    }
+
+    return `${MSTART}\n${clean}\n${MEND}`;
+  }
+
+  async function saveDilekceDraft(content) {
+    const clean = String(content || "").trim();
+    if (!clean) throw new Error("Kaydedilecek dilekçe metni bulunamadı.");
+    if (!activeWorkspaceId) throw new Error("Aktif çalışma alanı bulunamadı.");
+
+    const latestPetitionMessage =
+      messages.find((message) => message.id === lastPetitionMsgIdRef.current) ||
+      [...messages].reverse().find((message) => message.role === "assistant" && isPetitionMessage(message));
+
+    const updatedContent = buildSavedPetitionMessageContent(clean, latestPetitionMessage?.text || "");
+
+    if (latestPetitionMessage?.id) {
+      const res = await fetch(`/api/workspaces/${activeWorkspaceId}/messages`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          messageId: latestPetitionMessage.id,
+          content: updatedContent,
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.message || "Dilekçe kaydedilemedi.");
+
+      const savedMessage = data?.message;
+      setMessages((prev) =>
+        prev.map((message) =>
+          message.id === latestPetitionMessage.id
+            ? {
+                ...message,
+                text: savedMessage?.content || updatedContent,
+                sources: savedMessage?.sources || message.sources || null,
+              }
+            : message
+        )
+      );
+      lastPetitionMsgIdRef.current = latestPetitionMessage.id;
+      return savedMessage;
+    }
+
+    const res = await fetch(`/api/workspaces/${activeWorkspaceId}/messages`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({
+        role: "assistant",
+        content: updatedContent,
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(data?.message || "Dilekçe kaydedilemedi.");
+
+    const savedMessage = data?.message;
+    if (savedMessage?.id) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: savedMessage.id,
+          role: savedMessage.role,
+          text: savedMessage.content,
+          createdAt: savedMessage.createdAt,
+          sources: savedMessage.sources || null,
+        },
+      ]);
+      lastPetitionMsgIdRef.current = savedMessage.id;
+    }
+    return savedMessage;
+  }
 
   const savedDecisions = useMemo(
     () => savedDecisionItems,
@@ -1107,8 +1279,11 @@ async function confirmDeleteWorkspace() {
     }
 
     const submittingWorkspaceId = activeWorkspaceId;
-    const forceCaseSearch = Boolean(forceCaseSearchEnabled);
-    const deepThinking = Boolean(deepThinkingEnabled);
+    const forceCaseSearch = workspaceMode === "petition_draft" ? false : Boolean(forceCaseSearchEnabled);
+    // İlk kez dilekçe yazılıyorsa derin düşünme zorunludur
+    const deepThinking = (workspaceMode === "petition_draft" && !dilekceContent.trim())
+      ? true
+      : Boolean(deepThinkingEnabled);
     const selectedWorkspaceMode = workspaceMode;
     const selectedWorkspaceModeLabel = activeWorkspaceMode.label;
 
@@ -2125,7 +2300,7 @@ async function confirmDeleteWorkspace() {
     savedDecisionIds,
     savedStatutes,
     decisionView, setDecisionView,
-    visiblePanels,
+    visiblePanels, setVisiblePanels,
     forceCaseSearchEnabled, setForceCaseSearchEnabled,
     deepThinkingEnabled, setDeepThinkingEnabled,
     workspaceMode, setWorkspaceMode,
@@ -2159,6 +2334,11 @@ async function confirmDeleteWorkspace() {
 
     // derived
     activeWorkspace, activeWorkspaceMode, currentMessageTokenCost, savedDecisions,
+
+    // dilekçe drawer
+    dilekceContent, setDilekceContent,
+    dilekceDrawerOpen, setDilekceDrawerOpen,
+    saveDilekceDraft,
 
     // handlers
     toggleVisiblePanel, handleChatTextSelection, clearSelectedChatText,
