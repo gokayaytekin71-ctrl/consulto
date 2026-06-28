@@ -1,8 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import { pdf } from '@react-pdf/renderer'; // Link yerine fonksiyonu import ediyoruz
-import KararPDFDocument from './KararPDFDocument';
 
 export default function DownloadPDFButton({ karar }) {
   const [loading, setLoading] = useState(false);
@@ -14,8 +12,18 @@ export default function DownloadPDFButton({ karar }) {
     setLoading(true);
 
     try {
-      // 1. PDF'i o anda oluştur (blob formatında)
-      const blob = await pdf(<KararPDFDocument karar={karar} />).toBlob();
+      const response = await fetch("/api/kararlar/pdf", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(karar),
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.message || "PDF servisi yanıt vermedi.");
+      }
+
+      const blob = await response.blob();
       
       // 2. Tarayıcıda geçici bir indirme linki oluştur
       const url = URL.createObjectURL(blob);
@@ -36,7 +44,8 @@ export default function DownloadPDFButton({ karar }) {
 
     } catch (error) {
       console.error("PDF Oluşturma Hatası:", error);
-      alert("PDF oluşturulurken bir hata meydana geldi.");
+      const detail = error?.message ? `\n\nTeknik hata: ${error.message}` : "";
+      alert(`PDF oluşturulurken bir hata meydana geldi.${detail}`);
     } finally {
       setLoading(false); // İşlem bitince yükleniyor'u kapat
     }

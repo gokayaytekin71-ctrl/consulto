@@ -12,6 +12,99 @@ const API_ENDPOINT =
   process.env.NEXT_PUBLIC_API_URL ||
   "https://api.consultohukuk.com/semantic/arama_yap";
 
+function toArray(value) {
+  return Array.isArray(value) ? value : [];
+}
+
+function pruneChatForStorage(chat) {
+  if (!chat || typeof chat !== "object") return chat;
+  const sources = chat.sources && typeof chat.sources === "object" ? chat.sources : null;
+  if (!sources) return chat;
+
+  return {
+    ...chat,
+    sources: {
+      ...sources,
+      mevzuat: toArray(sources.mevzuat).map(({ raw, ...item }) => item),
+    },
+  };
+}
+
+function makeAnalysisTitle(queryText = "") {
+  const clean = String(queryText || "").trim().replace(/\s+/g, " ");
+  if (!clean) return "Yeni Analiz";
+  return clean.length > 40 ? `${clean.slice(0, 40)}…` : clean;
+}
+
+function buildStoredAnalysisChat({ chatId, queryText, dataFromPython }) {
+  const id = String(chatId || crypto.randomUUID());
+  const now = new Date().toISOString();
+  const analysisText = dataFromPython?.sonuc_ve_degerlendirme || "Analiz bulunamadı.";
+
+  return {
+    id,
+    title: makeAnalysisTitle(queryText),
+    messages: [
+      { id: crypto.randomUUID(), sender: "user", text: String(queryText || "").trim() },
+      { id: crypto.randomUUID(), sender: "bot", text: analysisText },
+    ],
+    sources: {
+      mevzuat: toArray(dataFromPython?.ilgili_mevzuat_parsed).map((src) => {
+        const props = src?.properties || {};
+        const read = (obj, key) => (obj?.[key] ?? "").toString().trim();
+        return {
+          mevzuat_adi:
+            read(src, "mevzuat_adi") ||
+            read(src, "kanun_adi") ||
+            read(src, "adi") ||
+            read(src, "name") ||
+            read(props, "title") ||
+            "Mevzuat",
+          madde:
+            read(src, "madde_no") ||
+            read(src, "madde") ||
+            read(props, "madde_no") ||
+            "",
+          baslik: read(src, "madde_baslik") || read(props, "baslik") || "",
+          metin: read(src, "maddeMetin") || read(props, "maddeMetin") || "",
+          maddeMetin: read(src, "maddeMetin") || read(props, "maddeMetin") || "",
+        };
+      }),
+      kararlar: toArray(dataFromPython?.ilgili_kararlar).map((k) => ({
+        id: k?.properties?.orijinal_karar_id,
+        dosya: k?.properties?.dosya_adi,
+        tip: k?.properties?.kaynak_turu,
+        code: k?.properties?.code,
+        type: k?.properties?.type,
+      })),
+      karar_kartlari: toArray(dataFromPython?.karar_kartlari),
+      makaleler: [],
+    },
+    createdAt: now,
+    updatedAt: now,
+  };
+}
+
+async function persistAnalysisChat(userId, chat) {
+  if (!userId || !chat?.id) return;
+
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+    select: { chats: true },
+  });
+
+  const current = toArray(user?.chats);
+  const withoutSame = current.filter((item) => item?.id !== chat.id);
+  const merged = [chat, ...withoutSame].slice(0, 100);
+
+  await prisma.user.update({
+    where: { id: userId },
+    data: { chats: merged },
+  });
+
+  return merged;
+}
+
 export async function GET(req) {
   const session = await getServerSession(authOptions);
   if (!session) {
@@ -58,9 +151,16 @@ export async function PUT(req) {
     return new Response(null, { status: 400 });
   }
   const { chats } = body;
+  if (!Array.isArray(chats)) {
+    return new Response(JSON.stringify({ error: "INVALID_CHATS" }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
+  }
+  const safeChats = chats.map(pruneChatForStorage).slice(0, 100);
   await prisma.user.update({
     where: { id: userId },
-    data: { chats },
+    data: { chats: safeChats },
   });
   return new Response(null, { status: 204 });
 }
@@ -206,9 +306,22 @@ export async function POST(request) {
       );
     }
 
+    let savedChat = null;
+    try {
+      savedChat = buildStoredAnalysisChat({
+        chatId: body?.chatId || null,
+        queryText,
+        dataFromPython,
+      });
+      await persistAnalysisChat(userId, savedChat);
+    } catch (saveError) {
+      console.error("ANALYSIS_CHAT_SAVE_ERROR", saveError);
+    }
+
     return new Response(JSON.stringify({
       ...dataFromPython,
       tokenRemaining: consumption.remaining,
+      savedChat,
     }), {
       status: 200,
       headers: { "Content-Type": "application/json" }

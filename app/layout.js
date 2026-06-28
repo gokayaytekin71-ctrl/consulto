@@ -9,17 +9,17 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "./context/ThemeContext";
 
 const siteUrl = "https://consultohukuk.com";
-const siteTitle = "Consülto | Hukukçular İçin Yapay Zeka Destekli Hukuk Asistanı";
+const siteTitle = "Consülto AI | Hukukçular İçin Yapay Zeka Destekli Hukuk Asistanı";
 const siteDescription =
   "Consülto; hukukçular için Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma, dosya analizi ve hesaplama araçları sunan yapay zeka destekli hukuk platformudur.";
 const socialDescription =
-  "Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma ve dosya analizi için yapay zeka destekli hukuk platformu.";
+  "Yargıtay karar arama, dilekçe hazırlama, hukuki araştırma, semantik karar arama ve dosya analizi için yapay zeka destekli hukuk platformu.";
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: siteTitle,
-    template: "%s | Consülto",
+    template: "%s | Consülto Ai",
   },
   description: siteDescription,
   alternates: {
@@ -29,7 +29,7 @@ export const metadata = {
     type: "website",
     locale: "tr_TR",
     url: siteUrl,
-    siteName: "Consülto",
+    siteName: "Consülto Ai",
     title: siteTitle,
     description: socialDescription,
   },

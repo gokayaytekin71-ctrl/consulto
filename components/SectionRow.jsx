@@ -108,10 +108,10 @@ export default function SectionRow({
             <h2
               id={`${id || "section"}-title`}
               style={{
-                fontFamily: "'Fraunces', serif",
-                fontWeight: 600,
+                fontFamily: "var(--font-inter), system-ui, sans-serif",
+                fontWeight: 800,
                 fontSize: "1.32rem",
-                letterSpacing: "-0.01em",
+                letterSpacing: "0",
                 color: "var(--navy, #0f2a4a)",
                 lineHeight: 1.15,
               }}
@@ -124,7 +124,7 @@ export default function SectionRow({
                   marginTop: "4px",
                   fontSize: "0.84rem",
                   color: "var(--ink-soft, #4a5160)",
-                  fontFamily: "'Newsreader', Georgia, serif",
+                  fontFamily: "var(--font-inter), system-ui, sans-serif",
                 }}
               >
                 {subtitle}

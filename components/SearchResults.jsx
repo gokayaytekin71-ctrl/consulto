@@ -144,8 +144,7 @@ export default function SearchResults({ items = [], query = "", field = "content
 
   return (
     <>
-      {/* Overlay SADECE sıralama/navigasyon değişiminde. Load-more inline buton gösterir. */}
-      {isNavigating && <LoadingOverlay />}
+      {(isNavigating || isMoreLoading) && <LoadingOverlay />}
       <section className="space-y-4">
         {/* Üst bar: alan rozeti + sıralama */}
         <div className="flex items-center justify-between gap-3">

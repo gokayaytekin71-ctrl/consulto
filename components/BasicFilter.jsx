@@ -244,7 +244,7 @@ export default function BasicFilter({ defaultParams = {} }) {
                 <div>
                   <p className="font-semibold text-[#0f2a4a]">Anahtar Kelime</p>
                   <p className="text-slate-500">Kararın anahtar kelimeleri alanında arama yapar.</p>
-                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[11px] text-[#0f2a4a]">Örnek: kira, muris muvazaası</p>
+                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-[#0f2a4a]">Örnek: kira, muris muvazaası</p>
                 </div>
               </li>
               <li className="flex gap-3">
@@ -252,7 +252,7 @@ export default function BasicFilter({ defaultParams = {} }) {
                 <div>
                   <p className="font-semibold text-[#0f2a4a]">Tam Eşleşme</p>
                   <p className="text-slate-500">Yazdığınız ifade karar metninde birebir aranır.</p>
-                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[11px] text-[#0f2a4a]">Örnek: &quot;mutlak muvazaa&quot;</p>
+                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-[#0f2a4a]">Örnek: &quot;mutlak muvazaa&quot;</p>
                 </div>
               </li>
               <li className="flex gap-3">
@@ -260,7 +260,7 @@ export default function BasicFilter({ defaultParams = {} }) {
                 <div>
                   <p className="font-semibold text-[#0f2a4a]">Hariç Tut</p>
                   <p className="text-slate-500">Belirttiğiniz kelimeleri içeren kararlar sonuçlardan çıkarılır.</p>
-                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[11px] text-[#0f2a4a]">Örnek: ihbar, kusur</p>
+                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-[#0f2a4a]">Örnek: ihbar, kusur</p>
                 </div>
               </li>
               <li className="flex gap-3">
@@ -268,7 +268,7 @@ export default function BasicFilter({ defaultParams = {} }) {
                 <div>
                   <p className="font-semibold text-[#0f2a4a]">Özet İçinde Ara</p>
                   <p className="text-slate-500">Yalnızca yapay zekâ karar özetleri içinde arama yapar.</p>
-                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[11px] text-[#0f2a4a]">Örnek: iş kazası, hizmet tespiti</p>
+                  <p className="mt-1 inline-block rounded bg-slate-100 px-1.5 py-0.5 text-[11px] font-semibold text-[#0f2a4a]">Örnek: iş kazası, hizmet tespiti</p>
                 </div>
               </li>
             </ul>

@@ -71,6 +71,22 @@ function cleanTitle(title = "") {
   return (title || "").replace(/^\s*Analiz\s*[—–-]\s*/i, "").trim();
 }
 
+function pruneChatForStorage(chat) {
+  if (!chat || typeof chat !== "object") return chat;
+  const sources = chat.sources && typeof chat.sources === "object" ? chat.sources : null;
+  if (!sources) return chat;
+
+  return {
+    ...chat,
+    sources: {
+      ...sources,
+      mevzuat: Array.isArray(sources.mevzuat)
+        ? sources.mevzuat.map(({ raw, ...item }) => item)
+        : sources.mevzuat,
+    },
+  };
+}
+
 // --- Karar Helperları ---
 function looksLikeSlug(s = "") {
   const base = String(s).replace(/\.txt$/i, "");
@@ -294,7 +310,7 @@ export function useAnalysisBot() {
 
   // --- API & Persistence ---
   const saveChats = async (nextChats, reason = "unspecified") => {
-    const payload = JSON.parse(JSON.stringify(nextChats ?? []));
+    const payload = JSON.parse(JSON.stringify((nextChats ?? []).map(pruneChatForStorage)));
     const seq = ++saveSeq.current;
     if (JSON.stringify({ chats: payload }).length > 800 * 1024) console.warn("Large payload");
     try {
@@ -302,7 +318,10 @@ export function useAnalysisBot() {
         method: "PUT", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chats: payload }), cache: "no-store", credentials: "include",
       });
-      if (!res.ok) return;
+      if (!res.ok) {
+        console.error("saveChats failed", { status: res.status, reason });
+        return;
+      }
       if (seq > latestCommitted.current) latestCommitted.current = seq;
     } catch (e) { console.error("saveChats error", e); }
   };
@@ -464,7 +483,6 @@ export function useAnalysisBot() {
                   baslik: read("madde_baslik") || readP("baslik") || "",
                   metin: maddeMetinRaw ? stripHtmlTags(maddeMetinRaw) : "",
                   maddeMetin: maddeMetinRaw ? stripHtmlTags(maddeMetinRaw) : "",
-                  raw: src,
                 };
               }),
               kararlar: (data?.ilgili_kararlar || []).map(k => ({ id: k?.properties?.orijinal_karar_id, dosya: k?.properties?.dosya_adi, tip: k?.properties?.kaynak_turu, code: k?.properties?.code, type: k?.properties?.type })),

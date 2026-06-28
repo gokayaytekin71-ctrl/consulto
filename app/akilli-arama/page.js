@@ -9,7 +9,7 @@ export default function AkilliAramaPage({ searchParams }) {
   return (
     // DEĞİŞİKLİK: Ana kapsayıcının kendi arka plan rengini kaldırıyoruz.
     // Arka plan artık tamamen CanvasBackground'dan gelecek.
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="clean-numerals min-h-screen relative overflow-hidden">
       
       <CanvasBackground />
 

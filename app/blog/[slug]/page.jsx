@@ -152,10 +152,10 @@ export default function BlogPostPage({ params }) {
 
         {/* Yazı sonu dönüşüm kutusu — ana ürüne yönlendir */}
         <div className="article-cta">
-          <h3>Bu konuyu kendi dosyanda çözmek ister misin?</h3>
+          <h3>Kendi uyuşmazlığını yapay zeka yardımıyla çözmek ister misin?</h3>
           <p>
-            Consülto, dosyanı analiz eder, ilgili Yargıtay kararlarını getirir ve dilekçeni yazar.
-            İlk 2 token ücretsiz.
+            Consülto, hukuki sorunuzu cevaplar, ilgili Yargıtay kararlarını getirir ve dilekçeni yazar.
+            İlk 2 token ücretsiz. - Kredi Kartı Gerekmez.
           </p>
           <Link href="/calisma-alani">
             Ücretsiz Dene

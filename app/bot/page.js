@@ -188,7 +188,7 @@ export default function AnalysisPage() {
   };
 
   return (
-    <div className={`flex flex-col h-[calc(100vh-4rem)] font-sans overflow-hidden transition-colors duration-500 ${c.appBg} ${c.ink} ${isDarkMode ? "selection:bg-amber-400/30 selection:text-amber-100" : "selection:bg-[#1C2A47]/15 selection:text-[#1C2A47]"}`}>
+    <div className={`clean-numerals flex flex-col h-[calc(100vh-4rem)] font-sans overflow-hidden transition-colors duration-500 ${c.appBg} ${c.ink} ${isDarkMode ? "selection:bg-amber-400/30 selection:text-amber-100" : "selection:bg-[#1C2A47]/15 selection:text-[#1C2A47]"}`}>
 
       <style jsx global>{`
         footer, .footer { display: none !important; }
@@ -314,7 +314,7 @@ export default function AnalysisPage() {
                         <div className="flex justify-between items-start gap-2">
                           <div className="min-w-0 flex-1">
                             <h4 className={`text-[13px] font-medium truncate mb-1 ${isActive ? c.navy : c.inkSoft} group-hover:${isDarkMode ? "text-slate-200" : "text-[#1C2A47]"}`}>{title}</h4>
-                            <span className={`text-[10px] font-mono ${c.inkMute}`}>{new Date(item.createdAt || Date.now()).toLocaleDateString("tr-TR")}</span>
+                            <span className={`clean-numerals text-[10px] font-semibold tracking-normal ${c.inkMute}`}>{new Date(item.createdAt || Date.now()).toLocaleDateString("tr-TR")}</span>
                           </div>
                         </div>
                         <button

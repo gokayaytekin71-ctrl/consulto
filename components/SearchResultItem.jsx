@@ -108,7 +108,7 @@ const SearchResultItem = ({
                 startTransition(() => router.push(`/kararlar/${hrefId}`));
               }}
             >
-              <h3 className="text-xl md:text-2xl font-mono font-normal text-slate-100 hover:text-sky-400 transition-colors mr-2">
+              <h3 className="text-xl md:text-2xl font-sans font-semibold tracking-normal text-slate-100 hover:text-sky-400 transition-colors mr-2">
                 {title}
               </h3>
             </Link>
@@ -130,7 +130,7 @@ const SearchResultItem = ({
           </div>
 
           {displayCode && (
-            <p className="text-sm text-slate-400 mt-1 font-mono">{displayCode}</p>
+            <p className="clean-numerals mt-1 text-sm font-semibold tracking-normal text-slate-400">{displayCode}</p>
           )}
         </div>
 

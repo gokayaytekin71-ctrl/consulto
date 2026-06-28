@@ -61,7 +61,7 @@ export default function DecisionCard({
             Karar Mercii
           </p>
           <h2
-            className="truncate font-serif text-lg font-semibold leading-tight text-[#0f2a4a]"
+            className="truncate font-sans text-lg font-bold leading-tight tracking-normal text-[#0f2a4a]"
             title={type}
           >
             {abbreviatedType}
@@ -69,7 +69,7 @@ export default function DecisionCard({
         </div>
 
         {code && (
-          <span className="mt-0.5 shrink-0 rounded-md border border-slate-200 bg-slate-50 px-2 py-1 font-mono text-[11px] font-semibold tracking-wide text-slate-600">
+          <span className="clean-numerals mt-0.5 shrink-0 rounded-md border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] font-semibold tracking-normal text-slate-600">
             {code}
           </span>
         )}

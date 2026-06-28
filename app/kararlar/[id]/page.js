@@ -142,7 +142,7 @@ const GLOBAL_CSS = `
   .doc-meta {
     display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center;
     margin-top: 18px;
-    font-family: var(--font-ibm-plex-mono), monospace;
+    font-family: var(--font-inter), system-ui, sans-serif;
     font-size: 0.78rem; color: var(--ink-soft);
   }
   .doc-meta .k { color: var(--ink-faint); text-transform: uppercase; font-size: 0.62rem; letter-spacing: 0.12em; margin-right: 8px; }
@@ -181,7 +181,7 @@ const GLOBAL_CSS = `
   }
 
   .prose p, .highlighted-body p {
-    font-family: var(--font-newsreader), Georgia, serif;
+    font-family: "Times New Roman", Times, serif;
     font-size: 1.16rem;
     line-height: 1.92;
     color: var(--ink);
@@ -189,7 +189,7 @@ const GLOBAL_CSS = `
     text-align: justify;
     hyphens: auto;
   }
-  .highlighted-body { font-family: var(--font-newsreader), Georgia, serif; }
+  .highlighted-body { font-family: "Times New Roman", Times, serif; }
 
   .reader-foot {
     margin-top: 56px; padding-top: 26px;
@@ -541,7 +541,7 @@ export default async function KararDetayPage({ params }) {
   const courtLabel = type.includes("Genel") ? "Hukuk Genel Kurulu" : "Yargıtay";
 
   return (
-    <main className="grain min-h-screen">
+    <main className="grain clean-numerals min-h-screen">
 
       <Suspense fallback={null}>
         <div className="progress-track">

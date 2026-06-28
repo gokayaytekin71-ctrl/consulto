@@ -1311,7 +1311,7 @@ const processedMd = useMemo(() => {
   const iconPath = "M12 18.75a6 6 0 006-6v-1.5a.75.75 0 011.5 0v1.5a7.5 7.5 0 11-15 0v-1.5a.75.75 0 011.5 0v1.5a6 6 0 006 6zM12 9a.75.75 0 01.75-.75h.008a.75.75 0 01.75.75V11.25a.75.75 0 01-.75.75h-.008a.75.75 0 01-.75-.75V9z";
 
   return (
-    <main className={`min-h-screen relative overflow-hidden font-sans transition-colors duration-500 ${c.appBg} ${c.ink} ${isDarkMode ? "selection:bg-amber-400/30 selection:text-amber-100" : "selection:bg-[#1C2A47]/15 selection:text-[#1C2A47]"}`}>
+    <main className={`min-h-screen relative overflow-hidden font-serif transition-colors duration-500 ${c.appBg} ${c.ink} ${isDarkMode ? "selection:bg-amber-400/30 selection:text-amber-100" : "selection:bg-[#1C2A47]/15 selection:text-[#1C2A47]"}`}>
       {CanvasBackground ? <CanvasBackground /> : null}
 
       <style jsx global>{`
@@ -1326,7 +1326,7 @@ const processedMd = useMemo(() => {
             <header className={`p-6 md:p-8 border-b ${c.lineSoft} ${isDarkMode ? "bg-white/[0.02]" : "bg-[#F6EFE2]"}`}>
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                  <span className={`block text-[9px] font-mono tracking-[0.22em] uppercase ${c.inkMute} mb-1`}>Hazırlık</span>
+                  <span className={`block text-[9px] font-serif tracking-[0.22em] uppercase ${c.inkMute} mb-1`}>Hazırlık</span>
                   <h2 className={`text-2xl font-serif font-semibold leading-tight ${c.ink}`}>Dilekçe Oluşturucu</h2>
                 </div>
                 <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3">
@@ -1433,7 +1433,7 @@ const processedMd = useMemo(() => {
                 <section className="p-6 md:p-8 space-y-8">
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                     <div className="flex items-center gap-2.5">
-                      <span className={`inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-mono tracking-wider ${isDarkMode ? "border-amber-400/40 bg-amber-400/10 text-amber-300" : "border-[#DCC68C] bg-[#F2E7CC] text-[#A77B2E]"}`}>✓ HAZIR</span>
+                      <span className={`inline-flex items-center rounded-full border px-2.5 py-1 text-[10px] font-serif tracking-wider ${isDarkMode ? "border-amber-400/40 bg-amber-400/10 text-amber-300" : "border-[#DCC68C] bg-[#F2E7CC] text-[#A77B2E]"}`}>✓ HAZIR</span>
                       <h2 className={`text-xl font-serif font-semibold ${c.ink}`}>Taslak Dilekçe</h2>
                       {saving && <span className={`text-xs ml-1 ${c.inkMute}`}>kaydediliyor…</span>}
                     </div>
@@ -1500,7 +1500,7 @@ const processedMd = useMemo(() => {
                         <div className="max-w-3xl mx-auto">
                           <p className={`text-xs mb-2 font-medium ${c.inkMute}`}>Dilekçe metnini doğrudan düzenleyebilirsiniz. Değişiklikler otomatik kaydedilir.</p>
                           <textarea
-                            className={`w-full min-h-[580px] rounded-lg border p-5 text-sm font-mono leading-relaxed resize-y outline-none focus:ring-2 transition-all ${
+                            className={`w-full min-h-[580px] rounded-lg border p-5 text-sm font-serif leading-relaxed resize-y outline-none focus:ring-2 transition-all ${
                               isDarkMode
                                 ? "border-white/10 bg-[#0D1322] text-slate-200 focus:border-amber-400/40 focus:ring-amber-400/10"
                                 : "border-[#E4DAC6] bg-white text-[#15233B] focus:border-[#A77B2E] focus:ring-[#A77B2E]/15"
@@ -1641,13 +1641,13 @@ const processedMd = useMemo(() => {
                               return (
                                 <div key={i} className="w-full space-y-1" data-mevzuat-popover="1">
                                   <div className="flex items-stretch gap-2">
-                                    <button type="button" onClick={(e) => { e.stopPropagation(); const el = e.currentTarget; const pos = calcMevzuatPopover(el); setOpenMevzuat(prev => (prev?.key === popKey ? null : { key: popKey, el, ...pos })); }} aria-expanded={openMevzuat?.key === popKey} className={`inline-flex items-center gap-1 px-2.5 py-1 text-[12px] font-mono font-semibold rounded-lg whitespace-nowrap leading-none transition-colors focus:outline-none focus:ring-2 ${isDarkMode ? "bg-amber-400/15 text-amber-200 hover:bg-amber-400/25 focus:ring-amber-300/30" : "bg-[#16223E] text-white hover:bg-[#1f2f54] focus:ring-[#A77B2E]/30"}`}><span>m.</span><span className="tabular-nums">{d.madde}</span></button>
+                                    <button type="button" onClick={(e) => { e.stopPropagation(); const el = e.currentTarget; const pos = calcMevzuatPopover(el); setOpenMevzuat(prev => (prev?.key === popKey ? null : { key: popKey, el, ...pos })); }} aria-expanded={openMevzuat?.key === popKey} className={`inline-flex items-center gap-1 px-2.5 py-1 text-[12px] font-serif font-semibold rounded-lg whitespace-nowrap leading-none transition-colors focus:outline-none focus:ring-2 ${isDarkMode ? "bg-amber-400/15 text-amber-200 hover:bg-amber-400/25 focus:ring-amber-300/30" : "bg-[#16223E] text-white hover:bg-[#1f2f54] focus:ring-[#A77B2E]/30"}`}><span>m.</span><span className="tabular-nums">{d.madde}</span></button>
                                     <div className="relative flex-1">
                                       {href ? (<a className={`flex-1 inline-flex items-center px-3 py-2 rounded-lg text-[11px] font-medium leading-tight min-h-[32px] transition-colors ${isDarkMode ? "bg-white/5 text-slate-300 hover:text-amber-300 hover:bg-white/10" : "bg-[#F6EFE2] text-[#5B6478] hover:text-[#A77B2E] hover:bg-[#EFE6D4]"}`} href={href} target="_blank" rel="noreferrer" onClick={(e)=>e.stopPropagation()} title="Tam mevzuat sayfasına git">{d.kanun}</a>) : (<span className={`flex-1 inline-flex items-center px-3 py-2 rounded-lg text-[11px] font-medium leading-tight min-h-[32px] ${isDarkMode ? "bg-white/5 text-slate-300" : "bg-[#F6EFE2] text-[#5B6478]"}`}>{d.kanun}</span>)}
                                       {openMevzuat?.key === popKey && (
                                         <div data-mevzuat-popover="1" role="dialog" aria-modal="true" onClick={(e)=>e.stopPropagation()} className={`fixed z-[999] w-[42rem] max-w-[92vw] max-h-[70vh] overflow-auto rounded-xl border p-4 text-[12px] transition-transform duration-150 ease-out will-change-transform ${isDarkMode ? "border-white/10 bg-[#0D1322]/95 backdrop-blur-md shadow-[0_24px_60px_rgba(0,0,0,0.6)] ring-1 ring-amber-400/25 text-slate-100" : "border-[#E4DAC6] bg-white shadow-[0_24px_60px_-20px_rgba(28,42,71,0.45)] ring-1 ring-[#DCC68C] text-[#1C2A47]"} ` + (openMevzuat?.placement === 'left' ? "-translate-x-full -translate-y-1/2" : openMevzuat?.placement === 'right' ? "-translate-y-1/2" : openMevzuat?.placement === 'bottom' ? "-translate-x-1/2" : "-translate-x-1/2 -translate-y-full")} style={{ top: openMevzuat.top, left: openMevzuat.left }}>
                                           <div className={`pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-transparent to-transparent ${isDarkMode ? "via-amber-400/30" : "via-[#A77B2E]/40"}`}></div>
-                                          <div className="flex items-center justify-between gap-2 mb-2"><div><div className="font-serif font-semibold">{d.kanun}</div><div className={`text-xs mt-0.5 font-mono ${c.inkSoft}`}>m. {d.madde}</div></div><button type="button" onClick={() => setOpenMevzuat(null)} className={`shrink-0 w-8 h-8 grid place-items-center rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? "bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white ring-1 ring-white/15 focus:ring-amber-400/40" : "bg-[#F6EFE2] text-[#5B6478] hover:bg-[#EFE6D4] hover:text-[#1C2A47] ring-1 ring-[#E4DAC6] focus:ring-[#A77B2E]/40"}`} aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
+                                          <div className="flex items-center justify-between gap-2 mb-2"><div><div className="font-serif font-semibold">{d.kanun}</div><div className={`text-xs mt-0.5 font-serif ${c.inkSoft}`}>m. {d.madde}</div></div><button type="button" onClick={() => setOpenMevzuat(null)} className={`shrink-0 w-8 h-8 grid place-items-center rounded-md focus:outline-none focus:ring-2 ${isDarkMode ? "bg-white/10 text-slate-200 hover:bg-white/20 hover:text-white ring-1 ring-white/15 focus:ring-amber-400/40" : "bg-[#F6EFE2] text-[#5B6478] hover:bg-[#EFE6D4] hover:text-[#1C2A47] ring-1 ring-[#E4DAC6] focus:ring-[#A77B2E]/40"}`} aria-label="Kapat"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div>
                                           <div className="leading-snug whitespace-pre-wrap break-words">{preview || "Madde metni getirilemedi."}</div>
                                         </div>
                                       )}
@@ -1813,7 +1813,7 @@ const processedMd = useMemo(() => {
                 </div>
                 <div className="min-w-0">
                   <h3 className={`text-sm font-serif font-semibold leading-tight ${c.ink}`}>Son Dilekçeleriniz</h3>
-                  <span className={`text-[10px] font-mono tracking-[0.18em] ${c.inkMute}`}>{Array.isArray(recentDrafts) ? recentDrafts.length : 0} KAYIT</span>
+                  <span className={`text-[10px] font-serif tracking-[0.18em] ${c.inkMute}`}>{Array.isArray(recentDrafts) ? recentDrafts.length : 0} KAYIT</span>
                 </div>
               </div>
               <div className="flex items-center gap-1.5">
@@ -1843,9 +1843,9 @@ const processedMd = useMemo(() => {
                       >
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0 flex-1">
-                            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-mono tracking-wide mb-2 border ${c.goldBg} ${c.goldBorder} ${c.gold}`}>{label}</span>
+                            <span className={`inline-block px-2 py-0.5 rounded-full text-[10px] font-serif tracking-wide mb-2 border ${c.goldBg} ${c.goldBorder} ${c.gold}`}>{label}</span>
                             {d.olay_ozet && <p className={`text-xs leading-relaxed line-clamp-2 ${c.inkSoft}`}>{d.olay_ozet}</p>}
-                            {when && <div className={`mt-2 text-[10px] font-mono ${c.inkMute}`}>{when}</div>}
+                            {when && <div className={`mt-2 text-[10px] font-serif ${c.inkMute}`}>{when}</div>}
                           </div>
                           {loadable && (
                             <span className={`shrink-0 self-center transition-transform group-hover:translate-x-0.5 ${c.gold}`}>

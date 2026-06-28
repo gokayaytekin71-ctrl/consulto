@@ -76,8 +76,8 @@ const GLOBAL_CSS = `
     box-shadow: 0 5px 16px -5px rgba(15,42,74,0.45);
   }
   .brand-name {
-    font-family: var(--font-fraunces), serif;
-    font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 800; font-size: 1.08rem; letter-spacing: 0;
     color: var(--navy); line-height: 1; display: block;
   }
   .brand-sub {
@@ -133,15 +133,16 @@ const GLOBAL_CSS = `
   /* ---------------- HERO SEARCH ---------------- */
   .hero { margin-bottom: 40px; }
   .hero-kicker {
-    font-family: var(--font-ibm-plex-mono), monospace;
-    font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.24em;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.16em;
+    font-weight: 700;
     color: var(--amber); margin-bottom: 12px;
   }
   .hero-title {
-    font-family: var(--font-fraunces), serif;
-    font-weight: 600;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-weight: 800;
     font-size: clamp(1.7rem, 3.2vw, 2.5rem);
-    line-height: 1.12; letter-spacing: -0.018em;
+    line-height: 1.12; letter-spacing: 0;
     color: var(--navy); max-width: 16ch;
     margin-bottom: 24px;
   }
@@ -156,7 +157,7 @@ const GLOBAL_CSS = `
     border: 1px solid var(--line-strong);
     background: var(--surface);
     padding: 0 124px 0 50px;
-    font-family: var(--font-newsreader), Georgia, serif;
+    font-family: var(--font-inter), system-ui, sans-serif;
     font-size: 1.08rem; color: var(--ink);
     box-shadow: 0 1px 0 var(--line), 0 24px 48px -38px rgba(26,31,43,0.4);
     transition: border-color .18s ease, box-shadow .18s ease;
@@ -219,8 +220,8 @@ const GLOBAL_CSS = `
     margin-bottom: 22px;
   }
   .results-head .lbl {
-    font-family: var(--font-ibm-plex-mono), monospace;
-    font-size: 0.66rem; font-weight: 500; letter-spacing: 0.16em;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
     text-transform: uppercase; color: var(--amber);
   }
   .results-head .rule { height: 1px; flex: 1; background: var(--line-strong); }

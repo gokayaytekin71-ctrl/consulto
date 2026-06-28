@@ -23,13 +23,13 @@ export default function AboutPage() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": "Consülto",
+    "name": "Consülto AI",
     "operatingSystem": "Web",
     "applicationCategory": "LegalApplication",
-    "description": "Avukatlar için eski nesil arama motorlarının ötesinde; bağlama duyarlı içtihat araması yapan, halüsinasyon riski barındırmayan yapay zeka tabanlı dilekçe ve analiz platformu.",
+    "description": "Avukatlar için eski nesil arama motorlarının ötesinde; bağlama duyarlı içtihat araması yapan, halüsinasyon riski barındırmayan yapay zeka tabanlı dilekçe ve analiz platformu. Yapay zeka ile chat yapın!",
     "publisher": {
       "@type": "Organization",
-      "name": "Consülto Legal Tech Platform",
+      "name": "Consülto AI Legal Tech Platform",
       "url": "https://consultohukuk.com"
     }
   };
@@ -44,14 +44,14 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="mx-auto max-w-6xl px-4 sm:px-6 pt-16 pb-12 text-center md:text-left">
         <div className="inline-flex items-center gap-2 rounded-full bg-consulto-surface/80 border border-consulto-border text-consulto-primary text-xs px-4 py-1.5 mb-6 backdrop-blur-sm">
-          <span className="font-bold">1.000.000+</span>
+          <span className="font-bold">7.000.000+</span>
           <span>Nitelikli Kararla Eğitildi</span>
         </div>
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white mb-6">
           Standart Programların Ötesinde <span className="text-transparent bg-clip-text bg-gradient-to-r from-consulto-primary to-consulto-accent">Hukuki Zeka</span>
         </h1>
         <p className="mt-4 text-base sm:text-lg text-consulto-muted max-w-3xl leading-relaxed">
-          Sıradan sohbet botlarının "uydurma" (halüsinasyon) riskini ve eski nesil içtihat programlarının yetersiz arama yapılarını geride bırakın. Consülto; <strong>Yargıtay atıflı dilekçeler</strong>, konsept anlayan semantik aramalar, dosya analizleri ve sıfır hata paylı <strong>hukuki hesaplama araçlarıyla</strong> avukatların en güvenilir çalışma arkadaşıdır.
+          Sıradan sohbet botlarının "uydurma" (halüsinasyon) riskini ve eski nesil içtihat programlarının yetersiz arama yapılarını geride bırakın. Consülto; <strong>Yargıtay atıflı dilekçeler</strong>, konsept anlayan semantik aramalar, dosya analizleri ve soru cevap yapabileceğiniz <strong>sohbet araçlarıyla</strong> avukatların en güvenilir çalışma arkadaşıdır.
         </p>
       </section>
 
@@ -63,14 +63,14 @@ export default function AboutPage() {
           {[
             {
               title: "Dilekçe Botu",
-              desc: "Jenerik yapay zekaların aksine Türk Hukuku normlarına sadıktır. Halüsinasyon riski barındırmayan; hukuki nedeni isabetli, gerçek Yargıtay kararlarına atıf yapan profesyonel taslaklar üretir.",
+              desc: "Jenerik yapay zekaların aksine Türk Hukuku normlarına sadıktır. Halüsinasyon riski barındırmayan; hukuki nedeni isabetli, gerçek Yargıtay kararlarına atıf yapan profesyonel taslaklar üretir. Üstelik dilekçeleriniz .udf formatında indirebilirsiniz!",
               icon: (
                 <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 12h6"/><path d="M9 16h4"/></svg>
               ),
             },
             {
               title: "Akıllı Çalışma Alanı",
-              desc: "Yüzlerce sayfalık PDF'leri okutun. Klasik programların yapamadığını yapın; iddianame veya bilirkişi raporunuzdaki aleyhe/lehe delilleri ve gizli riskleri saniyeler içinde profilleyip tespit edin.",
+              desc: "Yüzlerce sayfalık PDF'leri okutun. Klasik programların yapamadığını yapın; iddianame veya bilirkişi raporunuzdaki aleyhe/lehe delilleri ve gizli riskleri saniyeler içinde profilleyip tespit edin. Soru sorun, dilekçe yazdırın. Her şey tek platformda!",
               icon: (
                 <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18" /><path d="M8 14h4" /><path d="M8 17h8" /></svg>
               ),

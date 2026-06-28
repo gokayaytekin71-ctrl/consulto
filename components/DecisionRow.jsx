@@ -48,11 +48,11 @@ export default function DecisionRow({
 
   const headingStyle = {
     display: "block",
-    fontFamily: "'Fraunces', serif",
-    fontWeight: 600,
-    fontSize: "1.04rem",
+    fontFamily: '"Times New Roman", Times, serif',
+    fontWeight: 700,
+    fontSize: "1.14rem",
     lineHeight: 1.32,
-    letterSpacing: "-0.005em",
+    letterSpacing: "0",
     color: "var(--navy, #0f2a4a)",
     textDecoration: "none",
     transition: "color .16s ease",
@@ -115,14 +115,14 @@ export default function DecisionRow({
           {type}
         </span>
         {code && (
-          <span style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.7rem", color: "var(--ink-faint, #8a8f9c)" }}>
+          <span className="clean-numerals" style={{ fontFamily: '"Times New Roman", Times, serif', fontSize: "0.88rem", fontWeight: 700, color: "var(--ink-soft, #4a5160)" }}>
             {code}
           </span>
         )}
         {dateStr && (
           <span
-            className="ml-auto inline-flex items-center gap-1"
-            style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: "0.68rem", color: "var(--ink-faint, #8a8f9c)" }}
+            className="clean-numerals ml-auto inline-flex items-center gap-1"
+            style={{ fontFamily: '"Times New Roman", Times, serif', fontSize: "0.86rem", fontWeight: 700, color: "var(--ink-soft, #4a5160)" }}
           >
             <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
             {dateStr}
@@ -139,13 +139,13 @@ export default function DecisionRow({
       {showSnippet ? (
         <p
           className="mt-2 line-clamp-3"
-          style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "0.94rem", lineHeight: 1.6, color: "var(--ink-soft, #4a5160)" }}
+          style={{ fontFamily: '"Times New Roman", Times, serif', fontSize: "1rem", lineHeight: 1.62, color: "var(--ink-soft, #4a5160)" }}
           dangerouslySetInnerHTML={{ __html: `… ${highlight(snippet, query)} …` }}
         />
       ) : preview ? (
         <p
           className="mt-2 line-clamp-2"
-          style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "0.94rem", lineHeight: 1.6, color: "var(--ink-soft, #4a5160)" }}
+          style={{ fontFamily: '"Times New Roman", Times, serif', fontSize: "1rem", lineHeight: 1.62, color: "var(--ink-soft, #4a5160)" }}
         >
           <span style={{ color: "var(--ink-faint, #8a8f9c)", fontStyle: "italic" }}>Uyuşmazlık: </span>
           {preview}
@@ -167,7 +167,7 @@ export default function DecisionRow({
                 >
                   {b.label}
                 </div>
-                <div style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "0.94rem", lineHeight: 1.62, color: "var(--ink-soft, #4a5160)" }}>
+                <div style={{ fontFamily: '"Times New Roman", Times, serif', fontSize: "1rem", lineHeight: 1.62, color: "var(--ink-soft, #4a5160)" }}>
                   {b.body}
                 </div>
               </div>
@@ -175,7 +175,7 @@ export default function DecisionRow({
           ) : (
             <div
               className="whitespace-pre-line"
-              style={{ fontFamily: "'Newsreader', Georgia, serif", fontSize: "0.94rem", lineHeight: 1.62, color: "var(--ink-soft, #4a5160)" }}
+              style={{ fontFamily: '"Times New Roman", Times, serif', fontSize: "1rem", lineHeight: 1.62, color: "var(--ink-soft, #4a5160)" }}
             >
               {aiSummary || "Özet bulunamadı."}
             </div>

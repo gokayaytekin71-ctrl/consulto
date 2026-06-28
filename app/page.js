@@ -25,7 +25,7 @@ const homeStructuredData = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "Consülto",
+      name: "Consülto Ai",
       url: SITE_URL,
       logo: `${SITE_URL}/images/logo.png`,
     },
@@ -33,7 +33,7 @@ const homeStructuredData = {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
       url: SITE_URL,
-      name: "Consülto",
+      name: "Consülto Ai",
       publisher: {
         "@id": `${SITE_URL}/#organization`,
       },
@@ -46,7 +46,7 @@ const homeStructuredData = {
     },
     {
       "@type": "SoftwareApplication",
-      name: "Consülto",
+      name: "Consülto Ai",
       applicationCategory: "LegalTechApplication",
       operatingSystem: "Web",
       url: SITE_URL,
@@ -191,6 +191,140 @@ function ProductMockup() {
         <span className="text-sm font-bold text-slate-700">Dilekçe hazırlandı</span>
       </div>
     </div>
+  );
+}
+
+function PetitionEditorShowcase() {
+  return (
+    <section className="mx-auto max-w-7xl px-4 pb-16 md:px-6 md:pb-24">
+      <div className="grid items-center gap-8 lg:grid-cols-[0.82fr_1.18fr]">
+        <div>
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2">
+            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-600 text-white">
+              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.8}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </span>
+            <span className="text-[11px] font-black uppercase tracking-[0.22em] text-emerald-700">Yeni · Dilekçe Editörü</span>
+          </div>
+
+          <h2 className="text-3xl font-black tracking-tight text-[#002a5c] md:text-5xl">
+            Dilekçeyi sadece üretme,<br />
+            <span className="text-shine">çalışma alanında düzenle</span>
+          </h2>
+          <p className="mt-5 max-w-xl text-base font-medium leading-7 text-slate-500 md:text-lg">
+            Dilekçe masasında metni Word görünümünde oku, istediğin paragrafı seç, revize iste veya doğrudan düzenle. Değişiklikleri takip et, son halini Word ya da UYAP uyumlu(udf formatında) dosya olarak indir.
+          </p>
+
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {[
+              { title: "Seçili Metne Revize", desc: "Tek satır ya da paragraf seç; sadece o kısmı iyileştir.", color: "text-blue-700", bg: "bg-blue-50", border: "border-blue-100" },
+              { title: "Yeşil Değişiklik Takibi", desc: "Revize edilen kısımlar belgede görünür kalır.", color: "text-emerald-700", bg: "bg-emerald-50", border: "border-emerald-100" },
+              { title: "Word / udf Çıktısı", desc: "Kalın, altı çizili ve hizalamalar korunur.", color: "text-violet-700", bg: "bg-violet-50", border: "border-violet-100" },
+              { title: "Çalışma Alanı Bağlamı", desc: "Dosyalar, kararlar ve notlarla aynı masada çalışır.", color: "text-amber-700", bg: "bg-amber-50", border: "border-amber-100" },
+            ].map((item) => (
+              <div key={item.title} className={`rounded-2xl border ${item.border} ${item.bg} p-4`}>
+                <div className={`text-sm font-black ${item.color}`}>{item.title}</div>
+                <p className="mt-1 text-xs font-medium leading-5 text-slate-500">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <Link
+            href="/calisma-alani"
+            className="mt-8 inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-500 px-6 py-3.5 text-sm font-black text-white shadow-[0_12px_34px_-12px_rgba(5,150,105,0.65)] transition hover:-translate-y-1"
+          >
+            Dilekçe Masasını Aç
+            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </Link>
+        </div>
+
+        <div className="grad-border grad-border-on relative overflow-hidden rounded-[2rem] bg-white shadow-[0_42px_100px_-38px_rgba(15,42,74,0.55)]">
+          <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-emerald-300/25 blur-3xl" />
+          <div className="absolute -bottom-28 left-10 h-56 w-56 rounded-full bg-blue-300/20 blur-3xl" />
+
+          <div className="relative border-b border-slate-200 bg-slate-50/90 px-4 py-3">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-500 text-white shadow-sm">
+                  <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </span>
+                <div className="min-w-0">
+                  <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Çalışma Alanı</div>
+                  <div className="truncate text-sm font-black text-slate-900">Dilekçe Editörü</div>
+                </div>
+              </div>
+              <div className="flex shrink-0 items-center gap-2">
+                <span className="rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-[11px] font-black text-slate-600 shadow-sm">Word</span>
+                <span className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-[11px] font-black text-emerald-700 shadow-sm">udf</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative bg-[linear-gradient(to_right,rgba(15,23,42,0.04)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.04)_1px,transparent_1px)] bg-[size:28px_28px] p-4 md:p-5">
+            <div className="mx-auto max-h-[520px] max-w-[760px] overflow-hidden rounded-sm border border-slate-200 bg-white px-6 py-7 shadow-[0_28px_70px_-38px_rgba(15,23,42,0.55)] md:px-9">
+              <div className="text-center font-serif text-base font-black text-slate-900">NÖBETÇİ SULH HUKUK MAHKEMESİNE</div>
+              <div className="mt-7 space-y-3 font-serif text-[13.5px] leading-6 text-slate-900">
+                <div className="grid grid-cols-[170px_1fr] items-start gap-x-3">
+                  <span className="flex h-6 items-start justify-between border-b-2 border-slate-800 pr-1 font-black leading-6"><span>DAVACI</span><span>:</span></span>
+                  <span>[Davacı Adı Soyadı] - [Adres]</span>
+                </div>
+                <div className="grid grid-cols-[170px_1fr] items-start gap-x-3">
+                  <span className="flex h-6 items-start justify-between border-b-2 border-slate-800 pr-1 font-black leading-6"><span>VEKİLİ</span><span>:</span></span>
+                  <span>Av. [Avukat Adı Soyadı] - [UETS Adresi]</span>
+                </div>
+                <div className="grid grid-cols-[170px_1fr] items-start gap-x-3">
+                  <span className="flex h-6 items-start justify-between border-b-2 border-slate-800 pr-1 font-black leading-6"><span>DAVALI</span><span>:</span></span>
+                  <span>[Davalı Kiracı Adı Soyadı] - [Adres]</span>
+                </div>
+                <div className="grid grid-cols-[170px_1fr] items-start gap-x-3">
+                  <span className="flex h-6 items-start justify-between border-b-2 border-slate-800 pr-1 font-black leading-6"><span>KONU</span><span>:</span></span>
+                  <span>
+                    Davalı kiracının kira bedellerini ihtara rağmen ödememesi nedeniyle tahliye ve kira alacaklarının tahsili talebidir.
+                  </span>
+                </div>
+
+                <div className="my-4 border-t border-slate-200" />
+                <div className="text-center text-xs font-black uppercase tracking-[0.18em] text-slate-700">Açıklamalar</div>
+
+                <p>
+                  <span className="font-black">1. Kira İlişkisinin Kurulması:</span>{" "}
+                  <span className="rounded bg-yellow-200/80 px-1 py-0.5">Müvekkil ile davalı arasında [Sözleşme Tarihi] başlangıç tarihli kira sözleşmesi akdedilmiş</span> olup davalı, [Kiralanan Adresi] adresindeki taşınmazı konut olarak kullanmaktadır.
+                </p>
+                <p>
+                  <span className="font-black">2. Temerrüt Olgusunun Gerçekleşmesi:</span>{" "}
+                  <span className="rounded bg-emerald-100 px-1 py-0.5 text-emerald-900">Davalı, usulüne uygun ihtara rağmen Türk Borçlar Kanunu m. 315'te öngörülen otuz günlük süre içinde ödeme yapmamış</span>; bu nedenle tahliye ve birikmiş kira alacaklarının tahsili şartları oluşmuştur.
+                </p>
+              </div>
+            </div>
+
+            <div className="mx-auto -mt-8 flex max-w-[660px] flex-col gap-3 rounded-3xl border border-slate-200 bg-white/95 p-4 shadow-[0_22px_70px_-30px_rgba(15,23,42,0.55)] backdrop-blur">
+              <div className="flex flex-col gap-3 md:flex-row md:items-center">
+                <div className="min-w-0 flex-1">
+                  <div className="text-[10px] font-black uppercase tracking-[0.24em] text-slate-400">Seçili Metin</div>
+                  <div className="mt-1 truncate text-sm font-bold text-slate-700">“Müvekkil ile davalı arasında kira sözleşmesi...”</div>
+                </div>
+                <div className="flex shrink-0 gap-2">
+                  <span className="rounded-2xl border border-slate-200 bg-white px-4 py-2 text-xs font-black text-slate-700 shadow-sm">Düzenle</span>
+                  <span className="rounded-2xl bg-blue-600 px-4 py-2 text-xs font-black text-white shadow-sm">Revize İste</span>
+                </div>
+              </div>
+              <div className="rounded-2xl border border-blue-100 bg-blue-50/70 px-4 py-3">
+                <div className="text-[10px] font-black uppercase tracking-[0.22em] text-blue-500">Revize Talimatı</div>
+                <div className="mt-1 text-sm font-semibold text-slate-700">
+                  Bu kısmı biraz daha detaylandır; TBK m. 315 yönünden ihtar, süre ve temerrüt sonucunu açıkla.
+                  <span className="ml-1 inline-block h-4 w-px translate-y-0.5 animate-pulse bg-blue-600" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -530,6 +664,8 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <PetitionEditorShowcase />
  
       {/* =====================================================================
           3. NASIL ÇALIŞIR — 3 adım

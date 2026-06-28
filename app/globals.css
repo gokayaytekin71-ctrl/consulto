@@ -43,6 +43,11 @@ body {
   font-family: var(--font-inter), sans-serif;
 }
 
+.clean-numerals {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
 /* react-calendar gibi harici bileşenleri temamızla uyumlu hale getiriyoruz */
 .react-calendar {
   color: var(--foreground);
