@@ -41,7 +41,7 @@ export default function WorkspaceHeader({ vm }) {
   }
 
   return (
-    <header className="relative z-30 flex h-[72px] shrink-0 items-center gap-3 overflow-hidden border-b border-slate-200/70 bg-white/85 px-3 backdrop-blur-2xl md:h-[86px] md:px-5">
+    <header className="relative z-30 flex h-[72px] shrink-0 items-center gap-3 overflow-visible border-b border-slate-200/70 bg-white/85 px-3 backdrop-blur-2xl md:h-[86px] md:px-5">
       <div className="flex min-w-0 flex-1 items-center gap-2 md:gap-3">
         <button
           type="button"
@@ -111,7 +111,7 @@ export default function WorkspaceHeader({ vm }) {
 
           {/* Dropdown Menu */}
           {isWorkspaceDropdownOpen && (
-            <div className="absolute left-0 top-full mt-2 w-[360px] max-w-[calc(100vw-2rem)] origin-top-left overflow-hidden rounded-3xl border border-slate-200 bg-white/95 p-2 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.18)] backdrop-blur-2xl animate-in fade-in slide-in-from-top-4 duration-200">
+            <div className="absolute left-0 top-full z-50 mt-2 w-[360px] max-w-[calc(100vw-2rem)] origin-top-left overflow-hidden rounded-3xl border border-slate-200 bg-white/95 p-2 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.18)] backdrop-blur-2xl animate-in fade-in slide-in-from-top-4 duration-200">
               <div className="max-h-[300px] overflow-y-auto overflow-x-hidden custom-scrollbar p-1">
                 {isLoadingWorkspaces ? (
                   <div className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 p-4 text-center text-xs font-bold text-slate-500">

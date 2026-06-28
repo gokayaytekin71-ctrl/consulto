@@ -343,7 +343,27 @@ export default function AnalysisPage() {
           <div className="flex flex-col gap-5 pb-16">
 
             {/* Soru Alanı — "danışma masası" */}
-            <PremiumCard isDarkMode={isDarkMode} eyebrow="Akademisyen Titizliğinde" title="Analiz Raporları" icon={icons.scale}>
+            <PremiumCard
+              isDarkMode={isDarkMode}
+              eyebrow="Akademisyen Titizliğinde"
+              title="Analiz Raporları"
+              icon={icons.scale}
+              action={
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className={`hidden md:inline-flex h-9 w-9 items-center justify-center rounded-xl border transition-colors ${
+                    isDarkMode
+                      ? "border-white/10 text-white/70 hover:bg-white/[0.05] hover:text-amber-300"
+                      : "border-[#E4DAC6] text-[#5B6478] hover:bg-white hover:text-[#A77B2E]"
+                  }`}
+                  title={isDarkMode ? "Açık Mod" : "Koyu Mod"}
+                  aria-label={isDarkMode ? "Açık moda geç" : "Koyu moda geç"}
+                >
+                  {isDarkMode ? icons.sun : icons.moon}
+                </button>
+              }
+            >
               <form onSubmit={handleAnalyze} className="relative">
                 <textarea
                   disabled={isLoading}

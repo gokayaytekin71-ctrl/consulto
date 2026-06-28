@@ -56,7 +56,7 @@ export default function LoadingOverlay() {
           {/* Terminal Stili Alt Metin */}
           <div className="flex items-center gap-2 text-xs md:text-sm font-mono text-cyan-200/50 tracking-widest">
             <span className="w-2 h-2 bg-cyan-400 rounded-full animate-ping"></span>
-            SİSTEM BAŞLATILIYOR...
+            Lütfen Bekleyiniz...
           </div>
 
         </div>
