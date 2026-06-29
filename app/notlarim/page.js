@@ -59,8 +59,13 @@ export default function NotlarimPage() {
   const editorSpan = rightCount === 2 ? "xl:col-span-6" : rightCount === 1 ? "xl:col-span-9" : "xl:col-span-12";
 
   return (
-    <div className="h-[calc(100vh-4rem)] overflow-hidden workspace-bg text-slate-900 font-sans">
-      <div className="flex h-full">
+    <div className="notlarim-page-shell min-h-[calc(100vh-4rem)] overflow-y-auto workspace-bg text-slate-900 font-sans xl:h-[calc(100vh-4rem)] xl:overflow-hidden">
+      <style jsx global>{`
+        body:has(.notlarim-page-shell) footer {
+          display: none !important;
+        }
+      `}</style>
+      <div className="flex min-h-[calc(100vh-4rem)] xl:h-full xl:min-h-0">
         {/* Sol not ağacı — yalnızca masaüstü */}
         {!useMobile && vm.sidebarOpen && <NotesSidebar vm={vm} />}
 
@@ -70,8 +75,8 @@ export default function NotlarimPage() {
           {useMobile ? (
             /* ── Mobil: tek panel + alt sekme ── */
             <>
-              <section className="flex min-h-0 flex-1 flex-col overflow-hidden p-3">
-                <div className="min-h-0 flex-1">
+              <section className="flex flex-1 flex-col overflow-visible p-3">
+                <div className="min-h-[calc(100vh-12rem)] flex-1">
                   {mobileTab === "editor"   && <NoteEditorPanel vm={vm} />}
                   {mobileTab === "kararlar" && <KararlarPanel   vm={vm} />}
                   {mobileTab === "mevzuat"  && <MevzuatPanel    vm={vm} />}

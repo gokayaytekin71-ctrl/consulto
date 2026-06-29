@@ -17,6 +17,26 @@ const IcoMenu    = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentCol
 const IcoX       = () => <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>;
 const IcoDot     = ({ className = "" }) => <span className={`h-1.5 w-1.5 rounded-full ${className}`} />;
 
+const READ_ANNOUNCEMENTS_KEY = "consulto_read_announcements";
+
+function getReadAnnouncementIds() {
+  try {
+    const raw = localStorage.getItem(READ_ANNOUNCEMENTS_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveReadAnnouncementId(id) {
+  if (!id) return;
+  try {
+    const next = Array.from(new Set([...getReadAnnouncementIds(), id]));
+    localStorage.setItem(READ_ANNOUNCEMENTS_KEY, JSON.stringify(next));
+  } catch {}
+}
+
 /* ─── nav tanımları ─── */
 const NAV_MAIN = [
   { label: "Kararlar",      path: "/kararlar" },
@@ -117,14 +137,20 @@ export default function Header() {
   useEffect(() => {
     if (status !== "authenticated") return;
     setIsLoadingNotifications(true);
-    Promise.all([fetch("/api/tasks"), fetch("/api/hearings")])
-      .then(async ([tr, hr]) => {
+    Promise.all([fetch("/api/tasks"), fetch("/api/hearings"), fetch("/api/announcements")])
+      .then(async ([tr, hr, ar]) => {
         const tasks    = tr.ok ? await tr.json() : [];
         const hearings = hr.ok ? await hr.json() : [];
+        const announcements = ar.ok ? await ar.json() : [];
         const today    = new Date(); today.setHours(0, 0, 0, 0);
-        return [...tasks.map(i => ({ ...i, type: "Görev" })), ...hearings.map(i => ({ ...i, type: "Duruşma" }))]
+        const agendaItems = [...tasks.map(i => ({ ...i, type: "Görev" })), ...hearings.map(i => ({ ...i, type: "Duruşma" }))]
           .filter(i => new Date(i.date) >= today)
           .sort((a, b) => new Date(a.date) - new Date(b.date));
+        const readAnnouncementIds = getReadAnnouncementIds();
+        return [
+          ...announcements.map(i => ({ ...i, type: "Duyuru", content: i.title || i.content, description: i.content, read: readAnnouncementIds.includes(i.id) })),
+          ...agendaItems,
+        ];
       })
       .then(setNotifications)
       .catch(console.error)
@@ -146,6 +172,20 @@ export default function Header() {
     setMobileOpen(false);
     if (pathname !== path) startTransition(() => router.push(path));
   };
+
+  const handleNotificationClick = (item) => {
+    if (item.type === "Duyuru") {
+      saveReadAnnouncementId(item.id);
+      setNotifications(prev => prev.map(notification =>
+        notification.type === "Duyuru" && notification.id === item.id
+          ? { ...notification, read: true }
+          : notification
+      ));
+    }
+    setBellOpen(false);
+  };
+
+  const hasUnreadNotifications = notifications.some(item => item.type !== "Duyuru" || !item.read);
 
   const isActive = (item) =>
     item.matchPrefix ? pathname.startsWith(item.path) : pathname === item.path;
@@ -349,7 +389,7 @@ export default function Header() {
                     className="relative flex h-10 w-10 items-center justify-center rounded-lg text-slate-400 transition-colors hover:bg-white/[0.07] hover:text-white"
                   >
                     <IcoBell />
-                    {notifications.length > 0 && (
+                    {hasUnreadNotifications && (
                       <span className="absolute right-2 top-2 flex h-1.5 w-1.5">
                         <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" />
                         <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-red-500" />
@@ -374,13 +414,16 @@ export default function Header() {
                           notifications.slice(0, 5).map((item) => (
                             <Link
                               key={`${item.type}-${item.id}`}
-                              href="/profilim/gorevlerim"
-                              onClick={() => setBellOpen(false)}
+                              href={item.href || "/profilim/gorevlerim"}
+                              onClick={() => handleNotificationClick(item)}
                               className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-slate-800"
                             >
-                              <IcoDot className={`mt-1.5 flex-shrink-0 ${item.type === "Görev" ? "bg-emerald-400" : "bg-orange-400"}`} />
-                              <div>
+                              <IcoDot className={`mt-1.5 flex-shrink-0 ${item.type === "Duyuru" && item.read ? "bg-transparent" : item.type === "Duyuru" ? "bg-cyan-400" : item.type === "Görev" ? "bg-emerald-400" : "bg-orange-400"}`} />
+                              <div className="min-w-0">
                                 <p className="text-sm font-medium text-slate-100 line-clamp-1">{item.content}</p>
+                                {item.description && (
+                                  <p className="mt-0.5 text-xs leading-4 text-slate-400 line-clamp-2">{item.description}</p>
+                                )}
                                 <p className="mt-0.5 text-xs text-slate-400">
                                   {item.type} · {new Date(item.date).toLocaleDateString("tr-TR")}
                                 </p>
@@ -395,7 +438,7 @@ export default function Header() {
                           onClick={() => setBellOpen(false)}
                           className="text-[12px] font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
                         >
-                          Tüm ajandayı gör →
+                          Ajandaya Git →
                         </Link>
                       </div>
                     </Menu>

@@ -1,8 +1,16 @@
 "use client";
 
+import { useState } from "react";
 import NotlarimPanel from "./NotlarimPanel";
 
 function StatuteCard({ statute, onDelete }) {
+  const [open, setOpen] = useState(false);
+  const articleText = statute.article?.trim() ?? "";
+  const noteText = statute.note?.trim() ?? "";
+  const isLong = articleText.length > 90 || noteText.length > 420;
+  const previewStyle = open || !isLong ? undefined : { maxHeight: "9.5rem", overflow: "hidden" };
+  const articlePreviewStyle = open || !isLong ? undefined : { maxHeight: "3rem", overflow: "hidden" };
+
   return (
     <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all hover:border-indigo-200 hover:shadow-md">
       <div className="absolute left-0 top-0 h-full w-1 bg-indigo-100 transition-colors group-hover:bg-indigo-500" />
@@ -12,9 +20,12 @@ function StatuteCard({ statute, onDelete }) {
           <div className="min-w-0 flex-1">
             <div className="text-[12px] font-black text-slate-900 leading-snug">{statute.name}</div>
             {statute.article && (
-              <span className="mt-1 inline-block rounded-lg bg-indigo-50 px-2 py-0.5 text-[10px] font-black text-indigo-700">
+              <div
+                className="mt-1 inline-block max-w-full rounded-lg bg-indigo-50 px-2 py-1 text-[10px] font-black leading-4 text-indigo-700"
+                style={articlePreviewStyle}
+              >
                 {statute.article}
-              </span>
+              </div>
             )}
           </div>
           <button
@@ -26,8 +37,24 @@ function StatuteCard({ statute, onDelete }) {
           </button>
         </div>
 
-        {statute.note && (
-          <p className="mt-2 text-[11px] font-medium leading-5 text-slate-600">{statute.note}</p>
+        {noteText && (
+          <p
+            className="mt-2 whitespace-pre-wrap break-words text-[11px] font-medium leading-5 text-slate-600"
+            style={previewStyle}
+          >
+            {statute.note}
+          </p>
+        )}
+
+        {isLong && (
+          <button
+            type="button"
+            onClick={() => setOpen(prev => !prev)}
+            className="mt-2 inline-flex items-center rounded-lg bg-slate-50 px-2.5 py-1 text-[10px] font-black text-indigo-700 transition-colors hover:bg-indigo-50 hover:text-indigo-900"
+            aria-expanded={open}
+          >
+            {open ? "Daralt" : "Devamını gör"}
+          </button>
         )}
       </div>
     </div>
@@ -120,36 +147,40 @@ export default function MevzuatPanel({ vm }) {
       subtitle="Kaydettiğiniz kanun ve maddeler"
       actions={!showStatuteForm && addButton}
     >
-      <div className="custom-scrollbar flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto p-4">
-        {showStatuteForm && (
-          <AddStatuteForm
-            form={statuteForm}
-            setForm={setStatuteForm}
-            onAdd={handleAddStatute}
-            onCancel={() => {
-              setShowStatuteForm(false);
-              setStatuteForm({ name: "", article: "", note: "" });
-            }}
-          />
-        )}
+      <div className="flex h-full min-h-0 flex-col overflow-hidden bg-slate-50/50">
+        <div className="custom-scrollbar min-h-0 flex-1 overflow-y-auto p-4">
+          <div className="space-y-3">
+            {showStatuteForm && (
+              <AddStatuteForm
+                form={statuteForm}
+                setForm={setStatuteForm}
+                onAdd={handleAddStatute}
+                onCancel={() => {
+                  setShowStatuteForm(false);
+                  setStatuteForm({ name: "", article: "", note: "" });
+                }}
+              />
+            )}
 
-        {statutes.length === 0 && !showStatuteForm ? (
-          <div className="flex h-full flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-white/50 p-6 text-center">
-            <span className="mb-2 text-2xl opacity-40">📚</span>
-            <div className="text-xs font-bold text-slate-500">Henüz kaydedilen mevzuat yok</div>
-            <button
-              type="button"
-              onClick={() => setShowStatuteForm(true)}
-              className="mt-3 rounded-xl bg-indigo-700 px-4 py-2 text-[11px] font-black text-white hover:bg-indigo-800"
-            >
-              İlk Mevzuatı Ekle
-            </button>
+            {statutes.length === 0 && !showStatuteForm ? (
+              <div className="flex min-h-[220px] flex-col items-center justify-center rounded-2xl border-2 border-dashed border-slate-200 bg-white/50 p-6 text-center">
+                <span className="mb-2 text-2xl opacity-40">📚</span>
+                <div className="text-xs font-bold text-slate-500">Henüz kaydedilen mevzuat yok</div>
+                <button
+                  type="button"
+                  onClick={() => setShowStatuteForm(true)}
+                  className="mt-3 rounded-xl bg-indigo-700 px-4 py-2 text-[11px] font-black text-white hover:bg-indigo-800"
+                >
+                  İlk Mevzuatı Ekle
+                </button>
+              </div>
+            ) : (
+              statutes.map(s => (
+                <StatuteCard key={s.id} statute={s} onDelete={() => handleDeleteStatute(s.id)} />
+              ))
+            )}
           </div>
-        ) : (
-          statutes.map(s => (
-            <StatuteCard key={s.id} statute={s} onDelete={() => handleDeleteStatute(s.id)} />
-          ))
-        )}
+        </div>
       </div>
     </NotlarimPanel>
   );

@@ -116,7 +116,7 @@ export default function DocumentSidebar({ vm, drawer = false, onClose }) {
               </svg>
             </div>
             <span className="mt-1.5 text-[11px] font-black text-slate-700">Dosya ekle</span>
-            <span className="text-[8.5px] font-bold text-slate-400">seç · maks {MAX_WORKSPACE_FILE_SIZE_MB}MB</span>
+            <span className="text-[8.5px] font-bold text-slate-400">udf,pdf,word vs. · maks {MAX_WORKSPACE_FILE_SIZE_MB}MB</span>
           </>
         )}
         <input
